@@ -17,6 +17,6 @@ test("renders the DeepSearch application shell", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<title>LLM&amp;GR · DeepSearch<\/title>/i);
-  assert.match(html, /正在装载今日技术雷达/);
+  assert.match(html, /正在加载 LLM&amp;GR/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });

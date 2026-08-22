@@ -23,19 +23,20 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("GenRec", infer_tags(paper))
         self.assertIn("Semantic ID", infer_tags(paper))
 
-    def test_daily_selection_balances_company_and_genrec(self):
+    def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
         today = dt.date.today().isoformat()
         papers = [
-            Paper(id="company", title="Official LLM Technical Report", published=today, company="Kimi", content_type="company_report", abstract="large language model technical report"),
-            Paper(id="genrec", title="Generative Recommendation with Semantic ID", published=today, abstract="generative recommendation semantic id"),
-            Paper(id="llm", title="Large Language Model Study", published=today, abstract="large language model"),
-            Paper(id="other", title="LLM Recommendation", published=today, abstract="llm recommendation"),
+            Paper(id="company", title="Kimi K2 Technical Report", published=today, company="Kimi", content_type="company_report", abstract="foundation model post-training technical report"),
+            Paper(id="enterprise-genrec", title="Generative Recommendation with Semantic ID", published=today, affiliations=["ByteDance"], abstract="generative recommendation semantic id"),
+            Paper(id="academic-genrec", title="Generative Retrieval for Recommendation", published=today, abstract="generative retrieval for recommendation"),
+            Paper(id="llm", title="Scaling Foundation Model Pretraining", published=today, abstract="large language model pretraining scaling law"),
+            Paper(id="app", title="Using LLM for Healthcare", published=today, abstract="healthcare application using llm for diagnosis"),
         ]
         ranked = prepare_candidates(papers, self.config)
-        selected = choose_daily_picks(ranked, 4)
+        selected = choose_daily_picks(ranked, self.config)
         self.assertEqual(len(selected), 4)
-        self.assertTrue(any(item.company for item in selected))
-        self.assertTrue(any("GenRec" in item.tags for item in selected))
+        self.assertNotIn("app", [item.id for item in ranked])
+        self.assertGreater(next(item.score for item in ranked if item.id == "enterprise-genrec"), next(item.score for item in ranked if item.id == "academic-genrec"))
 
 
 if __name__ == "__main__":

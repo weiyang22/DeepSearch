@@ -13,10 +13,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const image = `${protocol}://${host}/og.png`;
   return {
     title: "LLM&GR · DeepSearch",
-    description: "大模型、生成式推荐与 Semantic ID 技术雷达",
+    description: "追踪大模型预训练、基模、后训练，以及企业优先的生成式推荐研究。",
     openGraph: {
       title: "LLM&GR · DeepSearch",
-      description: "每日追踪大模型、生成式推荐与 Semantic ID 论文和官方技术报告。",
+      description: "追踪大模型基座技术与企业优先的生成式推荐论文。",
       images: [{ url: image, width: 1200, height: 630, alt: "LLM&GR DeepSearch Research Radar" }],
     },
     twitter: { card: "summary_large_image", images: [image] },

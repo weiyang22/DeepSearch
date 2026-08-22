@@ -9,7 +9,7 @@ import urllib.request
 from .config import Config
 from .models import Paper
 
-PROMPT_VERSION = "deepsearch-analysis-v1"
+PROMPT_VERSION = "deepsearch-analysis-v2-core-llm-genrec"
 ANALYSIS_FIELDS = (
     "summary",
     "one_line_takeaway",
@@ -62,7 +62,9 @@ def analysis_signature(paper: Paper, config: Config) -> str:
 def _call_deepseek(paper: Paper, config: Config, api_key: str) -> dict[str, object]:
     evidence = "官方技术发布" if paper.content_type == "company_report" else "标题、摘要和学术元数据"
     system_prompt = (
-        "你是关注大模型、生成式推荐和语义ID的资深研究分析师。"
+        "你是关注基座大模型技术、生成式推荐和语义ID的资深研究分析师。"
+        "对LLM内容，重点解释预训练、基模架构、训练数据、扩展规律、对齐与后训练、推理系统，"
+        "不要把应用层案例当作核心贡献。对GenRec内容，特别指出企业真实业务场景、工程约束和线上价值。"
         "请只基于给定材料分析，不要补造实验数据。输出严格JSON，不要输出解释或Markdown。"
         "description要比普通论文摘要更完整，说明研究问题、技术路线和结果。"
         "JSON字段：summary（120-220字中文扩展摘要）、one_line_takeaway（一句话结论）、"

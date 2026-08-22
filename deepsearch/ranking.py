@@ -7,17 +7,94 @@ from collections.abc import Iterable
 from .config import Config
 from .models import Paper
 
+
+GENREC_TERMS = (
+    "generative recommendation",
+    "generative recommender",
+    "generative retrieval",
+    "semantic id",
+    "semantic identifier",
+    "semantic token",
+    "item token",
+    "item tokenizer",
+    "item tokenization",
+)
+
+CORE_LLM_TERMS = (
+    "foundation model",
+    "base model",
+    "large language model",
+    "language model pretraining",
+    "language model pre-training",
+    "pretraining",
+    "pre-training",
+    "post-training",
+    "post training",
+    "instruction tuning",
+    "supervised fine-tuning",
+    "alignment",
+    "rlhf",
+    "rlaif",
+    "direct preference optimization",
+    "dpo",
+    "grpo",
+    "mixture of experts",
+    "mixture-of-experts",
+    "scaling law",
+    "training data",
+    "data curation",
+    "tokenizer",
+    "technical report",
+    "whitepaper",
+    "white paper",
+)
+
+STRONG_LLM_TERMS = (
+    "foundation model",
+    "base model",
+    "pretraining",
+    "pre-training",
+    "post-training",
+    "post training",
+    "instruction tuning",
+    "supervised fine-tuning",
+    "rlhf",
+    "rlaif",
+    "preference optimization",
+    "mixture of experts",
+    "mixture-of-experts",
+    "scaling law",
+    "training data",
+    "data curation",
+    "distributed training",
+    "technical report",
+    "whitepaper",
+    "white paper",
+)
+
+APPLICATION_ONLY_TERMS = (
+    "healthcare application",
+    "medical application",
+    "legal application",
+    "education application",
+    "financial application",
+    "llm agent for",
+    "using llm for",
+    "large language models for recommendation",
+)
+
 TAG_RULES = {
-    "LLM": ["large language model", "llm", "foundation model"],
+    "LLM 基模": ["large language model", "foundation model", "base model"],
+    "预训练": ["pretraining", "pre-training", "pretrain", "scaling law"],
+    "后训练": ["post-training", "post training", "instruction tuning", "supervised fine-tuning", "rlhf", "rlaif", "dpo", "grpo"],
     "GenRec": ["generative recommendation", "generative recommender", "generative retrieval"],
     "Semantic ID": ["semantic id", "semantic identifier", "item identifier"],
     "Tokenization": ["semantic token", "item token", "tokenization", "codebook"],
-    "Agent": ["agentic", "agent", "tool use", "tool-use"],
     "Reasoning": ["reasoning", "reinforcement learning", "chain of thought"],
-    "Long Context": ["long context", "long-context", "million token"],
     "MoE": ["mixture of experts", "mixture-of-experts", "moe"],
     "Multimodal": ["multimodal", "vision-language", "audio-language"],
-    "Systems": ["inference", "serving", "training system", "distributed"],
+    "训练系统": ["training system", "distributed training", "parallelism", "training efficiency"],
+    "推理系统": ["inference", "serving", "kv cache", "speculative decoding"],
 }
 
 
@@ -25,87 +102,114 @@ def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     selected: list[Paper] = []
     for paper in papers:
-        if _paper_date(paper) < cutoff:
+        paper_date = _paper_date(paper)
+        if paper_date < cutoff or paper_date > dt.date.today() + dt.timedelta(days=7):
             continue
         text = _search_text(paper)
         if any(term.lower() in text for term in config.exclude_keywords):
             continue
-        company_match = bool(paper.company)
-        topic_match = any(term.lower() in text for term in config.include_keywords)
-        if not company_match and not topic_match:
+        if not is_genrec(paper) and not is_core_llm(paper):
             continue
-        paper.tags = infer_tags(paper)
-        paper.score = score_paper(paper)
+        paper.tags = infer_tags(paper, config)
+        paper.score = score_paper(paper, config)
         selected.append(paper)
     return sorted(selected, key=lambda item: (-item.score, -_date_ordinal(item), item.title.lower()))
 
 
-def choose_daily_picks(papers: list[Paper], limit: int) -> list[Paper]:
-    if len(papers) <= limit:
-        return papers
-    reports = [item for item in papers if item.content_type == "company_report"]
-    genrec = [item for item in papers if any(tag in item.tags for tag in ("GenRec", "Semantic ID", "Tokenization"))]
-    result: list[Paper] = []
-
-    def add(items: list[Paper], count: int) -> None:
-        for paper in items:
-            if paper not in result:
-                result.append(paper)
-            if len([item for item in result if item in items]) >= count:
-                break
-
-    add(reports, min(2, limit // 2))
-    add(genrec, min(2, limit - len(result)))
-    for paper in papers:
-        if paper not in result:
-            result.append(paper)
-        if len(result) >= limit:
-            break
-    return result[:limit]
+def choose_daily_picks(papers: list[Paper], config: Config) -> list[Paper]:
+    """Choose every fresh, high-signal item; daily_limit=0 means no count cap."""
+    if not papers:
+        return []
+    newest = max(_paper_date(paper) for paper in papers)
+    window_start = newest - dt.timedelta(days=max(0, config.daily_window_days - 1))
+    selected = [
+        paper
+        for paper in papers
+        if _paper_date(paper) >= window_start and paper.score >= config.daily_min_score
+    ]
+    if not selected:
+        selected = [paper for paper in papers if _paper_date(paper) == newest]
+    if config.daily_limit > 0:
+        return selected[: config.daily_limit]
+    return selected
 
 
-def score_paper(paper: Paper) -> int:
+def score_paper(paper: Paper, config: Config) -> int:
     text = _search_text(paper)
+    genrec = is_genrec(paper)
+    enterprise = is_enterprise_paper(paper, config)
     score = 0
-    if paper.content_type == "company_report":
-        score += 45
-    if paper.company:
-        score += 22
-    for tag in infer_tags(paper):
-        score += {
-            "GenRec": 28,
-            "Semantic ID": 28,
-            "Tokenization": 18,
-            "LLM": 12,
-            "Agent": 10,
-            "Reasoning": 10,
-            "Systems": 8,
-        }.get(tag, 5)
-    if paper.venue.lower() in {"recsys", "sigir", "www", "kdd", "wsdm", "neurips", "icml", "iclr", "acl", "emnlp"}:
-        score += 20
-    if paper.pdf_url:
-        score += 5
-    if paper.abstract:
-        score += 5
-    if any(term in text for term in ("technical report", "whitepaper", "white paper")):
+    if paper.content_type == "company_report" and is_core_llm(paper):
+        score += 50
+    if genrec:
+        score += 32
+    if genrec and enterprise:
+        score += 42
+    elif enterprise:
         score += 12
+    for tag in infer_tags(paper, config):
+        score += {
+            "LLM 基模": 18,
+            "预训练": 18,
+            "后训练": 18,
+            "GenRec": 24,
+            "Semantic ID": 22,
+            "Tokenization": 14,
+            "企业论文": 18,
+            "Reasoning": 8,
+            "MoE": 10,
+            "训练系统": 10,
+            "推理系统": 8,
+        }.get(tag, 2)
+    if paper.venue.lower() in {"recsys", "sigir", "www", "kdd", "wsdm", "neurips", "icml", "iclr", "acl", "emnlp"}:
+        score += 18
+    if paper.pdf_url:
+        score += 4
+    if paper.abstract:
+        score += 4
+    if any(term in text for term in ("technical report", "whitepaper", "white paper")):
+        score += 14
     age = max(0, (dt.date.today() - _paper_date(paper)).days)
-    score += max(0, 20 - age // 3)
+    score += max(0, 18 - age // 3)
     return score
 
 
-def infer_tags(paper: Paper) -> list[str]:
+def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     text = _search_text(paper)
     tags = [tag for tag, terms in TAG_RULES.items() if any(term in text for term in terms)]
     if paper.content_type == "company_report":
-        tags.insert(0, "技术报告")
+        tags.insert(0, "LLM 基模")
+        tags.insert(0, "官方技术报告")
+    if config and is_enterprise_paper(paper, config):
+        tags.insert(0, "企业论文")
     if paper.company:
         tags.insert(0, paper.company)
     unique: list[str] = []
     for tag in tags:
         if tag not in unique:
             unique.append(tag)
-    return unique[:6] or ["推荐系统"]
+    return unique[:7] or ["GenRec"]
+
+
+def is_genrec(paper: Paper) -> bool:
+    text = _search_text(paper)
+    return any(term in text for term in GENREC_TERMS)
+
+
+def is_core_llm(paper: Paper) -> bool:
+    text = _search_text(paper)
+    if paper.content_type == "company_report":
+        return True
+    if not any(term in text for term in STRONG_LLM_TERMS):
+        return False
+    application_only = any(term in text for term in APPLICATION_ONLY_TERMS)
+    technical_depth = sum(term in text for term in STRONG_LLM_TERMS) >= 2
+    return not application_only or technical_depth
+
+
+def is_enterprise_paper(paper: Paper, config: Config) -> bool:
+    text = " ".join([paper.company, *paper.affiliations, *paper.authors]).lower()
+    return bool(paper.company) or any(term.lower() in text for term in config.enterprise_keywords)
 
 
 def _search_text(paper: Paper) -> str:

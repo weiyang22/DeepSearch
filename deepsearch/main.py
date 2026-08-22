@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 from .config import load_config
 from .models import Paper
 from .ranking import choose_daily_picks, prepare_candidates
-from .sources import classify_company, collect_all
+from .sources import classify_company, collect_all, deduplicate
 from .summarizer import analyze_papers
 
 
@@ -40,7 +40,7 @@ def main() -> int:
         discovered, source_errors = collect_all(config)
 
     candidates = prepare_candidates(discovered, config)
-    daily_picks = choose_daily_picks(candidates, config.daily_limit)
+    daily_picks = choose_daily_picks(candidates, config)
     analyze_papers(daily_picks, previous_by_id, config)
 
     daily_ids = {paper.id for paper in daily_picks}
@@ -49,7 +49,8 @@ def main() -> int:
     for paper in previous:
         paper.is_daily_pick = False
 
-    merged = _merge(daily_picks, candidates, previous)
+    archived = prepare_candidates(previous, config)
+    merged = deduplicate(_merge(daily_picks, candidates, archived))
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
     for paper in merged:
@@ -63,6 +64,8 @@ def main() -> int:
             "subtitle": config.subtitle,
             "timezone": config.timezone,
             "daily_limit": config.daily_limit,
+            "daily_window_days": config.daily_window_days,
+            "daily_min_score": config.daily_min_score,
             "retention_days": config.retention_days,
         },
         "status": {

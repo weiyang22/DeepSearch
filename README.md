@@ -1,12 +1,14 @@
 # DeepSearch · LLM&GR
 
-每日追踪大模型、生成式推荐、Generative Retrieval 与 Semantic ID 论文，同时监测 Kimi、DeepSeek、MiniMax、智谱官方 GitHub 中的新技术报告。
+追踪大模型基座技术、生成式推荐、Generative Retrieval 与 Semantic ID 论文，同时监测 Kimi、DeepSeek、MiniMax、智谱官方渠道中的新技术报告。
 
 ## 功能
 
 - arXiv、DBLP、OpenAlex、Semantic Scholar 多源发现与降级
+- LLM 仅收录预训练、基模架构、训练数据、扩展规律、对齐/后训练及训练推理系统，过滤普通应用层案例
+- GenRec/SID 方向提高企业参与论文的排序权重
 - DeepSeek `deepseek-v4-flash` 中文扩展分析
-- 每日 4 篇，兼顾公司技术报告和 GenRec/SID 论文
+- 每日数量不设硬上限，按发布时间窗口与质量分动态入选
 - 90 天滚动归档、搜索、标签、公司筛选和本地收藏
 - GitHub Actions 每天北京时间 08:00 自动更新
 - API 失败时保留原始摘要并继续发布

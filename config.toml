@@ -2,22 +2,36 @@
 title = "LLM&GR"
 subtitle = "大模型 · 生成式推荐 · Semantic ID 技术雷达"
 timezone = "Asia/Shanghai"
-daily_limit = 4
+# 0 表示不设数量上限；每日入选数量由时间窗口和质量分决定。
+daily_limit = 0
+daily_window_days = 3
+daily_min_score = 45
 retention_days = 90
 
 [discovery]
 arxiv_categories = ["cs.AI", "cs.CL", "cs.LG", "cs.IR"]
 topic_queries = [
-  "large language model recommendation",
+  "large language model pretraining",
+  "foundation model technical report",
+  "large language model post-training alignment",
+  "large language model architecture scaling",
   "generative recommendation",
   "generative retrieval",
   "semantic ID recommendation",
-  "semantic identifier recommendation",
-  "LLM recommender system"
+  "semantic identifier recommendation"
 ]
 include_keywords = [
   "large language model",
   "llm",
+  "foundation model",
+  "base model",
+  "pretraining",
+  "pre-training",
+  "post-training",
+  "alignment",
+  "rlhf",
+  "mixture of experts",
+  "scaling law",
   "generative recommendation",
   "generative recommender",
   "generative retrieval",
@@ -27,7 +41,16 @@ include_keywords = [
   "item tokenization",
   "recommendation"
 ]
-exclude_keywords = []
+exclude_keywords = [
+  "survey",
+  "benchmarking chatgpt for",
+  "llm-as-a-judge for recommendation"
+]
+enterprise_keywords = [
+  "Alibaba", "Amazon", "Apple", "ByteDance", "Google", "Huawei", "JD.com",
+  "Kuaishou", "Meituan", "Meta", "Microsoft", "Netflix", "NVIDIA", "Pinterest",
+  "Shopee", "Snap", "Tencent", "TikTok", "Xiaomi", "Yahoo"
+]
 semantic_scholar_limit = 12
 
 [companies.queries]

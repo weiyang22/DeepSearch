@@ -101,7 +101,7 @@ def collect_arxiv(config: Config) -> list[Paper]:
 
 def collect_dblp(config: Config) -> list[Paper]:
     papers: list[Paper] = []
-    for query in config.topic_queries[:4]:
+    for query in config.topic_queries[:8]:
         url = "https://dblp.org/search/publ/api?" + urllib.parse.urlencode(
             {"q": query, "format": "json", "h": "12"}
         )
@@ -142,7 +142,7 @@ def collect_dblp(config: Config) -> list[Paper]:
 def collect_openalex(config: Config) -> list[Paper]:
     papers: list[Paper] = []
     cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
-    queries = config.topic_queries[:4] + [terms[0] for terms in config.company_queries.values()]
+    queries = config.topic_queries[:8] + [terms[0] for terms in config.company_queries.values()]
     for query in queries:
         url = "https://api.openalex.org/works?" + urllib.parse.urlencode(
             {
@@ -192,7 +192,7 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
     headers = {}
     if os.getenv("SEMANTIC_SCHOLAR_API_KEY"):
         headers["x-api-key"] = os.environ["SEMANTIC_SCHOLAR_API_KEY"]
-    queries = config.topic_queries[:4] + [terms[0] for terms in config.company_queries.values()]
+    queries = config.topic_queries[:8] + [terms[0] for terms in config.company_queries.values()]
     for query in queries:
         url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode(
             {"query": query, "limit": str(config.semantic_scholar_limit), "fields": fields}
@@ -240,7 +240,7 @@ def collect_official_github(config: Config) -> list[Paper]:
             description = _clean(str(repo.get("description", "") or ""))
             readme = _github_readme(org, str(repo.get("name", "")), github_headers)
             text = f"{repo.get('name', '')} {description} {readme}".lower()
-            if not any(term in text for term in ("technical report", "tech report", "whitepaper", "white paper", "paper", "arxiv.org")):
+            if not _looks_like_foundation_model_report(text):
                 continue
             arxiv_match = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", text)
             report_match = re.search(r"https?://[^\s)\]>'\"]+(?:tech(?:nical)?[_-]?report|report)[^\s)\]>'\"]*\.pdf", readme, re.I)
@@ -265,6 +265,22 @@ def collect_official_github(config: Config) -> list[Paper]:
             )
             papers.append(paper)
     return papers
+
+
+def _looks_like_foundation_model_report(text: str) -> bool:
+    report_signal = any(
+        term in text
+        for term in ("technical report", "tech report", "whitepaper", "white paper", "arxiv.org")
+    )
+    model_signal = any(
+        term in text
+        for term in (
+            "foundation model", "base model", "pretraining", "pre-training", "post-training",
+            "alignment", "mixture of experts", "deepseek-v", "deepseek-r", "kimi k",
+            "minimax-", "glm-", "language model",
+        )
+    )
+    return report_signal and model_signal
 
 
 def deduplicate(papers: Iterable[Paper]) -> list[Paper]:
