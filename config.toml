@@ -1,0 +1,47 @@
+[site]
+title = "LLM&GR"
+subtitle = "大模型 · 生成式推荐 · Semantic ID 技术雷达"
+timezone = "Asia/Shanghai"
+daily_limit = 4
+retention_days = 90
+
+[discovery]
+arxiv_categories = ["cs.AI", "cs.CL", "cs.LG", "cs.IR"]
+topic_queries = [
+  "large language model recommendation",
+  "generative recommendation",
+  "generative retrieval",
+  "semantic ID recommendation",
+  "semantic identifier recommendation",
+  "LLM recommender system"
+]
+include_keywords = [
+  "large language model",
+  "llm",
+  "generative recommendation",
+  "generative recommender",
+  "generative retrieval",
+  "semantic id",
+  "semantic identifier",
+  "semantic token",
+  "item tokenization",
+  "recommendation"
+]
+exclude_keywords = []
+semantic_scholar_limit = 12
+
+[companies.queries]
+Kimi = ["Kimi", "Moonshot AI", "Kimi Team", "MoonshotAI"]
+DeepSeek = ["DeepSeek", "DeepSeek-AI", "DeepSeek AI"]
+MiniMax = ["MiniMax AI", "MiniMaxAI", "MiniMax Team"]
+"智谱" = ["Zhipu AI", "Z.ai", "GLM Team", "THUDM", "ChatGLM"]
+
+[companies.github_orgs]
+DeepSeek = "deepseek-ai"
+Kimi = "MoonshotAI"
+MiniMax = "MiniMax-AI"
+"智谱" = "zai-org"
+
+[llm]
+base_url = "https://api.deepseek.com"
+model = "deepseek-v4-flash"
