@@ -31,9 +31,14 @@ def analyze_papers(papers: list[Paper], previous_by_id: dict[str, Paper], config
     for paper in papers:
         signature = analysis_signature(paper, config)
         cached = previous_by_id.get(paper.id)
-        if cached and cached.analysis_signature == signature and cached.summary:
+        cache_is_usable = bool(
+            cached
+            and cached.analysis_signature == signature
+            and cached.summary
+            and (not api_key or cached.analysis_status == "complete")
+        )
+        if cache_is_usable and cached:
             _copy_analysis(cached, paper)
-            paper.analysis_status = "cached"
             continue
         result: dict[str, object] = {}
         if api_key:

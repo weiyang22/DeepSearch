@@ -31,11 +31,13 @@ class PipelineTests(unittest.TestCase):
             Paper(id="academic-genrec", title="Generative Retrieval for Recommendation", published=today, abstract="generative retrieval for recommendation"),
             Paper(id="llm", title="Scaling Foundation Model Pretraining", published=today, abstract="large language model pretraining scaling law"),
             Paper(id="app", title="Using LLM for Healthcare", published=today, abstract="healthcare application using llm for diagnosis"),
+            Paper(id="science", title="A Foundation Model of Wavefunctions", published=today, abstract="foundation model for chemical bond breaking"),
         ]
         ranked = prepare_candidates(papers, self.config)
         selected = choose_daily_picks(ranked, self.config)
         self.assertEqual(len(selected), 4)
         self.assertNotIn("app", [item.id for item in ranked])
+        self.assertNotIn("science", [item.id for item in ranked])
         self.assertGreater(next(item.score for item in ranked if item.id == "enterprise-genrec"), next(item.score for item in ranked if item.id == "academic-genrec"))
 
 

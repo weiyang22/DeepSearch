@@ -72,6 +72,14 @@ STRONG_LLM_TERMS = (
     "white paper",
 )
 
+LLM_CONTEXT_TERMS = (
+    "large language model",
+    "language model",
+    "llm",
+    "autoregressive text",
+    "text generation model",
+)
+
 APPLICATION_ONLY_TERMS = (
     "healthcare application",
     "medical application",
@@ -200,6 +208,8 @@ def is_core_llm(paper: Paper) -> bool:
     text = _search_text(paper)
     if paper.content_type == "company_report":
         return True
+    if not any(term in text for term in LLM_CONTEXT_TERMS):
+        return False
     if not any(term in text for term in STRONG_LLM_TERMS):
         return False
     application_only = any(term in text for term in APPLICATION_ONLY_TERMS)
