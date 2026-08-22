@@ -89,8 +89,12 @@ AB_EXPERIMENT_PATTERN = re.compile(
 )
 
 OFFICIAL_MODEL_PATTERN = re.compile(
-    r"\b(?:deepseek[- ]?[vr]\d|kimi[- ]?k\d|minimax[- ]?m\d|glm[- ]?\d|chatglm|"
-    r"gemini[- ]?\d(?:\.\d)?|gemma[- ]?\d)\b",
+    r"\b(?:gpt[- ]?\d(?:\.\d)?|openai[- ]?o[134]|claude(?:[- ]\w+)?|"
+    r"gemini[- ]?\d(?:\.\d)?|gemma[- ]?\d|llama[- ]?\d(?:\.\d)?|grok[- ]?\d|"
+    r"phi[- ]?\d|nova(?:[- ]\w+)?|nemotron(?:[- ]\w+)?|deepseek[- ]?[vr]\d|"
+    r"kimi[- ]?k\d|minimax[- ]?m\d|glm[- ]?\d|chatglm|qwen[- ]?\d(?:\.\d)?|"
+    r"doubao(?:[- ]\w+)?|seed[- ]?\d(?:\.\d)?|hunyuan(?:[- ]\w+)?|mimo[- ]?\w+|"
+    r"baichuan[- ]?\w+|yi[- ]?\w+|step[- ]?\d|pangu(?:[- ]\w+)?|mixtral|mistral)\b",
     re.IGNORECASE,
 )
 
@@ -151,7 +155,7 @@ def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
         paper.tags = infer_tags(paper, config)
         paper.score = score_paper(paper, config)
         selected.append(paper)
-    return sorted(selected, key=lambda item: (-item.score, -_date_ordinal(item), item.title.lower()))
+    return sorted(selected, key=lambda item: (-_date_ordinal(item), -item.score, item.title.lower()))
 
 
 def choose_daily_picks(papers: list[Paper], config: Config) -> list[Paper]:
@@ -229,7 +233,7 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     for tag in tags:
         if tag not in unique:
             unique.append(tag)
-    return unique[:7] or ["GenRec"]
+    return unique[:8] or ["GenRec"]
 
 
 def is_genrec(paper: Paper) -> bool:

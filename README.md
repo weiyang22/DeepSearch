@@ -1,11 +1,15 @@
 # DeepSearch · LLM&GR
 
-追踪大模型基座技术、生成式推荐、Generative Retrieval 与 Semantic ID 论文，同时监测 Kimi、DeepSeek、MiniMax、智谱和 Google DeepMind 官方渠道中的新技术报告。
+追踪大模型基座技术、生成式推荐、Generative Retrieval 与 Semantic ID 论文，重点覆盖中美主流 LLM 机构与模型家族。
 
 ## 功能
 
 - arXiv、DBLP、OpenAlex、Semantic Scholar 多源发现与降级
 - Google DeepMind 使用 OpenAlex 机构 ID 定向检索，避免仅靠名称关键词造成漏采
+- 美国侧重点覆盖 GPT、Claude、Gemini/Gemma、Llama、Grok、Phi、Nova、Nemotron
+- 中国侧重点覆盖 DeepSeek、Kimi、MiniMax、GLM/Z.ai、Qwen、Doubao/Seed、Hunyuan、MiMo、Baichuan、Yi、Step、Pangu
+- 所有列表严格按论文发布日期从新到旧排列，评分仅用于准入和同日排序
+- 保留完整技术标签，并以分层胶囊样式展示机构、证据类型与研究主题
 - LLM 仅收录企业参与或企业官方发布的预训练、基模架构、训练数据、扩展规律、对齐/后训练及训练推理系统论文
 - GenRec/SID 只收录明确报告 A/B 测试或线上受控实验的论文
 - DeepSeek `deepseek-v4-flash` 中文扩展分析

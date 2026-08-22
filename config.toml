@@ -50,9 +50,11 @@ exclude_keywords = [
   "llm-as-a-judge for recommendation"
 ]
 enterprise_keywords = [
-  "Alibaba", "Amazon", "Apple", "ByteDance", "Google", "Google DeepMind", "DeepMind", "Huawei", "JD.com",
-  "Kuaishou", "Meituan", "Meta", "Microsoft", "Netflix", "NVIDIA", "Pinterest",
-  "Shopee", "Snap", "Tencent", "TikTok", "Xiaomi", "Yahoo"
+  "01.AI", "Alibaba", "Amazon", "Anthropic", "Apple", "Baichuan", "ByteDance", "Cohere",
+  "DeepSeek", "Google", "Google DeepMind", "DeepMind", "Huawei", "JD.com", "Kuaishou",
+  "Meituan", "Meta", "Microsoft", "MiniMax", "Mistral AI", "Moonshot AI", "Netflix",
+  "NVIDIA", "OpenAI", "Pinterest", "Shopee", "Snap", "StepFun", "Tencent", "TikTok",
+  "xAI", "Xiaomi", "Yahoo", "Zhipu AI"
 ]
 arxiv_max_results = 300
 openalex_per_query = 50
@@ -60,18 +62,72 @@ semantic_scholar_limit = 30
 official_github_per_org = 100
 
 [companies.queries]
+OpenAI = ["OpenAI", "OpenAI Research"]
+Anthropic = ["Anthropic", "Anthropic Research"]
+"Google DeepMind" = ["Google DeepMind", "DeepMind", "GoogleDeepMind"]
+"Meta AI" = ["Meta AI", "Meta Platforms", "FAIR"]
+xAI = ["xAI", "xAI Research"]
+Microsoft = ["Microsoft Research", "Microsoft"]
+Amazon = ["Amazon AGI", "Amazon Science", "AWS AI"]
+NVIDIA = ["NVIDIA Research", "NVIDIA"]
 Kimi = ["Kimi", "Moonshot AI", "Kimi Team", "MoonshotAI"]
 DeepSeek = ["DeepSeek", "DeepSeek-AI", "DeepSeek AI"]
 MiniMax = ["MiniMax AI", "MiniMaxAI", "MiniMax Team"]
 "智谱" = ["Zhipu AI", "Z.ai", "GLM Team", "THUDM", "ChatGLM"]
-"Google DeepMind" = ["Google DeepMind", "DeepMind", "GoogleDeepMind"]
+"Alibaba Qwen" = ["Alibaba", "Alibaba Cloud", "Qwen Team"]
+"ByteDance Seed" = ["ByteDance", "ByteDance Seed"]
+"Tencent Hunyuan" = ["Tencent", "Hunyuan Team"]
+"Xiaomi MiMo" = ["Xiaomi", "Xiaomi MiMo", "MiMo Team"]
+"Baichuan AI" = ["Baichuan AI", "Baichuan Inc"]
+"01.AI" = ["01.AI", "01AI"]
+StepFun = ["StepFun", "StepFun AI"]
+"Huawei Pangu" = ["Huawei", "Noah's Ark Lab", "Pangu Team"]
+"Mistral AI" = ["Mistral AI", "MistralAI"]
 
 [companies.github_orgs]
+OpenAI = "openai"
+Anthropic = "anthropics"
+"Meta AI" = "meta-llama"
+xAI = "xai-org"
+Microsoft = "microsoft"
+Amazon = "amazon-science"
+NVIDIA = "NVIDIA"
 DeepSeek = "deepseek-ai"
 Kimi = "MoonshotAI"
 MiniMax = "MiniMax-AI"
 "智谱" = "zai-org"
 "Google DeepMind" = "google-deepmind"
+"Alibaba Qwen" = "QwenLM"
+"ByteDance Seed" = "ByteDance-Seed"
+"Tencent Hunyuan" = "Tencent-Hunyuan"
+"Xiaomi MiMo" = "XiaomiMiMo"
+"Baichuan AI" = "baichuan-inc"
+"01.AI" = "01-ai"
+StepFun = "stepfun-ai"
+"Mistral AI" = "mistralai"
+
+[companies.model_families]
+OpenAI = ["GPT", "OpenAI o1", "OpenAI o3", "OpenAI o4"]
+Anthropic = ["Claude"]
+"Google DeepMind" = ["Gemini", "Gemma"]
+"Meta AI" = ["Llama"]
+xAI = ["Grok"]
+Microsoft = ["Phi"]
+Amazon = ["Amazon Nova", "Nova"]
+NVIDIA = ["Nemotron"]
+Kimi = ["Kimi"]
+DeepSeek = ["DeepSeek"]
+MiniMax = ["MiniMax"]
+"智谱" = ["GLM", "ChatGLM", "Z.ai"]
+"Alibaba Qwen" = ["Qwen"]
+"ByteDance Seed" = ["Doubao", "Seed"]
+"Tencent Hunyuan" = ["Hunyuan"]
+"Xiaomi MiMo" = ["MiMo", "Mino"]
+"Baichuan AI" = ["Baichuan"]
+"01.AI" = ["Yi"]
+StepFun = ["Step", "StepFun"]
+"Huawei Pangu" = ["Pangu", "PanGu"]
+"Mistral AI" = ["Mistral", "Mixtral"]
 
 [companies.openalex_institutions]
 "Google DeepMind" = "I4210090411"

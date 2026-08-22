@@ -46,6 +46,7 @@ def main() -> int:
     merged = deduplicate(_merge(daily_picks, candidates, archived))
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
+    merged.sort(key=lambda paper: (_paper_date(paper), paper.score), reverse=True)
 
     # Analyze the complete rolling archive. Existing complete analyses are reused by
     # signature, while newly discovered or fallback entries are backfilled.

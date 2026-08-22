@@ -24,6 +24,7 @@ class Config:
     require_ab_genrec: bool
     company_queries: dict[str, list[str]]
     github_orgs: dict[str, str]
+    model_families: dict[str, list[str]]
     openalex_institutions: dict[str, str]
     deepseek_base_url: str
     deepseek_model: str
@@ -57,6 +58,7 @@ def load_config(path: str | Path = "config.toml") -> Config:
         require_ab_genrec=bool(discovery.get("require_ab_genrec", True)),
         company_queries={key: list(value) for key, value in companies.get("queries", {}).items()},
         github_orgs={key: str(value) for key, value in companies.get("github_orgs", {}).items()},
+        model_families={key: list(value) for key, value in companies.get("model_families", {}).items()},
         openalex_institutions={
             key: str(value) for key, value in companies.get("openalex_institutions", {}).items()
         },

@@ -124,13 +124,16 @@ def _apply_result(paper: Paper, result: dict[str, object]) -> None:
     paper.practical_value = str(result.get("practical_value") or "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。")
     paper.why_it_matters = str(result.get("why_it_matters") or "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。")
     if isinstance(result.get("tags"), list):
-        paper.tags = _unique([*paper.tags, *[str(item) for item in result["tags"]]])[:6]
+        paper.tags = _unique([*paper.tags, *[str(item) for item in result["tags"]]])[:8]
     paper.evidence_basis = "official_release" if paper.content_type == "company_report" else "abstract"
     paper.analysis_status = "complete" if result else "fallback"
 
 
 def _copy_analysis(source: Paper, target: Paper) -> None:
     for name in ANALYSIS_FIELDS:
+        if name == "tags":
+            target.tags = _unique([*target.tags, *source.tags])[:8]
+            continue
         value = getattr(source, name)
         setattr(target, name, list(value) if isinstance(value, list) else value)
 

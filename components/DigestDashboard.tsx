@@ -59,11 +59,13 @@ export function DigestDashboard() {
   const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
-    try {
-      setSaved(JSON.parse(window.localStorage.getItem(MARKS_KEY) || "[]"));
-    } catch {
-      setSaved([]);
-    }
+    queueMicrotask(() => {
+      try {
+        setSaved(JSON.parse(window.localStorage.getItem(MARKS_KEY) || "[]"));
+      } catch {
+        setSaved([]);
+      }
+    });
     fetch("./papers.json")
       .then((response) => {
         if (!response.ok) throw new Error("data unavailable");
@@ -77,7 +79,10 @@ export function DigestDashboard() {
     window.localStorage.setItem(MARKS_KEY, JSON.stringify(saved));
   }, [saved]);
 
-  const papers = payload?.papers || [];
+  const papers = useMemo(
+    () => [...(payload?.papers || [])].sort((a, b) => paperTimestamp(b.published) - paperTimestamp(a.published) || b.score - a.score),
+    [payload],
+  );
   const tags = useMemo(() => unique(papers.flatMap((paper) => paper.tags)).slice(0, 16), [papers]);
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -122,7 +127,8 @@ export function DigestDashboard() {
         <h1>大模型基座技术与生成式推荐论文追踪</h1>
         <p className="intro-copy">
           LLM 仅关注企业参与或企业官方发布的预训练、基模架构、训练数据、对齐与后训练等技术内容；不收录普通应用层或纯学术论文。
-          重点跟踪 Kimi、DeepSeek、MiniMax、智谱与 Google DeepMind。GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，
+          重点跟踪中美主流模型机构及 GPT、Claude、Gemini、Llama、Grok、DeepSeek、Kimi、MiniMax、GLM、Qwen、MiMo 等模型家族。
+          GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，
           并且只收录明确报告 A/B 测试或线上受控实验的工作。
         </p>
         <div className="intro-meta">
@@ -179,7 +185,7 @@ function PaperCard({ paper, saved, onSave }: { paper: Paper; saved: boolean; onS
   return (
     <article className="paper-card">
       <div className="card-kicker">
-        <span className="type-badge">{paper.content_type === "company_report" ? "官方技术报告" : paper.tags.includes("企业论文") ? "企业论文" : "研究论文"}</span>
+        <span className="type-badge">{paperTypeLabel(paper)}</span>
         {paper.company && <span>{paper.company}</span>}
         <span>{paper.venue || paper.source}</span>
         <time>{formatPaperDate(paper.published)}</time>
@@ -190,7 +196,11 @@ function PaperCard({ paper, saved, onSave }: { paper: Paper; saved: boolean; onS
       </div>
       <p className="takeaway">{paper.one_line_takeaway}</p>
       <p className="summary">{paper.summary}</p>
-      <div className="tag-row">{paper.tags.map((item) => <span key={item}>{item}</span>)}</div>
+      <div className="tag-row" aria-label="论文标签">
+        {paper.tags.map((item) => (
+          <span className={`paper-tag ${tagTone(item, paper)}`} key={item}><b>#</b>{item}</span>
+        ))}
+      </div>
 
       <details className="analysis-panel">
         <summary>详细分析 <span>＋</span></summary>
@@ -227,6 +237,24 @@ function AnalysisList({ title, items }: { title: string; items: string[] }) {
 
 function compact(values: string[] = [], limit: number) {
   return values.length <= limit ? values.join(" · ") : `${values.slice(0, limit).join(" · ")} 等 ${values.length} 位作者`;
+}
+
+function paperTimestamp(value: string) {
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function paperTypeLabel(paper: Paper) {
+  if (paper.content_type === "company_report") return "官方技术报告";
+  if (paper.tags.includes("企业论文")) return "企业研究论文";
+  return "研究论文";
+}
+
+function tagTone(tag: string, paper: Paper) {
+  if (tag === paper.company) return "paper-tag--company";
+  if (["企业论文", "官方技术报告", "A/B 实验"].includes(tag)) return "paper-tag--evidence";
+  if (["LLM 基模", "GenRec", "Semantic ID"].includes(tag)) return "paper-tag--primary";
+  return "paper-tag--topic";
 }
 
 function unique(values: string[]) {

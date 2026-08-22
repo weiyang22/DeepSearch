@@ -8,6 +8,7 @@ from deepsearch.sources import (
     _github_report_url,
     _has_human_institution_author,
     _looks_like_foundation_model_report,
+    _repo_matches_model_family,
     classify_company,
     deduplicate,
 )
@@ -65,6 +66,19 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(_has_human_institution_author(model_authorship, "I4210090411"))
         self.assertTrue(_has_human_institution_author(human_authorship, "I4210090411"))
 
+    def test_mainstream_model_families_and_repo_prefilter(self):
+        expected = {
+            "OpenAI": "GPT",
+            "Anthropic": "Claude",
+            "Google DeepMind": "Gemini",
+            "Alibaba Qwen": "Qwen",
+            "Xiaomi MiMo": "MiMo",
+        }
+        for company, family in expected.items():
+            self.assertIn(family, self.config.model_families[company])
+        self.assertTrue(_repo_matches_model_family("Xiaomi MiMo", "MiMo-V2", "official model", self.config))
+        self.assertFalse(_repo_matches_model_family("OpenAI", "openai-python", "API client", self.config))
+
     def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
         today = dt.date.today().isoformat()
         papers = [
@@ -86,6 +100,26 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn("academic-llm", [item.id for item in ranked])
         self.assertNotIn("company-bench", [item.id for item in ranked])
         self.assertIn("A/B 实验", next(item.tags for item in ranked if item.id == "enterprise-genrec"))
+
+    def test_candidates_are_sorted_newest_first_even_when_older_scores_higher(self):
+        today = dt.date.today()
+        papers = [
+            Paper(
+                id="older-high-score",
+                title="Enterprise Generative Recommendation with Semantic IDs",
+                published=(today - dt.timedelta(days=1)).isoformat(),
+                affiliations=["ByteDance"],
+                abstract="Generative recommendation with semantic IDs and an online A/B test.",
+            ),
+            Paper(
+                id="newer-low-score",
+                title="Generative Retrieval",
+                published=today.isoformat(),
+                abstract="Generative retrieval validated in an online A/B test.",
+            ),
+        ]
+        ranked = prepare_candidates(papers, self.config)
+        self.assertEqual([item.id for item in ranked], ["newer-low-score", "older-high-score"])
 
     def test_retention_window_covers_the_past_year(self):
         within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()

@@ -142,7 +142,11 @@ def collect_dblp(config: Config) -> list[Paper]:
 def collect_openalex(config: Config) -> list[Paper]:
     papers: list[Paper] = []
     cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
-    queries = config.topic_queries[:8] + [terms[0] for terms in config.company_queries.values()]
+    queries = _unique([
+        *config.topic_queries[:8],
+        *[terms[0] for terms in config.company_queries.values()],
+        *[terms[0] for terms in config.model_families.values()],
+    ])
     requests: list[tuple[str, str, str, str]] = [
         (query, f"from_publication_date:{cutoff}", "", "") for query in queries
     ]
@@ -276,6 +280,8 @@ def collect_official_github(config: Config) -> list[Paper]:
             if not created or created < cutoff:
                 continue
             description = _clean(str(repo.get("description", "") or ""))
+            if not _repo_matches_model_family(company, repo_name, description, config):
+                continue
             readme = _github_readme(org, repo_name, github_headers)
             text = f"{repo_name} {description} {readme}".lower()
             if not _looks_like_foundation_model_report(text):
@@ -310,6 +316,14 @@ def collect_official_github(config: Config) -> list[Paper]:
     return papers
 
 
+def _repo_matches_model_family(company: str, name: str, description: str, config: Config) -> bool:
+    terms = config.model_families.get(company, [])
+    if not terms:
+        return True
+    text = f"{name} {description}".lower()
+    return any(term.lower() in text for term in terms)
+
+
 def _looks_like_foundation_model_report(text: str) -> bool:
     report_signal = any(
         term in text
@@ -323,7 +337,9 @@ def _looks_like_foundation_model_report(text: str) -> bool:
         for term in (
             "foundation model", "base model", "pretraining", "pre-training", "post-training",
             "alignment", "mixture of experts", "deepseek-v", "deepseek-r", "kimi k",
-            "minimax-", "glm-", "gemini", "gemma", "language model",
+            "minimax-", "glm-", "gemini", "gemma", "gpt-", "claude", "llama", "grok",
+            "phi-", "nova", "nemotron", "qwen", "doubao", "seed", "hunyuan", "mimo",
+            "baichuan", "yi-", "step-", "pangu", "mistral", "mixtral", "language model",
         )
     )
     return report_signal and model_signal
@@ -420,7 +436,8 @@ def _display_repo_title(name: str, description: str) -> str:
 def classify_company(paper: Paper, config: Config) -> None:
     if paper.content_type == "company_report" and paper.company:
         return
-    text = f"{paper.title} {' '.join(paper.authors)} {' '.join(paper.affiliations)}".lower()
+    # A model name in a title is not evidence of enterprise authorship.
+    text = f"{' '.join(paper.authors)} {' '.join(paper.affiliations)}".lower()
     paper.company = ""
     for company, terms in config.company_queries.items():
         if any(term.lower() in text for term in terms):
