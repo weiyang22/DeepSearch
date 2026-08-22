@@ -198,7 +198,7 @@ function PaperCard({ paper, saved, onSave }: { paper: Paper; saved: boolean; onS
       <p className="summary">{paper.summary}</p>
       <div className="tag-row" aria-label="论文标签">
         {paper.tags.map((item) => (
-          <span className={`paper-tag ${tagTone(item, paper)}`} key={item}><b>#</b>{item}</span>
+          <span className={`paper-tag ${tagTone(item, paper)}`} key={item}>{item}</span>
         ))}
       </div>
 
