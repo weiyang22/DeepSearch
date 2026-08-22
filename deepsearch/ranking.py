@@ -80,6 +80,28 @@ LLM_CONTEXT_TERMS = (
     "text generation model",
 )
 
+AB_EXPERIMENT_PATTERN = re.compile(
+    r"(?:\ba\s*/\s*b(?:\s+(?:tests?|testing|experiments?))?\b|"
+    r"\bonline\s+(?:controlled\s+)?(?:tests?|testing|experiments?)\b|"
+    r"\bcontrolled\s+online\s+experiments?\b|"
+    r"\blive[- ]traffic\s+experiments?\b)",
+    re.IGNORECASE,
+)
+
+OFFICIAL_MODEL_PATTERN = re.compile(
+    r"\b(?:deepseek[- ]?[vr]\d|kimi[- ]?k\d|minimax[- ]?m\d|glm[- ]?\d|chatglm)\b",
+    re.IGNORECASE,
+)
+
+NON_BASE_MODEL_TITLE_TERMS = (
+    "benchmark",
+    "bench:",
+    "toolkit",
+    "evaluation",
+    "perceptionbench",
+    "minitriton",
+)
+
 APPLICATION_ONLY_TERMS = (
     "healthcare application",
     "medical application",
@@ -116,7 +138,14 @@ def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
         text = _search_text(paper)
         if any(term.lower() in text for term in config.exclude_keywords):
             continue
-        if not is_genrec(paper) and not is_core_llm(paper):
+        genrec = is_genrec(paper)
+        core_llm = is_core_llm(paper)
+        enterprise = is_enterprise_paper(paper, config)
+        if not genrec and not core_llm:
+            continue
+        if genrec and config.require_ab_genrec and not has_ab_experiment(paper):
+            continue
+        if core_llm and not genrec and config.require_enterprise_llm and not enterprise:
             continue
         paper.tags = infer_tags(paper, config)
         paper.score = score_paper(paper, config)
@@ -164,6 +193,7 @@ def score_paper(paper: Paper, config: Config) -> int:
             "Semantic ID": 22,
             "Tokenization": 14,
             "企业论文": 18,
+            "A/B 实验": 28,
             "Reasoning": 8,
             "MoE": 10,
             "训练系统": 10,
@@ -190,6 +220,8 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
         tags.insert(0, "官方技术报告")
     if config and is_enterprise_paper(paper, config):
         tags.insert(0, "企业论文")
+    if has_ab_experiment(paper):
+        tags.insert(0, "A/B 实验")
     if paper.company:
         tags.insert(0, paper.company)
     unique: list[str] = []
@@ -207,7 +239,17 @@ def is_genrec(paper: Paper) -> bool:
 def is_core_llm(paper: Paper) -> bool:
     text = _search_text(paper)
     if paper.content_type == "company_report":
-        return True
+        title = paper.title.lower()
+        if any(term in title for term in NON_BASE_MODEL_TITLE_TERMS):
+            return False
+        training_signal = any(
+            term in text
+            for term in STRONG_LLM_TERMS
+            if term not in {"technical report", "whitepaper", "white paper"}
+        )
+        return bool(OFFICIAL_MODEL_PATTERN.search(text)) or (
+            training_signal and any(term in text for term in LLM_CONTEXT_TERMS)
+        )
     if not any(term in text for term in LLM_CONTEXT_TERMS):
         return False
     if not any(term in text for term in STRONG_LLM_TERMS):
@@ -220,6 +262,10 @@ def is_core_llm(paper: Paper) -> bool:
 def is_enterprise_paper(paper: Paper, config: Config) -> bool:
     text = " ".join([paper.company, *paper.affiliations, *paper.authors]).lower()
     return bool(paper.company) or any(term.lower() in text for term in config.enterprise_keywords)
+
+
+def has_ab_experiment(paper: Paper) -> bool:
+    return bool(AB_EXPERIMENT_PATTERN.search(_search_text(paper)))
 
 
 def _search_text(paper: Paper) -> str:

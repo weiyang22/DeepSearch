@@ -9,6 +9,9 @@ daily_min_score = 45
 retention_days = 90
 
 [discovery]
+# LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验。
+require_enterprise_llm = true
+require_ab_genrec = true
 arxiv_categories = ["cs.AI", "cs.CL", "cs.LG", "cs.IR"]
 topic_queries = [
   "large language model pretraining",

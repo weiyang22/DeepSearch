@@ -288,13 +288,23 @@ def deduplicate(papers: Iterable[Paper]) -> list[Paper]:
     for paper in papers:
         if not paper.title:
             continue
-        key = paper.doi.lower() if paper.doi else _normalized_title(paper.title)
+        key = _normalized_title(paper.title)
         current = by_key.get(key)
-        if not current or _paper_quality(paper) > _paper_quality(current):
-            if current:
-                paper.company = paper.company or current.company
-                paper.categories = _unique([*paper.categories, *current.categories])
+        if not current:
             by_key[key] = paper
+            continue
+        preferred, other = (paper, current) if _paper_quality(paper) > _paper_quality(current) else (current, paper)
+        preferred.company = preferred.company or other.company
+        preferred.affiliations = _unique([*preferred.affiliations, *other.affiliations])
+        preferred.authors = _unique([*preferred.authors, *other.authors])
+        preferred.categories = _unique([*preferred.categories, *other.categories])
+        preferred.doi = preferred.doi or other.doi
+        preferred.url = preferred.url or other.url
+        preferred.pdf_url = preferred.pdf_url or other.pdf_url
+        if other.content_type == "company_report":
+            preferred.content_type = "company_report"
+            preferred.evidence_basis = "official_release"
+        by_key[key] = preferred
     return list(by_key.values())
 
 

@@ -20,6 +20,8 @@ class Config:
     include_keywords: list[str]
     exclude_keywords: list[str]
     enterprise_keywords: list[str]
+    require_enterprise_llm: bool
+    require_ab_genrec: bool
     company_queries: dict[str, list[str]]
     github_orgs: dict[str, str]
     deepseek_base_url: str
@@ -47,6 +49,8 @@ def load_config(path: str | Path = "config.toml") -> Config:
         include_keywords=list(discovery.get("include_keywords", [])),
         exclude_keywords=list(discovery.get("exclude_keywords", [])),
         enterprise_keywords=list(discovery.get("enterprise_keywords", [])),
+        require_enterprise_llm=bool(discovery.get("require_enterprise_llm", True)),
+        require_ab_genrec=bool(discovery.get("require_ab_genrec", True)),
         company_queries={key: list(value) for key, value in companies.get("queries", {}).items()},
         github_orgs={key: str(value) for key, value in companies.get("github_orgs", {}).items()},
         deepseek_base_url=os.getenv("DEEPSEEK_BASE_URL", str(llm.get("base_url", "https://api.deepseek.com"))),

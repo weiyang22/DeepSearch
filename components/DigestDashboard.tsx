@@ -88,7 +88,7 @@ export function DigestDashboard() {
       const modeMatch =
         mode === "all" ||
         (mode === "today" && paper.is_daily_pick) ||
-        (mode === "llm" && paper.tags.some((item) => LLM_TAGS.includes(item))) ||
+        (mode === "llm" && paper.tags.includes("企业论文") && paper.tags.some((item) => LLM_TAGS.includes(item))) ||
         (mode === "genrec" && paper.tags.some((item) => GENREC_TAGS.includes(item))) ||
         (mode === "company" && (paper.content_type === "company_report" || paper.tags.includes("企业论文"))) ||
         (mode === "saved" && saved.includes(paper.id));
@@ -121,8 +121,8 @@ export function DigestDashboard() {
         <p className="eyebrow">LLM FOUNDATION MODELS × GENERATIVE RECOMMENDATION</p>
         <h1>大模型基座技术与生成式推荐论文追踪</h1>
         <p className="intro-copy">
-          LLM 仅关注预训练、基模架构、训练数据、扩展规律、对齐与后训练、训练及推理系统；不收录普通应用层案例。
-          GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，并优先呈现企业参与的论文。
+          LLM 仅关注企业参与或企业官方发布的预训练、基模架构、训练数据、对齐与后训练等技术内容；不收录普通应用层或纯学术论文。
+          GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，并且只收录明确报告 A/B 测试或线上受控实验的工作。
         </p>
         <div className="intro-meta">
           <span>今日收录 <strong>{todayCount}</strong> 篇，不设固定数量</span>
