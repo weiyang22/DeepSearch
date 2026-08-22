@@ -143,16 +143,32 @@ def collect_openalex(config: Config) -> list[Paper]:
     papers: list[Paper] = []
     cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
     queries = config.topic_queries[:8] + [terms[0] for terms in config.company_queries.values()]
-    for query in queries:
+    requests: list[tuple[str, str, str, str]] = [
+        (query, f"from_publication_date:{cutoff}", "", "") for query in queries
+    ]
+    for company, institution_id in config.openalex_institutions.items():
+        requests.extend(
+            (
+                query,
+                f"institutions.id:{institution_id},from_publication_date:{cutoff},type:article|preprint",
+                company,
+                institution_id,
+            )
+            for query in config.topic_queries[:8]
+        )
+
+    for query, work_filter, focus_company, focus_institution_id in requests:
         url = "https://api.openalex.org/works?" + urllib.parse.urlencode(
             {
                 "search": query,
-                "filter": f"from_publication_date:{cutoff}",
+                "filter": work_filter,
                 "per-page": str(config.openalex_per_query),
                 "sort": "publication_date:desc",
             }
         )
         for work in _request_json(url).get("results", []) or []:
+            if focus_institution_id and not _has_human_institution_author(work, focus_institution_id):
+                continue
             title = _clean(str(work.get("display_name", "")))
             if not title:
                 continue
@@ -181,9 +197,27 @@ def collect_openalex(config: Config) -> list[Paper]:
                 categories=[str(item.get("display_name", "")) for item in work.get("topics", [])[:4]],
             )
             classify_company(paper, config)
+            if focus_company:
+                paper.company = focus_company
             papers.append(paper)
         time.sleep(0.2)
     return papers
+
+
+def _has_human_institution_author(work: dict[str, Any], institution_id: str) -> bool:
+    normalized_id = institution_id.rstrip("/").split("/")[-1].lower()
+    model_author = re.compile(r"\b(?:gemini|chatgpt|gpt[- ]?\d|claude|chatterbox)\b", re.I)
+    for authorship in work.get("authorships", []) or []:
+        author_name = str(authorship.get("author", {}).get("display_name", ""))
+        if not author_name or model_author.search(author_name):
+            continue
+        institution_ids = {
+            str(item.get("id", "")).rstrip("/").split("/")[-1].lower()
+            for item in authorship.get("institutions", []) or []
+        }
+        if normalized_id in institution_ids:
+            return True
+    return False
 
 
 def collect_semantic_scholar(config: Config) -> list[Paper]:

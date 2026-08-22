@@ -5,6 +5,7 @@
 ## 功能
 
 - arXiv、DBLP、OpenAlex、Semantic Scholar 多源发现与降级
+- Google DeepMind 使用 OpenAlex 机构 ID 定向检索，避免仅靠名称关键词造成漏采
 - LLM 仅收录企业参与或企业官方发布的预训练、基模架构、训练数据、扩展规律、对齐/后训练及训练推理系统论文
 - GenRec/SID 只收录明确报告 A/B 测试或线上受控实验的论文
 - DeepSeek `deepseek-v4-flash` 中文扩展分析

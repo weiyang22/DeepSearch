@@ -24,6 +24,7 @@ class Config:
     require_ab_genrec: bool
     company_queries: dict[str, list[str]]
     github_orgs: dict[str, str]
+    openalex_institutions: dict[str, str]
     deepseek_base_url: str
     deepseek_model: str
     arxiv_max_results: int
@@ -56,6 +57,9 @@ def load_config(path: str | Path = "config.toml") -> Config:
         require_ab_genrec=bool(discovery.get("require_ab_genrec", True)),
         company_queries={key: list(value) for key, value in companies.get("queries", {}).items()},
         github_orgs={key: str(value) for key, value in companies.get("github_orgs", {}).items()},
+        openalex_institutions={
+            key: str(value) for key, value in companies.get("openalex_institutions", {}).items()
+        },
         deepseek_base_url=os.getenv("DEEPSEEK_BASE_URL", str(llm.get("base_url", "https://api.deepseek.com"))),
         deepseek_model=os.getenv("DEEPSEEK_MODEL", str(llm.get("model", "deepseek-v4-flash"))),
         arxiv_max_results=int(discovery.get("arxiv_max_results", 300)),

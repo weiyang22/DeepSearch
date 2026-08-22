@@ -4,7 +4,13 @@ import unittest
 from deepsearch.config import load_config
 from deepsearch.models import Paper
 from deepsearch.ranking import choose_daily_picks, has_ab_experiment, infer_tags, prepare_candidates
-from deepsearch.sources import _github_report_url, _looks_like_foundation_model_report, classify_company, deduplicate
+from deepsearch.sources import (
+    _github_report_url,
+    _has_human_institution_author,
+    _looks_like_foundation_model_report,
+    classify_company,
+    deduplicate,
+)
 
 
 class PipelineTests(unittest.TestCase):
@@ -41,6 +47,23 @@ class PipelineTests(unittest.TestCase):
         classify_company(paper, self.config)
         self.assertEqual(paper.company, "Google DeepMind")
         self.assertEqual(self.config.github_orgs["Google DeepMind"], "google-deepmind")
+        self.assertEqual(self.config.openalex_institutions["Google DeepMind"], "I4210090411")
+
+    def test_ignores_model_names_as_institution_authors(self):
+        model_authorship = {
+            "authorships": [{
+                "author": {"display_name": "Gemini 3.1 (Flash)"},
+                "institutions": [{"id": "https://openalex.org/I4210090411"}],
+            }]
+        }
+        human_authorship = {
+            "authorships": [{
+                "author": {"display_name": "A. Researcher"},
+                "institutions": [{"id": "https://openalex.org/I4210090411"}],
+            }]
+        }
+        self.assertFalse(_has_human_institution_author(model_authorship, "I4210090411"))
+        self.assertTrue(_has_human_institution_author(human_authorship, "I4210090411"))
 
     def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
         today = dt.date.today().isoformat()

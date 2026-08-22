@@ -73,6 +73,9 @@ MiniMax = "MiniMax-AI"
 "智谱" = "zai-org"
 "Google DeepMind" = "google-deepmind"
 
+[companies.openalex_institutions]
+"Google DeepMind" = "I4210090411"
+
 [llm]
 base_url = "https://api.deepseek.com"
 model = "deepseek-v4-flash"
