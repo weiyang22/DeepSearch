@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T06:10:00+08:00",
+  "generated_at": "2026-08-23T06:20:40+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -14,10 +14,10 @@
     "source_errors": [
       "DBLP: Remote end closed connection without response"
     ],
-    "discovered": 1188,
-    "candidates": 63,
+    "discovered": 1272,
+    "candidates": 69,
     "daily_picks": 1,
-    "analysis_complete": 63,
+    "analysis_complete": 71,
     "analysis_fallback": 0
   },
   "sources": [
@@ -599,7 +599,8 @@
         "官方技术报告",
         "LLM 基模",
         "后训练",
-        "Reasoning"
+        "Reasoning",
+        "MoE"
       ],
       "score": 170,
       "summary": "Kimi K3是Kimi团队发布的2.8T参数MoE模型，激活参数104B，具备原生视觉能力和1M上下文窗口。其核心创新包括Kimi Delta Attention和Attention Residuals，改善序列长度和模型深度的信息流；Stable LatentMoE每token激活16个路由专家；训练和数据配方的优化使整体扩展效率较K2提升约2.5倍。后训练阶段在通用、智能体和编码领域进行强化学习，支持多种推理努力水平，实现组合泛化和长程执行。基础设施方面，算法-系统协同设计、专家并行训练、百万token智能体RL和部署创新支撑了模型规模。评估显示K3在长程编码、智能体、知识、推理和视觉任务上达到前沿水平，虽仍落后于Claude Fable 5和GPT-5.6 Sol，但优于其他开源和专有模型。模型权重已全面开源。",
@@ -2665,8 +2666,7 @@
         "企业论文",
         "官方技术报告",
         "LLM 基模",
-        "Multimodal",
-        "Gemma"
+        "Multimodal"
       ],
       "score": 126,
       "summary": "Google DeepMind 发布了 gemma_penzai，这是一个基于 Penzai 的 JAX 研究工具包，用于可视化、操作和理解 Gemma 模型，并新增了多模态支持。原始 Penzai 主要支持纯文本 LLM，包括 Gemma 1 和 Gemma 2，现在扩展了视觉和多模态能力，从而支持 Gemma 3 的可解释性研究。该工具包旨在帮助研究人员深入理解模型内部机制，但未提供具体实验数据。",
@@ -3439,70 +3439,6 @@
       "is_daily_pick": false
     },
     {
-      "id": "s2:3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
-      "title": "FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets",
-      "authors": [
-        "Kairui Fu",
-        "Tao Zhang",
-        "Shuwen Xiao",
-        "Ziyang Wang",
-        "Xinming Zhang",
-        "Chenchi Zhang",
-        "Yuliang Yan",
-        "Junjun Zheng",
-        "Xiangheng Kong",
-        "Shengyu Zhang",
-        "K. Kuang",
-        "Yuning Jiang"
-      ],
-      "affiliations": [],
-      "published": "2025-09-25",
-      "updated": "2025-09-25",
-      "abstract": "Semantic identifiers (SIDs) have gained increasing attention in generative retrieval (GR) for recommendation due to their meaningful semantic discriminability. However, current studies in this field primarily (1) offer limited investigation into the construction strategies for better SIDs, and (2) their SID assessment typically relies on costly GR training. To address these challenges, we propose FORGE, a comprehensive benchmark for FOrming semantic identifieRs for Generative rEtrieval. Specifically, FORGE provides a taxonomy of the SID construction process from several perspectives and validates their impact on downstream GR through offline experiments across diverse settings. Notably, these empirical findings have led to a 0.35% increase in transaction count via online A/B experiments in the Guess You Like section of Taobao. The corresponding SID construction strategies have since been deployed at full scale on Taobao, demonstrating their practical effectiveness. To avoid expensive SID assessment that requires full GR training, we propose two novel SID evaluation metrics that are highly correlated with recommendation performance, enabling convenient evaluations without any GR training. Furthermore, to facilitate the community, we release AL-GR, the industrial dataset used in our experiments, comprising 14 billion interactions and 250 million items with the corresponding multimodal features collected from Taobao. All the code and data are available at https://github.com/selous123/al_sid.",
-      "url": "https://www.semanticscholar.org/paper/3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
-      "pdf_url": "",
-      "doi": "10.48550/arXiv.2509.20904",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2",
-      "categories": [],
-      "tags": [
-        "A/B 实验",
-        "GenRec",
-        "Semantic ID",
-        "Multimodal",
-        "生成式检索",
-        "语义标识符"
-      ],
-      "score": 112,
-      "summary": "FORGE是一个针对生成式检索（GR）中语义标识符（SID）构建的工业级基准。现有研究对SID构建策略探索不足，且评估依赖昂贵的GR训练。FORGE从多个角度对SID构建过程进行分类，并通过离线实验验证其对下游GR的影响。实验发现带来了淘宝“猜你喜欢”场景在线A/B测试中交易量0.35%的提升，相关策略已全量部署。为降低评估成本，FORGE提出两种与推荐性能高度相关的新SID评估指标，无需GR训练即可评估。此外，发布了包含140亿交互和2.5亿物品的多模态工业数据集AL-GR。",
-      "one_line_takeaway": "FORGE通过系统化SID构建策略和轻量评估指标，在淘宝工业场景中实现了交易量提升并全量部署。",
-      "core_method": "FORGE提出SID构建过程的分类法，涵盖多个视角（如标识符粒度、语义来源等），并通过离线实验系统比较不同策略对GR性能的影响。同时设计两种无需GR训练的SID评估指标，与推荐性能高度相关。",
-      "innovation_points": [
-        "首次系统化提出SID构建策略的分类法，覆盖多个设计维度。",
-        "提出两种无需GR训练的SID评估指标，显著降低评估成本。",
-        "发布大规模工业数据集AL-GR（140亿交互、2.5亿物品），促进社区研究。",
-        "在淘宝真实场景中验证了SID策略的有效性，并实现全量部署。"
-      ],
-      "experiment_results": [
-        "离线实验验证了不同SID构建策略对GR性能的影响，但具体数值未在摘要中给出。",
-        "在线A/B测试显示，采用FORGE策略后交易量提升0.35%。",
-        "提出的评估指标与推荐性能高度相关，但具体相关系数未在摘要中提供。"
-      ],
-      "limitations": [
-        "摘要未提供离线实验的具体性能数值，难以量化各策略的差异。",
-        "提出的评估指标虽与推荐性能相关，但未说明其在不同场景下的泛化性。",
-        "数据集AL-GR虽已发布，但摘要未提及数据集的详细统计特征或潜在偏差。"
-      ],
-      "practical_value": "FORGE为工业推荐系统提供了一套可落地的SID构建和评估方案，在淘宝“猜你喜欢”场景中实现了交易量提升，并已全量部署，证明了其实际价值。同时，发布的AL-GR数据集和开源代码可帮助其他团队复现和扩展研究。",
-      "why_it_matters": "本文填补了生成式检索中SID构建策略系统研究的空白，提出了低成本评估方法，并提供了大规模工业数据集，对学术界和工业界都有重要参考价值。其在线实验和部署结果也展示了生成式检索在真实场景中的潜力。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "ebcd13fb71fb65a2",
-      "is_daily_pick": false
-    },
-    {
       "id": "arxiv:2603.00980",
       "title": "Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations",
       "authors": [
@@ -4238,6 +4174,69 @@
       "is_daily_pick": false
     },
     {
+      "id": "openalex:W7202230636",
+      "title": "Retrofitting Linear Attention into Diffusion Language Models",
+      "authors": [
+        "Jinha Kim",
+        "Younghun Roh",
+        "Jaeyeon Kim"
+      ],
+      "affiliations": [
+        "Harvard University Press",
+        "Apple (United Kingdom)",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
+      ],
+      "published": "2026-08-06",
+      "updated": "2026-08-18T07:49:30.821534",
+      "abstract": "Diffusion language models (dLLMs) offer a promising alternative to autoregressive models by accelerating inference through parallel decoding. Recent dLLMs commonly use blockwise semi-autoregressive decoding, generating blocks autoregressively while denoising tokens within each active block in parallel. However, despite KV caching, each denoising step still attends to all previous blocks, repeatedly incurring prefix-attention cost. Motivated by this bottleneck, we ask whether dLLM inference can be further accelerated by linearizing attention over previous blocks. We introduce block-hybrid attention, which retains exact softmax attention within the active denoising block while applying linear attention over previous blocks. We show that this hybrid attention can be retrofitted into a pretrained dLLM with minimal post-training: LLaDA-Hybrid replaces 6 of the 20 attention layers in LLaDA~2.1, a 16B open-source dLLM, largely following LoLCAT (Zhang et al, 2024). The conversion takes only approximately 60 hours while preserving benchmark performance: 72.0% vs. 75.6% on HumanEval, 63.0% vs. 57.7% on MBPP+, and 86.7% vs. 88.3% on CMATH. With a Triton implementation, LLaDA-Hybrid achieves up to $1.7\\times$ higher decoding throughput and supports more concurrent requests before exhausting memory, showing that pretrained dLLMs can be efficiently linearized for faster inference. Our code is available at: https://github.com/Diuven/LLaDA-Hybrid.",
+      "url": "https://arxiv.org/abs/2608.06628",
+      "pdf_url": "https://arxiv.org/pdf/2608.06628",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Topic Modeling",
+        "Generative Adversarial Networks and Image Synthesis",
+        "Speech Recognition and Synthesis"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "预训练",
+        "后训练",
+        "推理系统",
+        "扩散语言模型"
+      ],
+      "score": 97,
+      "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而降低推理成本。作者将LLaDA 2.1（16B开源dLLM）中20个注意力层中的6层替换为线性注意力，仅需约60小时的后训练即可完成改造。在HumanEval、MBPP+和CMATH基准上，性能分别达到72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%），略有波动但总体保持。Triton实现使解码吞吐量提升至1.7倍，并支持更多并发请求。该工作证明预训练dLLM可被高效线性化以加速推理。",
+      "one_line_takeaway": "通过将部分注意力层替换为线性注意力，预训练扩散语言模型可在保持性能的同时显著提升解码吞吐量。",
+      "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力；基于LoLCAT方法对LLaDA 2.1进行后训练改造，替换6/20层注意力层。",
+      "innovation_points": [
+        "提出块混合注意力机制，结合精确与线性注意力，针对dLLM的块状解码瓶颈。",
+        "证明预训练dLLM可通过最小后训练（约60小时）实现线性化，无需从头训练。",
+        "提供Triton实现，实际提升解码吞吐量1.7倍，并支持更多并发请求。"
+      ],
+      "experiment_results": [
+        "HumanEval: 72.0% vs 75.6%（原模型），性能略有下降但可接受。",
+        "MBPP+: 63.0% vs 57.7%，性能提升。",
+        "CMATH: 86.7% vs 88.3%，略有下降。解码吞吐量提升至1.7倍。"
+      ],
+      "limitations": [
+        "性能在部分基准上略有下降（如HumanEval和CMATH）。",
+        "仅替换6/20层，线性化程度有限，可能未完全消除前缀注意力成本。",
+        "后训练时间约60小时，虽短但仍有成本。"
+      ],
+      "practical_value": "该技术可直接应用于现有dLLM推理系统，通过提高吞吐量和并发能力，降低部署成本，适用于需要大规模并行解码的场景。",
+      "why_it_matters": "该工作首次展示预训练dLLM可被高效线性化，为扩散语言模型的推理加速提供了新方向，同时保持性能，具有实际部署价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "a0b8bd738b6137b0",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2607.20145",
       "title": "SLAI T-Rex: Full-Parameter Post-training of the DeepSeek-V4 Family on Ascend SuperPOD",
       "authors": [
@@ -4418,6 +4417,540 @@
       "is_daily_pick": false
     },
     {
+      "id": "openalex:W7128096341",
+      "title": "Reinforced Attention Learning",
+      "authors": [
+        "Bangzheng Li",
+        "Jianmo Ni",
+        "Chen Qu",
+        "Ian Miao",
+        "Liu Yang",
+        "Xingyu Fu",
+        "Muhao Chen",
+        "Derek Zhiyuan Cheng"
+      ],
+      "affiliations": [
+        "UC Davis Health",
+        "University of California, Davis",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)",
+        "Princeton University"
+      ],
+      "published": "2026-02-04",
+      "updated": "2026-08-18T07:49:30.821534",
+      "abstract": "Post-training with Reinforcement Learning (RL) has substantially improved reasoning in Large Language Models (LLMs) via test-time scaling. However, extending this paradigm to Multimodal LLMs (MLLMs) through verbose rationales yields limited gains for perception and can even degrade performance. We propose Reinforced Attention Learning (RAL), a policy-gradient framework that directly optimizes internal attention distributions rather than output token sequences. By shifting optimization from what to generate to where to attend, RAL promotes effective information allocation and improved grounding in complex multimodal inputs. Experiments across diverse image and video benchmarks show consistent gains over GRPO and other baselines. We further introduce On-Policy Attention Distillation, demonstrating that transferring latent attention behaviors yields stronger cross-modal alignment than standard knowledge distillation. Our results position attention policies as a principled and general alternative for multimodal post-training.",
+      "url": "http://arxiv.org/abs/2602.04884",
+      "pdf_url": "https://arxiv.org/pdf/2602.04884",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Multimodal Machine Learning Applications",
+        "Domain Adaptation and Few-Shot Learning",
+        "Generative Adversarial Networks and Image Synthesis"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "后训练",
+        "Reasoning",
+        "Multimodal"
+      ],
+      "score": 86,
+      "summary": "本文提出强化注意力学习（RAL），一种直接优化多模态大语言模型（MLLM）内部注意力分布的策略梯度框架，而非传统的输出token序列。针对RL后训练在MLLM上通过冗长推理链提升有限甚至损害感知性能的问题，RAL将优化目标从“生成什么”转向“关注哪里”，促进有效信息分配和跨模态接地。实验在多种图像和视频基准上显示，RAL一致优于GRPO等基线。此外，引入在线策略注意力蒸馏，证明转移潜在注意力行为比标准知识蒸馏产生更强的跨模态对齐。结果表明注意力策略可作为多模态后训练的原则性通用替代方案。",
+      "one_line_takeaway": "直接优化注意力分布而非输出序列，为多模态LLM后训练提供了更有效的替代方案。",
+      "core_method": "RAL：一种策略梯度框架，直接优化MLLM内部注意力分布，通过奖励信号调整注意力权重，而非生成token。同时提出在线策略注意力蒸馏，利用教师模型的注意力行为指导学生模型。",
+      "innovation_points": [
+        "首次将RL后训练从输出空间转移到注意力空间，直接优化内部注意力分布。",
+        "提出在线策略注意力蒸馏，利用注意力行为进行跨模态对齐，优于标准知识蒸馏。",
+        "在多种图像和视频基准上验证了注意力策略的通用性和有效性。"
+      ],
+      "experiment_results": [
+        "在多种图像和视频基准上，RAL一致优于GRPO和其他基线。",
+        "在线策略注意力蒸馏比标准知识蒸馏产生更强的跨模态对齐。",
+        "具体数值未在摘要中提供，需查阅全文。"
+      ],
+      "limitations": [
+        "摘要未提供具体性能提升数值，需依赖全文数据。",
+        "方法可能对注意力分布的可解释性和可优化性有依赖，需进一步分析。",
+        "未讨论计算开销和工程实现细节。"
+      ],
+      "practical_value": "为多模态LLM的后训练提供了一种无需生成冗长推理链的优化方法，可提升模型在复杂多模态输入下的感知和接地能力，适用于图像和视频理解任务，可能降低推理成本并提高效率。",
+      "why_it_matters": "该研究挑战了传统RL后训练必须优化输出序列的范式，提出优化内部注意力分布的新思路，为多模态LLM的对齐和推理提供了新方向，具有理论价值和实践潜力。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "32cc31b6b94f4cf5",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W4413680550",
+      "title": "Evaluating the Effectiveness of Parameter-Efficient Fine-Tuning in Genomic Classification Tasks",
+      "authors": [
+        "Daniel S. Berman",
+        "Daniel A. Jiménez",
+        "Shengjun Ta",
+        "Brian Merritt",
+        "Jeremy Ratcliff",
+        "Vijay Narayan"
+      ],
+      "affiliations": [
+        "Johns Hopkins University Applied Physics Laboratory",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
+      ],
+      "published": "2025-08-26",
+      "updated": "2026-08-18T07:49:30.821534",
+      "abstract": "ABSTRACT Foundation models are increasingly being leveraged for biological tasks. To address the high memory requirements of fine-tuning large pre-trained language models, parameter efficient fine-tuning (PEFT) methods are also being increasingly utilized. Previous studies have shown minimal, if any, loss in performance when using PEFT on binary classification tasks. However, the impact of using PEFT on tasks with large classification spaces has not been systemically evaluated. In this work, we apply PEFT to the problem of taxonomic classification using pre-trained genomic language models as the classification backbone. We explore various training strategies—including PEFT, full fine-tuning, and partial fine-tuning—for classifying sequences at the superkingdom, phylum, and genus levels. We find that PEFT-trained models significantly underperform compared to those trained via full fine-tuning or partial fine-tuning. Additionally, we demonstrate increased performance of pretrained models over those randomly initialized.",
+      "url": "https://doi.org/10.1101/2025.08.21.671544",
+      "pdf_url": "https://www.biorxiv.org/content/biorxiv/early/2025/08/26/2025.08.21.671544.full.pdf",
+      "doi": "10.1101/2025.08.21.671544",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "bioRxiv (Cold Spring Harbor Laboratory)",
+      "categories": [
+        "Machine Learning in Bioinformatics",
+        "Gene expression and cancer classification",
+        "Genetics, Bioinformatics, and Biomedical Research"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "预训练",
+        "PEFT",
+        "基因组分类"
+      ],
+      "score": 76,
+      "summary": "本文系统评估了参数高效微调（PEFT）在基因组分类任务中的有效性，特别是针对大分类空间（如超界、门、属）的场景。作者使用预训练基因组语言模型作为骨干，比较了PEFT、全量微调和部分微调三种策略。结果表明，PEFT在分类性能上显著低于全量微调和部分微调，而预训练模型优于随机初始化模型。研究揭示了PEFT在复杂分类任务中的局限性，为基因组学中模型微调策略的选择提供了实证依据。",
+      "one_line_takeaway": "PEFT在大分类空间的基因组分类任务中性能显著下降，全量或部分微调更优。",
+      "core_method": "使用预训练基因组语言模型，对比PEFT（如LoRA）、全量微调和部分微调在超界、门、属三个分类层级上的性能。",
+      "innovation_points": [
+        "首次系统评估PEFT在基因组大分类空间任务中的表现",
+        "对比多种微调策略，揭示PEFT的适用边界",
+        "验证预训练模型在基因组分类中的优势"
+      ],
+      "experiment_results": [
+        "PEFT模型性能显著低于全量微调和部分微调",
+        "预训练模型优于随机初始化模型"
+      ],
+      "limitations": [
+        "未提供具体性能数值，仅定性描述",
+        "仅针对基因组分类任务，可能不适用于其他领域",
+        "未深入分析PEFT失效的原因"
+      ],
+      "practical_value": "为基因组学研究人员选择微调策略提供指导，避免在复杂分类任务中盲目使用PEFT，从而节省计算资源并保证模型性能。",
+      "why_it_matters": "该研究挑战了PEFT在生物信息学中普遍有效的假设，强调了任务复杂度对微调策略选择的影响，对资源受限的基因组学应用具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "738616eec56c16ff",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7161090895",
+      "title": "Mid-Training with Self-Generated Data Improves Reinforcement Learning in Language Models",
+      "authors": [
+        "Aswin RRV",
+        "Jacob Dineen",
+        "Divij Handa",
+        "Mihir Parmar",
+        "Ben Zhou",
+        "Swaroop Mishra",
+        "Chitta Baral"
+      ],
+      "affiliations": [
+        "Arizona State University",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
+      ],
+      "published": "2026-05-08",
+      "updated": "2026-08-21T09:56:20.448147",
+      "abstract": "The effectiveness of Reinforcement Learning (RL) in Large Language Models (LLMs) depends on the nature and diversity of the data used before and during RL. In particular, reasoning problems can often be approached in multiple ways that rely on different forms of reasoning, and exposure to only a limited range of such approaches in the training data may limit the effectiveness of RL. Motivated by this, we investigate using diverse self-generated data during mid-training as an intermediate step before RL training. Specifically, we adopt a bootstrapped data-generation framework guided by George Polya's problem-solving approaches for generating multiple variants of correct answers for each question in the training data, and then perform fine-tuning. We first provide a theoretical perspective on how mid-training on such data improves RL and explain how policy-gradient updates can incentivize combining multiple approaches. We then empirically demonstrate that RL-trained models initialized with our mid-training data achieve consistent improvements across various mathematical reasoning benchmarks and other OOD tasks like code generation and narrative reasoning. Overall, our investigative study shows that a language model learning multiple problem-solving approaches, through self-generated data helps subsequent RL.",
+      "url": "https://arxiv.org/abs/2605.08472",
+      "pdf_url": "https://arxiv.org/pdf/2605.08472",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Topic Modeling",
+        "Multimodal Machine Learning Applications",
+        "Artificial Intelligence in Healthcare and Education"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "Multimodal",
+        "强化学习"
+      ],
+      "score": 68,
+      "summary": "本研究探讨了在强化学习（RL）训练之前，使用模型自生成的多风格数据作为中间训练（mid-training）步骤，以提升RL在数学推理等任务上的效果。作者基于Polya的问题解决理论，引导模型为每个问题生成多种正确解答变体，并在此数据上进行微调。理论上，他们分析了这种中间训练如何通过策略梯度更新激励模型组合多种推理路径。实验表明，在多个数学推理基准以及代码生成和叙事推理等OOD任务上，经过中间训练的模型在RL后均取得一致提升。研究强调，模型学习多种问题解决方式有助于后续RL的优化。",
+      "one_line_takeaway": "在RL前用自生成的多风格数据做中间训练，能显著提升模型在数学推理等任务上的RL效果。",
+      "core_method": "采用自举式数据生成框架，依据Polya的解题策略，为每个训练问题生成多种正确解答变体，然后进行中间微调，最后再进行RL训练。",
+      "innovation_points": [
+        "提出在RL前使用自生成多风格数据进行中间训练的新范式",
+        "将Polya问题解决理论应用于数据生成，增强推理多样性",
+        "提供理论分析，解释中间训练如何通过策略梯度促进多路径组合"
+      ],
+      "experiment_results": [
+        "在多个数学推理基准上，中间训练+RL相比直接RL有稳定提升",
+        "在代码生成和叙事推理等OOD任务上也观察到改进",
+        "具体数值未在摘要中给出"
+      ],
+      "limitations": [
+        "摘要未提供具体实验数值，难以量化改进幅度",
+        "方法依赖模型自生成数据，可能受限于模型初始能力",
+        "未讨论计算成本或数据质量控制的细节"
+      ],
+      "practical_value": "该方法可作为一种通用的RL预处理步骤，适用于需要复杂推理的领域，如数学、代码生成，有助于提升模型在多样化任务上的泛化能力，且无需额外人工标注。",
+      "why_it_matters": "该研究揭示了数据多样性在RL中的关键作用，提供了一种简单有效的中间训练策略，为提升LLM推理能力提供了新思路，且具有理论支撑。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "404fd72ebc54cff7",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7148176929",
+      "title": "See it to Place it: Evolving Macro Placements with Vision-Language Models",
+      "authors": [
+        "Ikechukwu Uchendu",
+        "Swati Goel",
+        "Karly Hou",
+        "Ebrahim M. Songhori",
+        "Kuang-Huei Lee",
+        "Joe Wenjie Jiang",
+        "Vijay Janapa Reddi",
+        "Vincent Zhuang",
+        "∗. IkechukwuUchendu",
+        "J. Jiang",
+        "V. Reddi",
+        "Google DeepMind"
+      ],
+      "affiliations": [
+        "Harvard University Press",
+        "Artificial Intelligence in Medicine (Canada)",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
+      ],
+      "published": "2026-03-30",
+      "updated": "2026-08-18T07:49:30.821534",
+      "abstract": "We propose using Vision-Language Models (VLMs) for macro placement in chip floorplanning, a complex optimization task that has recently shown promising advancements through machine learning methods. Because human designers rely heavily on spatial reasoning to arrange components on the chip canvas, we hypothesize that VLMs with strong visual reasoning abilities can effectively complement existing learning-based approaches. We introduce VeoPlace (Visual Evolutionary Optimization Placement), a novel framework that uses a VLM, without any fine-tuning, to guide the actions of a base placer by constraining them to subregions of the chip canvas. The VLM proposals are iteratively optimized through an evolutionary search strategy with respect to resulting placement quality. On open-source benchmarks, VeoPlace outperforms the best prior learning-based approach on 9 of 10 benchmarks with peak wirelength reductions exceeding 32%. We further demonstrate that VeoPlace generalizes to analytical placers, improving DREAMPlace performance on all 8 evaluated benchmarks with gains up to 4.3%. Our approach opens new possibilities for electronic design automation tools that leverage foundation models to solve complex physical design problems.",
+      "url": "http://arxiv.org/abs/2603.28733",
+      "pdf_url": "https://arxiv.org/pdf/2603.28733",
+      "doi": "10.48550/arXiv.2603.28733",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "VLSI and FPGA Design Techniques",
+        "Advanced Neural Network Applications",
+        "Modular Robots and Swarm Intelligence"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "Multimodal",
+        "Vision-Language Models"
+      ],
+      "score": 68,
+      "summary": "本文提出VeoPlace框架，利用视觉语言模型（VLM）指导芯片宏布局优化。传统机器学习方法在布局任务中表现有限，而人类设计师依赖空间推理，因此作者假设VLM的视觉推理能力可辅助布局。VeoPlace无需微调VLM，通过进化搜索策略迭代优化VLM提出的布局区域约束，引导基础布局器（如DREAMPlace）在子区域内放置宏单元。在开源基准测试中，VeoPlace在10个基准中的9个上优于先前最佳学习方法，峰值线长减少超32%；在DREAMPlace上，8个基准全部提升，增益最高达4.3%。该方法展示了基础模型在电子设计自动化中的潜力。",
+      "one_line_takeaway": "VeoPlace利用VLM的视觉推理能力，通过进化搜索引导布局，显著提升芯片宏布局质量，无需微调。",
+      "core_method": "VeoPlace框架：使用预训练VLM（无需微调）生成布局区域建议，通过进化搜索策略迭代优化这些建议，并将VLM约束应用于基础布局器（如DREAMPlace）的放置过程。",
+      "innovation_points": [
+        "首次将VLM应用于芯片宏布局，利用其视觉推理能力辅助空间优化。",
+        "无需微调VLM，通过进化搜索迭代优化VLM建议，实现零样本适配。",
+        "框架可泛化到不同基础布局器，提升现有方法性能。"
+      ],
+      "experiment_results": [
+        "在10个开源基准中，VeoPlace在9个上优于先前最佳学习方法，峰值线长减少超32%。",
+        "在DREAMPlace上，8个基准全部提升，增益最高达4.3%。"
+      ],
+      "limitations": [
+        "依赖VLM的视觉推理能力，可能受限于VLM对芯片布局的固有理解。",
+        "进化搜索可能计算开销较大，需进一步优化效率。",
+        "实验仅基于开源基准，未验证在工业级复杂设计上的表现。"
+      ],
+      "practical_value": "VeoPlace为芯片设计自动化提供新思路，可集成到现有布局流程中，提升布局质量，减少线长，降低设计迭代成本，尤其适用于复杂芯片设计。",
+      "why_it_matters": "本文展示了基础模型（VLM）在物理设计中的潜力，突破了传统机器学习方法的局限，为电子设计自动化开辟了新方向，值得关注其跨领域应用价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "90d7ed27e480b681",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7163720394",
+      "title": "LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks",
+      "authors": [
+        "Po-Nien Kung",
+        "Linfeng Song",
+        "Dawsen Hwang",
+        "Jinsung Yoon",
+        "Chun-Liang Li",
+        "Simone Severini",
+        "Mirek Olšák",
+        "Edward Lockhart",
+        "Quoc V Le",
+        "Burak Göktürk",
+        "Thang Luong",
+        "Tomas Pfister",
+        "Nanyun Peng"
+      ],
+      "affiliations": [
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
+      ],
+      "published": "2026-06-02",
+      "updated": "2026-08-18T07:49:30.821534",
+      "abstract": "Large Language Models (LLMs) exhibit strong informal mathematical reasoning but struggle to generate mechanically verifiable proofs in formal languages like Lean. We present LEAP, an agentic framework that enables general-purpose foundation models to achieve state-of-the-art performance on automated formal theorem proving. LEAP leverages foundation model capabilities, such as informal reasoning, instruction following, and iterative self-refinement. By decomposing complex problems into smaller units, the system bridges formal proof construction with informal blueprints through continuous interaction with the Lean compiler. To provide a rigorous evaluation beyond increasingly saturated benchmarks, we introduce Lean-IMO-Bench, a benchmark of IMO-style problems formalized in Lean, with short statements yet highly non-routine and multi-step proofs across a wide range of difficulty levels. Empirically, on the latest 2025 Putnam Competition, an annual mathematics competition for undergraduate students in North America, LEAP solves all 12 problems, matching recent breakthroughs by frontier formal mathematical models. On Lean-IMO-Bench, LEAP boosts the one-shot formal solve rate of general-purpose LLMs from below 10% to 70%, notably surpassing the 48% benchmark set by a specialized, gold-medal-caliber IMO system. Furthermore, we demonstrate LEAP's research-level utility by autonomously formalizing complex proofs for open combinatorial challenges, including a verified proof for a key subproblem in Knuth's Hamiltonian decomposition of even-order Cayley graphs.",
+      "url": "https://arxiv.org/abs/2606.03303",
+      "pdf_url": "https://arxiv.org/pdf/2606.03303",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Machine Learning in Materials Science",
+        "Mathematics, Computing, and Information Processing",
+        "Logic, programming, and type systems"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "LLM",
+        "形式化数学"
+      ],
+      "score": 66,
+      "summary": "LEAP是一个智能体框架，旨在提升通用大语言模型在形式化数学定理证明中的表现。传统LLM在非正式数学推理上表现良好，但难以生成Lean等语言中可机械验证的证明。LEAP通过将复杂问题分解为更小的单元，并利用基础模型的非正式推理、指令遵循和迭代自我修正能力，与Lean编译器持续交互，桥接形式化证明构建与非正式蓝图。为严格评估，作者引入了Lean-IMO-Bench基准，包含IMO风格问题，语句简短但证明高度非例行且多步骤。实验表明，在2025年Putnam竞赛中，LEAP解决了全部12个问题，匹配前沿专用模型；在Lean-IMO-Bench上，将通用LLM的一次性形式化解决率从低于10%提升至70%，超过专业IMO系统的48%。此外，LEAP还自主形式化了Knuth关于偶数阶Cayley图哈密顿分解的关键子问题的验证证明，展示了研究级实用性。",
+      "one_line_takeaway": "LEAP通过智能体框架分解问题并迭代交互，显著提升通用LLM在形式化定理证明上的能力，达到甚至超越专用系统。",
+      "core_method": "LEAP采用智能体框架，将复杂形式化证明任务分解为多个子问题，利用基础LLM的非正式推理和指令遵循能力生成非正式蓝图，然后通过持续与Lean编译器交互进行迭代自我修正，逐步构建可验证的形式化证明。",
+      "innovation_points": [
+        "提出智能体框架LEAP，使通用基础模型无需专门训练即可在形式化定理证明上达到SOTA。",
+        "引入Lean-IMO-Bench基准，包含IMO风格问题，难度高且非例行，用于更严格的评估。",
+        "在Putnam竞赛和Lean-IMO-Bench上超越专用系统，并成功形式化开放组合问题的关键子证明。"
+      ],
+      "experiment_results": [
+        "在2025年Putnam竞赛中，LEAP解决了全部12个问题，匹配前沿形式化数学模型的突破。",
+        "在Lean-IMO-Bench上，LEAP将通用LLM的一次性形式化解决率从低于10%提升至70%，超过专业IMO系统的48%。",
+        "LEAP自主形式化了Knuth关于偶数阶Cayley图哈密顿分解的关键子问题的验证证明。"
+      ],
+      "limitations": [
+        "LEAP依赖基础模型的非正式推理能力，若模型本身推理能力不足，性能可能受限。",
+        "框架需要大量与Lean编译器的交互，计算成本较高。",
+        "Lean-IMO-Bench规模有限，可能无法完全覆盖所有数学领域。"
+      ],
+      "practical_value": "LEAP展示了通用LLM在形式化数学中的潜力，可辅助数学家验证复杂证明，降低形式化门槛，加速数学研究。",
+      "why_it_matters": "该研究突破性地让通用LLM在形式化定理证明上超越专用系统，为AI for Math提供了新范式，并引入更严格的基准，推动领域发展。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "85fc7d27218dcd56",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7161274572",
+      "title": "A framework for clinical validation of generative artificial intelligence therapeutics",
+      "authors": [
+        "Isaac R. Galatzer‐Levy",
+        "Nenad Tomašev",
+        "Carolyn Rodriguez",
+        "John Torous"
+      ],
+      "affiliations": [
+        "Google DeepMind (United Kingdom)",
+        "Google (United Kingdom)",
+        "Stanford Medicine",
+        "Harvard University"
+      ],
+      "published": "2026-05-15",
+      "updated": "2026-08-21T09:56:20.448147",
+      "abstract": "While established frameworks exist for assessing the clinical efficacy and effectiveness of human-delivered interventions, and standards are in place for pre-artificial intelligence (AI) chatbots that have achieved clearance from the US Food and Drug Administration (FDA) as companions to psychological treatment, a significant void remains. There are currently no defined standards to determine the efficacy of an AI agent in delivering validated treatment approaches, whether it is assisting with medication management, supporting clinicians, or directly delivering talk therapy. This gap leaves the field vulnerable, confronting a surge of emerging technologies without the necessary tools to ascertain their safety, and if – or for whom – they genuinely work. Autonomous or semi-autonomous AI agents, capable of interacting across diverse modalities – text, voice and images – can both understand and mirror the complex cues that human therapists utilize, thereby enhancing both engagement and assessment capabilities. This positions generative AI (GenAI) as a deeply promising solution for delivering psychological interventions, with the potential to significantly broaden treatment reach and reduce costs. However, the rapid proliferation of digital applications claiming therapeutic effects, coupled with their increasing adoption by the public1, underscores a crucial concern: the absence of established clinical standards for rigorously evaluating the safety and effectiveness of these GenAI agents. This regulatory void creates potential risks for patients and impedes the responsible and ethical integration of this transformative technology into validated clinical practice. Therefore, a robust evaluation framework, one that thoughtfully adapts established psychotherapy trial design principles to the unique characteristics of AI, is not only beneficial but urgently required. While sharing some commonalities with general wellness and coaching applications, GenAI agents explicitly intended for treatment of clinical disorders face distinct and amplified validation challenges. These encompass the intricate management of high-risk safety scenarios, the imperative for strict adherence to empirically supported therapeutic approaches, and the inherent complexities of clinical reasoning. Unlike traditional, deterministic chatbots that follow rigid decision trees, generative models operate probabilistically. Their dynamic, non-deterministic nature, while powerful, necessitates a novel dual approach to validation that seamlessly integrates meticulous human oversight with sophisticated agent-based evaluation, thereby ensuring uncompromised safety, efficacy and effectiveness. The concepts of efficacy (an intervention's effect under ideal conditions) and effectiveness (its performance in real-world settings) are foundational to therapeutic development. However, GenAI agents, with their dynamic, evolving models, directly challenge traditional validation paradigms. Their non-deterministic therapeutic actions mean that an agent may not produce identical responses to seemingly similar prompts. Consequently, the intervention cannot be defined by verbatim replication, but rather by the consistent and principled application of established therapeutic frameworks within clearly defined guardrails, much akin to how human-delivered treatments are evaluated for fidelity. Furthermore, the assumption that AI models can seamlessly mimic human clinical reasoning is inherently flawed. GenAI models are demonstrably prone to factual errors (often termed “hallucinations”), can inadvertently inherit biases embedded in their training data, and may exhibit deficits in episodic memory or subtle concept differentiation – all of which are critically important for sound clinical reasoning and avoiding problematic cognitions. Evaluating the cumulative impact of micro-interactions over extended periods is paramount, requiring analysis beyond simplistic single-turn benchmarks, to truly understand how an agent maintains therapeutic coherence, fosters an alliance, and effectively mitigates risks such as model sycophancy or the perpetuation of unhelpful thought patterns. Longitudinal studies, moreover, are particularly vulnerable to “model drift”, where updates to the underlying large language model (LLM) subtly alter the agent's therapeutic characteristics, necessitating rigorous version control and proactive clinical impact assessments. A particularly salient challenge, and potentially an opportunity, is the concept of the therapeutic alliance, which is an essential component of human-to-human treatment2, within human-AI interaction. Unlike humans, LLMs are not capable of complex cognitions that humans rely on to interact relationally3. Therefore, the nature of AI's alliance may rely on more concrete markers of trust and support – such as explicit goal-setting, the use of collaborative and validating language, and adaptive responsiveness. The “emotional bond” component, in this context, shifts from reciprocal human affection to the user's trust in the AI's consistency, reliability, helpfulness, and its demonstrated ability to deliver contextually appropriate and empathetic language. Evaluation, therefore, must involve analyzing the AI's dialogue for clear markers of active listening, validation, and empathetic resonance, alongside objective user interaction patterns such as sustained engagement and task adherence as robust behavioral proxies for a perceived positive alliance. To build patient confidence and ensure both safety and effectiveness, these core concepts must be rigorously adapted for GenAI. The efficacy of a GenAI therapeutic agent can be precisely defined as the capacity of a specific, version-controlled agent – meticulously characterized by its explicit model, knowledge grounding, therapeutic principles, and interaction protocols – to produce statistically and clinically significant improvement on validated primary outcome measures, relative to a robust control, in a randomly assigned population under optimized study conditions. This demands transparent documentation of the LLM version, fine-tuning data, and clearly defined guardrails4. Effectiveness is the extent to which an agent, deployed in representative real-world settings (including controlled updates), achieves clinically meaningful benefits across diverse outcome domains, demonstrates sustained user engagement, and consistently maintains an acceptable safety profile. Effectiveness studies therefore necessitate pragmatic designs that accurately reflect typical use-cases and heterogeneous populations, requiring robust strategies for managing model evolution through performance thresholds that trigger re-validation or continuous monitoring. To accelerate the responsible translation of GenAI into evidence-based mental health care, a multi-stage, hybrid validation process is essential, meticulously integrating rigorous technical AI evaluation with established clinical research methodologies. This comprehensive framework should be conceptualized in phases analogous to traditional therapeutic development: iterative development, pre-clinical validation, clinical trials, and post-deployment monitoring. The first phase, iterative development and benchmarking, involves rapid model refinement using simpler, initial benchmarks such as single-turn adherence checks. This phase focuses on foundational capabilities and preliminary alignment. The second phase, pre-clinical AI validation, moves beyond simple accuracy to rigorous in silico and simulated validation of the agent's behavior in complex, dynamic scenarios. This critical stage includes using LLM-to-LLM role-playing or human actors to simulate diverse therapeutic interactions, rigorous adversarial “red teaming” to proactively identify safety-critical failure modes5 (e.g., mismanaging crisis cues or providing harmful advice), and systematic bias and fairness audits to prevent the perpetuation or amplification of health disparities6. The third phase, clinical efficacy and effectiveness trials, establishes direct patient benefit. These demands validating longitudinal therapeutic coherence, as clinically relevant behaviors, therapeutic benefits, and potential risks often emerge and evolve over time. Trials must employ sophisticated methods to assess context retention, dialogue coherence, and task completion across extended, multi-session interactions. Human evaluation frameworks are paramount for assessing information quality, clinical reasoning, expression style, overall safety, and patient trust, alongside crucial ethical and practical considerations such as clinical credibility, user experience, user agency, equity, transparency, and crisis management protocols. The fourth phase, post-deployment and continuous validation, ensures sustained safety and efficacy in real-world use. GenAI agents require ongoing, vigilant monitoring to detect any performance degradation, drift, or the emergence of new risks. A one-time demonstration of effectiveness is insufficient for these rapidly evolving technologies. This phase demands pragmatic trial designs that accurately reflect real-world conditions7, clear and actionable protocols for re-validation when the underlying model is substantially updated or performance metrics fall below a pre-defined threshold, and robust continuous validation processes to re-establish therapeutic effects and comprehensively assess risk profiles. GenAI agents that interact directly with clinicians, caregivers and patients offer significant and transformative opportunities for psychotherapy. However, their responsible translation into validated clinical tools necessitates a clinically specific and robust research framework8, 9. The above-mentioned stages of development, which integrate traditional sequential clinical trial norms with emerging state-of-the-art AI validation strategies, provide a crucial path forward. The ultimate aim is to develop common standards and methodologies that facilitate unwavering transparency and engender deep trust across the entire ecosystem of mental health care.",
+      "url": "https://doi.org/10.1002/wps.70067",
+      "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13176844/pdf/WPS-25-327.pdf",
+      "doi": "10.1002/wps.70067",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "World Psychiatry",
+      "categories": [
+        "Digital Mental Health Interventions",
+        "Artificial Intelligence in Healthcare and Education",
+        "AI in Service Interactions"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "生成式AI",
+        "临床验证"
+      ],
+      "score": 66,
+      "summary": "本文由Google DeepMind等机构的研究者提出，针对生成式AI（GenAI）在心理治疗等临床干预中的验证框架缺失问题，系统阐述了GenAI治疗剂的临床验证挑战与解决方案。文章指出，传统心理治疗疗效评估框架和FDA对预AI聊天机器人的标准均不适用于动态、非确定性的GenAI代理。作者定义了GenAI治疗剂的疗效与效果，强调版本控制、模型漂移、治疗联盟等特殊问题，并提出一个四阶段混合验证框架：迭代开发与基准测试、临床前AI验证（包括红队测试和偏见审计）、临床疗效与效果试验（关注纵向连贯性和人类评估）、部署后持续监控与再验证。该框架整合了传统临床试验原则与前沿AI验证策略，旨在建立通用标准，确保GenAI在精神卫生领域的安全、有效和负责任转化。",
+      "one_line_takeaway": "GenAI治疗剂需要一种融合传统临床试验与AI特有验证策略的四阶段混合框架，以应对其非确定性、模型漂移和治疗联盟等独特挑战。",
+      "core_method": "提出四阶段混合验证框架：1) 迭代开发与基准测试（单轮依从性检查）；2) 临床前AI验证（LLM角色扮演模拟、对抗性红队测试、偏见与公平性审计）；3) 临床疗效与效果试验（纵向连贯性评估、人类评估框架）；4) 部署后持续验证（性能阈值触发再验证、持续监控）。",
+      "innovation_points": [
+        "首次为GenAI治疗剂定义了明确的疗效和效果概念，强调版本控制和治疗框架的忠实应用而非逐字复制。",
+        "提出将传统心理治疗试验设计原则与AI特有的验证方法（如红队测试、模型漂移管理）系统整合的四阶段框架。",
+        "针对治疗联盟概念，提出用具体信任标记（如目标设定、验证性语言）和用户行为代理（如持续参与）来评估人机联盟。",
+        "强调非确定性模型对验证范式的挑战，主张通过人类监督与代理评估的双重方法确保安全性和有效性。"
+      ],
+      "experiment_results": [
+        "本文为观点/框架性文章，未提供实验数据。"
+      ],
+      "limitations": [
+        "框架尚未经过实证检验，其可行性和有效性有待实际应用验证。",
+        "未详细说明各阶段的具体操作指标或阈值设定方法。",
+        "对模型漂移和再验证的触发条件缺乏量化标准。"
+      ],
+      "practical_value": "为监管机构、临床研究者和AI开发者提供了可操作的验证路径，有助于加速GenAI在心理治疗中的安全转化，降低患者风险，并促进透明度和信任建立。",
+      "why_it_matters": "当前GenAI治疗应用快速涌现但缺乏临床验证标准，本文填补了这一关键空白，为负责任地整合AI进入精神卫生实践提供了急需的框架，对政策制定和临床研究具有重要指导意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "6293dff40c52870b",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7160564884",
+      "title": "Moral Sensitivity in LLMs: A Tiered Evaluation of Contextual Bias via Behavioral Profiling and Mechanistic Interpretability",
+      "authors": [
+        "Yash Aggarwal",
+        "Atmika Gorti",
+        "Vinija Jain",
+        "Aman Chadha",
+        "Krishnaprasad Thirunarayan",
+        "Manas Gaur"
+      ],
+      "affiliations": [
+        "University of Maryland, College Park",
+        "Purdue University West Lafayette",
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)",
+        "Wright State University",
+        "University of Maryland, Baltimore County"
+      ],
+      "published": "2026-05-04",
+      "updated": "2026-08-22T07:34:49.880490",
+      "abstract": "Large language models (LLMs) are increasingly deployed in settings that require nuanced ethical reasoning, yet existing bias evaluations treat model outputs as simply \"biased\" or \"unbiased.\" This binary framing misses the gradual, context-sensitive way bias actually emerges. We address this gap in two stages: behavioral profiling and mechanistic validation. In the behavioral stage, we introduce the Moral Sensitivity Index (MSI), a metric that quantifies the probability of biased output across a graduated, seven-tier stress test ranging from abstract numerical problems to scenarios rooted in historical and socioeconomic injustice. Evaluating four leading models (Claude 3.5, Qwen 3.5, Llama 3, and Gemini 1.5), we identify distinct behavioral signatures shaped by alignment design: for instance, Gemini 1.5 reaches 72.7% MSI by Tier 5 under socioeconomic framing, while Claude exhibits sharp suppression consistent with identity-based safety training. We then verify these behavioral patterns mechanistically. We select criminal-bias scenarios, which produced the highest MSI scores across models, as probes and apply logit lens, attention analysis, activation patching, and semantic probing to a controlled set of six models spanning three capability tiers: small language models (SLMs), instruction-tuned base models, and reasoning-distilled variants. Circuit-level analysis reveals a U-curve of bias: SLMs exhibit strong criminal bias; scaling to instruction-tuned models eliminates it; reasoning distillation reintroduces bias to SLM-like levels despite identical parameter counts, suggesting distillation compresses reasoning traces in ways that reactivate shallow statistical associations. Critically, the socially loaded cues that drive high MSI scores activate the same bias-driving circuits identified mechanistically, providing cross-stage validation.",
+      "url": "https://arxiv.org/abs/2605.03217",
+      "pdf_url": "https://arxiv.org/pdf/2605.03217",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Ethics and Social Impacts of AI",
+        "Explainable Artificial Intelligence (XAI)",
+        "Artificial Intelligence in Healthcare and Education"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "道德敏感性",
+        "偏置评估"
+      ],
+      "score": 66,
+      "summary": "本文针对大语言模型（LLM）伦理评估中二元化（偏置/无偏）框架的不足，提出了一种分层的道德敏感性评估方法。研究分为行为剖析和机制验证两个阶段：行为阶段引入道德敏感性指数（MSI），通过七级压力测试（从抽象数值问题到历史和社会经济不公正场景）量化模型输出偏置的概率，并评估了Claude 3.5、Qwen 3.5、Llama 3和Gemini 1.5四个模型，发现不同对齐设计导致独特的行为特征（如Gemini 1.5在社会经济框架下MSI达72.7%，Claude表现出与身份安全训练相关的抑制）。机制阶段选取犯罪偏置场景作为探针，对六个模型（涵盖小语言模型、指令微调基座模型和推理蒸馏变体）应用logit lens、注意力分析、激活修补和语义探测，揭示出偏置的U型曲线：小模型表现出强犯罪偏置，指令微调消除偏置，而推理蒸馏重新引入类似小模型的偏置水平，尽管参数数量相同，表明蒸馏压缩推理轨迹可能重新激活浅层统计关联。跨阶段验证表明，高MSI的社会线索激活了机制上识别的偏置电路。",
+      "one_line_takeaway": "LLM的道德偏置并非二元，而是随上下文梯度涌现，且推理蒸馏可能重新引入偏置，需结合行为与机制评估。",
+      "core_method": "提出道德敏感性指数（MSI）作为七级压力测试的量化指标，结合行为剖析（评估四个模型）与机制验证（对六个模型进行logit lens、注意力分析、激活修补和语义探测），以犯罪偏置场景为探针，跨阶段验证偏置电路。",
+      "innovation_points": [
+        "引入MSI指标，将偏置评估从二元分类扩展为七级梯度，捕捉上下文敏感性。",
+        "结合行为剖析与机制可解释性，跨阶段验证偏置驱动电路。",
+        "发现推理蒸馏重新引入偏置的U型曲线，揭示蒸馏对伦理推理的潜在负面影响。"
+      ],
+      "experiment_results": [
+        "Gemini 1.5在第五级社会经济框架下MSI达72.7%，Claude表现出抑制性行为。",
+        "机制分析显示偏置U型曲线：小模型强偏置，指令微调消除，推理蒸馏重新引入类似小模型水平。",
+        "高MSI的社会线索激活了机制上识别的偏置电路，提供跨阶段验证。"
+      ],
+      "limitations": [
+        "仅评估四个模型的行为阶段，机制阶段仅六个模型，可能限制泛化性。",
+        "MSI指标基于特定压力测试设计，可能未覆盖所有偏置类型。",
+        "机制验证聚焦犯罪偏置场景，其他场景的电路泛化性未充分探讨。"
+      ],
+      "practical_value": "为LLM部署提供分层偏置评估工具，帮助识别高风险上下文（如社会经济框架），指导对齐训练和蒸馏策略，减少实际应用中的伦理风险。",
+      "why_it_matters": "本文突破传统二元偏置评估，结合行为与机制视角，揭示推理蒸馏的潜在副作用，对LLM安全对齐和可解释性研究具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "e68423d24621c348",
+      "is_daily_pick": false
+    },
+    {
+      "id": "s2:3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
+      "title": "FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets",
+      "authors": [
+        "Kairui Fu",
+        "Tao Zhang",
+        "Shuwen Xiao",
+        "Ziyang Wang",
+        "Xinming Zhang",
+        "Chenchi Zhang",
+        "Yuliang Yan",
+        "Junjun Zheng",
+        "Xiangheng Kong",
+        "Shengyu Zhang",
+        "K. Kuang",
+        "Yuning Jiang"
+      ],
+      "affiliations": [],
+      "published": "2025-09-25",
+      "updated": "2025-09-25",
+      "abstract": "Semantic identifiers (SIDs) have gained increasing attention in generative retrieval (GR) for recommendation due to their meaningful semantic discriminability. However, current studies in this field primarily (1) offer limited investigation into the construction strategies for better SIDs, and (2) their SID assessment typically relies on costly GR training. To address these challenges, we propose FORGE, a comprehensive benchmark for FOrming semantic identifieRs for Generative rEtrieval. Specifically, FORGE provides a taxonomy of the SID construction process from several perspectives and validates their impact on downstream GR through offline experiments across diverse settings. Notably, these empirical findings have led to a 0.35% increase in transaction count via online A/B experiments in the Guess You Like section of Taobao. The corresponding SID construction strategies have since been deployed at full scale on Taobao, demonstrating their practical effectiveness. To avoid expensive SID assessment that requires full GR training, we propose two novel SID evaluation metrics that are highly correlated with recommendation performance, enabling convenient evaluations without any GR training. Furthermore, to facilitate the community, we release AL-GR, the industrial dataset used in our experiments, comprising 14 billion interactions and 250 million items with the corresponding multimodal features collected from Taobao. All the code and data are available at https://github.com/selous123/al_sid.",
+      "url": "https://www.semanticscholar.org/paper/3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
+      "pdf_url": "",
+      "doi": "10.48550/arXiv.2509.20904",
+      "source": "Semantic Scholar",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2",
+      "categories": [],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Multimodal"
+      ],
+      "score": 112,
+      "summary": "FORGE是一个针对生成式检索（GR）中语义标识符（SID）构建的工业级基准。现有研究对SID构建策略探索不足，且评估依赖昂贵的GR训练。FORGE从多个角度对SID构建过程进行分类，并通过离线实验验证其对下游GR的影响。实验发现带来了淘宝“猜你喜欢”场景在线A/B测试中交易量0.35%的提升，相关策略已全量部署。为降低评估成本，FORGE提出两种与推荐性能高度相关的新SID评估指标，无需GR训练即可评估。此外，发布了包含140亿交互和2.5亿物品的多模态工业数据集AL-GR。",
+      "one_line_takeaway": "FORGE通过系统化SID构建策略和轻量评估指标，在淘宝工业场景中实现了交易量提升并全量部署。",
+      "core_method": "FORGE提出SID构建过程的分类法，涵盖多个视角（如标识符粒度、语义来源等），并通过离线实验系统比较不同策略对GR性能的影响。同时设计两种无需GR训练的SID评估指标，与推荐性能高度相关。",
+      "innovation_points": [
+        "首次系统化提出SID构建策略的分类法，覆盖多个设计维度。",
+        "提出两种无需GR训练的SID评估指标，显著降低评估成本。",
+        "发布大规模工业数据集AL-GR（140亿交互、2.5亿物品），促进社区研究。",
+        "在淘宝真实场景中验证了SID策略的有效性，并实现全量部署。"
+      ],
+      "experiment_results": [
+        "离线实验验证了不同SID构建策略对GR性能的影响，但具体数值未在摘要中给出。",
+        "在线A/B测试显示，采用FORGE策略后交易量提升0.35%。",
+        "提出的评估指标与推荐性能高度相关，但具体相关系数未在摘要中提供。"
+      ],
+      "limitations": [
+        "摘要未提供离线实验的具体性能数值，难以量化各策略的差异。",
+        "提出的评估指标虽与推荐性能相关，但未说明其在不同场景下的泛化性。",
+        "数据集AL-GR虽已发布，但摘要未提及数据集的详细统计特征或潜在偏差。"
+      ],
+      "practical_value": "FORGE为工业推荐系统提供了一套可落地的SID构建和评估方案，在淘宝“猜你喜欢”场景中实现了交易量提升，并已全量部署，证明了其实际价值。同时，发布的AL-GR数据集和开源代码可帮助其他团队复现和扩展研究。",
+      "why_it_matters": "本文填补了生成式检索中SID构建策略系统研究的空白，提出了低成本评估方法，并提供了大规模工业数据集，对学术界和工业界都有重要参考价值。其在线实验和部署结果也展示了生成式检索在真实场景中的潜力。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "ebcd13fb71fb65a2",
+      "is_daily_pick": false
+    },
+    {
       "id": "s2:9667fc9de2c057ac7433aa341aa44a6b9f727862",
       "title": "DualGR: Generative Retrieval with Long and Short-Term Interests Modeling",
       "authors": [
@@ -4444,11 +4977,7 @@
       "categories": [],
       "tags": [
         "A/B 实验",
-        "GenRec",
-        "生成式检索",
-        "推荐系统",
-        "长短期兴趣",
-        "语义ID"
+        "GenRec"
       ],
       "score": 88,
       "summary": "DualGR针对大规模短视频推荐系统中生成式检索（GR）面临的长短期兴趣干扰、层次化语义ID（SID）生成中的上下文噪声，以及缺乏对曝光未点击反馈的显式学习等问题，提出了一种结合双分支长短期路由（DBR）、基于搜索的SID解码（S2D）和曝光感知的下一词预测损失（ENTP-Loss）的解决方案。DBR通过选择性激活缓解兴趣干扰，S2D将细粒度解码限制在当前粗粒度桶内以提升效率和降噪，ENTP-Loss将未点击曝光作为粗粒度硬负样本以促进兴趣衰减。在快手短视频推荐系统的大规模实验中，离线评估和在线A/B测试均验证了其有效性，在线视频观看量提升0.527%，观看时长提升0.432%。",
