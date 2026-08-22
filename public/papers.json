@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T05:24:25+08:00",
+  "generated_at": "2026-08-23T05:28:44+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -10,11 +10,11 @@
     "retention_days": 90
   },
   "status": {
-    "analysis_enabled": false,
+    "analysis_enabled": true,
     "source_errors": [
       "DBLP: Remote end closed connection without response"
     ],
-    "discovered": 292,
+    "discovered": 280,
     "candidates": 71,
     "daily_picks": 2
   },
@@ -135,7 +135,7 @@
       "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
       "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
       "evidence_basis": "abstract",
-      "analysis_status": "fallback",
+      "analysis_status": "cached",
       "analysis_signature": "32476989da5d352f",
       "is_daily_pick": true
     },
@@ -3224,6 +3224,49 @@
       "is_daily_pick": false
     },
     {
+      "id": "s2:77d2680dfee06f583b73a40f659a55db5bc16db1",
+      "title": "Harrison.Rad 1.5 Technical Report: A radiology foundation model that can draft reports from images, priors and clinical context",
+      "authors": [
+        "Suneeta Mall",
+        "Vladimir Nekrasov",
+        "Ashnil Kumar",
+        "Sajith Karunasena",
+        "Aiden Nibali",
+        "Alix Bird",
+        "Mateo Diaz Shine",
+        "J. Seah"
+      ],
+      "affiliations": [],
+      "published": "2026-07-07",
+      "updated": "2026-07-07",
+      "abstract": "Imaging demand is growing faster than the radiology workforce can expand, and reporting backlogs cannot be resolved through training and recruitment alone. The most direct opportunity is reducing the time and effort radiologists spend producing reports, a task that requires interpreting images, integrating clinical history and prior studies, and drafting structured findings. We present Harrison.Rad 1.5 (HR1.5), a radiology-specific multimodal large language model that accepts interleaved text and visual inputs and generates structured and unstructured text across plain-film radiology, spanning computed radiography, chest, musculoskeletal, abdominal, spine, and pelvic x-rays, and mammography. HR1.5 is trained through a three-stage pipeline: domain adaptation of a base language model on radiology reports, contrastive vision-encoder training with curriculum-based hard negatives on ~6 million image-report instances, and visual-question-answering fine-tuning on multi-turn conversations. We evaluate it with a Findings-Diagnosis scoring framework that extends RadGraph-XL entity extraction with ontology-based synonym matching and polarity-contradiction detection, benchmarked on RadBench, a simulated FRCR 2B Short Case examination scored against Angoff-method thresholds, ReXGradient, and internal multi-modality datasets. HR1.5 is the only system evaluated to meet the simulated FRCR passing standard and achieves the highest accuracy on closed-format clinical questions, across anatomical regions, on internal multi-body-part and mammography reporting, and on the primary clinically-aligned score for public chest reporting. We further examine explainability and model behaviour, including question-sensitive Grad-CAM heatmaps, attention analysis, and confidence estimation, to support responsible future evaluation toward clinical use, and a framework for clinically grounded assessment of report quality.",
+      "url": "https://www.semanticscholar.org/paper/77d2680dfee06f583b73a40f659a55db5bc16db1",
+      "pdf_url": "",
+      "doi": "",
+      "source": "Semantic Scholar",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [],
+      "tags": [
+        "LLM 基模",
+        "Multimodal"
+      ],
+      "score": 41,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2608.08482",
       "title": "FlashBoot: Sub-Second Weight Loading for Large Models at Rack Scale",
       "authors": [
@@ -3292,43 +3335,6 @@
         "推理系统"
       ],
       "score": 40,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
-      "id": "s2:2ca1bced57350e1db439a23b623556e0a39b50d3",
-      "title": "Domain-specific Large Language Model Pretraining for Construction Specification Review",
-      "authors": [
-        "Shuyi Wang",
-        "Jinwoo Kim"
-      ],
-      "affiliations": [],
-      "published": "2026-06-22",
-      "updated": "2026-06-22",
-      "abstract": "",
-      "url": "https://www.semanticscholar.org/paper/2ca1bced57350e1db439a23b623556e0a39b50d3",
-      "pdf_url": "",
-      "doi": "10.22260/isarc2026/0172",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
-      "categories": [],
-      "tags": [
-        "LLM 基模",
-        "预训练"
-      ],
-      "score": 36,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -3500,6 +3506,43 @@
         "后训练"
       ],
       "score": 43,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "s2:2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "title": "Domain-specific Large Language Model Pretraining for Construction Specification Review",
+      "authors": [
+        "Shuyi Wang",
+        "Jinwoo Kim"
+      ],
+      "affiliations": [],
+      "published": "2026-06-22",
+      "updated": "2026-06-22",
+      "abstract": "",
+      "url": "https://www.semanticscholar.org/paper/2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "pdf_url": "",
+      "doi": "10.22260/isarc2026/0172",
+      "source": "Semantic Scholar",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
+      "categories": [],
+      "tags": [
+        "LLM 基模",
+        "预训练"
+      ],
+      "score": 36,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
