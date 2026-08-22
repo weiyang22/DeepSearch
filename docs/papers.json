@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T05:12:05+08:00",
+  "generated_at": "2026-08-23T05:24:25+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -11,9 +11,11 @@
   },
   "status": {
     "analysis_enabled": false,
-    "source_errors": [],
-    "discovered": 80,
-    "candidates": 56,
+    "source_errors": [
+      "DBLP: Remote end closed connection without response"
+    ],
+    "discovered": 292,
+    "candidates": 71,
     "daily_picks": 2
   },
   "sources": [
@@ -79,30 +81,46 @@
       "is_daily_pick": true
     },
     {
-      "id": "openalex:W7203878760",
-      "title": "Post-Training with Policy Gradients: Optimality and the Base Model Barrier",
+      "id": "openalex:W4414988070",
+      "title": "An ab initio foundation model of wavefunctions that accurately describes chemical bond breaking",
       "authors": [
-        "Alireza Mousavi-Hosseini"
+        "Adam Foster",
+        "Zeno Schätzle",
+        "P. Bernát Szabó",
+        "Lixue Cheng",
+        "Jonas Köhler",
+        "Gino Cassella",
+        "Nicholas Gao",
+        "Jiawei Li",
+        "Frank Noé",
+        "Jan Hermann"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Microsoft Research (United Kingdom)",
+        "Freie Universität Berlin"
+      ],
       "published": "2026-08-21",
       "updated": "2026-08-22T07:34:49.880490",
-      "abstract": "We study post-training linear autoregressive models with outcome and process rewards. Given a context $x$, the model must predict the response $y \\in \\mathcal{Y}^N$, a sequence of length $N$ that satisfies a standard $\\gamma$ margin assumption extended to sequences. We prove that on test samples where the base model achieves a non-trivial likelihood $\\alpha$, a variant of policy gradient (PG) can achieve likelihood $1 - \\varepsilon$ with an essentially minimax optimal number of reward queries $O((\\alpha^{-1} + \\varepsilon^{-1})/\\gamma^2)$. However, a barrier arises for going beyond the support of the base model. We prove that the overall expected error after post-training with outcome rewards is governed by a property of the base model we call the Likelihood Quantile (LQ), and that variants of PG, while minimax optimal, may require a number of reward queries exponential in $N$ to go beyond this support, regardless of the pre-training algorithm. To overcome this barrier, we study post-training with a process reward model, and demonstrate how PG variants in this setting avoid the curse of dimensionality in $N$ via dependence on a token-level LQ. Along the way, we prove that under the margin condition, SGD with adaptive learning rate (LR) achieves a near optimal test error for statistical learning, and PG with adaptive LR achieves a near optimal number of mistakes for online learning while being computationally efficient whenever possible, both of which may be of independent interest.",
-      "url": "https://doi.org/10.14288/1.0455246",
-      "pdf_url": "None",
-      "doi": "10.14288/1.0455246",
+      "abstract": "Abstract Reliable description of bond breaking remains a major challenge for quantum chemistry due to the multireference character of the electronic structure in dissociating species. Multireference methods in particular suffer from large computational cost, which under the normal paradigm has to be paid anew for each system at a full price, ignoring commonalities in electronic structure across molecules. Quantum Monte Carlo with deep neural networks uniquely offers to exploit such commonalities by pretraining transferable wavefunction models, but all such attempts were so far limited in scope. Here, we bring this paradigm to fruition with Orbformer, a transferable wavefunction model pretrained on 22,000 equilibrium and dissociating structures that can be fine-tuned on unseen molecules reaching an accuracy–cost ratio rivalling classical multireference methods. On established benchmarks as well as more challenging bond dissociations and Diels–Alder reactions, Orbformer is the only method that consistently converges to chemical accuracy (1 kcal/mol). This work turns the idea of amortizing the cost of solving the Schrödinger equation over many molecules into a practical approach in quantum chemistry.",
+      "url": "https://doi.org/10.1038/s41467-026-76604-2",
+      "pdf_url": "https://www.nature.com/articles/s41467-026-76604-2_reference.pdf",
+      "doi": "10.1038/s41467-026-76604-2",
       "source": "OpenAlex",
       "content_type": "paper",
       "company": "",
-      "venue": "Open Collections",
-      "categories": [],
-      "tags": [
-        "LLM 基模",
-        "预训练",
-        "后训练"
+      "venue": "Nature Communications",
+      "categories": [
+        "Molecular spectroscopy and chirality",
+        "Computational Drug Discovery Methods",
+        "Inorganic and Organometallic Chemistry"
       ],
-      "score": 80,
-      "summary": "We study post-training linear autoregressive models with outcome and process rewards. Given a context $x$, the model must predict the response $y \\in \\mathcal{Y}^N$, a sequence of length $N$ that satisfies a standard $\\gamma$ margin assumption extended to sequences. We prove that on test samples where the base model achieves a non-trivial likelihood $\\alpha$, a variant of policy gradient (PG) can achieve likelihood $1 - \\varepsilon$ with an essentially minimax optimal number of reward queries $O((\\alpha^{-1} + \\...",
+      "tags": [
+        "企业论文",
+        "LLM 基模",
+        "预训练"
+      ],
+      "score": 92,
+      "summary": "Abstract Reliable description of bond breaking remains a major challenge for quantum chemistry due to the multireference character of the electronic structure in dissociating species. Multireference methods in particular suffer from large computational cost, which under the normal paradigm has to be paid anew for each system at a full price, ignoring commonalities in electronic structure across molecules. Quantum Monte Carlo with deep neural networks uniquely offers to exploit such commonalities by pretraining t...",
       "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
       "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
       "innovation_points": [
@@ -117,8 +135,8 @@
       "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
       "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
       "evidence_basis": "abstract",
-      "analysis_status": "cached",
-      "analysis_signature": "c94be0a5afb6d52a",
+      "analysis_status": "fallback",
+      "analysis_signature": "32476989da5d352f",
       "is_daily_pick": true
     },
     {
@@ -171,24 +189,18 @@
         "Tokenization",
         "Multimodal"
       ],
-      "score": 166,
-      "summary": "Pretrained large language models (LLMs) are promising retrieval engines because they combine rich semantic priors, strong sequence modeling capabilities, and favorable scaling behavior. However, turning a pretrained LLM into a generative retriever in production deployment raises several challenges: the model must learn an internal item vocabulary that was absent from pretraining, and generate valid item identifiers under strict latency and cost constraints. We address these challenges through the design and laun...",
-      "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
-      "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
-      "innovation_points": [
-        "待从完整论文或技术报告中进一步提取。"
-      ],
-      "experiment_results": [
-        "当前元数据未提供足够的实验结果细节。"
-      ],
-      "limitations": [
-        "当前分析仅基于公开摘要或官方介绍，结论需以原文为准。"
-      ],
-      "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
-      "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
-      "evidence_basis": "abstract",
-      "analysis_status": "cached",
-      "analysis_signature": "573120593ad40524",
+      "score": 167,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
       "is_daily_pick": false
     },
     {
@@ -225,23 +237,17 @@
         "推理系统"
       ],
       "score": 157,
-      "summary": "Recent advances in generative recommendation (GR) leverage large language models (LLMs) as recommender backbones, enabling LLMs to directly generate recommendations conditioned on item-interaction histories. In these systems, items are often represented through semantic IDs (SIDs) added to the LLM vocabulary as special tokens. Ideally, SIDs imbue item token representations with semantic priors, thereby improving model generalization. However, standard vocabulary expansion typically initializes these tokens as ra...",
-      "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
-      "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
-      "innovation_points": [
-        "待从完整论文或技术报告中进一步提取。"
-      ],
-      "experiment_results": [
-        "当前元数据未提供足够的实验结果细节。"
-      ],
-      "limitations": [
-        "当前分析仅基于公开摘要或官方介绍，结论需以原文为准。"
-      ],
-      "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
-      "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
-      "evidence_basis": "abstract",
-      "analysis_status": "cached",
-      "analysis_signature": "f7e3f70181490a6e",
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
       "is_daily_pick": false
     },
     {
@@ -282,7 +288,7 @@
         "Semantic ID",
         "MoE"
       ],
-      "score": 141,
+      "score": 142,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -292,6 +298,130 @@
       "practical_value": "",
       "why_it_matters": "",
       "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.20498",
+      "title": "AISE Bench",
+      "authors": [
+        "智谱 Research"
+      ],
+      "affiliations": [],
+      "published": "2026-08-06T11:48:00Z",
+      "updated": "2026-08-07T09:49:44Z",
+      "abstract": "AISE-Bench: A Full-Cycle Curated Benchmark for Information Seeking on Academic Knowledge Graphs",
+      "url": "https://github.com/zai-org/AISE-Bench",
+      "pdf_url": "https://arxiv.org/pdf/2607.20498",
+      "doi": "",
+      "source": "Official GitHub",
+      "content_type": "company_report",
+      "company": "智谱",
+      "venue": "Official release",
+      "categories": [
+        "LLM",
+        "Technical Report"
+      ],
+      "tags": [
+        "智谱",
+        "企业论文",
+        "官方技术报告",
+        "LLM 基模"
+      ],
+      "score": 137,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "official_release",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.24957",
+      "title": "PerceptionBench: PerceptionBench: Evaluating Atomic Visual Perception in Multimodal Large Language Models",
+      "authors": [
+        "Kimi Research"
+      ],
+      "affiliations": [],
+      "published": "2026-07-23T07:36:15Z",
+      "updated": "2026-08-03T08:33:26Z",
+      "abstract": "<img src=\"images/kimi_small.png\" width=\"16\" height=\"16\" style=\"vertical-align: middle;\" HomePage <img src=\"images/arxiv_small.svg\" width=\"16\" height=\"16\" style=\"vertical-align: middle;\" Paper 🤗 Dataset <img src=\"images/github_small.svg\" width=\"16\" height=\"16\" style=\"vertical-align: middle;\" Code",
+      "url": "https://github.com/MoonshotAI/PerceptionBench",
+      "pdf_url": "https://arxiv.org/pdf/2607.24957",
+      "doi": "",
+      "source": "Official GitHub",
+      "content_type": "company_report",
+      "company": "Kimi",
+      "venue": "Official release",
+      "categories": [
+        "LLM",
+        "Technical Report"
+      ],
+      "tags": [
+        "Kimi",
+        "企业论文",
+        "官方技术报告",
+        "LLM 基模",
+        "Multimodal"
+      ],
+      "score": 134,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "official_release",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2205.14135",
+      "title": "minitriton",
+      "authors": [
+        "Kimi Research"
+      ],
+      "affiliations": [],
+      "published": "2026-07-23T07:39:34Z",
+      "updated": "2026-07-27T13:49:08Z",
+      "abstract": "MiniTriton is a teaching-grade but production-minded tile compiler. You write kernels in a small Python-embedded tile DSL; they lower through upstream MLIR dialects to PTX and run on NVIDIA GPUs. On top of that sits an eager tensor library (eager execution and tile-level compilation, one API). All application kernels — flash attention, KDA (Kimi Delta Attention), and friends — are written in the DSL itself ; the compiler contains only tile-level vocabulary primitives and general passes — no application-specific intrinsics (the one expressibility exception is a generic linear-algebra primitive, tl.solve_tril ; see Limitations ). Known gaps are documented in Limitations below. The tile programming model deliberately follows Triton's — a familiar, well-specified target to validate an agent-built compiler against; upstream triton appears here only as a benchmark baseline.",
+      "url": "https://github.com/MoonshotAI/minitriton",
+      "pdf_url": "https://arxiv.org/pdf/2205.14135",
+      "doi": "",
+      "source": "Official GitHub",
+      "content_type": "company_report",
+      "company": "Kimi",
+      "venue": "Official release",
+      "categories": [
+        "LLM",
+        "Technical Report"
+      ],
+      "tags": [
+        "Kimi",
+        "企业论文",
+        "官方技术报告",
+        "LLM 基模"
+      ],
+      "score": 132,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "official_release",
       "analysis_status": "",
       "analysis_signature": "",
       "is_daily_pick": false
@@ -336,6 +466,48 @@
       "practical_value": "",
       "why_it_matters": "",
       "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2606.13392",
+      "title": "MiniMax M3",
+      "authors": [
+        "MiniMax Research"
+      ],
+      "affiliations": [],
+      "published": "2026-06-01T06:05:17Z",
+      "updated": "2026-07-11T09:08:38Z",
+      "abstract": "MiniMax-M3 is a native multimodal model with 1M context. It has ~428B parameters and ~23B activated parameters.",
+      "url": "https://github.com/MiniMax-AI/MiniMax-M3",
+      "pdf_url": "https://arxiv.org/pdf/2606.13392",
+      "doi": "",
+      "source": "Official GitHub",
+      "content_type": "company_report",
+      "company": "MiniMax",
+      "venue": "Official release",
+      "categories": [
+        "LLM",
+        "Technical Report"
+      ],
+      "tags": [
+        "MiniMax",
+        "企业论文",
+        "官方技术报告",
+        "LLM 基模",
+        "Multimodal"
+      ],
+      "score": 126,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "official_release",
       "analysis_status": "",
       "analysis_signature": "",
       "is_daily_pick": false
@@ -420,23 +592,17 @@
         "推理系统"
       ],
       "score": 122,
-      "summary": "Autoregressive semantic ID recommenders are constrained by expensive beam-search decoding, which limits the practical length of item identifiers. Parallel generation methods alleviate this bottleneck by predicting all semantic ID tokens simultaneously, enabling longer IDs. However, existing semantic ID methods still rely on manually predefined and homogeneous ID structures, where both the number of semantic slots and the codebook size of each slot are treated as fixed hyperparameters. This ignores the heterogene...",
-      "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
-      "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
-      "innovation_points": [
-        "待从完整论文或技术报告中进一步提取。"
-      ],
-      "experiment_results": [
-        "当前元数据未提供足够的实验结果细节。"
-      ],
-      "limitations": [
-        "当前分析仅基于公开摘要或官方介绍，结论需以原文为准。"
-      ],
-      "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
-      "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
-      "evidence_basis": "abstract",
-      "analysis_status": "fallback",
-      "analysis_signature": "9936087206e6a09f",
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
       "is_daily_pick": false
     },
     {
@@ -481,6 +647,47 @@
       "practical_value": "",
       "why_it_matters": "",
       "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "github:MiniMax-AI/MSA",
+      "title": "MSA",
+      "authors": [
+        "MiniMax Research"
+      ],
+      "affiliations": [],
+      "published": "2026-06-11T09:20:28Z",
+      "updated": "2026-07-30T06:11:11Z",
+      "abstract": "MSA ( fmha_sm100 ) ships dense FlashAttention and sparse top-k attention kernels for NVIDIA SM100 . Two JIT-compiled stacks share one Python package:",
+      "url": "https://github.com/MiniMax-AI/MSA",
+      "pdf_url": "",
+      "doi": "",
+      "source": "Official GitHub",
+      "content_type": "company_report",
+      "company": "MiniMax",
+      "venue": "Official release",
+      "categories": [
+        "LLM",
+        "Technical Report"
+      ],
+      "tags": [
+        "MiniMax",
+        "企业论文",
+        "官方技术报告",
+        "LLM 基模"
+      ],
+      "score": 120,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "official_release",
       "analysis_status": "",
       "analysis_signature": "",
       "is_daily_pick": false
@@ -660,7 +867,7 @@
         "GenRec",
         "Reasoning"
       ],
-      "score": 117,
+      "score": 118,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -703,53 +910,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 117,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.21028",
-      "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
-      "authors": [
-        "Junchao Zeng",
-        "Junzhang Zhu",
-        "Junyang Chen",
-        "Yudong Li",
-        "Wei Liu",
-        "Chengxiang Zhuo",
-        "Zang Li"
-      ],
-      "affiliations": [],
-      "published": "2026-07-23T08:11:57Z",
-      "updated": "2026-08-20T03:22:01Z",
-      "abstract": "Generative Recommendation (GR) has emerged as a new paradigm for sequential recommendation, in which a representative line of work encodes items into hierarchical semantic IDs via residual quantization and predicts the IDs token by token. However, this generative formulation still exhibits structural gaps with respect to the recommendation task: flattening multi-token IDs into a single sequence destroys item-level structure, and the inconsistency between training and inference over a hierarchical codebook gives rise to semantic drift. To bridge these two gaps, we propose BARGE, which employs Item Context-Aware Attention (ICA) to restore item-level structure during encoding, and Hierarchical Path Reranking (HPR) together with Dual-Path Decoding (DPD) to suppress semantic drift from two complementary angles during decoding. Extensive experiments and analytical studies on public benchmarks and a large-scale offline test demonstrate that BARGE achieves superior recommendation performance. An online A/B test on a Tencent platform yields improvements of 0.60% in click-through rate, 1.34% in click unique visitors, and 1.70% in total reading time, confirming the practical value of BARGE in industrial-scale recommendation.",
-      "url": "http://arxiv.org/abs/2607.21028v3",
-      "pdf_url": "https://arxiv.org/pdf/2607.21028v3",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "GenRec",
-        "Semantic ID",
-        "Tokenization",
-        "推理系统"
-      ],
-      "score": 116,
+      "score": 118,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -796,23 +957,17 @@
         "Tokenization"
       ],
       "score": 115,
-      "summary": "Semantic ID (SID)-based generative recommendation has recently achieved remarkable success. However, existing methods suffer from a previously overlooked fairness issue, which we term \\textbf{Token Frequency Bias}, where high-frequency SID tokens are systematically over-predicted while low-frequency SID tokens are under-predicted. This bias originates from the combined effects of imbalanced semantic codebooks during SID construction, and popularity bias together with the maximum likelihood estimation objective d...",
-      "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
-      "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
-      "innovation_points": [
-        "待从完整论文或技术报告中进一步提取。"
-      ],
-      "experiment_results": [
-        "当前元数据未提供足够的实验结果细节。"
-      ],
-      "limitations": [
-        "当前分析仅基于公开摘要或官方介绍，结论需以原文为准。"
-      ],
-      "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
-      "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
-      "evidence_basis": "abstract",
-      "analysis_status": "fallback",
-      "analysis_signature": "c71ac9a7ef3a3c0c",
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
       "is_daily_pick": false
     },
     {
@@ -943,7 +1098,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 109,
+      "score": 110,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -993,7 +1148,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 108,
+      "score": 109,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1043,7 +1198,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 107,
+      "score": 108,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1143,7 +1298,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 105,
+      "score": 106,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1210,6 +1365,54 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2607.24402",
+      "title": "CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation",
+      "authors": [
+        "Xiang Liu",
+        "Jingsong Su",
+        "Shuqi Zhao",
+        "Pengbo Mo",
+        "Yiming Qiu",
+        "Huimu Wang",
+        "Mingming Li",
+        "Jiao Dai",
+        "Jizhong Han",
+        "Songlin Hu"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T13:19:55Z",
+      "updated": "2026-07-27T13:19:55Z",
+      "abstract": "Semantic-ID-based generative recommendation represents each item as a hierarchical discrete token sequence and reformulates next-item prediction as constrained sequence generation. Existing methods, however, mainly use Semantic IDs as target sequences to be memorized, leaving the hierarchy, intra-layer relations, and item neighborhoods underused as an explicit reasoning space. Explicit reasoning-enhanced generative methods often produce a natural-language rationale before the item identifier, but this rationale is only weakly coupled with the discrete SID space in which the final prediction is made. We propose CogRec, a structure-cognitive fast-and-slow reasoning framework that grounds intermediate reasoning in the same SID topology used for target generation. CogRec augments the vertical SID hierarchy with intra-layer semantic graphs and item-level neighborhoods, and introduces SID Routing to represent recommendation reasoning through layer-wise Match, LateralJump, and Explore operations. Exact matching implements fast semantic localization, whereas lateral and exploratory operations instantiate slower structural navigation. A supervised multi-stage pipeline aligns the newly introduced SID tokens, establishes direct SID generation, and trains natural-language and SID-routing reasoning branches from a shared checkpoint under the same trie-constrained output space. Experiments on three public sequential-recommendation benchmarks show that SID Routing improves its corresponding direct-generation, indicate that structure-grounded reasoning is most useful when prefix matching is insufficient but learnable SID-space transitions remain available, whereas long or weakly supported routes introduce additional decoding cost and accumulated errors. Code is available at https://github.com/caskcsg/CogRec",
+      "url": "http://arxiv.org/abs/2607.24402v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24402v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "GenRec",
+        "Semantic ID",
+        "Reasoning"
+      ],
+      "score": 104,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2608.17613",
       "title": "Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs",
       "authors": [
@@ -1257,54 +1460,6 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2607.24402",
-      "title": "CogRec: Structure-Cognitive Fast-and-Slow Reasoning for Generative Recommendation",
-      "authors": [
-        "Xiang Liu",
-        "Jingsong Su",
-        "Shuqi Zhao",
-        "Pengbo Mo",
-        "Yiming Qiu",
-        "Huimu Wang",
-        "Mingming Li",
-        "Jiao Dai",
-        "Jizhong Han",
-        "Songlin Hu"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T13:19:55Z",
-      "updated": "2026-07-27T13:19:55Z",
-      "abstract": "Semantic-ID-based generative recommendation represents each item as a hierarchical discrete token sequence and reformulates next-item prediction as constrained sequence generation. Existing methods, however, mainly use Semantic IDs as target sequences to be memorized, leaving the hierarchy, intra-layer relations, and item neighborhoods underused as an explicit reasoning space. Explicit reasoning-enhanced generative methods often produce a natural-language rationale before the item identifier, but this rationale is only weakly coupled with the discrete SID space in which the final prediction is made. We propose CogRec, a structure-cognitive fast-and-slow reasoning framework that grounds intermediate reasoning in the same SID topology used for target generation. CogRec augments the vertical SID hierarchy with intra-layer semantic graphs and item-level neighborhoods, and introduces SID Routing to represent recommendation reasoning through layer-wise Match, LateralJump, and Explore operations. Exact matching implements fast semantic localization, whereas lateral and exploratory operations instantiate slower structural navigation. A supervised multi-stage pipeline aligns the newly introduced SID tokens, establishes direct SID generation, and trains natural-language and SID-routing reasoning branches from a shared checkpoint under the same trie-constrained output space. Experiments on three public sequential-recommendation benchmarks show that SID Routing improves its corresponding direct-generation, indicate that structure-grounded reasoning is most useful when prefix matching is insufficient but learnable SID-space transitions remain available, whereas long or weakly supported routes introduce additional decoding cost and accumulated errors. Code is available at https://github.com/caskcsg/CogRec",
-      "url": "http://arxiv.org/abs/2607.24402v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24402v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "GenRec",
-        "Semantic ID",
-        "Reasoning"
-      ],
-      "score": 103,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
       "id": "arxiv:2608.10929",
       "title": "FedCGR: Federated Cross-Domain Generative Recommendation",
       "authors": [
@@ -1332,7 +1487,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 100,
+      "score": 101,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1404,7 +1559,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 100,
+      "score": 101,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1650,7 +1805,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 96,
+      "score": 97,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -1959,7 +2114,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 90,
+      "score": 91,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -2225,7 +2380,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 83,
+      "score": 84,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -2293,6 +2448,48 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2608.16274",
+      "title": "Decoupled Temporal Encoding for Generative Recommendation",
+      "authors": [
+        "Pengfei Jia",
+        "Jingjian Wang",
+        "Jingmao Li",
+        "Ge Zhang",
+        "Feng Shi"
+      ],
+      "affiliations": [],
+      "published": "2026-08-17T08:47:21Z",
+      "updated": "2026-08-17T08:47:21Z",
+      "abstract": "Positional encoding is a fundamental component of Transformer-based generative recommendation models, where user histories are modeled as autoregressive item sequences. Most positional encoding methods are inherited from natural language processing and mainly represent discrete item order. However, recommendation sequences go beyond ordered lists, as timestamps and temporal effects also shape item relations. Our work is motivated by a real-world food delivery and instant retail recommendation system, where user behavior exhibits multi-level temporal regularities, including recency effects, meal-time peaks, weekday-weekend shifts, and promotion-driven traffic bursts. Existing methods partially address this issue through timestamp features, interval embeddings, decay functions, or attention biases, but they usually inject heterogeneous temporal signals through a unified representation or a single modeling pathway, making it difficult to distinguish broad temporal dynamics from local order cues. To address this limitation, we propose Decoupled Temporal Encoding, a lightweight framework for generative recommendation. DTE separates temporal dynamics from order information through two complementary modules: a personalized macro-temporal module that injects compact temporal primitives into item embeddings, and a time-gated micro-sequential module that introduces relative-order bias only when interactions are temporally dense. DTE is also parameter-efficient and deployment-friendly, allowing easy integration into existing systems.",
+      "url": "http://arxiv.org/abs/2608.16274v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.16274v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "tags": [
+        "GenRec"
+      ],
+      "score": 81,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2607.23762",
       "title": "Escaping the Euclidean Void: Manifold-Informed Flow Matching for Sequential Recommendation",
       "authors": [
@@ -2322,48 +2519,6 @@
         "推理系统"
       ],
       "score": 81,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2608.16274",
-      "title": "Decoupled Temporal Encoding for Generative Recommendation",
-      "authors": [
-        "Pengfei Jia",
-        "Jingjian Wang",
-        "Jingmao Li",
-        "Ge Zhang",
-        "Feng Shi"
-      ],
-      "affiliations": [],
-      "published": "2026-08-17T08:47:21Z",
-      "updated": "2026-08-17T08:47:21Z",
-      "abstract": "Positional encoding is a fundamental component of Transformer-based generative recommendation models, where user histories are modeled as autoregressive item sequences. Most positional encoding methods are inherited from natural language processing and mainly represent discrete item order. However, recommendation sequences go beyond ordered lists, as timestamps and temporal effects also shape item relations. Our work is motivated by a real-world food delivery and instant retail recommendation system, where user behavior exhibits multi-level temporal regularities, including recency effects, meal-time peaks, weekday-weekend shifts, and promotion-driven traffic bursts. Existing methods partially address this issue through timestamp features, interval embeddings, decay functions, or attention biases, but they usually inject heterogeneous temporal signals through a unified representation or a single modeling pathway, making it difficult to distinguish broad temporal dynamics from local order cues. To address this limitation, we propose Decoupled Temporal Encoding, a lightweight framework for generative recommendation. DTE separates temporal dynamics from order information through two complementary modules: a personalized macro-temporal module that injects compact temporal primitives into item embeddings, and a time-gated micro-sequential module that introduces relative-order bias only when interactions are temporally dense. DTE is also parameter-efficient and deployment-friendly, allowing easy integration into existing systems.",
-      "url": "http://arxiv.org/abs/2608.16274v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.16274v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR",
-        "cs.AI"
-      ],
-      "tags": [
-        "GenRec"
-      ],
-      "score": 80,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -2414,7 +2569,7 @@
         "MoE",
         "推理系统"
       ],
-      "score": 77,
+      "score": 78,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -2532,6 +2687,143 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2608.10276",
+      "title": "Fine-Tuning Large Language Models for Codebook-Guided Coding of Students' Mathematics Metaphor Responses",
+      "authors": [
+        "Liang Zhang",
+        "Stephen Hwang",
+        "Yue Ma",
+        "Jinfa Cai"
+      ],
+      "affiliations": [],
+      "published": "2026-08-10T22:18:33Z",
+      "updated": "2026-08-10T22:18:33Z",
+      "abstract": "Student-generated metaphors about mathematics can reveal students' attitudes, beliefs, identities, and experiences, but human expert coding of these thematically and semantically complex open-ended responses is time-intensive and difficult to scale. This study examines whether LoRA-based supervised fine-tuning of large language models (LLMs) can improve their performance on codebook-guided coding tasks for student mathematics metaphors. We used a human-coded corpus of 2,265 Grade 6-8 responses to food- and animal-based metaphor prompts and instructed the LLMs to perform two coding tasks: valence-intensity coding to capture the direction and strength of students' affective orientations toward mathematics, and thematic coding to capture students' framings of mathematics as expressed through their metaphors. We compared two proprietary models, GPT-4o mini and GPT-5 mini, under prompt-only conditions with two open-weight models, DeepSeek-R1 1.5B and Mistral 7B, evaluated before and after fine-tuning. Results show that fine-tuning substantially improved the performance and run-to-run reliability of the open-weight models across both tasks relative to their base versions. The fine-tuned compact open-weight models became competitive with, and often outperformed, the proprietary prompt-only models. These findings suggest that compact open-weight LLMs can support scalable, locally controllable, and privacy-conscious AI-assisted measurement of students' metaphor responses in mathematics education.",
+      "url": "http://arxiv.org/abs/2608.10276v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10276v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.HC",
+        "cs.CY"
+      ],
+      "tags": [
+        "LLM 基模",
+        "后训练",
+        "Tokenization"
+      ],
+      "score": 72,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.12419",
+      "title": "LoKiFormer: Locality-aware Attention with Decoupled Knowledge Memory for Efficient Large Language Model Pretraining",
+      "authors": [
+        "Qiuwu Chen",
+        "Zimo Liu",
+        "Yuchen Li",
+        "Ying Sun",
+        "Yifan Zhang",
+        "Zhijie Qiu",
+        "Zeng You",
+        "Ryan Dong",
+        "Simeng Ma",
+        "Yaofo Chen",
+        "Mingkui Tan"
+      ],
+      "affiliations": [],
+      "published": "2026-08-12T07:45:11Z",
+      "updated": "2026-08-12T07:45:11Z",
+      "abstract": "Large language models (LLMs) have achieved remarkable breakthroughs across various applications. However, their architectures remain inefficient in pretraining due to two main limitations: (i) self-attention lacks an explicit inductive bias for locality, leading to redundant modeling of sequence-internal local information; (ii) mixture-of-experts (MoE) implicitly couples knowledge storage with computational pathways, hindering flexible access to sequence-external global knowledge. To overcome these limitations, we propose LoKiFormer, a novel LLM architecture that augments the standard decoder with two dedicated modules: 1) Local Fusion Attention (LFA), which incorporates a convolutional fusion to attention, explicitly capturing local patterns and allowing the attention to operate on more informative representations; 2) Knowledge Memory Module (KMM), which introduces a parametric key-value memory that explicitly stores global knowledge in addressable slots, decoupling storage from computation and enabling direct knowledge retrieval. Together, these modules enable LoKiFormer to achieve more efficient and effective integration of information at both levels. Experimental results show that LoKiFormer converges 1.33x faster in pre-training than baseline models, underscoring its superiority over existing LLM architectures.",
+      "url": "http://arxiv.org/abs/2608.12419v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.12419v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.LG"
+      ],
+      "tags": [
+        "LLM 基模",
+        "预训练",
+        "MoE"
+      ],
+      "score": 69,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.10090",
+      "title": "CHORUS: Complementary Experts for High-Coverage Testbench Stimulus Generation",
+      "authors": [
+        "Hejia Zhang",
+        "Sheng Lu",
+        "Zhongming Yu",
+        "Chia-Tung Ho",
+        "Brucek Khailany",
+        "Jishen Zhao"
+      ],
+      "affiliations": [],
+      "published": "2026-08-10T18:02:42Z",
+      "updated": "2026-08-10T18:02:42Z",
+      "abstract": "Large language models (LLMs) have advanced code generation, where executable feedback provides a more reliable learning signal than textual imitation alone. Hardware verification is an important application of code generation and accounts for a substantial fraction of modern chip design effort, with high-coverage testbench stimulus generation as a key task. We present CHORUS, a post-training framework that pushes performance beyond what a conventional supervised fine-tuning (SFT)-to-reinforcement learning (RL) pipeline achieves. CHORUS builds on two observations. First, staged SFT produces behaviorally diverse checkpoints, and dense-reward RL turns them into strong experts with comparable aggregate performance but distinct task-level strengths. Second, these complementary strengths can be exploited through either training-free model merging or further post-training to outperform the best individual expert. By consolidating the resulting specialists into a single 4B model, CHORUS achieves 88.0% Pass@1 on CVDP-ECov, outperforming DeepSeek-R1 (671B) by 13.5 percentage points.",
+      "url": "http://arxiv.org/abs/2608.10090v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.10090v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "tags": [
+        "LLM 基模",
+        "后训练",
+        "Reasoning"
+      ],
+      "score": 66,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2608.15299",
       "title": "MAPLE: MoE Adaptive Plug-and-play Layer-wise Expert allocation",
       "authors": [
@@ -2575,31 +2867,120 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2608.13937",
-      "title": "Deep Vision in Smart Manufacturing: MODERN Framework for Intelligent Quality Monitoring and Diagnosis",
+      "id": "arxiv:2608.03089",
+      "title": "Scalable Frequency- and Length-Aware Subdocument Deduplication for Large Language Model Pretraining",
       "authors": [
-        "Yicheng Kang",
-        "Yuling Jiao",
-        "Xin Geng",
-        "Mahesh Nagarajan"
+        "Hai Wang",
+        "Chenhao Wang",
+        "Qifeng Cai",
+        "Yixiu Liu",
+        "Miao Peng",
+        "Nuo Chen",
+        "Yuanlin Tu",
+        "Chengcheng Xu",
+        "Feng Zhang"
       ],
       "affiliations": [],
-      "published": "2026-08-14T04:17:57Z",
-      "updated": "2026-08-14T04:17:57Z",
-      "abstract": "Smart manufacturing processes are often installed with a large number of sensors, imaging devices and computers, which not only enable instant communication across various modules of a production system but also aid in intelligent manufacturing management. In this paper, we introduce MODERN, a deep learning framework for quality monitoring and fault isolation, which integrates these enhanced capabilities into the practice of industrial quality control. Using the architecture of an inception residual neural network, we develop a control chart that monitors the likelihood of a product containing defects. We also propose a faulty region estimator that identifies the defective area using transfer learning. To extend our framework to cases where there are not sufficient training data, we suggest a transfer monitoring technique that requires only a small sample size and a hypothesis testing approach for quantitatively assessing the applicability of our method. Theoretically, we establish the minimax optimal convergence rate for both our defect likelihood estimation and fault diagnosis. Our results lead to a seemingly counter-intuitive managerial implication - it may not always be in a manufacturer's best interests to keep upgrading its monitoring equipment regardless of the cost. Empirically, we demonstrate the superior performance of our method in comparison with a state-of-the-art approach using both simulated experiments and real data.",
-      "url": "http://arxiv.org/abs/2608.13937v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.13937v1",
+      "published": "2026-08-04T04:02:28Z",
+      "updated": "2026-08-04T04:02:28Z",
+      "abstract": "Large-scale pretraining corpora contain substantial duplicate content. Although document-level deduplication is widely used, removing subdocument-level redundancy remains challenging. At corpus scale, suffix-array-based methods are commonly applied independently within shards, leaving cross-shard duplicates undetected and making the resulting retention behavior sensitive to the sharding configuration. Hash-based methods enable global exact duplicate counting, but often rely on fixed copy-retention policies that cannot accommodate heterogeneous repetition patterns. We propose a scalable subdocument deduplication framework that decouples duplicate detection from copy retention. It identifies duplicate groups through natural-boundary segmentation, normalized exact hashing, and distributed aggregation, and then applies an explicit frequency- and length-aware retention policy that allocates an adaptive copy budget to each group, retaining more copies of low-frequency or short repetitions while more aggressively deleting high-frequency or long ones. Experiments on FineWeb-Edu and a code-containing web corpus show that models trained on data processed by our method achieve the best overall performance among the evaluated settings. These results underscore the importance of explicit copy-retention control.",
+      "url": "http://arxiv.org/abs/2608.03089v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.03089v1",
       "doi": "",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "stat.ML",
+        "cs.CL"
+      ],
+      "tags": [
+        "LLM 基模",
+        "预训练"
+      ],
+      "score": 56,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.08853",
+      "title": "Beyond Routing: Decoupling Expert Dispatch and Aggregation in Sparse Mixture-of-Experts",
+      "authors": [
+        "Zongfei Li"
+      ],
+      "affiliations": [],
+      "published": "2026-08-09T18:31:16Z",
+      "updated": "2026-08-09T18:31:16Z",
+      "abstract": "Sparse Mixture-of-Experts (MoE) routers commonly use the same scores both to select experts and to weight their already-computed outputs. We study whether these two roles, dispatch and aggregation, should be coupled. On pretrained OLMoE-1B-7B, we keep selected Top-8 expert IDs, expert computation, and total selected router mass fixed and change only within-set aggregation. A structured oracle improves full-horizon cross-entropy by 0.0160 +/- 0.0039 across three seeds; the router's top-scored expert is the counterfactual-best vertex only 17.2% of the time, with router-utility Spearman 0.030. We therefore train Fixed-Dispatch Adaptive Aggregation (FDAA), a 301K-parameter post-compute head optimized directly with the language-modeling objective while freezing the backbone, router, and experts. On OLMoE, FDAA improves fresh WikiText-103 test by Delta CE = -0.1523 +/- 0.0031 across three seeds, and mixed-domain training gives robust gains on WikiText-103, C4, and held-out Penn Treebank under frozen confirmatory evaluation. We also replicate the fixed-dispatch audit on DeepSeek-V2-Lite, which uses Top-6 routed experts plus shared experts. Best-vertex headroom remains significant on WikiText and C4, while router Top1 identifies the best selected expert in only 12.5% and 16.7% of audited examples. In a one-seed mixed-domain replication, FDAA improves locked WikiText and PTB, while C4 is statistically neutral. These results support a cross-architecture distinction between expert selection and expert commitment.",
+      "url": "http://arxiv.org/abs/2608.08853v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.08853v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
         "cs.LG"
       ],
       "tags": [
-        "GenRec"
+        "预训练",
+        "MoE"
+      ],
+      "score": 50,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.07004",
+      "title": "Benchmarking and Reasoning Distillation of Large Language Models for Feedback Controller Design in Complex Dynamical Systems",
+      "authors": [
+        "Zhongchao Zhou",
+        "Yixuan Xie",
+        "Wenwei Yu",
+        "Yuxi Lu",
+        "Yaonan Zhu",
+        "Qian Niu",
+        "Yutaka Matsuo",
+        "Yusuke Iwasawa"
+      ],
+      "affiliations": [],
+      "published": "2026-08-07T09:19:31Z",
+      "updated": "2026-08-07T09:19:31Z",
+      "abstract": "Although remarkable capabilities have been demonstrated by Large Language Models (LLMs) across scientific domains, feedback controller design remains underexplored. Existing benchmarks focus mainly on linear single-Degree-of-Freedom (DoF) systems and large API-hosted models, leaving performance on complex controller-design tasks and feasibility for edge deployment unclear. To address these limitations, we introduce the Complex Dynamics-to-Control Benchmark for Large Language Models (CoDyControlBench), comprising 132 system configurations across five evaluation dimensions: number of DoF, system type, coupling level, damping regime, and controller type. Six state-of-the-art LLMs were evaluated over three independent runs, including three commercial models (GPT, Gemini, and Claude) and three open-source models (GLM, DeepSeek, and Qwen). GPT achieved the highest design success rate at 94.8\\%, whereas Qwen showed the lowest rate at 50.0\\%. Across the benchmark dimensions, DoF and controller type exhibited the largest model-averaged variations in design success, with success-rate ranges of 36.3\\% and 17.6\\%, respectively, exceeding those associated with system type, coupling level, and damping regime. Comparison of GPT and Qwen showed that their performance gap arose mainly from the control-design knowledge, particularly gain selection and the use of transient-limiting mechanisms. For edge deployment, a specialized 1.5B-parameter model was developed through reasoning distillation. The reasoning-distilled model outperformed the answer-distilled and base model on CoDyControlBench, maintained stable performance across 1-6 DoFs, and achieved successful traget tracking in all three physical trials on a pneumatic-artificial-muscle-driven robotic arm. These results establish a benchmark baseline and highlight the potential of lightweight, edge-deployable controller-design models.",
+      "url": "http://arxiv.org/abs/2608.07004v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.07004v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "tags": [
+        "LLM 基模",
+        "Reasoning"
       ],
       "score": 47,
       "summary": "",
@@ -2616,31 +2997,177 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2608.18237",
-      "title": "Sobolev Regularized Score Difference Estimation in Diffusion Models",
+      "id": "arxiv:2608.06811",
+      "title": "Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution",
       "authors": [
-        "Chenghan Xie",
-        "Jose Blanchet",
-        "Renyuan Xu"
+        "Jiahao Zhang",
+        "Yifan Zhang",
+        "Yu Huang"
       ],
       "affiliations": [],
-      "published": "2026-08-18T18:23:30Z",
-      "updated": "2026-08-18T18:23:30Z",
-      "abstract": "Estimating the difference of two Stein's score functions is a fundamental problem in generative modeling. In particular, score differences arise naturally in transfer learning, where the score difference provides the mechanism for adapting a pre-trained model to a new target distribution, and in diffusion model-based post-training methods such as discriminator guidance. Existing estimators for score differences in these settings either lack of statistical consistency or are difficult to scale up in high-dimensions. We propose a statistically consistent and scalable estimator for score differences based on Sobolev regularization, which plays a crucial role in ensuring consistency and stablizing the training in the small-sample regime. Mathematically, we establish a convergence rate of $O(n^{-\\frac{s-1}{d+2s-2}})$ where $d$ is the dimension and $s$ denotes the smoothness of the underlying densities, and provide a minimax lower bound of $\\tildeΩ(n^{-\\frac{2(s-1)}{d+2s}})$ (in mean-squared error). Empirically, our estimator exhibits significantly improved stability in small-sample regimes compared to existing methods. We demonstrate its effectiveness on real-world tasks, including transfer learning for ECG signal generation, where it substantially outperforms non-regularized score difference estimators in downstream classification performance.",
-      "url": "http://arxiv.org/abs/2608.18237v1",
-      "pdf_url": "https://arxiv.org/pdf/2608.18237v1",
+      "published": "2026-08-07T05:05:05Z",
+      "updated": "2026-08-07T05:05:05Z",
+      "abstract": "Resolving a real software issue with a large language model (LLM) agent is a long repair episode, often tens to hundreds of steps spanning exploration, hypothesis, implementation, and verification. Success depends on both the base model's local reasoning and the agent's ability to maintain an evolving plan and remember observations across phases. Existing repository-level agents typically strengthen planning or memory in isolation, leaving long trajectories vulnerable to stale evidence, repeated failed edits, and verification inferred from the agent's own claims instead of execution evidence. We present PMCoder, an issue-resolution agent that couples a hierarchical phase planner with episodic memory. The coupling is bidirectional: the current plan phase conditions memory retrieval, while memory-derived trajectory statistics inform stuck detection and replanning. When available, issue-reproduction verdicts ground verification progress in execution evidence rather than self-reported completion. On SWE-bench Verified, PMCoder resolves an average of $25$ more cases ($+5.0$pp) than a harness-matched baseline, with gains persisting even where the reproduction gate never fires. Further Verified-500 evaluations show the same positive direction across Claude Haiku 4.5, DeepSeek-V4-Flash, and an OpenHands port, with at least $14$ additional resolved cases ($+2.8$pp). Separately, evaluation on TerminalWorld's official sample suggests that the plan-memory substrate transfers beyond issue reports. Ablation and trajectory analyses show where the gains come from: coupling planning and memory outperforms either component alone and reduces repeated failed actions, empty-patch exits, and context-window exhaustion.",
+      "url": "http://arxiv.org/abs/2608.06811v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.06811v1",
       "doi": "",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "stat.ML",
-        "cs.LG",
-        "math.OC"
+        "cs.SE",
+        "cs.AI"
       ],
       "tags": [
-        "后训练"
+        "LLM 基模",
+        "Reasoning"
+      ],
+      "score": 47,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.07762",
+      "title": "Who Verifies the Benchmark? Decentralizing Trust in Large Language Model Evaluation",
+      "authors": [
+        "Sahil Pardasani",
+        "Madhusudan Singh"
+      ],
+      "affiliations": [],
+      "published": "2026-08-07T20:56:21Z",
+      "updated": "2026-08-07T20:56:21Z",
+      "abstract": "LLM benchmarks can build an organization's reputation and attract customers, but only when results are transparent and verifiable. Unverified claims that DeepSeek R1 outperformed OpenAI's o1 contributed to market panic on January 27, 2025, when Nvidia lost USD589 billion in market value. Yet vendor benchmarks often depend on an honor system. Academic reassessments and independent leaderboards have found undisclosed changes to proprietary models, contaminated training data, and selective reporting. LLM-as-a-judge methods scale evaluation by reducing human review. Studies, however, suggest that judges may show identity-aware bias, scoring an answer according to its source model rather than its quality. This bias has not been fully measured or corrected across politically sensitive, reasoning-intensive, and preference-based tasks. We examine this problem using seven verifier models: GPT-OSS 120B, Llama 3.3 70B, GLM 5.1, Qwen3 32B, DeepSeek V4 Pro, Mistral Large3, and Sarvam M. They score anonymous and identity-disclosed responses from three primary models on 58 factual, reasoning, political, and preference-based questions. Identity disclosure slightly raises scores for factual questions, moderately affects stress-reasoning tasks, and causes large changes for geopolitically sensitive topics. Notable results include GLM5.1 (+7.00 points, p = 0.0249) and Llama 3.3 70B (+1.56 points, p = 0.00). We also introduce a blockchain-based commit-reveal protocol using Autonomous Economic Agents on an Ethereum-compatible ledger. In Phase 1, each judge records a one-way hash of its score and a secret salt before candidate identities are revealed. In Phase 2, the identity and raw score are disclosed and verified on-chain. This creates a tamper-evident audit trail that separates blind evaluation from post-hoc claims and reduces the verification burden on independent researchers and leaderboard operators.",
+      "url": "http://arxiv.org/abs/2608.07762v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.07762v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.AI",
+        "cs.CR"
+      ],
+      "tags": [
+        "LLM 基模",
+        "Reasoning"
+      ],
+      "score": 47,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.25479",
+      "title": "Architectural Backdoors in Vision-Language Model Supply Chains via Representation Steering",
+      "authors": [
+        "Maria Rosaria Briglia",
+        "Igor Maljkovic",
+        "Antonio Emanuele Cinà",
+        "Luca Oneto",
+        "Iacopo Masi",
+        "Fabio Roli"
+      ],
+      "affiliations": [],
+      "published": "2026-07-28T09:12:11Z",
+      "updated": "2026-07-28T09:12:11Z",
+      "abstract": "Vision--Language Models (VLMs) are increasingly deployed through a model supply chain in which pretrained checkpoints, architecture definitions, text encoders, and exported computation graphs are distributed by third parties and reused across downstream services. This reuse model creates a security-critical trust boundary: VLM deployments inherit not only learned parameters but also executable behavior encoded in shared model artifacts. In this paper, we show that a malicious provider can exploit this trust boundary by embedding architectural backdoors into VLM supply chains through representation steering. Our attack introduces dormant steering logic into the model architecture through a trigger-gated additive modification of an intermediate representation, without poisoning training data, controlling downstream fine-tuning, or modifying prompts at deployment time. When the trigger is absent, the modification reduces to zero and the model follows its normal computation, preserving clean utility. When the trigger is present, a steering direction shifts the internal representation toward an attacker-defined objective. We evaluate the attack across multiple VLM families and downstream tasks, including visual question answering, text-to-image generation, retrieval, and semantic response biasing. The results show that the proposed architectural steering backdoor compromises integrity, safety enforcement, and ranking fairness while preserving normal behavior on clean inputs. We further show that shared VLM artifacts can carry dormant steering logic against downstream services, and we propose an auditing defense that inspects the executable logic distributed with model artifacts rather than only their learned weights.",
+      "url": "http://arxiv.org/abs/2607.25479v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.25479v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.CR",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "tags": [
+        "预训练",
+        "Multimodal",
+        "推理系统"
+      ],
+      "score": 46,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W4417105698",
+      "title": "Fine-tuning an ECG foundation model to predict coronary CT angiography outcomes",
+      "authors": [
+        "Yujie Xiao",
+        "Qinghao Zhao",
+        "Gongzheng Tang",
+        "Hao Zhang",
+        "Zhuoran Kan",
+        "Deyun Zhang",
+        "Jun Li",
+        "Guangkun Nie",
+        "Xiaocheng Fang",
+        "Haoyu Wang",
+        "Shenda Hong",
+        "Tong Liu",
+        "Jian Liu",
+        "Kang‐Yin Chen",
+        "Shenda Hong"
+      ],
+      "affiliations": [
+        "Peking University",
+        "Peking University People's Hospital",
+        "Second Hospital of Tianjin Medical University",
+        "Tianjin Medical University",
+        "University of Chinese Academy of Sciences",
+        "Beijing Academy of Artificial Intelligence"
+      ],
+      "published": "2026-08-18",
+      "updated": "2026-08-21T09:56:20.448147",
+      "abstract": "Abstract Coronary artery disease (CAD) remains a major global health burden. Accurate identification of the culprit vessel and assessment of stenosis severity are essential for guiding individualized therapy. Although coronary CT angiography (CCTA) is the first-line non-invasive modality for CAD diagnosis, its dependence on high-end equipment, radiation exposure, and strict patient cooperation limits large-scale use. With advances in artificial intelligence (AI) and the widespread availability of electrocardiography (ECG), AI-ECG offers a promising alternative for CAD screening. In this study, we developed an interpretable AI-ECG model to predict severe or complete stenosis of the four major coronary arteries on CCTA. On the internal validation set, the model's AUCs for the right coronary artery (RCA), left main coronary artery (LM), left anterior descending artery (LAD), and left circumflex artery (LCX) were 0.794, 0.818, 0.744, and 0.755, respectively; on the external validation set, the AUCs reached 0.749, 0.971, 0.667, and 0.727, respectively. Performance remained stable in a clinically normal-ECG subset, indicating robustness beyond overt ECG abnormalities. Subgroup analyses across demographic and acquisition-time strata further confirmed model stability. Risk stratification based on vessel-specific incidence thresholds showed consistent separation on calibration and cumulative event curves. Interpretability analyses revealed distinct waveform differences between high- and low-risk groups, highlighting key electrophysiological regions contributing to model decisions and offering new insights into the ECG correlates of coronary stenosis.",
+      "url": "https://doi.org/10.1038/s41746-026-03085-4",
+      "pdf_url": "https://www.nature.com/articles/s41746-026-03085-4_reference.pdf",
+      "doi": "10.1038/s41746-026-03085-4",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "npj Digital Medicine",
+      "categories": [
+        "Cardiac Imaging and Diagnostics",
+        "ECG Monitoring and Analysis",
+        "Atrial Fibrillation Management and Outcomes"
+      ],
+      "tags": [
+        "LLM 基模"
       ],
       "score": 43,
       "summary": "",
@@ -2682,7 +3209,297 @@
       "tags": [
         "后训练"
       ],
-      "score": 42,
+      "score": 43,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.08482",
+      "title": "FlashBoot: Sub-Second Weight Loading for Large Models at Rack Scale",
+      "authors": [
+        "Issac Zhu",
+        "Hscos Zhang",
+        "Keith Jiang",
+        "Jack Li",
+        "Hugh Yin",
+        "Jason Zhao"
+      ],
+      "affiliations": [],
+      "published": "2026-08-09T04:56:59Z",
+      "updated": "2026-08-09T04:56:59Z",
+      "abstract": "Flagship Mixture-of-Experts (MoE) models are growing fast along two axes at once: total parameter count and the number of experts. In elastic deployment scenarios, many GPUs across many nodes must become serving-ready quickly, and this growth makes weight loading a noticeable part of the latency budget. Even on NVIDIA's GB300 NVL72, today's state-of-the-art loaders leave most of that bandwidth unused. The losses are structural: (C1) weight memory is fragmented into tens of thousands of per-tensor objects, so transfers run far below link bandwidth; (C2) cross-node replication is gated by NCCL communicator setup, which costs 10-110 s before a single weight byte moves; and (C3) the existing cross-node GPU->GPU clone path is serial and scales poorly to concurrent multi-node bring-up. We present FlashBoot, a hardware-friendly, framework-workflow co-designed weight-loading subsystem built on SGLang. At its core is FabricArena, a contiguous, exportable and inter-node addressable tensor memory layout. On top of it, FlashLoad loads from CPU as a single bulk, zero-copy transfer, and FlashClone replicates a resident model from a remote GPU via a remote-mapping mechanism that removes NCCL setup. In experiments on NVL72 with DeepSeek-V4-Pro and DeepSeek-V4-Flash, FlashClone maps remote weight memory in ~10 ms (versus 10-110 s for NCCL) and sustains >=700 GB/s per clone. Against the state of the art, FlashBoot accelerates single-node weight loading by up to 50x (from 20.1 s to 0.4 s) and concurrent rack-level weight loading by >270x (from 87 s to 0.32 s). Our code will be made publicly available.",
+      "url": "http://arxiv.org/abs/2608.08482v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.08482v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.DC"
+      ],
+      "tags": [
+        "MoE",
+        "推理系统"
+      ],
+      "score": 40,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.08910",
+      "title": "Tied Trit-Planes: Constraining PTQTP to a Uniform Nine-Level Quantizer, with a Persistent Folded Format for Disk-Streamed Mixture-of-Experts Serving",
+      "authors": [
+        "Matteo Grella"
+      ],
+      "affiliations": [],
+      "published": "2026-08-09T20:53:47Z",
+      "updated": "2026-08-09T20:53:47Z",
+      "abstract": "PTQTP decomposes LLM weight matrices into two ternary (trit) planes with two free per-group scales. Tying the scales to a fixed ratio of three collapses the decomposition into a single uniform nine-level quantizer, a known balanced-ternary identity. To our knowledge, at the time of writing, this work is the first to impose that identity as a constraint inside PTQTP's solver. The two trit planes then fold losslessly into one 4-bit code plane that we make the persistent serving representation: disk bytes, expert-cache bytes, and kernel input are the same 4.0625-bits/weight blocks, consumed in one integer dot pass. For this conjunction (ratio-3 nine-level code, CPU-SIMD kernels, SSD expert streaming, identical persistent bytes) we likewise found no precedent. We apply this to the routed experts of DeepSeek-V4-Flash-0731, a 284B-A13B mixture-of-experts model, quantizing in one shot from the released MXFP4 expert weights and streaming experts from SSD on a 64 GB laptop. Against a 4.5-bit Q4_K baseline, measured one process per fixture with an expert-lossless anchor arm as reference control, the tied model matches the official serving API on 5/5 fixtures at step 0 (Q4_K: 4/5) and 12/14 captured continuation steps (11/14), scores 86 vs. 84 on a 100-item MMLU subset, decodes 6.7% faster in decode phase, and ships 9% smaller files: no detected fidelity difference at these small evaluation sizes, and every fixture-level difference between the arms traces to a single measured near-tie cell. The tied fit nevertheless shows higher weight-reconstruction error and worse perplexity, a measured dissociation between proxy metrics and reference fidelity. A cumulative trunk-ternarization ladder and bitwise-pinned aarch64/x86-64 kernels complete the report. All code, formats, and evaluation artifacts are open source in the fucina inference stack.",
+      "url": "http://arxiv.org/abs/2608.08910v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.08910v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "tags": [
+        "MoE",
+        "推理系统"
+      ],
+      "score": 40,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "s2:2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "title": "Domain-specific Large Language Model Pretraining for Construction Specification Review",
+      "authors": [
+        "Shuyi Wang",
+        "Jinwoo Kim"
+      ],
+      "affiliations": [],
+      "published": "2026-06-22",
+      "updated": "2026-06-22",
+      "abstract": "",
+      "url": "https://www.semanticscholar.org/paper/2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "pdf_url": "",
+      "doi": "10.22260/isarc2026/0172",
+      "source": "Semantic Scholar",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
+      "categories": [],
+      "tags": [
+        "LLM 基模",
+        "预训练"
+      ],
+      "score": 36,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.21028",
+      "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
+      "authors": [
+        "Junchao Zeng",
+        "Junzhang Zhu",
+        "Junyang Chen",
+        "Yudong Li",
+        "Wei Liu",
+        "Chengxiang Zhuo",
+        "Zang Li"
+      ],
+      "affiliations": [],
+      "published": "2026-07-23T08:11:57Z",
+      "updated": "2026-08-20T03:22:01Z",
+      "abstract": "Generative Recommendation (GR) has emerged as a new paradigm for sequential recommendation, in which a representative line of work encodes items into hierarchical semantic IDs via residual quantization and predicts the IDs token by token. However, this generative formulation still exhibits structural gaps with respect to the recommendation task: flattening multi-token IDs into a single sequence destroys item-level structure, and the inconsistency between training and inference over a hierarchical codebook gives rise to semantic drift. To bridge these two gaps, we propose BARGE, which employs Item Context-Aware Attention (ICA) to restore item-level structure during encoding, and Hierarchical Path Reranking (HPR) together with Dual-Path Decoding (DPD) to suppress semantic drift from two complementary angles during decoding. Extensive experiments and analytical studies on public benchmarks and a large-scale offline test demonstrate that BARGE achieves superior recommendation performance. An online A/B test on a Tencent platform yields improvements of 0.60% in click-through rate, 1.34% in click unique visitors, and 1.70% in total reading time, confirming the practical value of BARGE in industrial-scale recommendation.",
+      "url": "http://arxiv.org/abs/2607.21028v3",
+      "pdf_url": "https://arxiv.org/pdf/2607.21028v3",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "推理系统"
+      ],
+      "score": 116,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7203878760",
+      "title": "Post-Training with Policy Gradients: Optimality and the Base Model Barrier",
+      "authors": [
+        "Alireza Mousavi-Hosseini"
+      ],
+      "affiliations": [],
+      "published": "2026-08-21",
+      "updated": "2026-08-22T07:34:49.880490",
+      "abstract": "We study post-training linear autoregressive models with outcome and process rewards. Given a context $x$, the model must predict the response $y \\in \\mathcal{Y}^N$, a sequence of length $N$ that satisfies a standard $\\gamma$ margin assumption extended to sequences. We prove that on test samples where the base model achieves a non-trivial likelihood $\\alpha$, a variant of policy gradient (PG) can achieve likelihood $1 - \\varepsilon$ with an essentially minimax optimal number of reward queries $O((\\alpha^{-1} + \\varepsilon^{-1})/\\gamma^2)$. However, a barrier arises for going beyond the support of the base model. We prove that the overall expected error after post-training with outcome rewards is governed by a property of the base model we call the Likelihood Quantile (LQ), and that variants of PG, while minimax optimal, may require a number of reward queries exponential in $N$ to go beyond this support, regardless of the pre-training algorithm. To overcome this barrier, we study post-training with a process reward model, and demonstrate how PG variants in this setting avoid the curse of dimensionality in $N$ via dependence on a token-level LQ. Along the way, we prove that under the margin condition, SGD with adaptive learning rate (LR) achieves a near optimal test error for statistical learning, and PG with adaptive LR achieves a near optimal number of mistakes for online learning while being computationally efficient whenever possible, both of which may be of independent interest.",
+      "url": "https://doi.org/10.14288/1.0455246",
+      "pdf_url": "None",
+      "doi": "10.14288/1.0455246",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Open Collections",
+      "categories": [],
+      "tags": [
+        "LLM 基模",
+        "预训练",
+        "后训练"
+      ],
+      "score": 80,
+      "summary": "We study post-training linear autoregressive models with outcome and process rewards. Given a context $x$, the model must predict the response $y \\in \\mathcal{Y}^N$, a sequence of length $N$ that satisfies a standard $\\gamma$ margin assumption extended to sequences. We prove that on test samples where the base model achieves a non-trivial likelihood $\\alpha$, a variant of policy gradient (PG) can achieve likelihood $1 - \\varepsilon$ with an essentially minimax optimal number of reward queries $O((\\alpha^{-1} + \\...",
+      "one_line_takeaway": "该工作与大模型或生成式推荐方向相关，建议结合原文确认技术细节。",
+      "core_method": "尚未配置 DeepSeek API，核心方法需结合原文进一步提取。",
+      "innovation_points": [
+        "待从完整论文或技术报告中进一步提取。"
+      ],
+      "experiment_results": [
+        "当前元数据未提供足够的实验结果细节。"
+      ],
+      "limitations": [
+        "当前分析仅基于公开摘要或官方介绍，结论需以原文为准。"
+      ],
+      "practical_value": "可作为 LLM 与生成式推荐技术跟踪的候选阅读材料。",
+      "why_it_matters": "与当前关注的 LLM、GenRec 或 Semantic ID 技术路线存在直接关联。",
+      "evidence_basis": "abstract",
+      "analysis_status": "cached",
+      "analysis_signature": "c94be0a5afb6d52a",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.13937",
+      "title": "Deep Vision in Smart Manufacturing: MODERN Framework for Intelligent Quality Monitoring and Diagnosis",
+      "authors": [
+        "Yicheng Kang",
+        "Yuling Jiao",
+        "Xin Geng",
+        "Mahesh Nagarajan"
+      ],
+      "affiliations": [],
+      "published": "2026-08-14T04:17:57Z",
+      "updated": "2026-08-14T04:17:57Z",
+      "abstract": "Smart manufacturing processes are often installed with a large number of sensors, imaging devices and computers, which not only enable instant communication across various modules of a production system but also aid in intelligent manufacturing management. In this paper, we introduce MODERN, a deep learning framework for quality monitoring and fault isolation, which integrates these enhanced capabilities into the practice of industrial quality control. Using the architecture of an inception residual neural network, we develop a control chart that monitors the likelihood of a product containing defects. We also propose a faulty region estimator that identifies the defective area using transfer learning. To extend our framework to cases where there are not sufficient training data, we suggest a transfer monitoring technique that requires only a small sample size and a hypothesis testing approach for quantitatively assessing the applicability of our method. Theoretically, we establish the minimax optimal convergence rate for both our defect likelihood estimation and fault diagnosis. Our results lead to a seemingly counter-intuitive managerial implication - it may not always be in a manufacturer's best interests to keep upgrading its monitoring equipment regardless of the cost. Empirically, we demonstrate the superior performance of our method in comparison with a state-of-the-art approach using both simulated experiments and real data.",
+      "url": "http://arxiv.org/abs/2608.13937v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.13937v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "stat.ML",
+        "cs.LG"
+      ],
+      "tags": [
+        "GenRec"
+      ],
+      "score": 48,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2608.18237",
+      "title": "Sobolev Regularized Score Difference Estimation in Diffusion Models",
+      "authors": [
+        "Chenghan Xie",
+        "Jose Blanchet",
+        "Renyuan Xu"
+      ],
+      "affiliations": [],
+      "published": "2026-08-18T18:23:30Z",
+      "updated": "2026-08-18T18:23:30Z",
+      "abstract": "Estimating the difference of two Stein's score functions is a fundamental problem in generative modeling. In particular, score differences arise naturally in transfer learning, where the score difference provides the mechanism for adapting a pre-trained model to a new target distribution, and in diffusion model-based post-training methods such as discriminator guidance. Existing estimators for score differences in these settings either lack of statistical consistency or are difficult to scale up in high-dimensions. We propose a statistically consistent and scalable estimator for score differences based on Sobolev regularization, which plays a crucial role in ensuring consistency and stablizing the training in the small-sample regime. Mathematically, we establish a convergence rate of $O(n^{-\\frac{s-1}{d+2s-2}})$ where $d$ is the dimension and $s$ denotes the smoothness of the underlying densities, and provide a minimax lower bound of $\\tildeΩ(n^{-\\frac{2(s-1)}{d+2s}})$ (in mean-squared error). Empirically, our estimator exhibits significantly improved stability in small-sample regimes compared to existing methods. We demonstrate its effectiveness on real-world tasks, including transfer learning for ECG signal generation, where it substantially outperforms non-regularized score difference estimators in downstream classification performance.",
+      "url": "http://arxiv.org/abs/2608.18237v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.18237v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "stat.ML",
+        "cs.LG",
+        "math.OC"
+      ],
+      "tags": [
+        "后训练"
+      ],
+      "score": 43,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
