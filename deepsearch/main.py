@@ -26,6 +26,8 @@ def main() -> int:
     output = Path(args.out)
     previous_payload = {"papers": []} if args.reset else _load_payload(output)
     previous = [Paper.from_dict(item) for item in previous_payload.get("papers", [])]
+    for paper in previous:
+        classify_company(paper, config)
     previous_by_id = {paper.id: paper for paper in previous}
 
     if args.reselect_existing:

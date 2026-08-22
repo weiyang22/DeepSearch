@@ -105,6 +105,51 @@ NON_BASE_MODEL_TITLE_TERMS = (
     "evaluation",
     "perceptionbench",
     "minitriton",
+    "oncall",
+    "coding plan",
+    "checkpoint engine",
+    "clinical",
+    "medical",
+    "vulnerability",
+    "genomic",
+    "macro placement",
+    "high-stakes decision",
+    "3d generation",
+    "hunyuan3d",
+    "hunyuan 3d",
+    "image generation",
+    "video generation",
+    "world generation",
+    "world reconstruction",
+    "ocr",
+    " asr",
+    " tts",
+    " embedding",
+    " audio",
+    " embodied",
+    " visual tokenizer",
+    " mt",
+)
+
+CORE_LLM_TITLE_TERMS = (
+    "foundation model",
+    "base model",
+    "language model",
+    "llm",
+    "pretrain",
+    "pre-train",
+    "post-train",
+    "mid-training",
+    "fine-tuning",
+    "alignment",
+    "preference optimization",
+    "mixture of experts",
+    "mixture-of-experts",
+    "scaling law",
+    "training data",
+    "tokenizer",
+    "reasoning model",
+    "technical report",
 )
 
 APPLICATION_ONLY_TERMS = (
@@ -243,18 +288,21 @@ def is_genrec(paper: Paper) -> bool:
 
 def is_core_llm(paper: Paper) -> bool:
     text = _search_text(paper)
+    title = paper.title.lower()
+    if any(term in title for term in NON_BASE_MODEL_TITLE_TERMS):
+        return False
+    title_signal = bool(OFFICIAL_MODEL_PATTERN.search(title)) or any(
+        term in title for term in CORE_LLM_TITLE_TERMS
+    )
+    if not title_signal:
+        return False
     if paper.content_type == "company_report":
-        title = paper.title.lower()
-        if any(term in title for term in NON_BASE_MODEL_TITLE_TERMS):
-            return False
         training_signal = any(
             term in text
             for term in STRONG_LLM_TERMS
             if term not in {"technical report", "whitepaper", "white paper"}
         )
-        return bool(OFFICIAL_MODEL_PATTERN.search(text)) or (
-            training_signal and any(term in text for term in LLM_CONTEXT_TERMS)
-        )
+        return training_signal or any(term in text for term in LLM_CONTEXT_TERMS)
     if not any(term in text for term in LLM_CONTEXT_TERMS):
         return False
     if not any(term in text for term in STRONG_LLM_TERMS):

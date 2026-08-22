@@ -84,6 +84,9 @@ class PipelineTests(unittest.TestCase):
         papers = [
             Paper(id="company", title="Kimi K2 Technical Report", published=today, company="Kimi", content_type="company_report", abstract="foundation model post-training technical report"),
             Paper(id="company-bench", title="Kimi PerceptionBench", published=today, company="Kimi", content_type="company_report", abstract="large language model evaluation benchmark technical report"),
+            Paper(id="company-tool", title="oncall kit", published=today, company="Anthropic", content_type="company_report", abstract="A Claude toolkit with a linked technical report for language model users."),
+            Paper(id="company-3d", title="Hunyuan3D World", published=today, company="Tencent Hunyuan", content_type="company_report", abstract="A foundation model technical report for scalable 3D generation."),
+            Paper(id="company-visual-tokenizer", title="VTP: Scalable Pre-training of Visual Tokenizers", published=today, company="MiniMax", content_type="company_report", abstract="A technical report for visual generation."),
             Paper(id="enterprise-genrec", title="Generative Recommendation with Semantic ID", published=today, affiliations=["ByteDance"], abstract="generative recommendation semantic id with an online A/B test"),
             Paper(id="academic-genrec", title="Generative Retrieval for Recommendation", published=today, abstract="generative retrieval for recommendation"),
             Paper(id="enterprise-llm", title="Scaling Foundation Model Pretraining", published=today, affiliations=["Google"], abstract="large language model pretraining scaling law"),
@@ -99,6 +102,9 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn("academic-genrec", [item.id for item in ranked])
         self.assertNotIn("academic-llm", [item.id for item in ranked])
         self.assertNotIn("company-bench", [item.id for item in ranked])
+        self.assertNotIn("company-tool", [item.id for item in ranked])
+        self.assertNotIn("company-3d", [item.id for item in ranked])
+        self.assertNotIn("company-visual-tokenizer", [item.id for item in ranked])
         self.assertIn("A/B 实验", next(item.tags for item in ranked if item.id == "enterprise-genrec"))
 
     def test_candidates_are_sorted_newest_first_even_when_older_scores_higher(self):
