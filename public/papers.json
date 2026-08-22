@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T05:48:37+08:00",
+  "generated_at": "2026-08-23T05:50:39+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -10,10 +10,12 @@
     "retention_days": 90
   },
   "status": {
-    "analysis_enabled": false,
-    "source_errors": [],
-    "discovered": 69,
-    "candidates": 13,
+    "analysis_enabled": true,
+    "source_errors": [
+      "DBLP: Remote end closed connection without response"
+    ],
+    "discovered": 267,
+    "candidates": 12,
     "daily_picks": 1
   },
   "sources": [
@@ -139,7 +141,7 @@
         "Semantic ID",
         "Tokenization"
       ],
-      "score": 192,
+      "score": 193,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -192,54 +194,7 @@
         "Semantic ID",
         "MoE"
       ],
-      "score": 169,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.21028",
-      "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
-      "authors": [
-        "Junchao Zeng",
-        "Junzhang Zhu",
-        "Junyang Chen",
-        "Yudong Li",
-        "Wei Liu",
-        "Chengxiang Zhuo",
-        "Zang Li"
-      ],
-      "affiliations": [],
-      "published": "2026-07-23T08:11:57Z",
-      "updated": "2026-08-20T03:22:01Z",
-      "abstract": "Generative Recommendation (GR) has emerged as a new paradigm for sequential recommendation, in which a representative line of work encodes items into hierarchical semantic IDs via residual quantization and predicts the IDs token by token. However, this generative formulation still exhibits structural gaps with respect to the recommendation task: flattening multi-token IDs into a single sequence destroys item-level structure, and the inconsistency between training and inference over a hierarchical codebook gives rise to semantic drift. To bridge these two gaps, we propose BARGE, which employs Item Context-Aware Attention (ICA) to restore item-level structure during encoding, and Hierarchical Path Reranking (HPR) together with Dual-Path Decoding (DPD) to suppress semantic drift from two complementary angles during decoding. Extensive experiments and analytical studies on public benchmarks and a large-scale offline test demonstrate that BARGE achieves superior recommendation performance. An online A/B test on a Tencent platform yields improvements of 0.60% in click-through rate, 1.34% in click unique visitors, and 1.70% in total reading time, confirming the practical value of BARGE in industrial-scale recommendation.",
-      "url": "http://arxiv.org/abs/2607.21028v3",
-      "pdf_url": "https://arxiv.org/pdf/2607.21028v3",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "GenRec",
-        "Semantic ID",
-        "Tokenization",
-        "推理系统"
-      ],
-      "score": 144,
+      "score": 170,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -338,7 +293,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 136,
+      "score": 137,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -389,7 +344,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 135,
+      "score": 136,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -515,7 +470,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 128,
+      "score": 129,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
@@ -701,6 +656,53 @@
         "GenRec"
       ],
       "score": 102,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.21028",
+      "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
+      "authors": [
+        "Junchao Zeng",
+        "Junzhang Zhu",
+        "Junyang Chen",
+        "Yudong Li",
+        "Wei Liu",
+        "Chengxiang Zhuo",
+        "Zang Li"
+      ],
+      "affiliations": [],
+      "published": "2026-07-23T08:11:57Z",
+      "updated": "2026-08-20T03:22:01Z",
+      "abstract": "Generative Recommendation (GR) has emerged as a new paradigm for sequential recommendation, in which a representative line of work encodes items into hierarchical semantic IDs via residual quantization and predicts the IDs token by token. However, this generative formulation still exhibits structural gaps with respect to the recommendation task: flattening multi-token IDs into a single sequence destroys item-level structure, and the inconsistency between training and inference over a hierarchical codebook gives rise to semantic drift. To bridge these two gaps, we propose BARGE, which employs Item Context-Aware Attention (ICA) to restore item-level structure during encoding, and Hierarchical Path Reranking (HPR) together with Dual-Path Decoding (DPD) to suppress semantic drift from two complementary angles during decoding. Extensive experiments and analytical studies on public benchmarks and a large-scale offline test demonstrate that BARGE achieves superior recommendation performance. An online A/B test on a Tencent platform yields improvements of 0.60% in click-through rate, 1.34% in click unique visitors, and 1.70% in total reading time, confirming the practical value of BARGE in industrial-scale recommendation.",
+      "url": "http://arxiv.org/abs/2607.21028v3",
+      "pdf_url": "https://arxiv.org/pdf/2607.21028v3",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "推理系统"
+      ],
+      "score": 144,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
