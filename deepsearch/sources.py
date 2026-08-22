@@ -237,27 +237,33 @@ def collect_official_github(config: Config) -> list[Paper]:
         )
         repos = _request_json(url, headers=github_headers)
         for repo in repos:
+            repo_name = str(repo.get("name", ""))
             created = _parse_datetime(str(repo.get("created_at", "")))
             if not created or created < cutoff:
                 continue
             description = _clean(str(repo.get("description", "") or ""))
-            readme = _github_readme(org, str(repo.get("name", "")), github_headers)
-            text = f"{repo.get('name', '')} {description} {readme}".lower()
+            readme = _github_readme(org, repo_name, github_headers)
+            text = f"{repo_name} {description} {readme}".lower()
             if not _looks_like_foundation_model_report(text):
                 continue
             arxiv_match = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})", text)
-            report_match = re.search(r"https?://[^\s)\]>'\"]+(?:tech(?:nical)?[_-]?report|report)[^\s)\]>'\"]*\.pdf", readme, re.I)
+            report_url = _github_report_url(
+                org,
+                repo_name,
+                str(repo.get("default_branch", "main") or "main"),
+                readme,
+            )
             abstract = _readme_excerpt(readme) or description
             paper = Paper(
-                id=(f"arxiv:{arxiv_match.group(1)}" if arxiv_match else f"github:{org}/{repo.get('name')}"),
-                title=_display_repo_title(str(repo.get("name", "")), description),
+                id=(f"arxiv:{arxiv_match.group(1)}" if arxiv_match else f"github:{org}/{repo_name}"),
+                title=_display_repo_title(repo_name, description),
                 authors=[f"{company} Research"],
                 published=str(repo.get("created_at", "")),
                 updated=str(repo.get("pushed_at", "") or repo.get("updated_at", "")),
                 abstract=abstract,
                 url=str(repo.get("html_url", "")),
                 pdf_url=(
-                    f"https://arxiv.org/pdf/{arxiv_match.group(1)}" if arxiv_match else (report_match.group(0) if report_match else "")
+                    f"https://arxiv.org/pdf/{arxiv_match.group(1)}" if arxiv_match else report_url
                 ),
                 source="Official GitHub",
                 content_type="company_report",
@@ -273,17 +279,39 @@ def collect_official_github(config: Config) -> list[Paper]:
 def _looks_like_foundation_model_report(text: str) -> bool:
     report_signal = any(
         term in text
-        for term in ("technical report", "tech report", "whitepaper", "white paper", "arxiv.org")
+        for term in (
+            "technical report", "tech report", "technical_report", "tech_report",
+            "full report", "whitepaper", "white paper", "arxiv.org",
+        )
     )
     model_signal = any(
         term in text
         for term in (
             "foundation model", "base model", "pretraining", "pre-training", "post-training",
             "alignment", "mixture of experts", "deepseek-v", "deepseek-r", "kimi k",
-            "minimax-", "glm-", "language model",
+            "minimax-", "glm-", "gemini", "gemma", "language model",
         )
     )
     return report_signal and model_signal
+
+
+def _github_report_url(org: str, repo: str, branch: str, readme: str) -> str:
+    """Resolve an official report PDF linked by URL or repository-relative path."""
+    links = re.findall(r"(?:href=[\"']|\]\()([^\"')]+\.pdf)(?:[\"']|\))", readme, re.I)
+    links.extend(re.findall(r"https?://[^\s)\]>'\"]+\.pdf", readme, re.I))
+    for link in links:
+        clean = link.strip()
+        normalized = clean.lower().replace("-", "_")
+        if not any(term in normalized for term in ("report", "whitepaper", "white_paper")):
+            continue
+        if clean.startswith(("http://", "https://")):
+            return clean
+        path = clean.lstrip("./")
+        return (
+            f"https://github.com/{urllib.parse.quote(org)}/{urllib.parse.quote(repo)}"
+            f"/blob/{urllib.parse.quote(branch)}/{urllib.parse.quote(path, safe='/')}"
+        )
+    return ""
 
 
 def deduplicate(papers: Iterable[Paper]) -> list[Paper]:

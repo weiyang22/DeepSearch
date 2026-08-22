@@ -1,6 +1,6 @@
 # DeepSearch · LLM&GR
 
-追踪大模型基座技术、生成式推荐、Generative Retrieval 与 Semantic ID 论文，同时监测 Kimi、DeepSeek、MiniMax、智谱官方渠道中的新技术报告。
+追踪大模型基座技术、生成式推荐、Generative Retrieval 与 Semantic ID 论文，同时监测 Kimi、DeepSeek、MiniMax、智谱和 Google DeepMind 官方渠道中的新技术报告。
 
 ## 功能
 

@@ -122,7 +122,8 @@ export function DigestDashboard() {
         <h1>大模型基座技术与生成式推荐论文追踪</h1>
         <p className="intro-copy">
           LLM 仅关注企业参与或企业官方发布的预训练、基模架构、训练数据、对齐与后训练等技术内容；不收录普通应用层或纯学术论文。
-          GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，并且只收录明确报告 A/B 测试或线上受控实验的工作。
+          重点跟踪 Kimi、DeepSeek、MiniMax、智谱与 Google DeepMind。GenRec 聚焦生成式推荐、生成式检索与 Semantic ID，
+          并且只收录明确报告 A/B 测试或线上受控实验的工作。
         </p>
         <div className="intro-meta">
           <span>今日收录 <strong>{todayCount}</strong> 篇，不设固定数量</span>

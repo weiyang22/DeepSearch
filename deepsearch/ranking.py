@@ -89,7 +89,8 @@ AB_EXPERIMENT_PATTERN = re.compile(
 )
 
 OFFICIAL_MODEL_PATTERN = re.compile(
-    r"\b(?:deepseek[- ]?[vr]\d|kimi[- ]?k\d|minimax[- ]?m\d|glm[- ]?\d|chatglm)\b",
+    r"\b(?:deepseek[- ]?[vr]\d|kimi[- ]?k\d|minimax[- ]?m\d|glm[- ]?\d|chatglm|"
+    r"gemini[- ]?\d(?:\.\d)?|gemma[- ]?\d)\b",
     re.IGNORECASE,
 )
 

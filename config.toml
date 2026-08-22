@@ -50,7 +50,7 @@ exclude_keywords = [
   "llm-as-a-judge for recommendation"
 ]
 enterprise_keywords = [
-  "Alibaba", "Amazon", "Apple", "ByteDance", "Google", "Huawei", "JD.com",
+  "Alibaba", "Amazon", "Apple", "ByteDance", "Google", "Google DeepMind", "DeepMind", "Huawei", "JD.com",
   "Kuaishou", "Meituan", "Meta", "Microsoft", "Netflix", "NVIDIA", "Pinterest",
   "Shopee", "Snap", "Tencent", "TikTok", "Xiaomi", "Yahoo"
 ]
@@ -64,12 +64,14 @@ Kimi = ["Kimi", "Moonshot AI", "Kimi Team", "MoonshotAI"]
 DeepSeek = ["DeepSeek", "DeepSeek-AI", "DeepSeek AI"]
 MiniMax = ["MiniMax AI", "MiniMaxAI", "MiniMax Team"]
 "智谱" = ["Zhipu AI", "Z.ai", "GLM Team", "THUDM", "ChatGLM"]
+"Google DeepMind" = ["Google DeepMind", "DeepMind", "GoogleDeepMind"]
 
 [companies.github_orgs]
 DeepSeek = "deepseek-ai"
 Kimi = "MoonshotAI"
 MiniMax = "MiniMax-AI"
 "智谱" = "zai-org"
+"Google DeepMind" = "google-deepmind"
 
 [llm]
 base_url = "https://api.deepseek.com"

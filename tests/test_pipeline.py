@@ -4,7 +4,7 @@ import unittest
 from deepsearch.config import load_config
 from deepsearch.models import Paper
 from deepsearch.ranking import choose_daily_picks, has_ab_experiment, infer_tags, prepare_candidates
-from deepsearch.sources import deduplicate
+from deepsearch.sources import _github_report_url, _looks_like_foundation_model_report, classify_company, deduplicate
 
 
 class PipelineTests(unittest.TestCase):
@@ -23,6 +23,24 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("GenRec", infer_tags(paper))
         self.assertIn("Semantic ID", infer_tags(paper))
         self.assertTrue(has_ab_experiment(paper))
+
+    def test_recognizes_kimi_k3_relative_full_report(self):
+        readme = '<a href="k3_tech_report.pdf">Full Report</a> Kimi K3 mixture of experts'
+        self.assertTrue(_looks_like_foundation_model_report(readme.lower()))
+        self.assertEqual(
+            _github_report_url("MoonshotAI", "Kimi-K3", "main", readme),
+            "https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf",
+        )
+
+    def test_classifies_google_deepmind_as_focus_company(self):
+        paper = Paper(
+            id="deepmind",
+            title="Scaling a Foundation Model",
+            affiliations=["Google DeepMind"],
+        )
+        classify_company(paper, self.config)
+        self.assertEqual(paper.company, "Google DeepMind")
+        self.assertEqual(self.config.github_orgs["Google DeepMind"], "google-deepmind")
 
     def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
         today = dt.date.today().isoformat()
