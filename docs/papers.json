@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T05:41:23+08:00",
+  "generated_at": "2026-08-23T05:45:52+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -11,11 +11,9 @@
   },
   "status": {
     "analysis_enabled": true,
-    "source_errors": [
-      "DBLP: Remote end closed connection without response"
-    ],
-    "discovered": 304,
-    "candidates": 66,
+    "source_errors": [],
+    "discovered": 334,
+    "candidates": 67,
     "daily_picks": 3
   },
   "sources": [
@@ -3149,6 +3147,43 @@
       "is_daily_pick": false
     },
     {
+      "id": "s2:2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "title": "Domain-specific Large Language Model Pretraining for Construction Specification Review",
+      "authors": [
+        "Shuyi Wang",
+        "Jinwoo Kim"
+      ],
+      "affiliations": [],
+      "published": "2026-06-22",
+      "updated": "2026-06-22",
+      "abstract": "",
+      "url": "https://www.semanticscholar.org/paper/2ca1bced57350e1db439a23b623556e0a39b50d3",
+      "pdf_url": "",
+      "doi": "10.22260/isarc2026/0172",
+      "source": "Semantic Scholar",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
+      "categories": [],
+      "tags": [
+        "LLM 基模",
+        "预训练"
+      ],
+      "score": 36,
+      "summary": "",
+      "one_line_takeaway": "",
+      "core_method": "",
+      "innovation_points": [],
+      "experiment_results": [],
+      "limitations": [],
+      "practical_value": "",
+      "why_it_matters": "",
+      "evidence_basis": "metadata",
+      "analysis_status": "",
+      "analysis_signature": "",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2607.21028",
       "title": "Bridging the Structural Gap: Adapting Autoregressive Generation for Recommendation",
       "authors": [
@@ -3224,43 +3259,6 @@
         "Multimodal"
       ],
       "score": 41,
-      "summary": "",
-      "one_line_takeaway": "",
-      "core_method": "",
-      "innovation_points": [],
-      "experiment_results": [],
-      "limitations": [],
-      "practical_value": "",
-      "why_it_matters": "",
-      "evidence_basis": "metadata",
-      "analysis_status": "",
-      "analysis_signature": "",
-      "is_daily_pick": false
-    },
-    {
-      "id": "s2:2ca1bced57350e1db439a23b623556e0a39b50d3",
-      "title": "Domain-specific Large Language Model Pretraining for Construction Specification Review",
-      "authors": [
-        "Shuyi Wang",
-        "Jinwoo Kim"
-      ],
-      "affiliations": [],
-      "published": "2026-06-22",
-      "updated": "2026-06-22",
-      "abstract": "",
-      "url": "https://www.semanticscholar.org/paper/2ca1bced57350e1db439a23b623556e0a39b50d3",
-      "pdf_url": "",
-      "doi": "10.22260/isarc2026/0172",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "Proceedings of the International Symposium on Automation and Robotics in Construction (IAARC)",
-      "categories": [],
-      "tags": [
-        "LLM 基模",
-        "预训练"
-      ],
-      "score": 36,
       "summary": "",
       "one_line_takeaway": "",
       "core_method": "",
