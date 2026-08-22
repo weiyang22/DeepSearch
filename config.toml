@@ -6,7 +6,7 @@ timezone = "Asia/Shanghai"
 daily_limit = 0
 daily_window_days = 3
 daily_min_score = 45
-retention_days = 90
+retention_days = 365
 
 [discovery]
 # LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验。
@@ -54,7 +54,10 @@ enterprise_keywords = [
   "Kuaishou", "Meituan", "Meta", "Microsoft", "Netflix", "NVIDIA", "Pinterest",
   "Shopee", "Snap", "Tencent", "TikTok", "Xiaomi", "Yahoo"
 ]
-semantic_scholar_limit = 12
+arxiv_max_results = 300
+openalex_per_query = 50
+semantic_scholar_limit = 30
+official_github_per_org = 100
 
 [companies.queries]
 Kimi = ["Kimi", "Moonshot AI", "Kimi Team", "MoonshotAI"]

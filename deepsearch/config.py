@@ -26,7 +26,10 @@ class Config:
     github_orgs: dict[str, str]
     deepseek_base_url: str
     deepseek_model: str
+    arxiv_max_results: int
+    openalex_per_query: int
     semantic_scholar_limit: int
+    official_github_per_org: int
 
 
 def load_config(path: str | Path = "config.toml") -> Config:
@@ -43,7 +46,7 @@ def load_config(path: str | Path = "config.toml") -> Config:
         daily_limit=int(site.get("daily_limit", 0)),
         daily_window_days=int(site.get("daily_window_days", 3)),
         daily_min_score=int(site.get("daily_min_score", 45)),
-        retention_days=int(site.get("retention_days", 90)),
+        retention_days=int(site.get("retention_days", 365)),
         arxiv_categories=list(discovery.get("arxiv_categories", ["cs.AI", "cs.CL", "cs.LG", "cs.IR"])),
         topic_queries=list(discovery.get("topic_queries", [])),
         include_keywords=list(discovery.get("include_keywords", [])),
@@ -55,5 +58,8 @@ def load_config(path: str | Path = "config.toml") -> Config:
         github_orgs={key: str(value) for key, value in companies.get("github_orgs", {}).items()},
         deepseek_base_url=os.getenv("DEEPSEEK_BASE_URL", str(llm.get("base_url", "https://api.deepseek.com"))),
         deepseek_model=os.getenv("DEEPSEEK_MODEL", str(llm.get("model", "deepseek-v4-flash"))),
-        semantic_scholar_limit=int(discovery.get("semantic_scholar_limit", 12)),
+        arxiv_max_results=int(discovery.get("arxiv_max_results", 300)),
+        openalex_per_query=int(discovery.get("openalex_per_query", 50)),
+        semantic_scholar_limit=int(discovery.get("semantic_scholar_limit", 30)),
+        official_github_per_org=int(discovery.get("official_github_per_org", 100)),
     )

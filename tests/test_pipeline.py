@@ -46,6 +46,29 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn("company-bench", [item.id for item in ranked])
         self.assertIn("A/B 实验", next(item.tags for item in ranked if item.id == "enterprise-genrec"))
 
+    def test_retention_window_covers_the_past_year(self):
+        within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()
+        outside_window = (dt.date.today() - dt.timedelta(days=366)).isoformat()
+        papers = [
+            Paper(
+                id="within",
+                title="Industrial Generative Recommendation",
+                published=within_window,
+                affiliations=["ByteDance"],
+                abstract="Generative recommendation evaluated with an online A/B test.",
+            ),
+            Paper(
+                id="outside",
+                title="Older Industrial Generative Recommendation",
+                published=outside_window,
+                affiliations=["ByteDance"],
+                abstract="Generative recommendation evaluated with an online A/B test.",
+            ),
+        ]
+        ranked = prepare_candidates(papers, self.config)
+        self.assertIn("within", [item.id for item in ranked])
+        self.assertNotIn("outside", [item.id for item in ranked])
+
 
 if __name__ == "__main__":
     unittest.main()

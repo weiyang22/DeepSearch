@@ -56,7 +56,7 @@ def collect_arxiv(config: Config) -> list[Paper]:
             {
                 "search_query": query,
                 "start": 0,
-                "max_results": 60,
+                "max_results": config.arxiv_max_results,
                 "sortBy": "submittedDate",
                 "sortOrder": "descending",
             }
@@ -148,7 +148,7 @@ def collect_openalex(config: Config) -> list[Paper]:
             {
                 "search": query,
                 "filter": f"from_publication_date:{cutoff}",
-                "per-page": "12",
+                "per-page": str(config.openalex_per_query),
                 "sort": "publication_date:desc",
             }
         )
@@ -231,7 +231,10 @@ def collect_official_github(config: Config) -> list[Paper]:
     if github_token:
         github_headers["Authorization"] = f"Bearer {github_token}"
     for company, org in config.github_orgs.items():
-        url = f"https://api.github.com/orgs/{urllib.parse.quote(org)}/repos?sort=created&direction=desc&per_page=12"
+        url = (
+            f"https://api.github.com/orgs/{urllib.parse.quote(org)}/repos"
+            f"?sort=created&direction=desc&per_page={config.official_github_per_org}"
+        )
         repos = _request_json(url, headers=github_headers)
         for repo in repos:
             created = _parse_datetime(str(repo.get("created_at", "")))

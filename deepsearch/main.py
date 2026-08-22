@@ -41,18 +41,17 @@ def main() -> int:
 
     candidates = prepare_candidates(discovered, config)
     daily_picks = choose_daily_picks(candidates, config)
-    analyze_papers(daily_picks, previous_by_id, config)
-
-    daily_ids = {paper.id for paper in daily_picks}
-    for paper in daily_picks:
-        paper.is_daily_pick = True
-    for paper in previous:
-        paper.is_daily_pick = False
 
     archived = prepare_candidates(previous, config)
     merged = deduplicate(_merge(daily_picks, candidates, archived))
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
+
+    # Analyze the complete rolling archive. Existing complete analyses are reused by
+    # signature, while newly discovered or fallback entries are backfilled.
+    analyze_papers(merged, previous_by_id, config)
+
+    daily_ids = {paper.id for paper in daily_picks}
     for paper in merged:
         paper.is_daily_pick = paper.id in daily_ids
 
@@ -74,6 +73,8 @@ def main() -> int:
             "discovered": len(discovered),
             "candidates": len(candidates),
             "daily_picks": len(daily_picks),
+            "analysis_complete": sum(paper.analysis_status == "complete" for paper in merged),
+            "analysis_fallback": sum(paper.analysis_status != "complete" for paper in merged),
         },
         "sources": ["arXiv", "DBLP", "OpenAlex", "Semantic Scholar", "Official GitHub"],
         "companies": list(config.company_queries),
