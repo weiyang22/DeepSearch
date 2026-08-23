@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T07:04:32+08:00",
+  "generated_at": "2026-08-23T08:47:40+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -13,11 +13,10 @@
     "analysis_enabled": true,
     "source_errors": [
       "arXiv: HTTP Error 500: Internal Server Error",
-      "DBLP: Remote end closed connection without response",
-      "OpenAlex: HTTP Error 429: Too Many Requests"
+      "DBLP: Remote end closed connection without response"
     ],
-    "discovered": 311,
-    "candidates": 12,
+    "discovered": 1982,
+    "candidates": 19,
     "daily_picks": 1,
     "analysis_complete": 70,
     "analysis_fallback": 0
@@ -171,7 +170,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 129,
+      "score": 128,
       "summary": "Sona技术报告介绍了Yandex Music部署的单一生成式推荐模型，该模型在在线A/B测试中完全替代了包含超过15个候选生成器及预排序和排序模型的生产级级联系统，并显著提升了关键参与度指标。Sona架构统一了候选生成与排序，围绕共享用户表示构建，其编码器将用户按时间排序的交互事件序列转换为隐藏状态，供自回归解码器和排序模块使用。通过下一词预测和蒸馏目标联合更新编码器，将生成与排序耦合在同一用户状态中。最终配置中，较大的教师模型仅在训练时提供排序目标，推理时仅部署编码器、解码器和排序模块。在线实验基于智能音箱上的My Vibe流量，结果显示活跃用户数提升4.53%，总收听时长提升6.30%，点赞数提升11.42%，且活跃用户提升幅度是此前最强模型Argus的2.35倍。研究表明，单一联合训练模型可替代成熟的多阶段推荐级联，并在真实流量上提升推荐质量。",
       "one_line_takeaway": "单一生成式推荐模型Sona在真实业务中完全替代了多阶段级联系统，并显著提升核心参与度指标。",
       "core_method": "Sona采用编码器-解码器架构，编码器将用户交互序列转换为隐藏状态，解码器自回归生成推荐项，排序模块对生成项打分；通过下一词预测和蒸馏损失联合训练，教师模型提供排序目标但推理时不参与。",
@@ -235,7 +234,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 136,
+      "score": 135,
       "summary": "PushDualGen是快手提出的面向工业级推送推荐系统的轻量级生成式推荐框架。现有生成式推荐通过语义ID实现端到端个性化，但黑盒特性导致逻辑难以追踪，而引入思维链的OneRec-Thinking虽可解释但推理成本高。PushDualGen采用双阶段生成：首先生成语义ID，再生成可跳过的解释性副本，在保持推荐效果的同时降低推理开销。该系统已在快手推送场景部署，在线A/B测试显示有效播放率相对提升8.50%，不满意率相对下降37.70%，并长期优化内容生态，增加长尾视频曝光。",
       "one_line_takeaway": "PushDualGen通过先生成语义ID再生成可跳过解释的轻量级双阶段生成，在工业推送推荐中实现了可解释性与低推理成本的平衡。",
       "core_method": "PushDualGen采用双阶段生成架构：第一阶段生成语义ID（SID）作为推荐核心，第二阶段生成解释性副本（copy）作为可跳过的辅助输出。该设计避免了在生成SID时强制引入思维链（CoT）带来的高推理开销，同时通过解释副本提供可追溯性。",
@@ -380,7 +379,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "a0b8bd738b6137b0",
-      "is_daily_pick": false
+      "is_daily_pick": true
     },
     {
       "id": "arxiv:2608.00750",
@@ -493,7 +492,7 @@
         "Tokenization",
         "Multimodal"
       ],
-      "score": 195,
+      "score": 194,
       "summary": "本文介绍了SnapLGR，一个基于大语言模型（LLM）的生成式检索系统，用于Snapchat的短视频推荐。系统面临的主要挑战是LLM需要学习预训练中不存在的内部物品词汇，并在严格的延迟和成本约束下生成有效标识。为解决这些问题，作者设计了三个核心组件：基于多模态嵌入构建语义标识（SID），并通过个性化PageRank（PPR）协同对比学习增强，改善码本利用率和减少冲突；使用持续预训练（CPT）在监督微调（SFT）前对SID token进行接地；通过TensorRT-LLM CUDA支持的束搜索和去中心化工作循环架构实现高效服务。在线A/B测试显示，与TIGER风格基线相比，观看时间提升0.37%，花费时间提升0.09%，深度会话提升0.18%，深度会话独立用户提升0.11%。此外，作者在固定分词器下分解离线差距，量化了模型架构、规模和预训练的贡献。该部署表明，生产级SnapLGR需要联合设计表示学习、词汇接地和高效训练与服务。",
       "one_line_takeaway": "SnapLGR通过语义标识、持续预训练和高效服务设计，成功将LLM生成式检索应用于Snapchat推荐，显著提升线上指标。",
       "core_method": "构建语义标识（SID）并利用PPR对比学习增强；使用持续预训练（CPT）接地SID token；采用TensorRT-LLM束搜索和去中心化工作循环架构进行高效服务。",
@@ -555,7 +554,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 137,
+      "score": 136,
       "summary": "本文针对基于语义ID的生成式推荐系统，指出其项目级监督仅捕捉行为共现和局部转换，而大语言模型虽能推理用户需求，却缺乏推荐结果反馈，导致语言上合理的推理未必带来有效推荐，即“理解-行动差距”。为此，作者提出一个反馈驱动的智能体框架，先诱导任务导向的意图，再根据增量效用发现推荐策略，并通过结果反馈而非语言合理性来评估和优化策略。最后，通过双空间关系蒸馏将意图和策略知识转移到轻量级语义ID生成器的两个潜在token中，实现无LLM的在线推理。在公开基准上取得一致改进，在线A/B测试中收入提升4.506%，ADVV提升4.621%。",
       "one_line_takeaway": "通过反馈驱动的策略发现和知识蒸馏，弥合LLM理解与推荐行动之间的差距，实现高效生成式推荐。",
       "core_method": "提出反馈驱动智能体框架，先诱导意图，再基于增量效用发现策略，用结果反馈评估优化，并通过双空间关系蒸馏将知识转移到轻量级语义ID生成器。",
@@ -1194,7 +1193,7 @@
         "Reasoning",
         "MoE"
       ],
-      "score": 170,
+      "score": 169,
       "summary": "Kimi K3 是 Kimi 团队发布的 2.8T 参数混合专家模型，激活参数 104B，具备原生视觉能力和 100 万 token 上下文窗口。其核心创新包括 Kimi Delta Attention（KDA）和 Attention Residuals，以改善长序列信息流和模型深度传播；Stable LatentMoE 每 token 激活 16 个路由专家，结合优化的训练和数据配方，整体扩展效率较 K2 提升约 2.5 倍。后训练阶段强调通用、智能体和编码领域的强化学习，支持多种推理努力水平，实现组合泛化和长程执行。基础设施方面，算法-系统协同设计、专家并行负载均衡、百万 token 智能体 RL 和部署创新支撑了模型规模。评测显示，Kimi K3 在长程编码、智能体、知识、推理和视觉任务上达到前沿水平，虽仍落后于 Claude Fable 5 和 GPT-5.6 Sol，但优于其他开源和专有模型。模型权重已完全开源。",
       "one_line_takeaway": "Kimi K3 通过 KDA、Attention Residuals 和 Stable LatentMoE 实现 2.5 倍扩展效率提升，以开源权重达到前沿性能，但整体仍不及最强专有模型。",
       "core_method": "Kimi K3 采用 2.8T 参数 MoE 架构，结合 Kimi Delta Attention（KDA）和 Attention Residuals 改进信息流，Stable LatentMoE 每 token 激活 16 个专家，并配合优化的训练数据配方和后训练 RL（通用、智能体、编码多领域）。",
@@ -1219,7 +1218,7 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "bda2fa4e2a92916b",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2607.24255",
@@ -1260,7 +1259,7 @@
         "Semantic ID",
         "MoE"
       ],
-      "score": 170,
+      "score": 169,
       "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
       "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
       "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
@@ -1494,7 +1493,7 @@
         "Semantic ID",
         "Tokenization"
       ],
-      "score": 136,
+      "score": 135,
       "summary": "TSGR是淘宝搜索生成式检索系统，针对现有生成式检索（GR）在工业场景中忽视商品商业价值的问题，提出统一框架，在物品表示和候选排序中融入价值感知。物品表示上，提出查询感知并行SID（QP-SID），基于查询-物品统计构建并行码本，将价值排序编码进SID，使高价值且相关物品获得更好token索引。候选排序上，引入价值感知排序模块（VRM），与GR联合优化，使单一模型同时承担检索和预排序，无需独立预排序阶段。采用渐进式训练流水线，对齐语义相关性、用户偏好和业务目标。离线实验显示HR@1000提升9.16%，在线A/B测试显示IPV提升0.43%，交易数提升1.12%，GMV提升1.64%。系统已全面部署。",
       "one_line_takeaway": "TSGR通过价值感知的SID构建和联合排序模块，在生成式检索中直接优化商业价值，显著提升淘宝搜索的在线业务指标。",
       "core_method": "提出QP-SID（查询感知并行SID）和VRM（价值感知排序模块），并采用渐进式训练流水线。QP-SID基于查询-物品统计构建并行码本，将价值排序编码进SID；VRM与GR联合优化，使模型同时作为检索器和预排序器。",
@@ -1551,7 +1550,7 @@
         "LLM 基模",
         "Reasoning"
       ],
-      "score": 70,
+      "score": 69,
       "summary": "实体搜索（即查找与查询实体最相似的实体）在电子商务中面临独特挑战，因为产品相似性因类别和上下文而异。传统嵌入方法难以捕捉细微的上下文特定属性相关性。本文提出一种两阶段方法，结合LLM驱动的属性图构建与图感知的LLM排序。离线阶段，从非结构化文本中提取结构化产品属性，构建具有类别感知模式的、可复用的属性图。在线阶段，通过推理该结构化表示而非原始文本来对检索到的候选进行排序，将每个产品的token使用量减少57%，同时提高排序精度。实验表明，在零样本场景下，该方法优于多个基线，平均精度提升超过5%，无需训练数据，且在不同产品类别中具有稳健的泛化能力，显示出实际部署的巨大潜力。",
       "one_line_takeaway": "通过LLM构建属性图并基于图进行排序，可在零样本下提升实体搜索精度并大幅降低token消耗。",
       "core_method": "两阶段方法：离线阶段使用LLM从非结构化文本中提取结构化产品属性，构建类别感知的属性图；在线阶段使用图感知的LLM对检索候选进行排序，基于结构化表示而非原始文本进行推理。",
@@ -3325,24 +3324,20 @@
         "Shimin Cai",
         "Tao Zhou",
         "Fuji Ren",
-        "Wenwu Ou",
-        "Yuting Yin"
+        "Wenwu Ou"
       ],
       "affiliations": [],
       "published": "2026-02-28",
       "updated": "2026-02-28",
       "abstract": "Semantic IDs (SIDs) are compact discrete representations derived from multimodal item features, serving as a unified and efficient abstraction for both conventional ID-based recommendation and emerging generative recommendation. However, learning high-quality SIDs remains challenging due to two issues. (1) Collision problem: the quantized token space is prone to collisions, in which semantically distinct items are assigned identical or overly similar SID compositions, resulting in undesirable semantic entanglement. (2) Collision-signal heterogeneity: collisions are not uniformly harmful. Some reflect genuine conflicts between semantically unrelated items, while others stem from benign redundancy or systematic data effects, where maintaining proximity is expected. To address these challenges, we propose Qualification-Aware Semantic ID Learning (QuaSID), an end-to-end framework that learns collision-qualified SIDs by selectively repelling qualified conflict pairs and scaling the repulsion strength by collision severity. QuaSID consists of two mechanisms: Hamming-guided Margin Repulsion (HaMR), which translates low-Hamming SID overlaps into explicit, severity-scaled geometric constraints on the encoder space; and Conflict-Aware Valid Pair Masking (CVPM), which masks protocol-induced benign overlaps to denoise repulsion supervision. In addition, QuaSID incorporates a dual-tower contrastive objective to inject collaborative signals into the tokenization process. Extensive experiments on public benchmarks and industrial data validate QuaSID. On public datasets, QuaSID consistently outperforms strong VQ-based SID tokenizers, improving top-K ranking quality by an average of 5.9% over the best baseline while also increasing SID composition diversity. In a 5-day online A/B test on Kuaishou e-commerce, deploying QuaSID-learned SIDs in retrieval and ranking yields measurable business impact: with a 5% traffic split (covering over 20 million users), QuaSID increases ranking GMV-S2 by 2.38% and improves completed orders on cold-start retrieval by up to 6.42%; production-scale SID diagnostics further show reduced collision rate and improved codebook utilization. Finally, we show that the proposed repulsion loss is plug-and-play and consistently enhances a range of SID learning frameworks across datasets.",
       "url": "https://www.semanticscholar.org/paper/cda9a46194ca54397934e4094a1a64a9173913c4",
-      "pdf_url": "https://arxiv.org/pdf/2603.00632v1",
+      "pdf_url": "",
       "doi": "10.48550/arXiv.2603.00632",
       "source": "Semantic Scholar",
       "content_type": "paper",
       "company": "",
       "venue": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2",
-      "categories": [
-        "cs.IR",
-        "cs.LG"
-      ],
+      "categories": [],
       "tags": [
         "A/B 实验",
         "GenRec",
@@ -3351,7 +3346,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 138,
+      "score": 134,
       "summary": "本文针对生成式推荐中语义ID（SID）学习面临的碰撞问题及其信号异质性，提出了一种端到端的资格感知语义ID学习框架QuaSID。现有SID学习方法常因量化token空间碰撞导致语义纠缠，且碰撞并非均匀有害，部分碰撞源于良性冗余或系统效应。QuaSID通过汉明引导的边际排斥（HaMR）将低汉明重叠转化为编码器空间上的显式几何约束，并根据碰撞严重度缩放排斥强度；同时利用冲突感知有效对掩码（CVPM）过滤协议导致的良性重叠，以去噪排斥监督。此外，引入双塔对比目标注入协同信号。在公开数据集上，QuaSID平均提升top-K排序质量5.9%，并增加SID多样性；在快手电商的5天在线A/B测试中（5%流量，覆盖超2000万用户），排名GMV-S2提升2.38%，冷启动检索完成订单提升6.42%，同时降低碰撞率并提高码本利用率。排斥损失即插即用，可增强多种SID学习框架。",
       "one_line_takeaway": "QuaSID通过资格感知的碰撞排斥和对比学习，显著提升语义ID质量，并在工业规模推荐中带来可观的业务收益。",
       "core_method": "QuaSID框架包含两个核心机制：汉明引导边际排斥（HaMR）和冲突感知有效对掩码（CVPM），并辅以双塔对比目标。HaMR将低汉明重叠的SID对视为潜在冲突，在编码器空间施加几何排斥约束，排斥强度随碰撞严重度缩放；CVPM识别并掩码由协议（如共享前缀）导致的良性重叠，避免错误排斥。双塔对比目标将协同信号注入tokenization过程。整体采用端到端训练。",
@@ -4447,11 +4442,7 @@
         "A/B 实验",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式推荐",
-        "Slate推荐",
-        "语义ID",
-        "层次化解码"
+        "推理系统"
       ],
       "score": 118,
       "summary": "HiGR是腾讯提出的工业级层次化生成式Slate推荐框架，旨在解决生成式推荐方法在工业规模Slate推荐中的根本性脱节问题：语义ID空间纠缠导致高层列表规划困难、长序列细粒度自回归解码限制语义规划效率、token级目标与整体Slate质量不一致。HiGR通过协同设计的流程弥合这一鸿沟：首先，提出前缀对比残差量化VAE（PCRQ-VAE）学习结构化语义ID，通过强制高层前缀捕获共享语义，创建可控的离散空间，为高效规划奠定基础；其次，利用该结构化空间，层次化Slate解码器（HSD）将自回归建模从纠缠的token级解码转向粗粒度偏好嵌入，显著降低推理延迟，同时允许显式的全局Slate结构规划；最后，该稳定规划空间支持基于ORPO的列表级对齐机制，优化三重目标：隐式反馈排序保真度、真实用户兴趣和多样性。离线实验表明，HiGR在离线推荐质量上优于最先进基线超过10%，同时实现5倍推理加速。腾讯平台在线A/B测试进一步将观看时长提升1.22%，视频播放量提升1.73%。HiGR已在腾讯多个平台上线，服务数亿用户，证明了其工业规模适用性。",
