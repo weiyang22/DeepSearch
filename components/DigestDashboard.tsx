@@ -40,7 +40,12 @@ type Payload = {
   };
   status: {
     analysis_enabled: boolean;
+    source_errors?: string[];
+    discovered?: number;
+    candidates?: number;
     daily_picks: number;
+    analysis_complete?: number;
+    analysis_fallback?: number;
   };
   papers: Paper[];
 };
@@ -66,7 +71,7 @@ export function DigestDashboard() {
         setSaved([]);
       }
     });
-    fetch("./papers.json")
+    fetch(`./papers.json?v=${Date.now()}`, { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("data unavailable");
         return response.json();
@@ -114,6 +119,7 @@ export function DigestDashboard() {
   }
 
   const todayCount = papers.filter((paper) => paper.is_daily_pick).length;
+  const sourceErrors = payload.status.source_errors || [];
 
   return (
     <main className="site-shell" id="top">
@@ -141,6 +147,25 @@ export function DigestDashboard() {
       {!payload.status.analysis_enabled && (
         <p className="notice">尚未配置 AI Key，当前显示原始摘要与保守分析；配置后会自动补全中文深度解读。</p>
       )}
+
+      <section className={`data-status ${sourceErrors.length ? "data-status--warning" : ""}`} aria-label="数据同步状态">
+        <div>
+          <p className="data-status-label">DATA STATUS</p>
+          <p className="data-status-main">最后更新：{formatGeneratedAtFull(payload.generated_at)}</p>
+          <p className="data-status-meta">
+            本轮发现 {payload.status.discovered ?? 0} 条，筛选出 {payload.status.candidates ?? 0} 条；
+            当前归档 {papers.length} 篇
+          </p>
+        </div>
+        {sourceErrors.length ? (
+          <details className="source-status">
+            <summary>{sourceErrors.length} 个数据源部分异常，已自动使用成功分片、其他来源和历史归档</summary>
+            <ul>{sourceErrors.map((error) => <li key={error}>{friendlySourceError(error)}</li>)}</ul>
+          </details>
+        ) : (
+          <p className="source-status source-status--healthy"><span />数据源同步正常</p>
+        )}
+      </section>
 
       <section className="feed" aria-label="论文列表">
         <div className="toolbar">
@@ -265,6 +290,28 @@ function formatGeneratedAt(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
   return new Intl.DateTimeFormat("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }).format(date);
+}
+
+function formatGeneratedAtFull(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(date);
+}
+
+function friendlySourceError(value: string) {
+  const [source = "数据源", ...details] = value.split(":");
+  const detail = details.join(":").toLowerCase();
+  if (detail.includes("429")) return `${source}：请求频率受限，已保留历史数据`;
+  if (detail.includes("500") || detail.includes("502") || detail.includes("503")) return `${source}：服务暂时异常，已启用分片重试与降级`;
+  if (detail.includes("timed out") || detail.includes("connection") || detail.includes("closed")) return `${source}：连接暂时中断，已保留成功结果`;
+  return `${source}：部分请求未完成，已保留成功结果`;
 }
 
 function formatPaperDate(value: string) {

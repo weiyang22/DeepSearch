@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import base64
 import datetime as dt
+import http.client
 import json
 import os
 import re
+import socket
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -18,6 +21,15 @@ from .models import Paper
 ATOM = "{http://www.w3.org/2005/Atom}"
 ARXIV = "{http://arxiv.org/schemas/atom}"
 USER_AGENT = "DeepSearch/0.1 (+https://github.com/weiyang22/DeepSearch)"
+RETRYABLE_HTTP_STATUS = {408, 425, 429, 500, 502, 503, 504}
+
+
+class PartialCollectionError(RuntimeError):
+    """A source returned useful records while some of its requests failed."""
+
+    def __init__(self, message: str, papers: list[Paper]):
+        super().__init__(message)
+        self.papers = papers
 
 
 def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
@@ -33,6 +45,9 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
     for name, collector in collectors:
         try:
             papers.extend(collector(config))
+        except PartialCollectionError as exc:
+            papers.extend(exc.papers)
+            errors.append(f"{name}: {exc}")
         except Exception as exc:  # one source must not stop the daily digest
             errors.append(f"{name}: {exc}")
     return deduplicate(papers), errors
@@ -40,29 +55,27 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
 
 def collect_arxiv(config: Config) -> list[Paper]:
     categories = " OR ".join(f"cat:{item}" for item in config.arxiv_categories)
-    topic_terms = " OR ".join(f'all:"{item}"' for item in config.topic_queries)
-    company_terms = " OR ".join(
-        f'all:"{term}"' for terms in config.company_queries.values() for term in terms
-    )
     cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=config.retention_days)
     date_range = f"submittedDate:[{cutoff:%Y%m%d%H%M} TO {dt.datetime.now(dt.timezone.utc):%Y%m%d%H%M}]"
-    queries = [
-        f"({categories}) AND ({topic_terms}) AND {date_range}",
-        f"({company_terms}) AND {date_range}",
-    ]
+    queries = _arxiv_queries(config, categories, date_range)
     papers: list[Paper] = []
+    failures: list[str] = []
     for query in queries:
         url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode(
             {
                 "search_query": query,
                 "start": 0,
-                "max_results": config.arxiv_max_results,
+                "max_results": min(config.arxiv_max_results, 100),
                 "sortBy": "submittedDate",
                 "sortOrder": "descending",
             }
         )
-        body = _request(url, timeout=45)
-        root = ET.fromstring(body)
+        try:
+            body = _request(url, timeout=45)
+            root = ET.fromstring(body)
+        except Exception as exc:
+            failures.append(str(exc))
+            continue
         for entry in root.findall(ATOM + "entry"):
             abs_url = _xml_text(entry, ATOM + "id")
             arxiv_id = re.sub(r"v\d+$", "", abs_url.rstrip("/").split("/")[-1])
@@ -95,17 +108,44 @@ def collect_arxiv(config: Config) -> list[Paper]:
             )
             classify_company(paper, config)
             papers.append(paper)
-        time.sleep(1)
+        time.sleep(3)
+    papers = deduplicate(papers)
+    if failures:
+        if not papers:
+            raise RuntimeError(f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}）")
+        message = f"{len(failures)}/{len(queries)} 个分片失败，已保留成功分片（{_short_error(failures[0])}）"
+        raise PartialCollectionError(message, papers)
     return papers
+
+
+def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str]:
+    """Keep arXiv requests short so one oversized query cannot fail the whole source."""
+    queries = [
+        f"({categories}) AND (all:\"{term}\") AND {date_range}"
+        for term in config.topic_queries[:8]
+    ]
+    discovery_terms = _unique([
+        *[terms[0] for terms in config.company_queries.values() if terms],
+        *[term for terms in config.model_families.values() for term in terms],
+    ])
+    for chunk in _chunks(discovery_terms, 6):
+        terms = " OR ".join(f'all:\"{term}\"' for term in chunk)
+        queries.append(f"({categories}) AND ({terms}) AND {date_range}")
+    return queries
 
 
 def collect_dblp(config: Config) -> list[Paper]:
     papers: list[Paper] = []
+    failures: list[str] = []
     for query in config.topic_queries[:8]:
         url = "https://dblp.org/search/publ/api?" + urllib.parse.urlencode(
             {"q": query, "format": "json", "h": "12"}
         )
-        payload = _request_json(url)
+        try:
+            payload = _request_json(url)
+        except Exception as exc:
+            failures.append(str(exc))
+            continue
         hits = payload.get("result", {}).get("hits", {}).get("hit", [])
         if isinstance(hits, dict):
             hits = [hits]
@@ -135,7 +175,13 @@ def collect_dblp(config: Config) -> list[Paper]:
             )
             classify_company(paper, config)
             papers.append(paper)
-        time.sleep(0.25)
+        time.sleep(1)
+    papers = deduplicate(papers)
+    if failures:
+        if not papers:
+            raise RuntimeError(f"全部关键词失败（{_short_error(failures[0])}）")
+        message = f"{len(failures)}/{min(8, len(config.topic_queries))} 个关键词失败，已保留成功结果（{_short_error(failures[0])}）"
+        raise PartialCollectionError(message, papers)
     return papers
 
 
@@ -396,16 +442,36 @@ def _request_json(url: str, headers: dict[str, str] | None = None) -> Any:
 def _request(url: str, headers: dict[str, str] | None = None, timeout: int = 25) -> bytes:
     request_headers = {"User-Agent": USER_AGENT, **(headers or {})}
     last_error: Exception | None = None
-    for attempt in range(3):
+    for attempt in range(4):
         try:
             request = urllib.request.Request(url, headers=request_headers)
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 return response.read()
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in RETRYABLE_HTTP_STATUS:
+                break
+            retry_after = exc.headers.get("Retry-After") if exc.headers else None
+            delay = float(retry_after) if retry_after and retry_after.isdigit() else 2 ** attempt
+        except (urllib.error.URLError, http.client.HTTPException, socket.timeout, TimeoutError, ConnectionError, OSError) as exc:
+            last_error = exc
+            delay = 2 ** attempt
         except Exception as exc:
             last_error = exc
-            if attempt < 2:
-                time.sleep(1.5 * (attempt + 1))
-    raise RuntimeError(str(last_error))
+            break
+        if attempt < 3:
+            time.sleep(min(delay, 8))
+    raise RuntimeError(_short_error(str(last_error)))
+
+
+def _short_error(value: str) -> str:
+    clean = _clean(value)
+    return clean[:180] or "未知网络错误"
+
+
+def _chunks(values: list[str], size: int) -> Iterable[list[str]]:
+    for index in range(0, len(values), size):
+        yield values[index:index + size]
 
 
 def _github_readme(org: str, repo: str, headers: dict[str, str]) -> str:

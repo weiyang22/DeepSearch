@@ -1,15 +1,22 @@
 import datetime as dt
+import urllib.error
 import unittest
+from unittest.mock import MagicMock, patch
 
+import deepsearch.sources as sources
 from deepsearch.config import load_config
 from deepsearch.models import Paper
 from deepsearch.ranking import choose_daily_picks, has_ab_experiment, infer_tags, prepare_candidates
 from deepsearch.sources import (
+    PartialCollectionError,
+    _arxiv_queries,
     _github_report_url,
     _has_human_institution_author,
     _looks_like_foundation_model_report,
     _repo_matches_model_family,
+    _request,
     classify_company,
+    collect_all,
     deduplicate,
 )
 
@@ -78,6 +85,41 @@ class PipelineTests(unittest.TestCase):
             self.assertIn(family, self.config.model_families[company])
         self.assertTrue(_repo_matches_model_family("Xiaomi MiMo", "MiMo-V2", "official model", self.config))
         self.assertFalse(_repo_matches_model_family("OpenAI", "openai-python", "API client", self.config))
+
+    def test_arxiv_queries_are_split_into_short_independent_requests(self):
+        queries = _arxiv_queries(
+            self.config,
+            "cat:cs.AI OR cat:cs.CL",
+            "submittedDate:[202508270000 TO 202608270000]",
+        )
+        self.assertGreater(len(queries), len(self.config.topic_queries))
+        self.assertTrue(all(len(query) < 600 for query in queries))
+        self.assertTrue(any("Claude" in query for query in queries))
+
+    def test_collect_all_keeps_partial_source_results_and_warning(self):
+        partial = Paper(id="partial", title="Partial arXiv result")
+        empty = MagicMock(return_value=[])
+        with patch.multiple(
+            sources,
+            collect_arxiv=MagicMock(side_effect=PartialCollectionError("1/10 个分片失败", [partial])),
+            collect_dblp=empty,
+            collect_openalex=empty,
+            collect_semantic_scholar=empty,
+            collect_official_github=empty,
+        ):
+            papers, errors = collect_all(self.config)
+        self.assertEqual([paper.id for paper in papers], ["partial"])
+        self.assertEqual(errors, ["arXiv: 1/10 个分片失败"])
+
+    def test_request_retries_transient_http_errors(self):
+        failure = urllib.error.HTTPError("https://example.com", 500, "server error", {}, None)
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = b"ok"
+        with patch("deepsearch.sources.urllib.request.urlopen", side_effect=[failure, response]) as urlopen:
+            with patch("deepsearch.sources.time.sleep") as sleep:
+                self.assertEqual(_request("https://example.com"), b"ok")
+        self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(1)
 
     def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
         today = dt.date.today().isoformat()
