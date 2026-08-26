@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T08:46:53+08:00",
+  "generated_at": "2026-08-27T02:20:15+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,13 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "arXiv: HTTP Error 500: Internal Server Error",
-      "DBLP: Remote end closed connection without response"
+      "OpenAlex: HTTP Error 429: Too Many Requests"
     ],
-    "discovered": 1972,
-    "candidates": 15,
+    "discovered": 1332,
+    "candidates": 50,
     "daily_picks": 1,
-    "analysis_complete": 70,
+    "analysis_complete": 76,
     "analysis_fallback": 0
   },
   "sources": [
@@ -52,6 +51,135 @@
     "Mistral AI"
   ],
   "papers": [
+    {
+      "id": "arxiv:2608.24176",
+      "title": "Tlow: Flow-based Item Tokenizer for Recommendation",
+      "authors": [
+        "Nian Li",
+        "Chonggang Song",
+        "Jingtao Ding",
+        "Lingling Yi",
+        "Yong Li",
+        "Qingmin Liao"
+      ],
+      "affiliations": [],
+      "published": "2026-08-25T07:43:09Z",
+      "updated": "2026-08-25T07:43:09Z",
+      "abstract": "Item tokenizer encodes semantic embeddings into token IDs to replace the randomly assigned item IDs used in traditional recommendation models, fundamentally addressing the problems of excessive parameters and cold starts. However, the most common tokenizer, RQ-VAE, suffers from low decoding efficiency due to the inherent dependencies among its codebooks. Meanwhile, efficient independent tokenizers such as optimized product quantization (OPQ) still struggle with dimensional correlations and distribution complexity of semantic embeddings. In this work, we propose a f\\underline{low}-based item \\underline{T}okenizer (Tlow) to transform raw semantic embeddings into a latent space where embeddings conform to a unified standard normal distribution, achieving dual advantages of dimensional independence and distributional simplicity. Independent tokenization performed on these latent embeddings yields semantically clear token IDs. Additionally, we introduce a novel codebook guidance to align the codebook space with the token embedding space, further aiding the learning of more semantically distinct token embeddings. Offline experiments on four public datasets demonstrate that Tlow's tokenization and codebook guidance significantly improve recommendation performance. The improvement on cross-domain and multi-modal recommendations also proves the effectiveness of item tokenization in a simplified embedding space. Online experiments for a multi-modal retrieval task on China's largest social media platform WeChat validate Tlow's powerful distribution transformation capability. The retrieval model based on token IDs improves user CTR by 10.32\\% globally and by 11.64\\% for new items. Our codes are available at https://github.com/wjjln/Tlow.",
+      "url": "http://arxiv.org/abs/2608.24176v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.24176v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "tags": [
+        "A/B 实验",
+        "Tokenization",
+        "物品分词器",
+        "标准化流",
+        "生成式推荐",
+        "语义ID",
+        "冷启动",
+        "多模态推荐"
+      ],
+      "score": 100,
+      "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
+      "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
+      "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
+      "innovation_points": [
+        "首次将标准化流应用于物品分词器，实现嵌入的维度独立和分布简化，克服RQ-VAE和OPQ的局限。",
+        "提出码本引导机制，对齐码本空间与令牌嵌入空间，提升令牌嵌入的语义区分度。",
+        "在真实工业场景（微信）验证了Tlow的有效性，显著提升新物品的点击率。"
+      ],
+      "experiment_results": [
+        "在四个公开数据集上，Tlow的推荐性能优于RQ-VAE和OPQ等基线。",
+        "跨域和多模态推荐任务中，Tlow也表现出改进。",
+        "在线实验：全局用户点击率提升10.32%，新物品点击率提升11.64%。"
+      ],
+      "limitations": [
+        "依赖预训练语义嵌入的质量，若嵌入本身分布复杂，流模型可能难以完全简化。",
+        "标准化流增加了计算开销，可能影响训练效率。",
+        "实验主要针对多模态和跨域场景，对纯ID推荐的效果未充分验证。"
+      ],
+      "practical_value": "Tlow可直接用于推荐系统物品ID生成，降低参数规模，缓解冷启动，提升检索和排序效率，尤其适用于多模态和跨域场景，已在微信平台验证商业价值。",
+      "why_it_matters": "本文针对推荐系统中物品分词器的核心瓶颈，提出基于流的分布简化方法，兼具理论创新和工业验证，为生成式推荐和语义ID研究提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "defae80dfde868d5",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2608.21012",
+      "title": "From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation",
+      "authors": [
+        "Tianlu Xie",
+        "Xin Ku",
+        "Mingjie Sun",
+        "Yunhao Sha",
+        "Lixiang Wang",
+        "Peng Wang",
+        "Yiyu Wang",
+        "Wenjin Wu",
+        "Zhaojie Liu",
+        "Peng Jiang",
+        "Wenwu Ou"
+      ],
+      "affiliations": [],
+      "published": "2026-08-21T11:58:44Z",
+      "updated": "2026-08-21T11:58:44Z",
+      "abstract": "Generative recommendation represents each item with a sequence of discrete Semantic IDs (SIDs) and predicts the sequence to retrieve the next item. Typical systems use multi-level residual quantization, which increases autoregressive decoding cost and creates a large hierarchical space that may be sparsely occupied. Static codebooks also become misaligned with current traffic as new items arrive and exposure distributions change. We propose a single-level large semantic codebook that replaces multiple residual semantic codes with one semantic token while retaining a separate collaborative disambiguation token to reduce item collisions. We further introduce an exposure-aware dynamic update mechanism based on temporal weight decay, exponential moving-average center updates, and an exposure-weighted penalty on SID changes. We also develop an offline evaluation framework covering representation quality, code utilization, cluster load, full-SID collision, and temporal stability. On two public datasets, the two-level SID improves mean Recall@10 by 5.0%-8.8% and mean NDCG@10 by 4.1%-5.1% for OneRec-V1, and by 7.1%-8.7% and 3.8%-8.5%, respectively, for OneRec-V2. Dynamic updating provides further gains on KuaiRec. Across three serving architectures, the shorter SID reduces estimated autoregressive-decoding FLOPs by 47.93%-48.70% and increases single-card QPS by 28.57%-47.0%. A five-day online A/B test serving 2.5% of production traffic improves the primary consumption metric by 0.792%.",
+      "url": "http://arxiv.org/abs/2608.21012v1",
+      "pdf_url": "https://arxiv.org/pdf/2608.21012v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "码本设计"
+      ],
+      "score": 153,
+      "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
+      "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
+      "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
+      "innovation_points": [
+        "用单级大码本替代多级残差量化，减少解码长度和层级稀疏性。",
+        "动态更新码本以适应流量分布变化，解决静态码本对齐问题。",
+        "提出全面的离线评估框架，涵盖表示质量、码利用率、时间稳定性等。"
+      ],
+      "experiment_results": [
+        "在OneRec-V1和V2上，两级SID相比基线提升Recall@10 5.0%-8.8%，NDCG@10 4.1%-8.5%。",
+        "动态更新在KuaiRec上进一步增益。",
+        "缩短SID减少解码FLOPs约48%，QPS提升28.57%-47.0%；线上A/B测试提升消费指标0.792%。"
+      ],
+      "limitations": [
+        "实验基于两个公开数据集，可能不覆盖所有业务场景。",
+        "动态更新机制需要额外计算和调参。",
+        "线上测试仅2.5%流量，长期效果未知。"
+      ],
+      "practical_value": "该方法可直接应用于工业级生成式推荐系统，通过减少解码计算提升吞吐量，同时动态更新机制适应流量变化，线上A/B测试验证了实际收益。",
+      "why_it_matters": "本文针对生成式推荐的核心瓶颈（解码成本和码本静态性）提出简洁有效的解决方案，并提供了完整的评估框架，对学术和工业界均有参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "98261b9a6802ff9d",
+      "is_daily_pick": false
+    },
     {
       "id": "arxiv:2608.17613",
       "title": "Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs",
@@ -379,7 +507,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "a0b8bd738b6137b0",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2608.00750",
@@ -762,6 +890,71 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b7d7fe13c9b7e4e",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.24255",
+      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+      "authors": [
+        "Guo Tang",
+        "Hanye Wu",
+        "Changjiang Han",
+        "Qingyang Li",
+        "Ming Zhang",
+        "Xiangyu Qian",
+        "Yanchen Qiao",
+        "Huanjie Wang",
+        "Zhi Ma",
+        "Zhen Li",
+        "Yaqiang Zang",
+        "Pinghua Gong"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T10:45:48Z",
+      "updated": "2026-07-27T10:45:48Z",
+      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
+      "url": "http://arxiv.org/abs/2607.24255v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "MoE"
+      ],
+      "score": 168,
+      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
+      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
+      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
+      "innovation_points": [
+        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
+        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
+        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
+        "保持单一统一骨干网络，简化部署并降低推理成本。"
+      ],
+      "experiment_results": [
+        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
+        "未提供离线实验数据或消融实验细节。"
+      ],
+      "limitations": [
+        "依赖历史行为日志，冷启动场景可能受限。",
+        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
+        "未公开离线评估指标，难以独立验证模型效果。"
+      ],
+      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
+      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -1221,71 +1414,6 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2607.24255",
-      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
-      "authors": [
-        "Guo Tang",
-        "Hanye Wu",
-        "Changjiang Han",
-        "Qingyang Li",
-        "Ming Zhang",
-        "Xiangyu Qian",
-        "Yanchen Qiao",
-        "Huanjie Wang",
-        "Zhi Ma",
-        "Zhen Li",
-        "Yaqiang Zang",
-        "Pinghua Gong"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T10:45:48Z",
-      "updated": "2026-07-27T10:45:48Z",
-      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
-      "url": "http://arxiv.org/abs/2607.24255v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "预训练",
-        "后训练",
-        "GenRec",
-        "Semantic ID",
-        "MoE"
-      ],
-      "score": 168,
-      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
-      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
-      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
-      "innovation_points": [
-        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
-        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
-        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
-        "保持单一统一骨干网络，简化部署并降低推理成本。"
-      ],
-      "experiment_results": [
-        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
-        "未提供离线实验数据或消融实验细节。"
-      ],
-      "limitations": [
-        "依赖历史行为日志，冷启动场景可能受限。",
-        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
-        "未公开离线评估指标，难以独立验证模型效果。"
-      ],
-      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
-      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "07b20b1dcf67f427",
-      "is_daily_pick": false
-    },
-    {
       "id": "arxiv:2607.23740",
       "title": "Zing: Social Mind for LLMs",
       "authors": [
@@ -1634,6 +1762,93 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "b7f1195e45b2380c",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.13095",
+      "title": "Full-Pipeline Inference Optimization for MiMo-V2.5 Series: Pushing Hybrid SWA Efficiency to the Limit",
+      "authors": [
+        "Xiaomi MiMo Team",
+        "Anqi Liu",
+        "Aoxin Ma",
+        "Bo Chen",
+        "Bo Yang",
+        "Chen Wang",
+        "Chen Zhang",
+        "Chengda Tang",
+        "Chengwei Wang",
+        "Chiheng Lou",
+        "Depeng Yan",
+        "Fuli Luo",
+        "Gang Wang",
+        "Hailin Zhang",
+        "Jiale Sun",
+        "Kang Zhou",
+        "Rui Huang",
+        "Shaohui Liu",
+        "Shen Huang",
+        "Shijie Cao",
+        "Shuaishuai Fan",
+        "Tianling Zhou",
+        "Xiangwei Deng",
+        "Xueyang Xie",
+        "Xuli Wang",
+        "Yingchun Lai",
+        "Yu Yang",
+        "Yuan Zhang",
+        "Zhen Tang",
+        "Zhonghua Deng",
+        "Zihan Jiang"
+      ],
+      "affiliations": [],
+      "published": "2026-07-14T03:38:06Z",
+      "updated": "2026-07-14T03:38:06Z",
+      "abstract": "We present a full-pipeline inference optimization for the MiMo-V2.5 model family, which combines Hybrid Sliding Window Attention (Hybrid SWA), sparse Mixture-of-Experts (MoE), and multimodal encoders. While Hybrid SWA can ideally reduce both attention compute and KVCache storage significantly compared to Full Attention, realizing these gains in production requires substantial engineering effort. We systematically optimize the KVCache system with layerwise prefetch, SWA-aware prefix cache trees, and specialized placement strategies, achieving strict $O(W)$ SWA storage and high cache hit rates. We further build GCache, a high-performance distributed cache infrastructure with RDMA-optimized networking, and develop a KVCache-affinity router to reduce computation while preserving load balancing. We also optimize for multimodal inputs, including GPU image preprocessing, parallel video decoding, and multimodal cache sharing. Together, these optimizations constitute the first large-scale LLM serving system in production that efficiently covers the Hybrid SWA + MoE + multimodal composite architecture.",
+      "url": "http://arxiv.org/abs/2607.13095v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.13095v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Xiaomi MiMo",
+      "venue": "",
+      "categories": [
+        "cs.AR",
+        "cs.AI"
+      ],
+      "tags": [
+        "Xiaomi MiMo",
+        "企业论文",
+        "MoE",
+        "Multimodal",
+        "推理系统",
+        "推理优化",
+        "混合滑动窗口注意力",
+        "KVCache"
+      ],
+      "score": 64,
+      "summary": "本文介绍了小米MiMo团队针对MiMo-V2.5模型系列的全流水线推理优化方案。该模型结合了混合滑动窗口注意力（Hybrid SWA）、稀疏混合专家（MoE）和多模态编码器。尽管Hybrid SWA理论上能显著减少注意力计算和KVCache存储，但在生产中实现这些收益需要大量工程努力。作者系统优化了KVCache系统，包括分层预取、SWA感知前缀缓存树和专用放置策略，实现了严格的O(W) SWA存储和高缓存命中率。他们还构建了GCache，一个基于RDMA优化网络的高性能分布式缓存基础设施，并开发了KVCache亲和路由器以减少计算同时保持负载均衡。此外，针对多模态输入进行了优化，包括GPU图像预处理、并行视频解码和多模态缓存共享。这些优化构成了首个在生产环境中高效覆盖Hybrid SWA + MoE + 多模态复合架构的大规模LLM服务系统。",
+      "one_line_takeaway": "通过系统化的KVCache管理和分布式缓存优化，首次在生产环境中实现了Hybrid SWA + MoE + 多模态架构的高效推理。",
+      "core_method": "针对Hybrid SWA的KVCache系统优化（分层预取、SWA感知前缀缓存树、专用放置策略）、GCache分布式缓存基础设施（RDMA优化）、KVCache亲和路由器、多模态输入优化（GPU图像预处理、并行视频解码、多模态缓存共享）。",
+      "innovation_points": [
+        "首次在生产级LLM服务系统中全面覆盖Hybrid SWA + MoE + 多模态复合架构的推理优化。",
+        "提出SWA感知前缀缓存树和分层预取策略，实现严格的O(W)存储和高效缓存命中。",
+        "构建GCache分布式缓存基础设施，利用RDMA优化网络，并设计KVCache亲和路由器以平衡计算和负载。",
+        "针对多模态输入进行端到端优化，包括GPU图像预处理、并行视频解码和缓存共享。"
+      ],
+      "experiment_results": [
+        "论文未提供具体实验数据，但声称实现了严格的O(W) SWA存储和高缓存命中率。",
+        "未提供端到端延迟或吞吐量对比数据，但强调系统已投入生产。"
+      ],
+      "limitations": [
+        "论文未提供详细的性能基准数据，难以量化优化效果。",
+        "优化方案针对特定模型架构（MiMo-V2.5），可能不适用于其他模型。",
+        "未讨论多模态输入优化在真实场景中的具体收益。"
+      ],
+      "practical_value": "该工作为混合SWA和MoE架构的大规模部署提供了工程实践指南，尤其适用于需要处理多模态输入的生产环境，可显著降低推理成本和延迟。",
+      "why_it_matters": "本文展示了从理论架构到生产系统的工程挑战和解决方案，对于关注LLM推理系统优化和混合注意力机制落地的研究者和工程师具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "2a0fe9457bd0a348",
       "is_daily_pick": false
     },
     {
@@ -2039,13 +2254,14 @@
       "abstract": "Live streaming has emerged as one of the fastest-growing forms of online media, enabling instant content broadcasting and real-time engagement between users and streamers. Despite the effectiveness of existing recommendation algorithms in this domain, they often suffer from limited utilization of computational resources, with low FLOPs that hinder further performance enhancement. Generative recommendation techniques, which have gained traction in various industrial tasks, offer a promising avenue for improving live streaming recommendations. However, directly applying generative methods to live streaming is non-trivial due to two major challenges: (1) static semantic IDs (SIDs) cannot reflect the rapidly changing nature of live room content; and (2) generative pipelines generally do not incorporate user--streamer interaction signals (e.g., likes, orders), which are critical for modeling user intent toward both the streamer and showcased products. To address these challenges, we introduce SSRLive: Dynamic Semantic ID-guided Streaming Recommendation for Live platforms. The proposed framework integrates a generative module and a discriminative module in a unified architecture. The generative component employs an encoder-decoder design to produce both static and dynamic SIDs, enabling timely representation of live room content while leveraging multimodal information. The discriminative component refines task-specific representations by combining SIDs with user features, augments them with user-streamer interaction data, and performs multi-task predictions. Online A/B tests in real-world deployment demonstrate tangible benefits: watch time (+3.38%), GMV (+0.72%), follower growth (+3.12%), and interaction volume (+2.92%). These improvements highlight the effectiveness and business value of SSRLive, which is now fully deployed, serving hundreds of millions of active users.",
       "url": "http://arxiv.org/abs/2606.06970v1",
       "pdf_url": "https://arxiv.org/pdf/2606.06970v1",
-      "doi": "10.48550/arXiv.2606.06970",
+      "doi": "10.48550/ARXIV.2606.06970",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "CoRR"
       ],
       "tags": [
         "A/B 实验",
@@ -2246,10 +2462,7 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统",
-        "推理优化",
-        "解聚架构",
-        "SLO"
+        "推理系统"
       ],
       "score": 76,
       "summary": "本文系统探索了面向MoE大模型推理的注意力-FFN算子级解聚（AFD）设计空间，以回答不同解聚层级在何种条件下真正有效的问题。作者以chunked-prefill和prefill-decode解聚为基线，结合设备端内核测量与高保真网络仿真，在真实工作负载（聊天、编码、智能体编码）下评估AFD的收益与局限。结果表明，在严格的TTFT/TPOT SLO约束下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐，而非AFD部署无法满足SLO。文章还提炼了如何根据工作负载和模型架构划分注意力与FFN GPU组的实用原则，为当前机架/集群规模及未来解聚式AI基础设施提供设计指导。",
@@ -2333,6 +2546,139 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "d261e7164274a0a4",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2605.25726",
+      "title": "SIREN: Unified Multi-Granularity Semantic Interaction for Multi-Modal Lifelong User Interest Modeling",
+      "authors": [
+        "Yaqian Zhang",
+        "Ruyi Yu",
+        "Tianyi Li",
+        "Bohan Liu",
+        "Maoquan Ye",
+        "Ke Wang",
+        "Shifeng Wen",
+        "Junwei Pan",
+        "Lijie Wang",
+        "Qi Zhou",
+        "Yeshou Cai",
+        "Chengguo Yin",
+        "Lifeng Wang",
+        "Hui Li",
+        "Lei Xiao",
+        "Haijie Gu"
+      ],
+      "affiliations": [],
+      "published": "2026-05-25T11:33:27Z",
+      "updated": "2026-05-25T11:33:27Z",
+      "abstract": "Industrial recommender systems increasingly leverage lifelong user behavior histories and rich multi-modal content to capture evolving user preferences. However, effectively integrating multi-modal features into lifelong interest modeling remains challenging due to the inherent misalignment between multi-modal and collaborative spaces. Existing paradigms typically rely on separate modeling of multi-modal sequence and behavior sequence, and late fusion to alleviate the modality gap, which results in coarse-grained multi-modal representation and limited integration. In this paper, we propose SIREN, a unified multi-granularity semantic interaction framework for multi-modal lifelong user interest modeling. In the General Search Unit stage, we introduce two alternative retrieval strategies: multi-modal similarity-based soft retrieval for retrieval effectiveness, and Semantic ID (SemID)-based hard retrieval for efficient industrial serving. For the Exact Search Unit stage, we explicitly incorporate target-aware relevance via coarse similarity buckets and fine-grained prefix-encoded SemIDs, enabling unified interaction with collaborative ID features within the target-conditioned transformer architecture. Extensive experiments on the offline dataset demonstrate that SIREN achieves a state-of-the-art GAUC. Online A/B tests further demonstrate consistent GMV gains across multiple production scenarios, including +2.28% in Weixin Moments, +3.87% in Weixin Official Accounts, and +1.61% in Weixin Channels. From July 2025, SIREN has been fully launched for full-traffic serving in Tencent's advertising platform.",
+      "url": "http://arxiv.org/abs/2605.25726v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.25726v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "Semantic ID",
+        "推理系统",
+        "多模态推荐",
+        "终身用户兴趣建模",
+        "语义ID",
+        "工业推荐系统",
+        "多粒度交互"
+      ],
+      "score": 98,
+      "summary": "工业推荐系统日益依赖长期用户行为历史和丰富的多模态内容来捕捉用户偏好的演变。然而，由于多模态空间与协同空间之间的固有错位，将多模态特征有效整合到终身兴趣建模中仍具挑战性。现有范式通常依赖对多模态序列和行为序列的分离建模，并通过后期融合来缓解模态差距，这导致多模态表示粗糙且整合有限。本文提出SIREN，一个用于多模态终身用户兴趣建模的统一多粒度语义交互框架。在通用搜索单元阶段，引入两种可选的检索策略：基于多模态相似性的软检索以提升检索效果，以及基于语义ID（SemID）的硬检索以实现高效工业服务。在精确搜索单元阶段，通过粗粒度相似度桶和细粒度前缀编码的SemID显式融入目标感知相关性，在目标条件Transformer架构内实现与协同ID特征的统一交互。离线实验表明SIREN达到了最先进的GAUC。在线A/B测试进一步证明了在多个生产场景中的一致GMV提升，包括微信朋友圈+2.28%、微信公众号+3.87%和微信视频号+1.61%。自2025年7月起，SIREN已在腾讯广告平台全流量上线。",
+      "one_line_takeaway": "SIREN通过统一多粒度语义交互框架，结合软检索和基于语义ID的硬检索，有效解决了多模态终身兴趣建模中的模态错位问题，并在腾讯广告平台取得显著在线收益。",
+      "core_method": "SIREN框架包含两个阶段：通用搜索单元和精确搜索单元。通用搜索单元提供两种检索策略：多模态相似性软检索（利用多模态嵌入计算相似度）和基于语义ID的硬检索（将多模态内容映射为离散语义ID，支持高效索引）。精确搜索单元通过粗粒度相似度桶和细粒度前缀编码的SemID，在目标条件Transformer中融合目标感知相关性和协同ID特征，实现统一交互。",
+      "innovation_points": [
+        "提出统一多粒度语义交互框架，将多模态特征与协同特征在终身兴趣建模中深度融合，而非后期融合。",
+        "设计双检索策略：软检索保证效果，硬检索（基于SemID）满足工业级服务效率。",
+        "在精确搜索单元中引入粗粒度相似度桶和细粒度前缀编码SemID，实现目标感知的多粒度交互。"
+      ],
+      "experiment_results": [
+        "离线数据集上达到最先进的GAUC。",
+        "在线A/B测试中，微信朋友圈GMV提升+2.28%，微信公众号+3.87%，微信视频号+1.61%。",
+        "自2025年7月起全流量上线腾讯广告平台。"
+      ],
+      "limitations": [
+        "论文未提供离线GAUC的具体数值，仅称最先进。",
+        "未详细讨论SemID的生成细节及其对多模态内容的覆盖范围。",
+        "未分析框架在不同规模数据或不同模态组合下的鲁棒性。"
+      ],
+      "practical_value": "SIREN已在腾讯广告平台全流量部署，显著提升多个业务场景的GMV，证明了其在实际工业推荐系统中的有效性和可落地性。其基于SemID的硬检索策略为多模态推荐提供了高效的工程解决方案。",
+      "why_it_matters": "本文针对多模态终身兴趣建模中的模态错位问题，提出了一种统一交互框架，并在真实工业场景中验证了显著收益。对于推荐系统研究者和工程师，SIREN提供了从模型设计到工程部署的完整案例，特别是语义ID在检索中的应用，具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "139d906f3acfcaf5",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2605.23310",
+      "title": "From Head to Tail: Asymmetric Knowledge Transfer in Long-tail Recommendation with Generative Semantic IDs",
+      "authors": [
+        "Chenyi Yan",
+        "Ruocong Tang",
+        "Xing Fang",
+        "Yang Huang",
+        "He Guo",
+        "Jing Wang"
+      ],
+      "affiliations": [],
+      "published": "2026-05-22T07:29:51Z",
+      "updated": "2026-05-22T07:29:51Z",
+      "abstract": "Long-tail recommendation in real-world e-commerce platforms remains challenging due to severe data imbalance. Existing methods often struggle to combine content-based multimodal features with collaborative signals. Many of these methods also ignore an important asymmetry in knowledge transfer between head and tail IDs: noisy signals from tail IDs can hurt representation learning for head IDs. This paper presents AKT-Rec, a framework for Asymmetric Knowledge Transfer in long-tail Recommendation that uses LLM-generated semantic IDs. AKT-Rec uses Multimodal LLMs (MLLMs) with supervised fine-tuning to align content representations with collaborative information for both items and users, producing semantic representations. It then discretizes these representations into semantic IDs with a Residual-Quantized VAE (RQ-VAE), which yields semantic clusters of similar entities. AKT-Rec has two main components: (1) Cluster-Guided Adaptive Embedding, which decomposes each ID representation into a cluster-level embedding that captures shared semantics and an individual embedding. Through an asymmetric contrastive objective and an activity-aware gating mechanism, this module directs knowledge transfer from head to tail IDs. (2) Hierarchical Feature Aggregation, which builds parallel feature views and adaptively fuses them to optimize predictions for samples with varying activity levels. Extensive experiments on a large-scale industrial dataset and online A/B testing on the Alibaba Tmall platform demonstrate the effectiveness of AKT-Rec. AKT-Rec improves offline performance by 0.35% in AUC and 1.53% in GAUC, outperforming several competitive baselines. In online A/B testing, AKT-Rec achieves a 2.76% increase in CTR and a 3.47% increase in GMV, validating its utility in real-world production environments.",
+      "url": "http://arxiv.org/abs/2605.23310v1",
+      "pdf_url": "https://arxiv.org/pdf/2605.23310v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "后训练",
+        "Semantic ID",
+        "Multimodal",
+        "长尾推荐",
+        "生成式语义ID",
+        "多模态大模型",
+        "知识迁移"
+      ],
+      "score": 110,
+      "summary": "针对真实电商平台中长尾推荐面临的数据严重不平衡问题，现有方法难以有效结合多模态内容特征与协同信号，且忽略了头尾ID间知识迁移的不对称性（尾部噪声会损害头部表示学习）。本文提出AKT-Rec框架，利用多模态大模型（MLLM）进行监督微调，将内容表示与协同信息对齐，生成语义表示，并通过残差量化VAE（RQ-VAE）离散化为语义ID。框架包含两个核心组件：簇引导自适应嵌入（分解为簇级和个体嵌入，通过非对称对比学习和活动感知门控实现头到尾的知识迁移）和层次特征聚合（构建并行特征视图并自适应融合）。在阿里巴巴天猫平台的大规模工业数据集和在线A/B测试中，AKT-Rec离线AUC提升0.35%、GAUC提升1.53%，在线CTR提升2.76%、GMV提升3.47%，验证了其实际生产环境中的有效性。",
+      "one_line_takeaway": "AKT-Rec通过LLM生成的语义ID和头尾非对称知识迁移，有效提升长尾推荐性能，并在工业场景中验证了显著业务价值。",
+      "core_method": "AKT-Rec框架：1) 使用多模态大模型（MLLM）监督微调对齐内容与协同信息，生成语义表示；2) 通过RQ-VAE将语义表示离散化为语义ID；3) 簇引导自适应嵌入模块，将ID表示分解为簇级和个体嵌入，采用非对称对比学习和活动感知门控机制，实现从头到尾的知识迁移；4) 层次特征聚合模块，构建并行特征视图并自适应融合，优化不同活跃度样本的预测。",
+      "innovation_points": [
+        "首次提出利用LLM生成的语义ID进行长尾推荐，并显式建模头尾ID间知识迁移的非对称性。",
+        "设计簇引导自适应嵌入，通过非对称对比学习和活动感知门控，实现头到尾的定向知识迁移，避免尾部噪声干扰头部。",
+        "提出层次特征聚合，自适应融合多视图特征，适应不同活跃度样本。",
+        "在工业级数据集和在线A/B测试中验证了方法的有效性，展示了实际业务价值。"
+      ],
+      "experiment_results": [
+        "离线实验：AUC提升0.35%，GAUC提升1.53%，优于多个竞争基线。",
+        "在线A/B测试（天猫平台）：CTR提升2.76%，GMV提升3.47%。",
+        "未提供消融实验或详细统计显著性数据。"
+      ],
+      "limitations": [
+        "依赖多模态LLM和RQ-VAE，计算成本较高，可能限制在资源受限场景的部署。",
+        "语义ID的生成质量受LLM能力影响，可能引入额外偏差。",
+        "实验仅基于单一工业数据集（天猫），泛化性需进一步验证。"
+      ],
+      "practical_value": "AKT-Rec在真实电商平台（天猫）上显著提升CTR和GMV，直接证明了其在生产环境中的商业价值。其方法可推广至其他长尾分布严重的推荐场景，帮助企业改善冷启动和长尾商品曝光，提升整体转化和营收。",
+      "why_it_matters": "本文针对长尾推荐这一实际难题，创新性地结合LLM语义ID和非对称知识迁移，解决了传统方法无法有效融合多模态与协同信号的问题。其工业级验证和显著业务提升，为生成式推荐在真实场景中的应用提供了有力证据，值得关注。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "00374a796b722f1c",
       "is_daily_pick": false
     },
     {
@@ -2587,7 +2933,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2604.23522",
+      "id": "s2:c359263b01276b6a949d1d18b12d2b233c7186cb",
       "title": "Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale",
       "authors": [
         "Yongsen Pan",
@@ -2595,26 +2941,28 @@
         "Zheng Hu",
         "Xu Yuan",
         "Daoyuan Wang",
-        "Yuting Yin",
+        "Yu Yin",
         "Songhao Ni",
         "Hongyang Wang",
         "Jun Wang",
         "Fuji Ren",
         "Wenwu Ou",
-        "Yu Yin"
+        "Zheng Hu 0001",
+        "Yuting Yin"
       ],
       "affiliations": [],
-      "published": "2026-04-26T03:59:35Z",
-      "updated": "2026-04-26T03:59:35Z",
+      "published": "2026-04-26",
+      "updated": "2026-04-26",
       "abstract": "Modern recommendation systems involve massive catalogs of multimodal items, where scalable item identification must balance compactness, semantic fidelity, and downstream effectiveness. Semantic IDs (SIDs) address this need by representing items as short discrete token sequences derived from multimodal signals, providing a compact interface for retrieval, ranking, and generative recommendation. However, effective SID learning is hindered by collisions, where different items are assigned identical or highly confusable codes. Existing methods mainly rely on improved quantization or fixed overlap regularization, but they do not adaptively distinguish whether an overlap should be suppressed or preserved. We propose AdaSID, an adaptive semantic ID learning framework for recommendation. AdaSID regulates SID overlaps through a two-stage process. First, it relaxes repulsion for observed overlaps when the involved items are semantically compatible, preserving admissible sharing rather than uniformly separating all collisions. Second, it allocates the remaining regulation pressure according to local collision load and training progress, strengthening control in congested regions while gradually rebalancing optimization toward recommendation alignment. This design adaptively decides which overlaps to penalize, how strongly to regulate them, and when to shift the learning focus. Extensive offline and online experiments validate AdaSID. On two public benchmarks, AdaSID improves Recall and NDCG by about 4.5% on average over strong baselines, while improving codebook utilization and SID diversity. In Kuaishou e-commerce, an online A/B test on short-video retrieval covering tens of millions of users achieves statistically significant gains, including a 0.98% GMV improvement, and industrial ranking evaluation shows consistent AUC improvements.",
-      "url": "http://arxiv.org/abs/2604.23522v1",
-      "pdf_url": "https://arxiv.org/pdf/2604.23522v1",
+      "url": "https://www.semanticscholar.org/paper/c359263b01276b6a949d1d18b12d2b233c7186cb",
+      "pdf_url": "https://doi.org/10.48550/arXiv.2604.23522",
       "doi": "10.48550/arXiv.2604.23522",
-      "source": "arXiv",
+      "source": "Semantic Scholar",
       "content_type": "paper",
       "company": "",
-      "venue": "",
+      "venue": "arXiv.org",
       "categories": [
+        "CoRR",
         "cs.IR",
         "cs.MM"
       ],
@@ -2624,32 +2972,34 @@
         "Semantic ID",
         "Tokenization",
         "Multimodal",
-        "推理系统"
+        "推理系统",
+        "语义ID",
+        "多模态推荐"
       ],
       "score": 138,
-      "summary": "现代推荐系统面临海量多模态物品，语义ID（SID）通过将物品表示为短离散token序列，为检索、排序和生成式推荐提供紧凑接口。然而，SID学习中的碰撞问题（不同物品被分配相同或高度混淆的代码）阻碍了其有效性。现有方法主要依赖改进量化或固定重叠正则化，但无法自适应区分重叠应被抑制还是保留。为此，我们提出AdaSID，一种自适应语义ID学习框架。AdaSID通过两阶段过程调节SID重叠：首先，当涉及物品语义兼容时，放宽对观察到的重叠的排斥，保留可接受的共享而非统一分离所有碰撞；其次，根据局部碰撞负载和训练进度分配剩余调节压力，加强拥挤区域的控制，同时逐步将优化重心转向推荐对齐。该设计自适应决定惩罚哪些重叠、调节强度以及何时转移学习焦点。大量离线和在线实验验证了AdaSID的有效性。在两个公开基准上，AdaSID相比强基线平均提升Recall和NDCG约4.5%，同时提高码本利用率和SID多样性。在快手电商，覆盖数千万用户的短视频检索在线A/B测试取得统计显著增益，包括GMV提升0.98%，工业级排序评估显示AUC持续提升。",
-      "one_line_takeaway": "AdaSID通过自适应区分语义兼容与冲突的重叠，动态调节碰撞惩罚，显著提升多模态推荐中语义ID的学习效果和线上业务指标。",
-      "core_method": "AdaSID框架：两阶段自适应重叠调节。第一阶段，对观察到的重叠，若物品语义兼容则放宽排斥（保留可接受共享）；第二阶段，根据局部碰撞负载和训练进度分配剩余调节压力，加强拥挤区域控制，并逐步将优化重心转向推荐对齐。",
+      "summary": "现代推荐系统面临海量多模态物品的识别挑战，语义ID（SID）通过将物品表示为短离散token序列来平衡紧凑性、语义保真度和下游效果。然而，SID学习中的碰撞问题（不同物品被分配相同或高度混淆的编码）严重制约其性能。现有方法主要依赖改进量化或固定重叠正则化，但无法自适应区分重叠应被抑制还是保留。为此，我们提出AdaSID，一种自适应语义ID学习框架。AdaSID通过两阶段过程调节SID重叠：首先，对观察到的重叠，若涉及物品语义兼容则放宽排斥，保留可接受的共享；其次，根据局部碰撞负载和训练进度分配剩余调节压力，加强拥挤区域的控制，同时逐步将优化重心转向推荐对齐。该设计自适应决定惩罚哪些重叠、调节强度以及何时转移学习焦点。在公开基准上，AdaSID平均提升Recall和NDCG约4.5%，并改善码本利用率和SID多样性。在快手电商的短视频检索线上A/B测试中（覆盖数千万用户），取得统计显著提升，包括GMV提升0.98%，工业级排序评估显示AUC一致提升。",
+      "one_line_takeaway": "AdaSID通过自适应区分语义兼容与冲突的重叠，动态调节碰撞惩罚，显著提升多模态推荐中语义ID的学习质量与线上效果。",
+      "core_method": "AdaSID框架：两阶段自适应碰撞调节。第一阶段，对观察到的重叠，根据物品语义兼容性决定是否放宽排斥（保留可接受共享）；第二阶段，根据局部碰撞负载和训练进度动态分配调节压力，在拥挤区域加强控制，并逐步将优化重心从ID学习转向推荐对齐。",
       "innovation_points": [
-        "自适应碰撞处理：不同于静态正则化，AdaSID根据语义兼容性决定重叠是否应被抑制，保留有意义的共享。",
-        "动态调节压力：根据局部碰撞负载和训练进度调整惩罚强度，实现拥挤区域强化控制与全局优化平衡。",
-        "工业级验证：在快手电商大规模在线A/B测试中验证有效性，覆盖数千万用户，GMV提升0.98%。"
+        "提出自适应碰撞处理机制，区分语义兼容与冲突的重叠，避免一刀切惩罚。",
+        "动态调节调节压力，根据局部碰撞负载和训练进度分配，实现精细控制。",
+        "在工业规模验证，包括线上A/B测试和排序评估，展示实际价值。"
       ],
       "experiment_results": [
-        "公开基准：在两个数据集上，AdaSID平均提升Recall和NDCG约4.5%，优于强基线。",
-        "码本利用率和SID多样性提升。",
-        "在线A/B测试：短视频检索场景，GMV提升0.98%，统计显著；工业排序评估AUC持续提升。"
+        "公开基准上，AdaSID平均提升Recall和NDCG约4.5%（相对强基线）。",
+        "快手电商线上A/B测试（数千万用户）中，GMV提升0.98%，统计显著。",
+        "工业排序评估显示AUC一致提升。"
       ],
       "limitations": [
         "依赖语义兼容性判断的准确性，可能受多模态表示质量影响。",
-        "两阶段调节机制增加训练复杂度，需要额外超参数调优。",
-        "论文未详细说明计算开销和扩展性细节。"
+        "调节压力分配策略需要额外超参数，调参成本可能较高。",
+        "未详细讨论计算开销，工业部署时需考虑效率。"
       ],
-      "practical_value": "AdaSID为工业推荐系统提供了一种可落地的语义ID学习方案，通过自适应碰撞处理提升检索和排序效果，直接带来GMV和AUC等业务指标增长，适用于大规模多模态物品目录。",
-      "why_it_matters": "该研究解决了语义ID学习中的关键碰撞问题，提出自适应调节机制，突破了静态方法的局限，并在真实工业场景中验证了价值，对生成式推荐和检索系统的设计具有重要参考意义。",
+      "practical_value": "AdaSID在快手电商场景中验证了线上GMV提升和排序AUC改进，表明其可直接应用于工业级多模态推荐系统，提升检索和排序效果，带来商业价值。",
+      "why_it_matters": "本文针对语义ID学习中的碰撞问题提出自适应解决方案，突破了传统固定正则化的局限，并在大规模工业场景中验证有效性，对生成式推荐和语义ID研究具有重要参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "46c30655434df5d1",
+      "analysis_signature": "758069710e1d0d9d",
       "is_daily_pick": false
     },
     {
@@ -3095,6 +3445,60 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2603.20633",
+      "title": "Seed1.8 Model Card: Towards Generalized Real-World Agency",
+      "authors": [
+        "Bytedance Seed"
+      ],
+      "affiliations": [],
+      "published": "2026-03-21T04:03:45Z",
+      "updated": "2026-04-17T08:57:17Z",
+      "abstract": "We present Seed1.8, a foundation model aimed at generalized real-world agency: going beyond single-turn prediction to multi-turn interaction, tool use, and multi-step execution. Seed1.8 keeps strong LLM and vision-language performance while supporting a unified agentic interface-search, code generation and execution, and GUI interaction. For deployment, it offers latency- and cost-aware inference, including configurable thinking modes and optimized visual encoding for images and video. We report evaluations on standard benchmarks and application-aligned workflows spanning foundational skills, multimodal understanding, and agentic behavior. Seed1.8 is released to support further research and development on interactive, real-world use cases.",
+      "url": "http://arxiv.org/abs/2603.20633v3",
+      "pdf_url": "https://arxiv.org/pdf/2603.20633v3",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "ByteDance Seed",
+      "venue": "",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "ByteDance Seed",
+        "企业论文",
+        "LLM 基模",
+        "Multimodal",
+        "推理系统",
+        "基础模型",
+        "代理",
+        "多模态"
+      ],
+      "score": 68,
+      "summary": "Seed1.8是字节跳动Seed团队发布的基础模型，旨在实现通用真实世界代理能力，超越单轮预测，支持多轮交互、工具使用和多步执行。模型在保持强大LLM和视觉语言性能的同时，统一了搜索、代码生成与执行、GUI交互等代理接口。部署上提供延迟和成本感知的推理，包括可配置思考模式和优化的图像视频视觉编码。评估覆盖标准基准和应用对齐工作流，涉及基础技能、多模态理解和代理行为。Seed1.8已发布以支持交互式真实世界用例的研究与开发。",
+      "one_line_takeaway": "Seed1.8通过统一代理接口和高效推理设计，将基础模型能力扩展到真实世界多步任务，但具体技术细节和实验数据未公开。",
+      "core_method": "Seed1.8采用统一代理接口设计，整合搜索、代码生成与执行、GUI交互，并支持多轮交互和工具使用；推理阶段提供可配置思考模式和优化视觉编码，以平衡延迟和成本。",
+      "innovation_points": [
+        "统一代理接口：将搜索、代码执行和GUI交互整合到单一模型中，支持多步执行。",
+        "延迟和成本感知推理：提供可配置思考模式和优化视觉编码，适应不同部署场景。",
+        "多模态与代理能力融合：在保持LLM和视觉语言性能的同时，增强代理行为。"
+      ],
+      "experiment_results": [
+        "论文未提供具体实验数据，仅提及在标准基准和应用对齐工作流上评估了基础技能、多模态理解和代理行为，但未给出数值结果。"
+      ],
+      "limitations": [
+        "缺乏具体技术细节和架构描述，难以复现。",
+        "实验数据未公开，无法验证性能声明。",
+        "代理能力在真实世界复杂场景中的泛化性未充分讨论。"
+      ],
+      "practical_value": "Seed1.8为真实世界代理应用提供了统一模型基础，可降低部署多个专用模型的成本，支持搜索、代码和GUI交互等场景，适合需要多步任务自动化的企业应用。",
+      "why_it_matters": "该模型卡展示了基础模型向通用代理发展的趋势，强调统一接口和部署效率，对研究多模态代理和实际部署有参考价值，但需注意其技术细节和实验证据的缺失。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "14a0811453817b52",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2603.17540",
       "title": "Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify",
       "authors": [
@@ -3331,20 +3735,25 @@
         "Shimin Cai",
         "Tao Zhou",
         "Fuji Ren",
-        "Wenwu Ou"
+        "Wenwu Ou",
+        "Zheng Hu 0001",
+        "Yuting Yin",
+        "Tao Zhou 0001"
       ],
       "affiliations": [],
       "published": "2026-02-28",
       "updated": "2026-02-28",
       "abstract": "Semantic IDs (SIDs) are compact discrete representations derived from multimodal item features, serving as a unified and efficient abstraction for both conventional ID-based recommendation and emerging generative recommendation. However, learning high-quality SIDs remains challenging due to two issues. (1) Collision problem: the quantized token space is prone to collisions, in which semantically distinct items are assigned identical or overly similar SID compositions, resulting in undesirable semantic entanglement. (2) Collision-signal heterogeneity: collisions are not uniformly harmful. Some reflect genuine conflicts between semantically unrelated items, while others stem from benign redundancy or systematic data effects, where maintaining proximity is expected. To address these challenges, we propose Qualification-Aware Semantic ID Learning (QuaSID), an end-to-end framework that learns collision-qualified SIDs by selectively repelling qualified conflict pairs and scaling the repulsion strength by collision severity. QuaSID consists of two mechanisms: Hamming-guided Margin Repulsion (HaMR), which translates low-Hamming SID overlaps into explicit, severity-scaled geometric constraints on the encoder space; and Conflict-Aware Valid Pair Masking (CVPM), which masks protocol-induced benign overlaps to denoise repulsion supervision. In addition, QuaSID incorporates a dual-tower contrastive objective to inject collaborative signals into the tokenization process. Extensive experiments on public benchmarks and industrial data validate QuaSID. On public datasets, QuaSID consistently outperforms strong VQ-based SID tokenizers, improving top-K ranking quality by an average of 5.9% over the best baseline while also increasing SID composition diversity. In a 5-day online A/B test on Kuaishou e-commerce, deploying QuaSID-learned SIDs in retrieval and ranking yields measurable business impact: with a 5% traffic split (covering over 20 million users), QuaSID increases ranking GMV-S2 by 2.38% and improves completed orders on cold-start retrieval by up to 6.42%; production-scale SID diagnostics further show reduced collision rate and improved codebook utilization. Finally, we show that the proposed repulsion loss is plug-and-play and consistently enhances a range of SID learning frameworks across datasets.",
       "url": "https://www.semanticscholar.org/paper/cda9a46194ca54397934e4094a1a64a9173913c4",
-      "pdf_url": "",
+      "pdf_url": "https://doi.org/10.48550/arXiv.2603.00632",
       "doi": "10.48550/arXiv.2603.00632",
       "source": "Semantic Scholar",
       "content_type": "paper",
       "company": "",
       "venue": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2",
-      "categories": [],
+      "categories": [
+        "CoRR"
+      ],
       "tags": [
         "A/B 实验",
         "GenRec",
@@ -3353,7 +3762,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 134,
+      "score": 138,
       "summary": "本文针对生成式推荐中语义ID（SID）学习面临的碰撞问题及其信号异质性，提出了一种端到端的资格感知语义ID学习框架QuaSID。现有SID学习方法常因量化token空间碰撞导致语义纠缠，且碰撞并非均匀有害，部分碰撞源于良性冗余或系统效应。QuaSID通过汉明引导的边际排斥（HaMR）将低汉明重叠转化为编码器空间上的显式几何约束，并根据碰撞严重度缩放排斥强度；同时利用冲突感知有效对掩码（CVPM）过滤协议导致的良性重叠，以去噪排斥监督。此外，引入双塔对比目标注入协同信号。在公开数据集上，QuaSID平均提升top-K排序质量5.9%，并增加SID多样性；在快手电商的5天在线A/B测试中（5%流量，覆盖超2000万用户），排名GMV-S2提升2.38%，冷启动检索完成订单提升6.42%，同时降低碰撞率并提高码本利用率。排斥损失即插即用，可增强多种SID学习框架。",
       "one_line_takeaway": "QuaSID通过资格感知的碰撞排斥和对比学习，显著提升语义ID质量，并在工业规模推荐中带来可观的业务收益。",
       "core_method": "QuaSID框架包含两个核心机制：汉明引导边际排斥（HaMR）和冲突感知有效对掩码（CVPM），并辅以双塔对比目标。HaMR将低汉明重叠的SID对视为潜在冲突，在编码器空间施加几何排斥约束，排斥强度随碰撞严重度缩放；CVPM识别并掩码由协议（如共享前缀）导致的良性重叠，避免错误排斥。双塔对比目标将协同信号注入tokenization过程。整体采用端到端训练。",
@@ -3971,8 +4380,8 @@
       ],
       "affiliations": [],
       "published": "2026-02-09T08:17:02Z",
-      "updated": "2026-08-11T06:36:36Z",
-      "abstract": "<div align=\"center\" <img src=resources/logo.svg width=\"15%\"/ </div <p align=\"center\" 👋 Join our <a href=\"resources/WECHAT.md\" target=\"_blank\" Wechat</a or <a href=\"https://discord.gg/Hc5z9bx5Xw\" target=\"_blank\" Discord</a community. <br 📖 Check out the GLM-5.2 <a href=\"https://z.ai/blog/glm-5.2\" target=\"_blank\" blog</a and GLM-5 <a href=\"https://arxiv.org/abs/2602.15763\" target=\"_blank\" Technical report</a . <br 📍 Use GLM-5.2 API services on <a href=\"https://docs.z.ai/guides/llm/glm-5.2\" Z.ai API Platform. </a <br 🔜 Try GLM-5.2 at <a href=\"https://z.ai\" z.ai</a . </p",
+      "updated": "2026-08-26T14:02:23Z",
+      "abstract": "<div align=\"center\" <img src=resources/logo.svg width=\"15%\"/ </div <p align=\"center\" 👋 Join our <a href=\"resources/WECHAT.md\" target=\"_blank\" Wechat</a or <a href=\"https://discord.gg/Hc5z9bx5Xw\" target=\"_blank\" Discord</a community. <br 📖 Check out the GLM-5.3-Flash <a href=\"https://z.ai/blog/glm-5.3-flash\" target=\"_blank\" blog</a , GLM-5.3 <a href=\"https://z.ai/blog/glm-5.3\" target=\"_blank\" blog</a and GLM-5 <a href=\"https://arxiv.org/abs/2602.15763\" target=\"_blank\" Technical report</a . <br 📍 Use GLM-5.3 & GLM-5.3-Flash API services on <a href=\"https://docs.z.ai/guides/llm/glm-5.3\" Z.ai API Platform. </a <br 🔜 Try GLM-5.3 & GLM-5.3-Flash at <a href=\"https://z.ai\" z.ai</a . </p",
       "url": "https://github.com/zai-org/GLM-5",
       "pdf_url": "https://arxiv.org/pdf/2602.15763",
       "doi": "",
@@ -3988,31 +4397,35 @@
         "智谱",
         "企业论文",
         "官方技术报告",
-        "LLM 基模"
+        "LLM 基模",
+        "GLM-5",
+        "智能体工程",
+        "预训练",
+        "后训练"
       ],
       "score": 124,
-      "summary": "智谱在官方技术发布中介绍了GLM-5系列模型，从GLM-5到GLM-5.2，强调从“vibe coding”向“agentic engineering”的范式转变。该报告聚焦于基座大模型的技术演进，包括预训练、架构优化、后训练对齐以及推理系统设计。GLM-5通过改进训练数据质量和扩展规律，提升了模型的基础能力；GLM-5.2进一步强化了智能体工程能力，支持复杂任务分解和工具调用。报告未提供具体实验数据，但强调了模型在代码生成、逻辑推理和交互式任务中的表现。核心贡献在于将大模型从被动响应转向主动智能体，并优化了推理效率。实践价值体现在企业级应用中的自动化流程和决策支持，但具体业务场景未详细展开。",
-      "one_line_takeaway": "GLM-5系列通过从vibe coding到agentic engineering的转变，展示了基座大模型在智能体任务中的技术升级，但缺乏具体数据支撑。",
-      "core_method": "基于预训练基座模型，通过优化训练数据、扩展规律和架构设计，结合后训练对齐和推理系统优化，实现从简单代码生成到复杂智能体工程的能力跃迁。",
+      "summary": "智谱发布GLM-5系列模型，从GLM-5到GLM-5.3及Flash版本，强调从'vibe coding'（基于直觉的编程）向'agentic engineering'（智能体工程）的范式转变。技术报告指出，GLM-5在预训练阶段采用更大规模的高质量数据与优化的架构设计，提升基础能力；后训练阶段通过强化学习和指令微调增强工具调用与多步推理能力，使模型能自主规划、执行复杂任务。GLM-5.3进一步优化推理效率，Flash版本则针对低延迟场景。官方博客展示了在代码生成、智能体任务中的性能提升，但未提供详细基准数据。该系列模型通过API提供服务，强调在真实业务场景中的可用性。",
+      "one_line_takeaway": "GLM-5系列通过预训练与后训练优化，推动模型从被动生成转向主动智能体工程，提升复杂任务自主执行能力。",
+      "core_method": "预训练阶段采用大规模高质量数据与改进的Transformer架构；后训练阶段结合监督微调、强化学习（如RLHF）和工具调用训练，增强模型规划、推理和工具使用能力。",
       "innovation_points": [
-        "提出从vibe coding到agentic engineering的范式转变，强调模型主动规划和执行任务的能力。",
-        "GLM-5.2在推理系统上优化，支持更高效的智能体交互和工具调用。",
-        "通过扩展规律和训练数据改进，提升基座模型的通用能力。"
+        "从'vibe coding'到'agentic engineering'的范式升级，强调模型作为智能体的自主性。",
+        "多版本策略（GLM-5、5.3、Flash）覆盖不同性能与延迟需求。",
+        "后训练中强化工具调用与多步推理，提升实际任务完成度。"
       ],
       "experiment_results": [
-        "报告未提供具体实验数据，仅定性描述模型能力提升。",
-        "未提及基准测试分数或对比结果。"
+        "官方未提供具体数值，仅声称在代码生成和智能体任务中性能提升。",
+        "GLM-5.3-Flash针对低延迟场景优化，但无量化数据。"
       ],
       "limitations": [
-        "缺乏量化评估，难以验证性能提升幅度。",
-        "未详细说明训练数据规模或计算资源。",
-        "智能体工程的实际效果缺乏线上验证。"
+        "缺乏公开的详细基准测试数据，难以独立验证性能。",
+        "技术报告细节有限，预训练数据规模、架构参数等未披露。",
+        "智能体工程的实际效果依赖具体应用场景，泛化性待验证。"
       ],
-      "practical_value": "对于企业用户，GLM-5系列可应用于自动化代码生成、复杂任务编排和智能决策支持，提升开发效率和运营自动化水平，但需结合具体场景验证。",
-      "why_it_matters": "该报告反映了智谱在基座大模型技术上的最新方向，特别是从生成式AI向智能体工程的演进，对理解行业趋势和模型能力边界具有参考价值。",
+      "practical_value": "GLM-5系列通过API提供，支持企业构建智能体应用，如自动化代码生成、复杂任务规划，降低开发成本，提升效率。Flash版本适合实时交互场景。",
+      "why_it_matters": "该报告反映了国产大模型在智能体方向的探索，从基础模型到工程化应用的转变，对理解行业趋势和模型能力边界有参考价值。",
       "evidence_basis": "official_release",
       "analysis_status": "complete",
-      "analysis_signature": "e351242b3dfdfda7",
+      "analysis_signature": "31a690f7fbad197f",
       "is_daily_pick": false
     },
     {
