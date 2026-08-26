@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T08:45:22+08:00",
+  "generated_at": "2026-08-26T08:46:53+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -15,8 +15,8 @@
       "arXiv: HTTP Error 500: Internal Server Error",
       "DBLP: Remote end closed connection without response"
     ],
-    "discovered": 1942,
-    "candidates": 16,
+    "discovered": 1972,
+    "candidates": 15,
     "daily_picks": 1,
     "analysis_complete": 70,
     "analysis_fallback": 0
@@ -170,7 +170,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 128,
+      "score": 127,
       "summary": "Sona技术报告介绍了Yandex Music部署的单一生成式推荐模型，该模型在在线A/B测试中完全替代了包含超过15个候选生成器及预排序和排序模型的生产级级联系统，并显著提升了关键参与度指标。Sona架构统一了候选生成与排序，围绕共享用户表示构建，其编码器将用户按时间排序的交互事件序列转换为隐藏状态，供自回归解码器和排序模块使用。通过下一词预测和蒸馏目标联合更新编码器，将生成与排序耦合在同一用户状态中。最终配置中，较大的教师模型仅在训练时提供排序目标，推理时仅部署编码器、解码器和排序模块。在线实验基于智能音箱上的My Vibe流量，结果显示活跃用户数提升4.53%，总收听时长提升6.30%，点赞数提升11.42%，且活跃用户提升幅度是此前最强模型Argus的2.35倍。研究表明，单一联合训练模型可替代成熟的多阶段推荐级联，并在真实流量上提升推荐质量。",
       "one_line_takeaway": "单一生成式推荐模型Sona在真实业务中完全替代了多阶段级联系统，并显著提升核心参与度指标。",
       "core_method": "Sona采用编码器-解码器架构，编码器将用户交互序列转换为隐藏状态，解码器自回归生成推荐项，排序模块对生成项打分；通过下一词预测和蒸馏损失联合训练，教师模型提供排序目标但推理时不参与。",
@@ -234,7 +234,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 135,
+      "score": 134,
       "summary": "PushDualGen是快手提出的面向工业级推送推荐系统的轻量级生成式推荐框架。现有生成式推荐通过语义ID实现端到端个性化，但黑盒特性导致逻辑难以追踪，而引入思维链的OneRec-Thinking虽可解释但推理成本高。PushDualGen采用双阶段生成：首先生成语义ID，再生成可跳过的解释性副本，在保持推荐效果的同时降低推理开销。该系统已在快手推送场景部署，在线A/B测试显示有效播放率相对提升8.50%，不满意率相对下降37.70%，并长期优化内容生态，增加长尾视频曝光。",
       "one_line_takeaway": "PushDualGen通过先生成语义ID再生成可跳过解释的轻量级双阶段生成，在工业推送推荐中实现了可解释性与低推理成本的平衡。",
       "core_method": "PushDualGen采用双阶段生成架构：第一阶段生成语义ID（SID）作为推荐核心，第二阶段生成解释性副本（copy）作为可跳过的辅助输出。该设计避免了在生成SID时强制引入思维链（CoT）带来的高推理开销，同时通过解释副本提供可追溯性。",
@@ -492,7 +492,7 @@
         "Tokenization",
         "Multimodal"
       ],
-      "score": 194,
+      "score": 193,
       "summary": "本文介绍了SnapLGR，一个基于大语言模型（LLM）的生成式检索系统，用于Snapchat的短视频推荐。系统面临的主要挑战是LLM需要学习预训练中不存在的内部物品词汇，并在严格的延迟和成本约束下生成有效标识。为解决这些问题，作者设计了三个核心组件：基于多模态嵌入构建语义标识（SID），并通过个性化PageRank（PPR）协同对比学习增强，改善码本利用率和减少冲突；使用持续预训练（CPT）在监督微调（SFT）前对SID token进行接地；通过TensorRT-LLM CUDA支持的束搜索和去中心化工作循环架构实现高效服务。在线A/B测试显示，与TIGER风格基线相比，观看时间提升0.37%，花费时间提升0.09%，深度会话提升0.18%，深度会话独立用户提升0.11%。此外，作者在固定分词器下分解离线差距，量化了模型架构、规模和预训练的贡献。该部署表明，生产级SnapLGR需要联合设计表示学习、词汇接地和高效训练与服务。",
       "one_line_takeaway": "SnapLGR通过语义标识、持续预训练和高效服务设计，成功将LLM生成式检索应用于Snapchat推荐，显著提升线上指标。",
       "core_method": "构建语义标识（SID）并利用PPR对比学习增强；使用持续预训练（CPT）接地SID token；采用TensorRT-LLM束搜索和去中心化工作循环架构进行高效服务。",
@@ -554,7 +554,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 136,
+      "score": 135,
       "summary": "本文针对基于语义ID的生成式推荐系统，指出其项目级监督仅捕捉行为共现和局部转换，而大语言模型虽能推理用户需求，却缺乏推荐结果反馈，导致语言上合理的推理未必带来有效推荐，即“理解-行动差距”。为此，作者提出一个反馈驱动的智能体框架，先诱导任务导向的意图，再根据增量效用发现推荐策略，并通过结果反馈而非语言合理性来评估和优化策略。最后，通过双空间关系蒸馏将意图和策略知识转移到轻量级语义ID生成器的两个潜在token中，实现无LLM的在线推理。在公开基准上取得一致改进，在线A/B测试中收入提升4.506%，ADVV提升4.621%。",
       "one_line_takeaway": "通过反馈驱动的策略发现和知识蒸馏，弥合LLM理解与推荐行动之间的差距，实现高效生成式推荐。",
       "core_method": "提出反馈驱动智能体框架，先诱导意图，再基于增量效用发现策略，用结果反馈评估优化，并通过双空间关系蒸馏将知识转移到轻量级语义ID生成器。",
@@ -1193,7 +1193,7 @@
         "Reasoning",
         "MoE"
       ],
-      "score": 169,
+      "score": 168,
       "summary": "Kimi K3 是 Kimi 团队发布的 2.8T 参数混合专家模型，激活参数 104B，具备原生视觉能力和 100 万 token 上下文窗口。其核心创新包括 Kimi Delta Attention（KDA）和 Attention Residuals，以改善长序列信息流和模型深度传播；Stable LatentMoE 每 token 激活 16 个路由专家，结合优化的训练和数据配方，整体扩展效率较 K2 提升约 2.5 倍。后训练阶段强调通用、智能体和编码领域的强化学习，支持多种推理努力水平，实现组合泛化和长程执行。基础设施方面，算法-系统协同设计、专家并行负载均衡、百万 token 智能体 RL 和部署创新支撑了模型规模。评测显示，Kimi K3 在长程编码、智能体、知识、推理和视觉任务上达到前沿水平，虽仍落后于 Claude Fable 5 和 GPT-5.6 Sol，但优于其他开源和专有模型。模型权重已完全开源。",
       "one_line_takeaway": "Kimi K3 通过 KDA、Attention Residuals 和 Stable LatentMoE 实现 2.5 倍扩展效率提升，以开源权重达到前沿性能，但整体仍不及最强专有模型。",
       "core_method": "Kimi K3 采用 2.8T 参数 MoE 架构，结合 Kimi Delta Attention（KDA）和 Attention Residuals 改进信息流，Stable LatentMoE 每 token 激活 16 个专家，并配合优化的训练数据配方和后训练 RL（通用、智能体、编码多领域）。",
@@ -1259,7 +1259,7 @@
         "Semantic ID",
         "MoE"
       ],
-      "score": 169,
+      "score": 168,
       "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
       "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
       "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
@@ -1493,7 +1493,7 @@
         "Semantic ID",
         "Tokenization"
       ],
-      "score": 135,
+      "score": 134,
       "summary": "TSGR是淘宝搜索生成式检索系统，针对现有生成式检索（GR）在工业场景中忽视商品商业价值的问题，提出统一框架，在物品表示和候选排序中融入价值感知。物品表示上，提出查询感知并行SID（QP-SID），基于查询-物品统计构建并行码本，将价值排序编码进SID，使高价值且相关物品获得更好token索引。候选排序上，引入价值感知排序模块（VRM），与GR联合优化，使单一模型同时承担检索和预排序，无需独立预排序阶段。采用渐进式训练流水线，对齐语义相关性、用户偏好和业务目标。离线实验显示HR@1000提升9.16%，在线A/B测试显示IPV提升0.43%，交易数提升1.12%，GMV提升1.64%。系统已全面部署。",
       "one_line_takeaway": "TSGR通过价值感知的SID构建和联合排序模块，在生成式检索中直接优化商业价值，显著提升淘宝搜索的在线业务指标。",
       "core_method": "提出QP-SID（查询感知并行SID）和VRM（价值感知排序模块），并采用渐进式训练流水线。QP-SID基于查询-物品统计构建并行码本，将价值排序编码进SID；VRM与GR联合优化，使模型同时作为检索器和预排序器。",
@@ -1550,7 +1550,7 @@
         "LLM 基模",
         "Reasoning"
       ],
-      "score": 69,
+      "score": 68,
       "summary": "实体搜索（即查找与查询实体最相似的实体）在电子商务中面临独特挑战，因为产品相似性因类别和上下文而异。传统嵌入方法难以捕捉细微的上下文特定属性相关性。本文提出一种两阶段方法，结合LLM驱动的属性图构建与图感知的LLM排序。离线阶段，从非结构化文本中提取结构化产品属性，构建具有类别感知模式的、可复用的属性图。在线阶段，通过推理该结构化表示而非原始文本来对检索到的候选进行排序，将每个产品的token使用量减少57%，同时提高排序精度。实验表明，在零样本场景下，该方法优于多个基线，平均精度提升超过5%，无需训练数据，且在不同产品类别中具有稳健的泛化能力，显示出实际部署的巨大潜力。",
       "one_line_takeaway": "通过LLM构建属性图并基于图进行排序，可在零样本下提升实体搜索精度并大幅降低token消耗。",
       "core_method": "两阶段方法：离线阶段使用LLM从非结构化文本中提取结构化产品属性，构建类别感知的属性图；在线阶段使用图感知的LLM对检索候选进行排序，基于结构化表示而非原始文本进行推理。",
@@ -2220,18 +2220,21 @@
       ],
       "affiliations": [
         "Georgia Institute of Technology",
+        "Sant Gadge Baba Amravati University",
+        "Theravance Biopharma (United States)",
         "Intel (United Kingdom)",
-        "Google (United States)"
+        "Google (United States)",
+        "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-27",
-      "updated": "2026-08-21T09:56:20.448147",
+      "updated": "2026-08-25T07:29:55.448023",
       "abstract": "Modern large language model (LLM) inference has progressively disaggregated to keep pace with growing model sizes and tight TTFT and TPOT service-level objectives: from chunked-prefill aggregation, to prefill-decode (P/D) disaggregation, and most recently to operator-level Attention-FFN Disaggregation (AFD). This trend is especially important for mixture-of-experts (MoE) models, where memory-bound attention, compute-intensive expert FFNs, and MoE dispatch/combine communication create distinct resource demands. AFD further exposes this heterogeneity by placing attention and MoE-FFN execution on separate GPU groups. Each level of disaggregation deepens the scheduling design space across workload characteristics, resource allocation, and interconnect topology, raising the central question: when does each level actually pay off? We systematically characterize this trade-off for MoE inference across realistic workloads spanning input/output sequence lengths, prefix-KV reuse, and per-user latency constraints. Using chunked-prefill and P/D disaggregation as baselines, we study the benefits and limits of AFD at scale through a framework that fuses on-device kernel measurements with high-fidelity network simulation. Under strict TTFT/TPOT SLOs, AFD sustains around 4k tokens/s of system throughput on DeepSeek-V3.2 across chat, coding, and agentic-coding workloads, where non-AFD deployments are infeasible. We distill concrete takeaways for jointly optimizing throughput and interactivity, including how to partition attention and FFN across GPUs as a function of workload and model architecture, providing design principles for current rack- and cluster-scale deployments as well as future disaggregated AI infrastructure.",
       "url": "https://arxiv.org/abs/2605.28302",
       "pdf_url": "https://arxiv.org/pdf/2605.28302",
       "doi": "",
       "source": "OpenAlex",
       "content_type": "paper",
-      "company": "",
+      "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Big Data and Digital Economy",
@@ -2239,35 +2242,39 @@
         "Advanced Neural Network Applications"
       ],
       "tags": [
+        "Google DeepMind",
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统"
+        "推理系统",
+        "推理优化",
+        "解聚架构",
+        "SLO"
       ],
-      "score": 74,
-      "summary": "本文系统探索了MoE大模型推理中注意力与FFN算子级分离（AFD）的设计空间，以回答“分离到何种程度才有效”的核心问题。作者以chunked-prefill和prefill-decode分离为基线，通过融合设备内核测量与高保真网络仿真的框架，在真实工作负载（不同输入/输出长度、前缀KV复用、用户延迟约束）下评估AFD的收益与局限。结果表明，在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐量，而传统非AFD部署无法满足SLO。文章还提炼了如何根据工作负载和模型架构划分注意力与FFN资源的设计原则，为当前机架级和集群级部署及未来分离式AI基础设施提供指导。",
-      "one_line_takeaway": "注意力-FFN算子级分离（AFD）在严格SLO下能显著提升MoE推理吞吐，但收益取决于工作负载和资源分配，需按需设计。",
-      "core_method": "提出一个融合设备内核测量与高保真网络仿真的评估框架，系统比较chunked-prefill、P/D分离和AFD三种分离级别，在不同工作负载和SLO约束下进行设计空间探索。",
+      "score": 76,
+      "summary": "本文系统探索了面向MoE大模型推理的注意力-FFN算子级解聚（AFD）设计空间，以回答不同解聚层级在何种条件下真正有效的问题。作者以chunked-prefill和prefill-decode解聚为基线，结合设备端内核测量与高保真网络仿真，在真实工作负载（聊天、编码、智能体编码）下评估AFD的收益与局限。结果表明，在严格的TTFT/TPOT SLO约束下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐，而非AFD部署无法满足SLO。文章还提炼了如何根据工作负载和模型架构划分注意力与FFN GPU组的实用原则，为当前机架/集群规模及未来解聚式AI基础设施提供设计指导。",
+      "one_line_takeaway": "注意力-FFN算子级解聚（AFD）在严格SLO下能显著提升MoE推理吞吐，但收益取决于工作负载、资源分配和互连拓扑的精细匹配。",
+      "core_method": "构建一个融合设备端内核测量与高保真网络仿真的框架，系统比较chunked-prefill、P/D解聚和AFD三种方案，在不同输入/输出长度、前缀KV复用和用户延迟约束下，评估MoE推理的吞吐和SLO满足情况。",
       "innovation_points": [
-        "首次系统探索注意力-FFN算子级分离（AFD）在MoE推理中的设计空间，涵盖工作负载、资源分配和互连拓扑。",
-        "提出融合内核测量与网络仿真的评估框架，实现高保真度的大规模AFD性能预测。",
-        "基于DeepSeek-V3.2在真实工作负载下验证AFD的收益，并给出注意力/FFN分区比例的具体指导。"
+        "首次系统探索注意力-FFN算子级解聚（AFD）的设计空间，并明确其适用条件。",
+        "提出融合内核测量与网络仿真的评估框架，实现高保真的大规模MoE推理性能预测。",
+        "基于真实工作负载（聊天、编码、智能体编码）给出注意力/FFN GPU划分的实用原则。"
       ],
       "experiment_results": [
-        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上实现约4k tokens/s的系统吞吐量，而传统非AFD部署不可行。",
-        "AFD在聊天、编码和代理编码工作负载下均优于基线，但收益随工作负载特性变化。",
-        "具体分区比例与工作负载和模型架构相关，文中给出了设计原则（无具体数值表格）。"
+        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐，而非AFD部署不可行。",
+        "AFD的收益随工作负载特征（如序列长度、前缀复用率）变化，需精细调整资源分配。",
+        "具体数据未完整披露，但提供了设计原则和趋势性结论。"
       ],
       "limitations": [
-        "实验基于模拟和特定模型（DeepSeek-V3.2），实际硬件部署可能因网络拓扑差异而效果不同。",
-        "未考虑多租户场景下的动态调度和资源竞争。",
-        "框架依赖精确的内核测量，对新型硬件或算子可能需重新校准。"
+        "实验基于仿真和特定模型（DeepSeek-V3.2），实际部署效果可能因硬件和网络而异。",
+        "未覆盖所有可能的调度策略和互连拓扑，设计空间探索仍有局限。",
+        "未提供端到端延迟和成本的具体数值，仅给出吞吐和SLO满足性。"
       ],
-      "practical_value": "为MoE推理系统设计者提供AFD的适用条件与分区策略，帮助在严格SLO下提升吞吐，适用于云服务商和AI基础设施团队。",
-      "why_it_matters": "该研究填补了算子级分离在MoE推理中的系统性评估空白，为未来分离式AI基础设施的设计提供了实证依据和原则，对追求高吞吐与低延迟的LLM服务有重要参考价值。",
+      "practical_value": "为MoE推理服务提供商提供了解聚架构选择的量化依据，帮助在满足交互性SLO的同时最大化吞吐，尤其适用于大规模部署和未来AI基础设施规划。",
+      "why_it_matters": "随着MoE模型规模扩大，传统P/D解聚面临瓶颈，本文首次系统验证了算子级解聚（AFD）的可行性和收益，为推理系统设计提供了新方向，对追求极致性能和SLO保证的工程实践有直接指导意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "1d0514aca82c0522",
+      "analysis_signature": "870082571857fb1a",
       "is_daily_pick": false
     },
     {
