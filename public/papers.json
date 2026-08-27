@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T02:20:15+08:00",
+  "generated_at": "2026-08-27T13:51:43+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -11,11 +11,9 @@
   },
   "status": {
     "analysis_enabled": true,
-    "source_errors": [
-      "OpenAlex: HTTP Error 429: Too Many Requests"
-    ],
-    "discovered": 1332,
-    "candidates": 50,
+    "source_errors": [],
+    "discovered": 2902,
+    "candidates": 52,
     "daily_picks": 1,
     "analysis_complete": 76,
     "analysis_fallback": 0
@@ -79,13 +77,7 @@
       ],
       "tags": [
         "A/B 实验",
-        "Tokenization",
-        "物品分词器",
-        "标准化流",
-        "生成式推荐",
-        "语义ID",
-        "冷启动",
-        "多模态推荐"
+        "Tokenization"
       ],
       "score": 100,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
@@ -149,12 +141,9 @@
         "GenRec",
         "Semantic ID",
         "Tokenization",
-        "推理系统",
-        "生成式推荐",
-        "语义ID",
-        "码本设计"
+        "推理系统"
       ],
-      "score": 153,
+      "score": 152,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -214,7 +203,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 130,
+      "score": 129,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -421,7 +410,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 112,
+      "score": 111,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -462,7 +451,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-08-06",
-      "updated": "2026-08-18T07:49:30.821534",
+      "updated": "2026-08-26T07:47:46.906454",
       "abstract": "Diffusion language models (dLLMs) offer a promising alternative to autoregressive models by accelerating inference through parallel decoding. Recent dLLMs commonly use blockwise semi-autoregressive decoding, generating blocks autoregressively while denoising tokens within each active block in parallel. However, despite KV caching, each denoising step still attends to all previous blocks, repeatedly incurring prefix-attention cost. Motivated by this bottleneck, we ask whether dLLM inference can be further accelerated by linearizing attention over previous blocks. We introduce block-hybrid attention, which retains exact softmax attention within the active denoising block while applying linear attention over previous blocks. We show that this hybrid attention can be retrofitted into a pretrained dLLM with minimal post-training: LLaDA-Hybrid replaces 6 of the 20 attention layers in LLaDA~2.1, a 16B open-source dLLM, largely following LoLCAT (Zhang et al, 2024). The conversion takes only approximately 60 hours while preserving benchmark performance: 72.0% vs. 75.6% on HumanEval, 63.0% vs. 57.7% on MBPP+, and 86.7% vs. 88.3% on CMATH. With a Triton implementation, LLaDA-Hybrid achieves up to $1.7\\times$ higher decoding throughput and supports more concurrent requests before exhausting memory, showing that pretrained dLLMs can be efficiently linearized for faster inference. Our code is available at: https://github.com/Diuven/LLaDA-Hybrid.",
       "url": "https://arxiv.org/abs/2608.06628",
       "pdf_url": "https://arxiv.org/pdf/2608.06628",
@@ -481,32 +470,35 @@
         "企业论文",
         "预训练",
         "后训练",
-        "推理系统"
+        "推理系统",
+        "扩散语言模型",
+        "线性注意力",
+        "推理加速"
       ],
-      "score": 96,
-      "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而降低推理成本。作者将LLaDA 2.1（16B开源dLLM）中20个注意力层中的6层替换为线性注意力，仅需约60小时的后训练即可完成改造。在HumanEval、MBPP+和CMATH基准上，性能分别达到72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%），略有波动但总体保持。Triton实现使解码吞吐量提升至1.7倍，并支持更多并发请求。该工作证明预训练dLLM可被高效线性化以加速推理。",
-      "one_line_takeaway": "通过将部分注意力层替换为线性注意力，预训练扩散语言模型可在保持性能的同时显著提升解码吞吐量。",
-      "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力；基于LoLCAT方法对LLaDA 2.1进行后训练改造，替换6/20层注意力层。",
+      "score": 95,
+      "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而消除前缀注意力瓶颈。该方法可对预训练dLLM进行最小化后训练改造：将LLaDA 2.1（16B开源模型）的20个注意力层中的6层替换为线性注意力，遵循LoLCAT方法，转换仅需约60小时。在HumanEval、MBPP+和CMATH基准上，性能分别保持72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%）。基于Triton实现，解码吞吐量提升最高1.7倍，并支持更多并发请求，证明预训练dLLM可被高效线性化以加速推理。",
+      "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型线性化，可在保持性能的同时显著提升解码吞吐量。",
+      "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力，并基于LoLCAT方法对预训练模型进行最小化后训练改造。",
       "innovation_points": [
-        "提出块混合注意力机制，结合精确与线性注意力，针对dLLM的块状解码瓶颈。",
-        "证明预训练dLLM可通过最小后训练（约60小时）实现线性化，无需从头训练。",
-        "提供Triton实现，实际提升解码吞吐量1.7倍，并支持更多并发请求。"
+        "提出块混合注意力机制，结合softmax和线性注意力，减少前缀注意力成本。",
+        "证明预训练dLLM可通过最小化后训练（约60小时）实现线性化，无需从头训练。",
+        "在16B规模模型上验证，解码吞吐量提升1.7倍，并支持更多并发请求。"
       ],
       "experiment_results": [
-        "HumanEval: 72.0% vs 75.6%（原模型），性能略有下降但可接受。",
-        "MBPP+: 63.0% vs 57.7%，性能提升。",
-        "CMATH: 86.7% vs 88.3%，略有下降。解码吞吐量提升至1.7倍。"
+        "HumanEval: 72.0% vs 75.6%（原模型），MBPP+: 63.0% vs 57.7%，CMATH: 86.7% vs 88.3%。",
+        "Triton实现下，解码吞吐量最高提升1.7倍。",
+        "支持更多并发请求，内存占用降低。"
       ],
       "limitations": [
         "性能在部分基准上略有下降（如HumanEval和CMATH）。",
-        "仅替换6/20层，线性化程度有限，可能未完全消除前缀注意力成本。",
-        "后训练时间约60小时，虽短但仍有成本。"
+        "仅替换6/20层，线性化程度有限，可能未完全消除前缀成本。",
+        "未提供更广泛任务（如长文本生成）的评估。"
       ],
-      "practical_value": "该技术可直接应用于现有dLLM推理系统，通过提高吞吐量和并发能力，降低部署成本，适用于需要大规模并行解码的场景。",
-      "why_it_matters": "该工作首次展示预训练dLLM可被高效线性化，为扩散语言模型的推理加速提供了新方向，同时保持性能，具有实际部署价值。",
+      "practical_value": "该方法可显著降低dLLM推理延迟和内存占用，提升吞吐量，适用于需要高并发和低延迟的生成任务，如对话系统和内容生成。",
+      "why_it_matters": "该研究首次证明预训练扩散语言模型可被高效线性化，为dLLM推理加速提供了新思路，且后训练成本低，具有实用价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "a0b8bd738b6137b0",
+      "analysis_signature": "abfd9a68353bab26",
       "is_daily_pick": false
     },
     {
@@ -866,7 +858,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 101,
+      "score": 100,
       "summary": "生成式推荐将推荐任务建模为语义ID序列的自回归生成，但解码过程常被生成似然主导，与真实业务目标冲突，高价值候选可能因低生成概率在束搜索早期被剪枝。现有重排序或训练时对齐方法干预过晚或需昂贵重训练。本文提出奖励引导解码（RGD），一种面向工业价值导向生成式推荐的可控解码框架。将价值引导解码形式化为KL正则化奖励最大化问题，推导出闭式奖励引导解码分布，原则性地结合生成概率与奖励信号。RGD将基础生成器视为参考策略，引入奖励模型作为测试时控制器，在每步解码注入奖励以重塑搜索轨迹，无需重训练生成器。离线与在线实验证明其在个性化与业务价值对齐上的有效性，已在快手平台部署，带来真实推荐场景的持续改进。",
       "one_line_takeaway": "RGD通过测试时奖励引导解码，在不重训练生成器的情况下，将业务价值注入生成式推荐的每一步搜索，实现个性化与商业目标的对齐。",
       "core_method": "将价值引导解码形式化为KL正则化奖励最大化问题，推导闭式解，得到奖励引导解码分布，在解码每一步结合生成概率与奖励信号，以基础生成器为参考策略，奖励模型为测试时控制器，调整束搜索轨迹。",
@@ -890,71 +882,6 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b7d7fe13c9b7e4e",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.24255",
-      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
-      "authors": [
-        "Guo Tang",
-        "Hanye Wu",
-        "Changjiang Han",
-        "Qingyang Li",
-        "Ming Zhang",
-        "Xiangyu Qian",
-        "Yanchen Qiao",
-        "Huanjie Wang",
-        "Zhi Ma",
-        "Zhen Li",
-        "Yaqiang Zang",
-        "Pinghua Gong"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T10:45:48Z",
-      "updated": "2026-07-27T10:45:48Z",
-      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
-      "url": "http://arxiv.org/abs/2607.24255v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "预训练",
-        "后训练",
-        "GenRec",
-        "Semantic ID",
-        "MoE"
-      ],
-      "score": 168,
-      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
-      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
-      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
-      "innovation_points": [
-        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
-        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
-        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
-        "保持单一统一骨干网络，简化部署并降低推理成本。"
-      ],
-      "experiment_results": [
-        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
-        "未提供离线实验数据或消融实验细节。"
-      ],
-      "limitations": [
-        "依赖历史行为日志，冷启动场景可能受限。",
-        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
-        "未公开离线评估指标，难以独立验证模型效果。"
-      ],
-      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
-      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -1414,6 +1341,71 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2607.24255",
+      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+      "authors": [
+        "Guo Tang",
+        "Hanye Wu",
+        "Changjiang Han",
+        "Qingyang Li",
+        "Ming Zhang",
+        "Xiangyu Qian",
+        "Yanchen Qiao",
+        "Huanjie Wang",
+        "Zhi Ma",
+        "Zhen Li",
+        "Yaqiang Zang",
+        "Pinghua Gong"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T10:45:48Z",
+      "updated": "2026-07-27T10:45:48Z",
+      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
+      "url": "http://arxiv.org/abs/2607.24255v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "MoE"
+      ],
+      "score": 168,
+      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
+      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
+      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
+      "innovation_points": [
+        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
+        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
+        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
+        "保持单一统一骨干网络，简化部署并降低推理成本。"
+      ],
+      "experiment_results": [
+        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
+        "未提供离线实验数据或消融实验细节。"
+      ],
+      "limitations": [
+        "依赖历史行为日志，冷启动场景可能受限。",
+        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
+        "未公开离线评估指标，难以独立验证模型效果。"
+      ],
+      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
+      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "07b20b1dcf67f427",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2607.23740",
       "title": "Zing: Social Mind for LLMs",
       "authors": [
@@ -1659,7 +1651,7 @@
         "Amazon (United States)"
       ],
       "published": "2026-07-15",
-      "updated": "2026-08-21T09:56:20.448147",
+      "updated": "2026-08-26T07:47:46.906454",
       "abstract": "Entity search, i.e., finding the most similar entities to a query entity, faces unique challenges in e-commerce, where product similarity varies across categories and contexts. Traditional embedding-based approaches often struggle to capture nuanced context-specific attribute relevance. In this paper, we present a two-stage approach combining Large Language Model (LLM)-driven attribute graph construction with graph-aware LLM ranking. In the offline stage, we extract structured product attributes from unstructured text, and construct a reusable attribute graph with category-aware schemas. In the online stage, we rank retrieved candidates by reasoning over this structured representation rather than raw text, reducing per-product token usage by 57% while improving ranking precision. Experiments show that our approach outperforms multiple baselines under zero-shot scenarios, achieving a over 5% improvement in average precision without requiring training data, generalizes robustly across diverse product categories, and shows immense potential for real-world deployment.",
       "url": "https://doi.org/10.1145/3805712.3808501",
       "pdf_url": "None",
@@ -1676,32 +1668,37 @@
       "tags": [
         "企业论文",
         "LLM 基模",
-        "Reasoning"
+        "Reasoning",
+        "LLM",
+        "实体搜索",
+        "属性图",
+        "电商",
+        "零样本"
       ],
       "score": 68,
-      "summary": "实体搜索（即查找与查询实体最相似的实体）在电子商务中面临独特挑战，因为产品相似性因类别和上下文而异。传统嵌入方法难以捕捉细微的上下文特定属性相关性。本文提出一种两阶段方法，结合LLM驱动的属性图构建与图感知的LLM排序。离线阶段，从非结构化文本中提取结构化产品属性，构建具有类别感知模式的、可复用的属性图。在线阶段，通过推理该结构化表示而非原始文本来对检索到的候选进行排序，将每个产品的token使用量减少57%，同时提高排序精度。实验表明，在零样本场景下，该方法优于多个基线，平均精度提升超过5%，无需训练数据，且在不同产品类别中具有稳健的泛化能力，显示出实际部署的巨大潜力。",
-      "one_line_takeaway": "通过LLM构建属性图并基于图进行排序，可在零样本下提升实体搜索精度并大幅降低token消耗。",
-      "core_method": "两阶段方法：离线阶段使用LLM从非结构化文本中提取结构化产品属性，构建类别感知的属性图；在线阶段使用图感知的LLM对检索候选进行排序，基于结构化表示而非原始文本进行推理。",
+      "summary": "本文针对电商领域实体搜索中产品相似度因类别和上下文而异的问题，提出了一种两阶段方法：离线阶段利用大语言模型（LLM）从非结构化文本中提取结构化产品属性，并构建类别感知的属性图；在线阶段通过图感知的LLM对检索候选进行排序，基于结构化表示而非原始文本进行推理。该方法在零样本场景下无需训练数据，平均精度提升超过5%，同时每个产品的token使用量减少57%，并在多个产品类别上表现稳健。实验表明该方法优于多个基线，具有实际部署潜力。",
+      "one_line_takeaway": "通过LLM构建属性图并基于图进行排序，显著提升实体搜索精度并降低推理成本。",
+      "core_method": "两阶段方法：离线阶段使用LLM从非结构化文本提取结构化属性，构建类别感知的属性图；在线阶段使用图感知的LLM对候选实体进行排序，基于属性图推理而非原始文本。",
       "innovation_points": [
-        "提出LLM驱动的属性图构建方法，将非结构化文本转化为结构化、可复用的属性图，支持类别感知模式。",
-        "采用图感知的LLM排序，在结构化表示上进行推理，而非直接处理原始文本，显著降低token使用量。",
-        "在零样本场景下无需训练数据即可提升排序精度，并展现出跨类别的稳健泛化能力。"
+        "提出LLM驱动的属性图构建方法，将非结构化文本转化为结构化表示，支持类别感知的schema。",
+        "采用图感知的LLM排序，在推理时利用结构化属性图，减少token消耗并提高排序精度。",
+        "零样本场景下无需训练数据，即可跨类别泛化，适应电商多样化的产品类型。"
       ],
       "experiment_results": [
-        "与多个基线相比，在零样本场景下平均精度提升超过5%。",
+        "平均精度提升超过5%（零样本场景）。",
         "每个产品的token使用量减少57%。",
-        "在不同产品类别上表现稳健，但具体数值未在摘要中给出。"
+        "在多个产品类别上表现稳健，优于多个基线。"
       ],
       "limitations": [
-        "摘要未提供详细的实验设置和基线对比细节。",
-        "未讨论属性图构建的误差传播或对LLM输出质量的依赖。",
-        "未提及在真实电商系统中的在线延迟和工程集成挑战。"
+        "依赖LLM的提取质量，可能受限于LLM对特定领域文本的理解能力。",
+        "属性图的构建需要离线处理，可能无法实时更新。",
+        "实验未提供具体数据集规模或类别数量，泛化性需进一步验证。"
       ],
-      "practical_value": "该方法可直接应用于电商搜索和推荐系统，通过结构化属性图减少推理成本，同时提升排序质量，尤其适合需要零样本快速部署的场景。",
-      "why_it_matters": "本文针对实体搜索中上下文相关属性匹配的难题，提出一种结合LLM和图的创新方案，在提升精度的同时大幅降低计算成本，为实际部署提供了可行路径，对电商搜索和推荐领域具有重要参考价值。",
+      "practical_value": "该方法可直接应用于电商平台的产品搜索和推荐系统，通过结构化属性图提高搜索相关性，同时降低推理成本，适合大规模部署。",
+      "why_it_matters": "本文展示了LLM在结构化知识提取和推理中的应用，为实体搜索提供了一种高效且可扩展的解决方案，对电商场景具有直接价值，同时为生成式推荐中的语义ID和结构化表示提供了新思路。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "02f492c4f2f77e24",
+      "analysis_signature": "fcb81a35b215e1c1",
       "is_daily_pick": false
     },
     {
@@ -1820,10 +1817,7 @@
         "企业论文",
         "MoE",
         "Multimodal",
-        "推理系统",
-        "推理优化",
-        "混合滑动窗口注意力",
-        "KVCache"
+        "推理系统"
       ],
       "score": 64,
       "summary": "本文介绍了小米MiMo团队针对MiMo-V2.5模型系列的全流水线推理优化方案。该模型结合了混合滑动窗口注意力（Hybrid SWA）、稀疏混合专家（MoE）和多模态编码器。尽管Hybrid SWA理论上能显著减少注意力计算和KVCache存储，但在生产中实现这些收益需要大量工程努力。作者系统优化了KVCache系统，包括分层预取、SWA感知前缀缓存树和专用放置策略，实现了严格的O(W) SWA存储和高缓存命中率。他们还构建了GCache，一个基于RDMA优化网络的高性能分布式缓存基础设施，并开发了KVCache亲和路由器以减少计算同时保持负载均衡。此外，针对多模态输入进行了优化，包括GPU图像预处理、并行视频解码和多模态缓存共享。这些优化构成了首个在生产环境中高效覆盖Hybrid SWA + MoE + 多模态复合架构的大规模LLM服务系统。",
@@ -1889,7 +1883,7 @@
         "Semantic ID",
         "Reasoning"
       ],
-      "score": 162,
+      "score": 161,
       "summary": "Gwhere是阿里巴巴高德地图提出的端到端工业级生成式下一兴趣点（POI）推荐框架，旨在解决生成式检索在工业场景中面临的token分配冗余/冲突以及异构信号融合不足等问题。该框架首先通过对比残差量化分词器学习判别性POI语义ID（SID），该分词器对齐文本、视觉、空间和协同信号；然后基于SID，通过丰富时空语料上的持续预训练、监督微调和暴露感知的Kahneman-Tversky优化（EAKTO）将LLM适配到移动场景。在公共数据集和高德大规模工业数据集上的实验验证了有效性，系统已部署在高德首页服务中，长期在线A/B测试显示P-CTR提升5.83%，U-CTR提升6.20%。",
       "one_line_takeaway": "Gwhere通过语义ID生成和LLM微调，实现了工业级生成式POI推荐，显著提升线上点击率。",
       "core_method": "Gwhere包含两个核心组件：1）对比残差量化分词器，学习融合多模态信号的POI语义ID；2）基于LLM的生成式推荐，通过持续预训练、监督微调和EAKTO对齐用户行为偏好。",
@@ -1967,7 +1961,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 136,
+      "score": 135,
       "summary": "生成式检索已成为工业搜索、推荐和广告系统的重要范式，但现有方法将用户行为序列与大型语言模型结合时，特征工程与模型架构紧密耦合，导致离线迭代慢、在线部署重且难以复用。本文提出Prompt Generation（PG），一个高层分词器和配置驱动框架，通过两个声明式JSON文件解耦特征处理逻辑与模型架构，作为离线训练和在线服务的唯一事实来源，确保特征一致性。PG将特征组织为四种类型，使用三个可组合处理组件进行组装和压缩，实现三级加速：快速训练迭代（仅需配置变更，内置超长序列压缩）、快速部署（新场景只需符合PG模式并接入通用管道）、快速在线推理（引擎统一优化，开销可忽略）。PG已在淘宝搜索部署，取得交易数+0.47%和GMV+0.51%的显著线上提升，并被多个搜索和推荐团队采用。",
       "one_line_takeaway": "PG通过配置驱动的JSON文件解耦特征与模型，实现生成式检索的快速迭代、部署和推理，并在淘宝搜索获得显著线上收益。",
       "core_method": "PG框架：定义两种JSON配置（特征模式和模型模式），将特征分为四类（用户、物品、上下文、交互），通过三个可组合组件（编码器、聚合器、压缩器）处理特征，生成离散token序列供LLM使用。配置作为单一事实来源，驱动离线训练和在线服务，实现特征一致性。",
@@ -2027,7 +2021,7 @@
         "训练系统",
         "推理系统"
       ],
-      "score": 113,
+      "score": 112,
       "summary": "FlashTrie提出了一种面向生成式检索的GPU加速约束波束搜索方法。生成式检索中，模型需直接生成与预定义文档标识符库精确匹配的ID，通常使用基于trie的约束解码，但现有实现多在CPU上运行，导致波束宽度增大时成为服务瓶颈。FlashTrie通过整数感知的紧凑trie布局（位压缩）将完整索引驻留于GPU高带宽内存，减少内存停顿；并设计协作式CUDA内核，在设备端完成波束扩展、验证和剪枝，无需主机逐步骤协调。同时，用GPU并行原语替代CPU式不规则查找和堆维护，提升warp利用率并减少发散。在800M关键词库、波束宽度达1000时，trie搜索延迟降至3毫秒以下，相比多线程CPU基线实现最高24倍加速，并支持波束规模扩大5倍。在大型商业搜索引擎的在线A/B实验中，实现了统计显著的+0.71%收入提升，使实时约束解码达到此前仅离线可行的规模。代码将在评审后公开。",
       "one_line_takeaway": "FlashTrie通过GPU优化的紧凑trie布局和协作内核，将生成式检索的约束波束搜索延迟降低至毫秒级，并带来显著在线收益。",
       "core_method": "FlashTrie的核心方法包括：1) 整数感知的紧凑trie布局，利用位压缩减少内存占用，使完整索引驻留于GPU高带宽内存；2) 协作式CUDA内核，在设备端完成波束扩展、验证和剪枝，消除主机逐步骤协调；3) 用GPU并行原语替代CPU式不规则查找和堆维护，提升warp利用率并减少发散。",
@@ -2443,7 +2437,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-27",
-      "updated": "2026-08-25T07:29:55.448023",
+      "updated": "2026-08-26T07:47:46.906454",
       "abstract": "Modern large language model (LLM) inference has progressively disaggregated to keep pace with growing model sizes and tight TTFT and TPOT service-level objectives: from chunked-prefill aggregation, to prefill-decode (P/D) disaggregation, and most recently to operator-level Attention-FFN Disaggregation (AFD). This trend is especially important for mixture-of-experts (MoE) models, where memory-bound attention, compute-intensive expert FFNs, and MoE dispatch/combine communication create distinct resource demands. AFD further exposes this heterogeneity by placing attention and MoE-FFN execution on separate GPU groups. Each level of disaggregation deepens the scheduling design space across workload characteristics, resource allocation, and interconnect topology, raising the central question: when does each level actually pay off? We systematically characterize this trade-off for MoE inference across realistic workloads spanning input/output sequence lengths, prefix-KV reuse, and per-user latency constraints. Using chunked-prefill and P/D disaggregation as baselines, we study the benefits and limits of AFD at scale through a framework that fuses on-device kernel measurements with high-fidelity network simulation. Under strict TTFT/TPOT SLOs, AFD sustains around 4k tokens/s of system throughput on DeepSeek-V3.2 across chat, coding, and agentic-coding workloads, where non-AFD deployments are infeasible. We distill concrete takeaways for jointly optimizing throughput and interactivity, including how to partition attention and FFN across GPUs as a function of workload and model architecture, providing design principles for current rack- and cluster-scale deployments as well as future disaggregated AI infrastructure.",
       "url": "https://arxiv.org/abs/2605.28302",
       "pdf_url": "https://arxiv.org/pdf/2605.28302",
@@ -2462,32 +2456,36 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统"
+        "推理系统",
+        "推理优化",
+        "解聚",
+        "注意力-FFN"
       ],
       "score": 76,
-      "summary": "本文系统探索了面向MoE大模型推理的注意力-FFN算子级解聚（AFD）设计空间，以回答不同解聚层级在何种条件下真正有效的问题。作者以chunked-prefill和prefill-decode解聚为基线，结合设备端内核测量与高保真网络仿真，在真实工作负载（聊天、编码、智能体编码）下评估AFD的收益与局限。结果表明，在严格的TTFT/TPOT SLO约束下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐，而非AFD部署无法满足SLO。文章还提炼了如何根据工作负载和模型架构划分注意力与FFN GPU组的实用原则，为当前机架/集群规模及未来解聚式AI基础设施提供设计指导。",
-      "one_line_takeaway": "注意力-FFN算子级解聚（AFD）在严格SLO下能显著提升MoE推理吞吐，但收益取决于工作负载、资源分配和互连拓扑的精细匹配。",
-      "core_method": "构建一个融合设备端内核测量与高保真网络仿真的框架，系统比较chunked-prefill、P/D解聚和AFD三种方案，在不同输入/输出长度、前缀KV复用和用户延迟约束下，评估MoE推理的吞吐和SLO满足情况。",
+      "summary": "本文系统探索了MoE大模型推理中注意力与FFN算子级解聚（AFD）的设计空间，以应对模型规模增长和TTFT/TPOT严格SLO带来的挑战。相比分块预填充和预填充-解码解聚，AFD将注意力与MoE-FFN分别部署在不同GPU组，进一步暴露资源需求异质性。作者通过融合设备内核测量与高保真网络模拟的框架，在真实工作负载（聊天、编码、智能体编码）下对比不同解聚级别的收益与限制。结果表明，在严格SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐量，而非AFD部署不可行。文章还提炼了根据工作负载和模型架构划分注意力与FFN的实用原则，为当前机架/集群及未来解聚AI基础设施提供设计指导。",
+      "one_line_takeaway": "算子级注意力-FFN解聚（AFD）在严格SLO下显著提升MoE推理吞吐，但收益取决于工作负载和资源分配。",
+      "core_method": "构建一个融合设备内核测量与高保真网络仿真的框架，系统比较分块预填充、预填充-解码解聚和注意力-FFN解聚（AFD）在MoE推理中的性能，并探索注意力与FFN的GPU划分策略。",
       "innovation_points": [
-        "首次系统探索注意力-FFN算子级解聚（AFD）的设计空间，并明确其适用条件。",
-        "提出融合内核测量与网络仿真的评估框架，实现高保真的大规模MoE推理性能预测。",
-        "基于真实工作负载（聊天、编码、智能体编码）给出注意力/FFN GPU划分的实用原则。"
+        "首次系统探索注意力-FFN算子级解聚（AFD）的设计空间，涵盖工作负载特征、资源分配和互连拓扑。",
+        "提出融合设备内核测量与网络仿真的评估框架，实现高保真的大规模解聚性能预测。",
+        "在DeepSeek-V3.2上验证AFD在严格SLO下维持约4k tokens/s吞吐，而非AFD部署不可行。",
+        "提炼出根据工作负载和模型架构划分注意力与FFN的实用设计原则。"
       ],
       "experiment_results": [
-        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐，而非AFD部署不可行。",
-        "AFD的收益随工作负载特征（如序列长度、前缀复用率）变化，需精细调整资源分配。",
-        "具体数据未完整披露，但提供了设计原则和趋势性结论。"
+        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐量，覆盖聊天、编码和智能体编码工作负载。",
+        "非AFD部署在相同SLO下不可行，表明AFD在特定场景下的必要性。",
+        "研究提供了注意力与FFN划分的指导原则，但未给出具体数值对比表。"
       ],
       "limitations": [
-        "实验基于仿真和特定模型（DeepSeek-V3.2），实际部署效果可能因硬件和网络而异。",
-        "未覆盖所有可能的调度策略和互连拓扑，设计空间探索仍有局限。",
-        "未提供端到端延迟和成本的具体数值，仅给出吞吐和SLO满足性。"
+        "研究基于模拟和内核测量，可能未完全反映真实生产环境的动态变化。",
+        "主要聚焦于MoE模型，对密集模型或其他架构的适用性未明确。",
+        "未提供详细的成本效益分析，如硬件投入与吞吐提升的量化关系。"
       ],
-      "practical_value": "为MoE推理服务提供商提供了解聚架构选择的量化依据，帮助在满足交互性SLO的同时最大化吞吐，尤其适用于大规模部署和未来AI基础设施规划。",
-      "why_it_matters": "随着MoE模型规模扩大，传统P/D解聚面临瓶颈，本文首次系统验证了算子级解聚（AFD）的可行性和收益，为推理系统设计提供了新方向，对追求极致性能和SLO保证的工程实践有直接指导意义。",
+      "practical_value": "为MoE推理服务提供商提供了解聚级别的选择指南，帮助在严格SLO下优化吞吐和交互性，尤其适用于大规模部署和未来AI基础设施规划。",
+      "why_it_matters": "该研究填补了算子级解聚在MoE推理中的系统研究空白，为设计高效解聚系统提供了实证依据和设计原则，对推动LLM推理基础设施演进具有重要参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "870082571857fb1a",
+      "analysis_signature": "e848713ab4278439",
       "is_daily_pick": false
     },
     {
@@ -2586,12 +2584,7 @@
       "tags": [
         "A/B 实验",
         "Semantic ID",
-        "推理系统",
-        "多模态推荐",
-        "终身用户兴趣建模",
-        "语义ID",
-        "工业推荐系统",
-        "多粒度交互"
+        "推理系统"
       ],
       "score": 98,
       "summary": "工业推荐系统日益依赖长期用户行为历史和丰富的多模态内容来捕捉用户偏好的演变。然而，由于多模态空间与协同空间之间的固有错位，将多模态特征有效整合到终身兴趣建模中仍具挑战性。现有范式通常依赖对多模态序列和行为序列的分离建模，并通过后期融合来缓解模态差距，这导致多模态表示粗糙且整合有限。本文提出SIREN，一个用于多模态终身用户兴趣建模的统一多粒度语义交互框架。在通用搜索单元阶段，引入两种可选的检索策略：基于多模态相似性的软检索以提升检索效果，以及基于语义ID（SemID）的硬检索以实现高效工业服务。在精确搜索单元阶段，通过粗粒度相似度桶和细粒度前缀编码的SemID显式融入目标感知相关性，在目标条件Transformer架构内实现与协同ID特征的统一交互。离线实验表明SIREN达到了最先进的GAUC。在线A/B测试进一步证明了在多个生产场景中的一致GMV提升，包括微信朋友圈+2.28%、微信公众号+3.87%和微信视频号+1.61%。自2025年7月起，SIREN已在腾讯广告平台全流量上线。",
@@ -2648,11 +2641,7 @@
         "A/B 实验",
         "后训练",
         "Semantic ID",
-        "Multimodal",
-        "长尾推荐",
-        "生成式语义ID",
-        "多模态大模型",
-        "知识迁移"
+        "Multimodal"
       ],
       "score": 110,
       "summary": "针对真实电商平台中长尾推荐面临的数据严重不平衡问题，现有方法难以有效结合多模态内容特征与协同信号，且忽略了头尾ID间知识迁移的不对称性（尾部噪声会损害头部表示学习）。本文提出AKT-Rec框架，利用多模态大模型（MLLM）进行监督微调，将内容表示与协同信息对齐，生成语义表示，并通过残差量化VAE（RQ-VAE）离散化为语义ID。框架包含两个核心组件：簇引导自适应嵌入（分解为簇级和个体嵌入，通过非对称对比学习和活动感知门控实现头到尾的知识迁移）和层次特征聚合（构建并行特征视图并自适应融合）。在阿里巴巴天猫平台的大规模工业数据集和在线A/B测试中，AKT-Rec离线AUC提升0.35%、GAUC提升1.53%，在线CTR提升2.76%、GMV提升3.47%，验证了其实际生产环境中的有效性。",
@@ -2816,7 +2805,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-08",
-      "updated": "2026-08-21T09:56:20.448147",
+      "updated": "2026-08-26T07:47:46.906454",
       "abstract": "The effectiveness of Reinforcement Learning (RL) in Large Language Models (LLMs) depends on the nature and diversity of the data used before and during RL. In particular, reasoning problems can often be approached in multiple ways that rely on different forms of reasoning, and exposure to only a limited range of such approaches in the training data may limit the effectiveness of RL. Motivated by this, we investigate using diverse self-generated data during mid-training as an intermediate step before RL training. Specifically, we adopt a bootstrapped data-generation framework guided by George Polya's problem-solving approaches for generating multiple variants of correct answers for each question in the training data, and then perform fine-tuning. We first provide a theoretical perspective on how mid-training on such data improves RL and explain how policy-gradient updates can incentivize combining multiple approaches. We then empirically demonstrate that RL-trained models initialized with our mid-training data achieve consistent improvements across various mathematical reasoning benchmarks and other OOD tasks like code generation and narrative reasoning. Overall, our investigative study shows that a language model learning multiple problem-solving approaches, through self-generated data helps subsequent RL.",
       "url": "https://arxiv.org/abs/2605.08472",
       "pdf_url": "https://arxiv.org/pdf/2605.08472",
@@ -2835,32 +2824,35 @@
         "企业论文",
         "LLM 基模",
         "Reasoning",
-        "Multimodal"
+        "Multimodal",
+        "强化学习",
+        "自生成数据",
+        "中期训练"
       ],
       "score": 68,
-      "summary": "本研究探讨了在强化学习（RL）训练之前，使用模型自生成的多风格数据作为中间训练（mid-training）步骤，以提升RL在数学推理等任务上的效果。作者基于Polya的问题解决理论，引导模型为每个问题生成多种正确解答变体，并在此数据上进行微调。理论上，他们分析了这种中间训练如何通过策略梯度更新激励模型组合多种推理路径。实验表明，在多个数学推理基准以及代码生成和叙事推理等OOD任务上，经过中间训练的模型在RL后均取得一致提升。研究强调，模型学习多种问题解决方式有助于后续RL的优化。",
-      "one_line_takeaway": "在RL前用自生成的多风格数据做中间训练，能显著提升模型在数学推理等任务上的RL效果。",
-      "core_method": "采用自举式数据生成框架，依据Polya的解题策略，为每个训练问题生成多种正确解答变体，然后进行中间微调，最后再进行RL训练。",
+      "summary": "本文研究了在强化学习（RL）之前使用自生成数据进行中期训练对语言模型推理性能的影响。作者基于波利亚的问题解决框架，引导模型为每个训练问题生成多种正确解答变体，并在此数据上进行微调。理论分析表明，中期训练可促使策略梯度更新隐式地组合多种推理路径，从而提升RL效率。实验证明，在数学推理基准及代码生成、叙事推理等OOD任务上，经过中期训练的模型在RL后均取得一致改进。研究强调多样化的自生成数据是提升RL效果的关键中间步骤。",
+      "one_line_takeaway": "在RL前用自生成的多样化解题数据做中期训练，能显著提升后续RL的性能。",
+      "core_method": "采用波利亚问题解决框架引导模型自生成多种正确解答变体，构建中期训练数据集，然后进行监督微调，最后再进行RL训练。",
       "innovation_points": [
-        "提出在RL前使用自生成多风格数据进行中间训练的新范式",
-        "将Polya问题解决理论应用于数据生成，增强推理多样性",
-        "提供理论分析，解释中间训练如何通过策略梯度促进多路径组合"
+        "提出在RL之前使用自生成多样化数据进行中期训练的新范式",
+        "从理论上解释了中期训练如何通过策略梯度更新促进多种推理方法的组合",
+        "在多个数学推理基准和OOD任务上验证了方法的有效性"
       ],
       "experiment_results": [
-        "在多个数学推理基准上，中间训练+RL相比直接RL有稳定提升",
+        "在数学推理基准上，RL模型经过中期训练后性能一致提升",
         "在代码生成和叙事推理等OOD任务上也观察到改进",
         "具体数值未在摘要中给出"
       ],
       "limitations": [
-        "摘要未提供具体实验数值，难以量化改进幅度",
-        "方法依赖模型自生成数据，可能受限于模型初始能力",
-        "未讨论计算成本或数据质量控制的细节"
+        "摘要未提供具体性能提升幅度",
+        "方法依赖自生成数据的质量，可能受模型初始能力限制",
+        "未讨论计算成本增加的问题"
       ],
-      "practical_value": "该方法可作为一种通用的RL预处理步骤，适用于需要复杂推理的领域，如数学、代码生成，有助于提升模型在多样化任务上的泛化能力，且无需额外人工标注。",
-      "why_it_matters": "该研究揭示了数据多样性在RL中的关键作用，提供了一种简单有效的中间训练策略，为提升LLM推理能力提供了新思路，且具有理论支撑。",
+      "practical_value": "该方法可作为一种通用的预训练后处理步骤，提升LLM在数学、代码等推理任务上的RL微调效果，尤其适用于数据多样性不足的场景。",
+      "why_it_matters": "该研究揭示了数据多样性在RL中的重要性，提供了一种简单有效的自数据增强方法，为提升LLM推理能力提供了新思路。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "404fd72ebc54cff7",
+      "analysis_signature": "be198ac3326d6116",
       "is_daily_pick": false
     },
     {
@@ -2972,9 +2964,7 @@
         "Semantic ID",
         "Tokenization",
         "Multimodal",
-        "推理系统",
-        "语义ID",
-        "多模态推荐"
+        "推理系统"
       ],
       "score": 138,
       "summary": "现代推荐系统面临海量多模态物品的识别挑战，语义ID（SID）通过将物品表示为短离散token序列来平衡紧凑性、语义保真度和下游效果。然而，SID学习中的碰撞问题（不同物品被分配相同或高度混淆的编码）严重制约其性能。现有方法主要依赖改进量化或固定重叠正则化，但无法自适应区分重叠应被抑制还是保留。为此，我们提出AdaSID，一种自适应语义ID学习框架。AdaSID通过两阶段过程调节SID重叠：首先，对观察到的重叠，若涉及物品语义兼容则放宽排斥，保留可接受的共享；其次，根据局部碰撞负载和训练进度分配剩余调节压力，加强拥挤区域的控制，同时逐步将优化重心转向推荐对齐。该设计自适应决定惩罚哪些重叠、调节强度以及何时转移学习焦点。在公开基准上，AdaSID平均提升Recall和NDCG约4.5%，并改善码本利用率和SID多样性。在快手电商的短视频检索线上A/B测试中（覆盖数千万用户），取得统计显著提升，包括GMV提升0.98%，工业级排序评估显示AUC一致提升。",
@@ -3469,10 +3459,7 @@
         "企业论文",
         "LLM 基模",
         "Multimodal",
-        "推理系统",
-        "基础模型",
-        "代理",
-        "多模态"
+        "推理系统"
       ],
       "score": 68,
       "summary": "Seed1.8是字节跳动Seed团队发布的基础模型，旨在实现通用真实世界代理能力，超越单轮预测，支持多轮交互、工具使用和多步执行。模型在保持强大LLM和视觉语言性能的同时，统一了搜索、代码生成与执行、GUI交互等代理接口。部署上提供延迟和成本感知的推理，包括可配置思考模式和优化的图像视频视觉编码。评估覆盖标准基准和应用对齐工作流，涉及基础技能、多模态理解和代理行为。Seed1.8已发布以支持交互式真实世界用例的研究与开发。",
@@ -4397,11 +4384,7 @@
         "智谱",
         "企业论文",
         "官方技术报告",
-        "LLM 基模",
-        "GLM-5",
-        "智能体工程",
-        "预训练",
-        "后训练"
+        "LLM 基模"
       ],
       "score": 124,
       "summary": "智谱发布GLM-5系列模型，从GLM-5到GLM-5.3及Flash版本，强调从'vibe coding'（基于直觉的编程）向'agentic engineering'（智能体工程）的范式转变。技术报告指出，GLM-5在预训练阶段采用更大规模的高质量数据与优化的架构设计，提升基础能力；后训练阶段通过强化学习和指令微调增强工具调用与多步推理能力，使模型能自主规划、执行复杂任务。GLM-5.3进一步优化推理效率，Flash版本则针对低延迟场景。官方博客展示了在代码生成、智能体任务中的性能提升，但未提供详细基准数据。该系列模型通过API提供服务，强调在真实业务场景中的可用性。",
