@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T10:32:19+08:00",
+  "generated_at": "2026-08-31T10:46:16+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "DBLP: 全部关键词失败（HTTP Error 503: Service Unavailable）"
+      "arXiv: 15/17 个分片失败，已保留成功分片（HTTP Error 429: Unknown Error）"
     ],
-    "discovered": 2842,
-    "candidates": 50,
+    "discovered": 2146,
+    "candidates": 21,
     "daily_picks": 1,
-    "analysis_complete": 76,
+    "analysis_complete": 77,
     "analysis_fallback": 0
   },
   "sources": [
@@ -52,6 +52,77 @@
   ],
   "papers": [
     {
+      "id": "openalex:W7204606868",
+      "title": "Beyond Scaling: Self-Evolving LLM Agents for Hardware Kernel Optimization via an Experience-Driven Workflow and Experience Graph Memory",
+      "authors": [
+        "Siyuan Chen",
+        "Runlin Hou",
+        "Shenxiu Wu",
+        "Yansong Sun",
+        "Junming Cao",
+        "Yiyu Zhang",
+        "Shudi Shao",
+        "Junhao Qiu",
+        "Zhichao Lu",
+        "Qingfu Zhang"
+      ],
+      "affiliations": [
+        "City University of Hong Kong",
+        "Huawei Technologies (United States)",
+        "Huawei Technologies (United Kingdom)"
+      ],
+      "published": "2026-08-26",
+      "updated": "2026-08-30T07:30:35.949966",
+      "abstract": "Hardware kernel optimization requires repeated compilation, correctness testing, profiling, and revision. LLM agents can automate parts of this process, and stronger foundation models, longer context windows, and longer execution horizons have improved optimization within individual tasks. These advances alone do not enable an agent to learn from completed optimization runs. Existing kernel-optimization agents seldom preserve a decision, its observed execution feedback, and the later decisions that use that evidence. Retaining every prior trajectory is also impractical because an expanding history competes with the current task for context. We present KOPE, an experience-driven framework for hardware kernel optimization. KOPE records optimization trajectories with correctness and performance feedback in Experience Graph Memory, then uses Active Context Management and Injection to retrieve relevant experience under a fixed token budget. The graph retains decision order, observed outcomes, and alternative branches, allowing evidence collected on the target hardware to inform later optimization steps and tasks. Under the same GLM-5.2 setting, the geometric mean of KOPE's per-operator speedups is $1.54\\times$ that of CANNBot, the strongest competing baseline. In a complete 53-operator ablation, Active Context Management and Injection raises pass rate from 60.0\\% to 84.6\\%, increases the evaluator-reported positive-field geometric mean from 0.0382 to 0.0661, and reduces optimization token consumption from 15.9B to 1.113B tokens relative to passive agent-led context construction. Enabling Experience Graph Memory raises full-suite pass rate from 55.2\\% to 84.6\\% and yields a $1.43\\times$ geometric-mean speedup on valid timing comparisons. These results support continual optimization through external experience while the foundation model remains fixed.",
+      "url": "https://arxiv.org/abs/2608.25570",
+      "pdf_url": "https://arxiv.org/pdf/2608.25570",
+      "doi": "",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Huawei Pangu",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Parallel Computing and Optimization Techniques",
+        "Embedded Systems Design Techniques",
+        "Advanced Neural Network Applications"
+      ],
+      "tags": [
+        "Huawei Pangu",
+        "企业论文",
+        "LLM 基模",
+        "LLM代理",
+        "硬件内核优化",
+        "经验图记忆",
+        "上下文管理",
+        "持续学习"
+      ],
+      "score": 75,
+      "summary": "硬件内核优化需要反复编译、正确性测试、性能分析和修改。现有LLM代理虽能自动化部分流程，但无法从已完成的任务中学习，且保留所有历史轨迹会与当前任务竞争上下文。本文提出KOPE，一个经验驱动的框架，通过经验图记忆记录优化轨迹及反馈，并采用主动上下文管理和注入，在固定token预算下检索相关经验。在GLM-5.2设置下，KOPE的每算子加速比几何均值是强基线CANNBot的1.54倍。在53算子消融中，主动上下文管理将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，优化token消耗从15.9B降至1.113B。启用经验图记忆将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。结果表明，在基础模型固定时，通过外部经验可实现持续优化。",
+      "one_line_takeaway": "KOPE通过经验图记忆和主动上下文管理，使LLM代理能从历史优化中学习，显著提升硬件内核优化效率，且不依赖更强的基础模型。",
+      "core_method": "KOPE框架：1) 经验图记忆（EGM）存储优化轨迹，包含决策、执行反馈和后续决策，保留决策顺序和替代分支；2) 主动上下文管理和注入（ACMI）在固定token预算下检索相关经验，动态构建上下文。",
+      "innovation_points": [
+        "提出经验驱动的工作流，使LLM代理能从已完成优化任务中持续学习，突破单任务限制。",
+        "设计经验图记忆结构，保留决策顺序、观察结果和替代分支，支持跨任务知识复用。",
+        "主动上下文管理和注入机制，在固定token预算下高效检索经验，避免历史膨胀问题。"
+      ],
+      "experiment_results": [
+        "在GLM-5.2设置下，KOPE的每算子加速比几何均值为CANNBot的1.54倍。",
+        "53算子消融中，ACMI将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，token消耗从15.9B降至1.113B。",
+        "启用EGM将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。"
+      ],
+      "limitations": [
+        "实验基于特定基础模型GLM-5.2，泛化性未知。",
+        "经验图记忆的构建和维护可能引入额外开销。",
+        "未与更大规模基础模型或更长上下文窗口的代理进行对比。"
+      ],
+      "practical_value": "KOPE可应用于硬件内核优化场景，减少人工干预，提升优化效率，尤其适合需要持续优化的生产环境。其经验复用机制可降低token消耗，节省计算成本。",
+      "why_it_matters": "本文挑战了“仅靠扩展模型规模”的范式，证明通过外部经验管理可实现持续优化，为LLM代理在工程优化任务中的长期学习提供了新思路，对资源受限场景具有重要价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "727e6c837a29ec73",
+      "is_daily_pick": true
+    },
+    {
       "id": "arxiv:2608.24176",
       "title": "Tlow: Flow-based Item Tokenizer for Recommendation",
       "authors": [
@@ -81,7 +152,7 @@
         "A/B 实验",
         "Tokenization"
       ],
-      "score": 99,
+      "score": 98,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
       "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
       "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
@@ -169,7 +240,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "98261b9a6802ff9d",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2608.17613",
@@ -534,7 +605,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 141,
+      "score": 140,
       "summary": "生成式推荐通过自回归解码语义标识（SID）来选择物品，其令牌位置形成从粗到细的层次结构。然而，SID解码器通常使用监督式下一令牌预测训练，仅模仿历史轨迹，未直接优化下游效用。为此，本文提出层次残差策略优化（HRPO）框架，将物品级结果转化为密集的令牌对齐学习信号，实现保守的令牌级改进。HRPO首先通过基于特征用户聚类的组级奖励平滑估计SID前缀级效用，然后将效用分解为残差令牌信用并累积为信用到目标信号，最后通过残差回报策略优化（RRPO）使用裁剪更新、组归一化优势和KL正则化优化残差信用。在公共数据集和大型商业系统的在线A/B测试中，HRPO在会话级效用和关键业务指标上均取得一致提升。",
       "one_line_takeaway": "HRPO通过将物品级奖励分解为令牌级残差信用，实现了生成式推荐后训练中的密集信用分配，显著提升在线业务指标。",
       "core_method": "HRPO框架：1) 通过特征用户聚类进行组级奖励平滑，估计SID前缀级效用；2) 将前缀效用分解为残差令牌信用，并累积为信用到目标信号；3) 使用RRPO优化残差信用，采用裁剪更新、组归一化优势和KL正则化保持稳定性。",
@@ -737,7 +808,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 130,
+      "score": 129,
       "summary": "工业推荐系统通常为每个目标分配显式配额，构建候选池，但随目标增多，建模、训练和服务日益碎片化。基于语义ID的生成式检索提供统一方案，但单解码器纠缠多目标策略，限制候选互补性。本文提出Multi-Decoder OneRec，一种可控框架，结合共享表示、隔离目标适配和协调解码。所有目标共享用户上下文模块和通用解码器，每个目标添加隔离的LoRA专家。训练时，曝光样本的下一词预测更新共享基座，目标过滤的NTP更新事件专家，KL正则化策略优化更新观看时长专家，梯度路由隔离更新，通用解码器提供停止梯度参考。推理时，显式配额分配固定预算，多解码器约束束搜索减少跨路由重叠。作者公开Kwai26基准，含13.1亿原始记录、3185万Item-ID、2503万有效语义ID物品。在512项检索预算下，Multi-Decoder OneRec在四个Recall@512指标上比单解码器OneRec提升1.69%-5.62%。生产A/B测试中，设备使用时长相对提升0.37%，7日留存提升0.19%，分享设备提升0.19%，新内容冷启动提升2.09%。结果表明生成式检索可结合共享建模与目标特定控制及互补候选生成。",
       "one_line_takeaway": "Multi-Decoder OneRec通过共享表示、隔离LoRA专家和协调解码，在统一生成式检索中实现多目标可控性和候选互补性，显著提升工业推荐效果。",
       "core_method": "Multi-Decoder OneRec框架：共享用户上下文模块和通用解码器，每个目标添加LoRA专家；训练采用梯度路由隔离更新，通用解码器提供停止梯度参考；推理采用显式配额和Multi-Decoder Constrained Beam Search减少重叠。",
@@ -794,7 +865,7 @@
         "LLM 基模",
         "GenRec"
       ],
-      "score": 118,
+      "score": 117,
       "summary": "本文提出ClockRoPE，一种基于随机傅里叶旋转的时序建模方法，用于改进基于RoPE的Transformer在序列推荐中的表现。作者首先从理论上证明，任何归一化的连续正定注意力调制函数都可以由其傅里叶变换诱导的随机旋转近似，从而扩展了RoPE的表达能力。基于此，ClockRoPE将旋转频率设计为周期性注意力调制函数的傅里叶系数，以捕捉用户行为中的时间周期性。在在线A/B测试中，ClockRoPE在关键参与度指标上取得一致提升，并已成功部署于某大型视频分享平台的生成式检索系统。该方法为生成式推荐中的时间建模提供了新思路。",
       "one_line_takeaway": "ClockRoPE通过随机傅里叶旋转将周期性时间模式融入RoPE，显著提升生成式推荐系统的在线参与度。",
       "core_method": "提出随机傅里叶旋转理论，证明任意归一化连续正定注意力调制函数可由其傅里叶变换诱导的随机旋转近似；据此设计ClockRoPE，将旋转频率设为周期性函数的傅里叶系数，用于序列推荐中的时间建模。",
@@ -1490,7 +1561,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 99,
+      "score": 98,
       "summary": "本文提出Zing框架，系统性地解决大语言模型（LLM）的社会智能问题。社会智能指模型推断心理状态、追踪社会关系、推理规范并适应上下文的能力。作者首先构建SoMBench基准，基于心理学理论，覆盖3个主维度、17个子维度和71个任务范式，包含284个共享场景和3481个专家验证实例，并控制问题格式、叙事视角和上下文长度。对20个代表性LLM的评估显示，最佳模型准确率仅72.08%，且所有子维度均未达到90%的接近天花板水平，表明巨大提升空间。其次，提出Zing训练方法，结合监督微调、在线策略蒸馏和基于规则（rubric）的强化学习，在五个社会认知基准上持续优于基础模型，其中Zing-27B-Stage2平均分最佳，Zing-32B-Stage2与DeepSeek-V4-Pro竞争。最后，构建Actio推理架构，在部署时通过四种类型化支持（PRISM程序指导、Starling运行时心理状态表示、SAGE可复用经验、门控RAG外部知识）增强推理。在五个基础模型和三个基准上，完整架构在15个模型-基准对中改善14个，并在8个中达到最佳或并列最佳。结果表明，社会智能LLM需要评估、参数内化和部署时落地的协同进步。",
       "one_line_takeaway": "社会智能LLM需要评估、参数内化和部署时落地的协同进步，Zing框架通过SoMBench基准、诊断驱动训练和Actio推理架构显著提升模型社会智能。",
       "core_method": "Zing框架包含三部分：1）SoMBench基准，基于心理学理论设计，控制变量并专家验证；2）Zing训练方法，结合监督微调、在线策略蒸馏和基于规则的强化学习；3）Actio推理架构，在推理时路由四种类型化支持（PRISM、Starling、SAGE、门控RAG）到推理过程。",
@@ -1550,7 +1621,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 142,
+      "score": 141,
       "summary": "生成式推荐（GR）通过残差量化将物品编码为层次化语义ID，并逐token预测，但存在两个结构性问题：将多token ID展平为单一序列破坏了物品级结构，且训练与推理在层次码本上的不一致导致语义漂移。为此，本文提出BARGE方法，采用物品上下文感知注意力（ICA）在编码阶段恢复物品级结构，并通过层次路径重排序（HPR）和双路径解码（DPD）从两个互补角度抑制解码阶段的语义漂移。在公开基准和大规模离线测试上的实验表明，BARGE取得了优越的推荐性能；在腾讯平台上的在线A/B测试中，点击率提升0.60%，点击独立访客提升1.34%，总阅读时长提升1.70%，验证了其在工业级推荐中的实用价值。",
       "one_line_takeaway": "BARGE通过恢复物品级结构和抑制语义漂移，弥合了自回归生成与推荐任务之间的结构差距，并在工业场景中验证了有效性。",
       "core_method": "BARGE包含三个组件：物品上下文感知注意力（ICA）在编码时聚合物品内token信息以恢复物品级结构；层次路径重排序（HPR）在解码时对候选路径进行重排序以缓解语义漂移；双路径解码（DPD）同时考虑层次路径和扁平序列两种解码方式，从互补角度抑制漂移。",
@@ -1728,7 +1799,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 103,
+      "score": 102,
       "summary": "本文针对生成式推荐中Next-Token Prediction（NTP）训练信号的结构性局限，提出NONTP框架。NTP存在时间局部性（仅优化单步预测，缺乏长程行为结构监督）和空间局部性（多域序列中目标嵌入仅从紧邻隐状态获得梯度，缺乏跨域上下文梯度路径）。为扩展信号覆盖，作者提出两个辅助目标：TCL（时间对比学习）采用BYOL风格EMA教师和InfoNCE损失，将隐状态与K步未来轨迹在表示空间对齐；TDL（跨域学习）对跨域隐状态进行均值池化并通过共享预测头预测，开辟无额外参数的第二梯度路径。推理时丢弃辅助模块，零开销。在美团四域工业数据集（全排序）上，HR@10较NTP提升34.3%，较MBGR提升18.3%；在公开Amazon Movie-Book-CDs基准上，HR@10提升2.8%，NDCG@10提升3.7%。在线A/B测试确认CTR提升1.8%，GMV提升2.1%（均p<0.01）。消融实验验证各组件独立贡献，并分析梯度冲突作为未来方向。",
       "one_line_takeaway": "通过时间对比学习和跨域学习扩展NTP训练信号覆盖，显著提升生成式推荐性能且推理零开销。",
       "core_method": "提出NONTP框架，包含两个辅助目标：TCL（时间对比学习）使用BYOL风格EMA教师和InfoNCE损失对齐隐状态与K步未来轨迹；TDL（跨域学习）对跨域隐状态均值池化并通过共享预测头预测，增加梯度路径。训练时联合优化，推理时丢弃辅助模块。",
@@ -1813,7 +1884,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 63,
+      "score": 62,
       "summary": "本文介绍了小米MiMo团队针对MiMo-V2.5模型系列的全流水线推理优化方案。该模型结合了混合滑动窗口注意力（Hybrid SWA）、稀疏混合专家（MoE）和多模态编码器。尽管Hybrid SWA理论上能显著减少注意力计算和KVCache存储，但在生产中实现这些收益需要大量工程努力。作者系统优化了KVCache系统，包括分层预取、SWA感知前缀缓存树和专用放置策略，实现了严格的O(W) SWA存储和高缓存命中率。他们还构建了GCache，一个基于RDMA优化网络的高性能分布式缓存基础设施，并开发了KVCache亲和路由器以减少计算同时保持负载均衡。此外，针对多模态输入进行了优化，包括GPU图像预处理、并行视频解码和多模态缓存共享。这些优化构成了首个在生产环境中高效覆盖Hybrid SWA + MoE + 多模态复合架构的大规模LLM服务系统。",
       "one_line_takeaway": "通过系统化的KVCache管理和分布式缓存优化，首次在生产环境中实现了Hybrid SWA + MoE + 多模态架构的高效推理。",
       "core_method": "针对Hybrid SWA的KVCache系统优化（分层预取、SWA感知前缀缓存树、专用放置策略）、GCache分布式缓存基础设施（RDMA优化）、KVCache亲和路由器、多模态输入优化（GPU图像预处理、并行视频解码、多模态缓存共享）。",
@@ -2226,7 +2297,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "arxiv:2606.06970",
+      "id": "s2:14325ba5677438e8f9b10137098bade1b0ba110c",
       "title": "SSRLive: Live Streaming Recommendation with Dynamic Semantic ID",
       "authors": [
         "Teng Shi",
@@ -2237,17 +2308,18 @@
         "Yuning Jiang"
       ],
       "affiliations": [],
-      "published": "2026-06-05T06:58:07Z",
-      "updated": "2026-06-05T06:58:07Z",
+      "published": "2026-06-05",
+      "updated": "2026-06-05",
       "abstract": "Live streaming has emerged as one of the fastest-growing forms of online media, enabling instant content broadcasting and real-time engagement between users and streamers. Despite the effectiveness of existing recommendation algorithms in this domain, they often suffer from limited utilization of computational resources, with low FLOPs that hinder further performance enhancement. Generative recommendation techniques, which have gained traction in various industrial tasks, offer a promising avenue for improving live streaming recommendations. However, directly applying generative methods to live streaming is non-trivial due to two major challenges: (1) static semantic IDs (SIDs) cannot reflect the rapidly changing nature of live room content; and (2) generative pipelines generally do not incorporate user--streamer interaction signals (e.g., likes, orders), which are critical for modeling user intent toward both the streamer and showcased products. To address these challenges, we introduce SSRLive: Dynamic Semantic ID-guided Streaming Recommendation for Live platforms. The proposed framework integrates a generative module and a discriminative module in a unified architecture. The generative component employs an encoder-decoder design to produce both static and dynamic SIDs, enabling timely representation of live room content while leveraging multimodal information. The discriminative component refines task-specific representations by combining SIDs with user features, augments them with user-streamer interaction data, and performs multi-task predictions. Online A/B tests in real-world deployment demonstrate tangible benefits: watch time (+3.38%), GMV (+0.72%), follower growth (+3.12%), and interaction volume (+2.92%). These improvements highlight the effectiveness and business value of SSRLive, which is now fully deployed, serving hundreds of millions of active users.",
-      "url": "http://arxiv.org/abs/2606.06970v1",
-      "pdf_url": "https://arxiv.org/pdf/2606.06970v1",
-      "doi": "",
-      "source": "arXiv",
+      "url": "https://www.semanticscholar.org/paper/14325ba5677438e8f9b10137098bade1b0ba110c",
+      "pdf_url": "https://doi.org/10.48550/arXiv.2606.06970",
+      "doi": "10.48550/arXiv.2606.06970",
+      "source": "Semantic Scholar",
       "content_type": "paper",
       "company": "",
-      "venue": "",
+      "venue": "arXiv.org",
       "categories": [
+        "CoRR",
         "cs.IR"
       ],
       "tags": [
@@ -2255,31 +2327,34 @@
         "GenRec",
         "Semantic ID",
         "Multimodal",
-        "推理系统"
+        "推理系统",
+        "生成式推荐",
+        "动态语义ID",
+        "直播推荐"
       ],
       "score": 124,
-      "summary": "SSRLive针对直播推荐中静态语义ID无法反映直播间内容动态变化、以及生成式推荐未充分利用用户与主播交互信号的问题，提出了一种动态语义ID引导的直播推荐框架。该框架统一了生成式与判别式模块：生成模块采用编码器-解码器结构，结合多模态信息生成静态和动态语义ID，以实时表征直播间内容；判别模块将语义ID与用户特征结合，并融入用户-主播交互数据，进行多任务预测。在线A/B测试显示，该方法在观看时长、GMV、粉丝增长和互动量上分别提升3.38%、0.72%、3.12%和2.92%，已全面部署服务数亿活跃用户。",
-      "one_line_takeaway": "SSRLive通过动态语义ID和生成-判别统一架构，显著提升直播推荐的业务指标，验证了生成式推荐在动态场景中的可行性。",
-      "core_method": "提出SSRLive框架，包含生成模块（编码器-解码器生成静态和动态语义ID，利用多模态信息）和判别模块（融合语义ID与用户特征，加入用户-主播交互信号，进行多任务预测）。",
+      "summary": "SSRLive针对直播推荐中静态语义ID无法反映直播内容动态变化、以及生成式推荐未利用用户与主播交互信号的问题，提出统一架构，融合生成模块与判别模块。生成模块采用编码器-解码器生成静态和动态语义ID，结合多模态信息实时表征直播内容；判别模块将语义ID与用户特征结合，并引入用户-主播交互数据，进行多任务预测。在线A/B测试显示，观看时长提升3.38%，GMV提升0.72%，粉丝增长3.12%，互动量提升2.92%，系统已全面部署，服务数亿活跃用户。",
+      "one_line_takeaway": "通过动态语义ID和用户-主播交互信号，SSRLive在直播推荐中显著提升业务指标，验证了生成式推荐在动态场景的可行性。",
+      "core_method": "统一架构包含生成模块（编码器-解码器生成静态和动态语义ID，利用多模态信息）和判别模块（结合语义ID与用户特征，融合交互信号，多任务预测）。",
       "innovation_points": [
-        "提出动态语义ID机制，解决直播内容快速变化下静态ID失效的问题。",
+        "提出动态语义ID机制，实时反映直播内容变化，弥补静态ID不足。",
         "在生成式推荐中引入用户-主播交互信号（如点赞、订单），增强用户意图建模。",
-        "统一生成式与判别式模块，兼顾内容表征和任务优化。"
+        "统一生成与判别模块，兼顾内容表征与任务优化。"
       ],
       "experiment_results": [
-        "在线A/B测试显示：观看时长提升3.38%，GMV提升0.72%，粉丝增长提升3.12%，互动量提升2.92%。",
+        "在线A/B测试：观看时长+3.38%，GMV+0.72%，粉丝增长+3.12%，互动量+2.92%。",
         "系统已全面部署，服务数亿活跃用户。"
       ],
       "limitations": [
-        "论文未提供离线实验数据或消融研究细节。",
-        "动态语义ID的更新频率和计算开销未明确说明。",
-        "交互信号的引入可能增加数据稀疏性问题。"
+        "论文未提供离线实验数据，仅展示在线指标。",
+        "动态语义ID的生成可能增加计算开销，但文中未详细讨论。",
+        "交互信号依赖用户行为，冷启动场景可能受限。"
       ],
-      "practical_value": "SSRLive已在真实直播平台部署，显著提升核心业务指标，为直播推荐系统提供了可落地的生成式推荐方案，尤其适用于内容动态变化和强交互场景。",
-      "why_it_matters": "该研究首次将动态语义ID应用于直播推荐，解决了生成式推荐在实时场景中的关键挑战，并通过大规模在线实验验证了业务价值，对生成式推荐在工业界的应用具有重要参考意义。",
+      "practical_value": "为直播平台提供可落地的生成式推荐方案，显著提升核心业务指标，并已大规模部署，证明其工程可行性。",
+      "why_it_matters": "该研究解决了生成式推荐在动态内容场景中的关键挑战，动态语义ID和交互信号融合的思路对工业界有直接参考价值，且在线结果验证了实际效果。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "e161ff41d1aa66bd",
+      "analysis_signature": "a0cb9624e1846152",
       "is_daily_pick": false
     },
     {
@@ -2941,9 +3016,7 @@
       "company": "",
       "venue": "arXiv.org",
       "categories": [
-        "CoRR",
-        "cs.IR",
-        "cs.MM"
+        "CoRR"
       ],
       "tags": [
         "A/B 实验",
