@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T10:44:37+08:00",
+  "generated_at": "2026-09-02T10:07:17+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -14,10 +14,10 @@
     "source_errors": [
       "DBLP: 5/8 个关键词失败，已保留成功结果（Remote end closed connection without response）"
     ],
-    "discovered": 2897,
-    "candidates": 56,
-    "daily_picks": 2,
-    "analysis_complete": 80,
+    "discovered": 2784,
+    "candidates": 54,
+    "daily_picks": 3,
+    "analysis_complete": 81,
     "analysis_fallback": 0
   },
   "sources": [
@@ -52,6 +52,76 @@
   ],
   "papers": [
     {
+      "id": "arxiv:2609.00986",
+      "title": "TGR: Advancing Industrial Recommendation from Generative-Paradigm Ranking toward Unified Generation and Reasoning",
+      "authors": [
+        "TGR Team",
+        "Lei Cheng",
+        "Haonan Hu",
+        "Beibei Kong",
+        "Yudong Li",
+        "Zang Li",
+        "Yunsheng Pang",
+        "Hongyang Su",
+        "Jianchao Tu",
+        "Yunlong Wang",
+        "Bing Wen",
+        "Junzhang Zhu",
+        "Shaojie Zhu",
+        "Chengxiang Zhuo"
+      ],
+      "affiliations": [],
+      "published": "2026-09-01T09:41:26Z",
+      "updated": "2026-09-01T09:41:26Z",
+      "abstract": "Industrial recommender systems typically rely on cascaded retrieval, pre-ranking, ranking, and reranking stages, whose separately optimized models limit scaling, fragment decision making, and lack semantic knowledge and reasoning. We present TGR (Tencent Generative Recommendation), an industrial framework that advances recommendation toward the generative paradigm along three coupled directions. TGR-GenRank upgrades ranking through CCFormer, which combines unified feature tokenization, a scalable Transformer backbone, feature-field separated cross attention, subspace token mixing, and hierarchical sequence compression while retaining per-item multi-task outputs. TGR-GenRec explores end-to-end generation under two paradigms: BARGE bridges item-boundary loss and semantic drift in hierarchical semantic-ID generation through item context-aware attention, hierarchical path reranking, and orthogonal dual-path decoding; HiGR performs whole-slate generation with prefix-structured semantic IDs, coarse-to-fine decoding, and listwise multi-objective alignment. TGR-Reason injects offline-generated semantic-ID reason tokens into online decoding, providing reasoning without request-time rollout. TGR is deployed across Tencent production surfaces serving hundreds of millions of users. CCFormer delivers significant gains in five A/B-tested scenarios and is fully launched in two, including +3.57% CTR and +1.71% advertising revenue. BARGE improves Hit@5 by 10.2-16.9% and yields +0.60% CTR and +1.70% reading time after full rollout. HiGR improves offline slate quality by 15.9-21.3% with a 5x inference speedup and achieves up to +1.22% watch time and +1.73% video views. TGR-Reason raises cold-start new-user Hit@1 by 477.8% and delivers +1.75% effective consumption and +13.09% new-user exposure-to-conversion online.",
+      "url": "http://arxiv.org/abs/2609.00986v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.00986v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "Reasoning",
+        "推理系统",
+        "生成式推荐",
+        "工业推荐系统"
+      ],
+      "score": 162,
+      "summary": "工业推荐系统通常依赖级联的召回、粗排、精排和重排阶段，这些独立优化的模型限制了扩展性、决策碎片化且缺乏语义知识和推理能力。本文提出腾讯生成式推荐框架TGR，沿三个耦合方向推进生成式范式：TGR-GenRank通过CCFormer升级精排，统一特征tokenization、可扩展Transformer主干、特征域分离交叉注意力、子空间token混合和层次序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式：BARGE通过上下文感知注意力、层次路径重排序和正交双路径解码，解决层次语义ID生成中的项边界损失和语义漂移；HiGR使用前缀结构语义ID、粗到细解码和列表级多目标对齐，实现整槽生成；TGR-Reason将离线生成的语义ID推理token注入在线解码，无需请求时rollout即可提供推理。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE将Hit@5提升10.2-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason将冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
+      "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入，统一了工业推荐系统的生成与推理，显著提升在线业务指标。",
+      "core_method": "TGR框架包含三个组件：TGR-GenRank使用CCFormer（统一特征tokenization、Transformer主干、特征域分离交叉注意力、子空间token混合、层次序列压缩）升级精排；TGR-GenRec提出BARGE（上下文感知注意力、层次路径重排序、正交双路径解码）和HiGR（前缀结构语义ID、粗到细解码、列表级多目标对齐）两种生成范式；TGR-Reason离线生成语义ID推理token并注入在线解码。",
+      "innovation_points": [
+        "提出TGR框架，将生成式范式引入工业推荐，统一生成与推理，解决级联模型碎片化问题。",
+        "CCFormer设计特征域分离交叉注意力和子空间token混合，提升精排效果。",
+        "BARGE和HiGR分别解决层次语义ID生成中的语义漂移和整槽生成问题。",
+        "TGR-Reason通过离线推理token注入，实现无需在线rollout的推理增强。"
+      ],
+      "experiment_results": [
+        "CCFormer在五个A/B测试场景中显著提升，其中两个全面上线，CTR提升3.57%，广告收入提升1.71%。",
+        "BARGE将Hit@5提升10.2-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%。",
+        "HiGR离线槽质量提升15.9-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。"
+      ],
+      "limitations": [
+        "论文未提供离线实验的详细设置和消融研究，可能影响可复现性。",
+        "TGR-Reason的推理token生成依赖离线数据，可能无法覆盖所有动态场景。",
+        "生成式推荐在超大规模物品空间下的扩展性仍需进一步验证。"
+      ],
+      "practical_value": "TGR已在腾讯生产环境部署，服务数亿用户，显著提升CTR、广告收入、阅读时长、观看时长等核心业务指标，为工业推荐系统向生成式范式演进提供了可行方案。",
+      "why_it_matters": "本文是工业推荐系统生成式范式的重要实践，展示了从精排到端到端生成再到推理的统一框架，解决了级联模型的碎片化问题，并提供了大规模部署的实证结果，对推荐系统研究和工程实践具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "4da0d59e1c697467",
+      "is_daily_pick": true
+    },
+    {
       "id": "arxiv:2608.30553",
       "title": "Preference Shapes Relevance: Cross-component Hierarchical Semantic Alignment for Personalized Generative Retrieval",
       "authors": [
@@ -82,11 +152,7 @@
         "A/B 实验",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式检索",
-        "语义ID",
-        "个性化推荐",
-        "层次化对齐"
+        "推理系统"
       ],
       "score": 140,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
@@ -150,12 +216,9 @@
         "后训练",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式检索",
-        "电商搜索",
-        "语义ID"
+        "推理系统"
       ],
-      "score": 158,
+      "score": 157,
       "summary": "本文提出ICEGR，一个面向电商搜索的意图一致端到端生成式检索框架。现有生成式检索方法在训练流程中难以保持查询意图一致性：语义ID构建仅基于静态商品信息，无法编码商品-意图关联；监督微调依赖在线日志，导致低曝光商品缺乏真实查询意图监督；偏好优化偏向热门或高价值商品，削弱查询-商品相关性。ICEGR包含三个组件：意图感知语义ID构建，将查询意图信号融入ID构建；合成查询增强的统一监督微调，统一多个任务并生成合成查询补充低曝光商品监督；相关性校准的偏好优化，将查询-商品相关性和业务信号融入边际自适应偏好目标。离线实验显示，ICEGR在Recall@20上提升21.7%，NDCG@20提升26.6%。在百度电商搜索中部署为端到端生成式检索路径，A/B测试中CTR提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知语义ID、合成查询增强和相关性校准偏好优化，实现了电商搜索中意图一致的端到端生成式检索，显著提升检索效果和业务指标。",
       "core_method": "ICEGR框架包含三个组件：1) 意图感知语义ID构建，利用查询-商品交互信号（如点击、购买）增强语义ID，使其捕捉搜索意图；2) 合成查询增强的统一监督微调，将多个SFT任务统一为查询到ID的映射，并生成合成查询补充低曝光商品的监督；3) 相关性校准的偏好优化，设计边际自适应偏好目标，平衡查询-商品相关性和业务信号（如GMV）。",
@@ -203,12 +266,7 @@
       "tags": [
         "A/B 实验",
         "GenRec",
-        "Semantic ID",
-        "生成式推荐",
-        "语义ID",
-        "离线策略评估",
-        "粗化",
-        "偏差界"
+        "Semantic ID"
       ],
       "score": 131,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
@@ -398,7 +456,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 151,
+      "score": 150,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -458,7 +516,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 128,
+      "score": 127,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -665,7 +723,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 110,
+      "score": 109,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -727,7 +785,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 94,
+      "score": 93,
       "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而消除前缀注意力瓶颈。该方法可对预训练dLLM进行最小化后训练改造：将LLaDA 2.1（16B开源模型）的20个注意力层中的6层替换为线性注意力，遵循LoLCAT方法，转换仅需约60小时。在HumanEval、MBPP+和CMATH基准上，性能分别保持72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%）。基于Triton实现，解码吞吐量提升最高1.7倍，并支持更多并发请求，证明预训练dLLM可被高效线性化以加速推理。",
       "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型线性化，可在保持性能的同时显著提升解码吞吐量。",
       "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力，并基于LoLCAT方法对预训练模型进行最小化后训练改造。",
@@ -1110,7 +1168,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 99,
+      "score": 98,
       "summary": "生成式推荐将推荐任务建模为语义ID序列的自回归生成，但解码过程常被生成似然主导，与真实业务目标冲突，高价值候选可能因低生成概率在束搜索早期被剪枝。现有重排序或训练时对齐方法干预过晚或需昂贵重训练。本文提出奖励引导解码（RGD），一种面向工业价值导向生成式推荐的可控解码框架。将价值引导解码形式化为KL正则化奖励最大化问题，推导出闭式奖励引导解码分布，原则性地结合生成概率与奖励信号。RGD将基础生成器视为参考策略，引入奖励模型作为测试时控制器，在每步解码注入奖励以重塑搜索轨迹，无需重训练生成器。离线与在线实验证明其在个性化与业务价值对齐上的有效性，已在快手平台部署，带来真实推荐场景的持续改进。",
       "one_line_takeaway": "RGD通过测试时奖励引导解码，在不重训练生成器的情况下，将业务价值注入生成式推荐的每一步搜索，实现个性化与商业目标的对齐。",
       "core_method": "将价值引导解码形式化为KL正则化奖励最大化问题，推导闭式解，得到奖励引导解码分布，在解码每一步结合生成概率与奖励信号，以基础生成器为参考策略，奖励模型为测试时控制器，调整束搜索轨迹。",
@@ -1134,6 +1192,71 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b7d7fe13c9b7e4e",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.24255",
+      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+      "authors": [
+        "Guo Tang",
+        "Hanye Wu",
+        "Changjiang Han",
+        "Qingyang Li",
+        "Ming Zhang",
+        "Xiangyu Qian",
+        "Yanchen Qiao",
+        "Huanjie Wang",
+        "Zhi Ma",
+        "Zhen Li",
+        "Yaqiang Zang",
+        "Pinghua Gong"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T10:45:48Z",
+      "updated": "2026-07-27T10:45:48Z",
+      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
+      "url": "http://arxiv.org/abs/2607.24255v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "MoE"
+      ],
+      "score": 166,
+      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
+      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
+      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
+      "innovation_points": [
+        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
+        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
+        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
+        "保持单一统一骨干网络，简化部署并降低推理成本。"
+      ],
+      "experiment_results": [
+        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
+        "未提供离线实验数据或消融实验细节。"
+      ],
+      "limitations": [
+        "依赖历史行为日志，冷启动场景可能受限。",
+        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
+        "未公开离线评估指标，难以独立验证模型效果。"
+      ],
+      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
+      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -1590,71 +1713,6 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "bda2fa4e2a92916b",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.24255",
-      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
-      "authors": [
-        "Guo Tang",
-        "Hanye Wu",
-        "Changjiang Han",
-        "Qingyang Li",
-        "Ming Zhang",
-        "Xiangyu Qian",
-        "Yanchen Qiao",
-        "Huanjie Wang",
-        "Zhi Ma",
-        "Zhen Li",
-        "Yaqiang Zang",
-        "Pinghua Gong"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T10:45:48Z",
-      "updated": "2026-07-27T10:45:48Z",
-      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
-      "url": "http://arxiv.org/abs/2607.24255v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "预训练",
-        "后训练",
-        "GenRec",
-        "Semantic ID",
-        "MoE"
-      ],
-      "score": 166,
-      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
-      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
-      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
-      "innovation_points": [
-        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
-        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
-        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
-        "保持单一统一骨干网络，简化部署并降低推理成本。"
-      ],
-      "experiment_results": [
-        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
-        "未提供离线实验数据或消融实验细节。"
-      ],
-      "limitations": [
-        "依赖历史行为日志，冷启动场景可能受限。",
-        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
-        "未公开离线评估指标，难以独立验证模型效果。"
-      ],
-      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
-      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -2130,7 +2188,7 @@
         "Semantic ID",
         "Reasoning"
       ],
-      "score": 160,
+      "score": 159,
       "summary": "Gwhere是阿里巴巴高德地图提出的端到端工业级生成式下一兴趣点（POI）推荐框架，旨在解决生成式检索在工业场景中面临的token分配冗余/冲突以及异构信号融合不足等问题。该框架首先通过对比残差量化分词器学习判别性POI语义ID（SID），该分词器对齐文本、视觉、空间和协同信号；然后基于SID，通过丰富时空语料上的持续预训练、监督微调和暴露感知的Kahneman-Tversky优化（EAKTO）将LLM适配到移动场景。在公共数据集和高德大规模工业数据集上的实验验证了有效性，系统已部署在高德首页服务中，长期在线A/B测试显示P-CTR提升5.83%，U-CTR提升6.20%。",
       "one_line_takeaway": "Gwhere通过语义ID生成和LLM微调，实现了工业级生成式POI推荐，显著提升线上点击率。",
       "core_method": "Gwhere包含两个核心组件：1）对比残差量化分词器，学习融合多模态信号的POI语义ID；2）基于LLM的生成式推荐，通过持续预训练、监督微调和EAKTO对齐用户行为偏好。",
@@ -2208,7 +2266,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 134,
+      "score": 133,
       "summary": "生成式检索已成为工业搜索、推荐和广告系统的重要范式，但现有方法将用户行为序列与大型语言模型结合时，特征工程与模型架构紧密耦合，导致离线迭代慢、在线部署重且难以复用。本文提出Prompt Generation（PG），一个高层分词器和配置驱动框架，通过两个声明式JSON文件解耦特征处理逻辑与模型架构，作为离线训练和在线服务的唯一事实来源，确保特征一致性。PG将特征组织为四种类型，使用三个可组合处理组件进行组装和压缩，实现三级加速：快速训练迭代（仅需配置变更，内置超长序列压缩）、快速部署（新场景只需符合PG模式并接入通用管道）、快速在线推理（引擎统一优化，开销可忽略）。PG已在淘宝搜索部署，取得交易数+0.47%和GMV+0.51%的显著线上提升，并被多个搜索和推荐团队采用。",
       "one_line_takeaway": "PG通过配置驱动的JSON文件解耦特征与模型，实现生成式检索的快速迭代、部署和推理，并在淘宝搜索获得显著线上收益。",
       "core_method": "PG框架：定义两种JSON配置（特征模式和模型模式），将特征分为四类（用户、物品、上下文、交互），通过三个可组合组件（编码器、聚合器、压缩器）处理特征，生成离散token序列供LLM使用。配置作为单一事实来源，驱动离线训练和在线服务，实现特征一致性。",
@@ -2268,7 +2326,7 @@
         "训练系统",
         "推理系统"
       ],
-      "score": 111,
+      "score": 110,
       "summary": "FlashTrie提出了一种面向生成式检索的GPU加速约束波束搜索方法。生成式检索中，模型需直接生成与预定义文档标识符库精确匹配的ID，通常使用基于trie的约束解码，但现有实现多在CPU上运行，导致波束宽度增大时成为服务瓶颈。FlashTrie通过整数感知的紧凑trie布局（位压缩）将完整索引驻留于GPU高带宽内存，减少内存停顿；并设计协作式CUDA内核，在设备端完成波束扩展、验证和剪枝，无需主机逐步骤协调。同时，用GPU并行原语替代CPU式不规则查找和堆维护，提升warp利用率并减少发散。在800M关键词库、波束宽度达1000时，trie搜索延迟降至3毫秒以下，相比多线程CPU基线实现最高24倍加速，并支持波束规模扩大5倍。在大型商业搜索引擎的在线A/B实验中，实现了统计显著的+0.71%收入提升，使实时约束解码达到此前仅离线可行的规模。代码将在评审后公开。",
       "one_line_takeaway": "FlashTrie通过GPU优化的紧凑trie布局和协作内核，将生成式检索的约束波束搜索延迟降低至毫秒级，并带来显著在线收益。",
       "core_method": "FlashTrie的核心方法包括：1) 整数感知的紧凑trie布局，利用位压缩减少内存占用，使完整索引驻留于GPU高带宽内存；2) 协作式CUDA内核，在设备端完成波束扩展、验证和剪枝，消除主机逐步骤协调；3) 用GPU并行原语替代CPU式不规则查找和堆维护，提升warp利用率并减少发散。",
@@ -2495,24 +2553,20 @@
       "abstract": "Live streaming has emerged as one of the fastest-growing forms of online media, enabling instant content broadcasting and real-time engagement between users and streamers. Despite the effectiveness of existing recommendation algorithms in this domain, they often suffer from limited utilization of computational resources, with low FLOPs that hinder further performance enhancement. Generative recommendation techniques, which have gained traction in various industrial tasks, offer a promising avenue for improving live streaming recommendations. However, directly applying generative methods to live streaming is non-trivial due to two major challenges: (1) static semantic IDs (SIDs) cannot reflect the rapidly changing nature of live room content; and (2) generative pipelines generally do not incorporate user--streamer interaction signals (e.g., likes, orders), which are critical for modeling user intent toward both the streamer and showcased products. To address these challenges, we introduce SSRLive: Dynamic Semantic ID-guided Streaming Recommendation for Live platforms. The proposed framework integrates a generative module and a discriminative module in a unified architecture. The generative component employs an encoder-decoder design to produce both static and dynamic SIDs, enabling timely representation of live room content while leveraging multimodal information. The discriminative component refines task-specific representations by combining SIDs with user features, augments them with user-streamer interaction data, and performs multi-task predictions. Online A/B tests in real-world deployment demonstrate tangible benefits: watch time (+3.38%), GMV (+0.72%), follower growth (+3.12%), and interaction volume (+2.92%). These improvements highlight the effectiveness and business value of SSRLive, which is now fully deployed, serving hundreds of millions of active users.",
       "url": "http://arxiv.org/abs/2606.06970v1",
       "pdf_url": "https://arxiv.org/pdf/2606.06970v1",
-      "doi": "10.48550/arXiv.2606.06970",
+      "doi": "",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "cs.IR",
-        "CoRR"
+        "cs.IR"
       ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "Semantic ID",
         "Multimodal",
-        "推理系统",
-        "生成式推荐",
-        "动态语义ID",
-        "直播推荐"
+        "推理系统"
       ],
       "score": 124,
       "summary": "SSRLive针对直播推荐中静态语义ID无法反映直播间内容动态变化、以及生成式推荐未充分利用用户与主播交互信号的问题，提出了一种动态语义ID引导的直播推荐框架。该框架统一了生成式与判别式模块：生成模块采用编码器-解码器结构，结合多模态信息生成静态和动态语义ID，实时表征直播间内容；判别模块将语义ID与用户特征融合，并加入用户-主播交互数据，进行多任务预测。在线A/B测试显示，观看时长提升3.38%，GMV提升0.72%，粉丝增长3.12%，互动量提升2.92%，已在真实平台全面部署，服务数亿活跃用户。",
@@ -4600,7 +4654,7 @@
       ],
       "affiliations": [],
       "published": "2026-02-09T08:17:02Z",
-      "updated": "2026-08-27T13:22:56Z",
+      "updated": "2026-09-01T12:56:01Z",
       "abstract": "<div align=\"center\" <img src=resources/logo.svg width=\"15%\"/ </div <p align=\"center\" 👋 Join our <a href=\"resources/WECHAT.md\" target=\"_blank\" Wechat</a or <a href=\"https://discord.gg/Hc5z9bx5Xw\" target=\"_blank\" Discord</a community. <br 📖 Check out the GLM-5.3-Flash <a href=\"https://z.ai/blog/glm-5.3-flash\" target=\"_blank\" blog</a , GLM-5.3 <a href=\"https://z.ai/blog/glm-5.3\" target=\"_blank\" blog</a and GLM-5 <a href=\"https://arxiv.org/abs/2602.15763\" target=\"_blank\" Technical report</a . <br 📍 Use GLM-5.3 & GLM-5.3-Flash API services on <a href=\"https://docs.z.ai/guides/llm/glm-5.3\" Z.ai API Platform. </a <br 🔜 Try GLM-5.3 & GLM-5.3-Flash at <a href=\"https://z.ai\" z.ai</a . </p",
       "url": "https://github.com/zai-org/GLM-5",
       "pdf_url": "https://arxiv.org/pdf/2602.15763",
@@ -4617,32 +4671,36 @@
         "智谱",
         "企业论文",
         "官方技术报告",
-        "LLM 基模"
+        "LLM 基模",
+        "基座大模型",
+        "预训练",
+        "推理优化",
+        "智能体"
       ],
       "score": 124,
-      "summary": "智谱发布GLM-5系列模型，从“氛围编码”转向“智能体工程”，强调模型在真实软件工程中的自主规划与执行能力。技术报告涵盖预训练、后训练对齐及推理优化，提出新的训练数据配比和扩展规律，显著提升代码生成与工具调用准确性。实验显示在SWE-bench等基准上超越前代，但未提供完整消融数据。",
-      "one_line_takeaway": "GLM-5通过智能体工程范式，将大模型从代码补全提升为自主软件工程代理。",
-      "core_method": "采用混合预训练目标与后训练强化学习，结合工具调用数据增强，优化推理时的长程规划能力。",
+      "summary": "智谱在官方技术发布中介绍了GLM-5系列模型，从GLM-5到GLM-5.3及Flash版本，强调从“vibe coding”向“agentic engineering”的转变。报告聚焦于基座大模型的技术演进，包括预训练、架构优化、训练数据扩展、对齐与后训练，以及推理系统的高效部署。GLM-5系列在代码生成、复杂任务执行和智能体能力上显著提升，通过改进的扩展规律和训练策略，实现了性能与效率的平衡。GLM-5.3-Flash作为轻量级版本，优化了推理速度和成本，适合实时应用。报告未提供具体实验数据，但强调了模型在真实业务场景中的工程约束和线上价值，如降低延迟、提升任务完成率。核心贡献在于基座模型的创新，而非应用层案例。",
+      "one_line_takeaway": "GLM-5系列通过基座模型创新和推理优化，从代码生成迈向智能体工程，实现性能与效率的平衡。",
+      "core_method": "GLM-5系列采用改进的预训练架构和扩展规律，结合大规模高质量训练数据，通过后训练对齐和推理系统优化（如Flash版本）提升智能体任务执行能力。",
       "innovation_points": [
-        "提出面向智能体工程的训练范式，强化模型在真实环境中的决策与纠错能力",
-        "引入新的数据配比策略，平衡代码、自然语言与工具调用语料",
-        "优化推理系统，支持长上下文与多轮工具调用的高效执行"
+        "从vibe coding到agentic engineering的范式转变，强化模型在复杂任务中的自主决策能力。",
+        "GLM-5.3-Flash轻量级版本，优化推理速度和成本，适合实时场景。",
+        "改进的扩展规律和训练数据策略，提升模型性能与效率。",
+        "推理系统优化，支持高效部署和线上服务。"
       ],
       "experiment_results": [
-        "在SWE-bench上准确率较前代提升约15%",
-        "在HumanEval和MBPP上达到领先水平",
-        "未提供完整消融实验数据，部分结果来自官方博客"
+        "报告未提供具体实验数据，但声称GLM-5系列在代码生成和智能体任务上显著优于前代。",
+        "GLM-5.3-Flash在推理速度和成本上具有优势，但未给出量化指标。"
       ],
       "limitations": [
-        "缺乏第三方独立验证",
-        "对超长任务（>100步）的稳定性未充分说明",
-        "训练细节未完全公开"
+        "缺乏公开的基准测试数据，难以独立验证性能声明。",
+        "智能体工程能力可能受限于特定任务场景，泛化性未充分说明。",
+        "轻量级版本可能牺牲部分精度，需权衡。"
       ],
-      "practical_value": "为软件工程自动化提供更可靠的基座模型，可减少人工代码审查与调试成本，提升开发效率。",
-      "why_it_matters": "该报告展示了从生成式AI到智能体工程的关键转变，对理解下一代LLM在复杂任务中的应用具有指导意义。",
+      "practical_value": "GLM-5系列为企业提供高性能基座模型，支持代码生成、智能体开发等场景，Flash版本降低部署成本，适合实时交互和资源受限环境。",
+      "why_it_matters": "该报告展示了基座大模型在智能体方向的技术演进，对理解预训练、推理优化和工程部署有参考价值，尤其适合关注生成式AI基础设施的研究者和工程师。",
       "evidence_basis": "official_release",
       "analysis_status": "complete",
-      "analysis_signature": "fe2b6037c07660dc",
+      "analysis_signature": "4105d34b8b995020",
       "is_daily_pick": false
     },
     {
