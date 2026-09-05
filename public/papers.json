@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T10:08:09+08:00",
+  "generated_at": "2026-09-05T10:08:35+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,9 +12,9 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "DBLP: 3/8 个关键词失败，已保留成功结果（HTTP Error 503: Service Unavailable）"
+      "DBLP: 6/8 个关键词失败，已保留成功结果（HTTP Error 503: Service Unavailable）"
     ],
-    "discovered": 2848,
+    "discovered": 2892,
     "candidates": 55,
     "daily_picks": 3,
     "analysis_complete": 83,
@@ -72,10 +72,10 @@
       ],
       "affiliations": [],
       "published": "2026-09-01",
-      "updated": "2026-09-03T10:48:47.769340",
+      "updated": "2026-09-04T10:56:28.161419",
       "abstract": "Industrial recommender systems typically rely on cascaded retrieval, pre-ranking, ranking, and reranking stages, whose separately optimized models limit scaling, fragment decision making, and lack semantic knowledge and reasoning. We present TGR (Tencent Generative Recommendation), an industrial framework that advances recommendation toward the generative paradigm along three coupled directions. TGR-GenRank upgrades ranking through CCFormer, which combines unified feature tokenization, a scalable Transformer backbone, feature-field separated cross attention, subspace token mixing, and hierarchical sequence compression while retaining per-item multi-task outputs. TGR-GenRec explores end-to-end generation under two paradigms: BARGE bridges item-boundary loss and semantic drift in hierarchical semantic-ID generation through item context-aware attention, hierarchical path reranking, and orthogonal dual-path decoding; HiGR performs whole-slate generation with prefix-structured semantic IDs, coarse-to-fine decoding, and listwise multi-objective alignment. TGR-Reason injects offline-generated semantic-ID reason tokens into online decoding, providing reasoning without request-time rollout. TGR is deployed across Tencent production surfaces serving hundreds of millions of users. CCFormer delivers significant gains in five A/B-tested scenarios and is fully launched in two, including +3.57% CTR and +1.71% advertising revenue. BARGE improves Hit@5 by 10.2-16.9% and yields +0.60% CTR and +1.70% reading time after full rollout. HiGR improves offline slate quality by 15.9-21.3% with a 5x inference speedup and achieves up to +1.22% watch time and +1.73% video views. TGR-Reason raises cold-start new-user Hit@1 by 477.8% and delivers +1.75% effective consumption and +13.09% new-user exposure-to-conversion online.",
-      "url": "https://doi.org/10.48550/arxiv.2609.00986",
-      "pdf_url": "None",
+      "url": "https://arxiv.org/abs/2609.00986",
+      "pdf_url": "https://arxiv.org/pdf/2609.00986",
       "doi": "10.48550/arxiv.2609.00986",
       "source": "OpenAlex",
       "content_type": "paper",
@@ -98,30 +98,30 @@
         "生成式推荐"
       ],
       "score": 163,
-      "summary": "工业推荐系统通常依赖级联的召回、粗排、精排和重排阶段，各阶段独立优化限制了扩展性、决策碎片化且缺乏语义知识和推理能力。本文提出腾讯生成式推荐框架TGR，沿三个耦合方向推进生成式范式：TGR-GenRank通过CCFormer升级排序，统一特征token化、可扩展Transformer主干、特征域分离交叉注意力、子空间token混合和层次序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过上下文感知注意力、层次路径重排和正交双路径解码解决层次语义ID生成中的边界损失和语义漂移，HiGR使用前缀结构语义ID实现整槽生成；TGR-Reason将离线生成的语义ID推理token注入在线解码，无需请求时rollout。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个全量上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全量后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
-      "one_line_takeaway": "TGR通过统一生成与推理的工业框架，将排序、生成和推理耦合，显著提升推荐效果和推理效率，验证了生成式范式在超大规模工业推荐中的可行性。",
-      "core_method": "TGR框架包含三个组件：TGR-GenRank使用CCFormer架构，统一特征token化、Transformer主干、特征域分离交叉注意力、子空间token混合和层次序列压缩，保留多任务输出；TGR-GenRec提出BARGE和HiGR两种生成范式，BARGE采用层次语义ID生成，通过上下文感知注意力、路径重排和正交双路径解码解决语义漂移，HiGR使用前缀结构语义ID和粗到细解码实现整槽生成；TGR-Reason离线生成语义ID推理token，在线解码时注入，提供无需rollout的推理能力。",
+      "summary": "TGR是腾讯提出的工业级生成式推荐框架，旨在解决传统级联推荐系统（检索、预排序、排序、重排）中模型分离优化导致的扩展性受限、决策碎片化以及缺乏语义知识和推理能力的问题。TGR沿三个耦合方向推进：TGR-GenRank通过CCFormer升级排序，采用统一特征令牌化、可扩展Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过项上下文感知注意力、分层路径重排序和正交双路径解码解决层次语义ID生成中的项边界损失和语义漂移，HiGR则使用前缀结构语义ID、粗到细解码和列表级多目标对齐实现整槽生成；TGR-Reason将离线生成的语义ID推理令牌注入在线解码，无需请求时展开即可提供推理能力。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个已全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
+      "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入的统一框架，在工业推荐中实现了显著的在线收益，验证了生成式范式的可行性和价值。",
+      "core_method": "TGR框架包含三个核心组件：1) TGR-GenRank：基于CCFormer的生成式排序模型，采用统一特征令牌化、Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，输出逐项多任务预测；2) TGR-GenRec：包括BARGE和HiGR两种生成范式，BARGE使用层次语义ID生成并解决语义漂移，HiGR使用前缀结构语义ID进行整槽生成；3) TGR-Reason：通过离线生成语义ID推理令牌，在线解码时注入，实现无需请求时展开的推理增强。",
       "innovation_points": [
-        "提出TGR工业框架，首次将生成式排序、端到端生成和推理统一在单一框架中，解决级联系统的碎片化问题。",
-        "CCFormer设计特征域分离交叉注意力和子空间token混合，实现可扩展的生成式排序，同时保留多任务输出。",
-        "BARGE和HiGR分别解决层次语义ID生成中的语义漂移和整槽生成中的序列级优化问题。",
-        "TGR-Reason通过离线生成推理token注入在线解码，实现无rollout的推理增强，显著改善冷启动。"
+        "提出统一的生成式推荐框架TGR，将排序、生成和推理三个方向耦合，突破传统级联系统的局限。",
+        "CCFormer设计了特征域分离交叉注意力和子空间令牌混合，实现高效且可扩展的排序模型。",
+        "BARGE和HiGR分别解决层次语义ID生成中的语义漂移和整槽生成问题，支持端到端生成。",
+        "TGR-Reason通过离线推理令牌注入，在不增加在线计算负担的情况下提升推理能力，尤其改善冷启动。"
       ],
       "experiment_results": [
-        "CCFormer在五个A/B测试场景中显著提升，两个全量上线，CTR提升3.57%，广告收入提升1.71%。",
-        "BARGE的Hit@5提升10.2%-16.9%，全量后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%。",
+        "CCFormer在五个A/B测试场景中显著提升，两个全面上线，CTR提升3.57%，广告收入提升1.71%。",
+        "BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%。",
         "TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。"
       ],
       "limitations": [
-        "论文未提供模型参数量、训练成本等详细计算资源信息，难以评估可复现性。",
-        "生成式推荐依赖语义ID构建，其质量对效果影响大，但文中未深入讨论语义ID的生成细节和失败模式。",
-        "TGR-Reason的推理token离线生成，可能无法覆盖动态变化的用户意图，存在时效性局限。"
+        "论文未提供离线实验的详细设置和消融研究，难以独立验证各组件贡献。",
+        "生成式推荐的计算开销和延迟控制细节未充分披露，可能限制在低延迟场景的适用性。",
+        "语义ID的生成依赖离线过程，可能无法适应实时变化的用户兴趣。"
       ],
-      "practical_value": "TGR已在腾讯生产环境部署，服务数亿用户，覆盖多个业务场景，证明了生成式推荐在工业界的可行性。其组件可独立使用，如CCFormer可替换现有精排模型，BARGE和HiGR可用于生成式召回或整槽生成，TGR-Reason可增强冷启动和推理能力。提供了详细的在线收益数据，为其他工业推荐系统升级提供参考。",
-      "why_it_matters": "本文是工业界大规模部署生成式推荐的里程碑工作，展示了从级联系统向统一生成与推理范式转变的实际收益。其技术细节如特征token化、层次语义ID生成和推理token注入，为后续研究提供了新方向。对于关注推荐系统演进和LLM在推荐中应用的研究者，本文提供了宝贵的工业实践证据。",
+      "practical_value": "TGR已在腾讯生产环境部署，服务数亿用户，证明了生成式推荐在工业界的可行性。其模块化设计允许逐步升级现有系统，CCFormer可独立用于排序，BARGE和HiGR可替换检索或重排，TGR-Reason可增强冷启动。在线收益显著，为其他企业提供了可复制的生成式推荐落地路径。",
+      "why_it_matters": "该论文是生成式推荐在工业界大规模部署的罕见案例，提供了从模型设计到在线部署的完整经验。它展示了如何将LLM中的生成和推理技术迁移到推荐系统，并解决了语义ID、整槽生成等关键挑战。对于关注推荐系统演进和生成式AI应用的研究者与工程师，本文具有重要参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "1cd0c79c2d29ac08",
+      "analysis_signature": "bfe2e678119d5e72",
       "is_daily_pick": true
     },
     {
@@ -219,12 +219,9 @@
         "后训练",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式检索",
-        "电商搜索",
-        "语义ID"
+        "推理系统"
       ],
-      "score": 157,
+      "score": 156,
       "summary": "本文提出ICEGR，一个面向电商搜索的意图一致端到端生成式检索框架。现有生成式检索方法在训练流程中难以保持查询意图一致性：基于静态商品信息构建的语义ID无法编码商品-意图关联；仅依赖在线日志的查询到ID监督导致低曝光商品缺乏真实意图监督；面向业务的偏好优化可能偏向热门或高价值商品而损害相关性。ICEGR包含三个组件：意图感知的语义ID构建，将查询意图信号融入ID构建；合成查询增强的统一监督微调，统一多个任务并补充低曝光商品的监督；相关性校准的偏好优化，将相关性和业务信号整合进边际自适应目标。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%。在百度电商搜索部署后，A/B测试中CTR提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知的语义ID、合成查询增强的统一SFT和相关性校准的偏好优化，在端到端生成式检索中实现意图一致性，显著提升电商搜索的检索效果和业务指标。",
       "core_method": "ICEGR框架包含三个组件：1) 意图感知语义ID构建，利用查询-商品交互信号（如点击、购买）增强语义ID，使其捕捉搜索意图；2) 合成查询增强的统一SFT，将多个任务统一为查询到ID目标，并生成合成查询补充低曝光商品的监督；3) 相关性校准的偏好优化，设计边际自适应偏好目标，融合相关性和业务信号，平衡意图匹配与业务优化。",
@@ -516,7 +513,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 150,
+      "score": 149,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -576,7 +573,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 127,
+      "score": 126,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -783,7 +780,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 109,
+      "score": 108,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -845,7 +842,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 93,
+      "score": 92,
       "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而消除前缀注意力瓶颈。该方法可对预训练dLLM进行最小化后训练改造：将LLaDA 2.1（16B开源模型）的20个注意力层中的6层替换为线性注意力，遵循LoLCAT方法，转换仅需约60小时。在HumanEval、MBPP+和CMATH基准上，性能分别保持72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%）。基于Triton实现，解码吞吐量提升最高1.7倍，并支持更多并发请求，证明预训练dLLM可被高效线性化以加速推理。",
       "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型线性化，可在保持性能的同时显著提升解码吞吐量。",
       "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力，并基于LoLCAT方法对预训练模型进行最小化后训练改造。",
@@ -1228,7 +1225,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 98,
+      "score": 97,
       "summary": "生成式推荐将推荐任务建模为语义ID序列的自回归生成，但解码过程常被生成似然主导，与真实业务目标冲突，高价值候选可能因低生成概率在束搜索早期被剪枝。现有重排序或训练时对齐方法干预过晚或需昂贵重训练。本文提出奖励引导解码（RGD），一种面向工业价值导向生成式推荐的可控解码框架。将价值引导解码形式化为KL正则化奖励最大化问题，推导出闭式奖励引导解码分布，原则性地结合生成概率与奖励信号。RGD将基础生成器视为参考策略，引入奖励模型作为测试时控制器，在每步解码注入奖励以重塑搜索轨迹，无需重训练生成器。离线与在线实验证明其在个性化与业务价值对齐上的有效性，已在快手平台部署，带来真实推荐场景的持续改进。",
       "one_line_takeaway": "RGD通过测试时奖励引导解码，在不重训练生成器的情况下，将业务价值注入生成式推荐的每一步搜索，实现个性化与商业目标的对齐。",
       "core_method": "将价值引导解码形式化为KL正则化奖励最大化问题，推导闭式解，得到奖励引导解码分布，在解码每一步结合生成概率与奖励信号，以基础生成器为参考策略，奖励模型为测试时控制器，调整束搜索轨迹。",
@@ -2248,7 +2245,7 @@
         "Semantic ID",
         "Reasoning"
       ],
-      "score": 159,
+      "score": 158,
       "summary": "Gwhere是阿里巴巴高德地图提出的端到端工业级生成式下一兴趣点（POI）推荐框架，旨在解决生成式检索在工业场景中面临的token分配冗余/冲突以及异构信号融合不足等问题。该框架首先通过对比残差量化分词器学习判别性POI语义ID（SID），该分词器对齐文本、视觉、空间和协同信号；然后基于SID，通过丰富时空语料上的持续预训练、监督微调和暴露感知的Kahneman-Tversky优化（EAKTO）将LLM适配到移动场景。在公共数据集和高德大规模工业数据集上的实验验证了有效性，系统已部署在高德首页服务中，长期在线A/B测试显示P-CTR提升5.83%，U-CTR提升6.20%。",
       "one_line_takeaway": "Gwhere通过语义ID生成和LLM微调，实现了工业级生成式POI推荐，显著提升线上点击率。",
       "core_method": "Gwhere包含两个核心组件：1）对比残差量化分词器，学习融合多模态信号的POI语义ID；2）基于LLM的生成式推荐，通过持续预训练、监督微调和EAKTO对齐用户行为偏好。",
@@ -2326,7 +2323,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 133,
+      "score": 132,
       "summary": "生成式检索已成为工业搜索、推荐和广告系统的重要范式，但现有方法将用户行为序列与大型语言模型结合时，特征工程与模型架构紧密耦合，导致离线迭代慢、在线部署重且难以复用。本文提出Prompt Generation（PG），一个高层分词器和配置驱动框架，通过两个声明式JSON文件解耦特征处理逻辑与模型架构，作为离线训练和在线服务的唯一事实来源，确保特征一致性。PG将特征组织为四种类型，使用三个可组合处理组件进行组装和压缩，实现三级加速：快速训练迭代（仅需配置变更，内置超长序列压缩）、快速部署（新场景只需符合PG模式并接入通用管道）、快速在线推理（引擎统一优化，开销可忽略）。PG已在淘宝搜索部署，取得交易数+0.47%和GMV+0.51%的显著线上提升，并被多个搜索和推荐团队采用。",
       "one_line_takeaway": "PG通过配置驱动的JSON文件解耦特征与模型，实现生成式检索的快速迭代、部署和推理，并在淘宝搜索获得显著线上收益。",
       "core_method": "PG框架：定义两种JSON配置（特征模式和模型模式），将特征分为四类（用户、物品、上下文、交互），通过三个可组合组件（编码器、聚合器、压缩器）处理特征，生成离散token序列供LLM使用。配置作为单一事实来源，驱动离线训练和在线服务，实现特征一致性。",
