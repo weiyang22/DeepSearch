@@ -43,6 +43,8 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
         ("Official GitHub", collect_official_github),
     ]
     for name, collector in collectors:
+        started = time.monotonic()
+        print(f"Collecting {name}...")
         try:
             papers.extend(collector(config))
         except PartialCollectionError as exc:
@@ -50,6 +52,8 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
             errors.append(f"{name}: {exc}")
         except Exception as exc:  # one source must not stop the daily digest
             errors.append(f"{name}: {exc}")
+        finally:
+            print(f"Finished {name} in {time.monotonic() - started:.1f}s")
     return deduplicate(papers), errors
 
 
@@ -71,7 +75,7 @@ def collect_arxiv(config: Config) -> list[Paper]:
             }
         )
         try:
-            body = _request(url, timeout=45)
+            body = _request(url, timeout=30, attempts=3)
             root = ET.fromstring(body)
         except Exception as exc:
             failures.append(str(exc))
@@ -295,13 +299,22 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
     headers = {}
     if os.getenv("SEMANTIC_SCHOLAR_API_KEY"):
         headers["x-api-key"] = os.environ["SEMANTIC_SCHOLAR_API_KEY"]
-    queries = config.topic_queries[:8] + [terms[0] for terms in config.company_queries.values()]
+    # Anonymous Semantic Scholar traffic is heavily throttled on shared CI IPs.
+    # Core topic searches provide the useful abstracts; company-wide discovery is
+    # already handled by OpenAlex and official GitHub.
+    queries = config.topic_queries[:8]
     for query in queries:
         url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode(
             {"query": query, "limit": str(config.semantic_scholar_limit), "fields": fields}
         )
         try:
-            results = _request_json(url, headers=headers).get("data", []) or []
+            results = _request_json(
+                url,
+                headers=headers,
+                timeout=15,
+                request_attempts=3 if headers else 2,
+                parse_attempts=1,
+            ).get("data", []) or []
         except Exception:
             continue
         for work in results:
@@ -322,7 +335,7 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
             )
             classify_company(paper, config)
             papers.append(paper)
-        time.sleep(0.35)
+        time.sleep(1 if not headers else 0.35)
     return papers
 
 
