@@ -43,6 +43,7 @@ type Payload = {
     source_errors?: string[];
     discovered?: number;
     candidates?: number;
+    new_papers?: number;
     daily_picks: number;
     analysis_complete?: number;
     analysis_fallback?: number;
@@ -138,7 +139,7 @@ export function DigestDashboard() {
           并且只收录明确报告 A/B 测试或线上受控实验的工作。
         </p>
         <div className="intro-meta">
-          <span>今日收录 <strong>{todayCount}</strong> 篇，不设固定数量</span>
+          <span>近 {payload.site.daily_window_days || 3} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
           <span>滚动保留 {payload.site.retention_days} 天</span>
           <span>共 {papers.length} 篇</span>
         </div>
@@ -154,7 +155,7 @@ export function DigestDashboard() {
           <p className="data-status-main">最后更新：{formatGeneratedAtFull(payload.generated_at)}</p>
           <p className="data-status-meta">
             本轮发现 {payload.status.discovered ?? 0} 条，筛选出 {payload.status.candidates ?? 0} 条；
-            当前归档 {papers.length} 篇
+            新增 {payload.status.new_papers ?? 0} 篇，当前归档 {papers.length} 篇
           </p>
         </div>
         {sourceErrors.length ? (
@@ -170,7 +171,7 @@ export function DigestDashboard() {
       <section className="feed" aria-label="论文列表">
         <div className="toolbar">
           <nav className="view-tabs" aria-label="内容范围">
-            <ViewTab active={mode === "today"} onClick={() => setMode("today")} label="今日" count={todayCount} />
+            <ViewTab active={mode === "today"} onClick={() => setMode("today")} label="近期" count={todayCount} />
             <ViewTab active={mode === "llm"} onClick={() => setMode("llm")} label="LLM 基模" />
             <ViewTab active={mode === "genrec"} onClick={() => setMode("genrec")} label="GenRec" />
             <ViewTab active={mode === "company"} onClick={() => setMode("company")} label="企业 / 官方" />
@@ -320,5 +321,5 @@ function formatPaperDate(value: string) {
 }
 
 function viewLabel(mode: ViewMode) {
-  return { today: "今日收录", llm: "LLM 基模技术", genrec: "GenRec / Semantic ID", company: "企业与官方发布", all: "全部归档", saved: "我的收藏" }[mode];
+  return { today: "近期入选", llm: "LLM 基模技术", genrec: "GenRec / Semantic ID", company: "企业与官方发布", all: "全部归档", saved: "我的收藏" }[mode];
 }

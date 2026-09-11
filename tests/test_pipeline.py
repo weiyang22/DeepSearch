@@ -15,6 +15,7 @@ from deepsearch.sources import (
     _looks_like_foundation_model_report,
     _repo_matches_model_family,
     _request,
+    _request_json,
     classify_company,
     collect_all,
     deduplicate,
@@ -92,8 +93,8 @@ class PipelineTests(unittest.TestCase):
             "cat:cs.AI OR cat:cs.CL",
             "submittedDate:[202508270000 TO 202608270000]",
         )
-        self.assertGreater(len(queries), len(self.config.topic_queries))
-        self.assertTrue(all(len(query) < 600 for query in queries))
+        self.assertEqual(len(queries), 4)
+        self.assertTrue(all(len(query) < 900 for query in queries))
         self.assertTrue(any("Claude" in query for query in queries))
 
     def test_collect_all_keeps_partial_source_results_and_warning(self):
@@ -119,6 +120,22 @@ class PipelineTests(unittest.TestCase):
             with patch("deepsearch.sources.time.sleep") as sleep:
                 self.assertEqual(_request("https://example.com"), b"ok")
         self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(1)
+
+    def test_request_uses_longer_backoff_for_rate_limits(self):
+        failure = urllib.error.HTTPError("https://example.com", 429, "rate limited", {}, None)
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = b"ok"
+        with patch("deepsearch.sources.urllib.request.urlopen", side_effect=[failure, response]):
+            with patch("deepsearch.sources.time.sleep") as sleep:
+                self.assertEqual(_request("https://example.com"), b"ok")
+        sleep.assert_called_once_with(10)
+
+    def test_request_json_retries_invalid_transient_response(self):
+        with patch("deepsearch.sources._request", side_effect=[b"<html>busy</html>", b'{"ok": true}']) as request:
+            with patch("deepsearch.sources.time.sleep") as sleep:
+                self.assertEqual(_request_json("https://example.com"), {"ok": True})
+        self.assertEqual(request.call_count, 2)
         sleep.assert_called_once_with(1)
 
     def test_daily_selection_has_no_fixed_count_and_prioritizes_enterprise_genrec(self):
@@ -168,6 +185,17 @@ class PipelineTests(unittest.TestCase):
         ]
         ranked = prepare_candidates(papers, self.config)
         self.assertEqual([item.id for item in ranked], ["newer-low-score", "older-high-score"])
+
+    def test_daily_selection_does_not_relabel_stale_papers_as_today(self):
+        stale = Paper(
+            id="stale",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            published=(dt.date.today() - dt.timedelta(days=10)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        ranked = prepare_candidates([stale], self.config)
+        self.assertEqual(choose_daily_picks(ranked, self.config), [])
 
     def test_retention_window_covers_the_past_year(self):
         within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()

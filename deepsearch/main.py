@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import os
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -49,6 +50,8 @@ def main() -> int:
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
     merged.sort(key=lambda paper: (_paper_date(paper), paper.score), reverse=True)
+    previous_titles = {_normalized_title(paper.title) for paper in previous}
+    new_papers = sum(_normalized_title(paper.title) not in previous_titles for paper in merged)
 
     # Analyze the complete rolling archive. Existing complete analyses are reused by
     # signature, while newly discovered or fallback entries are backfilled.
@@ -71,10 +74,11 @@ def main() -> int:
             "retention_days": config.retention_days,
         },
         "status": {
-            "analysis_enabled": bool(__import__("os").getenv("DEEPSEEK_API_KEY")),
+            "analysis_enabled": bool(os.getenv("DEEPSEEK_API_KEY")),
             "source_errors": source_errors,
             "discovered": len(discovered),
             "candidates": len(candidates),
+            "new_papers": new_papers,
             "daily_picks": len(daily_picks),
             "analysis_complete": sum(paper.analysis_status == "complete" for paper in merged),
             "analysis_fallback": sum(paper.analysis_status != "complete" for paper in merged),
@@ -88,6 +92,10 @@ def main() -> int:
     print(f"Wrote {len(merged)} papers ({len(daily_picks)} daily picks) to {output}")
     if source_errors:
         print("Source warnings: " + "; ".join(source_errors))
+        if os.getenv("GITHUB_ACTIONS") == "true":
+            for warning in source_errors:
+                escaped = warning.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+                print(f"::warning title=Data source degraded::{escaped}")
     return 0
 
 
@@ -120,6 +128,10 @@ def _paper_date(paper: Paper) -> dt.date:
         except ValueError:
             continue
     return dt.date.today()
+
+
+def _normalized_title(value: str) -> str:
+    return "".join(char for char in value.lower() if char.isalnum())
 
 
 if __name__ == "__main__":

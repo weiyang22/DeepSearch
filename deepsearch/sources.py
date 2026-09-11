@@ -65,7 +65,7 @@ def collect_arxiv(config: Config) -> list[Paper]:
             {
                 "search_query": query,
                 "start": 0,
-                "max_results": min(config.arxiv_max_results, 100),
+                "max_results": min(config.arxiv_max_results, 200),
                 "sortBy": "submittedDate",
                 "sortOrder": "descending",
             }
@@ -108,7 +108,9 @@ def collect_arxiv(config: Config) -> list[Paper]:
             )
             classify_company(paper, config)
             papers.append(paper)
-        time.sleep(3)
+        # arXiv asks API clients to leave at least three seconds between calls.
+        # A little extra headroom matters on shared GitHub Actions IP ranges.
+        time.sleep(4)
     papers = deduplicate(papers)
     if failures:
         if not papers:
@@ -119,16 +121,19 @@ def collect_arxiv(config: Config) -> list[Paper]:
 
 
 def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str]:
-    """Keep arXiv requests short so one oversized query cannot fail the whole source."""
-    queries = [
-        f"({categories}) AND (all:\"{term}\") AND {date_range}"
-        for term in config.topic_queries[:8]
-    ]
-    discovery_terms = _unique([
-        *[terms[0] for terms in config.company_queries.values() if terms],
-        *[term for terms in config.model_families.values() for term in terms],
-    ])
-    for chunk in _chunks(discovery_terms, 6):
+    """Build a few balanced queries to avoid both oversized requests and rate limits."""
+    queries: list[str] = []
+    topic_terms = " OR ".join(f'all:\"{term}\"' for term in config.topic_queries[:8])
+    if topic_terms:
+        queries.append(f"({categories}) AND ({topic_terms}) AND {date_range}")
+
+    # Model-family names cover focused company releases without issuing one query
+    # for every institution. Company-only discovery remains covered by OpenAlex,
+    # Semantic Scholar and official GitHub collectors.
+    discovery_terms = _unique(
+        term for terms in config.model_families.values() for term in terms
+    )
+    for chunk in _chunks(discovery_terms, 11):
         terms = " OR ".join(f'all:\"{term}\"' for term in chunk)
         queries.append(f"({categories}) AND ({terms}) AND {date_range}")
     return queries
@@ -137,12 +142,26 @@ def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str
 def collect_dblp(config: Config) -> list[Paper]:
     papers: list[Paper] = []
     failures: list[str] = []
-    for query in config.topic_queries[:8]:
+    # DBLP is supplementary metadata (it does not provide abstracts), so keep its
+    # daily footprint small and let the richer sources handle broad discovery.
+    query_indexes = (0, 4, 6)
+    queries = _unique(
+        config.topic_queries[index]
+        for index in query_indexes
+        if index < len(config.topic_queries)
+    )
+    for query in queries:
         url = "https://dblp.org/search/publ/api?" + urllib.parse.urlencode(
             {"q": query, "format": "json", "h": "12"}
         )
         try:
-            payload = _request_json(url)
+            payload = _request_json(
+                url,
+                headers={"Accept": "application/json"},
+                timeout=10,
+                request_attempts=1,
+                parse_attempts=2,
+            )
         except Exception as exc:
             failures.append(str(exc))
             continue
@@ -175,12 +194,12 @@ def collect_dblp(config: Config) -> list[Paper]:
             )
             classify_company(paper, config)
             papers.append(paper)
-        time.sleep(1)
+        time.sleep(2)
     papers = deduplicate(papers)
     if failures:
         if not papers:
             raise RuntimeError(f"全部关键词失败（{_short_error(failures[0])}）")
-        message = f"{len(failures)}/{min(8, len(config.topic_queries))} 个关键词失败，已保留成功结果（{_short_error(failures[0])}）"
+        message = f"{len(failures)}/{len(queries)} 个关键词失败，已保留成功结果（{_short_error(failures[0])}）"
         raise PartialCollectionError(message, papers)
     return papers
 
@@ -435,14 +454,39 @@ def deduplicate(papers: Iterable[Paper]) -> list[Paper]:
     return list(by_key.values())
 
 
-def _request_json(url: str, headers: dict[str, str] | None = None) -> Any:
-    return json.loads(_request(url, headers=headers).decode("utf-8"))
+def _request_json(
+    url: str,
+    headers: dict[str, str] | None = None,
+    *,
+    timeout: int = 25,
+    request_attempts: int = 4,
+    parse_attempts: int = 3,
+) -> Any:
+    """Fetch JSON and retry transient HTML/empty responses from public indexes."""
+    last_error: Exception | None = None
+    body = b""
+    for attempt in range(parse_attempts):
+        body = _request(url, headers=headers, timeout=timeout, attempts=request_attempts)
+        try:
+            return json.loads(body.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            last_error = exc
+            if attempt < parse_attempts - 1:
+                time.sleep(2 ** attempt)
+    preview = _clean(body.decode("utf-8", errors="ignore"))[:80]
+    detail = preview or _short_error(str(last_error))
+    raise RuntimeError(f"响应不是有效 JSON（{detail}）")
 
 
-def _request(url: str, headers: dict[str, str] | None = None, timeout: int = 25) -> bytes:
+def _request(
+    url: str,
+    headers: dict[str, str] | None = None,
+    timeout: int = 25,
+    attempts: int = 4,
+) -> bytes:
     request_headers = {"User-Agent": USER_AGENT, **(headers or {})}
     last_error: Exception | None = None
-    for attempt in range(4):
+    for attempt in range(attempts):
         try:
             request = urllib.request.Request(url, headers=request_headers)
             with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -452,15 +496,20 @@ def _request(url: str, headers: dict[str, str] | None = None, timeout: int = 25)
             if exc.code not in RETRYABLE_HTTP_STATUS:
                 break
             retry_after = exc.headers.get("Retry-After") if exc.headers else None
-            delay = float(retry_after) if retry_after and retry_after.isdigit() else 2 ** attempt
+            if retry_after and retry_after.isdigit():
+                delay = float(retry_after)
+            elif exc.code == 429:
+                delay = 10 * (attempt + 1)
+            else:
+                delay = 2 ** attempt
         except (urllib.error.URLError, http.client.HTTPException, socket.timeout, TimeoutError, ConnectionError, OSError) as exc:
             last_error = exc
             delay = 2 ** attempt
         except Exception as exc:
             last_error = exc
             break
-        if attempt < 3:
-            time.sleep(min(delay, 8))
+        if attempt < attempts - 1:
+            time.sleep(min(delay, 30))
     raise RuntimeError(_short_error(str(last_error)))
 
 

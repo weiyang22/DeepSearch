@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
   schedule:
-    # Beijing 08:00 = UTC 00:00
-    - cron: "0 0 * * *"
+    # Start at Beijing 07:37 (UTC 23:37) so collection/build normally
+    # finishes near 08:00, while avoiding GitHub's congested top-of-hour queue.
+    - cron: "37 23 * * *"
   workflow_dispatch:
 
 permissions:

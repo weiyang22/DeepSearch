@@ -207,15 +207,13 @@ def choose_daily_picks(papers: list[Paper], config: Config) -> list[Paper]:
     """Choose every fresh, high-signal item; daily_limit=0 means no count cap."""
     if not papers:
         return []
-    newest = max(_paper_date(paper) for paper in papers)
-    window_start = newest - dt.timedelta(days=max(0, config.daily_window_days - 1))
+    window_start = dt.date.today() - dt.timedelta(days=max(0, config.daily_window_days - 1))
     selected = [
         paper
         for paper in papers
-        if _paper_date(paper) >= window_start and paper.score >= config.daily_min_score
+        if window_start <= _paper_date(paper) <= dt.date.today()
+        and paper.score >= config.daily_min_score
     ]
-    if not selected:
-        selected = [paper for paper in papers if _paper_date(paper) == newest]
     if config.daily_limit > 0:
         return selected[: config.daily_limit]
     return selected
