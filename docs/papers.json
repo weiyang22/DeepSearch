@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T10:26:31+08:00",
+  "generated_at": "2026-09-11T10:29:29+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -15,8 +15,8 @@
       "arXiv: 16/17 个分片失败，已保留成功分片（HTTP Error 429: Unknown Error）",
       "DBLP: 全部关键词失败（Expecting value: line 1 column 1 (char 0)）"
     ],
-    "discovered": 2021,
-    "candidates": 17,
+    "discovered": 1972,
+    "candidates": 33,
     "daily_picks": 1,
     "analysis_complete": 84,
     "analysis_fallback": 0
@@ -85,7 +85,8 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Multimodal Machine Learning Applications",
-        "Generative Adversarial Networks and Image Synthesis"
+        "Generative Adversarial Networks and Image Synthesis",
+        "cs.IR"
       ],
       "tags": [
         "A/B 实验",
@@ -121,7 +122,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "bfe2e678119d5e72",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2608.30553",
@@ -220,7 +221,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 155,
+      "score": 154,
       "summary": "本文提出ICEGR，一个面向电商搜索的意图一致端到端生成式检索框架。现有生成式检索方法在训练流程中难以保持查询意图一致性：基于静态商品信息构建的语义ID无法编码商品-意图关联；仅依赖在线日志的查询到ID监督导致低曝光商品缺乏真实意图监督；面向业务的偏好优化可能偏向热门或高价值商品而损害相关性。ICEGR包含三个组件：意图感知的语义ID构建，将查询意图信号融入ID构建；合成查询增强的统一监督微调，统一多个任务并补充低曝光商品的监督；相关性校准的偏好优化，将相关性和业务信号整合进边际自适应目标。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%。在百度电商搜索部署后，A/B测试中CTR提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知的语义ID、合成查询增强的统一SFT和相关性校准的偏好优化，在端到端生成式检索中实现意图一致性，显著提升电商搜索的检索效果和业务指标。",
       "core_method": "ICEGR框架包含三个组件：1) 意图感知语义ID构建，利用查询-商品交互信号（如点击、购买）增强语义ID，使其捕捉搜索意图；2) 合成查询增强的统一SFT，将多个任务统一为查询到ID目标，并生成合成查询补充低曝光商品的监督；3) 相关性校准的偏好优化，设计边际自适应偏好目标，融合相关性和业务信号，平衡意图匹配与业务优化。",
@@ -512,7 +513,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 148,
+      "score": 147,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -572,7 +573,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 125,
+      "score": 124,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -779,7 +780,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 107,
+      "score": 106,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -841,7 +842,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 91,
+      "score": 90,
       "summary": "扩散语言模型（dLLMs）通过并行解码加速推理，但现有块状半自回归解码在每一步去噪时仍需关注所有先前块，导致前缀注意力成本重复计算。本文提出块混合注意力（block-hybrid attention），在活动去噪块内保留精确softmax注意力，对先前块使用线性注意力，从而消除前缀注意力瓶颈。该方法可对预训练dLLM进行最小化后训练改造：将LLaDA 2.1（16B开源模型）的20个注意力层中的6层替换为线性注意力，遵循LoLCAT方法，转换仅需约60小时。在HumanEval、MBPP+和CMATH基准上，性能分别保持72.0%（原75.6%）、63.0%（原57.7%）和86.7%（原88.3%）。基于Triton实现，解码吞吐量提升最高1.7倍，并支持更多并发请求，证明预训练dLLM可被高效线性化以加速推理。",
       "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型线性化，可在保持性能的同时显著提升解码吞吐量。",
       "core_method": "块混合注意力：在活动去噪块内使用精确softmax注意力，对先前块使用线性注意力，并基于LoLCAT方法对预训练模型进行最小化后训练改造。",
@@ -1224,7 +1225,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 96,
+      "score": 95,
       "summary": "生成式推荐将推荐任务建模为语义ID序列的自回归生成，但解码过程常被生成似然主导，与真实业务目标冲突，高价值候选可能因低生成概率在束搜索早期被剪枝。现有重排序或训练时对齐方法干预过晚或需昂贵重训练。本文提出奖励引导解码（RGD），一种面向工业价值导向生成式推荐的可控解码框架。将价值引导解码形式化为KL正则化奖励最大化问题，推导出闭式奖励引导解码分布，原则性地结合生成概率与奖励信号。RGD将基础生成器视为参考策略，引入奖励模型作为测试时控制器，在每步解码注入奖励以重塑搜索轨迹，无需重训练生成器。离线与在线实验证明其在个性化与业务价值对齐上的有效性，已在快手平台部署，带来真实推荐场景的持续改进。",
       "one_line_takeaway": "RGD通过测试时奖励引导解码，在不重训练生成器的情况下，将业务价值注入生成式推荐的每一步搜索，实现个性化与商业目标的对齐。",
       "core_method": "将价值引导解码形式化为KL正则化奖励最大化问题，推导闭式解，得到奖励引导解码分布，在解码每一步结合生成概率与奖励信号，以基础生成器为参考策略，奖励模型为测试时控制器，调整束搜索轨迹。",
@@ -1248,6 +1249,71 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b7d7fe13c9b7e4e",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.24255",
+      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+      "authors": [
+        "Guo Tang",
+        "Hanye Wu",
+        "Changjiang Han",
+        "Qingyang Li",
+        "Ming Zhang",
+        "Xiangyu Qian",
+        "Yanchen Qiao",
+        "Huanjie Wang",
+        "Zhi Ma",
+        "Zhen Li",
+        "Yaqiang Zang",
+        "Pinghua Gong"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T10:45:48Z",
+      "updated": "2026-07-27T10:45:48Z",
+      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
+      "url": "http://arxiv.org/abs/2607.24255v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "MoE"
+      ],
+      "score": 163,
+      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
+      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
+      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
+      "innovation_points": [
+        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
+        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
+        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
+        "保持单一统一骨干网络，简化部署并降低推理成本。"
+      ],
+      "experiment_results": [
+        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
+        "未提供离线实验数据或消融实验细节。"
+      ],
+      "limitations": [
+        "依赖历史行为日志，冷启动场景可能受限。",
+        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
+        "未公开离线评估指标，难以独立验证模型效果。"
+      ],
+      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
+      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -1704,71 +1770,6 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "bda2fa4e2a92916b",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.24255",
-      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
-      "authors": [
-        "Guo Tang",
-        "Hanye Wu",
-        "Changjiang Han",
-        "Qingyang Li",
-        "Ming Zhang",
-        "Xiangyu Qian",
-        "Yanchen Qiao",
-        "Huanjie Wang",
-        "Zhi Ma",
-        "Zhen Li",
-        "Yaqiang Zang",
-        "Pinghua Gong"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T10:45:48Z",
-      "updated": "2026-07-27T10:45:48Z",
-      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
-      "url": "http://arxiv.org/abs/2607.24255v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "预训练",
-        "后训练",
-        "GenRec",
-        "Semantic ID",
-        "MoE"
-      ],
-      "score": 163,
-      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
-      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
-      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
-      "innovation_points": [
-        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
-        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
-        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
-        "保持单一统一骨干网络，简化部署并降低推理成本。"
-      ],
-      "experiment_results": [
-        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
-        "未提供离线实验数据或消融实验细节。"
-      ],
-      "limitations": [
-        "依赖历史行为日志，冷启动场景可能受限。",
-        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
-        "未公开离线评估指标，难以独立验证模型效果。"
-      ],
-      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
-      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
