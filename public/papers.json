@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T10:29:29+08:00",
+  "generated_at": "2026-09-12T03:41:33+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "arXiv: 16/17 个分片失败，已保留成功分片（HTTP Error 429: Unknown Error）",
-      "DBLP: 全部关键词失败（Expecting value: line 1 column 1 (char 0)）"
+      "DBLP: 全部关键词失败（响应不是有效 JSON（<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</t））"
     ],
-    "discovered": 1972,
-    "candidates": 33,
-    "daily_picks": 1,
+    "discovered": 2496,
+    "candidates": 45,
+    "new_papers": 0,
+    "daily_picks": 0,
     "analysis_complete": 84,
     "analysis_fallback": 0
   },
@@ -202,10 +202,10 @@
       ],
       "affiliations": [],
       "published": "2026-08-30T08:28:58Z",
-      "updated": "2026-09-02T11:51:23Z",
+      "updated": "2026-09-10T06:32:53Z",
       "abstract": "Generative Retrieval (GR) is promising for e-commerce search, yet existing methods struggle to maintain query-intent consistency throughout the training pipeline. First, semantic ID (SID) construction based on static product information limits the ability of SIDs to encode product-intent associations. Second, although supervised fine-tuning (SFT) learns product-SID mappings across the catalog, low-exposure products still lack real query-intent supervision because query-to-SID training relies solely on online logs, resulting in poor retrieval performance for these products. Third, business-oriented preference optimization may favor popular or high-value products over those that best match the query intent, weakening query-product relevance. To address these issues, we propose ICEGR, an Intent-Coherent End-to-End Generative Retrieval Framework for E-commerce Search that integrates query intent consistently throughout the GR training pipeline. ICEGR comprises three components: (1) Intent-Aware SID Construction incorporates query-intent signals into SID construction, enabling SIDs to capture search intent beyond static product information; (2) Synthetic Query-Enhanced Unified SFT unifies multiple SFT tasks under the query-to-SID objective and augments sparse supervision from online logs with synthetic queries, providing complementary query-intent supervision for low-exposure products; and (3) Relevance-Calibrated Preference Optimization integrates query-product relevance and business signals into a margin-adaptive preference objective, preserving query intent while enabling business preference learning. Offline results show that ICEGR improves Recall@20 by 21.7% and NDCG@20 by 26.6% over the baseline. Deployed as an end-to-end generative retrieval pathway in Baidu E-commerce Search, ICEGR achieves relative improvements of 3.52% in CTR, 15.96% in order volume, and 7.53% in GMV in an A/B test.",
-      "url": "http://arxiv.org/abs/2608.29652v2",
-      "pdf_url": "https://arxiv.org/pdf/2608.29652v2",
+      "url": "http://arxiv.org/abs/2608.29652v3",
+      "pdf_url": "https://arxiv.org/pdf/2608.29652v3",
       "doi": "",
       "source": "arXiv",
       "content_type": "paper",
@@ -219,31 +219,35 @@
         "后训练",
         "GenRec",
         "Semantic ID",
-        "推理系统"
+        "推理系统",
+        "生成式检索",
+        "电商搜索",
+        "语义ID"
       ],
       "score": 154,
-      "summary": "本文提出ICEGR，一个面向电商搜索的意图一致端到端生成式检索框架。现有生成式检索方法在训练流程中难以保持查询意图一致性：基于静态商品信息构建的语义ID无法编码商品-意图关联；仅依赖在线日志的查询到ID监督导致低曝光商品缺乏真实意图监督；面向业务的偏好优化可能偏向热门或高价值商品而损害相关性。ICEGR包含三个组件：意图感知的语义ID构建，将查询意图信号融入ID构建；合成查询增强的统一监督微调，统一多个任务并补充低曝光商品的监督；相关性校准的偏好优化，将相关性和业务信号整合进边际自适应目标。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%。在百度电商搜索部署后，A/B测试中CTR提升3.52%，订单量提升15.96%，GMV提升7.53%。",
-      "one_line_takeaway": "ICEGR通过意图感知的语义ID、合成查询增强的统一SFT和相关性校准的偏好优化，在端到端生成式检索中实现意图一致性，显著提升电商搜索的检索效果和业务指标。",
-      "core_method": "ICEGR框架包含三个组件：1) 意图感知语义ID构建，利用查询-商品交互信号（如点击、购买）增强语义ID，使其捕捉搜索意图；2) 合成查询增强的统一SFT，将多个任务统一为查询到ID目标，并生成合成查询补充低曝光商品的监督；3) 相关性校准的偏好优化，设计边际自适应偏好目标，融合相关性和业务信号，平衡意图匹配与业务优化。",
+      "summary": "针对电商搜索中生成式检索（GR）训练流程难以保持查询意图一致性的问题，ICEGR提出端到端框架，从语义ID构建、监督微调与偏好优化三阶段注入查询意图。首先，意图感知SID构建将查询意图信号融入语义ID，使其超越静态商品信息；其次，合成查询增强的统一SFT将多个SFT任务统一到查询到SID目标下，并用合成查询补充低曝光商品的稀疏监督；最后，相关性校准的偏好优化将查询-商品相关性与业务信号融入边际自适应偏好目标，在保留查询意图的同时学习业务偏好。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%；在百度电商搜索部署为端到端生成式检索通路，A/B测试中CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。",
+      "one_line_takeaway": "ICEGR通过意图感知SID、合成查询增强SFT和相关性校准偏好优化，在电商搜索中实现查询意图一致的端到端生成式检索，离线与线上指标显著提升。",
+      "core_method": "ICEGR包含三个组件：(1) 意图感知SID构建，将查询意图信号融入语义ID生成，使SID编码商品-意图关联；(2) 合成查询增强的统一SFT，统一多个SFT任务为查询到SID目标，并用合成查询为低曝光商品提供补充监督；(3) 相关性校准的偏好优化，将查询-商品相关性与业务信号集成到边际自适应偏好目标中，平衡意图保持与业务偏好。",
       "innovation_points": [
-        "提出意图感知的语义ID构建方法，将查询意图信号融入ID生成，超越静态商品信息。",
-        "设计合成查询增强的统一SFT，统一多任务并缓解低曝光商品的监督稀疏问题。",
-        "引入相关性校准的偏好优化，通过边际自适应目标整合相关性和业务信号，保持意图一致性。"
+        "提出意图感知的语义ID构建方法，将查询意图信号注入SID，突破静态商品信息的限制。",
+        "设计合成查询增强的统一SFT框架，统一多个SFT任务并利用合成查询缓解低曝光商品的监督稀疏问题。",
+        "提出相关性校准的偏好优化，通过边际自适应目标在业务偏好学习中保持查询意图一致性。",
+        "在百度电商搜索中实现端到端生成式检索通路，并完成线上A/B测试验证。"
       ],
       "experiment_results": [
-        "离线实验：ICEGR相比基线，Recall@20提升21.7%，NDCG@20提升26.6%。",
-        "在线A/B测试（百度电商搜索）：CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。"
+        "离线实验：相比基线，Recall@20提升21.7%，NDCG@20提升26.6%。",
+        "线上A/B测试（百度电商搜索）：CTR相对提升3.52%，订单量相对提升15.96%，GMV相对提升7.53%。"
       ],
       "limitations": [
-        "合成查询的质量可能影响低曝光商品的监督效果，但文中未详细评估合成查询的多样性或噪声。",
-        "偏好优化中的边际自适应机制需要调整超参数，可能增加调参成本。",
-        "框架在非电商场景或不同规模目录下的泛化性未在文中讨论。"
+        "摘要未提及模型规模、训练数据量及计算成本等细节，难以评估扩展性。",
+        "合成查询的生成质量与多样性可能影响低曝光商品的监督效果，但未提供相关分析。",
+        "偏好优化中业务信号与相关性的权重调节机制未详细说明，可能依赖人工调参。"
       ],
-      "practical_value": "ICEGR已在百度电商搜索中部署为端到端生成式检索路径，显著提升CTR、订单量和GMV，证明了其在真实业务场景中的有效性。其组件设计可复用于其他电商平台，尤其适合处理长尾商品检索和意图相关性平衡问题。",
-      "why_it_matters": "本文针对生成式检索在电商搜索中的意图一致性问题，提出系统性解决方案，并展示了从离线到在线的完整验证。对于关注生成式检索落地和电商搜索优化的研究者与工程师，提供了有价值的思路和实证。",
+      "practical_value": "ICEGR为电商搜索提供了一套可落地的端到端生成式检索方案，通过意图一致性优化显著提升检索相关性与商业指标，已在百度电商搜索中验证，对工业级搜索系统具有直接参考价值。",
+      "why_it_matters": "该工作系统性地解决了生成式检索在电商场景中查询意图一致性的核心挑战，从SID构建、训练监督到偏好优化全流程注入意图，并给出离线与线上双重验证，为生成式检索的工业部署提供了重要范例。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "929fee5b848505ce",
+      "analysis_signature": "e6d80e2ffbffa48a",
       "is_daily_pick": false
     },
     {
@@ -3280,7 +3284,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "s2:c359263b01276b6a949d1d18b12d2b233c7186cb",
+      "id": "arxiv:2604.23522",
       "title": "Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale",
       "authors": [
         "Yongsen Pan",
@@ -3288,57 +3292,63 @@
         "Zheng Hu",
         "Xu Yuan",
         "Daoyuan Wang",
-        "Yu Yin",
+        "Yuting Yin",
         "Songhao Ni",
         "Hongyang Wang",
         "Jun Wang",
         "Fuji Ren",
-        "Wenwu Ou"
+        "Wenwu Ou",
+        "Yu Yin"
       ],
       "affiliations": [],
-      "published": "2026-04-26",
-      "updated": "2026-04-26",
+      "published": "2026-04-26T03:59:35Z",
+      "updated": "2026-04-26T03:59:35Z",
       "abstract": "Modern recommendation systems involve massive catalogs of multimodal items, where scalable item identification must balance compactness, semantic fidelity, and downstream effectiveness. Semantic IDs (SIDs) address this need by representing items as short discrete token sequences derived from multimodal signals, providing a compact interface for retrieval, ranking, and generative recommendation. However, effective SID learning is hindered by collisions, where different items are assigned identical or highly confusable codes. Existing methods mainly rely on improved quantization or fixed overlap regularization, but they do not adaptively distinguish whether an overlap should be suppressed or preserved. We propose AdaSID, an adaptive semantic ID learning framework for recommendation. AdaSID regulates SID overlaps through a two-stage process. First, it relaxes repulsion for observed overlaps when the involved items are semantically compatible, preserving admissible sharing rather than uniformly separating all collisions. Second, it allocates the remaining regulation pressure according to local collision load and training progress, strengthening control in congested regions while gradually rebalancing optimization toward recommendation alignment. This design adaptively decides which overlaps to penalize, how strongly to regulate them, and when to shift the learning focus. Extensive offline and online experiments validate AdaSID. On two public benchmarks, AdaSID improves Recall and NDCG by about 4.5% on average over strong baselines, while improving codebook utilization and SID diversity. In Kuaishou e-commerce, an online A/B test on short-video retrieval covering tens of millions of users achieves statistically significant gains, including a 0.98% GMV improvement, and industrial ranking evaluation shows consistent AUC improvements.",
-      "url": "https://www.semanticscholar.org/paper/c359263b01276b6a949d1d18b12d2b233c7186cb",
-      "pdf_url": "",
+      "url": "http://arxiv.org/abs/2604.23522v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.23522v1",
       "doi": "10.48550/arXiv.2604.23522",
-      "source": "Semantic Scholar",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "",
-      "venue": "arXiv.org",
-      "categories": [],
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.MM"
+      ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "Semantic ID",
         "Tokenization",
         "Multimodal",
-        "推理系统"
+        "推理系统",
+        "语义ID",
+        "多模态推荐"
       ],
-      "score": 134,
-      "summary": "现代推荐系统面临海量多模态物品的识别挑战，语义ID（SID）通过将物品表示为短离散token序列来平衡紧凑性、语义保真度和下游效果。然而，SID学习中的碰撞问题（不同物品被分配相同或高度混淆的编码）严重制约其性能。现有方法主要依赖改进量化或固定重叠正则化，但无法自适应区分重叠应被抑制还是保留。为此，我们提出AdaSID，一种自适应语义ID学习框架。AdaSID通过两阶段过程调节SID重叠：首先，对观察到的重叠，若涉及物品语义兼容则放宽排斥，保留可接受的共享；其次，根据局部碰撞负载和训练进度分配剩余调节压力，加强拥挤区域的控制，同时逐步将优化重心转向推荐对齐。该设计自适应决定惩罚哪些重叠、调节强度以及何时转移学习焦点。在公开基准上，AdaSID平均提升Recall和NDCG约4.5%，并改善码本利用率和SID多样性。在快手电商的短视频检索线上A/B测试中（覆盖数千万用户），取得统计显著提升，包括GMV提升0.98%，工业级排序评估显示AUC一致提升。",
-      "one_line_takeaway": "AdaSID通过自适应区分语义兼容与冲突的重叠，动态调节碰撞惩罚，显著提升多模态推荐中语义ID的学习质量与线上效果。",
-      "core_method": "AdaSID框架：两阶段自适应碰撞调节。第一阶段，对观察到的重叠，根据物品语义兼容性决定是否放宽排斥（保留可接受共享）；第二阶段，根据局部碰撞负载和训练进度动态分配调节压力，在拥挤区域加强控制，并逐步将优化重心从ID学习转向推荐对齐。",
+      "score": 138,
+      "summary": "该论文针对多模态推荐系统中语义ID（SID）学习存在的碰撞问题，即不同物品被分配相同或高度混淆的编码，提出自适应语义ID学习框架AdaSID。现有方法依赖改进量化或固定重叠正则化，无法自适应区分重叠应被抑制还是保留。AdaSID通过两阶段过程调节SID重叠：首先，当涉及物品语义兼容时，放松对观察到的重叠的排斥，保留可接受的共享；其次，根据局部碰撞负载和训练进度分配剩余调节压力，在拥堵区域加强控制，并逐步将优化重新平衡到推荐对齐。在公开基准和快手电商线上A/B测试中验证了有效性。",
+      "one_line_takeaway": "AdaSID通过自适应调节语义ID重叠，在保留语义兼容共享的同时抑制有害碰撞，显著提升推荐效果和工业指标。",
+      "core_method": "AdaSID采用两阶段自适应调节：第一阶段基于语义兼容性放松对观察到的重叠的排斥，保留可接受的共享；第二阶段根据局部碰撞负载和训练进度分配调节压力，在拥堵区域加强控制，并逐步将优化焦点转向推荐对齐。",
       "innovation_points": [
-        "提出自适应碰撞处理机制，区分语义兼容与冲突的重叠，避免一刀切惩罚。",
-        "动态调节调节压力，根据局部碰撞负载和训练进度分配，实现精细控制。",
-        "在工业规模验证，包括线上A/B测试和排序评估，展示实际价值。"
+        "提出自适应语义ID学习框架，能够动态决定哪些重叠应被惩罚、调节强度以及何时转移学习焦点。",
+        "设计两阶段调节机制，先放松语义兼容重叠的排斥，再根据碰撞负载和训练进度分配调节压力。",
+        "在工业级推荐系统中验证了方法的有效性和可扩展性。"
       ],
       "experiment_results": [
-        "公开基准上，AdaSID平均提升Recall和NDCG约4.5%（相对强基线）。",
-        "快手电商线上A/B测试（数千万用户）中，GMV提升0.98%，统计显著。",
-        "工业排序评估显示AUC一致提升。"
+        "在两个公开基准上，AdaSID相比强基线平均提升Recall和NDCG约4.5%，同时提高了码本利用率和SID多样性。",
+        "在快手电商的短视频检索线上A/B测试中，覆盖数千万用户，取得统计显著增益，包括GMV提升0.98%。",
+        "工业排序评估显示AUC持续提升。"
       ],
       "limitations": [
-        "依赖语义兼容性判断的准确性，可能受多模态表示质量影响。",
-        "调节压力分配策略需要额外超参数，调参成本可能较高。",
-        "未详细讨论计算开销，工业部署时需考虑效率。"
+        "未明确说明方法在不同规模或领域推荐系统中的泛化能力。",
+        "两阶段调节机制的超参数（如语义兼容性阈值、调节压力分配策略）可能需针对不同场景调整。",
+        "线上实验仅报告了快手电商场景，其他工业场景的验证未知。"
       ],
-      "practical_value": "AdaSID在快手电商场景中验证了线上GMV提升和排序AUC改进，表明其可直接应用于工业级多模态推荐系统，提升检索和排序效果，带来商业价值。",
-      "why_it_matters": "本文针对语义ID学习中的碰撞问题提出自适应解决方案，突破了传统固定正则化的局限，并在大规模工业场景中验证有效性，对生成式推荐和语义ID研究具有重要参考价值。",
+      "practical_value": "AdaSID为工业级多模态推荐系统提供了一种有效的语义ID学习方案，能够自适应处理碰撞问题，提升检索和排序效果，已在快手电商大规模线上验证，带来显著业务收益。",
+      "why_it_matters": "语义ID是生成式推荐和检索的关键接口，碰撞问题直接影响推荐效果。AdaSID通过自适应调节重叠，平衡了语义保真与编码紧凑性，为工业级推荐系统提供了可落地的解决方案，并展示了显著的线上收益。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "758069710e1d0d9d",
+      "analysis_signature": "46c30655434df5d1",
       "is_daily_pick": false
     },
     {
