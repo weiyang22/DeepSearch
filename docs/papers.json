@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T09:46:06+08:00",
+  "generated_at": "2026-09-24T09:40:29+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -13,11 +13,10 @@
     "analysis_enabled": true,
     "source_errors": [
       "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable）",
-      "DBLP: 全部关键词失败（响应不是有效 JSON（<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</t））",
-      "OpenAlex: HTTP Error 429: Too Many Requests"
+      "DBLP: 全部关键词失败（响应不是有效 JSON（<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</t））"
     ],
-    "discovered": 44,
-    "candidates": 10,
+    "discovered": 1744,
+    "candidates": 13,
     "new_papers": 0,
     "daily_picks": 0,
     "analysis_complete": 85,
@@ -282,7 +281,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 133,
+      "score": 132,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
       "one_line_takeaway": "CHAP通过层次化语义对齐和残差级联生成机制，实现了高效且个性化的生成式检索，兼顾精度与推理速度。",
       "core_method": "CHAP框架包含三个核心组件：1）层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；2）个性化GR框架，结合离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；3）残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。",
@@ -397,7 +396,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 124,
+      "score": 123,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
       "one_line_takeaway": "在生成式推荐中，利用SID树进行粗化可显著提升离线策略评估的可靠性，且粗化偏差可由量化器重建误差和目标日志散度界定。",
       "core_method": "利用SID树作为动作抽象，将物品边缘化到码前缀簇，通过解码器直接计算簇质量，实现粗化OPE，并推导条件偏差界。",
@@ -519,7 +518,7 @@
         "LLM 基模",
         "Multimodal"
       ],
-      "score": 135,
+      "score": 134,
       "summary": "本报告介绍阿里巴巴Qwen团队发布的Qwen Drive 1.0，这是迈向自动驾驶视觉语言基础模型的第一步。该模型基于Qwen2-VL架构，通过多模态指令微调，将视觉编码器与语言模型结合，旨在处理驾驶场景中的感知、预测和规划任务。报告强调其作为基础模型的定位，而非应用层案例。技术路线包括利用大规模驾驶视频和文本对进行预训练，并采用统一的token表示来对齐视觉和语言信息。实验结果显示，在多个自动驾驶基准上，Qwen Drive 1.0在零样本和少样本设置下均展现出有竞争力的性能，尤其在场景理解和决策推理方面。然而，报告未提供详细的消融实验或与现有方法的全面对比数据。局限性包括对复杂动态场景的鲁棒性不足，以及缺乏真实路测验证。实践价值在于为自动驾驶提供可解释的决策基础，但距离实际部署仍有距离。",
       "one_line_takeaway": "Qwen Drive 1.0展示了将视觉语言基础模型应用于自动驾驶的初步可行性，但尚需更多工程化验证。",
       "core_method": "基于Qwen2-VL架构，采用视觉编码器与语言模型结合，通过多模态指令微调，使用驾驶视频和文本对进行预训练，统一视觉和语言token表示，实现感知、预测和规划的多任务处理。",
@@ -575,7 +574,7 @@
         "A/B 实验",
         "Tokenization"
       ],
-      "score": 91,
+      "score": 90,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
       "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
       "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
@@ -947,7 +946,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-08-06",
-      "updated": "2026-09-16T18:09:00.828671",
+      "updated": "2026-09-21T07:43:02.447757",
       "abstract": "Diffusion language models (dLLMs) offer a promising alternative to autoregressive models by accelerating inference through parallel decoding. Recent dLLMs commonly use blockwise semi-autoregressive decoding, generating blocks autoregressively while denoising tokens within each active block in parallel. However, despite KV caching, each denoising step still attends to all previous blocks, repeatedly incurring prefix-attention cost. Motivated by this bottleneck, we ask whether dLLM inference can be further accelerated by linearizing attention over previous blocks. We introduce block-hybrid attention, which retains exact softmax attention within the active denoising block while applying linear attention over previous blocks. We show that this hybrid attention can be retrofitted into a pretrained dLLM with minimal post-training: LLaDA-Hybrid replaces 6 of the 20 attention layers in LLaDA~2.1, a 16B open-source dLLM, largely following LoLCAT (Zhang et al, 2024). The conversion takes only approximately 60 hours while preserving benchmark performance: 72.0% vs. 75.6% on HumanEval, 63.0% vs. 57.7% on MBPP+, and 86.7% vs. 88.3% on CMATH. With a Triton implementation, LLaDA-Hybrid achieves up to $1.7\\times$ higher decoding throughput and supports more concurrent requests before exhausting memory, showing that pretrained dLLMs can be efficiently linearized for faster inference. Our code is available at: https://github.com/Diuven/LLaDA-Hybrid.",
       "url": "https://arxiv.org/abs/2608.06628",
       "pdf_url": "https://arxiv.org/pdf/2608.06628",
@@ -966,33 +965,36 @@
         "企业论文",
         "预训练",
         "后训练",
-        "推理系统"
+        "推理系统",
+        "扩散语言模型",
+        "线性注意力",
+        "推理加速"
       ],
       "score": 86,
-      "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块式半自回归解码中每个去噪步骤仍需对全部历史块做前缀注意力，成为瓶颈。本文提出块混合注意力（block-hybrid attention）：在活跃去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力开销。作者将预训练LLaDA 2.1（16B）的20层注意力中的6层替换为线性注意力，遵循LoLCAT方法，仅需约60小时后训练即可完成改造。在HumanEval、MBPP+、CMATH上性能基本保持（72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%）。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
-      "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型部分线性化，可在少量后训练下显著提升解码吞吐并保持基准性能。",
-      "core_method": "提出块混合注意力：在活跃去噪块内使用精确softmax注意力，对历史块使用线性注意力；基于LoLCAT方法将预训练LLaDA 2.1的20层注意力中的6层替换为线性注意力，并进行约60小时的后训练。",
+      "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块级半自回归解码中，每个去噪步骤仍需对全部历史块做前缀注意力，即使有KV缓存也反复产生开销。本文提出块混合注意力：在当前去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力成本。作者将LLaDA 2.1（16B开源dLLM）的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法，后训练约60小时。在HumanEval、MBPP+和CMATH上分别取得72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%的表现，基本保持基准性能。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
+      "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型部分线性化，可在约60小时后训练内保持基准性能并提升解码吞吐最高1.7倍。",
+      "core_method": "提出块混合注意力：在当前活跃去噪块内使用精确softmax注意力，对之前所有块使用线性注意力；将预训练dLLM LLaDA 2.1的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法进行轻量后训练。",
       "innovation_points": [
-        "针对dLLM块式半自回归解码中重复前缀注意力开销的瓶颈，提出块混合注意力机制。",
-        "将线性注意力改造（retrofit）到预训练dLLM中，仅需少量后训练即可完成，无需从头训练。",
-        "在16B开源dLLM LLaDA 2.1上验证，结合Triton实现获得实际吞吐提升。"
+        "针对块级半自回归dLLM中重复前缀注意力开销的瓶颈，提出块混合注意力机制。",
+        "证明预训练dLLM可通过最小后训练（约60小时）改造为混合线性注意力模型，保持基准性能。",
+        "提供Triton实现，实现最高1.7倍解码吞吐提升并支持更多并发请求。"
       ],
       "experiment_results": [
-        "HumanEval: 72.0% vs 75.6%（基线LLaDA 2.1）",
-        "MBPP+: 63.0% vs 57.7%",
-        "CMATH: 86.7% vs 88.3%",
-        "解码吞吐最高提升1.7倍，并支持更多并发请求"
+        "HumanEval：72.0% vs 75.6%（LLaDA-Hybrid vs 原模型）",
+        "MBPP+：63.0% vs 57.7%",
+        "CMATH：86.7% vs 88.3%",
+        "Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。"
       ],
       "limitations": [
-        "仅替换了20层中的6层注意力，线性化程度有限。",
+        "仅替换了20层中的6层注意力，未完全线性化。",
         "部分基准性能略有下降（如HumanEval和CMATH）。",
-        "未提供更大规模或更多样化任务上的评估数据。"
+        "后训练仍需约60小时，且方法基本沿用LoLCAT，创新性有限。"
       ],
-      "practical_value": "为已预训练的扩散语言模型提供了一种低成本的后训练改造方案，可在保持多数基准性能的同时提升解码吞吐和并发能力，有助于降低dLLM推理的部署成本。",
-      "why_it_matters": "该工作表明预训练dLLM可以通过少量后训练高效线性化，为扩散语言模型的推理加速提供了实用路径，并展示了混合注意力在块式解码中的潜力。",
+      "practical_value": "为预训练扩散语言模型提供了一种低成本的线性化改造方案，可在保持多数基准性能的同时提升推理吞吐和并发能力，有助于dLLM在实际部署中降低推理成本。",
+      "why_it_matters": "该工作展示了将线性注意力 retrofitting 到扩散语言模型的可行性，为dLLM推理加速提供了新思路，并开源了代码，对关注高效推理和dLLM架构的研究者具有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "a1742212a3688d4b",
+      "analysis_signature": "0236a7019cfac813",
       "is_daily_pick": false
     },
     {
@@ -1029,7 +1031,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 133,
+      "score": 132,
       "summary": "生成式推荐通过自回归解码语义标识（SID）来选择物品，其令牌位置形成从粗到细的层次结构。然而，SID解码器通常使用监督式下一令牌预测训练，仅模仿历史轨迹，未直接优化下游效用。为此，本文提出层次残差策略优化（HRPO）框架，将物品级结果转化为密集的令牌对齐学习信号，实现保守的令牌级改进。HRPO首先通过基于特征用户聚类的组级奖励平滑估计SID前缀级效用，然后将效用分解为残差令牌信用并累积为信用到目标信号，最后通过残差回报策略优化（RRPO）使用裁剪更新、组归一化优势和KL正则化优化残差信用。在公共数据集和大型商业系统的在线A/B测试中，HRPO在会话级效用和关键业务指标上均取得一致提升。",
       "one_line_takeaway": "HRPO通过将物品级奖励分解为令牌级残差信用，实现了生成式推荐后训练中的密集信用分配，显著提升在线业务指标。",
       "core_method": "HRPO框架：1) 通过特征用户聚类进行组级奖励平滑，估计SID前缀级效用；2) 将前缀效用分解为残差令牌信用，并累积为信用到目标信号；3) 使用RRPO优化残差信用，采用裁剪更新、组归一化优势和KL正则化保持稳定性。",
@@ -2925,7 +2927,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-27",
-      "updated": "2026-08-26T07:47:46.906454",
+      "updated": "2026-09-21T07:43:02.447757",
       "abstract": "Modern large language model (LLM) inference has progressively disaggregated to keep pace with growing model sizes and tight TTFT and TPOT service-level objectives: from chunked-prefill aggregation, to prefill-decode (P/D) disaggregation, and most recently to operator-level Attention-FFN Disaggregation (AFD). This trend is especially important for mixture-of-experts (MoE) models, where memory-bound attention, compute-intensive expert FFNs, and MoE dispatch/combine communication create distinct resource demands. AFD further exposes this heterogeneity by placing attention and MoE-FFN execution on separate GPU groups. Each level of disaggregation deepens the scheduling design space across workload characteristics, resource allocation, and interconnect topology, raising the central question: when does each level actually pay off? We systematically characterize this trade-off for MoE inference across realistic workloads spanning input/output sequence lengths, prefix-KV reuse, and per-user latency constraints. Using chunked-prefill and P/D disaggregation as baselines, we study the benefits and limits of AFD at scale through a framework that fuses on-device kernel measurements with high-fidelity network simulation. Under strict TTFT/TPOT SLOs, AFD sustains around 4k tokens/s of system throughput on DeepSeek-V3.2 across chat, coding, and agentic-coding workloads, where non-AFD deployments are infeasible. We distill concrete takeaways for jointly optimizing throughput and interactivity, including how to partition attention and FFN across GPUs as a function of workload and model architecture, providing design principles for current rack- and cluster-scale deployments as well as future disaggregated AI infrastructure.",
       "url": "https://arxiv.org/abs/2605.28302",
       "pdf_url": "https://arxiv.org/pdf/2605.28302",
@@ -2944,33 +2946,34 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统"
+        "推理系统",
+        "MoE推理",
+        "注意力-FFN解耦",
+        "LLM服务系统"
       ],
       "score": 76,
-      "summary": "本文系统探索了MoE大模型推理中注意力与FFN算子级解聚（AFD）的设计空间，以应对模型规模增长和TTFT/TPOT严格SLO带来的挑战。相比分块预填充和预填充-解码解聚，AFD将注意力与MoE-FFN分别部署在不同GPU组，进一步暴露资源需求异质性。作者通过融合设备内核测量与高保真网络模拟的框架，在真实工作负载（聊天、编码、智能体编码）下对比不同解聚级别的收益与限制。结果表明，在严格SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐量，而非AFD部署不可行。文章还提炼了根据工作负载和模型架构划分注意力与FFN的实用原则，为当前机架/集群及未来解聚AI基础设施提供设计指导。",
-      "one_line_takeaway": "算子级注意力-FFN解聚（AFD）在严格SLO下显著提升MoE推理吞吐，但收益取决于工作负载和资源分配。",
-      "core_method": "构建一个融合设备内核测量与高保真网络仿真的框架，系统比较分块预填充、预填充-解码解聚和注意力-FFN解聚（AFD）在MoE推理中的性能，并探索注意力与FFN的GPU划分策略。",
+      "summary": "本文系统探索了面向MoE大模型推理的注意力-FFN解耦（AFD）设计空间。针对MoE中内存受限的注意力、计算密集的专家FFN及调度通信的异构资源需求，作者构建了融合设备内核测量与高保真网络仿真的框架，在真实负载（输入/输出长度、前缀KV复用、延迟约束）下对比了分块预填充、P/D解耦与AFD。在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上维持约4k tokens/s系统吞吐，而传统部署不可行。研究提炼了按负载与模型架构划分注意力与FFN的设计原则，为机架级和集群级部署提供指导。",
+      "one_line_takeaway": "在严格延迟SLO下，注意力-FFN解耦（AFD）能将MoE大模型推理吞吐提升至非AFD部署无法达到的约4k tokens/s，但收益高度依赖负载与架构。",
+      "core_method": "提出融合设备内核测量与高保真网络仿真的评估框架，系统对比分块预填充、P/D解耦和AFD三种解耦级别，在真实MoE负载下分析吞吐与延迟权衡。",
       "innovation_points": [
-        "首次系统探索注意力-FFN算子级解聚（AFD）的设计空间，涵盖工作负载特征、资源分配和互连拓扑。",
-        "提出融合设备内核测量与网络仿真的评估框架，实现高保真的大规模解聚性能预测。",
-        "在DeepSeek-V3.2上验证AFD在严格SLO下维持约4k tokens/s吞吐，而非AFD部署不可行。",
-        "提炼出根据工作负载和模型架构划分注意力与FFN的实用设计原则。"
+        "首次系统刻画MoE推理中AFD的设计空间与收益边界，覆盖多种负载特征和SLO约束。",
+        "提出融合真实内核测量与网络仿真的高保真评估方法，兼顾计算与通信建模。",
+        "给出按工作负载和模型架构动态划分注意力与FFN资源的设计原则。"
       ],
       "experiment_results": [
-        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上可维持约4k tokens/s的系统吞吐量，覆盖聊天、编码和智能体编码工作负载。",
-        "非AFD部署在相同SLO下不可行，表明AFD在特定场景下的必要性。",
-        "研究提供了注意力与FFN划分的指导原则，但未给出具体数值对比表。"
+        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上实现约4k tokens/s系统吞吐，而分块预填充和P/D解耦部署不可行。",
+        "AFD收益随输入/输出序列长度、前缀KV复用和每用户延迟约束变化，需按场景调整资源划分。"
       ],
       "limitations": [
-        "研究基于模拟和内核测量，可能未完全反映真实生产环境的动态变化。",
-        "主要聚焦于MoE模型，对密集模型或其他架构的适用性未明确。",
-        "未提供详细的成本效益分析，如硬件投入与吞吐提升的量化关系。"
+        "评估基于仿真与内核测量，未在真实大规模集群中端到端验证。",
+        "仅针对DeepSeek-V3.2等特定MoE模型，结论对其他架构的泛化性需进一步验证。",
+        "未深入探讨AFD在故障恢复、动态负载波动下的鲁棒性。"
       ],
-      "practical_value": "为MoE推理服务提供商提供了解聚级别的选择指南，帮助在严格SLO下优化吞吐和交互性，尤其适用于大规模部署和未来AI基础设施规划。",
-      "why_it_matters": "该研究填补了算子级解聚在MoE推理中的系统研究空白，为设计高效解聚系统提供了实证依据和设计原则，对推动LLM推理基础设施演进具有重要参考价值。",
+      "practical_value": "为MoE大模型在线服务提供解耦架构选型与资源划分的量化依据，指导机架级和集群级部署在严格SLO下最大化吞吐与交互性。",
+      "why_it_matters": "随着MoE模型规模增长，推理服务需在严格延迟下平衡异构资源。本文首次系统回答AFD何时有效，为下一代解耦AI基础设施提供设计原则。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "e848713ab4278439",
+      "analysis_signature": "65cf03da6656a52e",
       "is_daily_pick": false
     },
     {
