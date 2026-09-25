@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T09:40:29+08:00",
+  "generated_at": "2026-09-25T09:51:18+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -15,11 +15,11 @@
       "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable）",
       "DBLP: 全部关键词失败（响应不是有效 JSON（<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</t））"
     ],
-    "discovered": 1744,
-    "candidates": 13,
-    "new_papers": 0,
+    "discovered": 1681,
+    "candidates": 14,
+    "new_papers": 1,
     "daily_picks": 0,
-    "analysis_complete": 85,
+    "analysis_complete": 86,
     "analysis_fallback": 0
   },
   "sources": [
@@ -53,6 +53,76 @@
     "Mistral AI"
   ],
   "papers": [
+    {
+      "id": "openalex:W7214069853",
+      "title": "Domain-Adaptive Pretraining Enhances Water Treatment Semantic Representation for Large-Scale Structured Literature Mining",
+      "authors": [
+        "Mudi Zhai",
+        "Ruihong Qiu",
+        "Q. Zeng",
+        "T. David Waite",
+        "Bing‐Jie Ni",
+        "Haoran Duan"
+      ],
+      "affiliations": [
+        "UNSW Sydney",
+        "The University of Queensland",
+        "Microsoft (United States)",
+        "University of Pennsylvania",
+        "Philadelphia University",
+        "University of Hong Kong"
+      ],
+      "published": "2026-09-22",
+      "updated": "2026-09-24T07:57:37.273135",
+      "abstract": "Water treatment research is expanding rapidly, but much of the knowledge acquired from this research remains scattered across unstructured literature. The field still lacks a dedicated language model that can efficiently capture water treatment-specific domain semantics for large-scale literature mining. Here, we address this by developing WaterBERT, a domain-adapted encoder model designed for semantic representation and structured information extraction from water treatment texts. WaterBERT was developed by continual pretraining on a large-scale water treatment corpus comprising about 2.97 billion tokens. Three fine-tuned models based on WaterBERT were systematically evaluated on downstream tasks, achieving the best overall performance among general-purpose and domain-specific BERT models, with F1 scores of 90.12% for multiclass treatment process classification, 79.50% for named entity recognition, and 74.04% for relation extraction. Beyond these benchmark tasks, we further demonstrated WaterBERT's advantages for large-scale literature processing. Applied to 5,144 Environmental Science & Technology articles, WaterBERT-BERTopic identified coherent, diverse, and domain-specific research topics without predefined categories. Building on WaterBERT, we processed 693,211 abstracts at substantially lower cost than commercial LLMs while retaining competitive extraction performance to construct a structured water treatment knowledge graph. The knowledge graph was then integrated with lexical and dense retrieval to develop a Water Knowledge-Enhanced Retrieval System (WaterKERS), which achieved a relevance score of 77.7, substantially outperforming text-based retrieval baselines (54.7-64.5). Through WaterBERT, this study provides a compact and scalable semantic foundation for large-scale information processing and evidence mapping in water treatment research.",
+      "url": "https://doi.org/10.48550/arxiv.2609.26034",
+      "pdf_url": "None",
+      "doi": "10.48550/arxiv.2609.26034",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Microsoft",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Biomedical Text Mining and Ontologies",
+        "Topic Modeling",
+        "Multimodal Machine Learning Applications"
+      ],
+      "tags": [
+        "Microsoft",
+        "企业论文",
+        "预训练",
+        "Multimodal",
+        "领域自适应预训练",
+        "水处理",
+        "语义表示",
+        "文献挖掘"
+      ],
+      "score": 77,
+      "summary": "针对水处理研究知识分散、缺乏专用语义模型的问题，本文提出WaterBERT，一个面向水处理文本语义表示与结构化信息抽取的领域自适应编码器。研究在约29.7亿token的大规模水处理语料上进行持续预训练，并基于WaterBERT微调三个下游模型，在多分类处理工艺分类、命名实体识别和关系抽取任务上分别取得90.12%、79.50%和74.04%的F1值，整体优于通用和领域BERT模型。进一步应用于5144篇Environmental Science & Technology文章的主题建模，以及69.3万篇摘要的结构化知识图谱构建，并集成检索系统WaterKERS，相关性得分77.7，显著优于文本检索基线。",
+      "one_line_takeaway": "WaterBERT通过领域自适应持续预训练，为水处理文献的大规模语义挖掘和知识图谱构建提供了紧凑、可扩展的语义基础。",
+      "core_method": "在约29.7亿token的水处理领域语料上对BERT进行持续预训练，得到领域自适应编码器WaterBERT；随后针对多分类处理工艺分类、命名实体识别和关系抽取三个任务进行微调，并用于大规模文献主题建模、知识图谱构建和检索增强系统。",
+      "innovation_points": [
+        "构建了约29.7亿token的大规模水处理领域语料，并基于此进行持续预训练，形成领域专用编码器WaterBERT。",
+        "系统评估了WaterBERT在三个下游任务上的性能，均优于通用和领域BERT模型。",
+        "将WaterBERT应用于大规模文献处理，包括主题建模、结构化知识图谱构建和检索系统WaterKERS，展示了领域模型在真实文献挖掘中的可扩展性。"
+      ],
+      "experiment_results": [
+        "多分类处理工艺分类F1为90.12%，命名实体识别F1为79.50%，关系抽取F1为74.04%，整体优于通用和领域BERT模型。",
+        "在5144篇Environmental Science & Technology文章上，WaterBERT-BERTopic识别出连贯、多样且领域特定的研究主题，无需预定义类别。",
+        "处理693,211篇摘要构建知识图谱，成本显著低于商业LLM且保持有竞争力的抽取性能；WaterKERS相关性得分77.7，优于文本检索基线（54.7-64.5）。"
+      ],
+      "limitations": [
+        "摘要未提及模型在跨领域或低资源场景下的泛化能力验证。",
+        "未说明持续预训练和下游任务的具体计算资源与训练细节。",
+        "知识图谱构建的完整评估指标和人工验证程度未在摘要中充分披露。"
+      ],
+      "practical_value": "为水处理领域提供了一种低成本、可扩展的文献挖掘工具，能够从大规模非结构化文本中自动抽取结构化知识，支持知识图谱构建和增强检索，有助于研究人员高效获取领域证据。",
+      "why_it_matters": "该工作展示了领域自适应预训练在垂直科学领域的有效性，为其他专业领域的文献挖掘和知识工程提供了可复用的技术路线，并验证了领域模型在成本与性能上相对于商业LLM的优势。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "c9a94189af05a169",
+      "is_daily_pick": false
+    },
     {
       "id": "openalex:W7124564256",
       "title": "The Spite Doesn't Vanish: Emotional Inertia in Large Language Models",
@@ -91,7 +161,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 101,
+      "score": 100,
       "summary": "该论文原声称通过隐藏状态几何测量发现大语言模型存在情绪惯性，即“冷静下来”指令无法重置情绪状态。但作者于2026年9月发布更正，指出实验使用无状态单字符串前向传播，未将诱导状态带入重置或探测上下文，因此四种重置措辞不可能影响报告的重置后表示，其相同值是设计属性而非重置鲁棒性证据。报告的十二个数字实为三个不同值各打印四次，2.13好奇心持续比率的分母是表中最小位移，输出掩蔽和尺度不变性观察也基于同一缺陷设计。结论：核心假设既未被证实也未被证伪，因为实验根本未测试该假设。",
       "one_line_takeaway": "该论文因实验设计缺陷（无状态单字符串前向传播）无法测试情绪惯性假设，作者主动更正并承认核心主张不成立。",
       "core_method": "原实验试图通过几何测量隐藏状态来检验LLM情绪重置能力，使用四种重置措辞、四种架构（含无RLHF对照和1.1B参数规模测试）。但实际采用无状态单字符串前向传播，未累积对话历史或诱导状态，导致重置条件无法影响探测表示。",
@@ -149,7 +219,7 @@
         "后训练",
         "GenRec"
       ],
-      "score": 125,
+      "score": 124,
       "summary": "VARG 是面向天猫 App 搜索的生成式检索系统，目标是在电商搜索中把召回与预排序统一，使生成的候选商品能直接进入最终排序器，同时兼顾相关性、个性化与业务价值。技术路线包括：用 RQ-VAE 构建语义前缀，通过双向 query-item 对比学习增强相关性，并将前缀与按价值排序的第三 token 组合成细粒度商品地址，提供业务价值先验；三阶段监督微调逐步学习商品到标识符映射、查询语义检索与个性化检索；个性化训练结合价值感知与层级对齐监督，并采用局部序数监督 LO-SFT 学习第三 token 编码的簇内排序；Prefix-GRPO 融合输出合法性、用户行为、排序器优势与搜索相关性的门控奖励，配合前缀感知 token 加权，使候选生成与业务价值和排序目标对齐。系统还支持每日商品与模型协同更新，在保留已有商品地址的同时纳入新品与行为反馈。离线实验在数千万商品上验证了标识符稳定性，并显示 SFT 策略与 Prefix-GRPO 在检索质量和头部价值召回上优于各自基线。14 天、覆盖 20% 搜索流量的在线 A/B 测试中，VARG 将生成候选直接送入最终排序器，GMV 提升 1.45%，人均 IPV 提升 0.22%，PCTR 提升 0.31%；购物指南类查询评估中，VARG 在更小候选配额下保持有竞争力的相关性。",
       "one_line_takeaway": "VARG 通过语义前缀、价值排序 token 与 Prefix-GRPO 对齐，让生成式检索候选直接进入天猫最终排序器，并在 14 天 20% 流量 A/B 中实现 GMV +1.45%。",
       "core_method": "VARG 以 RQ-VAE 构建语义前缀，并用双向 query-item 对比学习增强相关性；将前缀与按业务价值排序的第三 token 组合为细粒度商品地址。采用三阶段监督微调依次学习商品到标识符映射、查询语义检索和个性化检索；个性化阶段结合价值感知与层级对齐监督，并用 LO-SFT 学习第三 token 的簇内局部排序。Prefix-GRPO 使用输出合法性、用户行为、排序器优势和搜索相关性的门控奖励，并配合前缀感知 token 加权，使生成候选与业务价值和排序目标对齐。系统支持每日商品与模型协同更新，保留已有商品地址并纳入新品与行为反馈。",
@@ -221,7 +291,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 157,
+      "score": 156,
       "summary": "TGR是腾讯提出的工业级生成式推荐框架，旨在解决传统级联推荐系统（检索、预排序、排序、重排）中模型分离优化导致的扩展性受限、决策碎片化以及缺乏语义知识和推理能力的问题。TGR沿三个耦合方向推进：TGR-GenRank通过CCFormer升级排序，采用统一特征令牌化、可扩展Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过项上下文感知注意力、分层路径重排序和正交双路径解码解决层次语义ID生成中的项边界损失和语义漂移，HiGR则使用前缀结构语义ID、粗到细解码和列表级多目标对齐实现整槽生成；TGR-Reason将离线生成的语义ID推理令牌注入在线解码，无需请求时展开即可提供推理能力。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个已全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
       "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入的统一框架，在工业推荐中实现了显著的在线收益，验证了生成式范式的可行性和价值。",
       "core_method": "TGR框架包含三个核心组件：1) TGR-GenRank：基于CCFormer的生成式排序模型，采用统一特征令牌化、Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，输出逐项多任务预测；2) TGR-GenRec：包括BARGE和HiGR两种生成范式，BARGE使用层次语义ID生成并解决语义漂移，HiGR使用前缀结构语义ID进行整槽生成；3) TGR-Reason：通过离线生成语义ID推理令牌，在线解码时注入，实现无需请求时展开的推理增强。",
@@ -464,7 +534,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 67,
+      "score": 66,
       "summary": "硬件内核优化需要反复编译、正确性测试、性能分析和修改。现有LLM代理虽能自动化部分流程，但无法从已完成的任务中学习，且保留所有历史轨迹会与当前任务竞争上下文。本文提出KOPE，一个经验驱动的框架，通过经验图记忆记录优化轨迹及反馈，并采用主动上下文管理和注入，在固定token预算下检索相关经验。在GLM-5.2设置下，KOPE的每算子加速比几何均值是强基线CANNBot的1.54倍。在53算子消融中，主动上下文管理将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，优化token消耗从15.9B降至1.113B。启用经验图记忆将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。结果表明，在基础模型固定时，通过外部经验可实现持续优化。",
       "one_line_takeaway": "KOPE通过经验图记忆和主动上下文管理，使LLM代理能从历史优化中学习，显著提升硬件内核优化效率，且不依赖更强的基础模型。",
       "core_method": "KOPE框架：1) 经验图记忆（EGM）存储优化轨迹，包含决策、执行反馈和后续决策，保留决策顺序和替代分支；2) 主动上下文管理和注入（ACMI）在固定token预算下检索相关经验，动态构建上下文。",
@@ -782,7 +852,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 118,
+      "score": 117,
       "summary": "Sona技术报告介绍了Yandex Music部署的单一生成式推荐模型，该模型在在线A/B测试中完全替代了包含超过15个候选生成器及预排序和排序模型的生产级级联系统，并显著提升了关键参与度指标。Sona架构统一了候选生成与排序，围绕共享用户表示构建，其编码器将用户按时间排序的交互事件序列转换为隐藏状态，供自回归解码器和排序模块使用。通过下一词预测和蒸馏目标联合更新编码器，将生成与排序耦合在同一用户状态中。最终配置中，较大的教师模型仅在训练时提供排序目标，推理时仅部署编码器、解码器和排序模块。在线实验基于智能音箱上的My Vibe流量，结果显示活跃用户数提升4.53%，总收听时长提升6.30%，点赞数提升11.42%，且活跃用户提升幅度是此前最强模型Argus的2.35倍。研究表明，单一联合训练模型可替代成熟的多阶段推荐级联，并在真实流量上提升推荐质量。",
       "one_line_takeaway": "单一生成式推荐模型Sona在真实业务中完全替代了多阶段级联系统，并显著提升核心参与度指标。",
       "core_method": "Sona采用编码器-解码器架构，编码器将用户交互序列转换为隐藏状态，解码器自回归生成推荐项，排序模块对生成项打分；通过下一词预测和蒸馏损失联合训练，教师模型提供排序目标但推理时不参与。",
@@ -846,7 +916,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 125,
+      "score": 124,
       "summary": "PushDualGen是快手提出的面向工业级推送推荐系统的轻量级生成式推荐框架。现有生成式推荐通过语义ID实现端到端个性化，但黑盒特性导致逻辑难以追踪，而引入思维链的OneRec-Thinking虽可解释但推理成本高。PushDualGen采用双阶段生成：首先生成语义ID，再生成可跳过的解释性副本，在保持推荐效果的同时降低推理开销。该系统已在快手推送场景部署，在线A/B测试显示有效播放率相对提升8.50%，不满意率相对下降37.70%，并长期优化内容生态，增加长尾视频曝光。",
       "one_line_takeaway": "PushDualGen通过先生成语义ID再生成可跳过解释的轻量级双阶段生成，在工业推送推荐中实现了可解释性与低推理成本的平衡。",
       "core_method": "PushDualGen采用双阶段生成架构：第一阶段生成语义ID（SID）作为推荐核心，第二阶段生成解释性副本（copy）作为可跳过的辅助输出。该设计避免了在生成SID时强制引入思维链（CoT）带来的高推理开销，同时通过解释副本提供可追溯性。",
@@ -965,10 +1035,7 @@
         "企业论文",
         "预训练",
         "后训练",
-        "推理系统",
-        "扩散语言模型",
-        "线性注意力",
-        "推理加速"
+        "推理系统"
       ],
       "score": 86,
       "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块级半自回归解码中，每个去噪步骤仍需对全部历史块做前缀注意力，即使有KV缓存也反复产生开销。本文提出块混合注意力：在当前去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力成本。作者将LLaDA 2.1（16B开源dLLM）的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法，后训练约60小时。在HumanEval、MBPP+和CMATH上分别取得72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%的表现，基本保持基准性能。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
@@ -2927,7 +2994,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-27",
-      "updated": "2026-09-21T07:43:02.447757",
+      "updated": "2026-09-24T07:57:37.273135",
       "abstract": "Modern large language model (LLM) inference has progressively disaggregated to keep pace with growing model sizes and tight TTFT and TPOT service-level objectives: from chunked-prefill aggregation, to prefill-decode (P/D) disaggregation, and most recently to operator-level Attention-FFN Disaggregation (AFD). This trend is especially important for mixture-of-experts (MoE) models, where memory-bound attention, compute-intensive expert FFNs, and MoE dispatch/combine communication create distinct resource demands. AFD further exposes this heterogeneity by placing attention and MoE-FFN execution on separate GPU groups. Each level of disaggregation deepens the scheduling design space across workload characteristics, resource allocation, and interconnect topology, raising the central question: when does each level actually pay off? We systematically characterize this trade-off for MoE inference across realistic workloads spanning input/output sequence lengths, prefix-KV reuse, and per-user latency constraints. Using chunked-prefill and P/D disaggregation as baselines, we study the benefits and limits of AFD at scale through a framework that fuses on-device kernel measurements with high-fidelity network simulation. Under strict TTFT/TPOT SLOs, AFD sustains around 4k tokens/s of system throughput on DeepSeek-V3.2 across chat, coding, and agentic-coding workloads, where non-AFD deployments are infeasible. We distill concrete takeaways for jointly optimizing throughput and interactivity, including how to partition attention and FFN across GPUs as a function of workload and model architecture, providing design principles for current rack- and cluster-scale deployments as well as future disaggregated AI infrastructure.",
       "url": "https://arxiv.org/abs/2605.28302",
       "pdf_url": "https://arxiv.org/pdf/2605.28302",
@@ -2952,28 +3019,29 @@
         "LLM服务系统"
       ],
       "score": 76,
-      "summary": "本文系统探索了面向MoE大模型推理的注意力-FFN解耦（AFD）设计空间。针对MoE中内存受限的注意力、计算密集的专家FFN及调度通信的异构资源需求，作者构建了融合设备内核测量与高保真网络仿真的框架，在真实负载（输入/输出长度、前缀KV复用、延迟约束）下对比了分块预填充、P/D解耦与AFD。在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上维持约4k tokens/s系统吞吐，而传统部署不可行。研究提炼了按负载与模型架构划分注意力与FFN的设计原则，为机架级和集群级部署提供指导。",
-      "one_line_takeaway": "在严格延迟SLO下，注意力-FFN解耦（AFD）能将MoE大模型推理吞吐提升至非AFD部署无法达到的约4k tokens/s，但收益高度依赖负载与架构。",
-      "core_method": "提出融合设备内核测量与高保真网络仿真的评估框架，系统对比分块预填充、P/D解耦和AFD三种解耦级别，在真实MoE负载下分析吞吐与延迟权衡。",
+      "summary": "该论文系统研究了面向MoE大模型推理的注意力-FFN解耦（AFD）设计空间。随着LLM规模增长和TTFT/TPOT SLO收紧，推理架构从分块预填充、P/D解耦演进到算子级AFD，将内存受限的注意力与计算密集的专家FFN部署到不同GPU组。作者构建融合设备内核测量与高保真网络仿真的框架，在覆盖输入/输出长度、前缀KV复用和用户延迟约束的真实负载下，对比分块预填充与P/D解耦基线，量化AFD的收益与边界。在严格SLO下，AFD在DeepSeek-V3.2上对聊天、编码和智能体编码负载维持约4k tokens/s系统吞吐，而非AFD部署不可行。研究提炼了按负载与模型架构划分注意力/FFN的联合优化原则。",
+      "one_line_takeaway": "AFD在严格TTFT/TPOT SLO下能实现非AFD部署不可行的MoE推理吞吐，但其收益高度依赖负载特征与资源划分策略。",
+      "core_method": "构建融合设备内核测量与高保真网络仿真的评估框架，在真实MoE推理负载下系统对比分块预填充、P/D解耦与AFD三种解耦层级，分析工作负载、资源分配和互连拓扑对吞吐与延迟的影响。",
       "innovation_points": [
-        "首次系统刻画MoE推理中AFD的设计空间与收益边界，覆盖多种负载特征和SLO约束。",
-        "提出融合真实内核测量与网络仿真的高保真评估方法，兼顾计算与通信建模。",
-        "给出按工作负载和模型架构动态划分注意力与FFN资源的设计原则。"
+        "首次对MoE推理中注意力-FFN解耦（AFD）进行系统性设计空间探索，覆盖从分块预填充到算子级解耦的完整谱系。",
+        "提出融合设备内核测量与高保真网络仿真的评估框架，兼顾计算与通信的真实性。",
+        "在严格TTFT/TPOT SLO下量化AFD的收益边界，并给出按负载和模型架构划分注意力/FFN的设计原则。"
       ],
       "experiment_results": [
-        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上实现约4k tokens/s系统吞吐，而分块预填充和P/D解耦部署不可行。",
-        "AFD收益随输入/输出序列长度、前缀KV复用和每用户延迟约束变化，需按场景调整资源划分。"
+        "在DeepSeek-V3.2上，AFD在聊天、编码和智能体编码负载下维持约4k tokens/s系统吞吐，满足严格TTFT/TPOT SLO，而非AFD部署不可行。",
+        "通过设计空间探索揭示了AFD收益随输入/输出序列长度、前缀KV复用和每用户延迟约束的变化规律。",
+        "基于仿真与实测融合，提炼出注意力与FFN在GPU间的划分策略随工作负载和模型架构变化的定量指导。"
       ],
       "limitations": [
-        "评估基于仿真与内核测量，未在真实大规模集群中端到端验证。",
-        "仅针对DeepSeek-V3.2等特定MoE模型，结论对其他架构的泛化性需进一步验证。",
-        "未深入探讨AFD在故障恢复、动态负载波动下的鲁棒性。"
+        "研究基于仿真与内核测量的融合框架，未在真实大规模集群中端到端部署验证。",
+        "实验主要围绕DeepSeek-V3.2单一MoE模型，结论对其他MoE架构的泛化性需进一步验证。",
+        "未深入探讨AFD在故障恢复、动态负载波动和成本效益方面的工程约束。"
       ],
-      "practical_value": "为MoE大模型在线服务提供解耦架构选型与资源划分的量化依据，指导机架级和集群级部署在严格SLO下最大化吞吐与交互性。",
-      "why_it_matters": "随着MoE模型规模增长，推理服务需在严格延迟下平衡异构资源。本文首次系统回答AFD何时有效，为下一代解耦AI基础设施提供设计原则。",
+      "practical_value": "为当前机架级和集群级MoE推理部署提供AFD可行性与划分策略的量化依据，指导在严格SLO下联合优化吞吐与交互性，并为未来解耦AI基础设施设计提供原则。",
+      "why_it_matters": "随着MoE模型成为主流，推理服务面临内存与计算资源异构的挑战。该工作系统回答了何时采用AFD能带来实际收益，为工业界部署高吞吐、低延迟的MoE推理系统提供了关键设计参考。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "65cf03da6656a52e",
+      "analysis_signature": "5fc6179b3de23db5",
       "is_daily_pick": false
     },
     {
@@ -3285,7 +3353,7 @@
         "Mihir Parmar",
         "Ben Zhou",
         "Swaroop Mishra",
-        "Chitta Baral"
+        "Chitta R. Baral"
       ],
       "affiliations": [
         "Arizona State University",
@@ -3293,7 +3361,7 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-08",
-      "updated": "2026-08-26T07:47:46.906454",
+      "updated": "2026-09-24T07:57:37.273135",
       "abstract": "The effectiveness of Reinforcement Learning (RL) in Large Language Models (LLMs) depends on the nature and diversity of the data used before and during RL. In particular, reasoning problems can often be approached in multiple ways that rely on different forms of reasoning, and exposure to only a limited range of such approaches in the training data may limit the effectiveness of RL. Motivated by this, we investigate using diverse self-generated data during mid-training as an intermediate step before RL training. Specifically, we adopt a bootstrapped data-generation framework guided by George Polya's problem-solving approaches for generating multiple variants of correct answers for each question in the training data, and then perform fine-tuning. We first provide a theoretical perspective on how mid-training on such data improves RL and explain how policy-gradient updates can incentivize combining multiple approaches. We then empirically demonstrate that RL-trained models initialized with our mid-training data achieve consistent improvements across various mathematical reasoning benchmarks and other OOD tasks like code generation and narrative reasoning. Overall, our investigative study shows that a language model learning multiple problem-solving approaches, through self-generated data helps subsequent RL.",
       "url": "https://arxiv.org/abs/2605.08472",
       "pdf_url": "https://arxiv.org/pdf/2605.08472",
@@ -3312,32 +3380,34 @@
         "企业论文",
         "LLM 基模",
         "Reasoning",
-        "Multimodal"
+        "Multimodal",
+        "中期训练",
+        "强化学习",
+        "自生成数据"
       ],
       "score": 68,
-      "summary": "本文研究了在强化学习（RL）之前使用自生成数据进行中期训练对语言模型推理性能的影响。作者基于波利亚的问题解决框架，引导模型为每个训练问题生成多种正确解答变体，并在此数据上进行微调。理论分析表明，中期训练可促使策略梯度更新隐式地组合多种推理路径，从而提升RL效率。实验证明，在数学推理基准及代码生成、叙事推理等OOD任务上，经过中期训练的模型在RL后均取得一致改进。研究强调多样化的自生成数据是提升RL效果的关键中间步骤。",
-      "one_line_takeaway": "在RL前用自生成的多样化解题数据做中期训练，能显著提升后续RL的性能。",
-      "core_method": "采用波利亚问题解决框架引导模型自生成多种正确解答变体，构建中期训练数据集，然后进行监督微调，最后再进行RL训练。",
+      "summary": "该研究探讨了在强化学习（RL）前引入自生成数据的中期训练（mid-training）对LLM推理能力的影响。作者基于George Polya的问题解决方法，构建了一个自举数据生成框架，为训练数据中的每个问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能通过策略梯度更新激励模型组合多种推理路径。实验显示，在数学推理基准以及代码生成、叙事推理等分布外任务上，采用该中期数据初始化的RL模型均取得一致提升。研究强调了数据多样性在RL前阶段的关键作用。",
+      "one_line_takeaway": "在RL前使用自生成的多解法数据做中期训练，能显著提升语言模型的推理能力。",
+      "core_method": "基于George Polya问题解决方法的自举数据生成框架，为每个训练问题生成多种正确解法变体，然后进行监督微调作为RL前的中间步骤。",
       "innovation_points": [
-        "提出在RL之前使用自生成多样化数据进行中期训练的新范式",
-        "从理论上解释了中期训练如何通过策略梯度更新促进多种推理方法的组合",
-        "在多个数学推理基准和OOD任务上验证了方法的有效性"
+        "提出在RL前引入中期训练阶段，利用自生成数据增强推理多样性。",
+        "基于Polya问题解决方法设计数据生成框架，系统生成多解法变体。",
+        "从理论上解释中期训练如何通过策略梯度更新激励模型组合多种推理路径。"
       ],
       "experiment_results": [
-        "在数学推理基准上，RL模型经过中期训练后性能一致提升",
-        "在代码生成和叙事推理等OOD任务上也观察到改进",
-        "具体数值未在摘要中给出"
+        "在多个数学推理基准上，采用中期数据初始化的RL模型取得一致提升。",
+        "在代码生成和叙事推理等分布外任务上同样观察到性能改进。"
       ],
       "limitations": [
-        "摘要未提供具体性能提升幅度",
-        "方法依赖自生成数据的质量，可能受模型初始能力限制",
-        "未讨论计算成本增加的问题"
+        "摘要未提供具体实验数据或量化结果，无法评估提升幅度。",
+        "未讨论自生成数据可能引入的噪声或偏差问题。",
+        "理论分析的具体假设和适用范围未在摘要中详细说明。"
       ],
-      "practical_value": "该方法可作为一种通用的预训练后处理步骤，提升LLM在数学、代码等推理任务上的RL微调效果，尤其适用于数据多样性不足的场景。",
-      "why_it_matters": "该研究揭示了数据多样性在RL中的重要性，提供了一种简单有效的自数据增强方法，为提升LLM推理能力提供了新思路。",
+      "practical_value": "为提升LLM在RL训练中的推理能力提供了一种可操作的数据增强策略，尤其适用于需要多步推理的任务场景。",
+      "why_it_matters": "揭示了RL前数据多样性对RL效果的关键影响，为设计更有效的训练流程提供了理论和实证依据。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "be198ac3326d6116",
+      "analysis_signature": "196fc2988947854c",
       "is_daily_pick": false
     },
     {
@@ -4845,7 +4915,7 @@
       ],
       "affiliations": [],
       "published": "2026-02-09T08:17:02Z",
-      "updated": "2026-09-01T12:56:01Z",
+      "updated": "2026-09-24T10:28:33Z",
       "abstract": "<div align=\"center\" <img src=resources/logo.svg width=\"15%\"/ </div <p align=\"center\" 👋 Join our <a href=\"resources/WECHAT.md\" target=\"_blank\" Wechat</a or <a href=\"https://discord.gg/Hc5z9bx5Xw\" target=\"_blank\" Discord</a community. <br 📖 Check out the GLM-5.3-Flash <a href=\"https://z.ai/blog/glm-5.3-flash\" target=\"_blank\" blog</a , GLM-5.3 <a href=\"https://z.ai/blog/glm-5.3\" target=\"_blank\" blog</a and GLM-5 <a href=\"https://arxiv.org/abs/2602.15763\" target=\"_blank\" Technical report</a . <br 📍 Use GLM-5.3 & GLM-5.3-Flash API services on <a href=\"https://docs.z.ai/guides/llm/glm-5.3\" Z.ai API Platform. </a <br 🔜 Try GLM-5.3 & GLM-5.3-Flash at <a href=\"https://z.ai\" z.ai</a . </p",
       "url": "https://github.com/zai-org/GLM-5",
       "pdf_url": "https://arxiv.org/pdf/2602.15763",
@@ -4862,32 +4932,35 @@
         "智谱",
         "企业论文",
         "官方技术报告",
-        "LLM 基模"
+        "LLM 基模",
+        "基座大模型",
+        "GLM-5",
+        "Agentic Engineering",
+        "智能体工程"
       ],
       "score": 124,
-      "summary": "智谱在官方技术发布中介绍了GLM-5系列模型，从GLM-5到GLM-5.3及Flash版本，强调从“vibe coding”向“agentic engineering”的转变。报告聚焦于基座大模型的技术演进，包括预训练、架构优化、训练数据扩展、对齐与后训练，以及推理系统的高效部署。GLM-5系列在代码生成、复杂任务执行和智能体能力上显著提升，通过改进的扩展规律和训练策略，实现了性能与效率的平衡。GLM-5.3-Flash作为轻量级版本，优化了推理速度和成本，适合实时应用。报告未提供具体实验数据，但强调了模型在真实业务场景中的工程约束和线上价值，如降低延迟、提升任务完成率。核心贡献在于基座模型的创新，而非应用层案例。",
-      "one_line_takeaway": "GLM-5系列通过基座模型创新和推理优化，从代码生成迈向智能体工程，实现性能与效率的平衡。",
-      "core_method": "GLM-5系列采用改进的预训练架构和扩展规律，结合大规模高质量训练数据，通过后训练对齐和推理系统优化（如Flash版本）提升智能体任务执行能力。",
+      "summary": "智谱发布GLM-5系列技术报告，主题为从Vibe Coding向Agentic Engineering演进。官方材料显示，GLM-5为基座大模型，并衍生出GLM-5.3与GLM-5.3-Flash两个版本，提供API服务与在线体验入口。报告链接指向arXiv技术报告，但给定材料未披露预训练数据规模、模型架构细节、扩展规律、对齐与后训练策略、推理系统设计等关键信息，也未给出基准测试结果。该发布的核心信号在于将模型能力定位从辅助式编码推进到智能体工程，强调模型在复杂任务中自主规划、调用工具与执行多步流程的能力。",
+      "one_line_takeaway": "智谱GLM-5系列将基座模型能力定位从Vibe Coding升级到Agentic Engineering，并推出GLM-5.3与GLM-5.3-Flash两个版本对外服务。",
+      "core_method": "给定材料未披露GLM-5的具体预训练方法、基模架构、训练数据构成、扩展规律、对齐与后训练流程及推理系统设计。官方仅以技术报告链接和产品发布形式呈现，核心方法信息需查阅arXiv技术报告原文。",
       "innovation_points": [
-        "从vibe coding到agentic engineering的范式转变，强化模型在复杂任务中的自主决策能力。",
-        "GLM-5.3-Flash轻量级版本，优化推理速度和成本，适合实时场景。",
-        "改进的扩展规律和训练数据策略，提升模型性能与效率。",
-        "推理系统优化，支持高效部署和线上服务。"
+        "提出从Vibe Coding到Agentic Engineering的能力演进方向，强调模型在智能体工程场景中的自主执行能力。",
+        "发布GLM-5基座模型，并同步推出GLM-5.3与GLM-5.3-Flash两个版本，形成版本梯度。",
+        "通过Z.ai API平台与在线体验入口提供模型服务，覆盖开发者调用与终端用户试用。"
       ],
       "experiment_results": [
-        "报告未提供具体实验数据，但声称GLM-5系列在代码生成和智能体任务上显著优于前代。",
-        "GLM-5.3-Flash在推理速度和成本上具有优势，但未给出量化指标。"
+        "给定材料未提供任何基准测试、消融实验或定量对比数据。",
+        "材料仅包含技术报告链接、API服务入口与在线体验入口，未披露评测结果。"
       ],
       "limitations": [
-        "缺乏公开的基准测试数据，难以独立验证性能声明。",
-        "智能体工程能力可能受限于特定任务场景，泛化性未充分说明。",
-        "轻量级版本可能牺牲部分精度，需权衡。"
+        "给定材料为官方发布页，未披露预训练数据规模、模型参数量、架构细节与训练算力等关键信息。",
+        "未提供任何基准测试结果、消融实验或与同类模型的定量对比。",
+        "Agentic Engineering的具体能力边界、工具调用协议与工程约束未在材料中说明。"
       ],
-      "practical_value": "GLM-5系列为企业提供高性能基座模型，支持代码生成、智能体开发等场景，Flash版本降低部署成本，适合实时交互和资源受限环境。",
-      "why_it_matters": "该报告展示了基座大模型在智能体方向的技术演进，对理解预训练、推理优化和工程部署有参考价值，尤其适合关注生成式AI基础设施的研究者和工程师。",
+      "practical_value": "GLM-5.3与GLM-5.3-Flash已通过Z.ai API平台提供调用服务，开发者可直接接入用于智能体工程相关任务；在线体验入口便于快速验证模型能力。对于关注基座模型演进与智能体工程落地的团队，该发布提供了可用的模型服务与版本选择。",
+      "why_it_matters": "该发布标志着智谱将基座模型的能力叙事从辅助编码推进到智能体工程，若技术报告披露的预训练、后训练与推理系统设计具备可复现性，将对基座模型在复杂任务自主执行方向的发展提供参考。同时GLM-5.3与GLM-5.3-Flash的API开放，为工程实践提供了可评估的模型选项。",
       "evidence_basis": "official_release",
       "analysis_status": "complete",
-      "analysis_signature": "4105d34b8b995020",
+      "analysis_signature": "3492435b7ce87957",
       "is_daily_pick": false
     },
     {
