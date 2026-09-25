@@ -45,6 +45,7 @@ type Payload = {
     candidates?: number;
     new_papers?: number;
     daily_picks: number;
+    effective_daily_window_days?: number;
     analysis_complete?: number;
     analysis_fallback?: number;
   };
@@ -121,6 +122,7 @@ export function DigestDashboard() {
 
   const todayCount = papers.filter((paper) => paper.is_daily_pick).length;
   const sourceErrors = payload.status.source_errors || [];
+  const effectiveWindow = payload.status.effective_daily_window_days || payload.site.daily_window_days || 3;
 
   return (
     <main className="site-shell" id="top">
@@ -139,7 +141,7 @@ export function DigestDashboard() {
           并且只收录明确报告 A/B 测试或线上受控实验的工作。
         </p>
         <div className="intro-meta">
-          <span>近 {payload.site.daily_window_days || 3} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
+          <span>近 {effectiveWindow} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
           <span>滚动保留 {payload.site.retention_days} 天</span>
           <span>共 {papers.length} 篇</span>
         </div>
@@ -195,7 +197,13 @@ export function DigestDashboard() {
           {filtered.map((paper) => (
             <PaperCard key={paper.id} paper={paper} saved={saved.includes(paper.id)} onSave={() => toggleSaved(paper.id)} />
           ))}
-          {!filtered.length && <div className="empty-result">当前筛选下没有内容。</div>}
+          {!filtered.length && (
+            <div className="empty-result">
+              {mode === "today" && todayCount === 0
+                ? `近 ${effectiveWindow} 日暂无入选论文（数据源可能临时受限，下轮更新会自动补齐）。可切换到「全部」浏览归档。`
+                : "当前筛选下没有内容，试试调整关键词或标签。"}
+            </div>
+          )}
         </div>
       </section>
 

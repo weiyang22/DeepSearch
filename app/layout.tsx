@@ -14,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "LLM&GR · DeepSearch",
     description: "追踪大模型预训练、基模、后训练，以及企业优先的生成式推荐研究。",
+    icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
     openGraph: {
       title: "LLM&GR · DeepSearch",
       description: "追踪大模型基座技术与企业优先的生成式推荐论文。",

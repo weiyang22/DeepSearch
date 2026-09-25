@@ -5,7 +5,9 @@
 ## 功能
 
 - arXiv、DBLP、OpenAlex、Semantic Scholar 多源发现与降级
-- arXiv 使用短查询分片与指数退避重试；DBLP 按关键词独立降级，单个请求失败不会丢弃整批成功结果
+- arXiv 使用短查询分片与指数退避重试；CI 出口 IP 被 arXiv 拒绝（HTTP 406）时自动切换 OpenAlex 的 arXiv 镜像发现，保持归档新鲜
+- DBLP 已对非浏览器请求启用反爬挑战，默认关闭（`discovery.enable_dblp`）
+- 近期窗口内没有入选时，自动放宽窗口（最多 `daily_fallback_window_days` 天），页面如实显示实际窗口
 - 页面显示最后生成时间、当轮发现/筛选数量及数据源健康状态，并绕过旧 `papers.json` 浏览器缓存
 - Google DeepMind 使用 OpenAlex 机构 ID 定向检索，避免仅靠名称关键词造成漏采
 - 美国侧重点覆盖 GPT、Claude、Gemini/Gemma、Llama、Grok、Phi、Nova、Nemotron

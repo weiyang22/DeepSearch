@@ -9,7 +9,7 @@ from zoneinfo import ZoneInfo
 
 from .config import load_config
 from .models import Paper
-from .ranking import choose_daily_picks, prepare_candidates
+from .ranking import choose_daily_picks, effective_daily_window, prepare_candidates
 from .sources import classify_company, collect_all, deduplicate
 from .summarizer import analyze_papers
 
@@ -80,10 +80,20 @@ def main() -> int:
             "candidates": len(candidates),
             "new_papers": new_papers,
             "daily_picks": len(daily_picks),
+            # Window that actually produced the daily picks; equals
+            # daily_window_days on healthy days and relaxes on degraded ones.
+            "effective_daily_window_days": effective_daily_window(candidates, config)
+            or config.daily_window_days,
             "analysis_complete": sum(paper.analysis_status == "complete" for paper in merged),
             "analysis_fallback": sum(paper.analysis_status != "complete" for paper in merged),
         },
-        "sources": ["arXiv", "DBLP", "OpenAlex", "Semantic Scholar", "Official GitHub"],
+        "sources": [
+            "arXiv",
+            *(["DBLP"] if config.enable_dblp else []),
+            "OpenAlex",
+            "Semantic Scholar",
+            "Official GitHub",
+        ],
         "companies": list(config.company_queries),
         "papers": [paper.to_dict() for paper in merged],
     }

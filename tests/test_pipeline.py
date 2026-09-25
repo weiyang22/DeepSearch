@@ -6,13 +6,15 @@ from unittest.mock import MagicMock, patch
 import deepsearch.sources as sources
 from deepsearch.config import load_config
 from deepsearch.models import Paper
-from deepsearch.ranking import choose_daily_picks, has_ab_experiment, infer_tags, prepare_candidates
+from deepsearch.ranking import choose_daily_picks, effective_daily_window, has_ab_experiment, infer_tags, prepare_candidates
 from deepsearch.sources import (
     PartialCollectionError,
+    _arxiv_id_from,
     _arxiv_queries,
     _github_report_url,
     _has_human_institution_author,
     _looks_like_foundation_model_report,
+    _openalex_arxiv_paper,
     _repo_matches_model_family,
     _request,
     _request_json,
@@ -186,16 +188,82 @@ class PipelineTests(unittest.TestCase):
         ranked = prepare_candidates(papers, self.config)
         self.assertEqual([item.id for item in ranked], ["newer-low-score", "older-high-score"])
 
-    def test_daily_selection_does_not_relabel_stale_papers_as_today(self):
-        stale = Paper(
-            id="stale",
+    def test_daily_selection_relaxes_window_only_when_primary_window_is_empty(self):
+        today = dt.date.today()
+        fresh = Paper(
+            id="fresh",
             title="Enterprise Generative Recommendation with Semantic IDs",
-            published=(dt.date.today() - dt.timedelta(days=10)).isoformat(),
+            published=today.isoformat(),
             affiliations=["ByteDance"],
             abstract="Generative recommendation with semantic IDs and an online A/B test.",
         )
-        ranked = prepare_candidates([stale], self.config)
+        stale = Paper(
+            id="stale",
+            title="Enterprise Generative Retrieval at Scale",
+            published=(today - dt.timedelta(days=10)).isoformat(),
+            affiliations=["Kuaishou"],
+            abstract="Generative retrieval with semantic IDs and an online A/B test.",
+        )
+        # Healthy day: a fresh candidate exists, so the primary window is used
+        # and the 10-day-old paper is not relabeled as a recent pick.
+        ranked = prepare_candidates([fresh, stale], self.config)
+        picks = choose_daily_picks(ranked, self.config)
+        self.assertEqual([item.id for item in picks], ["fresh"])
+        self.assertEqual(effective_daily_window(ranked, self.config), self.config.daily_window_days)
+
+        # Degraded day: nothing inside the primary window, so the window is
+        # relaxed up to daily_fallback_window_days to keep 近期 non-empty.
+        ranked_stale_only = prepare_candidates([stale], self.config)
+        picks_stale = choose_daily_picks(ranked_stale_only, self.config)
+        self.assertEqual([item.id for item in picks_stale], ["stale"])
+        self.assertEqual(effective_daily_window(ranked_stale_only, self.config), 11)
+
+    def test_daily_selection_never_picks_beyond_the_fallback_window(self):
+        ancient = Paper(
+            id="ancient",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            published=(dt.date.today() - dt.timedelta(days=20)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        ranked = prepare_candidates([ancient], self.config)
         self.assertEqual(choose_daily_picks(ranked, self.config), [])
+        self.assertIsNone(effective_daily_window(ranked, self.config))
+
+    def test_arxiv_mirror_fallback_preserves_canonical_identity(self):
+        work = {
+            "id": "https://openalex.org/W123",
+            "display_name": "Generative Recommendation with Semantic IDs",
+            "publication_date": "2026-09-22",
+            "ids": {"doi": "https://doi.org/10.48550/arxiv.2609.12345"},
+            "primary_location": {"landing_page_url": "https://arxiv.org/abs/2609.12345v1"},
+            "best_oa_location": {"pdf_url": "https://arxiv.org/pdf/2609.12345v1"},
+            "authorships": [
+                {
+                    "author": {"display_name": "A. Researcher"},
+                    "institutions": [{"display_name": "ByteDance"}],
+                }
+            ],
+            "abstract_inverted_index": {"Generative": [0], "recommendation": [1], "with": [2], "semantic": [3], "IDs": [4]},
+        }
+        paper = _openalex_arxiv_paper(work, self.config)
+        self.assertIsNotNone(paper)
+        assert paper is not None
+        self.assertEqual(paper.id, "arxiv:2609.12345")
+        self.assertEqual(paper.url, "https://arxiv.org/abs/2609.12345")
+        self.assertEqual(paper.pdf_url, "https://arxiv.org/pdf/2609.12345")
+        self.assertEqual(paper.published, "2026-09-22")
+        self.assertEqual(paper.updated, paper.published)
+        self.assertEqual(paper.abstract, "Generative recommendation with semantic IDs")
+        self.assertEqual(paper.company, "ByteDance Seed")
+
+    def test_arxiv_mirror_fallback_rejects_works_without_arxiv_identity(self):
+        work = {
+            "display_name": "Some journal article",
+            "primary_location": {"landing_page_url": "https://example.com/paper"},
+            "ids": {"doi": "https://doi.org/10.1000/journal.123"},
+        }
+        self.assertIsNone(_openalex_arxiv_paper(work, self.config))
 
     def test_retention_window_covers_the_past_year(self):
         within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()

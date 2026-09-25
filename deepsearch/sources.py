@@ -24,6 +24,13 @@ USER_AGENT = "DeepSearch/0.1 (+https://github.com/weiyang22/DeepSearch)"
 RETRYABLE_HTTP_STATUS = {408, 425, 429, 500, 502, 503, 504}
 
 
+ATOMIC_ARXIV_ID = re.compile(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,5})(?:v\d+)?", re.IGNORECASE)
+ATOMIC_ARXIV_DOI = re.compile(r"10\.48550/arxiv\.(\d{4}\.\d{4,5})(?:v\d+)?", re.IGNORECASE)
+# OpenAlex source id for "arXiv (Cornell University)"; used as a mirror when
+# export.arxiv.org refuses requests from shared CI egress ranges.
+OPENALEX_ARXIV_SOURCE_ID = "S4306400194"
+
+
 class PartialCollectionError(RuntimeError):
     """A source returned useful records while some of its requests failed."""
 
@@ -35,13 +42,21 @@ class PartialCollectionError(RuntimeError):
 def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
     papers: list[Paper] = []
     errors: list[str] = []
-    collectors = [
+    # DBLP now serves an interactive bot challenge to non-browser clients, so it
+    # is opt-in: it only supplies abstract-less metadata that richer sources
+    # already cover better.
+    collectors: list[tuple[str, Any]] = [
         ("arXiv", collect_arxiv),
-        ("DBLP", collect_dblp),
-        ("OpenAlex", collect_openalex),
-        ("Semantic Scholar", collect_semantic_scholar),
-        ("Official GitHub", collect_official_github),
     ]
+    if config.enable_dblp:
+        collectors.append(("DBLP", collect_dblp))
+    collectors.extend(
+        [
+            ("OpenAlex", collect_openalex),
+            ("Semantic Scholar", collect_semantic_scholar),
+            ("Official GitHub", collect_official_github),
+        ]
+    )
     for name, collector in collectors:
         started = time.monotonic()
         print(f"Collecting {name}...")
@@ -118,10 +133,93 @@ def collect_arxiv(config: Config) -> list[Paper]:
     papers = deduplicate(papers)
     if failures:
         if not papers:
+            # export.arxiv.org increasingly refuses shared CI egress ranges with
+            # HTTP 406 before any query is evaluated. Fall back to the OpenAlex
+            # arXiv mirror so fresh preprints still reach the digest.
+            mirrored = _collect_arxiv_via_openalex(config)
+            if mirrored:
+                message = (
+                    f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}），"
+                    f"已通过 OpenAlex arXiv 镜像发现 {len(mirrored)} 篇预印本"
+                )
+                raise PartialCollectionError(message, mirrored)
             raise RuntimeError(f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}）")
         message = f"{len(failures)}/{len(queries)} 个分片失败，已保留成功分片（{_short_error(failures[0])}）"
         raise PartialCollectionError(message, papers)
     return papers
+
+
+def _collect_arxiv_via_openalex(config: Config) -> list[Paper]:
+    """Discover arXiv preprints through OpenAlex when the arXiv API is unreachable."""
+    papers: list[Paper] = []
+    cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
+    work_filter = f"primary_location.source.id:{OPENALEX_ARXIV_SOURCE_ID},from_publication_date:{cutoff}"
+    for query in config.topic_queries[:8]:
+        url = "https://api.openalex.org/works?" + urllib.parse.urlencode(
+            {
+                "search": query,
+                "filter": work_filter,
+                "per-page": str(config.openalex_per_query),
+                "sort": "publication_date:desc",
+            }
+        )
+        try:
+            results = (
+                _request_json(url, timeout=20, request_attempts=2, parse_attempts=2).get("results", [])
+                or []
+            )
+        except Exception:
+            continue
+        for work in results:
+            paper = _openalex_arxiv_paper(work, config)
+            if paper:
+                papers.append(paper)
+        time.sleep(0.2)
+    return deduplicate(papers)
+
+
+def _openalex_arxiv_paper(work: dict[str, Any], config: Config) -> Paper | None:
+    """Map an OpenAlex arXiv work onto the canonical arXiv paper identity."""
+    primary = work.get("primary_location", {}) or {}
+    open_access = work.get("best_oa_location", {}) or {}
+    doi = _clean_doi(str((work.get("ids", {}) or {}).get("doi", "")))
+    landing = str(primary.get("landing_page_url", "") or "")
+    pdf = str(open_access.get("pdf_url", "") or "")
+    arxiv_id = _arxiv_id_from(landing) or _arxiv_id_from(pdf) or _arxiv_id_from(doi)
+    if not arxiv_id:
+        return None
+    title = _clean(str(work.get("display_name", "")))
+    if not title:
+        return None
+    authorships = work.get("authorships", []) or []
+    published = str(work.get("publication_date", "") or work.get("publication_year", ""))
+    paper = Paper(
+        id=f"arxiv:{arxiv_id}",
+        title=title,
+        authors=[str(item.get("author", {}).get("display_name", "")) for item in authorships],
+        affiliations=_unique(
+            str(inst.get("display_name", ""))
+            for item in authorships
+            for inst in item.get("institutions", []) or []
+        ),
+        published=published,
+        # Keep `updated` stable across runs: OpenAlex internal timestamps churn
+        # and would invalidate cached DeepSeek analysis signatures.
+        updated=published,
+        abstract=_openalex_abstract(work.get("abstract_inverted_index") or {}),
+        url=f"https://arxiv.org/abs/{arxiv_id}",
+        pdf_url=f"https://arxiv.org/pdf/{arxiv_id}",
+        doi=doi,
+        source="arXiv",
+        categories=[str(item.get("display_name", "")) for item in work.get("topics", [])[:4]],
+    )
+    classify_company(paper, config)
+    return paper
+
+
+def _arxiv_id_from(value: str) -> str:
+    match = ATOMIC_ARXIV_ID.search(value) or ATOMIC_ARXIV_DOI.search(value)
+    return match.group(1) if match else ""
 
 
 def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str]:
@@ -259,14 +357,14 @@ def collect_openalex(config: Config) -> list[Paper]:
                     for item in authorships
                     for inst in item.get("institutions", []) or []
                 ),
-                published=str(work.get("publication_date", "") or work.get("publication_year", "")),
-                updated=str(work.get("updated_date", "") or work.get("publication_date", "")),
+                published=_text(work.get("publication_date") or work.get("publication_year")),
+                updated=_text(work.get("updated_date") or work.get("publication_date")),
                 abstract=_openalex_abstract(work.get("abstract_inverted_index") or {}),
-                url=str(primary.get("landing_page_url", "") or ids.get("openalex", "")),
-                pdf_url=str(open_access.get("pdf_url", "") or primary.get("pdf_url", "")),
-                doi=_clean_doi(str(ids.get("doi", ""))),
+                url=_text(primary.get("landing_page_url") or ids.get("openalex")),
+                pdf_url=_text(open_access.get("pdf_url") or primary.get("pdf_url")),
+                doi=_clean_doi(_text(ids.get("doi"))),
                 source="OpenAlex",
-                venue=str(source.get("display_name", "")),
+                venue=_text(source.get("display_name")),
                 categories=[str(item.get("display_name", "")) for item in work.get("topics", [])[:4]],
             )
             classify_company(paper, config)
@@ -322,16 +420,16 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
             pdf = work.get("openAccessPdf", {}) or {}
             paper = Paper(
                 id=f"s2:{work.get('paperId')}",
-                title=_clean(str(work.get("title", ""))),
+                title=_clean(str(work.get("title", "") or "")),
                 authors=[str(item.get("name", "")) for item in work.get("authors", []) or []],
-                published=str(work.get("publicationDate", "") or work.get("year", "")),
-                updated=str(work.get("publicationDate", "") or work.get("year", "")),
-                abstract=_clean(str(work.get("abstract", "") or "")),
-                url=str(work.get("url", "") or ""),
-                pdf_url=str(pdf.get("url", "") or ""),
-                doi=str(external.get("DOI", "") or ""),
+                published=_text(work.get("publicationDate") or work.get("year")),
+                updated=_text(work.get("publicationDate") or work.get("year")),
+                abstract=_clean(str(work.get("abstract") or "")),
+                url=_text(work.get("url")),
+                pdf_url=_text(pdf.get("url")),
+                doi=_text(external.get("DOI")),
                 source="Semantic Scholar",
-                venue=str(work.get("venue", "") or ""),
+                venue=_text(work.get("venue")),
             )
             classify_company(paper, config)
             papers.append(paper)
@@ -597,6 +695,11 @@ def _xml_text(node: ET.Element, tag: str) -> str:
 
 def _clean(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
+
+
+def _text(value: Any) -> str:
+    """Render an optional API value as a string without leaking `None`."""
+    return str(value) if value else ""
 
 
 def _clean_doi(value: str) -> str:

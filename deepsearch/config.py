@@ -22,6 +22,8 @@ class Config:
     enterprise_keywords: list[str]
     require_enterprise_llm: bool
     require_ab_genrec: bool
+    enable_dblp: bool
+    daily_fallback_window_days: int
     company_queries: dict[str, list[str]]
     github_orgs: dict[str, str]
     model_families: dict[str, list[str]]
@@ -56,6 +58,8 @@ def load_config(path: str | Path = "config.toml") -> Config:
         enterprise_keywords=list(discovery.get("enterprise_keywords", [])),
         require_enterprise_llm=bool(discovery.get("require_enterprise_llm", True)),
         require_ab_genrec=bool(discovery.get("require_ab_genrec", True)),
+        enable_dblp=bool(discovery.get("enable_dblp", True)),
+        daily_fallback_window_days=int(discovery.get("daily_fallback_window_days", 14)),
         company_queries={key: list(value) for key, value in companies.get("queries", {}).items()},
         github_orgs={key: str(value) for key, value in companies.get("github_orgs", {}).items()},
         model_families={key: list(value) for key, value in companies.get("model_families", {}).items()},

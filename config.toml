@@ -12,6 +12,10 @@ retention_days = 365
 # LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验。
 require_enterprise_llm = true
 require_ab_genrec = true
+# DBLP 现对非浏览器请求返回反爬挑战页（无摘要的元数据源，其他来源已覆盖），默认关闭。
+enable_dblp = false
+# 近 N 日窗口内没有入选时，逐步放宽窗口（最多到该天数）以保持"近期"不空档。
+daily_fallback_window_days = 14
 arxiv_categories = ["cs.AI", "cs.CL", "cs.LG", "cs.IR"]
 topic_queries = [
   "large language model pretraining",

@@ -204,19 +204,44 @@ def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
 
 
 def choose_daily_picks(papers: list[Paper], config: Config) -> list[Paper]:
-    """Choose every fresh, high-signal item; daily_limit=0 means no count cap."""
-    if not papers:
+    """Choose every fresh, high-signal item; daily_limit=0 means no count cap.
+
+    When a degraded day leaves the primary window empty (for example arXiv or
+    DBLP refusing CI egress), relax the window one day at a time up to
+    ``daily_fallback_window_days`` so the 近期 feed keeps showing recent,
+    high-scoring work instead of going blank. The window actually used is
+    reported by :func:`effective_daily_window` so the UI stays honest.
+    """
+    window = effective_daily_window(papers, config)
+    if window is None:
         return []
-    window_start = dt.date.today() - dt.timedelta(days=max(0, config.daily_window_days - 1))
-    selected = [
-        paper
-        for paper in papers
-        if window_start <= _paper_date(paper) <= dt.date.today()
-        and paper.score >= config.daily_min_score
-    ]
-    if config.daily_limit > 0:
-        return selected[: config.daily_limit]
-    return selected
+    selected = _window_candidates(papers, config, window)
+    return selected[: config.daily_limit] if config.daily_limit > 0 else selected
+
+
+def effective_daily_window(papers: list[Paper], config: Config) -> int | None:
+    """Smallest window (in days) that yields at least one qualifying paper."""
+    if not papers:
+        return None
+    fallback_days = max(config.daily_window_days, max(0, config.daily_fallback_window_days))
+    for window in range(max(1, config.daily_window_days), fallback_days + 1):
+        if _window_candidates(papers, config, window):
+            return window
+    return None
+
+
+def _window_candidates(papers: list[Paper], config: Config, window: int) -> list[Paper]:
+    today = dt.date.today()
+    window_start = today - dt.timedelta(days=max(0, window - 1))
+    return sorted(
+        (
+            paper
+            for paper in papers
+            if window_start <= _paper_date(paper) <= today
+            and paper.score >= config.daily_min_score
+        ),
+        key=lambda item: (-_date_ordinal(item), -item.score, item.title.lower()),
+    )
 
 
 def score_paper(paper: Paper, config: Config) -> int:

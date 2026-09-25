@@ -42,4 +42,10 @@ class Paper:
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "Paper":
         allowed = {item.name for item in fields(cls)}
-        return cls(**{key: item for key, item in value.items() if key in allowed})
+        data = {key: item for key, item in value.items() if key in allowed}
+        # Older archive entries serialized missing API values as the literal
+        # string "None"; scrub them so the UI does not render dead links.
+        for key, item in data.items():
+            if isinstance(item, str) and item.strip().lower() in {"none", "null"}:
+                data[key] = ""
+        return cls(**data)

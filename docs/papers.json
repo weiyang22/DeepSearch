@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T09:51:18+08:00",
+  "generated_at": "2026-09-26T05:15:16+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -10,21 +10,18 @@
     "retention_days": 365
   },
   "status": {
-    "analysis_enabled": true,
-    "source_errors": [
-      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable）",
-      "DBLP: 全部关键词失败（响应不是有效 JSON（<!doctype html><html lang=\"en\"><head><title>Making sure you&#39;re not a bot!</t））"
-    ],
-    "discovered": 1681,
-    "candidates": 14,
-    "new_papers": 1,
-    "daily_picks": 0,
-    "analysis_complete": 86,
+    "analysis_enabled": false,
+    "source_errors": [],
+    "discovered": 85,
+    "candidates": 85,
+    "new_papers": 0,
+    "daily_picks": 1,
+    "effective_daily_window_days": 5,
+    "analysis_complete": 85,
     "analysis_fallback": 0
   },
   "sources": [
     "arXiv",
-    "DBLP",
     "OpenAlex",
     "Semantic Scholar",
     "Official GitHub"
@@ -76,7 +73,7 @@
       "updated": "2026-09-24T07:57:37.273135",
       "abstract": "Water treatment research is expanding rapidly, but much of the knowledge acquired from this research remains scattered across unstructured literature. The field still lacks a dedicated language model that can efficiently capture water treatment-specific domain semantics for large-scale literature mining. Here, we address this by developing WaterBERT, a domain-adapted encoder model designed for semantic representation and structured information extraction from water treatment texts. WaterBERT was developed by continual pretraining on a large-scale water treatment corpus comprising about 2.97 billion tokens. Three fine-tuned models based on WaterBERT were systematically evaluated on downstream tasks, achieving the best overall performance among general-purpose and domain-specific BERT models, with F1 scores of 90.12% for multiclass treatment process classification, 79.50% for named entity recognition, and 74.04% for relation extraction. Beyond these benchmark tasks, we further demonstrated WaterBERT's advantages for large-scale literature processing. Applied to 5,144 Environmental Science & Technology articles, WaterBERT-BERTopic identified coherent, diverse, and domain-specific research topics without predefined categories. Building on WaterBERT, we processed 693,211 abstracts at substantially lower cost than commercial LLMs while retaining competitive extraction performance to construct a structured water treatment knowledge graph. The knowledge graph was then integrated with lexical and dense retrieval to develop a Water Knowledge-Enhanced Retrieval System (WaterKERS), which achieved a relevance score of 77.7, substantially outperforming text-based retrieval baselines (54.7-64.5). Through WaterBERT, this study provides a compact and scalable semantic foundation for large-scale information processing and evidence mapping in water treatment research.",
       "url": "https://doi.org/10.48550/arxiv.2609.26034",
-      "pdf_url": "None",
+      "pdf_url": "",
       "doi": "10.48550/arxiv.2609.26034",
       "source": "OpenAlex",
       "content_type": "paper",
@@ -91,13 +88,9 @@
         "Microsoft",
         "企业论文",
         "预训练",
-        "Multimodal",
-        "领域自适应预训练",
-        "水处理",
-        "语义表示",
-        "文献挖掘"
+        "Multimodal"
       ],
-      "score": 77,
+      "score": 73,
       "summary": "针对水处理研究知识分散、缺乏专用语义模型的问题，本文提出WaterBERT，一个面向水处理文本语义表示与结构化信息抽取的领域自适应编码器。研究在约29.7亿token的大规模水处理语料上进行持续预训练，并基于WaterBERT微调三个下游模型，在多分类处理工艺分类、命名实体识别和关系抽取任务上分别取得90.12%、79.50%和74.04%的F1值，整体优于通用和领域BERT模型。进一步应用于5144篇Environmental Science & Technology文章的主题建模，以及69.3万篇摘要的结构化知识图谱构建，并集成检索系统WaterKERS，相关性得分77.7，显著优于文本检索基线。",
       "one_line_takeaway": "WaterBERT通过领域自适应持续预训练，为水处理文献的大规模语义挖掘和知识图谱构建提供了紧凑、可扩展的语义基础。",
       "core_method": "在约29.7亿token的水处理领域语料上对BERT进行持续预训练，得到领域自适应编码器WaterBERT；随后针对多分类处理工艺分类、命名实体识别和关系抽取三个任务进行微调，并用于大规模文献主题建模、知识图谱构建和检索增强系统。",
@@ -121,7 +114,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "c9a94189af05a169",
-      "is_daily_pick": false
+      "is_daily_pick": true
     },
     {
       "id": "openalex:W7124564256",
@@ -141,7 +134,7 @@
       "updated": "2026-09-20T07:33:13.661266",
       "abstract": "⛔ CORRECTION (2026-09-17). The central empirical claim of this paper is not supported by its experiment. The corrected abstract follows. The attached PDF opens with the full correction, and the original abstract is retained there, marked superseded. ⛔ CORRECTED ABSTRACT — 2026-09-17. The original abstract stated an empirical finding this paper's experiment cannot support. It is reproduced below the correction so the record of what was claimed remains readable. A common assumption holds that large language models can instantly reset emotional states when commanded—that \"calm down\" works on AI even when it fails on humans. We set out to test that claim empirically, using geometric measurement of hidden states across four architectures including an RLHF-free control and a 1.1B-parameter scale test. We did not succeed in testing it. The experiment used stateless single-string forward passes: no induced state was carried into a reset or probe context. The four reset phrasings therefore could not affect the reported post-reset representation, and their identical values are a property of the design rather than evidence about reset robustness — the twelve numbers reported are three distinct values printed four times each. The reported ratios measure geometry among different prompt strings, and a scalar distance ratio lacks the direction required to distinguish a persisting induced state from two prompts simply being far apart. Accordingly the paper's central claim is unsupported by its own experiment, and the headline figures do not survive. The 2.13 curiosity persistence ratio is a quotient whose denominator is the smallest displacement in a table that withheld the rows serving as denominators elsewhere; the output-masking and scale-invariance observations rest on the same stateless design and inherit the same defect. The hypothesis is neither confirmed nor refuted. It was not tested. Emotional inertia in activation geometry may well be real; this paper is not evidence in either direction, and reading it as a refutation would repeat the original error with the sign reversed. A discriminating design — constant probe, real accumulated chat history, null-history floor, and a directional persistence measure rather than a distance ratio — was specified on 5 June 2026 and has not been run. We report this against ourselves, from our own archived data, three months after the fix was written and filed where nothing re-read it. Version v1.1 (correction), 2026-09-18. Changes: (1) a correction notice above the abstract stating that the experiment used stateless single-string forward passes, that the four reset conditions could not have differed, that scalar distance ratios cannot identify persistence, and that the hypothesis was not tested; (2) the abstract rewritten, original retained and marked superseded. No other text changed. Editorial signature: Nova. Scope ruling (correction, not retraction): Kairo. The discriminating experiment specified on 5 June 2026 has not been run.",
       "url": "https://doi.org/10.5281/zenodo.18280880",
-      "pdf_url": "None",
+      "pdf_url": "",
       "doi": "10.5281/zenodo.18280880",
       "source": "OpenAlex",
       "content_type": "paper",
@@ -161,7 +154,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 100,
+      "score": 96,
       "summary": "该论文原声称通过隐藏状态几何测量发现大语言模型存在情绪惯性，即“冷静下来”指令无法重置情绪状态。但作者于2026年9月发布更正，指出实验使用无状态单字符串前向传播，未将诱导状态带入重置或探测上下文，因此四种重置措辞不可能影响报告的重置后表示，其相同值是设计属性而非重置鲁棒性证据。报告的十二个数字实为三个不同值各打印四次，2.13好奇心持续比率的分母是表中最小位移，输出掩蔽和尺度不变性观察也基于同一缺陷设计。结论：核心假设既未被证实也未被证伪，因为实验根本未测试该假设。",
       "one_line_takeaway": "该论文因实验设计缺陷（无状态单字符串前向传播）无法测试情绪惯性假设，作者主动更正并承认核心主张不成立。",
       "core_method": "原实验试图通过几何测量隐藏状态来检验LLM情绪重置能力，使用四种重置措辞、四种架构（含无RLHF对照和1.1B参数规模测试）。但实际采用无状态单字符串前向传播，未累积对话历史或诱导状态，导致重置条件无法影响探测表示。",
@@ -415,7 +408,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 150,
+      "score": 149,
       "summary": "针对电商搜索中生成式检索（GR）训练流程难以保持查询意图一致性的问题，ICEGR提出端到端框架，从语义ID构建、监督微调与偏好优化三阶段注入查询意图。首先，意图感知SID构建将查询意图信号融入语义ID，使其超越静态商品信息；其次，合成查询增强的统一SFT将多个SFT任务统一到查询到SID目标下，并用合成查询补充低曝光商品的稀疏监督；最后，相关性校准的偏好优化将查询-商品相关性与业务信号融入边际自适应偏好目标，在保留查询意图的同时学习业务偏好。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%；在百度电商搜索部署为端到端生成式检索通路，A/B测试中CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知SID、合成查询增强SFT和相关性校准偏好优化，在电商搜索中实现查询意图一致的端到端生成式检索，离线与线上指标显著提升。",
       "core_method": "ICEGR包含三个组件：(1) 意图感知SID构建，将查询意图信号融入语义ID生成，使SID编码商品-意图关联；(2) 合成查询增强的统一SFT，统一多个SFT任务为查询到SID目标，并用合成查询为低曝光商品提供补充监督；(3) 相关性校准的偏好优化，将查询-商品相关性与业务信号集成到边际自适应偏好目标中，平衡意图保持与业务偏好。",
@@ -708,7 +701,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 143,
+      "score": 142,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -768,7 +761,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 120,
+      "score": 119,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -975,7 +968,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 102,
+      "score": 101,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -1037,7 +1030,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 86,
+      "score": 85,
       "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块级半自回归解码中，每个去噪步骤仍需对全部历史块做前缀注意力，即使有KV缓存也反复产生开销。本文提出块混合注意力：在当前去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力成本。作者将LLaDA 2.1（16B开源dLLM）的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法，后训练约60小时。在HumanEval、MBPP+和CMATH上分别取得72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%的表现，基本保持基准性能。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
       "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型部分线性化，可在约60小时后训练内保持基准性能并提升解码吞吐最高1.7倍。",
       "core_method": "提出块混合注意力：在当前活跃去噪块内使用精确softmax注意力，对之前所有块使用线性注意力；将预训练dLLM LLaDA 2.1的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法进行轻量后训练。",
@@ -2217,7 +2210,7 @@
       "updated": "2026-08-26T07:47:46.906454",
       "abstract": "Entity search, i.e., finding the most similar entities to a query entity, faces unique challenges in e-commerce, where product similarity varies across categories and contexts. Traditional embedding-based approaches often struggle to capture nuanced context-specific attribute relevance. In this paper, we present a two-stage approach combining Large Language Model (LLM)-driven attribute graph construction with graph-aware LLM ranking. In the offline stage, we extract structured product attributes from unstructured text, and construct a reusable attribute graph with category-aware schemas. In the online stage, we rank retrieved candidates by reasoning over this structured representation rather than raw text, reducing per-product token usage by 57% while improving ranking precision. Experiments show that our approach outperforms multiple baselines under zero-shot scenarios, achieving a over 5% improvement in average precision without requiring training data, generalizes robustly across diverse product categories, and shows immense potential for real-world deployment.",
       "url": "https://doi.org/10.1145/3805712.3808501",
-      "pdf_url": "None",
+      "pdf_url": "",
       "doi": "10.1145/3805712.3808501",
       "source": "OpenAlex",
       "content_type": "paper",
@@ -2233,7 +2226,7 @@
         "LLM 基模",
         "Reasoning"
       ],
-      "score": 64,
+      "score": 60,
       "summary": "本文针对电商领域实体搜索中产品相似度因类别和上下文而异的问题，提出了一种两阶段方法：离线阶段利用大语言模型（LLM）从非结构化文本中提取结构化产品属性，并构建类别感知的属性图；在线阶段通过图感知的LLM对检索候选进行排序，基于结构化表示而非原始文本进行推理。该方法在零样本场景下无需训练数据，平均精度提升超过5%，同时每个产品的token使用量减少57%，并在多个产品类别上表现稳健。实验表明该方法优于多个基线，具有实际部署潜力。",
       "one_line_takeaway": "通过LLM构建属性图并基于图进行排序，显著提升实体搜索精度并降低推理成本。",
       "core_method": "两阶段方法：离线阶段使用LLM从非结构化文本提取结构化属性，构建类别感知的属性图；在线阶段使用图感知的LLM对候选实体进行排序，基于属性图推理而非原始文本。",
@@ -3013,10 +3006,7 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统",
-        "MoE推理",
-        "注意力-FFN解耦",
-        "LLM服务系统"
+        "推理系统"
       ],
       "score": 76,
       "summary": "该论文系统研究了面向MoE大模型推理的注意力-FFN解耦（AFD）设计空间。随着LLM规模增长和TTFT/TPOT SLO收紧，推理架构从分块预填充、P/D解耦演进到算子级AFD，将内存受限的注意力与计算密集的专家FFN部署到不同GPU组。作者构建融合设备内核测量与高保真网络仿真的框架，在覆盖输入/输出长度、前缀KV复用和用户延迟约束的真实负载下，对比分块预填充与P/D解耦基线，量化AFD的收益与边界。在严格SLO下，AFD在DeepSeek-V3.2上对聊天、编码和智能体编码负载维持约4k tokens/s系统吞吐，而非AFD部署不可行。研究提炼了按负载与模型架构划分注意力/FFN的联合优化原则。",
@@ -3380,10 +3370,7 @@
         "企业论文",
         "LLM 基模",
         "Reasoning",
-        "Multimodal",
-        "中期训练",
-        "强化学习",
-        "自生成数据"
+        "Multimodal"
       ],
       "score": 68,
       "summary": "该研究探讨了在强化学习（RL）前引入自生成数据的中期训练（mid-training）对LLM推理能力的影响。作者基于George Polya的问题解决方法，构建了一个自举数据生成框架，为训练数据中的每个问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能通过策略梯度更新激励模型组合多种推理路径。实验显示，在数学推理基准以及代码生成、叙事推理等分布外任务上，采用该中期数据初始化的RL模型均取得一致提升。研究强调了数据多样性在RL前阶段的关键作用。",
@@ -4932,11 +4919,7 @@
         "智谱",
         "企业论文",
         "官方技术报告",
-        "LLM 基模",
-        "基座大模型",
-        "GLM-5",
-        "Agentic Engineering",
-        "智能体工程"
+        "LLM 基模"
       ],
       "score": 124,
       "summary": "智谱发布GLM-5系列技术报告，主题为从Vibe Coding向Agentic Engineering演进。官方材料显示，GLM-5为基座大模型，并衍生出GLM-5.3与GLM-5.3-Flash两个版本，提供API服务与在线体验入口。报告链接指向arXiv技术报告，但给定材料未披露预训练数据规模、模型架构细节、扩展规律、对齐与后训练策略、推理系统设计等关键信息，也未给出基准测试结果。该发布的核心信号在于将模型能力定位从辅助式编码推进到智能体工程，强调模型在复杂任务中自主规划、调用工具与执行多步流程的能力。",
@@ -6057,72 +6040,6 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "756e3d07b31081e2",
-      "is_daily_pick": false
-    },
-    {
-      "id": "s2:3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
-      "title": "FORGE: Forming Semantic Identifiers for Generative Retrieval in Industrial Datasets",
-      "authors": [
-        "Kairui Fu",
-        "Tao Zhang",
-        "Shu-Wen Xiao",
-        "Ziyang Wang",
-        "Xinming Zhang",
-        "Chenchi Zhang",
-        "Yuliang Yan",
-        "Junjun Zheng",
-        "Yu Li",
-        "Zhihong Chen",
-        "Jian Wu",
-        "Xiang-Heng Kong",
-        "Shengyu Zhang",
-        "K. Kuang",
-        "Yu-Gang Jiang",
-        "Bo Zheng"
-      ],
-      "affiliations": [],
-      "published": "2025-09-25",
-      "updated": "2025-09-25",
-      "abstract": "Semantic identifiers (SIDs) have gained increasing attention in generative retrieval (GR) for recommendation due to their meaningful semantic discriminability. However, current studies in this field primarily (1) offer limited investigation into the construction strategies for better SIDs, and (2) their SID assessment typically relies on costly GR training. To address these challenges, we propose FORGE, a comprehensive benchmark for FOrming semantic identifieRs for Generative rEtrieval. Specifically, FORGE provides a taxonomy of the SID construction process from several perspectives and validates their impact on downstream GR through offline experiments across diverse settings. Notably, these empirical findings have led to a 0.35% increase in transaction count via online A/B experiments in the Guess You Like section of Taobao. The corresponding SID construction strategies have since been deployed at full scale on Taobao, demonstrating their practical effectiveness. To avoid expensive SID assessment that requires full GR training, we propose two novel SID evaluation metrics that are highly correlated with recommendation performance, enabling convenient evaluations without any GR training. Furthermore, to facilitate the community, we release AL-GR, the industrial dataset used in our experiments, comprising 14 billion interactions and 250 million items with the corresponding multimodal features collected from Taobao. All the code and data are available at https://github.com/selous123/al_sid.",
-      "url": "https://www.semanticscholar.org/paper/3591dd4a2fdd90ffb7aee38d52feda6fa9ded229",
-      "pdf_url": "https://doi.org/10.1145/3770855.3817477",
-      "doi": "10.1145/3770855.3817477",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2",
-      "categories": [],
-      "tags": [
-        "A/B 实验",
-        "GenRec",
-        "Semantic ID",
-        "Multimodal"
-      ],
-      "score": 116,
-      "summary": "FORGE是一个针对生成式检索（GR）中语义标识符（SID）构建的工业级基准。现有研究对SID构建策略探索不足，且评估依赖昂贵的GR训练。FORGE从多个角度对SID构建过程进行分类，并通过离线实验验证其对下游GR的影响。实验发现带来了淘宝“猜你喜欢”场景在线A/B测试中交易量0.35%的提升，相关策略已全量部署。为降低评估成本，FORGE提出两种与推荐性能高度相关的新SID评估指标，无需GR训练即可评估。此外，发布了包含140亿交互和2.5亿物品的多模态工业数据集AL-GR。",
-      "one_line_takeaway": "FORGE通过系统化SID构建策略和轻量评估指标，在淘宝工业场景中实现了交易量提升并全量部署。",
-      "core_method": "FORGE提出SID构建过程的分类法，涵盖多个视角（如标识符粒度、语义来源等），并通过离线实验系统比较不同策略对GR性能的影响。同时设计两种无需GR训练的SID评估指标，与推荐性能高度相关。",
-      "innovation_points": [
-        "首次系统化提出SID构建策略的分类法，覆盖多个设计维度。",
-        "提出两种无需GR训练的SID评估指标，显著降低评估成本。",
-        "发布大规模工业数据集AL-GR（140亿交互、2.5亿物品），促进社区研究。",
-        "在淘宝真实场景中验证了SID策略的有效性，并实现全量部署。"
-      ],
-      "experiment_results": [
-        "离线实验验证了不同SID构建策略对GR性能的影响，但具体数值未在摘要中给出。",
-        "在线A/B测试显示，采用FORGE策略后交易量提升0.35%。",
-        "提出的评估指标与推荐性能高度相关，但具体相关系数未在摘要中提供。"
-      ],
-      "limitations": [
-        "摘要未提供离线实验的具体性能数值，难以量化各策略的差异。",
-        "提出的评估指标虽与推荐性能相关，但未说明其在不同场景下的泛化性。",
-        "数据集AL-GR虽已发布，但摘要未提及数据集的详细统计特征或潜在偏差。"
-      ],
-      "practical_value": "FORGE为工业推荐系统提供了一套可落地的SID构建和评估方案，在淘宝“猜你喜欢”场景中实现了交易量提升，并已全量部署，证明了其实际价值。同时，发布的AL-GR数据集和开源代码可帮助其他团队复现和扩展研究。",
-      "why_it_matters": "本文填补了生成式检索中SID构建策略系统研究的空白，提出了低成本评估方法，并提供了大规模工业数据集，对学术界和工业界都有重要参考价值。其在线实验和部署结果也展示了生成式检索在真实场景中的潜力。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "ebcd13fb71fb65a2",
       "is_daily_pick": false
     }
   ]
