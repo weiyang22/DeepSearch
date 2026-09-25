@@ -18,6 +18,7 @@ from deepsearch.sources import (
     _repo_matches_model_family,
     _request,
     _request_json,
+    _text,
     classify_company,
     collect_all,
     deduplicate,
@@ -264,6 +265,40 @@ class PipelineTests(unittest.TestCase):
             "ids": {"doi": "https://doi.org/10.1000/journal.123"},
         }
         self.assertIsNone(_openalex_arxiv_paper(work, self.config))
+
+    def test_llm_gate_requires_explicit_model_class_or_vendor_report_in_title(self):
+        today = dt.date.today().isoformat()
+        domain_pretraining = Paper(
+            id="domain",
+            title="Domain-Adaptive Pretraining Enhances Water Treatment Semantic Representation",
+            published=today,
+            abstract="A dedicated language model for water treatment literature mining, "
+            "pretrained on a large domain corpus with continued pretraining.",
+        )
+        vendor_report = Paper(
+            id="gui",
+            title="Step-GUI Technical Report",
+            published=today,
+            affiliations=["StepFun"],
+            abstract="A multimodal language model for GUI agents with post-training alignment, "
+            "validated by an online A/B test.",
+        )
+        ranked = prepare_candidates([domain_pretraining, vendor_report], self.config)
+        ids = [item.id for item in ranked]
+        # Generic "pretraining" titles no longer admit domain-specific encoders.
+        self.assertNotIn("domain", ids)
+        # Vendor technical reports without a versioned model name stay included.
+        self.assertIn("gui", ids)
+
+    def test_from_dict_scrubs_legacy_none_strings(self):
+        paper = Paper.from_dict({"id": "x", "title": "T", "pdf_url": "None", "venue": "null", "score": 5})
+        self.assertEqual(paper.pdf_url, "")
+        self.assertEqual(paper.venue, "")
+        self.assertEqual(paper.score, 5)
+
+    def test_text_helper_renders_missing_api_values_as_empty(self):
+        self.assertEqual(_text(None), "")
+        self.assertEqual(_text("https://example.com"), "https://example.com")
 
     def test_retention_window_covers_the_past_year(self):
         within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()

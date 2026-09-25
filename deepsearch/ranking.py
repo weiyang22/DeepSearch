@@ -20,35 +20,6 @@ GENREC_TERMS = (
     "item tokenization",
 )
 
-CORE_LLM_TERMS = (
-    "foundation model",
-    "base model",
-    "large language model",
-    "language model pretraining",
-    "language model pre-training",
-    "pretraining",
-    "pre-training",
-    "post-training",
-    "post training",
-    "instruction tuning",
-    "supervised fine-tuning",
-    "alignment",
-    "rlhf",
-    "rlaif",
-    "direct preference optimization",
-    "dpo",
-    "grpo",
-    "mixture of experts",
-    "mixture-of-experts",
-    "scaling law",
-    "training data",
-    "data curation",
-    "tokenizer",
-    "technical report",
-    "whitepaper",
-    "white paper",
-)
-
 STRONG_LLM_TERMS = (
     "foundation model",
     "base model",
@@ -131,25 +102,19 @@ NON_BASE_MODEL_TITLE_TERMS = (
     " mt",
 )
 
-CORE_LLM_TITLE_TERMS = (
-    "foundation model",
-    "base model",
-    "language model",
-    "llm",
-    "pretrain",
-    "pre-train",
-    "post-train",
-    "mid-training",
-    "fine-tuning",
-    "alignment",
-    "preference optimization",
-    "mixture of experts",
-    "mixture-of-experts",
-    "scaling law",
-    "training data",
-    "tokenizer",
-    "reasoning model",
-    "technical report",
+# A title must name the model class explicitly (or be a vendor report) to pass
+# the LLM gate. Generic method words such as "pretraining" or "fine-tuning"
+# appear across all of ML (e.g. domain-adaptive pretraining for water
+# treatment) and are too weak to admit a paper on their own.
+EXPLICIT_LLM_TITLE_PATTERN = re.compile(
+    r"\b(?:foundation|base)\s+models?\b"
+    r"|\blanguage\s+models?\b"
+    r"|\bllms?\b"
+    r"|technical\s+report"
+    r"|tech\s+report"
+    r"|white\s*paper"
+    r"|whitepaper",
+    re.IGNORECASE,
 )
 
 APPLICATION_ONLY_TERMS = (
@@ -314,8 +279,8 @@ def is_core_llm(paper: Paper) -> bool:
     title = paper.title.lower()
     if any(term in title for term in NON_BASE_MODEL_TITLE_TERMS):
         return False
-    title_signal = bool(OFFICIAL_MODEL_PATTERN.search(title)) or any(
-        term in title for term in CORE_LLM_TITLE_TERMS
+    title_signal = bool(OFFICIAL_MODEL_PATTERN.search(title)) or bool(
+        EXPLICIT_LLM_TITLE_PATTERN.search(title)
     )
     if not title_signal:
         return False

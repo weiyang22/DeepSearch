@@ -73,7 +73,10 @@ export function DigestDashboard() {
         setSaved([]);
       }
     });
-    fetch(`./papers.json?v=${Date.now()}`, { cache: "no-store" })
+    // Hourly cache key: repeat visits reuse the browser cache while a deploy
+    // at most ~10 minutes old (GitHub Pages max-age) is picked up on the next
+    // hour boundary — without re-downloading ~0.5MB on every single visit.
+    fetch(`./papers.json?v=${new Date().toISOString().slice(0, 13)}`)
       .then((response) => {
         if (!response.ok) throw new Error("data unavailable");
         return response.json();
@@ -91,20 +94,29 @@ export function DigestDashboard() {
     [payload],
   );
   const tags = useMemo(() => unique(papers.flatMap((paper) => paper.tags)).slice(0, 16), [papers]);
+  const tabCounts = useMemo(() => {
+    const counts: Record<ViewMode, number> = { today: 0, llm: 0, genrec: 0, company: 0, all: 0, saved: 0 };
+    for (const paper of papers) {
+      if (matchesMode(paper, "today", saved)) counts.today += 1;
+      if (matchesMode(paper, "llm", saved)) counts.llm += 1;
+      if (matchesMode(paper, "genrec", saved)) counts.genrec += 1;
+      if (matchesMode(paper, "company", saved)) counts.company += 1;
+      if (matchesMode(paper, "saved", saved)) counts.saved += 1;
+      counts.all += 1;
+    }
+    return counts;
+  }, [papers, saved]);
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return papers.filter((paper) => {
       const haystack = [paper.title, paper.summary, paper.core_method, paper.company, paper.venue, ...(paper.authors || []), ...(paper.tags || [])]
         .join(" ")
         .toLowerCase();
-      const modeMatch =
-        mode === "all" ||
-        (mode === "today" && paper.is_daily_pick) ||
-        (mode === "llm" && paper.tags.includes("企业论文") && paper.tags.some((item) => LLM_TAGS.includes(item))) ||
-        (mode === "genrec" && paper.tags.some((item) => GENREC_TAGS.includes(item))) ||
-        (mode === "company" && (paper.content_type === "company_report" || paper.tags.includes("企业论文"))) ||
-        (mode === "saved" && saved.includes(paper.id));
-      return modeMatch && (!needle || haystack.includes(needle)) && (tag === "全部" || paper.tags.includes(tag));
+      return (
+        matchesMode(paper, mode, saved) &&
+        (!needle || haystack.includes(needle)) &&
+        (tag === "全部" || paper.tags.includes(tag))
+      );
     });
   }, [papers, query, mode, tag, saved]);
 
@@ -120,7 +132,7 @@ export function DigestDashboard() {
     return <main className="center-state" role="status"><p>正在加载 LLM&GR…</p></main>;
   }
 
-  const todayCount = papers.filter((paper) => paper.is_daily_pick).length;
+  const todayCount = tabCounts.today;
   const sourceErrors = payload.status.source_errors || [];
   const effectiveWindow = payload.status.effective_daily_window_days || payload.site.daily_window_days || 3;
 
@@ -174,11 +186,11 @@ export function DigestDashboard() {
         <div className="toolbar">
           <nav className="view-tabs" aria-label="内容范围">
             <ViewTab active={mode === "today"} onClick={() => setMode("today")} label="近期" count={todayCount} />
-            <ViewTab active={mode === "llm"} onClick={() => setMode("llm")} label="LLM 基模" />
-            <ViewTab active={mode === "genrec"} onClick={() => setMode("genrec")} label="GenRec" />
-            <ViewTab active={mode === "company"} onClick={() => setMode("company")} label="企业 / 官方" />
-            <ViewTab active={mode === "all"} onClick={() => setMode("all")} label="全部" />
-            <ViewTab active={mode === "saved"} onClick={() => setMode("saved")} label="收藏" count={saved.length} />
+            <ViewTab active={mode === "llm"} onClick={() => setMode("llm")} label="LLM 基模" count={tabCounts.llm} />
+            <ViewTab active={mode === "genrec"} onClick={() => setMode("genrec")} label="GenRec" count={tabCounts.genrec} />
+            <ViewTab active={mode === "company"} onClick={() => setMode("company")} label="企业 / 官方" count={tabCounts.company} />
+            <ViewTab active={mode === "all"} onClick={() => setMode("all")} label="全部" count={tabCounts.all} />
+            <ViewTab active={mode === "saved"} onClick={() => setMode("saved")} label="收藏" count={tabCounts.saved} />
           </nav>
           <label className="search-box">
             <span>搜索</span>
@@ -330,4 +342,15 @@ function formatPaperDate(value: string) {
 
 function viewLabel(mode: ViewMode) {
   return { today: "近期入选", llm: "LLM 基模技术", genrec: "GenRec / Semantic ID", company: "企业与官方发布", all: "全部归档", saved: "我的收藏" }[mode];
+}
+
+function matchesMode(paper: Paper, mode: ViewMode, saved: string[]) {
+  return (
+    mode === "all" ||
+    (mode === "today" && paper.is_daily_pick) ||
+    (mode === "llm" && paper.tags.includes("企业论文") && paper.tags.some((item) => LLM_TAGS.includes(item))) ||
+    (mode === "genrec" && paper.tags.some((item) => GENREC_TAGS.includes(item))) ||
+    (mode === "company" && (paper.content_type === "company_report" || paper.tags.includes("企业论文"))) ||
+    (mode === "saved" && saved.includes(paper.id))
+  );
 }
