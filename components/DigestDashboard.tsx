@@ -93,7 +93,16 @@ export function DigestDashboard() {
     () => [...(payload?.papers || [])].sort((a, b) => paperTimestamp(b.published) - paperTimestamp(a.published) || b.score - a.score),
     [payload],
   );
-  const tags = useMemo(() => unique(papers.flatMap((paper) => paper.tags)).slice(0, 16), [papers]);
+  const tags = useMemo(() => {
+    const frequency = new Map<string, number>();
+    for (const paper of papers) {
+      for (const item of paper.tags) frequency.set(item, (frequency.get(item) ?? 0) + 1);
+    }
+    return [...frequency.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, 16)
+      .map(([item]) => item);
+  }, [papers]);
   const tabCounts = useMemo(() => {
     const counts: Record<ViewMode, number> = { today: 0, llm: 0, genrec: 0, company: 0, all: 0, saved: 0 };
     for (const paper of papers) {
@@ -301,10 +310,6 @@ function tagTone(tag: string, paper: Paper) {
   if (["企业论文", "官方技术报告", "A/B 实验"].includes(tag)) return "paper-tag--evidence";
   if (["LLM 基模", "GenRec", "Semantic ID"].includes(tag)) return "paper-tag--primary";
   return "paper-tag--topic";
-}
-
-function unique(values: string[]) {
-  return [...new Set(values)];
 }
 
 function formatGeneratedAt(value: string) {

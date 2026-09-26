@@ -150,11 +150,17 @@ def collect_arxiv(config: Config) -> list[Paper]:
 
 
 def _collect_arxiv_via_openalex(config: Config) -> list[Paper]:
-    """Discover arXiv preprints through OpenAlex when the arXiv API is unreachable."""
+    """Discover arXiv preprints through OpenAlex when the arXiv API is unreachable.
+
+    Mirrors the direct collector's query structure: broad topic searches plus
+    model-family term chunks, so an outage does not narrow what is discovered.
+    ``locations.source.id`` also matches works where arXiv is a secondary
+    location (~11% broader than the primary-location filter).
+    """
     papers: list[Paper] = []
     cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
-    work_filter = f"primary_location.source.id:{OPENALEX_ARXIV_SOURCE_ID},from_publication_date:{cutoff}"
-    for query in config.topic_queries[:8]:
+    work_filter = f"locations.source.id:{OPENALEX_ARXIV_SOURCE_ID},from_publication_date:{cutoff}"
+    for query in _arxiv_mirror_searches(config):
         url = "https://api.openalex.org/works?" + urllib.parse.urlencode(
             {
                 "search": query,
@@ -176,6 +182,17 @@ def _collect_arxiv_via_openalex(config: Config) -> list[Paper]:
                 papers.append(paper)
         time.sleep(0.2)
     return deduplicate(papers)
+
+
+def _arxiv_mirror_searches(config: Config) -> list[str]:
+    """Topic searches plus OR-quoted model-family chunks, mirroring _arxiv_queries."""
+    discovery_terms = _unique(
+        term for terms in config.model_families.values() for term in terms
+    )
+    family_searches = [
+        " OR ".join(f'"{term}"' for term in chunk) for chunk in _chunks(discovery_terms, 11)
+    ]
+    return [*config.topic_queries[:8], *family_searches]
 
 
 def _openalex_arxiv_paper(work: dict[str, Any], config: Config) -> Paper | None:

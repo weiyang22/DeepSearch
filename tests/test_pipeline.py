@@ -10,6 +10,7 @@ from deepsearch.ranking import choose_daily_picks, effective_daily_window, has_a
 from deepsearch.sources import (
     PartialCollectionError,
     _arxiv_id_from,
+    _arxiv_mirror_searches,
     _arxiv_queries,
     _github_report_url,
     _has_human_institution_author,
@@ -257,6 +258,17 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(paper.updated, paper.published)
         self.assertEqual(paper.abstract, "Generative recommendation with semantic IDs")
         self.assertEqual(paper.company, "ByteDance Seed")
+
+    def test_arxiv_mirror_searches_cover_topics_and_model_families(self):
+        searches = _arxiv_mirror_searches(self.config)
+        topics = [item for item in searches if " OR " not in item]
+        families = [item for item in searches if " OR " in item]
+        self.assertEqual(topics, self.config.topic_queries[:8])
+        self.assertTrue(families, "model-family chunks should extend the mirror")
+        self.assertIn('"GPT"', families[0])
+        self.assertIn('"Claude"', families[0])
+        # Model-family terms are chunked into OR groups of at most 11 terms.
+        self.assertTrue(all(item.count('"') <= 22 for item in families))
 
     def test_arxiv_mirror_fallback_rejects_works_without_arxiv_identity(self):
         work = {

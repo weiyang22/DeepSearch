@@ -5,8 +5,9 @@
 ## 功能
 
 - arXiv、DBLP、OpenAlex、Semantic Scholar 多源发现与降级
-- arXiv 使用短查询分片与指数退避重试；CI 出口 IP 被 arXiv 拒绝（HTTP 406）时自动切换 OpenAlex 的 arXiv 镜像发现，保持归档新鲜
+- arXiv 使用短查询分片与指数退避重试；CI 出口 IP 被 arXiv 拒绝（HTTP 406）时自动切换 OpenAlex 的 arXiv 镜像发现（覆盖主题与模型家族查询），保持归档新鲜
 - DBLP 已对非浏览器请求启用反爬挑战，默认关闭（`discovery.enable_dblp`）
+- LLM 准入要求标题显式点名模型类别或为厂商技术报告；泛方法词（如 pretraining）不再单独作为准入信号
 - 近期窗口内没有入选时，自动放宽窗口（最多 `daily_fallback_window_days` 天），页面如实显示实际窗口
 - 页面显示最后生成时间、当轮发现/筛选数量及数据源健康状态，并绕过旧 `papers.json` 浏览器缓存
 - Google DeepMind 使用 OpenAlex 机构 ID 定向检索，避免仅靠名称关键词造成漏采
