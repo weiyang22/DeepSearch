@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T14:45:50+08:00",
+  "generated_at": "2026-09-26T14:54:05+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,14 +12,13 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable）",
-      "OpenAlex: HTTP Error 429: Too Many Requests"
+      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable），已通过 OpenAlex arXiv 镜像发现 235 篇预印本"
     ],
-    "discovered": 71,
-    "candidates": 10,
+    "discovered": 1804,
+    "candidates": 11,
     "new_papers": 0,
-    "daily_picks": 0,
-    "effective_daily_window_days": 3,
+    "daily_picks": 1,
+    "effective_daily_window_days": 4,
     "analysis_complete": 85,
     "analysis_fallback": 0
   },
@@ -184,7 +183,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "39e77c4a740ee552",
-      "is_daily_pick": false
+      "is_daily_pick": true
     },
     {
       "id": "openalex:W7124564256",
