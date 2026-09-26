@@ -43,9 +43,13 @@ def main() -> int:
         discovered, source_errors = collect_all(config)
 
     candidates = prepare_candidates(discovered, config)
-    daily_picks = choose_daily_picks(candidates, config)
-
     archived = prepare_candidates(previous, config)
+    # Daily picks compete across the whole recent pool — fresh discoveries plus
+    # the current archive — so a slow discovery day (for example a paper aging
+    # out of a source's per-query window) cannot blank the 近期 feed.
+    daily_pool = deduplicate(_merge(candidates, archived))
+    daily_picks = choose_daily_picks(daily_pool, config)
+
     merged = deduplicate(_merge(daily_picks, candidates, archived))
     cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
@@ -82,7 +86,7 @@ def main() -> int:
             "daily_picks": len(daily_picks),
             # Window that actually produced the daily picks; equals
             # daily_window_days on healthy days and relaxes on degraded ones.
-            "effective_daily_window_days": effective_daily_window(candidates, config)
+            "effective_daily_window_days": effective_daily_window(daily_pool, config)
             or config.daily_window_days,
             "analysis_complete": sum(paper.analysis_status == "complete" for paper in merged),
             "analysis_fallback": sum(paper.analysis_status != "complete" for paper in merged),

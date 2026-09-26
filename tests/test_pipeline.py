@@ -5,6 +5,7 @@ from unittest.mock import MagicMock, patch
 
 import deepsearch.sources as sources
 from deepsearch.config import load_config
+from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import choose_daily_picks, effective_daily_window, has_ab_experiment, infer_tags, prepare_candidates
 from deepsearch.sources import (
@@ -258,6 +259,32 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(paper.updated, paper.published)
         self.assertEqual(paper.abstract, "Generative recommendation with semantic IDs")
         self.assertEqual(paper.company, "ByteDance Seed")
+
+    def test_daily_pool_includes_archived_papers_when_fresh_discovery_is_stale(self):
+        today = dt.date.today()
+        archived_recent = Paper(
+            id="archived-recent",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            published=(today - dt.timedelta(days=3)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        rediscovered_old = Paper(
+            id="rediscovered-old",
+            title="Scaling Foundation Model Pretraining",
+            published=(today - dt.timedelta(days=25)).isoformat(),
+            affiliations=["Google"],
+            abstract="large language model pretraining scaling law",
+        )
+        candidates = prepare_candidates([rediscovered_old], self.config)
+        archived = prepare_candidates([archived_recent], self.config)
+        pool = deduplicate(_merge(candidates, archived))
+        picks = choose_daily_picks(pool, self.config)
+        # The 3-day-old archive paper stays a recent pick even when today's
+        # fresh discovery only re-surfaced a 25-day-old paper.
+        self.assertIn("archived-recent", [item.id for item in picks])
+        self.assertNotIn("rediscovered-old", [item.id for item in picks])
+        self.assertEqual(effective_daily_window(pool, self.config), 4)
 
     def test_arxiv_mirror_searches_cover_topics_and_model_families(self):
         searches = _arxiv_mirror_searches(self.config)
