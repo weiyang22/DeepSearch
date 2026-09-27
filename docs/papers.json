@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T14:54:05+08:00",
+  "generated_at": "2026-09-27T09:55:25+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,14 +12,15 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable），已通过 OpenAlex arXiv 镜像发现 235 篇预印本"
+      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable），已通过 OpenAlex arXiv 镜像发现 80 篇预印本",
+      "OpenAlex: HTTP Error 429: Too Many Requests"
     ],
-    "discovered": 1804,
+    "discovered": 181,
     "candidates": 11,
-    "new_papers": 0,
+    "new_papers": 1,
     "daily_picks": 1,
     "effective_daily_window_days": 4,
-    "analysis_complete": 85,
+    "analysis_complete": 86,
     "analysis_fallback": 0
   },
   "sources": [
@@ -52,6 +53,71 @@
     "Mistral AI"
   ],
   "papers": [
+    {
+      "id": "arxiv:2609.28972",
+      "title": "Cross-Country Code-Mixing for Generative Recommendation",
+      "authors": [
+        "Yuan Gao",
+        "Hao Deng",
+        "Haibo Xing",
+        "Yi Xu",
+        "Lingyu Mu",
+        "Jinxin Hu",
+        "Yu Zhang",
+        "Xiaoyi Zeng"
+      ],
+      "affiliations": [],
+      "published": "2026-09-24",
+      "updated": "2026-09-24",
+      "abstract": "Cross-country recommendation on modern e-commerce platforms is typically deployed with disjoint user and item ID spaces across markets, removing the shared anchors that conventional cross-domain methods rely on. Generative recommendation (GR) mitigates this by mapping items into a shared token space and training a unified model, but existing approaches keep behavior sequences strictly country-specific, so knowledge transfer occurs only at the parameter level and remains absent at the data level. Inspired by code-switching corpora in multilingual natural language processing, we propose CMRec, a cross-country GR framework that injects cross-country supervision at the data level via dual-constrained, context-aware code-mixing. CMRec first learns a shared semantic codebook from multi-modal content and behavioral co-occurrence across countries. It then uses this codebook to synthesize mixed-country sequences via token-level substitutions that satisfy both static (content) and dynamic (e.g., price, audience, popularity) constraints. Finally, it introduces a context-aware loss that reweights mixed samples according to their plausibility in the current sequence. Experiments on two real-world multi-country datasets and an online A/B test show that CMRec substantially improves recommendation quality in data-sparse countries while preserving performance in data-rich countries, achieving +1.77% advertising revenue and +2.64% orders on a large-scale e-commerce platform.",
+      "url": "https://arxiv.org/abs/2609.28972",
+      "pdf_url": "https://arxiv.org/pdf/2609.28972",
+      "doi": "10.48550/arxiv.2609.28972",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Sentiment Analysis and Opinion Mining",
+        "Topic Modeling"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Tokenization",
+        "推理系统",
+        "生成式推荐",
+        "跨国家推荐",
+        "代码混合",
+        "语义ID"
+      ],
+      "score": 131,
+      "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏共享锚点的问题，本文提出CMRec，一种跨国家生成式推荐框架。其核心是在数据层面注入跨国监督，而非仅依赖参数级知识迁移。CMRec首先从多模态内容与跨国行为共现中学习共享语义码本，再通过满足静态（内容）与动态（价格、受众、热度）双重约束的token级替换合成混合国家序列，最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能，并在大规模电商平台取得广告收入+1.77%、订单量+2.64%的线上收益。",
+      "one_line_takeaway": "CMRec通过双约束上下文感知的跨国代码混合，在数据层面实现生成式推荐的跨国家知识迁移，线上广告收入提升1.77%、订单量提升2.64%。",
+      "core_method": "CMRec首先从多模态内容与跨国行为共现中学习共享语义码本，将商品映射到统一token空间；然后利用该码本进行token级替换，合成满足静态内容约束和动态（价格、受众、热度）约束的混合国家序列；最后设计上下文感知损失，根据混合样本在当前序列中的合理性重新加权，从而在数据层面注入跨国监督。",
+      "innovation_points": [
+        "首次将多语言NLP中的代码切换语料思想引入跨国家生成式推荐，在数据层面而非仅参数层面实现知识迁移。",
+        "提出双约束（静态内容与动态属性）的上下文感知代码混合序列合成方法，保证混合样本的合理性。",
+        "设计上下文感知损失，对混合样本按其在当前序列中的可信度动态重加权，提升训练信号质量。",
+        "在真实跨国电商场景中验证，兼顾数据稀疏国家提升与数据丰富国家性能保持。"
+      ],
+      "experiment_results": [
+        "在两个真实世界多国数据集上，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能。",
+        "在大规模电商平台的在线A/B测试中，CMRec取得广告收入+1.77%、订单量+2.64%的线上收益。"
+      ],
+      "limitations": [
+        "摘要未提及模型对动态约束中具体属性（如价格、受众、热度）的敏感性与调参成本。",
+        "未说明共享语义码本在商品类目差异极大的国家间是否仍能有效对齐。",
+        "线上A/B测试仅报告了整体收益，未披露对不同国家或用户群体的细分影响。"
+      ],
+      "practical_value": "为跨境电商平台提供了一种在用户与商品ID空间不共享条件下，通过数据级代码混合实现跨国家知识迁移的生成式推荐方案，可直接提升数据稀疏市场的推荐效果与商业指标，且对数据丰富市场无显著负面影响。",
+      "why_it_matters": "该工作突破了现有生成式推荐仅靠参数共享进行跨域迁移的局限，首次在数据层面通过代码混合注入跨国监督，为跨国家、跨市场推荐提供了新范式，并经过大规模线上验证，对工业界具有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "ec978a7f4f0e6f86",
+      "is_daily_pick": true
+    },
     {
       "id": "arxiv:2609.27284",
       "title": "Hunyuan-A13B Technical Report",
@@ -183,7 +249,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "39e77c4a740ee552",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "openalex:W7124564256",
@@ -413,7 +479,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 132,
+      "score": 131,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
       "one_line_takeaway": "CHAP通过层次化语义对齐和残差级联生成机制，实现了高效且个性化的生成式检索，兼顾精度与推理速度。",
       "core_method": "CHAP框架包含三个核心组件：1）层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；2）个性化GR框架，结合离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；3）残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。",
@@ -528,7 +594,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 123,
+      "score": 122,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
       "one_line_takeaway": "在生成式推荐中，利用SID树进行粗化可显著提升离线策略评估的可靠性，且粗化偏差可由量化器重建误差和目标日志散度界定。",
       "core_method": "利用SID树作为动作抽象，将物品边缘化到码前缀簇，通过解码器直接计算簇质量，实现粗化OPE，并推导条件偏差界。",
@@ -650,7 +716,7 @@
         "LLM 基模",
         "Multimodal"
       ],
-      "score": 134,
+      "score": 133,
       "summary": "本报告介绍阿里巴巴Qwen团队发布的Qwen Drive 1.0，这是迈向自动驾驶视觉语言基础模型的第一步。该模型基于Qwen2-VL架构，通过多模态指令微调，将视觉编码器与语言模型结合，旨在处理驾驶场景中的感知、预测和规划任务。报告强调其作为基础模型的定位，而非应用层案例。技术路线包括利用大规模驾驶视频和文本对进行预训练，并采用统一的token表示来对齐视觉和语言信息。实验结果显示，在多个自动驾驶基准上，Qwen Drive 1.0在零样本和少样本设置下均展现出有竞争力的性能，尤其在场景理解和决策推理方面。然而，报告未提供详细的消融实验或与现有方法的全面对比数据。局限性包括对复杂动态场景的鲁棒性不足，以及缺乏真实路测验证。实践价值在于为自动驾驶提供可解释的决策基础，但距离实际部署仍有距离。",
       "one_line_takeaway": "Qwen Drive 1.0展示了将视觉语言基础模型应用于自动驾驶的初步可行性，但尚需更多工程化验证。",
       "core_method": "基于Qwen2-VL架构，采用视觉编码器与语言模型结合，通过多模态指令微调，使用驾驶视频和文本对进行预训练，统一视觉和语言token表示，实现感知、预测和规划的多任务处理。",
@@ -706,7 +772,7 @@
         "A/B 实验",
         "Tokenization"
       ],
-      "score": 90,
+      "score": 89,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
       "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
       "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
