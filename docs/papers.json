@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T10:03:21+08:00",
+  "generated_at": "2026-09-29T10:50:26+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,15 +12,14 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [
-      "arXiv: 全部 4 个分片失败（HTTP Error 406: Not Acceptable），已通过 OpenAlex arXiv 镜像发现 89 篇预印本",
-      "OpenAlex: HTTP Error 503: Service Unavailable"
+      "OpenAlex: HTTP Error 429: Too Many Requests"
     ],
-    "discovered": 159,
-    "candidates": 11,
-    "new_papers": 0,
-    "daily_picks": 1,
-    "effective_daily_window_days": 5,
-    "analysis_complete": 86,
+    "discovered": 805,
+    "candidates": 45,
+    "new_papers": 3,
+    "daily_picks": 2,
+    "effective_daily_window_days": 6,
+    "analysis_complete": 89,
     "analysis_fallback": 0
   },
   "sources": [
@@ -54,6 +53,71 @@
   ],
   "papers": [
     {
+      "id": "arxiv:2609.30576",
+      "title": "T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation",
+      "authors": [
+        "Yang Liu",
+        "Noel Loo",
+        "Ali Khanafer",
+        "Shuying Sun",
+        "Akshay Soni",
+        "Zhong Wu",
+        "Linjun Yang"
+      ],
+      "affiliations": [],
+      "published": "2026-09-24T21:39:12Z",
+      "updated": "2026-09-24T21:39:12Z",
+      "abstract": "Large-scale recommenders increasingly adopt the sequential generative recipe behind large language models, bringing the Transformer into recommendation along with design choices made for text, including Rotary Position Embedding (RoPE). In language models, RoPE encodes token indices for relative position reasoning, but in recommendation, an interaction index records only event order, saying nothing about elapsed time, behavioral cycles across scales, or calendar phase. We revisit this choice and propose T-RoPE, a time-aware RoPE for sequential generative recommendation that replaces index-only rotation with timestamp-based angles, learnable temporal coefficients, multiscale frequency banks, shifted query alignment, and non-stationary key rotation. We prove that standard RoPE, even on timestamps, remains time-translation invariant and cannot distinguish seasonal contexts, and that T-RoPE breaks this invariance while preserving the RoPE interface. Across five public benchmarks, T-RoPE achieves the best result on every metric on every dataset, improving over the strongest baseline by 78--130\\% in HR@10 on the sparse PixelRec data and 8--12\\% across metrics on Amazon Books. On an industrial-scale e-commerce dataset with more than 6B interactions, it improves every metric over the HSTU + Time RAB backbone by 13--82\\%, with ablations attributing the largest gains to multiscale frequencies ($+56\\%$ NDCG@50) and non-stationary keys ($+4\\%$). An online A/B test in the Shop app yields positive lifts in conversion rate ($+0.33\\%$) and order count ($+0.63\\%$). We also provide forward and backward algorithms whose added cost is linear in sequence length and head dimension, keeping time-aware RoPE practical for large generative recommenders.",
+      "url": "http://arxiv.org/abs/2609.30576v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.30576v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.AI",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "LLM 基模",
+        "GenRec",
+        "Reasoning",
+        "推理系统",
+        "生成式推荐",
+        "旋转位置编码",
+        "时间感知"
+      ],
+      "score": 143,
+      "summary": "针对序列生成推荐中直接沿用语言模型RoPE仅编码交互顺序、忽略真实时间间隔与周期性的问题，本文提出T-RoPE。该方法用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，而T-RoPE在保留RoPE接口的同时打破该不变性。在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%；在超60亿交互的工业电商数据上，较HSTU+Time RAB基线各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试中转化率提升0.33%、订单量提升0.63%。前向与反向算法额外开销与序列长度和头维度呈线性。",
+      "one_line_takeaway": "T-RoPE将时间戳、多尺度周期与非平稳性注入旋转位置编码，在保留RoPE接口的同时显著提升序列生成推荐的离线与线上效果。",
+      "core_method": "T-RoPE用基于时间戳的角度替换RoPE的索引旋转，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转；理论证明标准RoPE即使使用时间戳仍时间平移不变，无法区分季节上下文，而T-RoPE打破该不变性且保持RoPE接口。",
+      "innovation_points": [
+        "提出时间感知的旋转位置编码T-RoPE，用时间戳角度替代索引旋转，并加入可学习时间系数与多尺度频率库。",
+        "理论证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，T-RoPE可打破该不变性。",
+        "引入偏移查询对齐与非平稳键旋转，在保留RoPE接口的同时增强时间建模能力。",
+        "给出前向与反向算法，额外计算开销与序列长度和头维度呈线性，适合大规模生成式推荐。"
+      ],
+      "experiment_results": [
+        "在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10较最强基线提升78-130%，Amazon Books各指标提升8-12%。",
+        "在超60亿交互的工业电商数据集上，较HSTU+Time RAB基线各指标提升13-82%；消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。",
+        "Shop应用在线A/B测试中，转化率提升0.33%，订单量提升0.63%。"
+      ],
+      "limitations": [
+        "仅基于标题、摘要和学术元数据，无法评估方法在更多工业场景或不同推荐任务上的泛化性。",
+        "未提供公开基准上的具体绝对指标数值，仅报告相对提升幅度。",
+        "在线A/B测试仅报告转化率和订单量两个指标，未说明其他业务指标或长期影响。"
+      ],
+      "practical_value": "T-RoPE可直接替换现有生成式推荐模型中的RoPE，以线性额外开销引入时间感知能力，在公开基准和工业级电商数据上均带来显著离线提升，并在Shop应用在线A/B测试中实现转化率与订单量正向增长，具备落地价值。",
+      "why_it_matters": "该工作指出语言模型位置编码在推荐场景中的时间盲区，并通过理论证明与多尺度时间建模给出可插拔的改进方案，在超60亿交互工业数据和在线A/B测试中验证有效性，对生成式推荐的位置编码设计具有参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "3648dd45f8461d50",
+      "is_daily_pick": true
+    },
+    {
       "id": "arxiv:2609.28972",
       "title": "Cross-Country Code-Mixing for Generative Recommendation",
       "authors": [
@@ -67,51 +131,54 @@
         "Xiaoyi Zeng"
       ],
       "affiliations": [],
-      "published": "2026-09-24",
-      "updated": "2026-09-24",
+      "published": "2026-09-24T03:38:51Z",
+      "updated": "2026-09-24T03:38:51Z",
       "abstract": "Cross-country recommendation on modern e-commerce platforms is typically deployed with disjoint user and item ID spaces across markets, removing the shared anchors that conventional cross-domain methods rely on. Generative recommendation (GR) mitigates this by mapping items into a shared token space and training a unified model, but existing approaches keep behavior sequences strictly country-specific, so knowledge transfer occurs only at the parameter level and remains absent at the data level. Inspired by code-switching corpora in multilingual natural language processing, we propose CMRec, a cross-country GR framework that injects cross-country supervision at the data level via dual-constrained, context-aware code-mixing. CMRec first learns a shared semantic codebook from multi-modal content and behavioral co-occurrence across countries. It then uses this codebook to synthesize mixed-country sequences via token-level substitutions that satisfy both static (content) and dynamic (e.g., price, audience, popularity) constraints. Finally, it introduces a context-aware loss that reweights mixed samples according to their plausibility in the current sequence. Experiments on two real-world multi-country datasets and an online A/B test show that CMRec substantially improves recommendation quality in data-sparse countries while preserving performance in data-rich countries, achieving +1.77% advertising revenue and +2.64% orders on a large-scale e-commerce platform.",
-      "url": "https://arxiv.org/abs/2609.28972",
-      "pdf_url": "https://arxiv.org/pdf/2609.28972",
-      "doi": "10.48550/arxiv.2609.28972",
+      "url": "http://arxiv.org/abs/2609.28972v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.28972v1",
+      "doi": "",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "Recommender Systems and Techniques",
-        "Sentiment Analysis and Opinion Mining",
-        "Topic Modeling"
+        "cs.IR",
+        "cs.AI"
       ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "Tokenization",
-        "推理系统"
+        "推理系统",
+        "生成式推荐",
+        "跨国推荐",
+        "码混合",
+        "语义ID"
       ],
       "score": 131,
-      "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏共享锚点的问题，本文提出CMRec，一种跨国家生成式推荐框架。其核心是在数据层面注入跨国监督，而非仅依赖参数级知识迁移。CMRec首先从多模态内容与跨国行为共现中学习共享语义码本，再通过满足静态（内容）与动态（价格、受众、热度）双重约束的token级替换合成混合国家序列，最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能，并在大规模电商平台取得广告收入+1.77%、订单量+2.64%的线上收益。",
-      "one_line_takeaway": "CMRec通过双约束上下文感知的跨国代码混合，在数据层面实现生成式推荐的跨国家知识迁移，线上广告收入提升1.77%、订单量提升2.64%。",
-      "core_method": "CMRec首先从多模态内容与跨国行为共现中学习共享语义码本，将商品映射到统一token空间；然后利用该码本进行token级替换，合成满足静态内容约束和动态（价格、受众、热度）约束的混合国家序列；最后设计上下文感知损失，根据混合样本在当前序列中的合理性重新加权，从而在数据层面注入跨国监督。",
+      "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏锚点的问题，生成式推荐（GR）通过共享token空间和统一模型缓解，但现有方法仍将行为序列严格限定在单一国家，知识迁移仅停留在参数层面，数据层面缺失。本文提出CMRec，受多语言NLP中语码转换语料启发，在数据层面注入跨国监督：首先从多模态内容与跨国行为共现中学习共享语义码本，再基于该码本通过token级替换合成混合国家序列，替换同时满足静态内容约束与动态（价格、受众、热度）约束，最后引入上下文感知损失，按混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
+      "one_line_takeaway": "CMRec通过双约束上下文感知的跨国码混合，在数据层面实现生成式推荐的跨国知识迁移，显著提升数据稀疏市场表现并带来线上收入与订单增长。",
+      "core_method": "CMRec是一个跨国生成式推荐框架，核心是在数据层面注入跨国监督。它首先利用多模态内容与跨国行为共现学习共享语义码本，将商品映射到统一token空间；然后基于该码本进行token级替换，合成混合国家序列，替换过程受静态（内容）和动态（价格、受众、热度等）双约束；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权，使模型在训练中有效利用跨国混合数据。",
       "innovation_points": [
-        "首次将多语言NLP中的代码切换语料思想引入跨国家生成式推荐，在数据层面而非仅参数层面实现知识迁移。",
-        "提出双约束（静态内容与动态属性）的上下文感知代码混合序列合成方法，保证混合样本的合理性。",
-        "设计上下文感知损失，对混合样本按其在当前序列中的可信度动态重加权，提升训练信号质量。",
+        "首次将多语言NLP中的语码转换（code-switching）思想引入跨国生成式推荐，在数据层面而非仅参数层面实现跨国知识迁移。",
+        "提出双约束（静态内容+动态属性）的上下文感知码混合方法，确保合成跨国序列的合理性与可用性。",
+        "设计上下文感知损失，对混合样本按序列合理性重加权，缓解噪声混合样本的负面影响。",
         "在真实跨国电商场景中验证，兼顾数据稀疏国家提升与数据丰富国家性能保持。"
       ],
       "experiment_results": [
-        "在两个真实世界多国数据集上，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能。",
-        "在大规模电商平台的在线A/B测试中，CMRec取得广告收入+1.77%、订单量+2.64%的线上收益。"
+        "在两个真实跨国数据集上，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能。",
+        "在大规模电商平台线上A/B测试中，CMRec实现广告收入+1.77%、订单量+2.64%。"
       ],
       "limitations": [
         "摘要未提及模型对动态约束中具体属性（如价格、受众、热度）的敏感性与调参成本。",
-        "未说明共享语义码本在商品类目差异极大的国家间是否仍能有效对齐。",
-        "线上A/B测试仅报告了整体收益，未披露对不同国家或用户群体的细分影响。"
+        "未说明共享语义码本构建对多模态数据质量和覆盖度的依赖程度。",
+        "缺乏对混合比例、约束强度等超参数影响的消融分析（基于摘要信息）。"
       ],
-      "practical_value": "为跨境电商平台提供了一种在用户与商品ID空间不共享条件下，通过数据级代码混合实现跨国家知识迁移的生成式推荐方案，可直接提升数据稀疏市场的推荐效果与商业指标，且对数据丰富市场无显著负面影响。",
-      "why_it_matters": "该工作突破了现有生成式推荐仅靠参数共享进行跨域迁移的局限，首次在数据层面通过代码混合注入跨国监督，为跨国家、跨市场推荐提供了新范式，并经过大规模线上验证，对工业界具有直接参考价值。",
+      "practical_value": "为跨境电商平台提供了一种在数据层面进行跨国知识迁移的生成式推荐方案，无需共享用户或商品ID空间，即可提升数据稀疏市场的推荐效果，并已在真实大规模平台上验证了广告收入和订单量的显著增长，具备直接落地价值。",
+      "why_it_matters": "该工作突破了现有生成式推荐仅靠参数共享进行跨国迁移的局限，通过数据层面的码混合为跨市场推荐提供了新范式，且线上A/B测试证实了其商业价值，对工业界跨国推荐系统具有重要参考意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "ec978a7f4f0e6f86",
+      "analysis_signature": "8b4bb29d8ee4d044",
       "is_daily_pick": true
     },
     {
@@ -220,7 +287,7 @@
         "MoE",
         "Multimodal"
       ],
-      "score": 145,
+      "score": 144,
       "summary": "腾讯混元团队发布开源大模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数80B，推理时仅激活13B，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；通过高质量监督微调和强化学习进一步优化性能。其双模式思维链框架可根据任务复杂度自适应调整推理深度：常规查询快速思考，复杂多步问题慢速思考。评估显示在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且推理吞吐量高，适合延迟敏感应用。",
       "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在80B总参数下仅激活13B，实现了高效推理与强大能力的平衡。",
       "core_method": "基于混合专家（MoE）架构，总参数80B，推理激活13B；在20T token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和强化学习；引入双模式思维链框架，根据任务复杂度自适应选择快速或慢速思考。",
@@ -314,6 +381,67 @@
       "is_daily_pick": false
     },
     {
+      "id": "arxiv:2609.21346",
+      "title": "IntBMoE: Integrating Block-Level Conditioning into Expert Composition for Full-Participation Mixture-of-Experts",
+      "authors": [
+        "Ran Cheng",
+        "Longfei Xu",
+        "Zheng Liu",
+        "Kaikui Liu",
+        "Xiangxiang Chu"
+      ],
+      "affiliations": [],
+      "published": "2026-09-18T06:01:13Z",
+      "updated": "2026-09-18T06:01:13Z",
+      "abstract": "Mixture-of-Experts (MoE) scales capacity, but existing designs cannot set three quantities independently. For a single token, participation is how many experts contribute knowledge to its output, execution is how many are actually computed (compute cost), and materialization is how many expert-sized parameter sets must be built and stored (memory cost). Sparse routing keeps execution and materialization low, but shrinks participation: for each token, only a few experts contribute. Dense output-mixing restores full participation, but its execution grows with the number of experts. Parameter-merging keeps execution at one expert, but its materialization grows with the number of routing decisions. We propose IntBMoE, a block-conditioned MoE that decouples all three by pairing dense expert composition with sparse block execution. Its blocks come from a small learned codebook, one per entry. At each internal layer, a lightweight hypernetwork merges all expert bases in that layer's pool into one composed expert. Participation is full, because every composed expert draws on the entire pool. Execution stays sparse, because a router sends each token to only a few blocks. Materialization is bounded, because the codebook, not the input, fixes how many blocks exist. Dual-Path Residual Gating (DPRG) further couples two independently composed paths through multiplicative gating. Experiments on image classification show consistent gains over representative sparse and dense MoE baselines. Additional experiments on language modeling and sequential recommendation validate its generalization beyond vision. IntBMoE is fully deployed in AMap's generative recommendation system, serving hundreds of millions of users under a 60ms latency budget, with a 2.4% relative UVCTR gain in online A/B testing. Our code is available at https://github.com/AMAP-ML/DreamX-Rec/.",
+      "url": "http://arxiv.org/abs/2609.21346v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.21346v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Tokenization",
+        "MoE",
+        "推理系统",
+        "Mixture-of-Experts",
+        "生成式推荐",
+        "模型架构"
+      ],
+      "score": 139,
+      "summary": "针对MoE中参与度、执行量与参数物化量无法独立调节的问题，提出IntBMoE。该方法将稠密专家组合与稀疏块执行配对：块来自小型可学习码本，每层通过轻量超网络将专家池中所有专家基合并为一个组合专家，使每个token获得全参与；路由器仅将token发送至少数块，保持稀疏执行；码本固定块数量，限制物化量。双路径残差门控进一步耦合两条独立组合路径。在图像分类、语言建模和序列推荐上验证了泛化性。该系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试获得2.4%相对UVCTR提升。",
+      "one_line_takeaway": "IntBMoE通过块级条件与超网络组合，将MoE的参与度、执行量和物化量解耦，并在高德生成式推荐中实现线上收益。",
+      "core_method": "IntBMoE采用块条件MoE架构：每个内部层维护一个专家基池，通过轻量超网络将所有专家基合并为一个组合专家，实现全参与；路由器将每个token路由至少数从可学习码本中选取的块，保持稀疏执行；码本大小固定，从而限制参数物化量。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
+      "innovation_points": [
+        "提出块级条件MoE，将参与度、执行量和物化量三个量解耦，突破传统稀疏路由、稠密输出混合和参数合并的固有权衡。",
+        "设计可学习码本与超网络组合机制，使每个token获得全专家池参与，同时保持稀疏执行和有界物化。",
+        "引入双路径残差门控（DPRG），通过乘法门控耦合两条独立组合路径，增强表示能力。",
+        "在高德生成式推荐系统中完成全量部署，验证了工业级可行性与线上价值。"
+      ],
+      "experiment_results": [
+        "在图像分类任务上，IntBMoE相比代表性稀疏和稠密MoE基线取得一致提升。",
+        "在语言建模和序列推荐任务上验证了泛化能力。",
+        "在高德生成式推荐系统全量部署，服务数亿用户，满足60ms延迟预算，在线A/B测试获得2.4%相对UVCTR提升。"
+      ],
+      "limitations": [
+        "摘要未提供图像分类、语言建模和序列推荐任务上的具体量化指标和消融实验细节。",
+        "未讨论码本大小、块数量等超参数对性能与效率的敏感性。",
+        "未分析在更大规模模型或不同模态下的扩展规律。"
+      ],
+      "practical_value": "IntBMoE为生成式推荐系统提供了一种在严格延迟约束下扩展模型容量且控制内存成本的方法。其在高德的大规模部署表明，该架构能有效平衡计算效率与推荐效果，为工业级推荐系统提供了可复用的MoE设计范式。",
+      "why_it_matters": "该工作从基座模型架构层面重新审视MoE的核心权衡，提出解耦参与度、执行量和物化量的新思路，并成功落地于真实业务场景，对研究者和工程师均有参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "1bf7c116ca5b7979",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2609.14493",
       "title": "VARG: Value-Aware and Ranking-Aligned Generative Retrieval for Dynamic E-commerce Search",
       "authors": [
@@ -368,6 +496,66 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "a2b2068eeb0515ab",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2609.22227",
+      "title": "Guiding the coarse levels of semantic IDs makes the fine levels learnable",
+      "authors": [
+        "Bin Wang",
+        "Zhengyu Zhang"
+      ],
+      "affiliations": [],
+      "published": "2026-09-03T01:54:14Z",
+      "updated": "2026-09-03T01:54:14Z",
+      "abstract": "Generative retrieval represents each item by a short Semantic ID and casts recommendation as autoregressive generation of that sequence. Because the tokenizer is trained independently to reconstruct an item embedding, its codes are aligned with neither the downstream LLM nor the end task. Nearly every SID system therefore spends extra effort to bridge this gap--alignment corpora, reasoning/RL, or per-token encoders to make codes legible, or learned tokenizer supervision to make them task-aware--yet the recovered meaning is content-derived and may not be the meaning the task needs. We introduce Guided SID, which instead makes the levels that matter most meaningful by construction: we force the coarse RQ-VAE levels to encode a predefined categorical attribute--chosen to be text-grounded (hence legible to the LLM) and task-relevant--by deterministic supervised index assignment (overriding nearest-neighbor selection with the attribute label) while keeping the codebooks learnable (they still receive reconstruction gradients). A trie-merge construction maps any high-cardinality or set-valued attribute onto the fixed code budget while keeping merged buckets semantically coherent. Guiding costs nothing intrinsically: collision and reconstruction match or beat the vanilla baseline despite pinning the coarse level. In a matched end-to-end A/B differing only in the SID encoding, the guided retriever improves recall@k at every list length we measure (1.36x at k=1, 1.39x at k=10), raises mean reciprocal rank from 0.0260 to 0.0355, and predicts the pre-defined attribute 4.2x more often.",
+      "url": "http://arxiv.org/abs/2609.22227v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.22227v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "Reasoning",
+        "生成式推荐",
+        "语义ID",
+        "RQ-VAE"
+      ],
+      "score": 146,
+      "summary": "生成式推荐中，语义ID（SID）通常由独立训练的RQ-VAE生成，其编码与下游LLM及任务目标不对齐，导致需要额外对齐语料、推理/RL或逐token编码器来弥合差距。本文提出Guided SID，通过确定性监督索引分配强制粗粒度RQ-VAE层级编码预定义的、文本接地且任务相关的类别属性，同时保持码本可学习（仍接收重建梯度）。采用trie-merge构造将高基数或集合值属性映射到固定码预算，并保持合并桶语义连贯。引导不增加内在成本：碰撞和重建指标匹配或优于基线。在仅SID编码不同的端到端A/B测试中，引导检索器在所有列表长度上提升recall@k（k=1时1.36倍，k=10时1.39倍），MRR从0.0260升至0.0355，预定义属性预测频率提高4.2倍。",
+      "one_line_takeaway": "通过强制粗粒度语义ID编码任务相关属性，无需额外对齐即可显著提升生成式推荐性能。",
+      "core_method": "Guided SID：在RQ-VAE训练中，对粗粒度层级采用确定性监督索引分配，用预定义类别属性标签覆盖最近邻选择，强制其编码文本接地且任务相关的属性；同时保留码本的重建梯度。使用trie-merge构造将高基数或集合值属性映射到固定码预算，确保合并桶语义连贯。",
+      "innovation_points": [
+        "提出Guided SID，通过构造使粗粒度语义ID层级直接编码任务相关属性，避免额外对齐步骤。",
+        "设计trie-merge构造，将高基数或集合值属性映射到固定码预算，保持语义连贯。",
+        "引导不增加内在成本，碰撞和重建指标匹配或优于基线。",
+        "在端到端A/B测试中，仅改变SID编码即带来显著召回和MRR提升。"
+      ],
+      "experiment_results": [
+        "在匹配的端到端A/B测试中，引导检索器在所有测量的列表长度上提升recall@k：k=1时提升1.36倍，k=10时提升1.39倍。",
+        "平均倒数排名（MRR）从0.0260提升至0.0355。",
+        "预定义属性预测频率提高4.2倍。"
+      ],
+      "limitations": [
+        "需要预定义任务相关的类别属性，属性选择可能依赖领域知识。",
+        "仅在单一数据集或场景中验证，泛化性需进一步测试。",
+        "未与其他对齐方法（如RL或对齐语料）进行直接效率对比。"
+      ],
+      "practical_value": "为生成式推荐系统提供了一种低成本、高效的语义ID构造方法，无需额外对齐步骤即可提升推荐性能，适用于具有明确类别属性的业务场景，如电商、内容推荐等。",
+      "why_it_matters": "该工作揭示了语义ID粗粒度层级与任务对齐的重要性，提供了一种简单有效的构造性对齐方案，有望推动生成式推荐在工业界的落地。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "d6d7cd454d25c8b3",
       "is_daily_pick": false
     },
     {
@@ -539,7 +727,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 149,
+      "score": 148,
       "summary": "针对电商搜索中生成式检索（GR）训练流程难以保持查询意图一致性的问题，ICEGR提出端到端框架，从语义ID构建、监督微调与偏好优化三阶段注入查询意图。首先，意图感知SID构建将查询意图信号融入语义ID，使其超越静态商品信息；其次，合成查询增强的统一SFT将多个SFT任务统一到查询到SID目标下，并用合成查询补充低曝光商品的稀疏监督；最后，相关性校准的偏好优化将查询-商品相关性与业务信号融入边际自适应偏好目标，在保留查询意图的同时学习业务偏好。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%；在百度电商搜索部署为端到端生成式检索通路，A/B测试中CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知SID、合成查询增强SFT和相关性校准偏好优化，在电商搜索中实现查询意图一致的端到端生成式检索，离线与线上指标显著提升。",
       "core_method": "ICEGR包含三个组件：(1) 意图感知SID构建，将查询意图信号融入语义ID生成，使SID编码商品-意图关联；(2) 合成查询增强的统一SFT，统一多个SFT任务为查询到SID目标，并用合成查询为低曝光商品提供补充监督；(3) 相关性校准的偏好优化，将查询-商品相关性与业务信号集成到边际自适应偏好目标中，平衡意图保持与业务偏好。",
@@ -832,7 +1020,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 142,
+      "score": 141,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -892,7 +1080,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 119,
+      "score": 118,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
@@ -1099,7 +1287,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 101,
+      "score": 100,
       "summary": "工业推荐系统通常部署为多阶段级联，包含候选生成器、预排序器和最终排序器，虽有效但需重复处理用户历史、复杂特征管道和多个服务阶段。基于语义ID的生成式检索提供了更简单的端到端路径，但仅预测下一项无法捕捉生产排序目标的细粒度偏好。Gryphon-v2提出统一的生成-排序架构，编码用户历史一次，用自回归解码器生成语义ID候选，解析为目录项，并通过共享编码器状态的物品级排序模块进行排序。为转移细粒度生产排序偏好而不增加服务端第二模型，将高容量、仅训练的教师排序器蒸馏到排序模块。训练采用Rollout Distillation，教师分数是唯一排序监督，在两种互补候选分布上收集：当前解码器的rollout暴露生成机制产生的候选，日志曝光覆盖用户实际看到的物品。在Yandex Music的大规模推荐表面在线A/B实验中，单个Gryphon-v2模型替代了包含超过15个候选生成器、预排序和最终排序的生产级联，活跃用户数增加1.41%，服务延迟与生产级联相当。结果支持生成式检索器与从教师排序器蒸馏的排序模块作为生产级联端到端替代方案的实践可行性。",
       "one_line_takeaway": "Gryphon-v2用单一生成-排序模型替代生产级联，通过Rollout Distillation蒸馏教师排序器，在保持延迟的同时提升活跃用户数。",
       "core_method": "Gryphon-v2架构：用户历史编码一次，自回归解码器生成语义ID候选，排序模块复用编码器状态进行物品级排序。训练采用Rollout Distillation，教师排序器（仅训练）提供排序分数作为唯一监督，在解码器rollout和日志曝光两种候选分布上收集。",
@@ -1161,7 +1349,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 85,
+      "score": 84,
       "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块级半自回归解码中，每个去噪步骤仍需对全部历史块做前缀注意力，即使有KV缓存也反复产生开销。本文提出块混合注意力：在当前去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力成本。作者将LLaDA 2.1（16B开源dLLM）的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法，后训练约60小时。在HumanEval、MBPP+和CMATH上分别取得72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%的表现，基本保持基准性能。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
       "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型部分线性化，可在约60小时后训练内保持基准性能并提升解码吞吐最高1.7倍。",
       "core_method": "提出块混合注意力：在当前活跃去噪块内使用精确softmax注意力，对之前所有块使用线性注意力；将预训练dLLM LLaDA 2.1的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法进行轻量后训练。",
@@ -1271,16 +1459,17 @@
         "Lili Zhang",
         "Mingtao Zhang",
         "Jinchao Ye",
+        "Jiacong He",
         "Vincent Xue",
         "Chunhui Zhu",
         "Neil Shah"
       ],
       "affiliations": [],
       "published": "2026-07-30T23:27:14Z",
-      "updated": "2026-08-18T16:58:28Z",
+      "updated": "2026-09-25T19:49:04Z",
       "abstract": "Pretrained large language models (LLMs) are promising retrieval engines because they combine rich semantic priors, strong sequence modeling capabilities, and favorable scaling behavior. However, turning a pretrained LLM into a generative retriever in production deployment raises several challenges: the model must learn an internal item vocabulary that was absent from pretraining, and generate valid item identifiers under strict latency and cost constraints. We address these challenges through the design and launch of SnapLGR, an LLM-based generative retrieval system for short-video recommendation at Snapchat. The system is built around three main designs. First, we construct semantic identifiers (SIDs) from multimodal item embeddings and enhance them with Personalized PageRank (PPR)-based co-engagement contrastive learning, resulting in improved codebook utilization, reduced collisions, and infused collaborative signal. Second, we use continued pretraining (CPT) to ground the introduced SID tokens before supervised fine-tuning (SFT) on user interaction sequences. Third, we make SnapLGR serving practical through TensorRT-LLM CUDA-backed beam search and a decentralized worker-loop architecture. In a live A/B test, the launched system increased View Time by 0.37%, Time Spent by 0.09%, Deep Sessions by 0.18%, and Deep Sessions Unique User by 0.11% relative to the existing TIGER-style generative retrieval baseline. We then decompose this offline gap under a fixed tokenizer and quantify the gains due to model architecture, scaling, and pretraining. Overall, our deployment shows that successful production SnapLGR requires joint design across representation learning, vocabulary grounding, and efficient training and serving.",
-      "url": "http://arxiv.org/abs/2607.28895v3",
-      "pdf_url": "https://arxiv.org/pdf/2607.28895v3",
+      "url": "http://arxiv.org/abs/2607.28895v4",
+      "pdf_url": "https://arxiv.org/pdf/2607.28895v4",
       "doi": "",
       "source": "arXiv",
       "content_type": "paper",
@@ -1300,28 +1489,29 @@
         "Multimodal"
       ],
       "score": 184,
-      "summary": "本文介绍了SnapLGR，一个基于大语言模型（LLM）的生成式检索系统，用于Snapchat的短视频推荐。系统面临的主要挑战是LLM需要学习预训练中不存在的内部物品词汇，并在严格的延迟和成本约束下生成有效标识。为解决这些问题，作者设计了三个核心组件：基于多模态嵌入构建语义标识（SID），并通过个性化PageRank（PPR）协同对比学习增强，改善码本利用率和减少冲突；使用持续预训练（CPT）在监督微调（SFT）前对SID token进行接地；通过TensorRT-LLM CUDA支持的束搜索和去中心化工作循环架构实现高效服务。在线A/B测试显示，与TIGER风格基线相比，观看时间提升0.37%，花费时间提升0.09%，深度会话提升0.18%，深度会话独立用户提升0.11%。此外，作者在固定分词器下分解离线差距，量化了模型架构、规模和预训练的贡献。该部署表明，生产级SnapLGR需要联合设计表示学习、词汇接地和高效训练与服务。",
-      "one_line_takeaway": "SnapLGR通过语义标识、持续预训练和高效服务设计，成功将LLM生成式检索应用于Snapchat推荐，显著提升线上指标。",
-      "core_method": "构建语义标识（SID）并利用PPR对比学习增强；使用持续预训练（CPT）接地SID token；采用TensorRT-LLM束搜索和去中心化工作循环架构进行高效服务。",
+      "summary": "本文提出SnapLGR，一个面向Snapchat短视频推荐的基于LLM的生成式检索系统。针对预训练LLM缺乏内部物品词汇表、需在严格延迟与成本约束下生成有效物品标识的挑战，系统采用三项核心设计：1）基于多模态物品嵌入构建语义标识符（SID），并通过个性化PageRank（PPR）协同参与对比学习增强，提升码本利用率、减少冲突并注入协同信号；2）采用持续预训练（CPT） grounding SID token，再在用户交互序列上进行监督微调（SFT）；3）通过TensorRT-LLM CUDA加速的beam search与去中心化worker-loop架构实现高效服务。线上A/B测试显示，相比现有TIGER风格生成式检索基线，系统在观看时长、停留时间、深度会话等指标上取得相对提升。离线分析进一步量化了模型架构、扩展和预训练带来的增益。",
+      "one_line_takeaway": "SnapLGR通过语义标识符、持续预训练和高效服务架构，成功将LLM生成式检索部署于Snapchat短视频推荐，线上A/B测试验证了其相对于TIGER风格基线的显著收益。",
+      "core_method": "构建多模态语义标识符（SID）并利用PPR协同参与对比学习增强；采用持续预训练 grounding SID token，再基于用户交互序列进行监督微调；使用TensorRT-LLM CUDA加速的beam search和去中心化worker-loop架构实现低延迟服务。",
       "innovation_points": [
-        "提出基于多模态嵌入和PPR对比学习的语义标识构建方法，提升码本利用率和协同信号。",
-        "在生成式检索中引入持续预训练（CPT）来接地新引入的SID token，改善模型适配。",
-        "设计生产级服务架构，利用TensorRT-LLM和去中心化工作循环满足严格延迟和成本约束。"
+        "基于多模态嵌入构建语义标识符，并引入PPR协同参与对比学习，提升码本利用率、减少冲突并注入协同信号。",
+        "通过持续预训练 grounding 新引入的SID token，再在用户交互序列上微调，解决预训练LLM缺乏内部物品词汇表的问题。",
+        "设计TensorRT-LLM CUDA加速的beam search与去中心化worker-loop服务架构，满足生产环境严格延迟与成本约束。",
+        "在线上A/B测试中验证系统有效性，并离线分解模型架构、扩展和预训练对性能的贡献。"
       ],
       "experiment_results": [
-        "在线A/B测试：观看时间+0.37%，花费时间+0.09%，深度会话+0.18%，深度会话独立用户+0.11%（相对TIGER基线）。",
-        "离线分解显示模型架构、规模和预训练对性能均有贡献，但具体数值未在摘要中给出。"
+        "线上A/B测试中，SnapLGR相比现有TIGER风格生成式检索基线，观看时长相对提升0.37%，停留时间相对提升0.09%，深度会话相对提升0.18%，深度会话独立用户相对提升0.11%。",
+        "离线分析在固定tokenizer下分解了模型架构、扩展和预训练带来的性能增益。"
       ],
       "limitations": [
-        "摘要未提供离线分解的具体数值，无法量化各组件贡献。",
-        "系统针对短视频推荐设计，可能不适用于其他物品类型或场景。",
-        "依赖多模态嵌入和PPR计算，可能增加工程复杂度。"
+        "线上A/B测试的绝对提升幅度较小（如观看时长仅0.37%），实际业务影响需进一步评估。",
+        "系统依赖多模态嵌入和PPR对比学习，可能增加训练复杂度和计算成本。",
+        "未与其他非生成式检索基线进行对比，泛化性有待验证。"
       ],
-      "practical_value": "为LLM生成式检索在工业推荐系统中的落地提供了完整案例，包括语义标识设计、训练策略和服务优化，可直接借鉴于类似场景。",
-      "why_it_matters": "本文是少数公开的LLM生成式检索生产部署案例，展示了从预训练模型到实际推荐系统的转化过程，解决了词汇学习、延迟约束等关键问题，对研究和工程均有重要参考价值。",
+      "practical_value": "为工业级生成式推荐系统提供了可落地的技术方案，包括语义标识符构建、持续预训练 grounding 和高效服务架构，对短视频推荐场景具有直接参考价值。",
+      "why_it_matters": "展示了LLM生成式检索在真实大规模推荐系统中的成功部署，解决了物品词汇表缺失和延迟约束等关键工程挑战，为后续研究提供了线上验证的实践范例。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "ef310317846f4625",
+      "analysis_signature": "4d34d5a8dd99a063",
       "is_daily_pick": false
     },
     {
@@ -1569,6 +1759,71 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b7d7fe13c9b7e4e",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2607.24255",
+      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
+      "authors": [
+        "Guo Tang",
+        "Hanye Wu",
+        "Changjiang Han",
+        "Qingyang Li",
+        "Ming Zhang",
+        "Xiangyu Qian",
+        "Yanchen Qiao",
+        "Huanjie Wang",
+        "Zhi Ma",
+        "Zhen Li",
+        "Yaqiang Zang",
+        "Pinghua Gong"
+      ],
+      "affiliations": [],
+      "published": "2026-07-27T10:45:48Z",
+      "updated": "2026-07-27T10:45:48Z",
+      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
+      "url": "http://arxiv.org/abs/2607.24255v1",
+      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "MoE"
+      ],
+      "score": 160,
+      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
+      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
+      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
+      "innovation_points": [
+        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
+        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
+        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
+        "保持单一统一骨干网络，简化部署并降低推理成本。"
+      ],
+      "experiment_results": [
+        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
+        "未提供离线实验数据或消融实验细节。"
+      ],
+      "limitations": [
+        "依赖历史行为日志，冷启动场景可能受限。",
+        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
+        "未公开离线评估指标，难以独立验证模型效果。"
+      ],
+      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
+      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -2025,71 +2280,6 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "bda2fa4e2a92916b",
-      "is_daily_pick": false
-    },
-    {
-      "id": "arxiv:2607.24255",
-      "title": "OxygenREC-v2: Internalizing Discrimination into Generative Recommendation",
-      "authors": [
-        "Guo Tang",
-        "Hanye Wu",
-        "Changjiang Han",
-        "Qingyang Li",
-        "Ming Zhang",
-        "Xiangyu Qian",
-        "Yanchen Qiao",
-        "Huanjie Wang",
-        "Zhi Ma",
-        "Zhen Li",
-        "Yaqiang Zang",
-        "Pinghua Gong"
-      ],
-      "affiliations": [],
-      "published": "2026-07-27T10:45:48Z",
-      "updated": "2026-07-27T10:45:48Z",
-      "abstract": "Generative recommendation unifies retrieval and ranking within a single model by autoregressively decoding semantic identifier (SID) sequences. Yet reliably incorporating behavior signals from clicks, cart additions, and orders remains challenging. Existing approaches either jointly optimize generative and discriminative objectives, requiring delicate trade-offs, or use a separate ranker as a post-hoc reinforcement-learning reward, risking out-of-distribution scoring and reward misalignment. We propose OxygenREC-v2, a generative recommender that Internalizes Discrimination into Generative Recommendation (IDGR). Rather than adding a separate discriminative objective, OxygenREC-v2 uses logged behavior to condition generation and supervise training. During pre-training, a behavior instruction conditions generation on the target behavior. During post-training, future interaction behaviors are exploited as privileged knowledge in our entropy-aware trajectory optimization self-distillation framework, enabling reward-model-free policy optimization. Throughout both training stages, OxygenREC-v2 maintains a single unified backbone. We implement OxygenREC-v2 as a 3B-parameter, 1B-activated MoE and deploy it on JD.com's large-scale e-commerce platform. Across multiple online A/B tests, OxygenREC-v2 improves user click-through conversion rate (UCTCVR) by 1.6--4.4% and GMV by 2.8--6.8% over OxygenREC-v1.",
-      "url": "http://arxiv.org/abs/2607.24255v1",
-      "pdf_url": "https://arxiv.org/pdf/2607.24255v1",
-      "doi": "",
-      "source": "arXiv",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [
-        "cs.IR"
-      ],
-      "tags": [
-        "A/B 实验",
-        "预训练",
-        "后训练",
-        "GenRec",
-        "Semantic ID",
-        "MoE"
-      ],
-      "score": 160,
-      "summary": "OxygenREC-v2提出了一种将判别式行为信号内化到生成式推荐中的方法（IDGR），以解决现有方法在联合优化生成与判别目标时需权衡、或使用独立排序器作为强化学习奖励导致分布外评分和奖励错位的问题。该方法在预训练阶段通过行为指令条件化生成，在后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏框架实现无奖励模型的策略优化，全程保持单一统一骨干网络。模型为3B参数、1B激活的MoE架构，已在京东大规模电商平台部署。在线A/B测试显示，相比OxygenREC-v1，用户点击转化率（UCTCVR）提升1.6%-4.4%，GMV提升2.8%-6.8%。",
-      "one_line_takeaway": "OxygenREC-v2通过行为指令和特权知识蒸馏，将判别信号内化到生成式推荐中，实现了单一模型下的高效在线部署和显著业务提升。",
-      "core_method": "IDGR框架：预训练阶段使用行为指令（如点击、加购、下单）条件化生成；后训练阶段利用未来交互行为作为特权知识，通过熵感知轨迹优化自蒸馏进行策略优化，无需奖励模型。",
-      "innovation_points": [
-        "提出行为指令条件化生成，将行为信号直接融入预训练，避免额外判别目标。",
-        "利用特权知识进行自蒸馏，实现无奖励模型的策略优化，减少分布外风险。",
-        "采用熵感知轨迹优化，平衡探索与利用，提升策略稳定性。",
-        "保持单一统一骨干网络，简化部署并降低推理成本。"
-      ],
-      "experiment_results": [
-        "在线A/B测试中，UCTCVR提升1.6%-4.4%，GMV提升2.8%-6.8%（对比OxygenREC-v1）。",
-        "未提供离线实验数据或消融实验细节。"
-      ],
-      "limitations": [
-        "依赖历史行为日志，冷启动场景可能受限。",
-        "特权知识蒸馏可能引入信息泄漏风险，需谨慎处理。",
-        "未公开离线评估指标，难以独立验证模型效果。"
-      ],
-      "practical_value": "在京东电商平台成功部署，显著提升点击转化率和GMV，验证了生成式推荐在真实业务场景中的可行性和商业价值。",
-      "why_it_matters": "该研究解决了生成式推荐中行为信号融合的难题，提出了一种无需额外判别模型或奖励模型的统一框架，为工业界大规模部署生成式推荐提供了新思路。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "07b20b1dcf67f427",
       "is_daily_pick": false
     },
     {
@@ -5702,13 +5892,13 @@
       "id": "s2:82a1edf341c82c20a67b38665e4293e463e14681",
       "title": "The Best of the Two Worlds: Harmonizing Semantic and Hash IDs for Sequential Recommendation",
       "authors": [
-        "Ziwei Liu",
+        "Zi-Wei Liu",
         "Yejing Wang",
         "Qidong Liu",
         "Zijian Zhang",
         "Chong Chen",
         "Wei Huang",
-        "Xiangyu Zhao"
+        "Xiang-Yu Zhao"
       ],
       "affiliations": [],
       "published": "2025-12-11",
