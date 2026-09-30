@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T10:50:26+08:00",
+  "generated_at": "2026-09-30T10:25:59+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -11,15 +11,13 @@
   },
   "status": {
     "analysis_enabled": true,
-    "source_errors": [
-      "OpenAlex: HTTP Error 429: Too Many Requests"
-    ],
-    "discovered": 805,
-    "candidates": 45,
+    "source_errors": [],
+    "discovered": 2437,
+    "candidates": 48,
     "new_papers": 3,
-    "daily_picks": 2,
-    "effective_daily_window_days": 6,
-    "analysis_complete": 89,
+    "daily_picks": 1,
+    "effective_daily_window_days": 3,
+    "analysis_complete": 92,
     "analysis_fallback": 0
   },
   "sources": [
@@ -53,6 +51,221 @@
   ],
   "papers": [
     {
+      "id": "arxiv:2609.36688",
+      "title": "GRP v0.1 Technical Report",
+      "authors": [
+        "Wenfeng Zhuo",
+        "Vincent Xue",
+        "Charles Wei",
+        "Cong Ni",
+        "Ruiming Lu",
+        "Jiwen Ren",
+        "Mo Li",
+        "Peng Yang",
+        "Xufei Wang",
+        "Dongheng Li",
+        "Jiacong He",
+        "Yi Song",
+        "Yufei Fan",
+        "Mikhail Obukhov",
+        "Yiwen Chen",
+        "Yvette Liu",
+        "Yin Ye",
+        "Chengjie Wu",
+        "Mingtao Zhang",
+        "Jinchao Ye",
+        "Lili Zhang",
+        "Chunhui Zhu"
+      ],
+      "affiliations": [],
+      "published": "2026-09-29T04:30:34Z",
+      "updated": "2026-09-29T04:30:34Z",
+      "abstract": "Industrial recommendation systems rely on multi-stage cascades whose retrieval, ranking, and serving components are difficult to replace jointly. We present GRP, a generative recommendation framework that combines retrieval, ranking, and reward modeling in a single encoder-decoder model, and evaluate a progressive path toward end-to-end recommendation. The model generates multimodal Semantic IDs and scores candidates with a jointly trained ranking module. The frozen ranking module then supplies rewards for reinforcement-learning post-training. We introduce mGRPO, which adds a reference-anchored margin to reward optimization to preserve the likelihood of logged targets. Offline experiments examine history encoding, model capacity allocation, event selection, tokenization, and reward discrimination. Serving optimizations reduce end-to-end retrieval latency by 69%. Online experiments evaluate the model as a retrieval source, with early-ranking bypass, and with replacement of weaker sources. In a retrieval-only comparison, view time increases by 0.46% and shares by 0.77% relative to production. A separate comparison combining bypass and source replacement yields increases of 0.82% in view time and 2.56% in shares, with neutral platform-level guardrails. These results support progressive deployment while identifying remaining gaps in ranking quality and performance across recommendation metrics.",
+      "url": "http://arxiv.org/abs/2609.36688v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.36688v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "Multimodal",
+        "推理系统",
+        "生成式推荐"
+      ],
+      "score": 188,
+      "summary": "GRP v0.1 是一个面向工业推荐系统的生成式推荐框架，旨在将检索、排序和奖励建模统一到单个编码器-解码器模型中，以解决多阶段级联难以联合替换的问题。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果：仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
+      "one_line_takeaway": "GRP 通过生成式统一检索、排序与奖励建模，并采用渐进式部署，在工业推荐系统中实现了可观的线上收益，同时揭示了排序质量与性能的剩余差距。",
+      "core_method": "GRP 是一个编码器-解码器生成式推荐框架，将检索、排序和奖励建模集成于单一模型。它生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块为强化学习后训练提供奖励。提出的 mGRPO 在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。",
+      "innovation_points": [
+        "将检索、排序和奖励建模统一到单个编码器-解码器模型中，支持端到端推荐的渐进路径。",
+        "生成多模态语义ID，并利用联合训练的排序模块进行候选打分。",
+        "提出 mGRPO，在奖励优化中引入参考锚定的 margin，以保持已记录目标的可能性。",
+        "服务优化将端到端检索延迟降低 69%，支持工业级部署。"
+      ],
+      "experiment_results": [
+        "离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。",
+        "在线仅检索对比中，观看时长提升 0.46%，分享提升 0.77%。",
+        "结合早期排序旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。"
+      ],
+      "limitations": [
+        "在排序质量和推荐指标性能方面仍存在剩余差距。",
+        "摘要未提供离线实验中各设计选择的详细量化结果。",
+        "在线实验仅报告了相对提升，未披露绝对指标或统计显著性细节。"
+      ],
+      "practical_value": "GRP 为工业推荐系统提供了一条渐进式部署路径，允许在保持平台护栏指标中性的同时，通过检索源替换和早期排序旁路获得观看时长和分享的提升，并显著降低检索延迟，具有较高的工程落地价值。",
+      "why_it_matters": "该工作展示了生成式推荐在真实工业场景中统一检索、排序与奖励建模的可行性，并通过在线实验验证了渐进式部署的收益，为后续端到端推荐系统的研究提供了实践参考。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "e85b2d19d836fdfe",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7171254520",
+      "title": "Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation",
+      "authors": [
+        "Shiteng Cao",
+        "Junda She",
+        "Bin Zeng",
+        "Ji Liu",
+        "C Guo",
+        "Kuo Cai",
+        "Qiang Luo",
+        "Ruiming Tang",
+        "Han Li",
+        "Kun Gai",
+        "Zhiheng Li",
+        "Cheng Yang"
+      ],
+      "affiliations": [
+        "Tsinghua University",
+        "Beijing University of Posts and Telecommunications",
+        "Kuaishou (China)"
+      ],
+      "published": "2026-09-25",
+      "updated": "2026-09-29T14:09:16.559479",
+      "abstract": "Leveraging long-term user behavioral patterns is a key trajectory for enhancing the accuracy of modern recommender systems. Due to the quadratic complexity of attention mechanisms, existing GR models are typically confined to short interaction sequences. While pioneer works have attempted to adapt Search-based Interest Models (SIM) to the generative context, they typically overlook the inherent hierarchical distinction of SIDs. GR is fundamentally a coarse-to-fine generation task, where the initial SIDs (prefix) determine the broad semantic category and the subsequent SIDs (suffix) pinpoint the specific item. Thus, our core insight is that the prefix and suffix of SIDs require distinct long-term signal injections. To bridge this gap, we propose GLASS, a Generative recommendation framework that integrates Long-term user interests into the generative process viA SIDTier and Semantic Search. For the generation of SID prefix, we introduce SID-Tier, a module that maps long-term interactions into a unified interest vector to enhance the prediction of the initial SID token. SID-Tier leverages the compact nature of the semantic codebook to incorporate cross features between the user’s long-term history and candidate semantic codes. Furthermore, for the generation of SID suffix, we present semantic hard search, which utilizes generated coarse-grained semantic ID as dynamic keys to extract relevant historical behaviors, which are then fused via an adaptive gated fusion module to recalibrate the trajectory of subsequent fine-grained tokens. Extensive experiments on two large-scale real-world datasets, TAOBAO-MM and KuaiRec, demonstrate that GLASS outperforms state-of-the-art baselines. A two-week online A/B test on a short-video platform demonstrate that GLASS achieves significant gains in recommendation quality. Our codes are publicly available at this anonymous link to facilitate further research in generative recommendation.",
+      "url": "https://doi.org/10.1145/3773078.3831769",
+      "pdf_url": "",
+      "doi": "10.1145/3773078.3831769",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Topic Modeling",
+        "Explainable Artificial Intelligence (XAI)"
+      ],
+      "tags": [
+        "A/B 实验",
+        "企业论文",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "生成式推荐",
+        "长期兴趣建模",
+        "语义ID"
+      ],
+      "score": 201,
+      "summary": "针对生成式推荐（GR）中因注意力二次复杂度而难以建模长序列用户行为的问题，本文提出GLASS框架。核心洞察是语义ID（SID）的生成本质是粗到细的过程：前缀决定粗粒度语义类别，后缀定位具体物品，因此需要差异化的长期信号注入。GLASS包含两个模块：SID-Tier将长期交互映射为统一兴趣向量，利用语义码本的紧凑性融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索则用已生成的粗粒度SID作为动态键，检索相关历史行为，并通过自适应门控融合模块校准后续细粒度token的生成轨迹。在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS优于现有最优基线；在短视频平台为期两周的在线A/B测试中，推荐质量获得显著提升。",
+      "one_line_takeaway": "GLASS通过为SID前缀和后缀分别设计长期兴趣注入机制，有效提升了生成式推荐对长序列用户行为的建模能力。",
+      "core_method": "提出GLASS框架，包含SID-Tier和语义硬搜索两个模块。SID-Tier将长期交互映射为统一兴趣向量，利用语义码本融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索以生成的粗粒度SID为动态键检索相关历史行为，并通过自适应门控融合模块校准后缀细粒度token的生成。",
+      "innovation_points": [
+        "首次指出SID前缀与后缀在生成式推荐中需要差异化的长期信号注入，并据此设计粗到细的长期兴趣建模框架。",
+        "提出SID-Tier模块，利用语义码本的紧凑性将长期交互映射为统一兴趣向量，并融合长期历史与候选语义码的交叉特征。",
+        "提出语义硬搜索机制，以生成的粗粒度SID作为动态键检索相关历史行为，并通过自适应门控融合校准细粒度token生成。"
+      ],
+      "experiment_results": [
+        "在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS优于现有最优基线。",
+        "在短视频平台为期两周的在线A/B测试中，GLASS在推荐质量上取得显著提升。"
+      ],
+      "limitations": [
+        "仅基于摘要和元数据，未提供具体实验数值、消融实验细节及计算开销分析。",
+        "未讨论方法在超长序列或冷启动场景下的泛化能力。",
+        "在线A/B测试仅提及短视频平台，未说明具体业务指标和统计显著性。"
+      ],
+      "practical_value": "GLASS针对生成式推荐中长序列建模的工程约束，通过粗到细的长期兴趣注入，在真实大规模数据集和在线A/B测试中验证了有效性，为工业级推荐系统提升长序列建模能力提供了可落地的技术方案。",
+      "why_it_matters": "该工作揭示了生成式推荐中SID层级结构对长期兴趣建模的关键影响，提出的差异化注入机制为后续研究提供了新思路，且在线实验验证了其工业价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "a0e13654bbc2ecc0",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7202207971",
+      "title": "LLM Reasoning for Subjective Tasks: Failure Modes, Mitigation, and Dynamic Reasoning Routing",
+      "authors": [
+        "Juncheng Dong",
+        "童 丁",
+        "Ishan Gupta",
+        "Yuyan Wang"
+      ],
+      "affiliations": [
+        "Duke University",
+        "Netflix (United States)"
+      ],
+      "published": "2026-09-25",
+      "updated": "2026-09-27T08:07:27.782135",
+      "abstract": "Recommendation systems thrive on personalization, where “correctness” is rarely a binary truth but a matter of subjective human preference. As Large Language Models (LLMs) are deployed as autonomous verifiers of safety and quality guidelines, they face a distinctive challenge: context-aware preference alignment. Recent gains in Reinforcement Learning with Verifiable Rewards (RLVR) are indexed mostly on objective, mathematical tasks. Through a large-scale study spanning both proprietary and open-source models on four real-world verification tasks from a production recommender platform, we ask whether explicit reasoning generalizes to subjective, human-centric industry rubrics. We expose a fundamental vulnerability: rigid, math-centric reasoning traces actively degrade verification, and applying standard RLVR triggers a phenomenon we term reasoning collapse, in which the policy abandons deliberation in favor of rapid heuristic guessing. We introduce a conditional length-penalized post-training algorithm that intertwines verification accuracy with bounded reasoning length, halting collapse and recovering performance. Finally, we show that a reasoning trace’s efficacy is tightly coupled with its socio-linguistic framing: across 1,500 synthesized personas, verification accuracy swings by nearly 0.38 macro-F1 depending solely on the adopted reasoning persona—evidence that much subjective-verification error is really reasoning-style mismatch. This observation motivates a mid-training architecture that routes reasoning through contextually aligned personas. This work offers both a scalable algorithmic patch and a long-term architectural blueprint for aligning reasoning models with real-world subjective constraints.",
+      "url": "https://doi.org/10.1145/3773078.3831929",
+      "pdf_url": "",
+      "doi": "10.1145/3773078.3831929",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Topic Modeling",
+        "Persona Design and Applications",
+        "Ethics and Social Impacts of AI"
+      ],
+      "tags": [
+        "企业论文",
+        "LLM 基模",
+        "后训练",
+        "Reasoning",
+        "LLM推理",
+        "主观验证",
+        "RLVR",
+        "推理崩溃"
+      ],
+      "score": 95,
+      "summary": "该研究针对推荐系统中主观验证任务（如安全与质量准则）的LLM推理失效问题展开大规模实证。基于生产推荐平台的四项真实任务，覆盖专有与开源模型，发现数学导向的刚性推理链会损害验证性能，标准RLVR训练引发“推理崩溃”——策略放弃深思转为快速启发式猜测。提出条件长度惩罚后训练算法，将验证准确率与有界推理长度耦合，遏制崩溃并恢复性能。进一步在1500个合成人格上发现，推理轨迹有效性与社会语言学框架紧密相关，仅因推理人格不同，宏F1波动近0.38，表明主观验证错误多源于推理风格错配。据此提出中期训练架构，通过上下文对齐人格路由推理，为对齐推理模型与真实主观约束提供算法补丁与架构蓝图。",
+      "one_line_takeaway": "主观验证任务中，数学式刚性推理会引发推理崩溃，需通过长度惩罚与人格路由对齐推理风格。",
+      "core_method": "提出条件长度惩罚后训练算法，在RLVR中耦合验证准确率与有界推理长度以遏制推理崩溃；并设计中期训练架构，基于上下文对齐的人格路由推理轨迹。",
+      "innovation_points": [
+        "首次系统揭示主观验证任务中标准RLVR导致的“推理崩溃”现象：策略放弃深思转为快速启发式猜测。",
+        "提出条件长度惩罚后训练算法，将验证准确率与有界推理长度交织，有效遏制崩溃并恢复性能。",
+        "发现推理轨迹有效性与社会语言学人格框架强相关，仅人格差异即可导致宏F1波动近0.38。",
+        "提出基于人格路由的中期训练架构，为对齐推理模型与真实主观约束提供长期蓝图。"
+      ],
+      "experiment_results": [
+        "在四个生产推荐平台真实验证任务上，覆盖专有与开源模型，标准RLVR触发推理崩溃，性能下降。",
+        "条件长度惩罚后训练算法成功遏制崩溃并恢复验证性能。",
+        "在1500个合成人格上，仅因推理人格不同，验证准确率宏F1波动近0.38。"
+      ],
+      "limitations": [
+        "研究基于特定生产推荐平台的四项任务，结论泛化性需进一步验证。",
+        "人格路由架构为中期训练蓝图，尚未在更大规模或更多样化任务中验证。",
+        "未提供条件长度惩罚算法与基线方法的详细量化对比数据。"
+      ],
+      "practical_value": "为推荐系统等主观验证场景提供可扩展的算法补丁（条件长度惩罚）与长期架构蓝图（人格路由），帮助企业避免RLVR导致的推理崩溃，提升LLM作为自主验证器的准确性与鲁棒性。",
+      "why_it_matters": "揭示了LLM推理在主观任务中的独特失效模式，挑战了RLVR在客观任务上的成功假设，为工业级主观验证提供了算法与架构双重解决方案，对生成式推荐中的语义ID与偏好对齐具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "f6a2e81de4f95a78",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2609.30576",
       "title": "T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation",
       "authors": [
@@ -85,12 +298,9 @@
         "LLM 基模",
         "GenRec",
         "Reasoning",
-        "推理系统",
-        "生成式推荐",
-        "旋转位置编码",
-        "时间感知"
+        "推理系统"
       ],
-      "score": 143,
+      "score": 142,
       "summary": "针对序列生成推荐中直接沿用语言模型RoPE仅编码交互顺序、忽略真实时间间隔与周期性的问题，本文提出T-RoPE。该方法用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，而T-RoPE在保留RoPE接口的同时打破该不变性。在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%；在超60亿交互的工业电商数据上，较HSTU+Time RAB基线各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试中转化率提升0.33%、订单量提升0.63%。前向与反向算法额外开销与序列长度和头维度呈线性。",
       "one_line_takeaway": "T-RoPE将时间戳、多尺度周期与非平稳性注入旋转位置编码，在保留RoPE接口的同时显著提升序列生成推荐的离线与线上效果。",
       "core_method": "T-RoPE用基于时间戳的角度替换RoPE的索引旋转，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转；理论证明标准RoPE即使使用时间戳仍时间平移不变，无法区分季节上下文，而T-RoPE打破该不变性且保持RoPE接口。",
@@ -115,7 +325,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "3648dd45f8461d50",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2609.28972",
@@ -149,13 +359,9 @@
         "A/B 实验",
         "GenRec",
         "Tokenization",
-        "推理系统",
-        "生成式推荐",
-        "跨国推荐",
-        "码混合",
-        "语义ID"
+        "推理系统"
       ],
-      "score": 131,
+      "score": 130,
       "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏锚点的问题，生成式推荐（GR）通过共享token空间和统一模型缓解，但现有方法仍将行为序列严格限定在单一国家，知识迁移仅停留在参数层面，数据层面缺失。本文提出CMRec，受多语言NLP中语码转换语料启发，在数据层面注入跨国监督：首先从多模态内容与跨国行为共现中学习共享语义码本，再基于该码本通过token级替换合成混合国家序列，替换同时满足静态内容约束与动态（价格、受众、热度）约束，最后引入上下文感知损失，按混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
       "one_line_takeaway": "CMRec通过双约束上下文感知的跨国码混合，在数据层面实现生成式推荐的跨国知识迁移，显著提升数据稀疏市场表现并带来线上收入与订单增长。",
       "core_method": "CMRec是一个跨国生成式推荐框架，核心是在数据层面注入跨国监督。它首先利用多模态内容与跨国行为共现学习共享语义码本，将商品映射到统一token空间；然后基于该码本进行token级替换，合成混合国家序列，替换过程受静态（内容）和动态（价格、受众、热度等）双约束；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权，使模型在训练中有效利用跨国混合数据。",
@@ -179,10 +385,10 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "8b4bb29d8ee4d044",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
-      "id": "arxiv:2609.27284",
+      "id": "openalex:W7214196674",
       "title": "Hunyuan-A13B Technical Report",
       "authors": [
         "Tencent Hunyuan Team",
@@ -263,15 +469,15 @@
       ],
       "affiliations": [],
       "published": "2026-09-23",
-      "updated": "2026-09-23",
+      "updated": "2026-09-27T08:07:27.782135",
       "abstract": "We present Hunyuan-A13B, an open-source large language model based on a Mixture-of-Experts architecture. It contains 80 billion total parameters but activates only 13 billion during inference, balancing model capability, computational efficiency, and deployment cost. The model is pretrained on a rigorously filtered 20T-token corpus with enhanced STEM data curation, improving factual reliability and reasoning ability. High-quality supervised fine-tuning and large-scale reinforcement learning further enhance its overall performance. Hunyuan-A13B also introduces a dual-mode Chain-of-Thought framework that adapts reasoning depth to task complexity: fast thinking for routine queries and slow thinking for complex, multi-step problems. Evaluations show competitive performance across mathematics, science, programming, general language understanding, and agent tasks, often approaching that of much larger models. Its high inference throughput makes it suitable for latency-sensitive applications. We release Hunyuan-A13B to support open research and practical LLM deployment.",
       "url": "https://arxiv.org/abs/2609.27284",
       "pdf_url": "https://arxiv.org/pdf/2609.27284",
       "doi": "10.48550/arxiv.2609.27284",
-      "source": "arXiv",
+      "source": "OpenAlex",
       "content_type": "paper",
       "company": "Tencent Hunyuan",
-      "venue": "",
+      "venue": "arXiv (Cornell University)",
       "categories": [
         "Topic Modeling",
         "Multimodal Machine Learning Applications",
@@ -288,30 +494,29 @@
         "Multimodal"
       ],
       "score": 144,
-      "summary": "腾讯混元团队发布开源大模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数80B，推理时仅激活13B，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；通过高质量监督微调和强化学习进一步优化性能。其双模式思维链框架可根据任务复杂度自适应调整推理深度：常规查询快速思考，复杂多步问题慢速思考。评估显示在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且推理吞吐量高，适合延迟敏感应用。",
-      "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在80B总参数下仅激活13B，实现了高效推理与强大能力的平衡。",
-      "core_method": "基于混合专家（MoE）架构，总参数80B，推理激活13B；在20T token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和强化学习；引入双模式思维链框架，根据任务复杂度自适应选择快速或慢速思考。",
+      "summary": "腾讯混元团队发布开源大语言模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数80B，推理时仅激活13B，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；随后通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，可根据任务复杂度自适应调整推理深度：对常规查询采用快速思考，对复杂多步问题采用慢速思考。评估显示其在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
+      "one_line_takeaway": "Hunyuan-A13B通过MoE架构与双模式思维链，在80B总参数下仅激活13B，实现了高效推理与接近更大模型的性能。",
+      "core_method": "基于混合专家（MoE）架构，总参数80B，推理激活13B；在20T token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和大规模强化学习；引入双模式思维链框架，动态适配推理深度。",
       "innovation_points": [
-        "MoE架构实现80B总参数仅激活13B，大幅降低推理成本。",
-        "双模式思维链框架，动态调整推理深度以适应任务复杂度。",
+        "MoE架构实现80B总参数仅激活13B，平衡能力与效率。",
+        "双模式思维链框架，根据任务复杂度自适应切换快速与慢速思考。",
         "增强STEM数据整理的20T token预训练，提升事实可靠性与推理能力。",
-        "结合监督微调与大规模强化学习，优化整体性能。"
+        "结合高质量SFT与大规模RL，优化整体性能。"
       ],
       "experiment_results": [
         "在数学、科学、编程、通用语言理解和智能体任务上评估，性能具有竞争力，常接近更大模型。",
-        "高推理吞吐量，适合延迟敏感应用。",
-        "摘要未提供具体数值结果。"
+        "高推理吞吐量，适合延迟敏感应用。"
       ],
       "limitations": [
-        "摘要未提及模型的具体局限性。",
-        "未提供与同类模型的详细对比数据。",
-        "未说明双模式思维链的具体实现细节和切换机制。"
+        "摘要未提供具体基准测试分数或与同类模型的详细对比数据。",
+        "未说明模型在长尾或特定领域任务上的表现。",
+        "未讨论训练数据的具体构成或潜在偏差。"
       ],
-      "practical_value": "Hunyuan-A13B开源且推理高效，适合需要低延迟、低成本部署的LLM应用场景，为研究和工业部署提供了实用选择。",
-      "why_it_matters": "该模型在开源模型中实现了高效推理与强大能力的平衡，双模式思维链和MoE设计为LLM部署提供了新思路，值得关注其技术细节和实际表现。",
+      "practical_value": "为开源社区和工业部署提供了一个高效的大模型选择，其MoE架构和双模式推理在降低计算成本的同时保持较强能力，适合延迟敏感场景。",
+      "why_it_matters": "该工作展示了通过MoE和动态推理深度在有限激活参数下实现接近更大模型性能的可行性，对高效大模型研究和实际部署具有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "39e77c4a740ee552",
+      "analysis_signature": "56677644dc5a29de",
       "is_daily_pick": false
     },
     {
@@ -409,12 +614,9 @@
         "GenRec",
         "Tokenization",
         "MoE",
-        "推理系统",
-        "Mixture-of-Experts",
-        "生成式推荐",
-        "模型架构"
+        "推理系统"
       ],
-      "score": 139,
+      "score": 138,
       "summary": "针对MoE中参与度、执行量与参数物化量无法独立调节的问题，提出IntBMoE。该方法将稠密专家组合与稀疏块执行配对：块来自小型可学习码本，每层通过轻量超网络将专家池中所有专家基合并为一个组合专家，使每个token获得全参与；路由器仅将token发送至少数块，保持稀疏执行；码本固定块数量，限制物化量。双路径残差门控进一步耦合两条独立组合路径。在图像分类、语言建模和序列推荐上验证了泛化性。该系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试获得2.4%相对UVCTR提升。",
       "one_line_takeaway": "IntBMoE通过块级条件与超网络组合，将MoE的参与度、执行量和物化量解耦，并在高德生成式推荐中实现线上收益。",
       "core_method": "IntBMoE采用块条件MoE架构：每个内部层维护一个专家基池，通过轻量超网络将所有专家基合并为一个组合专家，实现全参与；路由器将每个token路由至少数从可学习码本中选取的块，保持稀疏执行；码本大小固定，从而限制参数物化量。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
@@ -526,12 +728,9 @@
         "GenRec",
         "Semantic ID",
         "Tokenization",
-        "Reasoning",
-        "生成式推荐",
-        "语义ID",
-        "RQ-VAE"
+        "Reasoning"
       ],
-      "score": 146,
+      "score": 145,
       "summary": "生成式推荐中，语义ID（SID）通常由独立训练的RQ-VAE生成，其编码与下游LLM及任务目标不对齐，导致需要额外对齐语料、推理/RL或逐token编码器来弥合差距。本文提出Guided SID，通过确定性监督索引分配强制粗粒度RQ-VAE层级编码预定义的、文本接地且任务相关的类别属性，同时保持码本可学习（仍接收重建梯度）。采用trie-merge构造将高基数或集合值属性映射到固定码预算，并保持合并桶语义连贯。引导不增加内在成本：碰撞和重建指标匹配或优于基线。在仅SID编码不同的端到端A/B测试中，引导检索器在所有列表长度上提升recall@k（k=1时1.36倍，k=10时1.39倍），MRR从0.0260升至0.0355，预定义属性预测频率提高4.2倍。",
       "one_line_takeaway": "通过强制粗粒度语义ID编码任务相关属性，无需额外对齐即可显著提升生成式推荐性能。",
       "core_method": "Guided SID：在RQ-VAE训练中，对粗粒度层级采用确定性监督索引分配，用预定义类别属性标签覆盖最近邻选择，强制其编码文本接地且任务相关的属性；同时保留码本的重建梯度。使用trie-merge构造将高基数或集合值属性映射到固定码预算，确保合并桶语义连贯。",
@@ -663,7 +862,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 131,
+      "score": 130,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
       "one_line_takeaway": "CHAP通过层次化语义对齐和残差级联生成机制，实现了高效且个性化的生成式检索，兼顾精度与推理速度。",
       "core_method": "CHAP框架包含三个核心组件：1）层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；2）个性化GR框架，结合离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；3）残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。",
@@ -778,7 +977,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 122,
+      "score": 121,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
       "one_line_takeaway": "在生成式推荐中，利用SID树进行粗化可显著提升离线策略评估的可靠性，且粗化偏差可由量化器重建误差和目标日志散度界定。",
       "core_method": "利用SID树作为动作抽象，将物品边缘化到码前缀簇，通过解码器直接计算簇质量，实现粗化OPE，并推导条件偏差界。",
@@ -900,7 +1099,7 @@
         "LLM 基模",
         "Multimodal"
       ],
-      "score": 133,
+      "score": 132,
       "summary": "本报告介绍阿里巴巴Qwen团队发布的Qwen Drive 1.0，这是迈向自动驾驶视觉语言基础模型的第一步。该模型基于Qwen2-VL架构，通过多模态指令微调，将视觉编码器与语言模型结合，旨在处理驾驶场景中的感知、预测和规划任务。报告强调其作为基础模型的定位，而非应用层案例。技术路线包括利用大规模驾驶视频和文本对进行预训练，并采用统一的token表示来对齐视觉和语言信息。实验结果显示，在多个自动驾驶基准上，Qwen Drive 1.0在零样本和少样本设置下均展现出有竞争力的性能，尤其在场景理解和决策推理方面。然而，报告未提供详细的消融实验或与现有方法的全面对比数据。局限性包括对复杂动态场景的鲁棒性不足，以及缺乏真实路测验证。实践价值在于为自动驾驶提供可解释的决策基础，但距离实际部署仍有距离。",
       "one_line_takeaway": "Qwen Drive 1.0展示了将视觉语言基础模型应用于自动驾驶的初步可行性，但尚需更多工程化验证。",
       "core_method": "基于Qwen2-VL架构，采用视觉编码器与语言模型结合，通过多模态指令微调，使用驾驶视频和文本对进行预训练，统一视觉和语言token表示，实现感知、预测和规划的多任务处理。",
@@ -956,7 +1155,7 @@
         "A/B 实验",
         "Tokenization"
       ],
-      "score": 89,
+      "score": 88,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
       "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
       "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
@@ -2733,29 +2932,36 @@
         "Fanyi Di",
         "Xin Li"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Alibaba Group (China)"
+      ],
       "published": "2026-07-13T15:44:06Z",
       "updated": "2026-07-13T15:44:06Z",
       "abstract": "Generative retrieval enables recommender systems to retrieve items by generating compact item identifiers, but scaling it to industrial scenarios remains challenging due to redundant or colliding token assignments and insufficient integration of heterogeneous item signals. These challenges are particularly critical for next Point-of-Interest (POI) recommendation, where models must represent structured spatial entities, capture sequential mobility patterns, and produce predictions consistent with real user behavior. We propose Gwhere, an end-to-end industrial framework that integrates semantic identifier (SID) generation with LLM-based generative next POI recommendation. Gwhere first learns discriminative POI SIDs through a contrastive residual-quantization tokenizer that aligns textual, visual, spatial, and collaborative signals. Based on these SIDs, Gwhere adapts LLMs to mobility scenarios via continued pretraining on enriched spatio-temporal corpora, supervised fine-tuning, and Exposure-Aware Kahneman-Tversky Optimization (EAKTO), a reinforcement learning objective for behavioral preference alignment. Experiments on public datasets and Amap's large-scale industrial dataset demonstrate the effectiveness of Gwhere. The system has been deployed in Amap's homepage service under high-concurrency and low-latency constraints. Long-term online A/B tests show improvements of 5.83% in P-CTR and 6.20% in U-CTR over the production baseline. The implementation is publicly available at https://github.com/alibaba/SimCIT.",
       "url": "http://arxiv.org/abs/2607.26073v1",
       "pdf_url": "https://arxiv.org/pdf/2607.26073v1",
-      "doi": "",
+      "doi": "10.1145/3773078.3831863",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Alibaba Qwen",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Multimodal Machine Learning Applications",
+        "Advanced Graph Neural Networks"
       ],
       "tags": [
+        "Alibaba Qwen",
         "A/B 实验",
+        "企业论文",
         "预训练",
         "后训练",
         "GenRec",
         "Semantic ID",
         "Reasoning"
       ],
-      "score": 158,
+      "score": 220,
       "summary": "Gwhere是阿里巴巴高德地图提出的端到端工业级生成式下一兴趣点（POI）推荐框架，旨在解决生成式检索在工业场景中面临的token分配冗余/冲突以及异构信号融合不足等问题。该框架首先通过对比残差量化分词器学习判别性POI语义ID（SID），该分词器对齐文本、视觉、空间和协同信号；然后基于SID，通过丰富时空语料上的持续预训练、监督微调和暴露感知的Kahneman-Tversky优化（EAKTO）将LLM适配到移动场景。在公共数据集和高德大规模工业数据集上的实验验证了有效性，系统已部署在高德首页服务中，长期在线A/B测试显示P-CTR提升5.83%，U-CTR提升6.20%。",
       "one_line_takeaway": "Gwhere通过语义ID生成和LLM微调，实现了工业级生成式POI推荐，显著提升线上点击率。",
       "core_method": "Gwhere包含两个核心组件：1）对比残差量化分词器，学习融合多模态信号的POI语义ID；2）基于LLM的生成式推荐，通过持续预训练、监督微调和EAKTO对齐用户行为偏好。",
