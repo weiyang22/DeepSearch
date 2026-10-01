@@ -57,13 +57,47 @@ const MARKS_KEY = "deepsearch-saved-papers-v1";
 const GENREC_TAGS = ["GenRec", "Semantic ID", "Tokenization"];
 const LLM_TAGS = ["LLM 基模", "预训练", "后训练", "MoE", "训练系统", "推理系统"];
 
+const VIEW_MODES: ViewMode[] = ["today", "llm", "genrec", "company", "all", "saved"];
+
+function parseViewFromHash(): { mode: ViewMode; tag: string; query: string } | null {
+  if (typeof window === "undefined" || !window.location.hash) return null;
+  const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const view = params.get("v");
+  const tag = params.get("t");
+  const query = params.get("q");
+  if (!view && !tag && !query) return null;
+  return {
+    mode: VIEW_MODES.includes(view as ViewMode) ? (view as ViewMode) : "today",
+    tag: tag || "全部",
+    query: query || "",
+  };
+}
+
 export function DigestDashboard() {
+  const initialView = parseViewFromHash();
   const [payload, setPayload] = useState<Payload | null>(null);
-  const [query, setQuery] = useState("");
-  const [mode, setMode] = useState<ViewMode>("today");
-  const [tag, setTag] = useState("全部");
+  const [query, setQuery] = useState(initialView?.query ?? "");
+  const [mode, setMode] = useState<ViewMode>(initialView?.mode ?? "today");
+  const [tag, setTag] = useState(initialView?.tag ?? "全部");
   const [saved, setSaved] = useState<string[]>([]);
   const [loadError, setLoadError] = useState(false);
+
+  // Keep the active filters in the URL hash so refreshes and shared links
+  // restore the view; replaceState avoids polluting the history stack.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams();
+    if (mode !== "today") params.set("v", mode);
+    if (tag !== "全部") params.set("t", tag);
+    if (query.trim()) params.set("q", query.trim());
+    const encoded = params.toString();
+    const target = encoded
+      ? `#${encoded}`
+      : `${window.location.pathname}${window.location.search}`;
+    if (window.location.hash !== (encoded ? `#${encoded}` : "")) {
+      window.history.replaceState(null, "", target);
+    }
+  }, [mode, tag, query]);
 
   useEffect(() => {
     queueMicrotask(() => {

@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import time
 import urllib.error
 import urllib.request
 
@@ -10,6 +11,8 @@ from .config import Config
 from .models import Paper
 
 PROMPT_VERSION = "deepsearch-analysis-v2-core-llm-genrec"
+TRANSIENT_HTTP_STATUS = {408, 409, 425, 429, 500, 502, 503, 504}
+DEEPSEEK_RETRY_DELAY_SECONDS = 5
 ANALYSIS_FIELDS = (
     "summary",
     "one_line_takeaway",
@@ -99,11 +102,23 @@ def _call_deepseek(paper: Paper, config: Config, api_key: str) -> dict[str, obje
         headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
         method="POST",
     )
-    try:
-        with urllib.request.urlopen(request, timeout=90) as response:
-            data = json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"DeepSeek API error {exc.code}") from exc
+    # One retry for transient failures: without it a single 429/5xx would
+    # downgrade the paper to a raw summary until the next daily run.
+    for attempt in range(2):
+        try:
+            with urllib.request.urlopen(request, timeout=90) as response:
+                data = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            if exc.code in TRANSIENT_HTTP_STATUS and attempt == 0:
+                time.sleep(DEEPSEEK_RETRY_DELAY_SECONDS)
+                continue
+            raise RuntimeError(f"DeepSeek API error {exc.code}") from exc
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            if attempt == 0:
+                time.sleep(DEEPSEEK_RETRY_DELAY_SECONDS)
+                continue
+            raise RuntimeError(f"DeepSeek API unreachable: {exc}") from exc
     content = data["choices"][0]["message"]["content"]
     return json.loads(content)
 

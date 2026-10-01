@@ -1,13 +1,20 @@
 import datetime as dt
+import json
+import os
+import sys
+import tempfile
 import urllib.error
 import unittest
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+import deepsearch.main as ds_main
 import deepsearch.sources as sources
 from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import choose_daily_picks, effective_daily_window, has_ab_experiment, infer_tags, prepare_candidates
+from deepsearch.summarizer import _call_deepseek
 from deepsearch.sources import (
     PartialCollectionError,
     _arxiv_id_from,
@@ -361,6 +368,74 @@ class PipelineTests(unittest.TestCase):
         ranked = prepare_candidates(papers, self.config)
         self.assertIn("within", [item.id for item in ranked])
         self.assertNotIn("outside", [item.id for item in ranked])
+
+    def test_main_payload_invariants_end_to_end(self):
+        today = dt.date.today()
+        fresh = Paper(
+            id="arxiv:2609.99999",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            published=today.isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        older = Paper(
+            id="arxiv:2609.88888",
+            title="Industrial Generative Retrieval Framework",
+            published=(today - dt.timedelta(days=5)).isoformat(),
+            affiliations=["Kuaishou"],
+            abstract="Generative retrieval for industrial search with an online A/B test.",
+        )
+        out = Path(tempfile.mkdtemp()) / "papers.json"
+        env = {key: value for key, value in os.environ.items() if key != "DEEPSEEK_API_KEY"}
+        with patch.object(ds_main, "collect_all", return_value=([fresh, older], [])) as collect:
+            with patch.dict(os.environ, env, clear=True):
+                with patch.object(sys, "argv", ["deepsearch", "--out", str(out)]):
+                    exit_code = ds_main.main()
+        self.assertEqual(exit_code, 0)
+        collect.assert_called_once()
+        payload = json.loads(out.read_text(encoding="utf-8"))
+        for key in ("generated_at", "site", "status", "sources", "companies", "papers"):
+            self.assertIn(key, payload)
+        status = payload["status"]
+        self.assertIn("effective_daily_window_days", status)
+        self.assertEqual(status["daily_picks"], sum(1 for item in payload["papers"] if item["is_daily_pick"]))
+        self.assertEqual(status["daily_picks"], 1)
+        self.assertEqual(status["effective_daily_window_days"], 3)
+        dates = [item["published"][:10] for item in payload["papers"]]
+        self.assertEqual(dates, sorted(dates, reverse=True))
+        # No API key: every paper keeps a conservative fallback analysis and
+        # no network call was attempted.
+        self.assertFalse(status["analysis_enabled"])
+        self.assertTrue(all(item["analysis_status"] == "fallback" for item in payload["papers"]))
+
+    def test_deepseek_call_retries_transient_errors(self):
+        config = load_config("config.toml")
+        paper = Paper(
+            id="x",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        ok = json.dumps({"choices": [{"message": {"content": json.dumps({"summary": "好的总结"})}}]}).encode()
+        failure = urllib.error.HTTPError("https://api.deepseek.com", 429, "rate limited", {}, None)
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = ok
+        with patch("deepsearch.summarizer.urllib.request.urlopen", side_effect=[failure, response]) as urlopen:
+            with patch("deepsearch.summarizer.time.sleep") as sleep:
+                result = _call_deepseek(paper, config, "key")
+        self.assertEqual(result["summary"], "好的总结")
+        self.assertEqual(urlopen.call_count, 2)
+        sleep.assert_called_once_with(5)
+
+    def test_deepseek_call_does_not_retry_client_errors(self):
+        config = load_config("config.toml")
+        paper = Paper(id="x", title="T", abstract="A")
+        failure = urllib.error.HTTPError("https://api.deepseek.com", 401, "bad key", {}, None)
+        with patch("deepsearch.summarizer.urllib.request.urlopen", side_effect=failure) as urlopen:
+            with patch("deepsearch.summarizer.time.sleep") as sleep:
+                with self.assertRaisesRegex(RuntimeError, "401"):
+                    _call_deepseek(paper, config, "key")
+        self.assertEqual(urlopen.call_count, 1)
+        sleep.assert_not_called()
 
 
 if __name__ == "__main__":

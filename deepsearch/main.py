@@ -18,7 +18,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build the DeepSearch daily digest")
     parser.add_argument("--config", default="config.toml")
     parser.add_argument("--out", default="public/papers.json")
-    parser.add_argument("--fixtures", action="store_true", help="Use the bundled preview data")
     parser.add_argument("--reset", action="store_true", help="Rebuild without the previous archive")
     parser.add_argument("--reselect-existing", action="store_true", help="Reapply ranking to the current archive without network calls")
     args = parser.parse_args()
@@ -36,9 +35,6 @@ def main() -> int:
         source_errors = []
         for paper in discovered:
             classify_company(paper, config)
-    elif args.fixtures:
-        discovered = [Paper.from_dict(item) for item in _load_payload(Path("fixtures/papers.json")).get("papers", [])]
-        source_errors: list[str] = []
     else:
         discovered, source_errors = collect_all(config)
 
