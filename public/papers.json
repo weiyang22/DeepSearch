@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T10:25:59+08:00",
+  "generated_at": "2026-10-01T10:23:04+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2437,
-    "candidates": 48,
+    "discovered": 2489,
+    "candidates": 53,
     "new_papers": 3,
-    "daily_picks": 1,
+    "daily_picks": 2,
     "effective_daily_window_days": 3,
-    "analysis_complete": 92,
+    "analysis_complete": 95,
     "analysis_fallback": 0
   },
   "sources": [
@@ -50,6 +50,73 @@
     "Mistral AI"
   ],
   "papers": [
+    {
+      "id": "arxiv:2609.39327",
+      "title": "Generative End-to-end Ad Retrieval at Douyin",
+      "authors": [
+        "Shaowen Zeng",
+        "Yanhua Huang",
+        "Jiacheng Sun",
+        "Jiarui Liu",
+        "Qian Dai",
+        "Zhikai Yang",
+        "Hancheng Li",
+        "Boya Wu",
+        "Tuoyu Zhang",
+        "Yekui Chen",
+        "Xiang Sun"
+      ],
+      "affiliations": [],
+      "published": "2026-09-30T09:00:47Z",
+      "updated": "2026-09-30T09:00:47Z",
+      "abstract": "Generative retrieval reformulates recommendation as the generation of discrete item tokens. However, scaling this paradigm to real-world recommender systems reveals two critical bottlenecks: 1) Representation collapse, where the item tokenizer converges to degenerate results under continuous distribution shifts, fundamentally hindering stable end-to-end adaptation. 2) Item collisions, where the massive candidate pool causes distinct items to share identical token sequences, compromising the final retrieval precision. Crucially, these bottlenecks are inherently coupled: expanding codebook capacity to mitigate collisions inevitably exacerbates collapse. To address them simultaneously, we propose GEAR, an end-to-end framework that jointly optimizes the tokenizer, generator, and reranker. To mitigate representation collapse, we introduce BasisVQ, which re-parameterizes the codebook via an orthogonal basis to enable global gradient sharing and rigid spatial rotation of the latent space, effectively stabilizing gradient dynamics without ad-hoc heuristics. We further extend it to prefix-aware BasisRQ, substantially enhancing the codebook's expressiveness with the same asymptotic time complexity. To resolve item collisions, GEAR integrates a context-conditioned reranking head into the generative process, efficiently disambiguating colliding items with minimal computational overhead. By unifying stable tokenization and joint reranking within an end-to-end generative framework, GEAR establishes a fully differentiable and scalable paradigm. It currently serves hundreds of millions of daily active users on Douyin Ads, yielding substantial empirical improvements in extensive online A/B tests.",
+      "url": "http://arxiv.org/abs/2609.39327v1",
+      "pdf_url": "https://arxiv.org/pdf/2609.39327v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Tokenization",
+        "生成式检索",
+        "端到端推荐",
+        "向量量化",
+        "表示坍缩",
+        "物品碰撞"
+      ],
+      "score": 124,
+      "summary": "本文针对生成式检索在真实推荐系统中面临的两个关键瓶颈：表示坍缩（tokenizer在连续分布偏移下收敛到退化结果）和物品碰撞（大规模候选池导致不同物品共享相同token序列），且二者相互耦合（扩大码本容量缓解碰撞会加剧坍缩）。提出GEAR端到端框架，联合优化tokenizer、生成器和重排器。为缓解表示坍缩，引入BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间的刚性旋转，稳定梯度动态；进一步扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下增强码本表达能力。为解决物品碰撞，GEAR在生成过程中集成上下文条件重排头，以最小计算开销高效消歧碰撞物品。该框架统一了稳定token化与联合重排，形成完全可微且可扩展的范式，目前服务于抖音广告数亿日活用户，在线A/B测试取得显著提升。",
+      "one_line_takeaway": "GEAR通过BasisVQ稳定码本训练并集成上下文重排头，解决了生成式检索中表示坍缩与物品碰撞的耦合难题，在抖音广告数亿日活场景下实现端到端部署并取得显著线上收益。",
+      "core_method": "GEAR是一个端到端生成式检索框架，联合优化tokenizer、生成器和重排器。针对表示坍缩，提出BasisVQ，用正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转；进一步扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下提升码本表达能力。针对物品碰撞，在生成过程中集成上下文条件重排头，以最小计算开销消歧碰撞物品。整个框架完全可微，支持稳定token化和联合重排。",
+      "innovation_points": [
+        "提出BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，无需启发式方法即可稳定梯度动态，缓解表示坍缩。",
+        "扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下显著增强码本表达能力，进一步缓解碰撞与坍缩的耦合。",
+        "在生成式检索框架中集成上下文条件重排头，以最小计算开销高效消歧碰撞物品，实现端到端联合优化。",
+        "在抖音广告真实场景中部署，服务数亿日活用户，通过大规模在线A/B测试验证了框架的有效性和可扩展性。"
+      ],
+      "experiment_results": [
+        "在抖音广告的广泛在线A/B测试中，GEAR取得了显著的 empirical improvements（具体指标未在摘要中提供）。",
+        "GEAR目前服务于抖音广告数亿日活用户，证明了其工业级可扩展性和稳定性。",
+        "摘要未提供离线实验的定量结果，如召回率、碰撞率等具体数值。"
+      ],
+      "limitations": [
+        "摘要未提及离线实验的详细定量结果，无法评估各模块的独立贡献。",
+        "方法在抖音广告场景验证，其泛化性到其他推荐场景或平台仍需进一步验证。",
+        "BasisVQ和BasisRQ的理论性质（如收敛性保证）未在摘要中讨论。"
+      ],
+      "practical_value": "GEAR为生成式检索在真实大规模推荐系统中的落地提供了可行方案，解决了表示坍缩和物品碰撞的耦合难题，并通过端到端联合优化实现了稳定训练和高效推理。其在抖音广告数亿日活用户上的成功部署和线上A/B测试收益，证明了该框架的工业实用性和可扩展性，为其他企业构建生成式推荐系统提供了重要参考。",
+      "why_it_matters": "该工作直面生成式检索在工业级推荐系统中落地的核心挑战，提出的BasisVQ和上下文重排头在理论和工程上均有创新，且经过超大规模线上验证，对推动生成式推荐从研究走向实际应用具有里程碑意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "367ab315239a4d05",
+      "is_daily_pick": true
+    },
     {
       "id": "arxiv:2609.36688",
       "title": "GRP v0.1 Technical Report",
@@ -98,8 +165,7 @@
         "Semantic ID",
         "Tokenization",
         "Multimodal",
-        "推理系统",
-        "生成式推荐"
+        "推理系统"
       ],
       "score": 188,
       "summary": "GRP v0.1 是一个面向工业推荐系统的生成式推荐框架，旨在将检索、排序和奖励建模统一到单个编码器-解码器模型中，以解决多阶段级联难以联合替换的问题。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果：仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
@@ -170,12 +236,9 @@
         "企业论文",
         "GenRec",
         "Semantic ID",
-        "Tokenization",
-        "生成式推荐",
-        "长期兴趣建模",
-        "语义ID"
+        "Tokenization"
       ],
-      "score": 201,
+      "score": 200,
       "summary": "针对生成式推荐（GR）中因注意力二次复杂度而难以建模长序列用户行为的问题，本文提出GLASS框架。核心洞察是语义ID（SID）的生成本质是粗到细的过程：前缀决定粗粒度语义类别，后缀定位具体物品，因此需要差异化的长期信号注入。GLASS包含两个模块：SID-Tier将长期交互映射为统一兴趣向量，利用语义码本的紧凑性融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索则用已生成的粗粒度SID作为动态键，检索相关历史行为，并通过自适应门控融合模块校准后续细粒度token的生成轨迹。在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS优于现有最优基线；在短视频平台为期两周的在线A/B测试中，推荐质量获得显著提升。",
       "one_line_takeaway": "GLASS通过为SID前缀和后缀分别设计长期兴趣注入机制，有效提升了生成式推荐对长序列用户行为的建模能力。",
       "core_method": "提出GLASS框架，包含SID-Tier和语义硬搜索两个模块。SID-Tier将长期交互映射为统一兴趣向量，利用语义码本融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索以生成的粗粒度SID为动态键检索相关历史行为，并通过自适应门控融合模块校准后缀细粒度token的生成。",
@@ -232,13 +295,9 @@
         "企业论文",
         "LLM 基模",
         "后训练",
-        "Reasoning",
-        "LLM推理",
-        "主观验证",
-        "RLVR",
-        "推理崩溃"
+        "Reasoning"
       ],
-      "score": 95,
+      "score": 94,
       "summary": "该研究针对推荐系统中主观验证任务（如安全与质量准则）的LLM推理失效问题展开大规模实证。基于生产推荐平台的四项真实任务，覆盖专有与开源模型，发现数学导向的刚性推理链会损害验证性能，标准RLVR训练引发“推理崩溃”——策略放弃深思转为快速启发式猜测。提出条件长度惩罚后训练算法，将验证准确率与有界推理长度耦合，遏制崩溃并恢复性能。进一步在1500个合成人格上发现，推理轨迹有效性与社会语言学框架紧密相关，仅因推理人格不同，宏F1波动近0.38，表明主观验证错误多源于推理风格错配。据此提出中期训练架构，通过上下文对齐人格路由推理，为对齐推理模型与真实主观约束提供算法补丁与架构蓝图。",
       "one_line_takeaway": "主观验证任务中，数学式刚性推理会引发推理崩溃，需通过长度惩罚与人格路由对齐推理风格。",
       "core_method": "提出条件长度惩罚后训练算法，在RLVR中耦合验证准确率与有界推理长度以遏制推理崩溃；并设计中期训练架构，基于上下文对齐的人格路由推理轨迹。",
@@ -557,7 +616,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 95,
+      "score": 94,
       "summary": "该论文原声称通过隐藏状态几何测量发现大语言模型存在情绪惯性，即“冷静下来”指令无法重置情绪状态。但作者于2026年9月发布更正，指出实验使用无状态单字符串前向传播，未将诱导状态带入重置或探测上下文，因此四种重置措辞不可能影响报告的重置后表示，其相同值是设计属性而非重置鲁棒性证据。报告的十二个数字实为三个不同值各打印四次，2.13好奇心持续比率的分母是表中最小位移，输出掩蔽和尺度不变性观察也基于同一缺陷设计。结论：核心假设既未被证实也未被证伪，因为实验根本未测试该假设。",
       "one_line_takeaway": "该论文因实验设计缺陷（无状态单字符串前向传播）无法测试情绪惯性假设，作者主动更正并承认核心主张不成立。",
       "core_method": "原实验试图通过几何测量隐藏状态来检验LLM情绪重置能力，使用四种重置措辞、四种架构（含无RLHF对照和1.1B参数规模测试）。但实际采用无状态单字符串前向传播，未累积对话历史或诱导状态，导致重置条件无法影响探测表示。",
@@ -673,7 +732,7 @@
         "后训练",
         "GenRec"
       ],
-      "score": 123,
+      "score": 122,
       "summary": "VARG 是面向天猫 App 搜索的生成式检索系统，目标是在电商搜索中把召回与预排序统一，使生成的候选商品能直接进入最终排序器，同时兼顾相关性、个性化与业务价值。技术路线包括：用 RQ-VAE 构建语义前缀，通过双向 query-item 对比学习增强相关性，并将前缀与按价值排序的第三 token 组合成细粒度商品地址，提供业务价值先验；三阶段监督微调逐步学习商品到标识符映射、查询语义检索与个性化检索；个性化训练结合价值感知与层级对齐监督，并采用局部序数监督 LO-SFT 学习第三 token 编码的簇内排序；Prefix-GRPO 融合输出合法性、用户行为、排序器优势与搜索相关性的门控奖励，配合前缀感知 token 加权，使候选生成与业务价值和排序目标对齐。系统还支持每日商品与模型协同更新，在保留已有商品地址的同时纳入新品与行为反馈。离线实验在数千万商品上验证了标识符稳定性，并显示 SFT 策略与 Prefix-GRPO 在检索质量和头部价值召回上优于各自基线。14 天、覆盖 20% 搜索流量的在线 A/B 测试中，VARG 将生成候选直接送入最终排序器，GMV 提升 1.45%，人均 IPV 提升 0.22%，PCTR 提升 0.31%；购物指南类查询评估中，VARG 在更小候选配额下保持有竞争力的相关性。",
       "one_line_takeaway": "VARG 通过语义前缀、价值排序 token 与 Prefix-GRPO 对齐，让生成式检索候选直接进入天猫最终排序器，并在 14 天 20% 流量 A/B 中实现 GMV +1.45%。",
       "core_method": "VARG 以 RQ-VAE 构建语义前缀，并用双向 query-item 对比学习增强相关性；将前缀与按业务价值排序的第三 token 组合为细粒度商品地址。采用三阶段监督微调依次学习商品到标识符映射、查询语义检索和个性化检索；个性化阶段结合价值感知与层级对齐监督，并用 LO-SFT 学习第三 token 的簇内局部排序。Prefix-GRPO 使用输出合法性、用户行为、排序器优势和搜索相关性的门控奖励，并配合前缀感知 token 加权，使生成候选与业务价值和排序目标对齐。系统支持每日商品与模型协同更新，保留已有商品地址并纳入新品与行为反馈。",
@@ -802,7 +861,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 155,
+      "score": 154,
       "summary": "TGR是腾讯提出的工业级生成式推荐框架，旨在解决传统级联推荐系统（检索、预排序、排序、重排）中模型分离优化导致的扩展性受限、决策碎片化以及缺乏语义知识和推理能力的问题。TGR沿三个耦合方向推进：TGR-GenRank通过CCFormer升级排序，采用统一特征令牌化、可扩展Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过项上下文感知注意力、分层路径重排序和正交双路径解码解决层次语义ID生成中的项边界损失和语义漂移，HiGR则使用前缀结构语义ID、粗到细解码和列表级多目标对齐实现整槽生成；TGR-Reason将离线生成的语义ID推理令牌注入在线解码，无需请求时展开即可提供推理能力。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个已全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
       "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入的统一框架，在工业推荐中实现了显著的在线收益，验证了生成式范式的可行性和价值。",
       "core_method": "TGR框架包含三个核心组件：1) TGR-GenRank：基于CCFormer的生成式排序模型，采用统一特征令牌化、Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，输出逐项多任务预测；2) TGR-GenRec：包括BARGE和HiGR两种生成范式，BARGE使用层次语义ID生成并解决语义漂移，HiGR使用前缀结构语义ID进行整槽生成；3) TGR-Reason：通过离线生成语义ID推理令牌，在线解码时注入，实现无需请求时展开的推理增强。",
@@ -1004,6 +1063,94 @@
       "is_daily_pick": false
     },
     {
+      "id": "openalex:W7204487596",
+      "title": "Visual General Intelligence: A White Paper",
+      "authors": [
+        "Hirokatsu Kataoka",
+        "Yoshihiro Fukuhara",
+        "Yonglong Tian",
+        "Shangzhe Wu",
+        "Oishi Deb",
+        "Ryousuke Yamada",
+        "Christian Rupprecht",
+        "Jianyuan Wang",
+        "Kohsuke Ide",
+        "Koichi Namekata",
+        "Xianzheng Ma",
+        "Yiming Chen",
+        "Robert Geirhos",
+        "Aditi Raghunathan",
+        "Yuki M. Asano",
+        "Deva Ramanan",
+        "David Fouhey",
+        "Andrew J. Davison",
+        "Yilun Du",
+        "Jiajun Wu",
+        "Zhuang Liu"
+      ],
+      "affiliations": [
+        "National Institute of Advanced Industrial Science and Technology",
+        "Stanford University",
+        "University of Cambridge",
+        "University of Technology Nuremberg",
+        "University of Tsukuba",
+        "Google DeepMind (United Kingdom)",
+        "Carnegie Mellon University",
+        "New York University",
+        "Imperial College London",
+        "Harvard University Press",
+        "Princeton University"
+      ],
+      "published": "2026-08-26",
+      "updated": "2026-09-30T09:27:27.532063",
+      "abstract": "This paper reconsiders intelligence from a vision-centered perspective and examines whether intelligence emerging from visual experience and learning may provide a pathway toward AGI. In the language domain, beginning with the introduction of the Transformer architecture, the GPT series has demonstrated transfer to unseen tasks through autoregressive language modeling on web-scale text combined with aggressive scaling. This raises a natural question, namely, what capabilities and forms of intelligence can emerge from visual modalities such as images, videos, and geometry? In this paper, we discuss whether visual intelligence can serve as a pathway toward AGI, referred to in this paper as visual general intelligence (VGI), by bringing together contributors from diverse standpoints and affiliations. Our aim is not to offer a single definition of visual intelligence, but to clarify the principles that computer vision should pursue in the AGI era, the visual input modalities, the benchmarks, the learning paradigms, and the relationship between vision, when taken as the core, and other modalities such as language.",
+      "url": "https://arxiv.org/abs/2608.25924",
+      "pdf_url": "https://arxiv.org/pdf/2608.25924",
+      "doi": "10.48550/arxiv.2608.25924",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Psychiatry, Mental Health, Neuroscience",
+        "Cognitive Science and Education Research",
+        "Data Visualization and Analytics"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "后训练",
+        "视觉通用智能",
+        "AGI",
+        "计算机视觉",
+        "多模态学习",
+        "白皮书"
+      ],
+      "score": 78,
+      "summary": "本文以视觉为中心重新审视智能，探讨视觉经验与学习能否通向AGI，提出视觉通用智能（VGI）概念。作者汇集多机构观点，类比语言领域GPT系列通过自回归建模与规模化实现未见任务迁移，追问图像、视频、几何等视觉模态能涌现何种能力。目标不是给出单一视觉智能定义，而是澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准、学习范式，以及视觉作为核心与语言等其他模态的关系。",
+      "one_line_takeaway": "视觉通用智能（VGI）可能成为通向AGI的独立路径，需系统厘清其原则、模态、基准与学习范式。",
+      "core_method": "白皮书形式，汇集多机构研究者观点，以语言领域GPT系列的自回归建模与规模化迁移为类比，从视觉中心视角讨论AGI路径，不提出单一技术方案。",
+      "innovation_points": [
+        "提出视觉通用智能（VGI）概念，将视觉视为通向AGI的核心路径而非附属模态",
+        "系统梳理AGI时代计算机视觉应追求的原则、视觉输入模态、基准与学习范式",
+        "探讨视觉作为核心与语言等其他模态的关系，而非仅将视觉作为语言模型的输入"
+      ],
+      "experiment_results": [
+        "本文为白皮书，未报告具体实验数据或量化结果。"
+      ],
+      "limitations": [
+        "作为白皮书，未提供具体技术实现或实验验证",
+        "未给出视觉通用智能的单一明确定义，结论偏原则性讨论",
+        "未量化视觉路径与语言路径在通向AGI上的优劣"
+      ],
+      "practical_value": "为计算机视觉与多模态研究提供AGI时代的战略方向参考，帮助研究者理解视觉核心路径的潜在原则、基准需求与学习范式，对生成式推荐等需要视觉理解的任务有方向性启发。",
+      "why_it_matters": "在语言模型主导AGI讨论的背景下，本文系统论证视觉作为独立路径的可能性，为视觉与多模态研究提供议程设置，值得关注AGI路径的研究者阅读。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "d5a277cac2854f47",
+      "is_daily_pick": false
+    },
+    {
       "id": "openalex:W7204606868",
       "title": "Beyond Scaling: Self-Evolving LLM Agents for Hardware Kernel Optimization via an Experience-Driven Workflow and Experience Graph Memory",
       "authors": [
@@ -1045,7 +1192,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 65,
+      "score": 64,
       "summary": "硬件内核优化需要反复编译、正确性测试、性能分析和修改。现有LLM代理虽能自动化部分流程，但无法从已完成的任务中学习，且保留所有历史轨迹会与当前任务竞争上下文。本文提出KOPE，一个经验驱动的框架，通过经验图记忆记录优化轨迹及反馈，并采用主动上下文管理和注入，在固定token预算下检索相关经验。在GLM-5.2设置下，KOPE的每算子加速比几何均值是强基线CANNBot的1.54倍。在53算子消融中，主动上下文管理将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，优化token消耗从15.9B降至1.113B。启用经验图记忆将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。结果表明，在基础模型固定时，通过外部经验可实现持续优化。",
       "one_line_takeaway": "KOPE通过经验图记忆和主动上下文管理，使LLM代理能从历史优化中学习，显著提升硬件内核优化效率，且不依赖更强的基础模型。",
       "core_method": "KOPE框架：1) 经验图记忆（EGM）存储优化轨迹，包含决策、执行反馈和后续决策，保留决策顺序和替代分支；2) 主动上下文管理和注入（ACMI）在固定token预算下检索相关经验，动态构建上下文。",
@@ -1363,7 +1510,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 116,
+      "score": 115,
       "summary": "Sona技术报告介绍了Yandex Music部署的单一生成式推荐模型，该模型在在线A/B测试中完全替代了包含超过15个候选生成器及预排序和排序模型的生产级级联系统，并显著提升了关键参与度指标。Sona架构统一了候选生成与排序，围绕共享用户表示构建，其编码器将用户按时间排序的交互事件序列转换为隐藏状态，供自回归解码器和排序模块使用。通过下一词预测和蒸馏目标联合更新编码器，将生成与排序耦合在同一用户状态中。最终配置中，较大的教师模型仅在训练时提供排序目标，推理时仅部署编码器、解码器和排序模块。在线实验基于智能音箱上的My Vibe流量，结果显示活跃用户数提升4.53%，总收听时长提升6.30%，点赞数提升11.42%，且活跃用户提升幅度是此前最强模型Argus的2.35倍。研究表明，单一联合训练模型可替代成熟的多阶段推荐级联，并在真实流量上提升推荐质量。",
       "one_line_takeaway": "单一生成式推荐模型Sona在真实业务中完全替代了多阶段级联系统，并显著提升核心参与度指标。",
       "core_method": "Sona采用编码器-解码器架构，编码器将用户交互序列转换为隐藏状态，解码器自回归生成推荐项，排序模块对生成项打分；通过下一词预测和蒸馏损失联合训练，教师模型提供排序目标但推理时不参与。",
@@ -1427,7 +1574,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 123,
+      "score": 122,
       "summary": "PushDualGen是快手提出的面向工业级推送推荐系统的轻量级生成式推荐框架。现有生成式推荐通过语义ID实现端到端个性化，但黑盒特性导致逻辑难以追踪，而引入思维链的OneRec-Thinking虽可解释但推理成本高。PushDualGen采用双阶段生成：首先生成语义ID，再生成可跳过的解释性副本，在保持推荐效果的同时降低推理开销。该系统已在快手推送场景部署，在线A/B测试显示有效播放率相对提升8.50%，不满意率相对下降37.70%，并长期优化内容生态，增加长尾视频曝光。",
       "one_line_takeaway": "PushDualGen通过先生成语义ID再生成可跳过解释的轻量级双阶段生成，在工业推送推荐中实现了可解释性与低推理成本的平衡。",
       "core_method": "PushDualGen采用双阶段生成架构：第一阶段生成语义ID（SID）作为推荐核心，第二阶段生成解释性副本（copy）作为可跳过的辅助输出。该设计避免了在生成SID时强制引入思维链（CoT）带来的高推理开销，同时通过解释副本提供可追溯性。",
@@ -1513,7 +1660,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7202230636",
+      "id": "openalex:W7202131921",
       "title": "Retrofitting Linear Attention into Diffusion Language Models",
       "authors": [
         "Jinha Kim",
@@ -1521,17 +1668,19 @@
         "Jaeyeon Kim"
       ],
       "affiliations": [
+        "Harvard University",
+        "Apple (United States)",
+        "Google DeepMind (United Kingdom)",
         "Harvard University Press",
         "Apple (United Kingdom)",
-        "Google (United States)",
-        "Google DeepMind (United Kingdom)"
+        "Google (United States)"
       ],
       "published": "2026-08-06",
-      "updated": "2026-09-21T07:43:02.447757",
+      "updated": "2026-09-30T09:27:27.532063",
       "abstract": "Diffusion language models (dLLMs) offer a promising alternative to autoregressive models by accelerating inference through parallel decoding. Recent dLLMs commonly use blockwise semi-autoregressive decoding, generating blocks autoregressively while denoising tokens within each active block in parallel. However, despite KV caching, each denoising step still attends to all previous blocks, repeatedly incurring prefix-attention cost. Motivated by this bottleneck, we ask whether dLLM inference can be further accelerated by linearizing attention over previous blocks. We introduce block-hybrid attention, which retains exact softmax attention within the active denoising block while applying linear attention over previous blocks. We show that this hybrid attention can be retrofitted into a pretrained dLLM with minimal post-training: LLaDA-Hybrid replaces 6 of the 20 attention layers in LLaDA~2.1, a 16B open-source dLLM, largely following LoLCAT (Zhang et al, 2024). The conversion takes only approximately 60 hours while preserving benchmark performance: 72.0% vs. 75.6% on HumanEval, 63.0% vs. 57.7% on MBPP+, and 86.7% vs. 88.3% on CMATH. With a Triton implementation, LLaDA-Hybrid achieves up to $1.7\\times$ higher decoding throughput and supports more concurrent requests before exhausting memory, showing that pretrained dLLMs can be efficiently linearized for faster inference. Our code is available at: https://github.com/Diuven/LLaDA-Hybrid.",
       "url": "https://arxiv.org/abs/2608.06628",
       "pdf_url": "https://arxiv.org/pdf/2608.06628",
-      "doi": "",
+      "doi": "10.48550/arxiv.2608.06628",
       "source": "OpenAlex",
       "content_type": "paper",
       "company": "Google DeepMind",
@@ -1546,33 +1695,35 @@
         "企业论文",
         "预训练",
         "后训练",
-        "推理系统"
+        "推理系统",
+        "扩散语言模型",
+        "线性注意力",
+        "推理加速"
       ],
       "score": 84,
-      "summary": "扩散语言模型（dLLM）通过并行解码加速推理，但块级半自回归解码中，每个去噪步骤仍需对全部历史块做前缀注意力，即使有KV缓存也反复产生开销。本文提出块混合注意力：在当前去噪块内保留精确softmax注意力，对历史块改用线性注意力，从而降低前缀注意力成本。作者将LLaDA 2.1（16B开源dLLM）的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法，后训练约60小时。在HumanEval、MBPP+和CMATH上分别取得72.0% vs 75.6%、63.0% vs 57.7%、86.7% vs 88.3%的表现，基本保持基准性能。Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。",
-      "one_line_takeaway": "通过块混合注意力将预训练扩散语言模型部分线性化，可在约60小时后训练内保持基准性能并提升解码吞吐最高1.7倍。",
-      "core_method": "提出块混合注意力：在当前活跃去噪块内使用精确softmax注意力，对之前所有块使用线性注意力；将预训练dLLM LLaDA 2.1的20层注意力中的6层替换为线性注意力，基本沿用LoLCAT方法进行轻量后训练。",
+      "summary": "扩散语言模型（dLLM）通过并行去噪加速推理，但块级半自回归解码中每个去噪步仍需对全部历史块做前缀注意力，成为推理瓶颈。本文提出块混合注意力（block-hybrid attention）：在活跃去噪块内保留精确 softmax 注意力，对历史块改用线性注意力，从而降低前缀注意力开销。作者将预训练 dLLM LLaDA 2.1（16B）的 20 层注意力中的 6 层替换为线性注意力，参照 LoLCAT 方案，后训练约 60 小时即完成改造。LLaDA-Hybrid 在 HumanEval、MBPP+、CMATH 上基本保持基准性能，配合 Triton 实现解码吞吐最高提升 1.7 倍，并支持更多并发请求。",
+      "one_line_takeaway": "通过将预训练扩散语言模型的部分注意力层改造为块混合线性注意力，可在少量后训练下显著提升解码吞吐并基本保持基准性能。",
+      "core_method": "提出块混合注意力：在块级半自回归解码中，活跃去噪块内保留精确 softmax 注意力以保证局部去噪质量，对已完成的先前块采用线性注意力以消除重复的前缀注意力开销。基于 LoLCAT 思路，将 LLaDA 2.1 的 20 层注意力中的 6 层替换为线性注意力，经约 60 小时后训练完成改造，并给出 Triton 实现。",
       "innovation_points": [
-        "针对块级半自回归dLLM中重复前缀注意力开销的瓶颈，提出块混合注意力机制。",
-        "证明预训练dLLM可通过最小后训练（约60小时）改造为混合线性注意力模型，保持基准性能。",
-        "提供Triton实现，实现最高1.7倍解码吞吐提升并支持更多并发请求。"
+        "针对 dLLM 块级解码中重复前缀注意力的瓶颈，提出块内精确、块间线性的混合注意力机制",
+        "验证预训练 dLLM 可通过少量后训练被高效线性化，改造 6/20 层即可生效",
+        "给出 Triton 实现，在保持基准性能的同时提升解码吞吐与并发能力"
       ],
       "experiment_results": [
-        "HumanEval：72.0% vs 75.6%（LLaDA-Hybrid vs 原模型）",
-        "MBPP+：63.0% vs 57.7%",
-        "CMATH：86.7% vs 88.3%",
-        "Triton实现下解码吞吐最高提升1.7倍，并支持更多并发请求。"
+        "HumanEval：72.0% vs. 基线 75.6%；MBPP+：63.0% vs. 57.7%；CMATH：86.7% vs. 88.3%，整体基本保持基准性能",
+        "解码吞吐最高提升 1.7 倍，并可在耗尽内存前支持更多并发请求",
+        "改造后训练耗时约 60 小时"
       ],
       "limitations": [
-        "仅替换了20层中的6层注意力，未完全线性化。",
-        "部分基准性能略有下降（如HumanEval和CMATH）。",
-        "后训练仍需约60小时，且方法基本沿用LoLCAT，创新性有限。"
+        "仅在 LLaDA 2.1 单一 16B 模型上验证，未覆盖其他规模或架构的 dLLM",
+        "部分基准（HumanEval、CMATH）性能略有下降，线性化并非无损",
+        "摘要未报告长上下文、内存占用与延迟的细粒度消融数据"
       ],
-      "practical_value": "为预训练扩散语言模型提供了一种低成本的线性化改造方案，可在保持多数基准性能的同时提升推理吞吐和并发能力，有助于dLLM在实际部署中降低推理成本。",
-      "why_it_matters": "该工作展示了将线性注意力 retrofitting 到扩散语言模型的可行性，为dLLM推理加速提供了新思路，并开源了代码，对关注高效推理和dLLM架构的研究者具有参考价值。",
+      "practical_value": "为已部署的扩散语言模型提供低成本推理加速路径：无需从头预训练，仅需少量后训练即可将部分注意力层线性化，提升吞吐与并发，适合对推理成本敏感的生成式服务场景。",
+      "why_it_matters": "它表明预训练扩散语言模型可以被高效线性化，为 dLLM 推理系统优化提供了可复用的改造范式，并开源代码便于工程落地与后续研究。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "0236a7019cfac813",
+      "analysis_signature": "8780c0196976f1ad",
       "is_daily_pick": false
     },
     {
@@ -3489,7 +3640,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7162817945",
+      "id": "openalex:W7162644759",
       "title": "How Far Can Disaggregation Go? A Design-Space Exploration of Attention-FFN Disaggregation for Efficient MoE LLM Serving",
       "authors": [
         "Hanjiang Wu",
@@ -3509,16 +3660,17 @@
         "Georgia Institute of Technology",
         "Sant Gadge Baba Amravati University",
         "Theravance Biopharma (United States)",
-        "Intel (United Kingdom)",
+        "Intel (United States)",
         "Google (United States)",
-        "Google DeepMind (United Kingdom)"
+        "Google DeepMind (United Kingdom)",
+        "Intel (United Kingdom)"
       ],
       "published": "2026-05-27",
-      "updated": "2026-09-24T07:57:37.273135",
+      "updated": "2026-09-30T09:27:27.532063",
       "abstract": "Modern large language model (LLM) inference has progressively disaggregated to keep pace with growing model sizes and tight TTFT and TPOT service-level objectives: from chunked-prefill aggregation, to prefill-decode (P/D) disaggregation, and most recently to operator-level Attention-FFN Disaggregation (AFD). This trend is especially important for mixture-of-experts (MoE) models, where memory-bound attention, compute-intensive expert FFNs, and MoE dispatch/combine communication create distinct resource demands. AFD further exposes this heterogeneity by placing attention and MoE-FFN execution on separate GPU groups. Each level of disaggregation deepens the scheduling design space across workload characteristics, resource allocation, and interconnect topology, raising the central question: when does each level actually pay off? We systematically characterize this trade-off for MoE inference across realistic workloads spanning input/output sequence lengths, prefix-KV reuse, and per-user latency constraints. Using chunked-prefill and P/D disaggregation as baselines, we study the benefits and limits of AFD at scale through a framework that fuses on-device kernel measurements with high-fidelity network simulation. Under strict TTFT/TPOT SLOs, AFD sustains around 4k tokens/s of system throughput on DeepSeek-V3.2 across chat, coding, and agentic-coding workloads, where non-AFD deployments are infeasible. We distill concrete takeaways for jointly optimizing throughput and interactivity, including how to partition attention and FFN across GPUs as a function of workload and model architecture, providing design principles for current rack- and cluster-scale deployments as well as future disaggregated AI infrastructure.",
       "url": "https://arxiv.org/abs/2605.28302",
       "pdf_url": "https://arxiv.org/pdf/2605.28302",
-      "doi": "",
+      "doi": "10.48550/arxiv.2605.28302",
       "source": "OpenAlex",
       "content_type": "paper",
       "company": "Google DeepMind",
@@ -3533,32 +3685,36 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统"
+        "推理系统",
+        "MoE推理",
+        "Attention-FFN解耦",
+        "LLM服务系统"
       ],
       "score": 76,
-      "summary": "该论文系统研究了面向MoE大模型推理的注意力-FFN解耦（AFD）设计空间。随着LLM规模增长和TTFT/TPOT SLO收紧，推理架构从分块预填充、P/D解耦演进到算子级AFD，将内存受限的注意力与计算密集的专家FFN部署到不同GPU组。作者构建融合设备内核测量与高保真网络仿真的框架，在覆盖输入/输出长度、前缀KV复用和用户延迟约束的真实负载下，对比分块预填充与P/D解耦基线，量化AFD的收益与边界。在严格SLO下，AFD在DeepSeek-V3.2上对聊天、编码和智能体编码负载维持约4k tokens/s系统吞吐，而非AFD部署不可行。研究提炼了按负载与模型架构划分注意力/FFN的联合优化原则。",
-      "one_line_takeaway": "AFD在严格TTFT/TPOT SLO下能实现非AFD部署不可行的MoE推理吞吐，但其收益高度依赖负载特征与资源划分策略。",
-      "core_method": "构建融合设备内核测量与高保真网络仿真的评估框架，在真实MoE推理负载下系统对比分块预填充、P/D解耦与AFD三种解耦层级，分析工作负载、资源分配和互连拓扑对吞吐与延迟的影响。",
+      "summary": "该论文系统研究了面向MoE大模型推理的Attention-FFN解耦（AFD）设计空间，旨在回答不同解耦层级（chunked-prefill、P/D解耦、AFD）在何种工作负载下真正带来收益。作者构建了融合设备端内核测量与高保真网络仿真的评估框架，覆盖输入/输出序列长度、前缀KV复用和每用户延迟约束等真实场景。在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上于聊天、编码和智能体编码工作负载中维持约4k tokens/s系统吞吐，而非AFD部署不可行。研究提炼了按工作负载和模型架构划分注意力与FFN到GPU的设计原则，为机架和集群级部署及未来解耦AI基础设施提供指导。",
+      "one_line_takeaway": "AFD在严格SLO下为MoE推理提供非AFD不可行的吞吐保障，但收益取决于工作负载与架构的匹配。",
+      "core_method": "构建融合设备端内核测量与高保真网络仿真的评估框架，以chunked-prefill和P/D解耦为基线，系统探索AFD在MoE推理中的设计空间，覆盖序列长度、前缀KV复用和延迟约束等维度。",
       "innovation_points": [
-        "首次对MoE推理中注意力-FFN解耦（AFD）进行系统性设计空间探索，覆盖从分块预填充到算子级解耦的完整谱系。",
-        "提出融合设备内核测量与高保真网络仿真的评估框架，兼顾计算与通信的真实性。",
-        "在严格TTFT/TPOT SLO下量化AFD的收益边界，并给出按负载和模型架构划分注意力/FFN的设计原则。"
+        "首次系统刻画MoE推理中AFD相对于chunked-prefill和P/D解耦的收益边界与适用条件。",
+        "提出融合真实内核测量与网络仿真的高保真评估方法，兼顾计算与通信开销。",
+        "在DeepSeek-V3.2上验证AFD在严格TTFT/TPOT SLO下维持约4k tokens/s吞吐，而非AFD部署不可行。",
+        "提炼按工作负载和模型架构划分注意力与FFN到GPU的设计原则，指导机架与集群级部署。"
       ],
       "experiment_results": [
-        "在DeepSeek-V3.2上，AFD在聊天、编码和智能体编码负载下维持约4k tokens/s系统吞吐，满足严格TTFT/TPOT SLO，而非AFD部署不可行。",
-        "通过设计空间探索揭示了AFD收益随输入/输出序列长度、前缀KV复用和每用户延迟约束的变化规律。",
-        "基于仿真与实测融合，提炼出注意力与FFN在GPU间的划分策略随工作负载和模型架构变化的定量指导。"
+        "在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上于聊天、编码和智能体编码工作负载中维持约4k tokens/s系统吞吐。",
+        "非AFD部署在相同SLO下不可行，凸显AFD在特定场景的必要性。",
+        "研究覆盖输入/输出序列长度、前缀KV复用和每用户延迟约束等真实工作负载维度，但未提供各维度具体数值对比。"
       ],
       "limitations": [
-        "研究基于仿真与内核测量的融合框架，未在真实大规模集群中端到端部署验证。",
-        "实验主要围绕DeepSeek-V3.2单一MoE模型，结论对其他MoE架构的泛化性需进一步验证。",
-        "未深入探讨AFD在故障恢复、动态负载波动和成本效益方面的工程约束。"
+        "评估基于仿真与内核测量融合框架，未在真实大规模集群中端到端验证。",
+        "实验主要围绕DeepSeek-V3.2单一模型，结论对其他MoE架构的泛化性有待验证。",
+        "未提供AFD与基线在吞吐、延迟等指标上的详细数值对比，仅给出约4k tokens/s的总体吞吐。"
       ],
-      "practical_value": "为当前机架级和集群级MoE推理部署提供AFD可行性与划分策略的量化依据，指导在严格SLO下联合优化吞吐与交互性，并为未来解耦AI基础设施设计提供原则。",
-      "why_it_matters": "随着MoE模型成为主流，推理服务面临内存与计算资源异构的挑战。该工作系统回答了何时采用AFD能带来实际收益，为工业界部署高吞吐、低延迟的MoE推理系统提供了关键设计参考。",
+      "practical_value": "为MoE大模型推理部署提供解耦层级选择的设计原则，指导机架和集群级资源分配与拓扑优化，帮助在严格SLO下实现高吞吐与低延迟的平衡。",
+      "why_it_matters": "随着MoE模型规模增长和SLO收紧，解耦成为关键工程手段。该研究系统回答了AFD何时值得采用，为当前和未来AI基础设施的解耦设计提供实证依据和可操作原则。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "5fc6179b3de23db5",
+      "analysis_signature": "76bc75325d50ad2f",
       "is_daily_pick": false
     },
     {
@@ -3861,16 +4017,17 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7161090895",
+      "id": "openalex:W7160941984",
       "title": "Mid-Training with Self-Generated Data Improves Reinforcement Learning in Language Models",
       "authors": [
-        "Aswin RRV",
+        "Aswin Rrv",
         "Jacob Dineen",
         "Divij Handa",
         "Mihir Parmar",
         "Ben Zhou",
         "Swaroop Mishra",
-        "Chitta R. Baral"
+        "Chitta R. Baral",
+        "Aswin RRV"
       ],
       "affiliations": [
         "Arizona State University",
@@ -3878,11 +4035,11 @@
         "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-08",
-      "updated": "2026-09-24T07:57:37.273135",
+      "updated": "2026-09-30T09:27:27.532063",
       "abstract": "The effectiveness of Reinforcement Learning (RL) in Large Language Models (LLMs) depends on the nature and diversity of the data used before and during RL. In particular, reasoning problems can often be approached in multiple ways that rely on different forms of reasoning, and exposure to only a limited range of such approaches in the training data may limit the effectiveness of RL. Motivated by this, we investigate using diverse self-generated data during mid-training as an intermediate step before RL training. Specifically, we adopt a bootstrapped data-generation framework guided by George Polya's problem-solving approaches for generating multiple variants of correct answers for each question in the training data, and then perform fine-tuning. We first provide a theoretical perspective on how mid-training on such data improves RL and explain how policy-gradient updates can incentivize combining multiple approaches. We then empirically demonstrate that RL-trained models initialized with our mid-training data achieve consistent improvements across various mathematical reasoning benchmarks and other OOD tasks like code generation and narrative reasoning. Overall, our investigative study shows that a language model learning multiple problem-solving approaches, through self-generated data helps subsequent RL.",
       "url": "https://arxiv.org/abs/2605.08472",
       "pdf_url": "https://arxiv.org/pdf/2605.08472",
-      "doi": "",
+      "doi": "10.48550/arxiv.2605.08472",
       "source": "OpenAlex",
       "content_type": "paper",
       "company": "Google DeepMind",
@@ -3897,31 +4054,33 @@
         "企业论文",
         "LLM 基模",
         "Reasoning",
-        "Multimodal"
+        "Multimodal",
+        "中期训练",
+        "强化学习",
+        "自生成数据"
       ],
       "score": 68,
-      "summary": "该研究探讨了在强化学习（RL）前引入自生成数据的中期训练（mid-training）对LLM推理能力的影响。作者基于George Polya的问题解决方法，构建了一个自举数据生成框架，为训练数据中的每个问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能通过策略梯度更新激励模型组合多种推理路径。实验显示，在数学推理基准以及代码生成、叙事推理等分布外任务上，采用该中期数据初始化的RL模型均取得一致提升。研究强调了数据多样性在RL前阶段的关键作用。",
-      "one_line_takeaway": "在RL前使用自生成的多解法数据做中期训练，能显著提升语言模型的推理能力。",
-      "core_method": "基于George Polya问题解决方法的自举数据生成框架，为每个训练问题生成多种正确解法变体，然后进行监督微调作为RL前的中间步骤。",
+      "summary": "该研究探讨了在强化学习（RL）前进行中期训练（mid-training）时，使用自生成数据对语言模型的影响。作者提出一个基于波利亚问题解决方法的引导式数据生成框架，为每个训练问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能激励策略梯度更新结合多种推理路径。实验显示，在数学推理、代码生成和叙事推理等任务上，使用该中期数据初始化的RL模型取得一致提升。",
+      "one_line_takeaway": "在RL前用自生成的多解法数据做中期训练，能显著提升语言模型的推理能力。",
+      "core_method": "采用基于波利亚问题解决方法的引导式自生成数据框架，为每个问题生成多种正确解法变体，进行中期微调，再执行RL训练。",
       "innovation_points": [
         "提出在RL前引入中期训练阶段，利用自生成数据增强推理多样性。",
-        "基于Polya问题解决方法设计数据生成框架，系统生成多解法变体。",
-        "从理论上解释中期训练如何通过策略梯度更新激励模型组合多种推理路径。"
+        "基于波利亚问题解决方法设计数据生成框架，生成多解法变体。",
+        "从理论上解释中期训练如何通过策略梯度更新激励模型结合多种推理路径。"
       ],
       "experiment_results": [
-        "在多个数学推理基准上，采用中期数据初始化的RL模型取得一致提升。",
-        "在代码生成和叙事推理等分布外任务上同样观察到性能改进。"
+        "在多个数学推理基准上，使用中期数据初始化的RL模型取得一致提升。",
+        "在代码生成和叙事推理等OOD任务上也观察到性能改进。"
       ],
       "limitations": [
-        "摘要未提供具体实验数据或量化结果，无法评估提升幅度。",
-        "未讨论自生成数据可能引入的噪声或偏差问题。",
-        "理论分析的具体假设和适用范围未在摘要中详细说明。"
+        "未具体说明实验规模、模型大小及计算成本。",
+        "理论分析可能基于简化假设，实际泛化性需进一步验证。"
       ],
-      "practical_value": "为提升LLM在RL训练中的推理能力提供了一种可操作的数据增强策略，尤其适用于需要多步推理的任务场景。",
-      "why_it_matters": "揭示了RL前数据多样性对RL效果的关键影响，为设计更有效的训练流程提供了理论和实证依据。",
+      "practical_value": "为提升LLM在复杂推理任务上的RL训练效果提供了一种可操作的数据增强策略，可应用于数学、代码等领域的模型优化。",
+      "why_it_matters": "揭示了训练数据多样性对RL效果的关键作用，为设计更高效的LLM训练流程提供了新思路。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "196fc2988947854c",
+      "analysis_signature": "35d6a8d29dc485ac",
       "is_daily_pick": false
     },
     {
@@ -6100,7 +6259,7 @@
       "authors": [
         "Zi-Wei Liu",
         "Yejing Wang",
-        "Qidong Liu",
+        "Qi-Dong Liu",
         "Zijian Zhang",
         "Chong Chen",
         "Wei Huang",
@@ -6567,6 +6726,73 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "756e3d07b31081e2",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W4414817893",
+      "title": "InvThink: Premortem Reasoning for Safer Language Models",
+      "authors": [
+        "Yubin Kim",
+        "Taehan Kim",
+        "Eugene Park",
+        "Chunjong Park",
+        "Cynthia Breazeal",
+        "Daniel McDuff",
+        "Hae Won Park"
+      ],
+      "affiliations": [
+        "Massachusetts Institute of Technology",
+        "Google DeepMind (United Kingdom)",
+        "Google (United States)"
+      ],
+      "published": "2025-10-02",
+      "updated": "2026-09-30T09:27:27.532063",
+      "abstract": "We present InvThink, a training and prompting framework that requires the model to enumerate, analyze, and constrain potential failures before generating its final response. Unlike existing safety alignment methods that optimize only for safe final responses, InvThink structures generation into three steps: (1) enumerate potential harms, (2) analyze their consequences, (3) generate the response under explicit mitigation constraints. We observe three findings: (i) InvThink shows higher safety scores at larger model sizes, compared to existing safety prompting and alignment baselines. (ii) InvThink mitigates the safety tax. Models trained with INVTHINK preserve their reasoning capability on standard benchmarks. (iii) beyond general safety tasks, InvThink also reduces harmful behavior in professional ethics domains (medicine, finance, law) and in agentic misalignment scenarios, achieving up to 32% reduction in harmfulness over zero-shot baselines and 16% over SafetyPrompt. We extend InvThink with supervised fine-tuning, and GRPO-based reinforcement learning across three LLM families.",
+      "url": "https://arxiv.org/abs/2510.01569",
+      "pdf_url": "https://arxiv.org/pdf/2510.01569",
+      "doi": "10.48550/arxiv.2510.01569",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Google DeepMind",
+      "venue": "arXiv (Cornell University)",
+      "categories": [
+        "Adversarial Robustness in Machine Learning"
+      ],
+      "tags": [
+        "Google DeepMind",
+        "企业论文",
+        "后训练",
+        "Reasoning",
+        "安全对齐",
+        "预演推理",
+        "语言模型",
+        "强化学习"
+      ],
+      "score": 66,
+      "summary": "本文提出InvThink，一种训练与提示框架，要求模型在生成最终回复前先枚举、分析并约束潜在失败。与仅优化安全最终回复的现有安全对齐方法不同，InvThink将生成结构化为三步：(1)枚举潜在危害，(2)分析其后果，(3)在显式缓解约束下生成回复。研究发现：(i)相比现有安全提示与对齐基线，InvThink在更大模型规模上展现更高安全分数；(ii)缓解安全税，即用InvThink训练的模型在标准基准上保持推理能力；(iii)在专业伦理领域（医学、金融、法律）和智能体错位场景中，InvThink也减少有害行为，相比零样本基线最高降低32%危害性，相比SafetyPrompt降低16%。作者将InvThink扩展至监督微调和基于GRPO的强化学习，覆盖三个LLM家族。",
+      "one_line_takeaway": "InvThink通过预演式推理（先枚举危害、分析后果、再约束生成）在提升安全性的同时保持推理能力，并在专业伦理与智能体场景中显著降低有害行为。",
+      "core_method": "InvThink将生成过程结构化为三步：枚举潜在危害、分析后果、在缓解约束下生成回复。该框架可应用于提示和训练，训练时采用监督微调（SFT）和基于GRPO的强化学习，覆盖三个LLM家族。",
+      "innovation_points": [
+        "提出预演式推理（premortem reasoning）框架，在生成前显式枚举和分析潜在失败，而非仅优化最终回复。",
+        "将安全对齐与推理能力保持相结合，缓解安全税问题。",
+        "在专业伦理领域（医学、金融、法律）和智能体错位场景中验证有效性，扩展了安全对齐的应用范围。",
+        "结合监督微调和GRPO强化学习，在多个LLM家族上实现训练。"
+      ],
+      "experiment_results": [
+        "InvThink在更大模型规模上相比现有安全提示和对齐基线展现更高安全分数。",
+        "InvThink缓解安全税，训练后的模型在标准基准上保持推理能力。",
+        "在专业伦理领域和智能体错位场景中，InvThink相比零样本基线最高降低32%危害性，相比SafetyPrompt降低16%。"
+      ],
+      "limitations": [
+        "摘要未提供具体基准名称、模型规模细节或统计显著性信息。",
+        "未讨论计算开销或推理延迟增加等潜在成本。",
+        "未涉及在开放域或对抗性攻击下的鲁棒性评估。"
+      ],
+      "practical_value": "InvThink为构建更安全的语言模型提供了可操作的训练与提示框架，尤其适用于医疗、金融、法律等高风险专业领域以及智能体系统，能在不牺牲推理能力的前提下降低有害输出。",
+      "why_it_matters": "该工作将安全对齐从仅关注最终回复转向生成前的失败预演，为缓解安全与能力权衡提供了新思路，并在多个专业领域和智能体场景中验证了有效性，对安全关键应用具有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "a62021df0cbd1197",
       "is_daily_pick": false
     }
   ]
