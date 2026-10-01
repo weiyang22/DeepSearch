@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T10:23:04+08:00",
+  "generated_at": "2026-10-01T20:47:49+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,9 +12,9 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2489,
-    "candidates": 53,
-    "new_papers": 3,
+    "discovered": 2462,
+    "candidates": 54,
+    "new_papers": 0,
     "daily_picks": 2,
     "effective_daily_window_days": 3,
     "analysis_complete": 95,
@@ -83,12 +83,7 @@
       "tags": [
         "A/B 实验",
         "GenRec",
-        "Tokenization",
-        "生成式检索",
-        "端到端推荐",
-        "向量量化",
-        "表示坍缩",
-        "物品碰撞"
+        "Tokenization"
       ],
       "score": 124,
       "summary": "本文针对生成式检索在真实推荐系统中面临的两个关键瓶颈：表示坍缩（tokenizer在连续分布偏移下收敛到退化结果）和物品碰撞（大规模候选池导致不同物品共享相同token序列），且二者相互耦合（扩大码本容量缓解碰撞会加剧坍缩）。提出GEAR端到端框架，联合优化tokenizer、生成器和重排器。为缓解表示坍缩，引入BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间的刚性旋转，稳定梯度动态；进一步扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下增强码本表达能力。为解决物品碰撞，GEAR在生成过程中集成上下文条件重排头，以最小计算开销高效消歧碰撞物品。该框架统一了稳定token化与联合重排，形成完全可微且可扩展的范式，目前服务于抖音广告数亿日活用户，在线A/B测试取得显著提升。",
@@ -1119,12 +1114,7 @@
       "tags": [
         "Google DeepMind",
         "企业论文",
-        "后训练",
-        "视觉通用智能",
-        "AGI",
-        "计算机视觉",
-        "多模态学习",
-        "白皮书"
+        "后训练"
       ],
       "score": 78,
       "summary": "本文以视觉为中心重新审视智能，探讨视觉经验与学习能否通向AGI，提出视觉通用智能（VGI）概念。作者汇集多机构观点，类比语言领域GPT系列通过自回归建模与规模化实现未见任务迁移，追问图像、视频、几何等视觉模态能涌现何种能力。目标不是给出单一视觉智能定义，而是澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准、学习范式，以及视觉作为核心与语言等其他模态的关系。",
@@ -1670,10 +1660,7 @@
       "affiliations": [
         "Harvard University",
         "Apple (United States)",
-        "Google DeepMind (United Kingdom)",
-        "Harvard University Press",
-        "Apple (United Kingdom)",
-        "Google (United States)"
+        "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-08-06",
       "updated": "2026-09-30T09:27:27.532063",
@@ -1695,10 +1682,7 @@
         "企业论文",
         "预训练",
         "后训练",
-        "推理系统",
-        "扩散语言模型",
-        "线性注意力",
-        "推理加速"
+        "推理系统"
       ],
       "score": 84,
       "summary": "扩散语言模型（dLLM）通过并行去噪加速推理，但块级半自回归解码中每个去噪步仍需对全部历史块做前缀注意力，成为推理瓶颈。本文提出块混合注意力（block-hybrid attention）：在活跃去噪块内保留精确 softmax 注意力，对历史块改用线性注意力，从而降低前缀注意力开销。作者将预训练 dLLM LLaDA 2.1（16B）的 20 层注意力中的 6 层替换为线性注意力，参照 LoLCAT 方案，后训练约 60 小时即完成改造。LLaDA-Hybrid 在 HumanEval、MBPP+、CMATH 上基本保持基准性能，配合 Triton 实现解码吞吐最高提升 1.7 倍，并支持更多并发请求。",
@@ -3469,7 +3453,8 @@
         "Yuanhang Qu",
         "Yi Liu",
         "Lixiang Lai",
-        "Yuning Jiang"
+        "Yuning Jiang",
+        "Yu-Ning Jiang"
       ],
       "affiliations": [],
       "published": "2026-06-05T06:58:07Z",
@@ -3477,7 +3462,7 @@
       "abstract": "Live streaming has emerged as one of the fastest-growing forms of online media, enabling instant content broadcasting and real-time engagement between users and streamers. Despite the effectiveness of existing recommendation algorithms in this domain, they often suffer from limited utilization of computational resources, with low FLOPs that hinder further performance enhancement. Generative recommendation techniques, which have gained traction in various industrial tasks, offer a promising avenue for improving live streaming recommendations. However, directly applying generative methods to live streaming is non-trivial due to two major challenges: (1) static semantic IDs (SIDs) cannot reflect the rapidly changing nature of live room content; and (2) generative pipelines generally do not incorporate user--streamer interaction signals (e.g., likes, orders), which are critical for modeling user intent toward both the streamer and showcased products. To address these challenges, we introduce SSRLive: Dynamic Semantic ID-guided Streaming Recommendation for Live platforms. The proposed framework integrates a generative module and a discriminative module in a unified architecture. The generative component employs an encoder-decoder design to produce both static and dynamic SIDs, enabling timely representation of live room content while leveraging multimodal information. The discriminative component refines task-specific representations by combining SIDs with user features, augments them with user-streamer interaction data, and performs multi-task predictions. Online A/B tests in real-world deployment demonstrate tangible benefits: watch time (+3.38%), GMV (+0.72%), follower growth (+3.12%), and interaction volume (+2.92%). These improvements highlight the effectiveness and business value of SSRLive, which is now fully deployed, serving hundreds of millions of active users.",
       "url": "http://arxiv.org/abs/2606.06970v1",
       "pdf_url": "https://arxiv.org/pdf/2606.06970v1",
-      "doi": "",
+      "doi": "10.48550/arXiv.2606.06970",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
@@ -3662,8 +3647,7 @@
         "Theravance Biopharma (United States)",
         "Intel (United States)",
         "Google (United States)",
-        "Google DeepMind (United Kingdom)",
-        "Intel (United Kingdom)"
+        "Google DeepMind (United Kingdom)"
       ],
       "published": "2026-05-27",
       "updated": "2026-09-30T09:27:27.532063",
@@ -3685,10 +3669,7 @@
         "企业论文",
         "LLM 基模",
         "MoE",
-        "推理系统",
-        "MoE推理",
-        "Attention-FFN解耦",
-        "LLM服务系统"
+        "推理系统"
       ],
       "score": 76,
       "summary": "该论文系统研究了面向MoE大模型推理的Attention-FFN解耦（AFD）设计空间，旨在回答不同解耦层级（chunked-prefill、P/D解耦、AFD）在何种工作负载下真正带来收益。作者构建了融合设备端内核测量与高保真网络仿真的评估框架，覆盖输入/输出序列长度、前缀KV复用和每用户延迟约束等真实场景。在严格TTFT/TPOT SLO下，AFD在DeepSeek-V3.2上于聊天、编码和智能体编码工作负载中维持约4k tokens/s系统吞吐，而非AFD部署不可行。研究提炼了按工作负载和模型架构划分注意力与FFN到GPU的设计原则，为机架和集群级部署及未来解耦AI基础设施提供指导。",
@@ -4026,8 +4007,7 @@
         "Mihir Parmar",
         "Ben Zhou",
         "Swaroop Mishra",
-        "Chitta R. Baral",
-        "Aswin RRV"
+        "Chitta R. Baral"
       ],
       "affiliations": [
         "Arizona State University",
@@ -4054,10 +4034,7 @@
         "企业论文",
         "LLM 基模",
         "Reasoning",
-        "Multimodal",
-        "中期训练",
-        "强化学习",
-        "自生成数据"
+        "Multimodal"
       ],
       "score": 68,
       "summary": "该研究探讨了在强化学习（RL）前进行中期训练（mid-training）时，使用自生成数据对语言模型的影响。作者提出一个基于波利亚问题解决方法的引导式数据生成框架，为每个训练问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能激励策略梯度更新结合多种推理路径。实验显示，在数学推理、代码生成和叙事推理等任务上，使用该中期数据初始化的RL模型取得一致提升。",
@@ -4167,7 +4144,8 @@
         "Jun Wang",
         "Fuji Ren",
         "Wenwu Ou",
-        "Yu Yin"
+        "Yu Yin",
+        "Wen-Wu Ou"
       ],
       "affiliations": [],
       "published": "2026-04-26T03:59:35Z",
@@ -4945,10 +4923,10 @@
         "Songhao Ni",
         "Dongxu Liang",
         "Jun Wang",
-        "Shimin Cai",
+        "Shi-Min Cai",
         "Tao Zhou",
         "Fuji Ren",
-        "Wenwu Ou"
+        "Wen-Wu Ou"
       ],
       "affiliations": [],
       "published": "2026-02-28",
@@ -6762,11 +6740,7 @@
         "Google DeepMind",
         "企业论文",
         "后训练",
-        "Reasoning",
-        "安全对齐",
-        "预演推理",
-        "语言模型",
-        "强化学习"
+        "Reasoning"
       ],
       "score": 66,
       "summary": "本文提出InvThink，一种训练与提示框架，要求模型在生成最终回复前先枚举、分析并约束潜在失败。与仅优化安全最终回复的现有安全对齐方法不同，InvThink将生成结构化为三步：(1)枚举潜在危害，(2)分析其后果，(3)在显式缓解约束下生成回复。研究发现：(i)相比现有安全提示与对齐基线，InvThink在更大模型规模上展现更高安全分数；(ii)缓解安全税，即用InvThink训练的模型在标准基准上保持推理能力；(iii)在专业伦理领域（医学、金融、法律）和智能体错位场景中，InvThink也减少有害行为，相比零样本基线最高降低32%危害性，相比SafetyPrompt降低16%。作者将InvThink扩展至监督微调和基于GRPO的强化学习，覆盖三个LLM家族。",
