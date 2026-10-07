@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T11:19:44+08:00",
+  "generated_at": "2026-10-07T10:41:49+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,11 +12,11 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2395,
-    "candidates": 50,
+    "discovered": 2499,
+    "candidates": 51,
     "new_papers": 0,
     "daily_picks": 1,
-    "effective_daily_window_days": 7,
+    "effective_daily_window_days": 8,
     "analysis_complete": 95,
     "analysis_fallback": 0
   },
@@ -220,8 +220,8 @@
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Machine Learning and Data Classification",
-        "Domain Adaptation and Few-Shot Learning",
-        "Advanced Neural Network Applications"
+        "Machine Learning in Materials Science",
+        "Evolutionary Algorithms and Applications"
       ],
       "tags": [
         "Google DeepMind",
@@ -300,7 +300,7 @@
         "Semantic ID",
         "Tokenization"
       ],
-      "score": 199,
+      "score": 198,
       "summary": "针对生成式推荐（GR）中因注意力二次复杂度而难以建模长序列用户行为的问题，本文提出GLASS框架。核心洞察是语义ID（SID）的生成本质是粗到细的过程：前缀决定粗粒度语义类别，后缀定位具体物品，因此需要差异化的长期信号注入。GLASS包含两个模块：SID-Tier将长期交互映射为统一兴趣向量，利用语义码本的紧凑性融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索则用已生成的粗粒度SID作为动态键，检索相关历史行为，并通过自适应门控融合模块校准后续细粒度token的生成轨迹。在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS优于现有最优基线；在短视频平台为期两周的在线A/B测试中，推荐质量获得显著提升。",
       "one_line_takeaway": "GLASS通过为SID前缀和后缀分别设计长期兴趣注入机制，有效提升了生成式推荐对长序列用户行为的建模能力。",
       "core_method": "提出GLASS框架，包含SID-Tier和语义硬搜索两个模块。SID-Tier将长期交互映射为统一兴趣向量，利用语义码本融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索以生成的粗粒度SID为动态键检索相关历史行为，并通过自适应门控融合模块校准后缀细粒度token的生成。",
@@ -359,7 +359,7 @@
         "后训练",
         "Reasoning"
       ],
-      "score": 93,
+      "score": 92,
       "summary": "该研究针对推荐系统中主观验证任务（如安全与质量准则）的LLM推理失效问题展开大规模实证。基于生产推荐平台的四项真实任务，覆盖专有与开源模型，发现数学导向的刚性推理链会损害验证性能，标准RLVR训练引发“推理崩溃”——策略放弃深思转为快速启发式猜测。提出条件长度惩罚后训练算法，将验证准确率与有界推理长度耦合，遏制崩溃并恢复性能。进一步在1500个合成人格上发现，推理轨迹有效性与社会语言学框架紧密相关，仅因推理人格不同，宏F1波动近0.38，表明主观验证错误多源于推理风格错配。据此提出中期训练架构，通过上下文对齐人格路由推理，为对齐推理模型与真实主观约束提供算法补丁与架构蓝图。",
       "one_line_takeaway": "主观验证任务中，数学式刚性推理会引发推理崩溃，需通过长度惩罚与人格路由对齐推理风格。",
       "core_method": "提出条件长度惩罚后训练算法，在RLVR中耦合验证准确率与有界推理长度以遏制推理崩溃；并设计中期训练架构，基于上下文对齐的人格路由推理轨迹。",
@@ -601,8 +601,8 @@
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Topic Modeling",
-        "Multimodal Machine Learning Applications",
-        "Machine Learning in Materials Science"
+        "Natural Language Processing Techniques",
+        "Multimodal Machine Learning Applications"
       ],
       "tags": [
         "Tencent Hunyuan",
@@ -678,7 +678,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 93,
+      "score": 92,
       "summary": "该论文原声称通过隐藏状态几何测量发现大语言模型存在情绪惯性，即“冷静下来”指令无法重置情绪状态。但作者于2026年9月发布更正，指出实验使用无状态单字符串前向传播，未将诱导状态带入重置或探测上下文，因此四种重置措辞不可能影响报告的重置后表示，其相同值是设计属性而非重置鲁棒性证据。报告的十二个数字实为三个不同值各打印四次，2.13好奇心持续比率的分母是表中最小位移，输出掩蔽和尺度不变性观察也基于同一缺陷设计。结论：核心假设既未被证实也未被证伪，因为实验根本未测试该假设。",
       "one_line_takeaway": "该论文因实验设计缺陷（无状态单字符串前向传播）无法测试情绪惯性假设，作者主动更正并承认核心主张不成立。",
       "core_method": "原实验试图通过几何测量隐藏状态来检验LLM情绪重置能力，使用四种重置措辞、四种架构（含无RLHF对照和1.1B参数规模测试）。但实际采用无状态单字符串前向传播，未累积对话历史或诱导状态，导致重置条件无法影响探测表示。",
@@ -794,7 +794,7 @@
         "后训练",
         "GenRec"
       ],
-      "score": 121,
+      "score": 120,
       "summary": "VARG 是面向天猫 App 搜索的生成式检索系统，目标是在电商搜索中把召回与预排序统一，使生成的候选商品能直接进入最终排序器，同时兼顾相关性、个性化与业务价值。技术路线包括：用 RQ-VAE 构建语义前缀，通过双向 query-item 对比学习增强相关性，并将前缀与按价值排序的第三 token 组合成细粒度商品地址，提供业务价值先验；三阶段监督微调逐步学习商品到标识符映射、查询语义检索与个性化检索；个性化训练结合价值感知与层级对齐监督，并采用局部序数监督 LO-SFT 学习第三 token 编码的簇内排序；Prefix-GRPO 融合输出合法性、用户行为、排序器优势与搜索相关性的门控奖励，配合前缀感知 token 加权，使候选生成与业务价值和排序目标对齐。系统还支持每日商品与模型协同更新，在保留已有商品地址的同时纳入新品与行为反馈。离线实验在数千万商品上验证了标识符稳定性，并显示 SFT 策略与 Prefix-GRPO 在检索质量和头部价值召回上优于各自基线。14 天、覆盖 20% 搜索流量的在线 A/B 测试中，VARG 将生成候选直接送入最终排序器，GMV 提升 1.45%，人均 IPV 提升 0.22%，PCTR 提升 0.31%；购物指南类查询评估中，VARG 在更小候选配额下保持有竞争力的相关性。",
       "one_line_takeaway": "VARG 通过语义前缀、价值排序 token 与 Prefix-GRPO 对齐，让生成式检索候选直接进入天猫最终排序器，并在 14 天 20% 流量 A/B 中实现 GMV +1.45%。",
       "core_method": "VARG 以 RQ-VAE 构建语义前缀，并用双向 query-item 对比学习增强相关性；将前缀与按业务价值排序的第三 token 组合为细粒度商品地址。采用三阶段监督微调依次学习商品到标识符映射、查询语义检索和个性化检索；个性化阶段结合价值感知与层级对齐监督，并用 LO-SFT 学习第三 token 的簇内局部排序。Prefix-GRPO 使用输出合法性、用户行为、排序器优势和搜索相关性的门控奖励，并配合前缀感知 token 加权，使生成候选与业务价值和排序目标对齐。系统支持每日商品与模型协同更新，保留已有商品地址并纳入新品与行为反馈。",
@@ -923,7 +923,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 153,
+      "score": 152,
       "summary": "TGR是腾讯提出的工业级生成式推荐框架，旨在解决传统级联推荐系统（检索、预排序、排序、重排）中模型分离优化导致的扩展性受限、决策碎片化以及缺乏语义知识和推理能力的问题。TGR沿三个耦合方向推进：TGR-GenRank通过CCFormer升级排序，采用统一特征令牌化、可扩展Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过项上下文感知注意力、分层路径重排序和正交双路径解码解决层次语义ID生成中的项边界损失和语义漂移，HiGR则使用前缀结构语义ID、粗到细解码和列表级多目标对齐实现整槽生成；TGR-Reason将离线生成的语义ID推理令牌注入在线解码，无需请求时展开即可提供推理能力。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个已全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
       "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入的统一框架，在工业推荐中实现了显著的在线收益，验证了生成式范式的可行性和价值。",
       "core_method": "TGR框架包含三个核心组件：1) TGR-GenRank：基于CCFormer的生成式排序模型，采用统一特征令牌化、Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，输出逐项多任务预测；2) TGR-GenRec：包括BARGE和HiGR两种生成范式，BARGE使用层次语义ID生成并解决语义漂移，HiGR使用前缀结构语义ID进行整槽生成；3) TGR-Reason：通过离线生成语义ID推理令牌，在线解码时注入，实现无需请求时展开的推理增强。",
@@ -1161,11 +1161,11 @@
         "Carnegie Mellon University",
         "New York University",
         "Imperial College London",
-        "Harvard University Press",
+        "Harvard University",
         "Princeton University"
       ],
       "published": "2026-08-26",
-      "updated": "2026-10-02T10:15:12.560889",
+      "updated": "2026-10-06T10:28:23.643775",
       "abstract": "This paper reconsiders intelligence from a vision-centered perspective and examines whether intelligence emerging from visual experience and learning may provide a pathway toward AGI. In the language domain, beginning with the introduction of the Transformer architecture, the GPT series has demonstrated transfer to unseen tasks through autoregressive language modeling on web-scale text combined with aggressive scaling. This raises a natural question, namely, what capabilities and forms of intelligence can emerge from visual modalities such as images, videos, and geometry? In this paper, we discuss whether visual intelligence can serve as a pathway toward AGI, referred to in this paper as visual general intelligence (VGI), by bringing together contributors from diverse standpoints and affiliations. Our aim is not to offer a single definition of visual intelligence, but to clarify the principles that computer vision should pursue in the AGI era, the visual input modalities, the benchmarks, the learning paradigms, and the relationship between vision, when taken as the core, and other modalities such as language.",
       "url": "https://arxiv.org/abs/2608.25924",
       "pdf_url": "https://arxiv.org/pdf/2608.25924",
@@ -1175,38 +1175,43 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
-        "Psychiatry, Mental Health, Neuroscience",
-        "Cognitive Science and Education Research",
-        "Data Visualization and Analytics"
+        "Multimodal Machine Learning Applications",
+        "Domain Adaptation and Few-Shot Learning",
+        "Advanced Neural Network Applications"
       ],
       "tags": [
         "Google DeepMind",
         "企业论文",
-        "后训练"
+        "后训练",
+        "Multimodal",
+        "视觉通用智能",
+        "AGI",
+        "计算机视觉",
+        "多模态学习"
       ],
-      "score": 77,
-      "summary": "该白皮书从视觉中心视角重新审视智能，探讨视觉经验与学习能否成为通向AGI的路径，提出视觉通用智能（VGI）概念。作者类比语言领域GPT系列通过自回归建模与规模化实现未见任务迁移的成功，追问图像、视频、几何等视觉模态能涌现何种能力与智能形式。论文汇集多机构研究者观点，不追求单一视觉智能定义，而是旨在澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准测试、学习范式，以及视觉作为核心时与语言等其他模态的关系。",
+      "score": 78,
+      "summary": "该白皮书从视觉中心视角重新审视智能，探讨视觉经验与学习能否成为通向AGI的路径，提出视觉通用智能（VGI）概念。作者类比语言领域GPT系列通过自回归建模与规模化实现跨任务迁移的成功，追问图像、视频、几何等视觉模态能涌现何种能力与智能形式。论文汇集多机构研究者观点，不追求单一视觉智能定义，而是旨在澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准测试、学习范式，以及视觉作为核心时与语言等其他模态的关系。",
       "one_line_takeaway": "视觉通用智能（VGI）可能成为通向AGI的独立路径，需系统厘清其原则、模态、基准与学习范式。",
-      "core_method": "以白皮书形式汇集多视角观点，通过类比语言领域GPT系列的自回归建模与规模化成功，系统讨论视觉智能作为AGI路径的可行性，并梳理视觉输入模态、基准、学习范式及视觉与语言的关系。",
+      "core_method": "以立场论文形式，汇集多机构研究者观点，通过类比语言领域GPT系列的自回归建模与规模化路径，从视觉中心视角讨论AGI的可能性，并梳理视觉输入模态、基准、学习范式及视觉与语言的关系。",
       "innovation_points": [
-        "提出视觉通用智能（VGI）概念，将视觉中心视角作为通向AGI的候选路径。",
-        "系统类比语言领域GPT系列的成功机制，追问视觉模态能否复制类似涌现与迁移。",
-        "不追求单一视觉智能定义，而是澄清AGI时代计算机视觉应追求的原则与框架。",
-        "涵盖视觉输入模态、基准、学习范式及视觉与语言等多模态关系。"
+        "提出视觉通用智能（VGI）概念，将视觉经验与学习作为通向AGI的候选路径。",
+        "系统对比语言领域GPT成功范式，追问视觉模态能否复制类似涌现与迁移能力。",
+        "不追求单一视觉智能定义，而是聚焦AGI时代计算机视觉应追求的原则、模态、基准与学习范式。",
+        "探讨视觉作为核心时与语言等其他模态的关系，为多模态研究提供框架性思考。"
       ],
       "experiment_results": [
-        "该论文为白皮书，未报告具体实验数据或量化结果。"
+        "该论文为白皮书/立场论文，未报告具体实验数据或量化结果。"
       ],
       "limitations": [
-        "作为白皮书，未提供实证实验或量化验证。",
-        "未给出视觉通用智能的单一操作性定义，概念边界仍较开放。",
-        "对视觉与语言等其他模态关系的讨论可能停留在原则层面，缺乏具体技术方案。"
+        "作为立场论文，未提供实证实验或量化验证，结论以观点和框架为主。",
+        "未给出视觉通用智能的单一明确定义，可能影响后续研究的可操作性。",
+        "对视觉与语言等其他模态关系的讨论仍停留在原则层面，缺乏具体技术方案。"
       ],
-      "practical_value": "为AGI时代计算机视觉研究提供方向性指引，帮助研究者理解视觉中心路径的潜力与挑战，并促进视觉与语言等多模态融合的讨论。",
-      "why_it_matters": "在语言模型主导AGI讨论的背景下，该白皮书系统提出视觉中心路径，可能启发新的研究范式与基准设计，对计算机视觉和AGI交叉领域具有战略参考价值。",
+      "practical_value": "为计算机视觉与AGI交叉领域的研究者提供战略方向与原则性框架，帮助理解视觉中心路径的潜力与挑战，并指导基准设计、学习范式选择及多模态关系处理。",
+      "why_it_matters": "在语言模型主导AGI讨论的背景下，该白皮书系统提出视觉中心路径，可能启发新的研究议程与资源投入方向，对关注基座模型扩展规律与多模态智能的研究者具有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "6c5161d754957c08",
+      "analysis_signature": "f9f1af7c8104e4e3",
       "is_daily_pick": false
     },
     {
@@ -1251,7 +1256,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 63,
+      "score": 62,
       "summary": "硬件内核优化需要反复编译、正确性测试、性能分析和修改。现有LLM代理虽能自动化部分流程，但无法从已完成的任务中学习，且保留所有历史轨迹会与当前任务竞争上下文。本文提出KOPE，一个经验驱动的框架，通过经验图记忆记录优化轨迹及反馈，并采用主动上下文管理和注入，在固定token预算下检索相关经验。在GLM-5.2设置下，KOPE的每算子加速比几何均值是强基线CANNBot的1.54倍。在53算子消融中，主动上下文管理将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，优化token消耗从15.9B降至1.113B。启用经验图记忆将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。结果表明，在基础模型固定时，通过外部经验可实现持续优化。",
       "one_line_takeaway": "KOPE通过经验图记忆和主动上下文管理，使LLM代理能从历史优化中学习，显著提升硬件内核优化效率，且不依赖更强的基础模型。",
       "core_method": "KOPE框架：1) 经验图记忆（EGM）存储优化轨迹，包含决策、执行反馈和后续决策，保留决策顺序和替代分支；2) 主动上下文管理和注入（ACMI）在固定token预算下检索相关经验，动态构建上下文。",
@@ -1742,9 +1747,9 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
+        "Natural Language Processing Techniques",
         "Topic Modeling",
-        "Generative Adversarial Networks and Image Synthesis",
-        "Speech Recognition and Synthesis"
+        "Advanced Neural Network Applications"
       ],
       "tags": [
         "Google DeepMind",
@@ -3721,9 +3726,9 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
-        "Big Data and Digital Economy",
         "Parallel Computing and Optimization Techniques",
-        "Advanced Neural Network Applications"
+        "Cloud Computing and Resource Management",
+        "Distributed and Parallel Computing Systems"
       ],
       "tags": [
         "Google DeepMind",
@@ -4087,8 +4092,8 @@
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Topic Modeling",
-        "Multimodal Machine Learning Applications",
-        "Artificial Intelligence in Healthcare and Education"
+        "Reinforcement Learning in Robotics",
+        "Natural Language Processing Techniques"
       ],
       "tags": [
         "Google DeepMind",
@@ -4097,7 +4102,7 @@
         "Reasoning",
         "Multimodal"
       ],
-      "score": 68,
+      "score": 66,
       "summary": "该研究探讨了在强化学习（RL）前进行中期训练（mid-training）时，使用自生成数据对语言模型的影响。作者提出一个基于波利亚问题解决方法的引导式数据生成框架，为每个训练问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能激励策略梯度更新结合多种推理路径。实验显示，在数学推理、代码生成和叙事推理等任务上，使用该中期数据初始化的RL模型取得一致提升。",
       "one_line_takeaway": "在RL前用自生成的多解法数据做中期训练，能显著提升语言模型的推理能力。",
       "core_method": "采用基于波利亚问题解决方法的引导式自生成数据框架，为每个问题生成多种正确解法变体，进行中期微调，再执行RL训练。",
