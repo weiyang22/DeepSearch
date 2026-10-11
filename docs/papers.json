@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T10:41:15+08:00",
+  "generated_at": "2026-10-11T10:09:24+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2554,
+    "discovered": 2626,
     "candidates": 51,
     "new_papers": 1,
-    "daily_picks": 1,
-    "effective_daily_window_days": 4,
-    "analysis_complete": 96,
+    "daily_picks": 2,
+    "effective_daily_window_days": 5,
+    "analysis_complete": 97,
     "analysis_fallback": 0
   },
   "sources": [
@@ -97,11 +97,7 @@
         "A/B 实验",
         "企业论文",
         "预训练",
-        "后训练",
-        "LLM定制",
-        "企业软件工程",
-        "继续预训练",
-        "灾难性遗忘"
+        "后训练"
       ],
       "score": 115,
       "summary": "本文介绍Gemini for Google (GfG)，一个针对Google内部软件工程生态定制的LLM。企业软件开发产生大量增量修改、架构修订和部署维护数据，可用于微调LLM以解锁企业级工具能力。论文详述端到端开发：从构建万亿token专有数据集，到实施缓解灾难性遗忘的中间训练策略，再到全栈调优（继续预训练与后训练）及下游应用部署。在29,000名开发者参与的大规模盲测A/B研究中，GfG显著优于基线：每轮平均迭代次数减少23%，代码存活率提升约17%。该工作提供了企业模型适配的可复制蓝图，涵盖高价值信号提取、数据准备、全栈调优和部署。",
@@ -128,6 +124,74 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "f8867ce4976ea5b8",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7155634930",
+      "title": "Maintaining Control States for Initialization-Aware GRPO in Industrial LLM Workflows",
+      "authors": [
+        "Chen Liu",
+        "Zhenzhao Yuan",
+        "范奉媛",
+        "Limei Che",
+        "Qiao Qian",
+        "Qingyuan Liang",
+        "Zeyu Sun",
+        "Lu Zhang"
+      ],
+      "affiliations": [
+        "Peking University",
+        "Tencent (China)",
+        "Chinese Academy of Sciences",
+        "Institute of Software"
+      ],
+      "published": "2026-10-07",
+      "updated": "2026-10-10T09:11:00.788812",
+      "abstract": "Large language models (LLMs) are increasingly used as components in industrial software workflows, where they are expected to support reliable automation. However, newly introduced workflows often provide only limited data and sparse task-level feedback, making post-deployment adaptation difficult. GRPO-based post-training provides a practical adaptation way in this setting, but its effectiveness depends on the state from which adaptation begins. When the initial behavior of an LLM workflow is poorly aligned with the target workflow, early samples may provide weak reward signals, wasting adaptation budget and delaying workflow onboarding.",
+      "url": "https://doi.org/10.1145/3832783.3834459",
+      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3832783.3834459?download=true",
+      "doi": "10.1145/3832783.3834459",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Tencent Hunyuan",
+      "venue": "IEEE/ACM International Conference on Automated Software Engineering (ASE)",
+      "categories": [
+        "Scientific Computing and Data Management",
+        "Topic Modeling",
+        "Reinforcement Learning in Robotics"
+      ],
+      "tags": [
+        "Tencent Hunyuan",
+        "企业论文",
+        "LLM 基模",
+        "后训练",
+        "Reasoning",
+        "GRPO",
+        "工业LLM工作流",
+        "初始化感知"
+      ],
+      "score": 101,
+      "summary": "本文针对工业LLM工作流中数据有限、任务级反馈稀疏导致部署后适配困难的问题，提出初始化感知的GRPO后训练方法。研究指出GRPO适配效果高度依赖初始状态，当LLM工作流初始行为与目标工作流对齐不佳时，早期样本奖励信号弱，浪费适配预算并延迟工作流上线。为此，作者提出维护控制状态（Maintaining Control States）机制，在GRPO训练中显式跟踪和利用工作流控制状态，以改善初始化对齐，提升早期奖励信号质量。该方法在腾讯混元工业LLM工作流中验证，旨在加速新工作流适配并提高自动化可靠性。",
+      "one_line_takeaway": "通过维护控制状态实现初始化感知的GRPO，可有效缓解工业LLM工作流适配中早期奖励信号弱的问题。",
+      "core_method": "提出初始化感知的GRPO后训练框架，核心是维护工作流的控制状态（Control States），在GRPO训练过程中显式跟踪和利用这些状态来评估和调整初始行为对齐，从而在数据有限和反馈稀疏条件下提供更有效的早期奖励信号。",
+      "innovation_points": [
+        "识别出GRPO适配效果对LLM工作流初始状态的依赖性问题，即初始行为与目标工作流对齐不佳会导致早期奖励信号弱。",
+        "提出维护控制状态（Maintaining Control States）机制，将工作流控制状态显式纳入GRPO训练过程，实现初始化感知的适配。",
+        "针对工业场景中数据有限和任务级反馈稀疏的约束，设计了一种节省适配预算、加速工作流上线的后训练方法。"
+      ],
+      "experiment_results": [
+        "摘要未提供具体实验数据，仅说明该方法在工业LLM工作流中旨在解决适配困难问题，需查阅全文获取定量结果。"
+      ],
+      "limitations": [
+        "摘要未提及方法在非工业场景或不同LLM基座上的泛化能力验证。",
+        "未说明控制状态的具体定义、维护成本及其对训练效率的影响。",
+        "缺乏与基线GRPO或其他适配方法的定量对比数据。"
+      ],
+      "practical_value": "为工业LLM工作流部署后的快速适配提供了一种实用后训练方案，尤其适用于数据稀缺、反馈稀疏且对自动化可靠性要求高的企业场景，有助于降低适配成本、加速工作流上线。",
+      "why_it_matters": "该工作直面工业LLM工作流落地中的关键工程痛点——有限数据下的高效适配，提出的初始化感知GRPO方法有望提升后训练效率，对推动LLM在真实业务中的可靠自动化具有实践指导意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "081c9f3eda87fcba",
       "is_daily_pick": true
     },
     {
@@ -242,7 +306,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 185,
+      "score": 184,
       "summary": "GRP v0.1 是一个面向工业推荐系统的生成式推荐框架，旨在将检索、排序和奖励建模统一到单个编码器-解码器模型中，以解决多阶段级联难以联合替换的问题。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果：仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
       "one_line_takeaway": "GRP 通过生成式统一检索、排序与奖励建模，并采用渐进式部署，在工业推荐系统中实现了可观的线上收益，同时揭示了排序质量与性能的剩余差距。",
       "core_method": "GRP 是一个编码器-解码器生成式推荐框架，将检索、排序和奖励建模集成于单一模型。它生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块为强化学习后训练提供奖励。提出的 mGRPO 在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。",
@@ -309,7 +373,7 @@
         "LLM 基模",
         "预训练"
       ],
-      "score": 91,
+      "score": 90,
       "summary": "表格基础模型（如TabFM）通过在合成表格上预训练，在结构化数据上实现了强大的零样本准确率，但忽略了列名、任务描述和辅助文件等携带数据集语义的信息。同时，自演化的机器学习工程（MLE）智能体在每个数据集上从头训练模型，但联合搜索特征、架构和超参数噪声大且容易过拟合。本文提出TabFM-Auto，将表格基础模型TabFM与语言模型智能体配对，后者围绕TabFM演化数据管道。在数据集元数据和验证反馈的指导下，TabFM-Auto迭代优化数据清洗、特征工程、上下文选择和后处理，以降低TabFM的误差。在TabArena基准的全部51个数据集上，五种不同智能体和语言模型的TabFM-Auto配置占据了总排名前五，最佳配置将TabFM的Elo从1785提升至2013。发现的管道还能迁移到其他冻结的表格基础模型（提升69至143 Elo），无需进一步搜索。在MLE-Bench的8个表格竞赛中，TabFM-Auto在MLE智能体中总排名第一。",
       "one_line_takeaway": "TabFM-Auto通过语言模型智能体演化数据管道，显著提升表格基础模型的零样本性能，并在多个基准上达到最优。",
       "core_method": "TabFM-Auto将表格基础模型TabFM与语言模型智能体结合，智能体根据数据集元数据和验证反馈，迭代优化数据清洗、特征工程、上下文选择和后处理等数据管道步骤，以最小化TabFM的预测误差。",
@@ -694,7 +758,7 @@
         "MoE",
         "Multimodal"
       ],
-      "score": 141,
+      "score": 140,
       "summary": "腾讯混元团队发布开源大语言模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数80B，推理时仅激活13B，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；随后通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，可根据任务复杂度自适应调整推理深度：对常规查询采用快速思考，对复杂多步问题采用慢速思考。评估显示其在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
       "one_line_takeaway": "Hunyuan-A13B通过MoE架构与双模式思维链，在80B总参数下仅激活13B，实现了高效推理与接近更大模型的性能。",
       "core_method": "基于混合专家（MoE）架构，总参数80B，推理激活13B；在20T token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和大规模强化学习；引入双模式思维链框架，动态适配推理深度。",
@@ -1127,7 +1191,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 145,
+      "score": 144,
       "summary": "针对电商搜索中生成式检索（GR）训练流程难以保持查询意图一致性的问题，ICEGR提出端到端框架，从语义ID构建、监督微调与偏好优化三阶段注入查询意图。首先，意图感知SID构建将查询意图信号融入语义ID，使其超越静态商品信息；其次，合成查询增强的统一SFT将多个SFT任务统一到查询到SID目标下，并用合成查询补充低曝光商品的稀疏监督；最后，相关性校准的偏好优化将查询-商品相关性与业务信号融入边际自适应偏好目标，在保留查询意图的同时学习业务偏好。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%；在百度电商搜索部署为端到端生成式检索通路，A/B测试中CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知SID、合成查询增强SFT和相关性校准偏好优化，在电商搜索中实现查询意图一致的端到端生成式检索，离线与线上指标显著提升。",
       "core_method": "ICEGR包含三个组件：(1) 意图感知SID构建，将查询意图信号融入语义ID生成，使SID编码商品-意图关联；(2) 合成查询增强的统一SFT，统一多个SFT任务为查询到SID目标，并用合成查询为低曝光商品提供补充监督；(3) 相关性校准的偏好优化，将查询-商品相关性与业务信号集成到边际自适应偏好目标中，平衡意图保持与业务偏好。",
@@ -1506,7 +1570,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 138,
+      "score": 137,
       "summary": "生成式推荐通常将每个物品表示为离散语义ID（SID）序列，并通过自回归解码预测序列以检索下一个物品。现有系统采用多级残差量化，导致解码成本高且层级空间稀疏。本文提出单级大语义码本，用单个语义token替代多个残差语义码，并保留协作消歧token以减少物品冲突。同时引入曝光感知的动态更新机制，包括时间权重衰减、指数移动平均中心更新和曝光加权惩罚。离线评估框架覆盖表示质量、码利用率、簇负载、全SID冲突和时间稳定性。在两个公开数据集上，两级SID相比基线在Recall@10上提升5.0%-8.8%，NDCG@10提升4.1%-8.5%；动态更新在KuaiRec上进一步增益。三种服务架构下，缩短的SID减少自回归解码FLOPs约47.93%-48.70%，单卡QPS提升28.57%-47.0%。线上A/B测试（2.5%流量）提升主要消费指标0.792%。",
       "one_line_takeaway": "用单级大语义码本加动态更新替代多级残差量化，显著提升生成式推荐的效率与效果。",
       "core_method": "提出单级大语义码本（Single-Level Large Semantic Codebook），每个物品仅用一个语义token表示，并附加协作消歧token；引入曝光感知的动态更新机制（时间权重衰减、EMA中心更新、曝光加权惩罚）；开发离线评估框架。",
@@ -1566,7 +1630,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 115,
+      "score": 114,
       "summary": "本文提出OGR框架，用于端到端生成式列表推荐。现有方法将候选生成与排序分离，且语义ID构建缺乏推荐感知和局部协同信号，下一token预测与列表级目标不对齐。OGR引入TUSID，融合语义和局部协同信息构建分层语义ID；采用列表级偏好规划和流水线位置解码生成有序列表；提出SPA策略优化方法，通过奖励引导保守优化，对齐生成列表与用户偏好。离线实验显示，OGR在工业数据集和公开数据集上NDCG@5相对提升48.2%和27.2%，在线A/B测试在快手平台有效观看提升1.120%。",
       "one_line_takeaway": "OGR通过统一语义协同ID和列表级生成策略，实现端到端有序列表推荐，显著提升推荐效果。",
       "core_method": "TUSID（统一语义协同ID）构建分层ID，融合物品语义和局部协同信息；列表级偏好规划（list-wise preference planning）建模全局偏好；流水线位置解码（pipelined position-wise decoding）生成有序列表；SPA（保守策略优化）通过奖励引导优化生成列表。",
