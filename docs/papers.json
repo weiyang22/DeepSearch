@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T02:09:58+08:00",
+  "generated_at": "2026-10-16T02:22:28+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2674,
-    "candidates": 21,
-    "new_papers": 13,
+    "discovered": 2841,
+    "candidates": 24,
+    "new_papers": 3,
     "daily_picks": 2,
     "effective_daily_window_days": 4,
-    "analysis_complete": 107,
+    "analysis_complete": 110,
     "analysis_fallback": 0
   },
   "sources": [
@@ -60,31 +60,31 @@
         "Liangsheng Xu",
         "Ruiqi Yu",
         "Yingdi Guo",
-        "Zongbing Wang",
+        "Zihan Wang",
         "Xinhua Ye",
         "Chenyan Hua",
         "Xin Xie",
         "Pengcheng Yang",
         "Haijun Wu",
-        "Zihan Wang"
+        "Zongbing Wang"
       ],
       "affiliations": [],
-      "published": "2026-10-12T15:38:47Z",
-      "updated": "2026-10-12T15:38:47Z",
+      "published": "2026-10-12",
+      "updated": "2026-10-12",
       "abstract": "Generative retrieval (GR) offers a promising paradigm for industrial search by unifying candidate generation within an autoregressive framework. However, its effectiveness is limited by two key challenges. First, existing Semantic ID (SID) tokenizers struggle to incorporate collaborative signals while maintaining effective codebook utilization, limiting their ability to distinguish items and achieve high-quality retrieval. Second, existing reinforcement learning (RL) methods suffer from severe reward sparsity under exact SID matching, leaving many sampled trajectories without effective learning signals and hindering preference optimization. To address these challenges, we propose WeGR, a unified generative retrieval framework consisting of two complementary components. Specifically, the Collaborative and Collapse-free Tokenizer (CoCo-VAE) incorporates query-to-item and item-to-item collaborative signals while mitigating codebook collapse through codebook refresh and complementary regularization, enabling more informative and balanced SID representations. Building upon these SIDs, Dynamic Horizon Policy Optimization (DHPO) progressively expands both reward evaluation and policy optimization horizons, reducing learning difficulty while leveraging behavioral reward signals at different levels of the SID hierarchy, without relying on auxiliary reward models. Extensive offline experiments demonstrate the effectiveness of WeGR in improving retrieval and ranking performance. Moreover, a two-month online A/B test in WeChat E-commerce Search demonstrates relative improvements of 2.539% in orders, 1.508% in click-through rate, and 1.381% in conversion rate, while reducing online CPU and GPU usage by 25.5% and 26.1%, respectively. The system has been successfully deployed across multiple search scenarios in WeChat, serving billions of users, generating tens of millions of PVs daily.",
-      "url": "http://arxiv.org/abs/2610.16979v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.16979v1",
+      "url": "https://arxiv.org/abs/2610.16979",
+      "pdf_url": "https://arxiv.org/pdf/2610.16979",
       "doi": "10.48550/arxiv.2610.16979",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "cs.IR",
-        "cs.AI",
         "Information Retrieval and Search Behavior",
         "Recommender Systems and Techniques",
-        "Topic Modeling"
+        "Topic Modeling",
+        "cs.IR",
+        "cs.AI"
       ],
       "tags": [
         "A/B 实验",
@@ -97,29 +97,29 @@
         "语义ID"
       ],
       "score": 161,
-      "summary": "WeGR 是面向微信搜索的工业级统一生成式检索框架，旨在解决生成式检索在真实业务中面临的两大瓶颈：语义ID（SID）分词器难以融合协同信号且码本利用率低，以及基于精确SID匹配的强化学习奖励稀疏导致偏好优化困难。为此，WeGR 提出协同且抗坍缩的分词器 CoCo-VAE，通过引入查询-物品和物品-物品协同信号，并结合码本刷新与互补正则化缓解码本坍缩，生成更具区分度且分布均衡的SID。在此基础上，动态视界策略优化 DHPO 逐步扩展奖励评估与策略优化视界，利用SID层级不同粒度的行为奖励信号，无需辅助奖励模型即可降低学习难度。离线实验验证了检索与排序性能提升；微信电商搜索两个月的在线A/B测试显示订单量相对提升2.539%，点击率提升1.508%，转化率提升1.381%，同时在线CPU和GPU使用量分别降低25.5%和26.1%。系统已部署于微信多个搜索场景，服务数十亿用户，日均生成数千万PV。",
-      "one_line_takeaway": "WeGR 通过协同抗坍缩的语义ID分词器与动态视界策略优化，在微信搜索中实现了生成式检索的离线效果提升与在线业务指标增长，同时显著降低计算资源消耗。",
-      "core_method": "WeGR 包含两个核心组件：1）CoCo-VAE 分词器，在语义ID生成中融合查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化防止码本坍缩，提升码本利用率和物品区分度；2）DHPO 强化学习优化方法，逐步扩展奖励评估和策略优化的视界，利用SID层级不同粒度的行为奖励信号，避免精确SID匹配带来的奖励稀疏问题，且不依赖辅助奖励模型。",
+      "summary": "WeGR 是面向微信搜索的工业级统一生成式检索框架，旨在解决现有生成式检索中语义ID（SID）令牌化器难以融合协同信号且码本利用率低，以及强化学习在精确SID匹配下奖励稀疏导致偏好优化困难两大问题。其核心包含协同无坍缩令牌化器（CoCo-VAE）和动态视界策略优化（DHPO）。CoCo-VAE 通过引入查询-物品与物品-物品协同信号，并利用码本刷新与互补正则化缓解码本坍缩，生成更具信息量且均衡的SID表示；DHPO 逐步扩展奖励评估与策略优化的视界，降低学习难度，并利用不同SID层级的行为奖励信号，无需辅助奖励模型。离线实验验证了检索与排序性能提升，微信电商搜索两个月的在线A/B测试显示订单量相对提升2.539%，点击率提升1.508%，转化率提升1.381%，同时在线CPU和GPU使用率分别降低25.5%和26.1%。系统已部署于微信多个搜索场景，服务数十亿用户，日均生成数千万PV。",
+      "one_line_takeaway": "WeGR通过协同无坍缩语义ID令牌化与动态视界策略优化，在微信搜索中实现了生成式检索的工业级落地，显著提升业务指标并降低计算开销。",
+      "core_method": "提出统一生成式检索框架WeGR，包含两个组件：1）协同无坍缩令牌化器CoCo-VAE，融合查询-物品和物品-物品协同信号，通过码本刷新和互补正则化防止码本坍缩，生成高质量语义ID；2）动态视界策略优化DHPO，逐步扩展奖励评估和策略优化视界，利用不同SID层级的行为奖励信号，无需辅助奖励模型。",
       "innovation_points": [
-        "提出 CoCo-VAE 分词器，首次在语义ID生成中同时融入查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化有效缓解码本坍缩，提升SID的信息量和均衡性。",
-        "提出 DHPO 强化学习优化方法，通过动态扩展奖励评估和策略优化视界，利用SID层级的多粒度行为奖励信号，解决精确SID匹配下的奖励稀疏问题，且无需辅助奖励模型。",
-        "在微信电商搜索中完成大规模在线部署，验证了生成式检索在工业搜索系统中的实际业务价值与资源效率优势。"
+        "CoCo-VAE令牌化器同时注入查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化解决码本坍缩问题，提升SID的区分性和码本利用率。",
+        "DHPO策略优化方法通过动态扩展奖励评估和策略优化视界，缓解精确SID匹配下的奖励稀疏问题，无需依赖辅助奖励模型即可利用多层级行为信号。",
+        "在微信电商搜索中完成大规模在线部署，实现业务指标提升与计算资源节省的双重收益。"
       ],
       "experiment_results": [
-        "离线实验表明 WeGR 在检索和排序性能上均有提升。",
+        "离线实验表明WeGR在检索和排序性能上均有提升。",
         "微信电商搜索两个月的在线A/B测试显示：订单量相对提升2.539%，点击率相对提升1.508%，转化率相对提升1.381%。",
-        "在线CPU和GPU使用量分别相对降低25.5%和26.1%。"
+        "在线CPU和GPU使用率分别降低25.5%和26.1%。"
       ],
       "limitations": [
-        "摘要未提供离线实验的具体数据集、基线方法和详细指标，无法全面评估方法在不同场景下的泛化能力。",
-        "在线A/B测试仅报告了微信电商搜索场景的结果，未说明在其他搜索场景（如通用搜索、其他垂直领域）的适用性和效果。",
-        "未讨论 CoCo-VAE 和 DHPO 各自对最终性能的贡献程度，缺乏消融实验的公开数据。"
+        "摘要未提及离线实验的具体数据集、基线对比和量化指标，无法全面评估方法泛化性。",
+        "在线A/B测试仅报告相对提升，未提供绝对数值或置信区间，统计显著性未知。",
+        "方法在微信特定场景下验证，跨平台或跨业务迁移效果需进一步研究。"
       ],
-      "practical_value": "WeGR 为工业搜索系统提供了一套可落地的生成式检索解决方案，在微信电商搜索中显著提升了订单量、点击率和转化率，同时大幅降低CPU和GPU资源消耗，已部署于微信多个搜索场景，服务数十亿用户，日均处理数千万PV，证明了其在真实高并发业务环境下的有效性和效率优势。",
-      "why_it_matters": "该工作直面生成式检索在工业部署中的两个关键挑战——语义ID的协同信号融合与码本坍缩、强化学习的奖励稀疏，提出了针对性的解决方案，并通过微信大规模在线A/B测试验证了业务收益和资源节省，为生成式检索在真实搜索系统中的落地提供了重要参考和工程实践范例。",
+      "practical_value": "WeGR已成功部署于微信多个搜索场景，服务数十亿用户，日均处理数千万PV，在提升订单、点击和转化等核心业务指标的同时，显著降低CPU和GPU计算开销，为工业级生成式检索提供了可复用的工程范式。",
+      "why_it_matters": "该工作针对生成式检索在工业搜索中的两大瓶颈——语义ID协同信号融合与强化学习奖励稀疏——提出了有效的解决方案，并通过大规模在线A/B测试验证了其业务价值与资源效率，对生成式检索的学术研究和工业落地具有重要参考意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "0a27d2f9ea281059",
+      "analysis_signature": "ea374c62ab6d9192",
       "is_daily_pick": true
     },
     {
@@ -135,21 +135,21 @@
         "Xiaoyi Zeng"
       ],
       "affiliations": [],
-      "published": "2026-10-12T03:48:56Z",
-      "updated": "2026-10-12T03:48:56Z",
+      "published": "2026-10-12",
+      "updated": "2026-10-12",
       "abstract": "Semantic-ID-based generative recommendation unifies retrieval and ranking through autoregressive decoding but differs structurally from discriminative models, which can directly access rich target-item side features. The attributes are compressed into a finite codebook during quantization, while the target item remains undetermined during decoding and its features cannot be looked up. This target-side feature vacuum weakens generation at each semantic-ID level through high conditional entropy and cascading errors, and final ranking through missing target-side feature crossing. Existing methods interact with candidate representations or generate discrete attribute tokens, but none reconstructs a continuous target-side representation inside decoding to support both stepwise generation and ranking. We propose TacGR (Stepwise Target-Side Feature Anticipation and Crossing for Generative Recommendation). Before decoding each codeword, TacGR anticipates a continuous target-side feature vector and crosses it with the semantic prefix and user behavior sequence inside the decoder. The crossed representation conditions current-level generation and is directly used for ranking. Continuous-vector regression risks a learnable target collapsing with its prediction and prediction noise propagating into generation through attention. TacGR addresses these challenges with a semantic-anchoring auxiliary tower and a unidirectional visibility mask, respectively. For extremely long industrial behavior histories, it introduces gated convolutional denoising to suppress noise and adapts the pyramid memory funnel to reduce inference cost. Offline experiments on a large-scale Lazada dataset show significant gains over OneRec, UniRec, and UniSGR. Online A/B testing improves IPV, Order, and GMV by 0.79%, 5.55%, and 3.09%, respectively.",
-      "url": "http://arxiv.org/abs/2610.16132v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.16132v1",
+      "url": "https://arxiv.org/abs/2610.16132",
+      "pdf_url": "https://arxiv.org/pdf/2610.16132",
       "doi": "10.48550/arxiv.2610.16132",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "cs.IR",
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research"
+        "Advanced Bandit Algorithms Research",
+        "cs.IR"
       ],
       "tags": [
         "A/B 实验",
@@ -162,28 +162,28 @@
         "自回归解码"
       ],
       "score": 131,
-      "summary": "该论文针对语义ID生成式推荐中目标物品侧特征缺失的问题展开研究。由于量化过程将属性压缩到有限码本，且解码时目标物品未定，无法直接查询其侧特征，导致每级语义ID生成条件熵高、误差级联，最终排序也缺少目标侧特征交叉。为此提出TacGR，在解码每个码字前预测连续的目标侧特征向量，并与语义前缀、用户行为序列在解码器内交叉，交叉表示既用于当前级生成也直接用于排序。为应对连续向量回归中目标塌缩和预测噪声传播，引入语义锚定辅助塔和单向可见性掩码；针对超长工业行为历史，采用门控卷积去噪和金字塔记忆漏斗降低推理成本。在Lazada大规模数据集离线实验中显著优于OneRec、UniRec和UniSGR，在线A/B测试提升IPV 0.79%、Order 5.55%、GMV 3.09%。",
-      "one_line_takeaway": "TacGR通过在解码过程中逐步预测并交叉连续目标侧特征，有效缓解了语义ID生成式推荐中的目标特征真空问题，并在工业级A/B测试中显著提升核心业务指标。",
-      "core_method": "TacGR在自回归解码每个语义ID码字前，预测一个连续的目标侧特征向量，并将其与语义前缀和用户行为序列在解码器内部交叉。交叉后的表示用于条件化当前级生成，并直接作为排序特征。为稳定训练，引入语义锚定辅助塔防止目标塌缩，使用单向可见性掩码阻断预测噪声通过注意力传播。针对超长行为序列，采用门控卷积去噪和金字塔记忆漏斗降低推理成本。",
+      "summary": "该论文针对语义ID生成式推荐中目标物品侧特征缺失的问题展开研究。传统判别式模型可直接访问目标物品的丰富侧特征，而基于语义ID的生成式推荐在自回归解码时目标物品尚未确定，其属性被量化压缩到有限码本中，导致目标侧特征真空，进而引发高条件熵、级联错误以及最终排序时缺少目标侧特征交叉。为此，作者提出TacGR框架，在解码每个码字前预测一个连续的目标侧特征向量，并在解码器内部与语义前缀及用户行为序列进行交叉，交叉后的表示既用于当前层生成也直接用于排序。为应对连续向量回归中目标塌缩和预测噪声传播问题，TacGR分别引入语义锚定辅助塔和单向可见性掩码；针对超长工业行为历史，采用门控卷积去噪和金字塔记忆漏斗降低推理成本。在Lazada大规模数据集上的离线实验表明，TacGR显著优于OneRec、UniRec和UniSGR；在线A/B测试中，IPV、Order和GMV分别提升0.79%、5.55%和3.09%。",
+      "one_line_takeaway": "TacGR通过在解码过程中逐步预测并交叉连续目标侧特征，有效弥补了语义ID生成式推荐中的目标特征真空，在工业级场景下显著提升了生成与排序性能。",
+      "core_method": "TacGR在自回归解码每个语义ID码字之前，先预测一个连续的目标侧特征向量，并将其与语义前缀和用户行为序列在解码器内部进行交叉。交叉后的表示既用于当前层码字生成的条件，也直接作为排序特征。为缓解连续向量回归中目标塌缩和预测噪声传播，分别采用语义锚定辅助塔和单向可见性掩码；针对超长行为历史，引入门控卷积去噪和金字塔记忆漏斗以降低推理成本。",
       "innovation_points": [
-        "首次在生成式推荐解码过程中重建连续目标侧特征表示，同时服务于逐级生成和最终排序，填补目标侧特征真空。",
-        "提出语义锚定辅助塔和单向可见性掩码，分别解决连续向量回归中的目标塌缩和预测噪声传播问题。",
-        "针对工业级超长用户行为历史，设计门控卷积去噪和金字塔记忆漏斗，在抑制噪声的同时降低推理成本。"
+        "首次在语义ID生成式推荐中，于解码过程中逐步预测并交叉连续目标侧特征向量，同时服务于生成和排序。",
+        "提出语义锚定辅助塔解决连续向量回归中目标塌缩问题，以及单向可见性掩码防止预测噪声通过注意力传播到生成。",
+        "针对超长工业行为历史，设计门控卷积去噪和金字塔记忆漏斗，在抑制噪声的同时降低推理成本。"
       ],
       "experiment_results": [
-        "在Lazada大规模数据集离线实验中，TacGR显著优于OneRec、UniRec和UniSGR等基线方法。",
-        "在线A/B测试显示，IPV提升0.79%，Order提升5.55%，GMV提升3.09%。"
+        "在Lazada大规模数据集上的离线实验表明，TacGR显著优于OneRec、UniRec和UniSGR。",
+        "在线A/B测试中，IPV提升0.79%，Order提升5.55%，GMV提升3.09%。"
       ],
       "limitations": [
-        "摘要未提及模型在冷启动或长尾物品上的表现，可能受限于目标侧特征预测的准确性。",
-        "未讨论连续特征预测带来的额外计算开销与延迟，尽管有金字塔记忆漏斗优化，但实际部署成本仍需评估。",
-        "实验仅基于Lazada数据集，跨领域泛化能力有待验证。"
+        "论文未详细说明语义锚定辅助塔和单向可见性掩码的具体实现细节及其对超参数选择的敏感性。",
+        "在线A/B测试仅报告了相对提升，未提供绝对指标或置信区间，且未与其他最新基线进行在线对比。",
+        "方法在超长行为历史下的计算开销虽通过金字塔记忆漏斗降低，但未与现有方法进行推理效率的定量比较。"
       ],
-      "practical_value": "TacGR直接针对工业级生成式推荐中目标侧特征缺失的痛点，通过连续特征预测与交叉提升生成质量和排序效果，并在真实A/B测试中验证了IPV、Order和GMV的显著提升，为生成式推荐在电商场景的落地提供了有效方案。",
-      "why_it_matters": "该工作揭示了语义ID生成式推荐与判别式模型在目标侧特征利用上的结构性差异，并提出了一种在解码过程中动态重建连续目标侧特征的方法，为生成式推荐的特征交互和排序融合提供了新思路，同时通过工业级验证证明了其实际价值。",
+      "practical_value": "TacGR直接针对工业级生成式推荐中目标侧特征缺失的痛点，在Lazada真实业务场景中验证了其有效性，在线A/B测试中IPV、Order和GMV均有显著提升，表明该方法能够为电商推荐系统带来实际业务价值。其针对超长行为历史的优化也体现了对工程约束的考虑，具备较强的落地可行性。",
+      "why_it_matters": "该工作揭示了语义ID生成式推荐与判别式模型在目标侧特征访问上的结构性差异，并提出了一个兼顾生成与排序的连续特征交叉框架，为生成式推荐在工业场景中的性能提升提供了新思路。其在线实验的显著收益证明了该方向的实用潜力，对研究者和工业界均有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "3f79ba7e2a768f3c",
+      "analysis_signature": "9ffb33b1d65570fd",
       "is_daily_pick": true
     },
     {
@@ -225,11 +225,7 @@
         "企业论文",
         "LLM 基模",
         "后训练",
-        "Reasoning",
-        "异步强化学习",
-        "离策略校正",
-        "大语言模型后训练",
-        "actor-critic"
+        "Reasoning"
       ],
       "score": 98,
       "summary": "异步强化学习通过解耦轨迹生成与优化加速大语言模型后训练，但训练数据来自陈旧策略。现有方法主要依赖actor目标中的重要性比率控制进行token级策略校正，本文指出这种策略侧校正不足：优势估计也继承了行为策略延续带来的不匹配，称为优势陈旧。作者推导了双通道actor更新的精确偏差与方差分解，揭示策略权重与优势估计误差之间的不可分离耦合：交互产生乘性偏差项，而策略权重的平方放大梯度方差中的优势不确定性。这促使提出耦合离策略校正（COPC），一种actor-critic方法，结合token级比率掩码与TD残差的双侧裁剪比率加权，用于回报和优势估计。在工具集成数学推理和搜索任务上，COPC取得最高报告性能，优于最强异步基线，并在64步策略陈旧下保持增益，训练稳定性更好，搜索任务中基线后期崩溃而COPC稳定。COPC相比异步PPO仅增加极小步时开销，相比同步PPO保持1.7倍步时加速。",
@@ -259,7 +255,69 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7221045206",
+      "id": "arxiv:2610.10975",
+      "title": "Optimizing Large Language Models with Chained LMOs",
+      "authors": [
+        "Sungyoon Kim",
+        "Kaan Ozkara",
+        "Youngsuk Park"
+      ],
+      "affiliations": [
+        "Stanford University",
+        "Amazon (United States)"
+      ],
+      "published": "2026-10-07",
+      "updated": "2026-10-07",
+      "abstract": "Muon has motivated a growing family of optimizers that compose multiple matrix normalizations, but these methods remain fragmented and lack a unified perspective. We introduce chained linear minimization oracles (chained LMOs), which cast these methods as compositions of LMOs. Despite their empirical success, many chains fall outside the standard LMO framework and can diverge on smooth convex objectives. To explain why composition can nevertheless help, we turn to linear associative memory and show that chaining can improve over Muon under anisotropic embeddings. Empirically, we propose TensorChain, a novel optimizer within the framework that stacks compatible weight matrices across different layers and normalizes the 3d tensor across its axes. In Qwen3 0.6B and 1.7B pretraining, TensorChain outperforms all chained baselines in average token efficiency, with average token savings of 9.6% over Muon at matched validation loss.",
+      "url": "https://arxiv.org/abs/2610.10975",
+      "pdf_url": "https://arxiv.org/pdf/2610.10975",
+      "doi": "10.48550/arxiv.2610.10975",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Stochastic Gradient Optimization Techniques",
+        "Topic Modeling",
+        "Advanced Neural Network Applications"
+      ],
+      "tags": [
+        "企业论文",
+        "LLM 基模",
+        "预训练",
+        "LLM预训练",
+        "优化器",
+        "Muon",
+        "线性最小化预言机",
+        "TensorChain"
+      ],
+      "score": 90,
+      "summary": "本文针对Muon等由多个矩阵归一化组合而成的优化器家族，提出链式线性最小化预言机（chained LMOs）统一框架，将这类方法形式化为LMO的复合。作者指出，许多链式方法虽在经验上成功，却超出标准LMO框架，在光滑凸目标上可能发散。为解释复合为何有效，他们转向线性联想记忆，证明在各向异性嵌入下链式方法可优于Muon。基于该框架，提出TensorChain优化器，将不同层的兼容权重矩阵堆叠为三维张量并沿各轴归一化。在Qwen3 0.6B和1.7B预训练中，TensorChain在平均token效率上超越所有链式基线，在匹配验证损失下较Muon平均节省9.6% token。",
+      "one_line_takeaway": "链式LMO框架统一了Muon类优化器，并催生TensorChain，在Qwen3预训练中实现9.6%的token效率提升。",
+      "core_method": "将Muon等组合多个矩阵归一化的优化器统一为链式线性最小化预言机（chained LMOs），即LMO的复合；通过线性联想记忆理论分析各向异性嵌入下链式复合的优势；提出TensorChain，堆叠跨层兼容权重矩阵为三维张量并沿各轴归一化。",
+      "innovation_points": [
+        "提出链式LMO统一框架，将分散的Muon类优化器形式化为LMO复合，并指出其可能超出标准LMO框架、在光滑凸目标上发散。",
+        "利用线性联想记忆理论解释链式复合在各向异性嵌入下优于Muon的原因。",
+        "设计TensorChain优化器，通过堆叠跨层权重矩阵为三维张量并沿轴归一化，实现更高效的预训练。"
+      ],
+      "experiment_results": [
+        "在Qwen3 0.6B和1.7B预训练中，TensorChain在平均token效率上超越所有链式基线。",
+        "在匹配验证损失下，TensorChain较Muon平均节省9.6%的token。"
+      ],
+      "limitations": [
+        "许多链式方法超出标准LMO框架，在光滑凸目标上可能发散，理论保证有限。",
+        "实验仅涉及Qwen3 0.6B和1.7B预训练，未验证更大规模模型或其他任务。",
+        "线性联想记忆的理论分析基于各向异性嵌入假设，实际场景的适用性需进一步检验。"
+      ],
+      "practical_value": "为Muon类优化器提供统一理论视角，并给出TensorChain这一可直接用于LLM预训练的高效优化器，在Qwen3上验证可节省约9.6%的token，降低预训练计算成本。",
+      "why_it_matters": "该工作统一了新兴的Muon类优化器家族，揭示了链式复合的有效性条件，并提供了可落地的TensorChain优化器，对提升大模型预训练效率具有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "b4e7301795d9803f",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.07767",
       "title": "TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models",
       "authors": [
         "Xin Wang",
@@ -280,15 +338,15 @@
         "The Ohio State University"
       ],
       "published": "2026-10-06",
-      "updated": "2026-10-14T16:39:01.820549",
+      "updated": "2026-10-06",
       "abstract": "Reinforcement learning (RL) for post-training large language models (LLMs) incurs substantial computation and memory overhead during rollout generation, which motivates low-precision rollout for efficient RL training. However, existing FP4 RL methods suffer from a key limitation: they primarily optimize quantization accuracy on the training and rollout paths independently rather than directly reducing the discrepancy between the two quantized execution paths. In this work, we propose TRACE (Train-Rollout Quantization Alignment via Compact GuidancE), an FP4 quantization framework for RL training of Mixture-of-Experts (MoE) language models that addresses the limitation of existing FP4 RL methods. TRACE incorporates rollout-guided quantization-aware training that uses rollout-side quantization outcomes to guide training-side FP4 rounding decisions, directly reducing train-rollout discrepancy. Moreover, TRACE adopts an efficient quantization-information caching scheme that selectively retains mantissa and scale information from deeper layers to reduce the storage and communication overhead introduced by rollout guidance. We evaluate TRACE on four large-scale MoE language models across reasoning, coding, and long-horizon RL tasks. Our results demonstrate that TRACE enables joint FP4 weight/activation and FP4 KV-cache rollout with RL performance comparable to BF16 rollout, while achieving up to 5.4xrollout speedup and strong final FP4 performance compared with post-hoc FP4 quantization of BF16-trained policies.",
       "url": "https://arxiv.org/abs/2610.07767",
       "pdf_url": "https://arxiv.org/pdf/2610.07767",
       "doi": "10.48550/arxiv.2610.07767",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Alibaba Qwen",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Advanced Neural Network Applications",
         "Numerical Methods and Algorithms",
@@ -302,36 +360,36 @@
         "Reasoning",
         "MoE",
         "FP4量化",
-        "强化学习后训练"
+        "强化学习"
       ],
       "score": 109,
-      "summary": "针对MoE大模型强化学习后训练中rollout生成的计算与内存开销问题，本文提出TRACE，一种面向FP4 RL训练的量化框架。现有FP4 RL方法独立优化训练路径与rollout路径的量化精度，未直接缩小两条量化执行路径之间的差异。TRACE引入rollout引导的量化感知训练，利用rollout侧量化结果指导训练侧FP4舍入决策，直接降低训练-rollout差异；同时设计高效量化信息缓存方案，选择性保留深层尾数与缩放信息以降低存储和通信开销。在四个大规模MoE语言模型上，覆盖推理、编码和长时程RL任务，TRACE支持FP4权重/激活与FP4 KV-cache rollout，RL性能与BF16 rollout相当，rollout加速最高5.4倍，且最终FP4性能优于对BF16训练策略的事后FP4量化。",
-      "one_line_takeaway": "TRACE通过rollout引导的量化感知训练对齐训练与rollout的FP4执行路径，在MoE语言模型RL后训练中实现最高5.4倍rollout加速且性能媲美BF16。",
-      "core_method": "TRACE采用rollout引导的量化感知训练，将rollout侧量化结果用于指导训练侧FP4舍入决策，直接减小训练与rollout量化执行路径间的差异；并引入量化信息缓存方案，选择性保留深层尾数和缩放信息，降低rollout引导带来的存储与通信开销。",
+      "summary": "针对MoE大模型强化学习后训练中rollout生成计算与内存开销大的问题，现有FP4 RL方法独立优化训练和rollout路径的量化精度，未直接缩小两条量化执行路径间的差异。本文提出TRACE框架，通过rollout引导的量化感知训练，利用rollout侧量化结果指导训练侧FP4舍入决策，直接降低训练-rollout差异；并设计量化信息缓存方案，选择性保留深层尾数和缩放信息以降低存储与通信开销。在四个大规模MoE模型上，覆盖推理、编码和长时程RL任务，TRACE实现FP4权重/激活与FP4 KV-cache联合rollout，RL性能与BF16 rollout相当，rollout加速最高5.4倍，且最终FP4性能优于对BF16训练策略的事后FP4量化。",
+      "one_line_takeaway": "TRACE通过rollout引导的量化感知训练对齐训练与rollout的FP4执行路径，在MoE语言模型RL中实现最高5.4倍rollout加速且性能媲美BF16。",
+      "core_method": "TRACE是一种面向MoE语言模型RL训练的FP4量化框架。其核心是rollout引导的量化感知训练：利用rollout侧的量化结果指导训练侧的FP4舍入决策，直接减小训练与rollout两条量化执行路径之间的差异。同时采用量化信息缓存方案，选择性保留深层尾数和缩放信息，以降低rollout引导带来的存储和通信开销。",
       "innovation_points": [
-        "提出rollout引导的量化感知训练，用rollout侧量化结果指导训练侧FP4舍入，直接对齐训练与rollout两条量化执行路径，而非独立优化各自精度。",
-        "设计高效量化信息缓存方案，选择性保留深层尾数与缩放信息，缓解rollout引导引入的存储和通信开销。",
-        "面向MoE语言模型RL后训练，支持FP4权重/激活与FP4 KV-cache rollout的联合低精度执行。"
+        "提出rollout引导的量化感知训练，用rollout侧量化结果指导训练侧FP4舍入，直接对齐训练与rollout的量化执行路径，而非独立优化各自精度。",
+        "设计高效的量化信息缓存方案，选择性保留深层尾数和缩放信息，降低rollout引导引入的存储与通信开销。",
+        "实现FP4权重/激活与FP4 KV-cache的联合rollout，在MoE语言模型RL训练中同时量化权重、激活和KV缓存。"
       ],
       "experiment_results": [
-        "在四个大规模MoE语言模型上，覆盖推理、编码和长时程RL任务，TRACE支持FP4权重/激活与FP4 KV-cache rollout，RL性能与BF16 rollout相当。",
-        "实现最高5.4倍rollout加速。",
-        "最终FP4性能优于对BF16训练策略进行事后FP4量化。"
+        "在四个大规模MoE语言模型上评估，覆盖推理、编码和长时程RL任务。",
+        "TRACE实现FP4权重/激活与FP4 KV-cache联合rollout，RL性能与BF16 rollout相当。",
+        "相比BF16 rollout，rollout加速最高达5.4倍；最终FP4性能优于对BF16训练策略进行事后FP4量化。"
       ],
       "limitations": [
-        "证据来源仅限标题、摘要和学术元数据，未提供具体实验配置、基线细节和消融结果。",
-        "未说明量化信息缓存方案的具体存储与通信开销降低幅度。",
-        "未讨论TRACE在不同MoE架构或RL算法上的泛化性。"
+        "摘要未提供具体任务名称、模型规模、基线配置及详细超参数，无法评估方法在不同MoE架构上的泛化性。",
+        "未报告量化信息缓存方案带来的额外存储与通信开销的具体数值，难以判断其实际效率收益。",
+        "实验仅覆盖推理、编码和长时程RL任务，未涉及多模态或其他RLHF场景。"
       ],
-      "practical_value": "TRACE针对MoE大模型RL后训练中rollout生成的高计算与内存开销，提供FP4低精度rollout方案，在保持RL性能的同时显著加速rollout，并降低存储与通信开销，对大规模MoE模型的高效RL训练具有工程落地价值。",
-      "why_it_matters": "该工作直面RL后训练中rollout效率瓶颈，首次从训练-rollout量化路径对齐角度设计FP4 RL框架，而非独立优化量化精度，为MoE语言模型的高效低精度RL训练提供了新思路，并给出可观的加速与性能保持证据。",
+      "practical_value": "TRACE为MoE大模型强化学习后训练提供了一种低精度rollout方案，可显著降低rollout阶段的计算与内存开销，最高5.4倍加速且性能不降，适合需要大规模RL后训练的企业级LLM训练管线，有助于降低训练成本并提升吞吐。",
+      "why_it_matters": "该工作直面RL后训练中rollout开销大的工程瓶颈，首次从对齐训练与rollout量化路径的角度解决FP4 RL的精度损失问题，为MoE模型的高效RL训练提供了可落地的FP4量化方案，对推动低精度RL训练在工业界的应用具有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "c6e84e02ef2d5c55",
+      "analysis_signature": "91da5593f6e7823f",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7215030793",
+      "id": "arxiv:2609.39327",
       "title": "Generative End-to-end Ad Retrieval at Douyin",
       "authors": [
         "Shaowen ZENG",
@@ -349,15 +407,15 @@
       ],
       "affiliations": [],
       "published": "2026-09-30",
-      "updated": "2026-10-05T09:50:58.205359",
+      "updated": "2026-09-30",
       "abstract": "Generative retrieval reformulates recommendation as the generation of discrete item tokens. However, scaling this paradigm to real-world recommender systems reveals two critical bottlenecks: 1) Representation collapse, where the item tokenizer converges to degenerate results under continuous distribution shifts, fundamentally hindering stable end-to-end adaptation. 2) Item collisions, where the massive candidate pool causes distinct items to share identical token sequences, compromising the final retrieval precision. Crucially, these bottlenecks are inherently coupled: expanding codebook capacity to mitigate collisions inevitably exacerbates collapse. To address them simultaneously, we propose GEAR, an end-to-end framework that jointly optimizes the tokenizer, generator, and reranker. To mitigate representation collapse, we introduce BasisVQ, which re-parameterizes the codebook via an orthogonal basis to enable global gradient sharing and rigid spatial rotation of the latent space, effectively stabilizing gradient dynamics without ad-hoc heuristics. We further extend it to prefix-aware BasisRQ, substantially enhancing the codebook's expressiveness with the same asymptotic time complexity. To resolve item collisions, GEAR integrates a context-conditioned reranking head into the generative process, efficiently disambiguating colliding items with minimal computational overhead. By unifying stable tokenization and joint reranking within an end-to-end generative framework, GEAR establishes a fully differentiable and scalable paradigm. It currently serves hundreds of millions of daily active users on Douyin Ads, yielding substantial empirical improvements in extensive online A/B tests.",
       "url": "https://arxiv.org/abs/2609.39327",
       "pdf_url": "https://arxiv.org/pdf/2609.39327",
       "doi": "10.48550/arxiv.2609.39327",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
@@ -375,28 +433,29 @@
         "物品碰撞"
       ],
       "score": 119,
-      "summary": "该论文针对生成式检索在真实推荐系统中面临的两个关键瓶颈：表示坍缩（tokenizer在连续分布偏移下收敛到退化结果）和物品碰撞（大规模候选池导致不同物品共享相同token序列），且二者相互耦合——扩大码本容量缓解碰撞会加剧坍缩。为此提出GEAR端到端框架，联合优化tokenizer、生成器和重排器。通过BasisVQ用正交基重参数化码本，实现全局梯度共享和潜在空间的刚性旋转，稳定梯度动态；并扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下增强码本表达能力。同时集成上下文条件重排头，以极低计算开销消解碰撞物品。GEAR在抖音广告服务数亿日活用户，在线A/B测试取得显著提升。",
-      "one_line_takeaway": "GEAR通过正交基码本和上下文重排，端到端解决了生成式检索中的表示坍缩与物品碰撞耦合难题，并在抖音广告大规模线上验证有效。",
-      "core_method": "提出GEAR端到端生成式检索框架，联合优化tokenizer、生成器和重排器。核心包括：1）BasisVQ，用正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，稳定梯度动态；2）prefix-aware BasisRQ，在相同渐近时间复杂度下增强码本表达能力；3）上下文条件重排头，集成到生成过程中，以低计算开销消解碰撞物品。",
+      "summary": "抖音广告团队提出GEAR，一个端到端生成式检索框架，旨在解决大规模推荐系统中表示坍缩和物品碰撞两个耦合瓶颈。针对表示坍缩，提出BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，稳定梯度动态；进一步扩展为前缀感知的BasisRQ，在相同渐近时间复杂度下增强码本表达力。针对物品碰撞，GEAR在生成过程中集成上下文条件重排序头，以极小计算开销消歧碰撞物品。该框架统一了稳定的标记化与联合重排序，形成完全可微且可扩展的范式，目前服务于抖音广告数亿日活用户，在线A/B测试取得显著提升。",
+      "one_line_takeaway": "GEAR通过BasisVQ稳定码本训练并集成上下文重排序，解决了生成式检索在抖音广告大规模场景下的表示坍缩与物品碰撞问题，实现了端到端可扩展的工业级部署。",
+      "core_method": "GEAR联合优化标记器、生成器和重排序器。标记器采用BasisVQ，用正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，稳定梯度动态；扩展为前缀感知BasisRQ，在相同渐近时间复杂度下增强码本表达力。生成器生成离散物品标记，重排序头基于上下文条件对碰撞物品进行消歧，整个框架完全可微。",
       "innovation_points": [
-        "BasisVQ：通过正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，无需启发式方法即可稳定梯度动态，缓解表示坍缩。",
-        "prefix-aware BasisRQ：在相同渐近时间复杂度下扩展BasisVQ，显著增强码本表达能力。",
-        "上下文条件重排头：将重排集成到生成过程中，高效消解碰撞物品，计算开销极小。",
-        "端到端联合优化：统一稳定tokenization和联合重排，建立完全可微分且可扩展的生成式检索范式。"
+        "提出BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，无需启发式方法即可稳定梯度动态，缓解表示坍缩。",
+        "扩展为前缀感知BasisRQ，在相同渐近时间复杂度下显著增强码本表达力，平衡碰撞与坍缩。",
+        "在生成过程中集成上下文条件重排序头，以极小计算开销高效消歧碰撞物品，提升检索精度。",
+        "统一稳定标记化与联合重排序，形成完全可微、可扩展的端到端生成式检索范式，并在抖音广告大规模在线服务中验证。"
       ],
       "experiment_results": [
-        "在抖音广告服务数亿日活用户，在线A/B测试取得显著经验提升（摘要未提供具体数值）。"
+        "在抖音广告的广泛在线A/B测试中取得显著经验提升，具体指标未在摘要中披露。",
+        "系统目前服务于数亿日活用户，验证了工业级可扩展性。"
       ],
       "limitations": [
-        "摘要未提及离线实验的详细量化结果，仅强调在线A/B测试提升。",
-        "方法在抖音广告场景验证，泛化到其他推荐场景的有效性未讨论。",
-        "未提供与现有生成式检索方法的详细对比数据。"
+        "摘要未提供离线实验的定量结果，如召回率、碰撞率等具体指标。",
+        "未与其他生成式检索方法进行详细的对比实验分析。",
+        "BasisVQ和BasisRQ的理论性质（如收敛性保证）未在摘要中讨论。"
       ],
-      "practical_value": "GEAR已在抖音广告真实业务中服务数亿日活用户，通过端到端生成式检索框架解决了表示坍缩和物品碰撞的工程难题，在线A/B测试验证了其有效性，为大规模推荐系统提供了可落地的生成式检索方案。",
-      "why_it_matters": "该工作直面生成式检索在工业级推荐系统中的核心挑战，提出的BasisVQ和重排机制具有理论创新性，且在大规模线上场景验证，对推动生成式推荐的实际应用具有重要意义。",
+      "practical_value": "GEAR为大规模推荐系统提供了端到端生成式检索的工业解决方案，有效解决了表示坍缩和物品碰撞的耦合难题，在抖音广告数亿日活用户中稳定运行并带来显著在线收益，对生成式推荐在真实业务场景的落地具有重要参考价值。",
+      "why_it_matters": "该工作直面生成式检索在超大规模推荐系统中的两个核心瓶颈，提出了创新的码本重参数化和重排序集成方法，并成功在抖音广告实现端到端部署，为生成式推荐的研究与工业应用提供了可借鉴的范式。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "4cc6bdc5cda753a3",
+      "analysis_signature": "b48bbb6767586975",
       "is_daily_pick": false
     },
     {
@@ -412,7 +471,7 @@
         "Mo Li",
         "Peng Yang",
         "Xufei Wang",
-        "Dongheng Li",
+        "D. Li",
         "Jiacong He",
         "Yi Song",
         "Yufei Fan",
@@ -424,20 +483,24 @@
         "Mingtao Zhang",
         "Jinchao Ye",
         "Lili Zhang",
-        "Chunhui Zhu"
+        "Chunhui Zhu",
+        "Dongheng Li"
       ],
       "affiliations": [],
-      "published": "2026-09-29T04:30:34Z",
-      "updated": "2026-09-29T04:30:34Z",
+      "published": "2026-09-29",
+      "updated": "2026-09-29",
       "abstract": "Industrial recommendation systems rely on multi-stage cascades whose retrieval, ranking, and serving components are difficult to replace jointly. We present GRP, a generative recommendation framework that combines retrieval, ranking, and reward modeling in a single encoder-decoder model, and evaluate a progressive path toward end-to-end recommendation. The model generates multimodal Semantic IDs and scores candidates with a jointly trained ranking module. The frozen ranking module then supplies rewards for reinforcement-learning post-training. We introduce mGRPO, which adds a reference-anchored margin to reward optimization to preserve the likelihood of logged targets. Offline experiments examine history encoding, model capacity allocation, event selection, tokenization, and reward discrimination. Serving optimizations reduce end-to-end retrieval latency by 69%. Online experiments evaluate the model as a retrieval source, with early-ranking bypass, and with replacement of weaker sources. In a retrieval-only comparison, view time increases by 0.46% and shares by 0.77% relative to production. A separate comparison combining bypass and source replacement yields increases of 0.82% in view time and 2.56% in shares, with neutral platform-level guardrails. These results support progressive deployment while identifying remaining gaps in ranking quality and performance across recommendation metrics.",
-      "url": "http://arxiv.org/abs/2609.36688v1",
-      "pdf_url": "https://arxiv.org/pdf/2609.36688v1",
-      "doi": "",
+      "url": "https://arxiv.org/abs/2609.36688",
+      "pdf_url": "https://arxiv.org/pdf/2609.36688",
+      "doi": "10.48550/arxiv.2609.36688",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
         "cs.IR"
       ],
       "tags": [
@@ -447,37 +510,38 @@
         "Semantic ID",
         "Tokenization",
         "Multimodal",
-        "推理系统"
+        "推理系统",
+        "生成式推荐"
       ],
       "score": 183,
-      "summary": "GRP v0.1 是一个面向工业推荐系统的生成式推荐框架，旨在将检索、排序和奖励建模统一到单个编码器-解码器模型中，以解决多阶段级联难以联合替换的问题。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果：仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
-      "one_line_takeaway": "GRP 通过生成式统一检索、排序与奖励建模，并采用渐进式部署，在工业推荐系统中实现了可观的线上收益，同时揭示了排序质量与性能的剩余差距。",
-      "core_method": "GRP 是一个编码器-解码器生成式推荐框架，将检索、排序和奖励建模集成于单一模型。它生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块为强化学习后训练提供奖励。提出的 mGRPO 在奖励优化中加入参考锚定的 margin，以保持已记录目标的可能性。",
+      "summary": "工业推荐系统通常采用多阶段级联架构，检索、排序和服务组件难以联合替换。本文提出GRP，一个生成式推荐框架，将检索、排序和奖励建模统一在单个编码器-解码器模型中，并评估了向端到端推荐渐进式演进的路径。模型生成多模态语义ID，并通过联合训练的排序模块对候选进行评分。冻结的排序模块随后为强化学习后训练提供奖励。作者提出mGRPO，在奖励优化中加入参考锚定的边际以保持对日志目标的似然。离线实验考察了历史编码、模型容量分配、事件选择、标记化和奖励区分度。服务优化将端到端检索延迟降低69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果。在仅检索对比中，观看时长增加0.46%，分享增加0.77%；结合旁路和源替换的对比中，观看时长增加0.82%，分享增加2.56%，平台级护栏指标中性。这些结果支持渐进式部署，同时指出了排序质量和性能指标上的剩余差距。",
+      "one_line_takeaway": "GRP通过统一编码器-解码器模型联合检索、排序与奖励建模，并引入mGRPO后训练，在工业推荐系统中实现渐进式端到端部署，线上指标显著提升且延迟大幅降低。",
+      "core_method": "GRP采用单一编码器-解码器架构，生成多模态语义ID并联合训练排序模块；冻结排序模块为强化学习提供奖励，提出mGRPO算法在奖励优化中加入参考锚定边际以保持日志目标似然；通过服务优化降低延迟，支持检索、早期排序旁路和源替换等渐进部署模式。",
       "innovation_points": [
-        "将检索、排序和奖励建模统一到单个编码器-解码器模型中，支持端到端推荐的渐进路径。",
-        "生成多模态语义ID，并利用联合训练的排序模块进行候选打分。",
-        "提出 mGRPO，在奖励优化中引入参考锚定的 margin，以保持已记录目标的可能性。",
-        "服务优化将端到端检索延迟降低 69%，支持工业级部署。"
+        "将检索、排序和奖励建模统一到单个生成式编码器-解码器模型中，实现联合优化。",
+        "提出mGRPO强化学习后训练方法，通过参考锚定边际平衡奖励最大化与日志目标似然保持。",
+        "生成多模态语义ID作为候选表示，增强生成式推荐的表达能力。",
+        "设计渐进式部署路径，支持检索源、早期排序旁路和源替换等灵活上线策略。"
       ],
       "experiment_results": [
-        "离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励判别等设计选择。",
-        "在线仅检索对比中，观看时长提升 0.46%，分享提升 0.77%。",
-        "结合早期排序旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。"
+        "离线实验考察了历史编码、模型容量分配、事件选择、标记化和奖励区分度等设计选择。",
+        "服务优化将端到端检索延迟降低69%。",
+        "在线仅检索对比中，观看时长增加0.46%，分享增加0.77%；结合旁路和源替换的对比中，观看时长增加0.82%，分享增加2.56%，平台级护栏指标中性。"
       ],
       "limitations": [
-        "在排序质量和推荐指标性能方面仍存在剩余差距。",
-        "摘要未提供离线实验中各设计选择的详细量化结果。",
-        "在线实验仅报告了相对提升，未披露绝对指标或统计显著性细节。"
+        "排序质量仍存在差距，需进一步优化。",
+        "在更广泛的推荐指标上性能仍有提升空间。",
+        "未报告模型规模、训练数据量等细节，可复现性受限。"
       ],
-      "practical_value": "GRP 为工业推荐系统提供了一条渐进式部署路径，允许在保持平台护栏指标中性的同时，通过检索源替换和早期排序旁路获得观看时长和分享的提升，并显著降低检索延迟，具有较高的工程落地价值。",
-      "why_it_matters": "该工作展示了生成式推荐在真实工业场景中统一检索、排序与奖励建模的可行性，并通过在线实验验证了渐进式部署的收益，为后续端到端推荐系统的研究提供了实践参考。",
+      "practical_value": "GRP为工业推荐系统提供了一条渐进式端到端升级路径，通过统一模型降低系统复杂度，服务优化显著降低延迟，线上实验验证了在观看时长和分享等关键指标上的提升，且平台护栏指标中性，具备实际部署价值。",
+      "why_it_matters": "该工作展示了生成式推荐在工业级系统中替代多阶段级联的可行性，提出的mGRPO和渐进部署策略为后续研究提供了新思路，同时线上A/B测试结果证明了实际业务收益，对推荐系统架构演进具有重要参考意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "e85b2d19d836fdfe",
+      "analysis_signature": "364e86c9c173aacc",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214930856",
+      "id": "arxiv:2609.37183",
       "title": "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
       "authors": [
         "Yuntao Zheng",
@@ -504,15 +568,15 @@
       ],
       "affiliations": [],
       "published": "2026-09-29",
-      "updated": "2026-10-14T16:39:01.820549",
+      "updated": "2026-09-29",
       "abstract": "Industrial recommendation ranking models typically scale along two modeling axes: feature interaction over heterogeneous user, item, context, and cross features, and sequence modeling over long, informative, and multi-type user behavior histories. We find that scaling either capability in isolation is insufficient, as each exhibits a limited scaling ceiling and a suboptimal scaling-law slope. We conjecture that achieving a more favorable scaling-law slope requires jointly scaling both axes. To support this, we present HELIX, a purified and unified architecture for large-scale recommendation. HELIX interleaves sequence retrieval and feature interaction while enforcing one-way information flow from reusable sequence states to candidate-conditioned mix-tokens. This design preserves cross-depth communication between the two modeling axes while keeping user-side sequence computation amortizable, enabling flexible and asymmetric scaling of sequence modeling and feature interaction. Deployed in TikTok's e-commerce recommendation system, HELIX consistently improves offline CTR AUC, CVR AUC, and other ranking metrics. In online A/B tests, it achieves an approximately 6% increase in e-commerce video GMV per user.",
       "url": "https://arxiv.org/abs/2609.37183",
       "pdf_url": "https://arxiv.org/pdf/2609.37183",
       "doi": "10.48550/arxiv.2609.37183",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
@@ -529,28 +593,28 @@
         "电商推荐"
       ],
       "score": 105,
-      "summary": "工业推荐排序模型通常沿特征交互和序列建模两个轴扩展，但单独扩展任一轴均存在性能天花板和次优的缩放律斜率。HELIX提出一种净化统一架构，通过交错序列检索与特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，实现两轴联合扩展且保持用户侧序列计算可摊销。在TikTok电商推荐系统中部署，离线CTR AUC、CVR AUC等排序指标持续提升，在线A/B测试中电商视频人均GMV提升约6%。",
-      "one_line_takeaway": "HELIX通过联合扩展特征交互与序列建模，在TikTok电商推荐中实现人均GMV约6%的提升。",
-      "core_method": "HELIX采用净化统一架构，交错序列检索和特征交互，强制从可复用序列状态到候选条件混合令牌的单向信息流，保持跨深度通信并支持序列建模与特征交互的灵活非对称扩展。",
+      "summary": "工业推荐排序模型通常沿特征交互和序列建模两个轴扩展，但单独扩展任一轴均存在缩放上限且缩放律斜率次优。本文提出HELIX，一种净化统一架构，通过交错序列检索与特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，在保持跨深度通信的同时使用户侧序列计算可摊销，实现两轴灵活非对称缩放。在TikTok电商推荐系统部署，离线CTR AUC、CVR AUC等排序指标持续提升，在线A/B测试中电商视频人均GMV提升约6%。",
+      "one_line_takeaway": "HELIX通过统一交错序列建模与特征交互，突破单轴缩放瓶颈，在TikTok电商推荐中实现人均GMV约6%的在线提升。",
+      "core_method": "HELIX采用净化统一架构，交错序列检索与特征交互，强制从可复用序列状态到候选条件混合令牌的单向信息流，保持跨深度通信并摊销用户侧序列计算，支持序列建模与特征交互的灵活非对称缩放。",
       "innovation_points": [
-        "发现单独扩展特征交互或序列建模均存在缩放天花板和次优缩放律斜率，提出联合扩展两轴的必要性。",
-        "设计交错序列检索与特征交互的架构，强制单向信息流，保持用户侧序列计算可摊销。",
-        "支持序列建模和特征交互的灵活非对称扩展，实现更优的缩放律斜率。"
+        "发现单独扩展特征交互或序列建模均存在缩放上限和次优缩放律斜率，提出联合缩放两轴的必要性。",
+        "设计交错序列检索与特征交互的架构，强制单向信息流，兼顾跨深度通信与计算摊销。",
+        "支持序列建模和特征交互的灵活非对称缩放，适应工业推荐不同资源约束。"
       ],
       "experiment_results": [
         "离线评估中，CTR AUC、CVR AUC及其他排序指标持续提升。",
-        "在线A/B测试中，电商视频人均GMV提升约6%。"
+        "在线A/B测试中，TikTok电商视频人均GMV提升约6%。"
       ],
       "limitations": [
-        "摘要未提供具体离线指标提升数值和在线实验的统计显著性信息。",
-        "未讨论模型计算成本、延迟或资源消耗等工程约束。",
-        "未说明方法在其他推荐场景或数据集上的泛化能力。"
+        "摘要未提供具体缩放律斜率对比数据，联合缩放的理论优势需进一步验证。",
+        "仅报告了TikTok电商场景的在线结果，跨领域泛化性未知。",
+        "未讨论模型复杂度、训练成本及工程部署细节。"
       ],
-      "practical_value": "HELIX在TikTok电商推荐系统实际部署，验证了联合扩展特征交互与序列建模的工业可行性，并带来显著业务收益（人均GMV提升约6%），为大规模推荐系统提供可落地的架构设计。",
-      "why_it_matters": "该工作挑战了推荐系统中特征交互与序列建模独立扩展的常规思路，提出联合扩展的新范式，并在超大规模工业场景中验证了有效性，对推荐系统架构设计和缩放律研究具有重要参考价值。",
+      "practical_value": "为工业推荐系统提供可落地的统一架构，通过联合缩放特征交互与序列建模，在真实电商场景中显著提升GMV，且支持非对称缩放以适应不同计算资源。",
+      "why_it_matters": "揭示了推荐模型缩放的新维度，即联合缩放特征交互与序列建模可突破单轴瓶颈，为大规模推荐系统设计提供新范式，并已在TikTok电商验证在线价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "b6fd386d2bacd862",
+      "analysis_signature": "4e663bb96e6dcc35",
       "is_daily_pick": false
     },
     {
@@ -591,11 +655,7 @@
         "Google DeepMind",
         "企业论文",
         "LLM 基模",
-        "预训练",
-        "表格基础模型",
-        "自演化代理",
-        "自动化机器学习",
-        "数据流程优化"
+        "预训练"
       ],
       "score": 89,
       "summary": "针对表格基础模型忽略列名、任务描述等语义信息，以及自演化MLE代理从零训练易过拟合的问题，提出TabFM-Auto，将表格基础模型TabFM与语言模型代理结合，通过数据集元数据和验证反馈迭代优化数据清洗、特征工程、上下文选择和后处理，以降低TabFM误差。在TabArena的51个数据集上，五种配置占据前五名，最佳将TabFM的Elo从1785提升至2013；发现的流程可零样本迁移至其他冻结表格基础模型（+69至+143 Elo），在MLE-Bench的8个表格竞赛中综合排名第一。",
@@ -624,7 +684,76 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214960019",
+      "id": "arxiv:2609.37959",
+      "title": "TabFM: A Zero-Shot Foundation Model for Tabular Data",
+      "authors": [
+        "Weihao Kong",
+        "Erez Louidor Ilan",
+        "Shuxin Nie",
+        "Taman Narayan",
+        "Rajat Sen",
+        "Yichen Zhou",
+        "Deqing Fu",
+        "Samet Oymak",
+        "Das, Abhimanyu"
+      ],
+      "affiliations": [
+        "Google (United States)"
+      ],
+      "published": "2026-09-29",
+      "updated": "2026-09-29",
+      "abstract": "Tabular machine learning typically relies on per-dataset workflows, fitting tree ensembles or running AutoML searches from scratch for every task. We present TabFM, a 400M-parameter tabular foundation model that formulates supervised tabular prediction as in-context learning. TabFM produces calibrated zero-shot predictions in a single forward pass without task-specific tuning. Trained entirely on synthetic tables generated from structural causal models, TabFM learns general tabular representations that transfer zero-shot to real-world tasks. Across all 51 benchmark datasets in TabArena (38 classification and 13 regression), zero-shot TabFM ranks first among default tabular foundation models and outperforms tuned AutoML pipelines. Two extensions over the same frozen weights improve performance further on both tracks: multi-view feature expansion with ensembling and post-hoc calibration (TabFM+), and LLM-guided, dataset-specific data processing and feature engineering (TabFM-Auto).",
+      "url": "https://arxiv.org/abs/2609.37959",
+      "pdf_url": "https://arxiv.org/pdf/2609.37959",
+      "doi": "10.48550/arxiv.2609.37959",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Machine Learning and Data Classification",
+        "Domain Adaptation and Few-Shot Learning",
+        "Explainable Artificial Intelligence (XAI)"
+      ],
+      "tags": [
+        "企业论文",
+        "LLM 基模",
+        "表格基础模型",
+        "零样本预测",
+        "上下文学习",
+        "合成数据预训练",
+        "结构因果模型",
+        "AutoML"
+      ],
+      "score": 69,
+      "summary": "TabFM 是一个 400M 参数、面向表格数据的零样本基础模型，将监督式表格预测重构为上下文学习（in-context learning）问题。其核心思路是：完全基于结构因果模型（SCM）生成的合成表格进行预训练，从而学习可迁移的通用表格表征，并在单次前向传播中直接输出经过校准的零样本预测，无需任何任务特定的调参或 AutoML 搜索。在 TabArena 的 51 个基准数据集（38 个分类、13 个回归）上，零样本 TabFM 在默认表格基础模型中排名第一，并优于经过调优的 AutoML 流水线。作者进一步在同一冻结权重上提出两个扩展：TabFM+ 通过多视图特征扩展、集成与事后校准提升性能，TabFM-Auto 则借助 LLM 引导进行数据集特定的数据处理与特征工程。",
+      "one_line_takeaway": "TabFM 用纯合成数据预训练的 400M 表格基础模型，以单次前向的零样本上下文学习在 TabArena 上超越调优 AutoML，验证了表格领域基础模型的可行性。",
+      "core_method": "将监督式表格预测建模为上下文学习任务：把训练样本作为上下文、待预测样本作为查询，由 400M 参数模型在单次前向传播中输出预测。预训练数据完全由结构因果模型（SCM）合成的表格构成，不依赖任何真实数据集，从而学习可零样本迁移的通用表格表征。模型输出经过校准，无需任务特定微调。在此基础上，TabFM+ 在同一冻结权重上引入多视图特征扩展、集成与事后校准；TabFM-Auto 则利用 LLM 引导进行数据集特定的数据处理与特征工程。",
+      "innovation_points": [
+        "将表格监督预测统一重构为上下文学习，实现单次前向的零样本预测，摆脱逐数据集训练与 AutoML 搜索的范式。",
+        "完全使用结构因果模型生成的合成表格进行预训练，证明合成数据可支撑跨真实任务的通用表格表征迁移。",
+        "在冻结权重上叠加两种互补扩展：TabFM+ 的多视图集成与事后校准，以及 TabFM-Auto 的 LLM 引导特征工程。",
+        "在 TabArena 全部 51 个数据集上系统验证零样本表格基础模型相对默认基础模型与调优 AutoML 的优势。"
+      ],
+      "experiment_results": [
+        "在 TabArena 全部 51 个基准数据集（38 分类、13 回归）上，零样本 TabFM 在默认表格基础模型中排名第一，并优于经过调优的 AutoML 流水线。",
+        "TabFM+ 与 TabFM-Auto 在分类和回归两个赛道上均进一步提升性能，且均基于同一冻结权重。",
+        "摘要未提供具体数值指标（如准确率、AUC、RMSE 或相对提升幅度），仅给出排名与相对比较结论。"
+      ],
+      "limitations": [
+        "摘要未披露模型规模、合成数据规模、训练算力与推理延迟等工程细节，难以评估实际部署成本。",
+        "仅报告在 TabArena 基准上的排名与相对比较，缺少具体数值指标与统计显著性分析。",
+        "合成数据预训练对真实表格分布（如高基数类别、缺失模式、时间泄漏）的覆盖程度未在摘要中说明。"
+      ],
+      "practical_value": "TabFM 为表格机器学习提供了一种免训练、免调参的零样本推理路径：用户可直接对任意表格任务做单次前向预测，省去逐数据集的树模型拟合与 AutoML 搜索开销，适合需要快速冷启动或大规模批量预测的业务场景。TabFM-Auto 的 LLM 引导特征工程则展示了在保持冻结权重前提下，通过数据侧处理进一步提升线上效果的工程可行性。",
+      "why_it_matters": "它把基础模型范式从文本、图像扩展到表格数据，并用纯合成因果数据预训练验证了零样本迁移的可行性，可能改变长期由树集成与 AutoML 主导的表格建模工作流，为表格领域的预训练、扩展规律与上下文学习研究提供新基线。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "ca3ec1c87c3b3351",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2609.36116",
       "title": "Dyad: Extending Large Language Models with Native Typed Decision-Making",
       "authors": [
         "Yundaichuan Zhan",
@@ -645,15 +774,15 @@
         "Microsoft (United States)"
       ],
       "published": "2026-09-28",
-      "updated": "2026-10-12T09:40:04.860316",
+      "updated": "2026-09-28",
       "abstract": "We study how to build more capable general-purpose agents by extending large language models (LLMs) with native typed decision-making. We introduce Dyad, an architecture that augments a pretrained LLM with an environment-conditioned action encoder that embeds each candidate action description in parallel, then scores these embeddings against the LLM's internal state to yield a distribution over typed actions. By factorizing decision-making into representations of the evolving interaction state and environment-specific action semantics, Dyad introduces an inductive bias for learning reusable representations while keeping action scoring efficient even as the action space grows. We investigate two complementary reinforcement learning settings driven by environment interaction. With the LLM frozen, training the action encoder alone achieves consistent gains across four unseen environments, enabling modular adaptation without modifying any LLM parameters. Jointly optimizing both components outperforms conventional RL post-training across diverse interactive tasks and model scales, including a 3.80% average absolute gain on ALFWorld with a 9B model, while improving general knowledge, reasoning, and coding.",
       "url": "https://arxiv.org/abs/2609.36116",
       "pdf_url": "https://arxiv.org/pdf/2609.36116",
       "doi": "10.48550/arxiv.2609.36116",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Microsoft",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Reinforcement Learning in Robotics",
         "AI-based Problem Solving and Planning",
@@ -670,34 +799,33 @@
         "LLM智能体"
       ],
       "score": 117,
-      "summary": "本文研究如何通过原生类型化决策扩展大语言模型（LLM）以构建更强大的通用智能体。提出Dyad架构，在预训练LLM上增加环境条件动作编码器，并行嵌入候选动作描述，并与LLM内部状态评分，得到类型化动作分布。通过将决策分解为交互状态表示和环境特定动作语义，Dyad引入归纳偏置以学习可重用表示，并在动作空间增长时保持高效评分。研究两种互补的强化学习设置：冻结LLM仅训练动作编码器，在四个未见环境中取得一致增益，实现模块化适配；联合优化则优于传统RL后训练，在ALFWorld上9B模型平均绝对提升3.80%，同时提升通用知识、推理和编码能力。",
-      "one_line_takeaway": "Dyad通过为LLM添加类型化动作编码器，在冻结或联合训练下均能提升交互任务性能，并保持通用能力。",
-      "core_method": "Dyad在预训练LLM上增加环境条件动作编码器，将候选动作描述并行嵌入，并与LLM内部状态评分，生成类型化动作分布。决策分解为交互状态表示和环境动作语义，支持动作空间扩展下的高效评分。采用两种RL设置：冻结LLM仅训练动作编码器，或联合优化两者。",
+      "summary": "本文研究如何通过原生类型化决策扩展大语言模型（LLM）以构建更强大的通用智能体。作者提出Dyad架构，在预训练LLM上增加环境条件动作编码器，并行嵌入候选动作描述，并与LLM内部状态打分，输出类型化动作分布。该方法将决策分解为交互状态表示和环境特定动作语义，引入归纳偏置以学习可复用表示，同时保持动作评分高效。实验研究两种强化学习设置：冻结LLM仅训练动作编码器在四个未见环境中取得一致增益；联合优化在多种交互任务和模型规模上优于传统RL后训练，在ALFWorld上9B模型平均绝对提升3.80%，并改善通用知识、推理和编码能力。",
+      "one_line_takeaway": "Dyad通过为LLM添加类型化动作编码器，在冻结或联合训练下实现高效决策，并在多个交互任务上超越传统RL后训练。",
+      "core_method": "Dyad在预训练LLM上增加环境条件动作编码器，将每个候选动作描述并行嵌入，并与LLM内部状态打分，得到类型化动作分布。决策被分解为交互状态表示和环境动作语义，支持冻结LLM仅训练编码器或联合优化两种强化学习设置。",
       "innovation_points": [
-        "提出原生类型化决策架构，将动作选择建模为对类型化动作描述的评分，而非生成文本。",
-        "通过分解状态表示和动作语义，引入归纳偏置，提升表示可重用性和动作评分效率。",
-        "支持模块化适配：冻结LLM仅训练动作编码器即可在未见环境中取得增益。",
-        "联合优化在多个交互任务和模型规模上超越传统RL后训练，并提升通用能力。"
+        "提出原生类型化决策架构，将动作空间表示为环境条件嵌入，与LLM内部状态解耦。",
+        "引入归纳偏置，使动作表示可复用，且动作评分随动作空间增长仍保持高效。",
+        "支持两种RL设置：冻结LLM仅训练动作编码器实现模块化适应；联合优化提升整体性能。"
       ],
       "experiment_results": [
-        "冻结LLM仅训练动作编码器，在四个未见环境中取得一致增益。",
-        "联合优化在ALFWorld上9B模型平均绝对提升3.80%。",
-        "联合优化在通用知识、推理和编码任务上也有提升。"
+        "冻结LLM仅训练动作编码器在四个未见环境中取得一致增益。",
+        "联合优化在多种交互任务和模型规模上优于传统RL后训练，在ALFWorld上9B模型平均绝对提升3.80%。",
+        "联合优化还改善了通用知识、推理和编码能力。"
       ],
       "limitations": [
-        "未明确说明动作编码器的具体架构和训练细节。",
-        "实验仅涉及四个未见环境和ALFWorld，泛化性需进一步验证。",
-        "未讨论动作空间极大时的计算开销和可扩展性边界。"
+        "仅基于摘要和元数据，未提供具体实验细节、环境列表或消融研究。",
+        "未讨论动作编码器的计算开销或与更大模型规模的扩展性。",
+        "未说明类型化动作的定义范围或对非类型化动作空间的适用性。"
       ],
-      "practical_value": "Dyad为构建通用智能体提供了一种高效扩展LLM决策能力的方法，支持模块化适配，降低对LLM参数修改的依赖，在交互任务中提升性能并保持通用能力，具有实际部署潜力。",
-      "why_it_matters": "该工作展示了如何通过类型化决策接口增强LLM的智能体能力，同时保持其通用性，为LLM与强化学习结合提供了新思路，并验证了在多个任务和规模上的有效性。",
+      "practical_value": "为构建通用智能体提供了一种高效扩展LLM决策能力的方法，尤其适合需要快速适应新环境且不修改LLM参数的场景，降低训练成本并提升任务性能。",
+      "why_it_matters": "该工作展示了通过轻量级动作编码器增强LLM决策的潜力，在冻结LLM下即可实现跨环境泛化，为模块化智能体设计提供了新思路，并验证了联合优化对通用能力的提升。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "ab81942722c15123",
+      "analysis_signature": "99a1302c40fbd3af",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214719808",
+      "id": "arxiv:2609.34344",
       "title": "Learning to Steer, Steering to See: Unveiling the Geometry of RLVR in Large Language Models via Trainable Vectors",
       "authors": [
         "Yuchen Cai",
@@ -719,15 +847,15 @@
         "Beijing University of Posts and Telecommunications"
       ],
       "published": "2026-09-28",
-      "updated": "2026-10-04T09:36:47.201465",
+      "updated": "2026-09-28",
       "abstract": "Reinforcement learning (RL) has become a key paradigm for enhancing the reasoning of large language models, yet the high dimensionality of parameter updates makes its training dynamics hard to analyze. We study reinforcement learning with verifiable rewards (RLVR) and use vector steering to identify a low-dimensional effective manifold in activation space associated with RL-induced gains. We uncover two geometric properties. (1) Effective Manifold Capacity: the capacity needed to reproduce RL gains can be very small but is not infinitely compressible; at extremely low capacity, intervention dimensionality and input-dependent expressiveness become key constraints, and this requirement varies with injection depth. (2) Control Manifold Separation: effective control directions lie mainly in the low-variance complement of the activation principal subspace. Within a task and base model, the learned geometry stays largely consistent across training configurations, and across tasks geometric alignment correlates with capability transfer. Experiments on 5 LLMs and 6 verifiable-reward tasks support these findings. We then propose Alpha-Stabler, a plug-and-play framework with a Predictor that monitors principal-subspace intrusion for early collapse warnings, and a Controller that removes the principal-subspace component of activation gradients during backpropagation while preserving the orthogonal complement. Alpha-Stabler stabilizes training for 2,000 steps and consistently improves RL gains, offering practical insights for robust post-training. Code: https://github.com/caiyuchen-ustc/On_Policy_Vector_Training",
       "url": "https://arxiv.org/abs/2609.34344",
       "pdf_url": "https://arxiv.org/pdf/2609.34344",
       "doi": "10.48550/arxiv.2609.34344",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Tencent Hunyuan",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Reinforcement Learning in Robotics",
         "Topic Modeling",
@@ -741,36 +869,36 @@
         "Reasoning",
         "推理系统",
         "RLVR",
-        "LLM推理"
+        "向量引导"
       ],
       "score": 105,
-      "summary": "本文研究可验证奖励强化学习（RLVR）的训练动力学，通过可训练向量干预激活空间，发现RL增益对应一个低维有效流形。该流形具有两个几何性质：有效流形容量（重现RL增益所需容量很小但非无限可压缩，极低容量时干预维度和输入依赖表达性成为关键约束，且需求随注入深度变化）和控制流形分离（有效控制方向主要位于激活主成分子空间的低方差补空间）。在5个LLM和6个可验证奖励任务上验证了这些性质，并发现同一任务和基座模型下学习到的几何结构在不同训练配置下基本一致，跨任务几何对齐与能力迁移相关。基于此提出Alpha-Stabler，包含预测器（监控主成分子空间入侵以提前预警崩溃）和控制器（反向传播时移除激活梯度的主成分分量，保留正交补），可稳定训练2000步并持续提升RL增益。",
-      "one_line_takeaway": "RLVR的增益可由激活空间中低维有效流形上的向量干预复现，且控制方向位于主成分子空间的低方差补空间，据此设计的Alpha-Stabler能稳定训练并提升RL增益。",
-      "core_method": "使用可训练向量干预LLM激活空间，识别与RLVR增益相关的低维有效流形；分析其容量约束和方向分离特性；提出Alpha-Stabler框架，包含预测器（监控主成分子空间入侵）和控制器（反向传播时移除激活梯度的主成分分量）。",
+      "summary": "该研究针对RLVR训练动态难以分析的问题，利用可训练向量引导技术，在激活空间中识别出与RL增益相关的低维有效流形。研究发现两个几何性质：有效流形容量可极小但非无限压缩，且随注入深度变化；有效控制方向主要位于激活主成分子空间的低方差补空间中。基于此提出Alpha-Stabler框架，通过预测器监控主成分子空间入侵以预警崩溃，控制器在反向传播中移除激活梯度的主成分分量，保留正交补。在5个LLM和6个可验证奖励任务上，该框架稳定训练2000步并持续提升RL增益，为鲁棒后训练提供实践指导。",
+      "one_line_takeaway": "RLVR的有效控制方向位于激活主成分子空间的低方差补空间，移除梯度中的主成分分量可稳定训练并提升增益。",
+      "core_method": "使用可训练向量引导识别激活空间中的低维有效流形，分析RLVR的几何性质；提出Alpha-Stabler框架，包含预测器（监控主成分子空间入侵以预警崩溃）和控制器（在反向传播中移除激活梯度的主成分分量，保留正交补）。",
       "innovation_points": [
-        "首次通过可训练向量干预揭示RLVR在激活空间中的低维有效流形几何结构",
-        "发现有效流形容量有限且随注入深度变化，控制方向位于主成分子空间低方差补空间",
-        "提出Alpha-Stabler，一种即插即用框架，通过监控和修正主成分子空间入侵来稳定RL训练"
+        "发现RLVR在激活空间中的两个几何性质：有效流形容量有限且随注入深度变化，控制方向位于主成分子空间的低方差补空间。",
+        "提出Alpha-Stabler框架，通过预测器监控主成分子空间入侵实现早期崩溃预警，通过控制器移除梯度主成分分量稳定训练。",
+        "在5个LLM和6个可验证奖励任务上验证了几何性质的一致性和框架的有效性。"
       ],
       "experiment_results": [
-        "在5个LLM和6个可验证奖励任务上验证了几何性质",
-        "Alpha-Stabler稳定训练2000步并持续提升RL增益",
-        "同一任务和基座模型下学习到的几何结构在不同训练配置下基本一致，跨任务几何对齐与能力迁移相关"
+        "在5个LLM和6个可验证奖励任务上支持了几何性质发现。",
+        "Alpha-Stabler稳定训练2000步并持续提升RL增益。",
+        "任务内和基座模型内，学习到的几何结构在不同训练配置下保持高度一致，跨任务几何对齐与能力迁移相关。"
       ],
       "limitations": [
-        "摘要未提及具体局限性，需阅读全文获取",
-        "实验规模限于5个LLM和6个任务，泛化性需进一步验证",
-        "未说明Alpha-Stabler在不同模型规模或任务类型上的计算开销"
+        "研究主要基于可验证奖励任务，未涉及更广泛的RLHF场景。",
+        "未提供Alpha-Stabler与现有基线方法的详细对比数据。",
+        "几何性质在不同模型架构和任务类型上的普适性仍需进一步验证。"
       ],
-      "practical_value": "为RLVR后训练提供稳定化工具Alpha-Stabler，可即插即用提升训练稳定性与最终性能；几何分析为理解RL微调机制提供新视角，有助于设计更鲁棒的后训练策略。",
-      "why_it_matters": "该工作从几何角度解释RLVR的有效性，提出可解释的低维控制流形，并给出实用稳定框架，对提升LLM推理后训练的可靠性和效率有重要价值。",
+      "practical_value": "为RLVR后训练提供了一种即插即用的稳定化框架，可预警训练崩溃并提升RL增益，有助于在实际大模型后训练中实现更鲁棒的优化。",
+      "why_it_matters": "该工作从几何角度揭示了RLVR训练动态的低维本质，为理解和改进大模型强化学习后训练提供了新视角和实用工具。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "582b11987c045246",
+      "analysis_signature": "b9dbf5dabcd4ed76",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214763360",
+      "id": "arxiv:2609.34915",
       "title": "Muon Sublates the Edge of Stability in LLM Pretraining",
       "authors": [
         "Yanzhe Chen",
@@ -784,15 +912,15 @@
         "Institute of Natural Science"
       ],
       "published": "2026-09-28",
-      "updated": "2026-10-04T09:36:47.201465",
+      "updated": "2026-09-28",
       "abstract": "Muon is increasingly used for language-model pretraining, yet its large-step dynamics are not captured by the classical edge-of-stability (EoS) picture of gradient descent (GD). In GD, loss neutrality, equal-magnitude update reversal, and marginal stability meet at a single learning-rate-dependent edge. We show that Muon breaks this coupling. For stochastic no-momentum Muon, we derive a coherence-corrected conditional loss-neutral boundary $2ρ_b/η$, while temporal alignment follows a separate geometry. Controlled experiments show that loss balance and temporal alignment respond differently to learning rate and batch size. Across our language model experiments, the 130M Llama-like LLM runs exhibit loss-boundary tracking with weak negative alignment, whereas the studied 1B LLM configuration shows stronger partial cancellation; in both settings, directions remain far from coherent reversal while training continues to improve. These results support a split EoS picture for Muon: a stochastic loss-neutral edge survives, but it is not accompanied by a universal temporal-direction signature. The source code for reproducing the experiments can be found in https://github.com/cyzebra/Muon-Sublates-the-Edge-of-Stability-in-LLM-Pretraining",
       "url": "https://arxiv.org/abs/2609.34915",
       "pdf_url": "https://arxiv.org/pdf/2609.34915",
       "doi": "10.48550/arxiv.2609.34915",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Alibaba Qwen",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Stochastic Gradient Optimization Techniques",
         "Topic Modeling",
@@ -809,30 +937,30 @@
         "学习率"
       ],
       "score": 71,
-      "summary": "本文研究Muon优化器在大步长语言模型预训练中的动力学行为，指出经典梯度下降的“稳定边缘”（EoS）理论无法刻画Muon。作者针对无动量随机Muon，推导出相干性修正的条件损失中性边界2ρ_b/η，并发现时间对齐遵循独立几何。通过控制实验，他们观察到损失平衡与时间对齐对学习率和批量大小的响应不同。在130M Llama类模型上，损失边界跟踪伴随弱负对齐；在1B模型上则出现更强的部分抵消。两种设置下，方向均远离相干反转，但训练持续改善。结果支持Muon的“分裂EoS”图景：随机损失中性边缘仍存在，但不存在普适的时间方向特征。",
-      "one_line_takeaway": "Muon的大步长预训练动力学呈现分裂的稳定边缘：损失中性边界仍存在，但时间方向对齐与经典EoS解耦。",
-      "core_method": "针对无动量随机Muon，理论推导相干性修正的条件损失中性边界2ρ_b/η，并设计控制实验分析学习率与批量大小对损失平衡和时间对齐的独立影响。",
+      "summary": "本文研究Muon优化器在LLM预训练中的大步长动力学，指出经典梯度下降（GD）的“稳定边缘”（EoS）理论无法解释Muon行为。作者针对无动量随机Muon，推导出相干性修正的条件损失中性边界2ρ_b/η，并发现时间对齐遵循独立几何。控制实验表明，损失平衡与时间对齐对学习率和批大小的响应不同。在130M Llama类模型上，损失边界跟踪伴随弱负对齐；在1B模型上则出现更强的部分抵消，且方向远离相干反转时训练仍持续改善。结果支持Muon的“分裂EoS”图景：随机损失中性边缘仍存在，但无普适的时间方向特征。",
+      "one_line_takeaway": "Muon优化器在LLM预训练中表现出分裂的稳定边缘：损失中性边界仍存在，但时间方向对齐与经典EoS解耦。",
+      "core_method": "针对无动量随机Muon，理论推导相干性修正的条件损失中性边界2ρ_b/η，并通过控制实验分析学习率与批大小对损失平衡和时间对齐的独立影响，在130M和1B Llama类模型上验证。",
       "innovation_points": [
-        "揭示Muon打破经典EoS中损失中性、等幅更新反转与边际稳定的耦合关系。",
-        "推导出随机无动量Muon的相干性修正损失中性边界2ρ_b/η。",
-        "提出Muon的“分裂EoS”图景，区分损失中性边缘与时间方向对齐。",
-        "在130M和1B Llama类模型上验证理论预测，发现不同规模下对齐行为的差异。"
+        "揭示Muon打破经典EoS中损失中性、更新反转与边际稳定的耦合关系",
+        "推导出随机无动量Muon的相干性修正损失中性边界2ρ_b/η",
+        "提出Muon的“分裂EoS”图景：损失中性边缘存活但无普适时间方向特征",
+        "在130M和1B规模LLM上实验验证损失边界跟踪与时间对齐的分离现象"
       ],
       "experiment_results": [
-        "130M Llama类LLM运行表现出损失边界跟踪，但时间对齐为弱负。",
-        "1B LLM配置显示出更强的部分抵消现象。",
-        "两种设置下，方向均远离相干反转，而训练损失持续改善。"
+        "130M Llama类LLM运行显示损失边界跟踪伴随弱负对齐",
+        "1B LLM配置显示更强的部分抵消，方向远离相干反转时训练仍持续改善",
+        "损失平衡与时间对齐对学习率和批大小的响应不同"
       ],
       "limitations": [
-        "理论分析限于无动量随机Muon，未涵盖带动量或自适应变体。",
-        "实验规模限于130M和1B模型，未验证更大规模模型的行为。",
-        "未提供下游任务性能或收敛速度的定量比较。"
+        "理论分析限于无动量随机Muon，未涵盖带动量或自适应变体",
+        "实验规模限于130M和1B模型，未验证更大规模LLM",
+        "未提供下游任务性能或收敛速度的定量对比"
       ],
-      "practical_value": "为使用Muon进行LLM预训练的从业者提供了学习率与批量大小设置的理论指导，有助于避免因误用经典EoS直觉而导致的训练不稳定或次优调参。",
-      "why_it_matters": "Muon正被越来越多地用于LLM预训练，但缺乏对其大步长动力学的理论理解。本文首次系统刻画了Muon的稳定边缘特性，挑战了经典EoS的普适性，为优化器设计与超参调优提供了新视角。",
+      "practical_value": "为LLM预训练中Muon优化器的学习率与批大小调参提供理论指导，帮助理解大步长训练的稳定性边界，避免盲目套用GD的EoS经验。",
+      "why_it_matters": "Muon正被越来越多用于LLM预训练，但缺乏对其大步长动力学的理论解释。本文首次系统揭示Muon与GD在稳定边缘上的本质差异，为优化器设计和训练稳定性分析提供了新视角。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "f3bbbd3c9eadb939",
+      "analysis_signature": "82e0aac820b16776",
       "is_daily_pick": false
     },
     {
@@ -945,10 +1073,7 @@
         "企业论文",
         "GenRec",
         "Semantic ID",
-        "Tokenization",
-        "生成式推荐",
-        "长期兴趣建模",
-        "语义ID"
+        "Tokenization"
       ],
       "score": 196,
       "summary": "针对生成式推荐（GR）中长序列建模受限于注意力二次复杂度、且现有SIM适配方法忽略语义ID（SID）层级区分的问题，本文提出GLASS框架。其核心洞察是SID前缀决定粗粒度语义类别、后缀定位具体物品，因此需注入不同长期信号。GLASS包含SID-Tier模块，将长期交互映射为统一兴趣向量以增强前缀SID预测，并利用语义码本的紧凑性融合长期历史与候选语义码的交叉特征；同时提出语义硬搜索，以生成的前缀SID为动态键提取相关历史行为，经自适应门控融合模块校准后缀细粒度token生成。在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS超越最优基线；在短视频平台为期两周的在线A/B测试中，推荐质量获得显著提升。",
@@ -1016,10 +1141,7 @@
         "企业论文",
         "GenRec",
         "Semantic ID",
-        "Tokenization",
-        "生成式搜索",
-        "语义ID",
-        "可解释性"
+        "Tokenization"
       ],
       "score": 196,
       "summary": "工业搜索平台需从数十亿候选中高效检索，同时满足查询相关性与用户偏好。生成式搜索（GS）将传统索引与匹配重构为自回归生成任务，但现有模型存在两大缺陷：生成的语义ID（SID）缺乏显式语义对应，损害码本可解释性；非结构化码本导致全连接搜索空间，迫使生成器在高度纠缠的解码路径中导航。为此，作者提出PLAIN，集成多阶段码本构建（MCC）与统一生成式检索（UGR）。MCC利用LLM生成的分类体系与元数据标签，对闭集分类层级采用硬分配、对开集元数据层级采用软分配，将非结构化码本转化为可解释的层次化主题路径。UGR通过对称上下文编码器（SCE）将查询与物品表示对齐到结构化标签空间，借助知识蒸馏与半监督层次量化，实现一致的端到端生成式检索。在快手直播搜索系统的离线实验与在线A/B测试表明，用户参与度和内容消费显著提升。",
@@ -1082,12 +1204,7 @@
       "tags": [
         "A/B 实验",
         "企业论文",
-        "GenRec",
-        "生成式检索",
-        "双域推荐",
-        "本地生活服务",
-        "意图建模",
-        "时空状态条件化"
+        "GenRec"
       ],
       "score": 160,
       "summary": "本文针对本地生活服务推荐（LLSR）中内容推荐与POI推荐双域行为因果关联但现有生成式检索方法独立建模的问题，提出DPGR统一双域生成式检索框架。DPGR引入时空状态条件化Token建模机制，将动态用户上下文注入编码器多个阶段，实现状态依赖的重加权与自适应偏好平衡；同时通过量化双域行为学习离散意图码，预测目标会话的top-K意图，每个意图码并行ANN检索候选，实现无额外延迟的多样化覆盖。离线实验在公开与内部数据集上超越SOTA生成式检索基线；点评在线A/B测试显示内容域访问量提升1.486%、观看时长提升1.015%，POI域点击提升0.527%、收藏提升5.209%（p<0.05）。",
@@ -1177,7 +1294,7 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214368108",
+      "id": "arxiv:2609.28972",
       "title": "Cross-Country Code-Mixing for Generative Recommendation",
       "authors": [
         "Yuan Gao",
@@ -1193,15 +1310,15 @@
         "Alibaba Group (China)"
       ],
       "published": "2026-09-24",
-      "updated": "2026-10-01T08:54:57.152042",
+      "updated": "2026-09-24",
       "abstract": "Cross-country recommendation on modern e-commerce platforms is typically deployed with disjoint user and item ID spaces across markets, removing the shared anchors that conventional cross-domain methods rely on. Generative recommendation (GR) mitigates this by mapping items into a shared token space and training a unified model, but existing approaches keep behavior sequences strictly country-specific, so knowledge transfer occurs only at the parameter level and remains absent at the data level. Inspired by code-switching corpora in multilingual natural language processing, we propose CMRec, a cross-country GR framework that injects cross-country supervision at the data level via dual-constrained, context-aware code-mixing. CMRec first learns a shared semantic codebook from multi-modal content and behavioral co-occurrence across countries. It then uses this codebook to synthesize mixed-country sequences via token-level substitutions that satisfy both static (content) and dynamic (e.g., price, audience, popularity) constraints. Finally, it introduces a context-aware loss that reweights mixed samples according to their plausibility in the current sequence. Experiments on two real-world multi-country datasets and an online A/B test show that CMRec substantially improves recommendation quality in data-sparse countries while preserving performance in data-rich countries, achieving +1.77% advertising revenue and +2.64% orders on a large-scale e-commerce platform.",
       "url": "https://arxiv.org/abs/2609.28972",
       "pdf_url": "https://arxiv.org/pdf/2609.28972",
       "doi": "10.48550/arxiv.2609.28972",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Alibaba Qwen",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
@@ -1217,31 +1334,32 @@
         "Tokenization",
         "推理系统",
         "生成式推荐",
-        "跨国家推荐"
+        "跨国推荐"
       ],
       "score": 187,
-      "summary": "针对跨境电商推荐中用户与物品ID空间跨市场不共享、传统跨域方法缺乏共享锚点的问题，生成式推荐（GR）通过共享token空间和统一模型缓解，但现有方法行为序列仍严格按国家隔离，知识迁移仅停留在参数层面，数据层面缺失。受多语言NLP中语码转换语料启发，提出CMRec跨国家GR框架，通过双约束、上下文感知的语码混合在数据层面注入跨国家监督。CMRec首先从多模态内容与跨国家行为共现中学习共享语义码本，然后利用该码本通过满足静态（内容）和动态（价格、受众、流行度）约束的token级替换合成混合国家序列，最后引入上下文感知损失根据混合样本在当前序列中的合理性重新加权。在两个真实多国家数据集和在线A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
-      "one_line_takeaway": "CMRec通过双约束上下文感知的语码混合，在数据层面实现跨国家生成式推荐的知识迁移，显著提升数据稀疏国家的推荐效果与线上收益。",
-      "core_method": "CMRec是一个跨国家生成式推荐框架，核心包括：1）从多模态内容与跨国家行为共现中学习共享语义码本；2）利用该码本通过token级替换合成混合国家序列，替换需满足静态（内容）和动态（价格、受众、流行度）双约束；3）引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权。",
+      "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏共享锚点的问题，本文提出CMRec生成式推荐框架。现有生成式推荐虽通过共享token空间统一建模，但行为序列仍严格按国家隔离，知识迁移仅停留在参数层面。CMRec受多语言NLP中语码转换语料启发，在数据层面注入跨国监督：首先从多模态内容与跨国行为共现中学习共享语义码本；然后基于该码本，通过满足静态内容约束与动态属性（价格、受众、热度）约束的token级替换，合成混合国家序列；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
+      "one_line_takeaway": "CMRec通过双约束上下文感知的跨国码混合，在数据层面实现生成式推荐的跨国知识迁移，线上广告收入提升1.77%、订单量提升2.64%。",
+      "core_method": "CMRec是一个跨国生成式推荐框架，核心是在数据层面注入跨国监督。它首先从多模态内容与跨国行为共现中学习共享语义码本，将商品映射到统一token空间；然后利用该码本，通过token级替换合成混合国家序列，替换需同时满足静态内容约束和动态属性（价格、受众、热度）约束；最后引入上下文感知损失，根据混合样本在当前序列中的合理性进行重加权，从而在训练中有效利用合成的跨国序列。",
       "innovation_points": [
-        "首次将多语言NLP中的语码转换思想引入跨国家生成式推荐，在数据层面而非仅参数层面实现知识迁移。",
-        "提出双约束（静态内容与动态属性）的token级替换方法，合成符合跨国家场景的混合行为序列。",
-        "设计上下文感知损失，对混合样本按序列合理性动态重加权，提升训练信号质量。"
+        "提出跨国码混合（code-mixing）范式，将多语言NLP中的语码转换思想迁移到生成式推荐，在数据层面而非仅参数层面实现跨国知识迁移。",
+        "设计双约束（静态内容与动态属性）的上下文感知token级替换策略，保证合成混合国家序列的合理性与可用性。",
+        "引入上下文感知损失，根据混合样本在当前序列中的合理性动态重加权，提升训练信号质量。",
+        "在真实跨国电商场景中验证，兼顾数据稀疏国家提升与数据丰富国家性能保持。"
       ],
       "experiment_results": [
-        "在两个真实多国家数据集上，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能。",
-        "在大规模电商平台的在线A/B测试中，CMRec实现广告收入+1.77%、订单量+2.64%。"
+        "在两个真实世界多国数据集上，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能。",
+        "在大规模电商平台的线上A/B测试中，CMRec实现广告收入+1.77%、订单量+2.64%。"
       ],
       "limitations": [
-        "摘要未提及模型对极端数据稀疏或冷启动国家的泛化能力。",
-        "双约束替换依赖多模态内容与行为共现数据，在数据稀缺市场可能受限。",
-        "未讨论跨国家文化差异或动态约束的覆盖范围对合成序列质量的影响。"
+        "摘要未提供与基线方法在离线指标上的具体对比数值，无法评估相对提升幅度。",
+        "双约束码混合依赖多模态内容与行为共现数据，在内容或行为数据稀缺的市场可能受限。",
+        "上下文感知损失的重加权机制可能引入额外超参数，其调优成本与鲁棒性未在摘要中说明。"
       ],
-      "practical_value": "为跨境电商平台提供了一种数据层面的跨国家知识迁移方案，能在不共享用户/物品ID空间的情况下，利用数据丰富国家的行为提升数据稀疏国家的推荐效果，直接带来广告收入和订单量的增长，具有明确的工程落地价值。",
-      "why_it_matters": "该工作突破了现有生成式推荐仅靠参数共享进行跨域迁移的局限，通过数据增强和上下文感知损失实现了更细粒度的跨国家知识迁移，为多市场推荐系统提供了新思路，且在线A/B测试验证了其商业价值。",
+      "practical_value": "CMRec面向跨境电商真实业务场景，解决了多市场ID空间不共享导致的跨域推荐难题。其数据层面的跨国知识迁移方案可直接应用于数据稀疏市场的冷启动与推荐质量提升，线上A/B测试已验证其能带来广告收入和订单量的实际增长，对电商平台具有明确的工程落地价值和商业回报。",
+      "why_it_matters": "该工作将生成式推荐与跨国知识迁移结合，首次在数据层面通过码混合实现跨国监督，突破了现有方法仅靠参数共享的局限。其双约束合成与上下文感知损失设计为跨域生成式推荐提供了新思路，且线上A/B测试的显著收益证明了方法的实际有效性，对推荐系统研究者和电商平台工程师均有重要参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "5fe6faab607cc30e",
+      "analysis_signature": "ec978a7f4f0e6f86",
       "is_daily_pick": false
     },
     {
@@ -1256,18 +1374,23 @@
         "Zhong Wu",
         "Linjun Yang"
       ],
-      "affiliations": [],
-      "published": "2026-09-24T21:39:12Z",
-      "updated": "2026-09-24T21:39:12Z",
+      "affiliations": [
+        "Massachusetts Institute of Technology"
+      ],
+      "published": "2026-09-24",
+      "updated": "2026-09-24",
       "abstract": "Large-scale recommenders increasingly adopt the sequential generative recipe behind large language models, bringing the Transformer into recommendation along with design choices made for text, including Rotary Position Embedding (RoPE). In language models, RoPE encodes token indices for relative position reasoning, but in recommendation, an interaction index records only event order, saying nothing about elapsed time, behavioral cycles across scales, or calendar phase. We revisit this choice and propose T-RoPE, a time-aware RoPE for sequential generative recommendation that replaces index-only rotation with timestamp-based angles, learnable temporal coefficients, multiscale frequency banks, shifted query alignment, and non-stationary key rotation. We prove that standard RoPE, even on timestamps, remains time-translation invariant and cannot distinguish seasonal contexts, and that T-RoPE breaks this invariance while preserving the RoPE interface. Across five public benchmarks, T-RoPE achieves the best result on every metric on every dataset, improving over the strongest baseline by 78--130\\% in HR@10 on the sparse PixelRec data and 8--12\\% across metrics on Amazon Books. On an industrial-scale e-commerce dataset with more than 6B interactions, it improves every metric over the HSTU + Time RAB backbone by 13--82\\%, with ablations attributing the largest gains to multiscale frequencies ($+56\\%$ NDCG@50) and non-stationary keys ($+4\\%$). An online A/B test in the Shop app yields positive lifts in conversion rate ($+0.33\\%$) and order count ($+0.63\\%$). We also provide forward and backward algorithms whose added cost is linear in sequence length and head dimension, keeping time-aware RoPE practical for large generative recommenders.",
-      "url": "http://arxiv.org/abs/2609.30576v1",
-      "pdf_url": "https://arxiv.org/pdf/2609.30576v1",
+      "url": "https://arxiv.org/abs/2609.30576",
+      "pdf_url": "https://arxiv.org/pdf/2609.30576",
       "doi": "",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
         "cs.AI",
         "cs.IR",
         "cs.LG"
@@ -1277,37 +1400,39 @@
         "LLM 基模",
         "GenRec",
         "Reasoning",
-        "推理系统"
+        "推理系统",
+        "生成式推荐",
+        "位置编码",
+        "时间感知"
       ],
       "score": 137,
-      "summary": "针对序列生成推荐中直接沿用语言模型RoPE仅编码交互顺序、忽略真实时间间隔与周期性的问题，本文提出T-RoPE。该方法用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，而T-RoPE在保留RoPE接口的同时打破该不变性。在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%；在超60亿交互的工业电商数据上，较HSTU+Time RAB基线各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试中转化率提升0.33%、订单量提升0.63%。前向与反向算法额外开销与序列长度和头维度呈线性。",
-      "one_line_takeaway": "T-RoPE将时间戳、多尺度周期与非平稳性注入旋转位置编码，在保留RoPE接口的同时显著提升序列生成推荐的离线与线上效果。",
-      "core_method": "T-RoPE用基于时间戳的角度替换RoPE的索引旋转，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转；理论证明标准RoPE即使使用时间戳仍时间平移不变，无法区分季节上下文，而T-RoPE打破该不变性且保持RoPE接口。",
+      "summary": "该论文针对序列生成式推荐中直接沿用语言模型RoPE的问题，指出交互索引仅记录事件顺序而丢失真实时间间隔、行为周期和日历相位。作者提出T-RoPE，用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性，无法区分季节上下文，而T-RoPE打破该不变性且保留RoPE接口。在五个公开基准上，T-RoPE在所有数据集所有指标上最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%。在超60亿交互的工业电商数据上，较HSTU+Time RAB骨干各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试转化率+0.33%、订单数+0.63%。前向和反向算法额外成本与序列长度和头维度线性相关。",
+      "one_line_takeaway": "T-RoPE通过时间戳驱动的旋转位置编码打破RoPE的时间平移不变性，在公开和工业推荐场景中显著提升序列生成式推荐效果，并保持线性计算开销。",
+      "core_method": "T-RoPE将RoPE中基于交互索引的旋转角度替换为基于时间戳的角度，并引入可学习的时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转。理论证明标准RoPE即使使用时间戳仍具有时间平移不变性，无法区分季节上下文；T-RoPE打破该不变性，同时保留RoPE接口。前向和反向算法额外成本与序列长度和头维度线性相关。",
       "innovation_points": [
-        "提出时间感知的旋转位置编码T-RoPE，用时间戳角度替代索引旋转，并加入可学习时间系数与多尺度频率库。",
-        "理论证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，T-RoPE可打破该不变性。",
-        "引入偏移查询对齐与非平稳键旋转，在保留RoPE接口的同时增强时间建模能力。",
-        "给出前向与反向算法，额外计算开销与序列长度和头维度呈线性，适合大规模生成式推荐。"
+        "提出时间感知的旋转位置编码T-RoPE，用时间戳角度替代索引旋转，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转。",
+        "理论证明标准RoPE即使使用时间戳仍保持时间平移不变性，无法区分季节上下文，而T-RoPE打破该不变性且保留RoPE接口。",
+        "设计前向和反向算法，使额外计算成本与序列长度和头维度线性相关，保证大规模生成式推荐器的实用性。"
       ],
       "experiment_results": [
-        "在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10较最强基线提升78-130%，Amazon Books各指标提升8-12%。",
-        "在超60亿交互的工业电商数据集上，较HSTU+Time RAB基线各指标提升13-82%；消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。",
-        "Shop应用在线A/B测试中，转化率提升0.33%，订单量提升0.63%。"
+        "在五个公开基准上，T-RoPE在所有数据集的所有指标上取得最优结果，稀疏PixelRec的HR@10较最强基线提升78-130%，Amazon Books各指标提升8-12%。",
+        "在超过60亿交互的工业电商数据集上，T-RoPE较HSTU+Time RAB骨干在所有指标上提升13-82%，消融实验显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。",
+        "在Shop应用的在线A/B测试中，转化率提升0.33%，订单数提升0.63%。"
       ],
       "limitations": [
-        "仅基于标题、摘要和学术元数据，无法评估方法在更多工业场景或不同推荐任务上的泛化性。",
-        "未提供公开基准上的具体绝对指标数值，仅报告相对提升幅度。",
-        "在线A/B测试仅报告转化率和订单量两个指标，未说明其他业务指标或长期影响。"
+        "论文未明确说明T-RoPE在冷启动或时间戳缺失场景下的表现。",
+        "在线A/B测试仅报告了转化率和订单数的提升，未提供其他业务指标或长期效果。",
+        "多尺度频率库和非平稳键的具体设计细节未在摘要中充分展开，可能影响复现。"
       ],
-      "practical_value": "T-RoPE可直接替换现有生成式推荐模型中的RoPE，以线性额外开销引入时间感知能力，在公开基准和工业级电商数据上均带来显著离线提升，并在Shop应用在线A/B测试中实现转化率与订单量正向增长，具备落地价值。",
-      "why_it_matters": "该工作指出语言模型位置编码在推荐场景中的时间盲区，并通过理论证明与多尺度时间建模给出可插拔的改进方案，在超60亿交互工业数据和在线A/B测试中验证有效性，对生成式推荐的位置编码设计具有参考意义。",
+      "practical_value": "T-RoPE为工业级序列生成式推荐提供了一种即插即用的时间感知位置编码方案，在超60亿交互的电商数据上显著提升指标，在线A/B测试验证了转化率和订单数的正向收益，且计算开销线性可控，适合大规模部署。",
+      "why_it_matters": "该工作揭示了语言模型位置编码在推荐场景中的根本缺陷，即无法建模真实时间间隔和周期，并通过理论证明和实验验证了时间感知编码的必要性，为生成式推荐的位置编码设计提供了新方向，同时在大规模工业场景中验证了实用价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "3648dd45f8461d50",
+      "analysis_signature": "fb84d57f5d28c67b",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214196674",
+      "id": "arxiv:2609.27284",
       "title": "Hunyuan-A13B Technical Report",
       "authors": [
         "Tencent Hunyuan Team",
@@ -1388,15 +1513,15 @@
       ],
       "affiliations": [],
       "published": "2026-09-23",
-      "updated": "2026-10-14T16:39:01.820549",
+      "updated": "2026-09-23",
       "abstract": "We present Hunyuan-A13B, an open-source large language model based on a Mixture-of-Experts architecture. It contains 80 billion total parameters but activates only 13 billion during inference, balancing model capability, computational efficiency, and deployment cost. The model is pretrained on a rigorously filtered 20T-token corpus with enhanced STEM data curation, improving factual reliability and reasoning ability. High-quality supervised fine-tuning and large-scale reinforcement learning further enhance its overall performance. Hunyuan-A13B also introduces a dual-mode Chain-of-Thought framework that adapts reasoning depth to task complexity: fast thinking for routine queries and slow thinking for complex, multi-step problems. Evaluations show competitive performance across mathematics, science, programming, general language understanding, and agent tasks, often approaching that of much larger models. Its high inference throughput makes it suitable for latency-sensitive applications. We release Hunyuan-A13B to support open research and practical LLM deployment.",
       "url": "https://arxiv.org/abs/2609.27284",
       "pdf_url": "https://arxiv.org/pdf/2609.27284",
       "doi": "10.48550/arxiv.2609.27284",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "Tencent Hunyuan",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Topic Modeling",
         "Natural Language Processing Techniques",
@@ -1413,28 +1538,30 @@
         "Multimodal"
       ],
       "score": 139,
-      "summary": "腾讯混元团队发布开源大语言模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数量800亿，推理时仅激活130亿参数，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20万亿token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力。通过高质量监督微调和强化学习进一步优化性能。引入双模式思维链框架，根据任务复杂度自适应调整推理深度：快速思考用于常规查询，慢速思考用于复杂多步问题。评估显示在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
-      "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在800亿总参数下仅激活130亿，实现了高效推理与强大能力的平衡。",
-      "core_method": "基于混合专家（MoE）架构，总参数800亿，推理激活130亿；在20万亿token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和强化学习；引入双模式思维链（快速/慢速思考）自适应调整推理深度。",
+      "summary": "腾讯混元发布开源大语言模型Hunyuan-A13B，采用MoE架构，总参数量800亿，推理时仅激活130亿参数，在模型能力、计算效率与部署成本间取得平衡。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，根据任务复杂度自适应调整推理深度：常规查询使用快思考，复杂多步问题使用慢思考。评估显示其在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
+      "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，以130亿激活参数实现接近更大模型的性能，兼顾效率与部署成本。",
+      "core_method": "基于MoE架构，总参800亿、激活130亿；在20T token过滤语料上预训练，增强STEM数据；采用高质量SFT和大规模RL；引入双模式CoT（快思考/慢思考）自适应推理深度。",
       "innovation_points": [
         "MoE架构实现高参数容量与低推理激活的平衡，总参800亿仅激活130亿。",
-        "双模式思维链框架，根据任务复杂度动态切换快速与慢速推理模式。",
-        "增强STEM数据整理的20万亿token预训练语料，提升事实可靠性与推理能力。"
+        "双模式思维链框架，根据任务复杂度动态切换快思考与慢思考。",
+        "增强STEM数据整理的20T token预训练，提升事实可靠性与推理能力。",
+        "结合高质量SFT与大规模RL的后训练流程，优化整体性能。"
       ],
       "experiment_results": [
         "在数学、科学、编程、通用语言理解和智能体任务上评估，性能具有竞争力，常接近更大模型。",
-        "高推理吞吐量，适合延迟敏感应用。"
+        "高推理吞吐量，适合延迟敏感应用。",
+        "摘要未提供具体数值结果。"
       ],
       "limitations": [
-        "未提供具体基准测试分数或与同类模型的详细对比数据。",
-        "未说明模型在长尾或特定领域任务上的表现。",
-        "未讨论训练成本、能耗或部署硬件要求等工程细节。"
+        "摘要未提及模型的具体局限性或失败案例。",
+        "未提供与同规模或更大模型对比的详细实验数据。",
+        "双模式思维链的切换机制和效率增益未量化说明。"
       ],
-      "practical_value": "为开源社区和工业部署提供了一个高效能、低推理成本的大模型选择，尤其适合需要高吞吐量和低延迟的场景，如实时对话和智能体应用。",
-      "why_it_matters": "该工作展示了MoE架构与自适应推理策略在平衡模型规模与效率方面的潜力，为开源大模型的高效部署提供了新思路，并推动了思维链推理的实用化。",
+      "practical_value": "为开源社区和工业部署提供高效能LLM选择，低激活参数降低推理成本，高吞吐适合延迟敏感场景，双模式CoT平衡响应速度与复杂推理需求。",
+      "why_it_matters": "展示了MoE架构在开源大模型中的高效扩展路径，双模式推理为动态计算分配提供新思路，对推动低成本高性能LLM部署有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "d69841451a2b46cc",
+      "analysis_signature": "39e77c4a740ee552",
       "is_daily_pick": false
     },
     {
@@ -1514,17 +1641,20 @@
         "Xiangxiang Chu"
       ],
       "affiliations": [],
-      "published": "2026-09-18T06:01:13Z",
-      "updated": "2026-09-18T06:01:13Z",
+      "published": "2026-09-18",
+      "updated": "2026-09-18",
       "abstract": "Mixture-of-Experts (MoE) scales capacity, but existing designs cannot set three quantities independently. For a single token, participation is how many experts contribute knowledge to its output, execution is how many are actually computed (compute cost), and materialization is how many expert-sized parameter sets must be built and stored (memory cost). Sparse routing keeps execution and materialization low, but shrinks participation: for each token, only a few experts contribute. Dense output-mixing restores full participation, but its execution grows with the number of experts. Parameter-merging keeps execution at one expert, but its materialization grows with the number of routing decisions. We propose IntBMoE, a block-conditioned MoE that decouples all three by pairing dense expert composition with sparse block execution. Its blocks come from a small learned codebook, one per entry. At each internal layer, a lightweight hypernetwork merges all expert bases in that layer's pool into one composed expert. Participation is full, because every composed expert draws on the entire pool. Execution stays sparse, because a router sends each token to only a few blocks. Materialization is bounded, because the codebook, not the input, fixes how many blocks exist. Dual-Path Residual Gating (DPRG) further couples two independently composed paths through multiplicative gating. Experiments on image classification show consistent gains over representative sparse and dense MoE baselines. Additional experiments on language modeling and sequential recommendation validate its generalization beyond vision. IntBMoE is fully deployed in AMap's generative recommendation system, serving hundreds of millions of users under a 60ms latency budget, with a 2.4% relative UVCTR gain in online A/B testing. Our code is available at https://github.com/AMAP-ML/DreamX-Rec/.",
-      "url": "http://arxiv.org/abs/2609.21346v1",
-      "pdf_url": "https://arxiv.org/pdf/2609.21346v1",
-      "doi": "",
+      "url": "https://arxiv.org/abs/2609.21346",
+      "pdf_url": "https://arxiv.org/pdf/2609.21346",
+      "doi": "10.48550/arxiv.2609.21346",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
+        "Advanced Neural Network Applications",
+        "Domain Adaptation and Few-Shot Learning",
+        "Machine Learning and Data Classification",
         "cs.LG"
       ],
       "tags": [
@@ -1532,37 +1662,40 @@
         "GenRec",
         "Tokenization",
         "MoE",
-        "推理系统"
+        "推理系统",
+        "Mixture-of-Experts",
+        "生成式推荐",
+        "模型架构"
       ],
       "score": 133,
-      "summary": "针对MoE中参与度、执行量与参数物化量无法独立调节的问题，提出IntBMoE。该方法将稠密专家组合与稀疏块执行配对：块来自小型可学习码本，每层通过轻量超网络将专家池中所有专家基合并为一个组合专家，使每个token获得全参与；路由器仅将token发送至少数块，保持稀疏执行；码本固定块数量，限制物化量。双路径残差门控进一步耦合两条独立组合路径。在图像分类、语言建模和序列推荐上验证了泛化性。该系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试获得2.4%相对UVCTR提升。",
-      "one_line_takeaway": "IntBMoE通过块级条件与超网络组合，将MoE的参与度、执行量和物化量解耦，并在高德生成式推荐中实现线上收益。",
-      "core_method": "IntBMoE采用块条件MoE架构：每个内部层维护一个专家基池，通过轻量超网络将所有专家基合并为一个组合专家，实现全参与；路由器将每个token路由至少数从可学习码本中选取的块，保持稀疏执行；码本大小固定，从而限制参数物化量。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
+      "summary": "针对MoE中参与度、执行量与参数物化量无法独立调节的问题，提出IntBMoE。该方法将稠密专家组合与稀疏块执行解耦：每层通过轻量超网络将专家池中所有基专家合并为一个组合专家，保证每个token获得全池知识（全参与）；路由器仅将token发送至少数块，使执行保持稀疏；块来自小型可学习码本，物化量由码本而非输入决定，因此有界。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。在图像分类上持续优于稀疏和稠密MoE基线，语言建模与序列推荐验证泛化性。系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试相对UVCTR提升2.4%。",
+      "one_line_takeaway": "IntBMoE通过块级条件化与超网络组合，首次将MoE的参与度、执行量和物化量三者解耦，并在高德生成式推荐中实现60ms延迟下的2.4% UVCTR提升。",
+      "core_method": "IntBMoE将稠密专家组合与稀疏块执行配对：每层维护一个专家基池，由轻量超网络将所有基专家合并为一个组合专家，使每个token获得全池知识；块来自小型可学习码本，每个码本条目对应一个块，路由器仅将token路由至少数块以保持稀疏执行；物化量由码本大小固定，与输入无关。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
       "innovation_points": [
-        "提出块级条件MoE，将参与度、执行量和物化量三个量解耦，突破传统稀疏路由、稠密输出混合和参数合并的固有权衡。",
-        "设计可学习码本与超网络组合机制，使每个token获得全专家池参与，同时保持稀疏执行和有界物化。",
-        "引入双路径残差门控（DPRG），通过乘法门控耦合两条独立组合路径，增强表示能力。",
-        "在高德生成式推荐系统中完成全量部署，验证了工业级可行性与线上价值。"
+        "提出参与度、执行量、物化量三者的解耦框架，突破现有MoE设计无法独立调节三者的限制。",
+        "块级条件化：块来自小型可学习码本，物化量由码本而非输入决定，实现有界内存成本。",
+        "超网络组合：每层超网络将专家池中所有基专家合并为一个组合专家，保证全参与同时执行稀疏。",
+        "双路径残差门控（DPRG）：通过乘法门控耦合两条独立组合路径，增强表示能力。"
       ],
       "experiment_results": [
-        "在图像分类任务上，IntBMoE相比代表性稀疏和稠密MoE基线取得一致提升。",
+        "在图像分类任务上，IntBMoE持续优于代表性稀疏和稠密MoE基线。",
         "在语言建模和序列推荐任务上验证了泛化能力。",
-        "在高德生成式推荐系统全量部署，服务数亿用户，满足60ms延迟预算，在线A/B测试获得2.4%相对UVCTR提升。"
+        "已部署于高德生成式推荐系统，服务数亿用户，在60ms延迟预算下，在线A/B测试获得2.4%的相对UVCTR提升。"
       ],
       "limitations": [
-        "摘要未提供图像分类、语言建模和序列推荐任务上的具体量化指标和消融实验细节。",
-        "未讨论码本大小、块数量等超参数对性能与效率的敏感性。",
-        "未分析在更大规模模型或不同模态下的扩展规律。"
+        "摘要未提供图像分类、语言建模和序列推荐任务上的具体量化指标（如准确率、困惑度等），仅说明持续增益。",
+        "未详细说明超网络和码本带来的额外计算开销与训练稳定性影响。",
+        "在线A/B测试仅报告UVCTR单一指标，未提及其他业务指标或长期影响。"
       ],
-      "practical_value": "IntBMoE为生成式推荐系统提供了一种在严格延迟约束下扩展模型容量且控制内存成本的方法。其在高德的大规模部署表明，该架构能有效平衡计算效率与推荐效果，为工业级推荐系统提供了可复用的MoE设计范式。",
-      "why_it_matters": "该工作从基座模型架构层面重新审视MoE的核心权衡，提出解耦参与度、执行量和物化量的新思路，并成功落地于真实业务场景，对研究者和工程师均有参考价值。",
+      "practical_value": "IntBMoE在高德生成式推荐系统中实际部署，服务数亿用户，在60ms严格延迟预算下实现2.4%的相对UVCTR提升，证明了其在工业级推荐场景中的有效性和效率。其解耦设计为需要平衡模型容量、计算成本和内存占用的实际系统提供了可落地的MoE架构方案。",
+      "why_it_matters": "该工作直面MoE部署中参与度、计算量和内存成本难以兼得的根本矛盾，提出可独立调节三者的新架构，并在超大规模工业推荐系统中验证了在线收益。对于研究MoE扩展规律和生成式推荐的学者与工程师，提供了兼具理论创新和工程价值的参考。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "1bf7c116ca5b7979",
+      "analysis_signature": "f0ed3d68f127cbbe",
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7213940654",
+      "id": "arxiv:2609.21550",
       "title": "OneBid: A Unified Auto-Bidding Foundation Model for Diverse oCPX Advertising Scenarios",
       "authors": [
         "Yewen Li",
@@ -1570,22 +1703,21 @@
         "Yitian Li",
         "Pengfei Lv",
         "Xialong Liu",
-        "Peng Jiang",
         "Qingpeng Cai"
       ],
       "affiliations": [
         "Kuaishou (China)"
       ],
       "published": "2026-09-18",
-      "updated": "2026-09-30T09:27:27.532063",
+      "updated": "2026-09-18",
       "abstract": "Auto-bidding is central to computational advertising, where strategies must maximize advertisers' conversion value under economic constraints. It has evolved from rule-based controllers to reinforcement learning and generative methods such as Decision Transformer (DT). Yet these methods increasingly mismatch the prevailing optimized cost-per-X (oCPX) paradigm, which spans heterogeneous scenarios (e.g., registration, purchase), each served by a separate model, leading to fragmented pipelines and underexploring cross-scenario modeling. Inspired by foundation models like LLMs, unifying these oCPX scenarios into one model raises three challenges: multi-objective control, scalable capacity under strict latency, and safe offline policy improvement. We present OneBid, a unified auto-bidding foundation model that learns a reusable backbone from heterogeneous oCPX logs and adapts it to scenario-specific deployments via offline post-training. Building on DT, OneBid extends single Return-to-Go conditioning to two atomic signals, Return-to-Go for conversion value and Cost-to-Go for cost ratio, plus value-aware regularization on next-action prediction. To absorb distributional heterogeneity, we design a sequence-level Mixture-of-Experts architecture, where shared experts encode cross-scenario knowledge and sparsely-routed experts capture scenario-specific patterns at low latency, yielding consistent scaling with model size and data. During post-training, we align the backbone with scenario preferences via Critic-guided Relative Offline Policy optimization (CROP): a learned critic scores candidate actions group-relatively, avoiding the unsafe online exploration of GRPO-style fine-tuning while constraining policy shift to reduce OOD risk. Validated via online A/B tests and fully deployed at Kuaishou, OneBid delivers an overall +2.2% ADVV gain on oCPX Ads, peaking at +13.1% in the ROAS scenario.",
       "url": "https://arxiv.org/abs/2609.21550",
       "pdf_url": "https://arxiv.org/pdf/2609.21550",
       "doi": "10.48550/arxiv.2609.21550",
-      "source": "OpenAlex",
+      "source": "arXiv",
       "content_type": "paper",
       "company": "",
-      "venue": "arXiv (Cornell University)",
+      "venue": "",
       "categories": [
         "Advanced Bandit Algorithms Research",
         "Reinforcement Learning in Robotics",
@@ -1602,30 +1734,100 @@
         "基础模型"
       ],
       "score": 129,
-      "summary": "本文提出OneBid，一个面向多样化oCPX广告场景的统一自动出价基础模型。针对现有方法（如决策Transformer）与oCPX范式不匹配、多场景模型碎片化的问题，OneBid基于DT扩展了双目标条件信号（Return-to-Go和Cost-to-Go）并引入价值感知正则化，同时设计序列级混合专家架构以吸收跨场景分布异质性。后训练阶段采用Critic引导的相对离线策略优化（CROP），避免在线探索风险并约束策略偏移。在快手部署并通过在线A/B测试验证，整体ADVV提升2.2%，ROAS场景峰值提升13.1%。",
+      "summary": "本文提出OneBid，一个面向多样化oCPX广告场景的统一自动出价基础模型。针对现有方法（规则控制、强化学习、Decision Transformer）与oCPX范式不匹配、各场景独立建模导致碎片化的问题，OneBid基于DT扩展了双原子信号条件（Return-to-Go控制转化价值，Cost-to-Go控制成本比），并引入价值感知正则化。为吸收分布异质性，设计了序列级混合专家架构，共享专家编码跨场景知识，稀疏路由专家捕捉场景特定模式，实现低延迟下的可扩展性。后训练阶段采用Critic引导的相对离线策略优化（CROP），避免在线探索风险并约束策略偏移。在快手全量部署并通过在线A/B测试验证，oCPX广告整体ADVV提升2.2%，ROAS场景峰值提升13.1%。",
       "one_line_takeaway": "OneBid通过统一基础模型与离线后训练，在严格延迟约束下实现了跨oCPX场景的自动出价，线上ADVV提升2.2%。",
-      "core_method": "基于决策Transformer，将单一Return-to-Go条件扩展为Return-to-Go（转化价值）和Cost-to-Go（成本比）双原子信号，并加入价值感知正则化；采用序列级混合专家架构，共享专家编码跨场景知识，稀疏路由专家捕获场景特定模式；后训练使用Critic引导的相对离线策略优化（CROP），通过组相对评分和策略偏移约束实现安全离线改进。",
+      "core_method": "基于Decision Transformer扩展为双信号条件（Return-to-Go和Cost-to-Go）并加入价值感知正则化；采用序列级混合专家架构（共享专家+稀疏路由专家）处理跨场景异质性；后训练使用Critic引导的相对离线策略优化（CROP）对齐场景偏好。",
       "innovation_points": [
-        "将自动出价建模为统一基础模型，首次在oCPX场景中实现跨场景知识共享与场景特定适配。",
-        "提出双目标条件信号（Return-to-Go和Cost-to-Go）及价值感知正则化，解决多目标控制问题。",
-        "设计序列级混合专家架构，在低延迟下实现模型容量与数据规模的可扩展性。",
-        "提出CROP离线策略优化方法，避免在线探索风险并约束分布外风险。"
+        "将单Return-to-Go条件扩展为Return-to-Go和Cost-to-Go双原子信号，支持多目标控制。",
+        "设计序列级混合专家架构，共享专家编码跨场景知识，稀疏路由专家捕捉场景特定模式，实现低延迟下的可扩展性。",
+        "提出CROP离线策略优化方法，利用学习到的critic对候选动作进行组相对评分，避免在线探索风险并约束策略偏移。"
       ],
       "experiment_results": [
-        "在线A/B测试显示，OneBid在oCPX广告上整体ADVV提升2.2%。",
-        "在ROAS场景中，ADVV峰值提升13.1%。",
-        "模型已完全部署于快手。"
+        "在快手全量部署，在线A/B测试显示oCPX广告整体ADVV提升2.2%。",
+        "ROAS场景下ADVV峰值提升13.1%。"
       ],
       "limitations": [
-        "摘要未提及模型在非oCPX场景或更广泛广告形式上的泛化能力。",
-        "未提供离线实验的详细对比数据或消融研究结果。",
-        "未讨论模型规模、训练数据量等扩展规律的具体量化分析。"
+        "摘要未提及模型在未见过的新场景上的泛化能力验证。",
+        "未讨论离线日志中分布偏移对基础模型预训练的影响。",
+        "未提供与现有单场景模型在计算成本或延迟方面的详细对比。"
       ],
-      "practical_value": "OneBid为广告平台提供了一种统一、可扩展的自动出价解决方案，能够减少多场景模型维护的碎片化成本，并在严格延迟约束下提升广告转化价值，已在快手大规模部署验证。",
-      "why_it_matters": "该工作将基础模型思想引入自动出价领域，解决了oCPX多场景下的多目标控制、可扩展性和安全离线优化难题，为生成式推荐在广告出价中的应用提供了工业级范例。",
+      "practical_value": "OneBid为广告平台提供了一种统一、可扩展的自动出价解决方案，减少多场景独立模型的维护成本，并在严格延迟约束下实现跨场景知识共享，线上验证了显著的商业价值。",
+      "why_it_matters": "该工作将基础模型思想引入自动出价领域，解决了oCPX场景碎片化问题，并通过离线后训练安全地适配场景，为工业级广告系统提供了可落地的统一架构。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "b582ccc70746f107",
+      "analysis_signature": "55d7891d632be307",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2609.18182",
+      "title": "WFM: Wiki Foundation Model for Complex Agentic Reasoning",
+      "authors": [
+        "Junnan Dong",
+        "Linhao Luo",
+        "Senlei Zhang",
+        "Gong Chen",
+        "Taian Guo",
+        "Yifei Yu",
+        "Rong Tao",
+        "Tao Guo",
+        "Qianwen Zhang",
+        "Siyu An",
+        "Ruizhi Qiao",
+        "Xing Sun"
+      ],
+      "affiliations": [
+        "Tencent (China)",
+        "Monash University",
+        "Shenzhen University",
+        "Hong Kong Baptist University"
+      ],
+      "published": "2026-09-16",
+      "updated": "2026-09-16",
+      "abstract": "Real-world agents fundamentally require persistent non-parametric knowledge for dynamic reasoning, i.e., long-term memory and retrieval-augmented generation. While graphs have shown reliable advantages in providing structured evidence, the sparse graph representations naturally restrict machine readability and semantic density required for complex agentic workflows. Driven by this limitation, the entire industry is witnessing a paradigm shift from traditional sparse graphs to LLM Wiki, an agent-native knowledge representation that couples dense document contexts with markdown files containing multi-layered topological linkages. However, parameterizing such rich semantics is challenging to encode dense textual contexts using traditional sparse graph embeddings. Moreover, learning LLM Wiki with existing graph encoders could overwhelm distributed system overheads that hinder deployment in large-scale commercial scenarios. To this end, we propose a novel paradigm Wiki Foundation Model, i.e., WFM, tailored for scalable, agent-native representation and retrieval. Specifically, (i) we formalize a Wiki Graph schema that seamlessly bridges fine-grained structures with dense contexts, maintaining explicit topologies alongside continuous semantics; (ii) A query-conditioned attentive aggregation is tailored for rich wiki message passing and explicit attention variance regularization; (iii) We engineer an infrastructural NCCL boundary exchange protocol that hoists static partition indices and leverages fixed-shape GPU-to-GPU collectives, bypassing CPU serialization and memory copy overheads. Extensive evaluations across five long-term agent memory and multi-hop reasoning benchmarks demonstrate the remarkable performance of WFM, while achieving a 10.5 times training acceleration on distributed clusters.",
+      "url": "https://arxiv.org/abs/2609.18182",
+      "pdf_url": "https://arxiv.org/pdf/2609.18182",
+      "doi": "10.48550/arxiv.2609.18182",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Tencent Hunyuan",
+      "venue": "",
+      "categories": [
+        "Advanced Graph Neural Networks",
+        "Topic Modeling",
+        "Graph Theory and Algorithms"
+      ],
+      "tags": [
+        "Tencent Hunyuan",
+        "企业论文",
+        "LLM 基模",
+        "Reasoning",
+        "Wiki Foundation Model",
+        "智能体推理",
+        "知识表示",
+        "分布式训练"
+      ],
+      "score": 75,
+      "summary": "针对复杂智能体推理中稀疏图表示限制机器可读性与语义密度的问题，腾讯混元提出Wiki Foundation Model（WFM），将LLM Wiki（稠密文档上下文与Markdown多层拓扑链接耦合）参数化为可扩展的智能体原生表示。WFM形式化Wiki Graph模式桥接细粒度结构与稠密上下文，设计查询条件注意力聚合与显式注意力方差正则化，并实现NCCL边界交换协议提升分布式训练效率。在五个长期记忆与多跳推理基准上，WFM表现优异，分布式集群训练加速达10.5倍。",
+      "one_line_takeaway": "WFM通过Wiki Graph模式与查询条件注意力聚合，将LLM Wiki参数化为高效智能体记忆表示，在五个基准上性能领先且训练加速10.5倍。",
+      "core_method": "WFM包含三部分：(i) 形式化Wiki Graph模式，桥接细粒度结构与稠密上下文，保持显式拓扑与连续语义；(ii) 查询条件注意力聚合，用于丰富wiki消息传递，并引入显式注意力方差正则化；(iii) 工程化NCCL边界交换协议，提升静态分区索引，利用固定形状GPU间集合通信，绕过CPU序列化与内存拷贝开销。",
+      "innovation_points": [
+        "提出Wiki Graph模式，将稀疏图与稠密文档上下文统一为智能体原生知识表示。",
+        "设计查询条件注意力聚合与显式注意力方差正则化，增强wiki消息传递的表达能力。",
+        "实现NCCL边界交换协议，优化分布式训练通信，显著降低系统开销。"
+      ],
+      "experiment_results": [
+        "在五个长期智能体记忆与多跳推理基准上，WFM取得显著性能提升。",
+        "在分布式集群上实现10.5倍训练加速。"
+      ],
+      "limitations": [
+        "摘要未提及模型规模、数据细节及消融实验，具体泛化能力未知。",
+        "未讨论在真实商业场景中的部署成本与延迟表现。"
+      ],
+      "practical_value": "WFM为智能体长期记忆与检索增强生成提供可扩展的表示与检索方案，其NCCL优化显著降低分布式训练开销，适合大规模商业部署。",
+      "why_it_matters": "该工作推动从稀疏图到LLM Wiki的范式转变，为复杂智能体推理提供高效基础模型，并解决大规模训练中的系统瓶颈，对工业界智能体应用有重要参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "a98e9c0f5c442869",
       "is_daily_pick": false
     },
     {
