@@ -7,6 +7,8 @@ daily_limit = 0
 daily_window_days = 3
 daily_min_score = 45
 retention_days = 365
+# 发现侧只用窄窗口找近期论文（归档保留由既有 papers.json 负责），避免高频查询把新论文挤出单页结果。
+discovery_window_days = 30
 
 [discovery]
 # LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验。
@@ -25,7 +27,9 @@ topic_queries = [
   "generative recommendation",
   "generative retrieval",
   "semantic ID recommendation",
-  "semantic identifier recommendation"
+  "semantic identifier recommendation",
+  "recommendation model scaling",
+  "large-scale recommendation model"
 ]
 include_keywords = [
   "large language model",
@@ -79,7 +83,7 @@ DeepSeek = ["DeepSeek", "DeepSeek-AI", "DeepSeek AI"]
 MiniMax = ["MiniMax AI", "MiniMaxAI", "MiniMax Team"]
 "智谱" = ["Zhipu AI", "Z.ai", "GLM Team", "THUDM", "ChatGLM"]
 "Alibaba Qwen" = ["Alibaba", "Alibaba Cloud", "Qwen Team"]
-"ByteDance Seed" = ["ByteDance", "ByteDance Seed"]
+"ByteDance Seed" = ["ByteDance", "ByteDance Seed", "TikTok"]
 "Tencent Hunyuan" = ["Tencent", "Hunyuan Team"]
 "Xiaomi MiMo" = ["Xiaomi", "Xiaomi MiMo", "MiMo Team"]
 "Baichuan AI" = ["Baichuan AI", "Baichuan Inc"]

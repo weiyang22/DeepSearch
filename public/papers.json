@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T10:15:49+08:00",
+  "generated_at": "2026-10-16T02:01:44+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -10,16 +10,14 @@
     "retention_days": 365
   },
   "status": {
-    "analysis_enabled": true,
-    "source_errors": [
-      "arXiv: 全部 4 个分片失败（The read operation timed out），已通过 OpenAlex arXiv 镜像发现 72 篇预印本"
-    ],
-    "discovered": 1937,
-    "candidates": 18,
-    "new_papers": 1,
-    "daily_picks": 1,
-    "effective_daily_window_days": 4,
-    "analysis_complete": 100,
+    "analysis_enabled": false,
+    "source_errors": [],
+    "discovered": 95,
+    "candidates": 94,
+    "new_papers": 0,
+    "daily_picks": 0,
+    "effective_daily_window_days": 3,
+    "analysis_complete": 94,
     "analysis_fallback": 0
   },
   "sources": [
@@ -52,285 +50,6 @@
     "Mistral AI"
   ],
   "papers": [
-    {
-      "id": "openalex:W7221471702",
-      "title": "ChronoSteer: Bridging Large Language Model and Time Series Foundation Model via Synthetic Cross-Modal Alignment Dataset",
-      "authors": [
-        "Chengsen Wang",
-        "Qi Qi",
-        "Zhongwen Rao",
-        "Lujia Pan",
-        "Yi-Xiang Wang"
-      ],
-      "affiliations": [
-        "Beijing University of Posts and Telecommunications",
-        "State Key Laboratory of Networking and Switching Technology",
-        "Huawei Technologies (China)"
-      ],
-      "published": "2026-10-11",
-      "updated": "2026-10-12T09:40:04.860316",
-      "abstract": "Conventional forecasting methods are trained end-to-end on unimodal time series, which limits their ability to exploit textual information and undermines their generalization in data-scarce scenarios. Recently, large language models (LLMs) and time series foundation models (TSFMs) have demonstrated powerful capabilities in complex textual reasoning and zero-shot temporal modeling, respectively. Integrating these strengths to construct a multimodal time series foundation model that jointly leverages temporal and textual information for zero-shot future inference has emerged as a promising research direction. However, the scarcity of large-scale, high-quality multimodal datasets remains a fundamental obstacle. To address this challenge, we propose ChronoSteer, a decoupled agentic framework that learns cross-modal alignment from synthetic paired supervision. Specifically, a pretrained LLM first converts textual events into revision instructions that steer the initial unimodal prediction produced by a frozen TSFM. These revision instructions form an intermediate instruction space that bridges the semantic gap between text and time series while fully leveraging pretrained knowledge. Technically, the instructions are discretized into a compact codebook of instruction anchors, effectively mitigating semantic divergence while reducing the cost of dataset construction. Finally, we adopt a two-stage training strategy to recover the fine-grained magnitude information lost during discretization. Furthermore, we release a leakage-controlled multimodal benchmark constructed with temporal separation and textual context available before the prediction window. When paired with an LLM and trained on synthetic cross-modal alignment data, ChronoSteer achieves a 25.8% improvement in zero-shot prediction accuracy over its unimodal backbone, and outperforms prior state-of-the-art unimodal and multimodal methods by 17.8% and 22.5%. These results suggest that synthetic paired supervision is a promising direction for multimodal time series analysis.",
-      "url": "https://doi.org/10.1145/3849868",
-      "pdf_url": "",
-      "doi": "10.1145/3849868",
-      "source": "OpenAlex",
-      "content_type": "paper",
-      "company": "Huawei Pangu",
-      "venue": "ACM Transactions on Knowledge Discovery from Data",
-      "categories": [
-        "Time Series Analysis and Forecasting",
-        "Stock Market Forecasting Methods",
-        "Forecasting Techniques and Applications"
-      ],
-      "tags": [
-        "Huawei Pangu",
-        "企业论文",
-        "LLM 基模",
-        "预训练",
-        "Tokenization",
-        "Reasoning",
-        "Multimodal",
-        "推理系统"
-      ],
-      "score": 121,
-      "summary": "针对多模态时间序列预测中大规模高质量配对数据稀缺的核心问题，ChronoSteer提出解耦的智能体框架，通过合成配对监督学习跨模态对齐。该方法利用预训练LLM将文本事件转化为修订指令，以引导冻结的TSFM生成的初始单模态预测。这些指令被离散化为紧凑的指令锚码本，以缓解语义分歧并降低数据构建成本。采用两阶段训练策略恢复离散化过程中丢失的细粒度幅度信息。同时发布了泄漏控制的多模态基准。实验表明，在零样本预测中，ChronoSteer比单模态骨干提升25.8%，优于先前最先进的单模态和多模态方法17.8%和22.5%。",
-      "one_line_takeaway": "ChronoSteer通过合成跨模态对齐数据，利用LLM生成指令引导冻结的TSFM，显著提升了零样本时间序列预测性能。",
-      "core_method": "解耦的智能体框架：预训练LLM将文本事件转化为修订指令，引导冻结的TSFM初始预测；指令离散化为紧凑码本；两阶段训练恢复细粒度幅度信息。",
-      "innovation_points": [
-        "提出合成配对监督学习跨模态对齐，解决多模态数据稀缺问题",
-        "设计中间指令空间桥接文本与时间序列的语义鸿沟",
-        "指令离散化为紧凑码本，降低数据构建成本并缓解语义分歧",
-        "两阶段训练策略恢复离散化丢失的细粒度幅度信息"
-      ],
-      "experiment_results": [
-        "零样本预测准确率比单模态骨干提升25.8%",
-        "优于先前最先进的单模态方法17.8%",
-        "优于先前最先进的多模态方法22.5%"
-      ],
-      "limitations": [
-        "未明确说明合成数据与真实数据的分布差异影响",
-        "两阶段训练策略可能增加训练复杂度",
-        "基准测试的覆盖范围和多样性未详细说明"
-      ],
-      "practical_value": "为华为Pangu等企业提供了一种低成本构建多模态时间序列基础模型的方案，通过合成数据对齐LLM与TSFM，可应用于数据稀缺场景的零样本预测，提升业务预测准确性。",
-      "why_it_matters": "该工作展示了合成配对监督在多模态时间序列分析中的潜力，为结合LLM的语义理解与TSFM的时序建模能力提供了新思路，推动了多模态基础模型的发展。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "f55c3c7115700ea9",
-      "is_daily_pick": true
-    },
-    {
-      "id": "openalex:W7161720865",
-      "title": "Customizing an LLM for Enterprise Software Engineering",
-      "authors": [
-        "Aditya Kini",
-        "Satish Chandra",
-        "Milad Hashemi",
-        "Saksham Thakur",
-        "Aditya Pandey",
-        "Vincent Nguyen",
-        "Marc Brockschmidt",
-        "Franjo Ivančić",
-        "Danny Tarlow",
-        "Parthasarathy Ranganathan",
-        "Petros Maniatis",
-        "Ahmed Omran",
-        "Zaheer Abbas",
-        "Anita Gergely",
-        "Martin Sevenich",
-        "Gufeng Zhang",
-        "Amy Hua",
-        "Alexander Frömmgen Ranganathan"
-      ],
-      "affiliations": [
-        "Google (United States)",
-        "Meta (United States)",
-        "Google (United Kingdom)"
-      ],
-      "published": "2026-10-07",
-      "updated": "2026-10-09T09:14:12.587421",
-      "abstract": "Enterprise software development is a continuous evolutionary process, characterized by incremental additions, architectural revisions, production deployments and rigorous maintenance. These activities generate valuable data that modern LLMs could be finetuned on, to unlock additional tool possibilities for enterprise software engineering. While frontier LLMs are already very capable, this form of customization offers a compelling path for enterprise-specific optimization. We introduce Gemini for Google (GfG)}, an adaptation of Gemini specialized for Google's internal software engineering ecosystem. This paper details the model's end-to-end development, from curating a trillion-token proprietary dataset to implementing a mid-training strategy that mitigates catastrophic forgetting. In a large-scale blind A/B study across 29,000 developers, Gemini for Google significantly outperformed baselines: reducing the mean number of iterations per turn by 23\\%, and increasing code survival rates by about 17%. Beyond metrics, we provide a comprehensive blueprint for enterprise model adaptation, covering: (1)The extraction of high-value signals from software engineering data, (2)Data preparation strategies, (3)Full-stack model tuning (continued pre-training and post-training), and (4)The deployment of downstream applications. We believe this methodology offers a replicable path for other organizations to unlock the full potential of their internal engineering data.",
-      "url": "https://doi.org/10.1145/3832783.3834508",
-      "pdf_url": "",
-      "doi": "10.1145/3832783.3834508",
-      "source": "OpenAlex",
-      "content_type": "paper",
-      "company": "",
-      "venue": "IEEE/ACM International Conference on Automated Software Engineering (ASE)",
-      "categories": [
-        "Software Engineering Research",
-        "Topic Modeling",
-        "Software Engineering Techniques and Practices"
-      ],
-      "tags": [
-        "A/B 实验",
-        "企业论文",
-        "预训练",
-        "后训练"
-      ],
-      "score": 114,
-      "summary": "本文介绍Gemini for Google (GfG)，一个针对Google内部软件工程生态定制的LLM。企业软件开发产生大量增量修改、架构修订和部署维护数据，可用于微调LLM以解锁企业级工具能力。论文详述端到端开发：从构建万亿token专有数据集，到实施缓解灾难性遗忘的中间训练策略，再到全栈调优（继续预训练与后训练）及下游应用部署。在29,000名开发者参与的大规模盲测A/B研究中，GfG显著优于基线：每轮平均迭代次数减少23%，代码存活率提升约17%。该工作提供了企业模型适配的可复制蓝图，涵盖高价值信号提取、数据准备、全栈调优和部署。",
-      "one_line_takeaway": "通过万亿token专有数据继续预训练与中间训练策略，Gemini for Google在2.9万开发者盲测中减少23%迭代次数并提升17%代码存活率，为企业定制LLM提供了可复制蓝图。",
-      "core_method": "基于Gemini基座模型，使用万亿token的Google内部软件工程专有数据集进行继续预训练，并采用中间训练策略缓解灾难性遗忘；随后进行后训练（指令微调等）以适配企业开发任务，最终部署到内部工具链。",
-      "innovation_points": [
-        "构建万亿token级企业软件工程专有数据集，并系统化提取高价值信号与数据准备策略。",
-        "提出中间训练策略，在继续预训练中有效缓解灾难性遗忘，平衡通用能力与领域适配。",
-        "全栈调优流程：从继续预训练到后训练，再到下游应用部署，形成端到端企业模型适配方法论。",
-        "在29,000名开发者中进行大规模盲测A/B研究，以迭代次数和代码存活率等线上指标验证效果。"
-      ],
-      "experiment_results": [
-        "在29,000名开发者的盲测A/B研究中，每轮平均迭代次数减少23%。",
-        "代码存活率提升约17%。",
-        "未提供其他基准测试或消融实验的详细数据。"
-      ],
-      "limitations": [
-        "仅基于Google内部生态，方法在其他企业的可迁移性需进一步验证。",
-        "未披露模型规模、训练成本及具体中间训练策略的技术细节。",
-        "缺乏与公开基准（如HumanEval）的对比数据，评估主要依赖内部线上指标。"
-      ],
-      "practical_value": "为企业利用内部工程数据定制LLM提供了可复制的端到端蓝图，涵盖数据提取、准备、全栈调优和部署；实证表明能显著提升开发效率（减少迭代）和代码质量（提升存活率），对拥有大量专有代码库的企业具有直接参考价值。",
-      "why_it_matters": "首次系统披露了万亿token级企业代码数据定制LLM的完整流程与大规模线上A/B验证结果，为基座模型在企业场景的继续预训练、灾难性遗忘缓解及后训练提供了工程范本，对生成式推荐等需要领域适配的LLM应用亦有方法论借鉴意义。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "f8867ce4976ea5b8",
-      "is_daily_pick": false
-    },
-    {
-      "id": "openalex:W7155634930",
-      "title": "Maintaining Control States for Initialization-Aware GRPO in Industrial LLM Workflows",
-      "authors": [
-        "Chen Liu",
-        "Zhenzhao Yuan",
-        "范奉媛",
-        "Limei Che",
-        "Qiao Qian",
-        "Qingyuan Liang",
-        "Zeyu Sun",
-        "Lu Zhang"
-      ],
-      "affiliations": [
-        "Peking University",
-        "Tencent (China)",
-        "Chinese Academy of Sciences",
-        "Institute of Software"
-      ],
-      "published": "2026-10-07",
-      "updated": "2026-10-12T09:40:04.860316",
-      "abstract": "Large language models (LLMs) are increasingly used as components in industrial software workflows, where they are expected to support reliable automation. However, newly introduced workflows often provide only limited data and sparse task-level feedback, making post-deployment adaptation difficult. GRPO-based post-training provides a practical adaptation way in this setting, but its effectiveness depends on the state from which adaptation begins. When the initial behavior of an LLM workflow is poorly aligned with the target workflow, early samples may provide weak reward signals, wasting adaptation budget and delaying workflow onboarding.",
-      "url": "https://doi.org/10.1145/3832783.3834459",
-      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3832783.3834459?download=true",
-      "doi": "10.1145/3832783.3834459",
-      "source": "OpenAlex",
-      "content_type": "paper",
-      "company": "Tencent Hunyuan",
-      "venue": "IEEE/ACM International Conference on Automated Software Engineering (ASE)",
-      "categories": [
-        "Scientific Computing and Data Management",
-        "Topic Modeling",
-        "Reinforcement Learning in Robotics"
-      ],
-      "tags": [
-        "Tencent Hunyuan",
-        "企业论文",
-        "LLM 基模",
-        "后训练",
-        "Reasoning"
-      ],
-      "score": 100,
-      "summary": "本文针对工业LLM工作流中数据有限、任务级反馈稀疏导致部署后适配困难的问题，提出初始化感知的GRPO后训练方法。研究指出GRPO适配效果高度依赖初始状态，当初始行为与目标工作流对齐不佳时，早期样本奖励信号弱，浪费适配预算并延迟工作流上线。为此，作者提出维护控制状态（Control States）的机制，用于在GRPO训练中感知和利用初始化信息，从而提升工业场景下LLM工作流适配的效率和可靠性。论文发表于ASE会议，来自腾讯混元团队，聚焦真实工业软件工作流中的工程约束与线上价值。",
-      "one_line_takeaway": "通过维护控制状态实现初始化感知的GRPO，可缓解工业LLM工作流中因初始对齐差导致的适配预算浪费问题。",
-      "core_method": "提出初始化感知的GRPO后训练方法，核心是维护控制状态（Control States），在GRPO训练过程中感知并利用LLM工作流的初始行为状态，以改善早期奖励信号质量，提升适配效率。",
-      "innovation_points": [
-        "识别出GRPO后训练效果对初始状态的依赖性问题，即初始行为与目标工作流对齐差时早期奖励信号弱。",
-        "提出维护控制状态的机制，使GRPO训练具备初始化感知能力，从而更高效地利用适配预算。",
-        "面向工业LLM工作流场景，强调在数据有限和任务级反馈稀疏条件下的实际适配需求。"
-      ],
-      "experiment_results": [
-        "摘要中未提供具体实验数据或量化结果，仅指出该方法旨在解决早期奖励信号弱、适配预算浪费和上线延迟等问题。"
-      ],
-      "limitations": [
-        "摘要未提供实验验证细节，无法评估方法在不同工业工作流中的泛化性和实际效果。",
-        "控制状态的具体定义、维护方式及其对GRPO训练动态的影响未在摘要中展开。",
-        "缺乏与基线方法的定量对比，难以判断性能提升幅度。"
-      ],
-      "practical_value": "为工业LLM工作流部署后的快速适配提供了一种工程可行的后训练思路，有助于减少适配预算浪费、加速工作流上线，尤其适用于数据稀缺和反馈稀疏的真实业务场景。",
-      "why_it_matters": "工业LLM工作流适配是落地关键瓶颈，本文从初始化状态角度切入GRPO后训练，提出了一个被忽视但重要的工程问题，对提升工业场景下LLM可靠自动化具有实际指导意义。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "6aa48a741a82006f",
-      "is_daily_pick": false
-    },
-    {
-      "id": "openalex:W7221042420",
-      "title": "COPC: Coupled Off-Policy Correction for Asynchronous LLM Reinforcement Learning",
-      "authors": [
-        "Zicheng Hu",
-        "Zhijian Zhou",
-        "Xuan Zhang",
-        "Yuchen Liu",
-        "Cheng Chen",
-        "Yuan Li",
-        "Qi Gu",
-        "Yan Feng",
-        "Hongyan Hao",
-        "Chao Qu"
-      ],
-      "affiliations": [
-        "Fudan University",
-        "Meituan (China)",
-        "East China Normal University"
-      ],
-      "published": "2026-10-07",
-      "updated": "2026-10-13T10:08:12.033832",
-      "abstract": "Asynchronous RL accelerates large language model post-training by decoupling rollout generation from optimization, but trains on stale trajectories. Existing methods primarily correct token-level policy mismatch through importance-ratio control in the actor objective. We show that this \\emph{policy-side correction} alone is insufficient: advantage estimates also inherit mismatch from behavior-policy continuations, which we term \\emph{advantage staleness}. We derive exact bias and variance decompositions for a general two-channel actor update, revealing nonseparable coupling between policy-weight and advantage-estimation errors: their interaction induces multiplicative bias terms, while squared policy weights amplify advantage uncertainty in gradient variance. This motivates the hypothesis that policy- and advantage-side correction should be coordinated. We introduce Coupled Off-Policy Correction (COPC), an actor--critic method combining token-level ratio masking with two-sided clipped-ratio weighting of TD residuals for return and advantage estimation. Joint parameter sweeps across staleness levels support this hypothesis: the effect of one correction parameter depends on, and can reverse with, the other. COPC achieves the highest reported performance on tool-integrated mathematical reasoning and search, outperforming the strongest reported asynchronous baseline in each setting. It also offers a broad high-performing parameter region and improved training stability. In search, COPC remains stable throughout training, while most evaluated asynchronous baselines collapse late in training. These gains persist at 64-step policy staleness. COPC adds minimal step-time overhead over asynchronous PPO and retains a $1.7\\times$ step-time speedup over synchronous PPO.",
-      "url": "https://arxiv.org/abs/2610.09597",
-      "pdf_url": "https://arxiv.org/pdf/2610.09597",
-      "doi": "10.48550/arxiv.2610.09597",
-      "source": "OpenAlex",
-      "content_type": "paper",
-      "company": "",
-      "venue": "arXiv (Cornell University)",
-      "categories": [
-        "Reinforcement Learning in Robotics",
-        "Natural Language Processing Techniques",
-        "Topic Modeling"
-      ],
-      "tags": [
-        "企业论文",
-        "LLM 基模",
-        "后训练",
-        "Reasoning",
-        "异步强化学习",
-        "大语言模型",
-        "离策略校正",
-        "优势估计"
-      ],
-      "score": 98,
-      "summary": "异步强化学习通过解耦轨迹生成与优化来加速大语言模型后训练，但训练数据来自过时策略。现有方法主要在actor目标中通过重要性比率控制进行token级策略校正，本文指出这种策略侧校正不足：优势估计也继承了行为策略延续带来的不匹配，称为优势陈旧。作者推导了双通道actor更新的精确偏差和方差分解，揭示策略权重与优势估计误差之间存在不可分离的耦合，交互产生乘性偏差项，而策略权重的平方会放大梯度方差中的优势不确定性。基于此提出耦合离策略校正（COPC），一种actor-critic方法，结合token级比率掩码与TD残差的双侧裁剪比率加权，用于回报和优势估计。在工具集成数学推理和搜索任务上，COPC取得了报告的最高性能，优于最强的异步基线，并在64步策略陈旧下保持增益，训练稳定性更好，搜索任务中基线后期崩溃而COPC稳定。COPC相比异步PPO仅增加极小步时开销，并保持对同步PPO的1.7倍步时加速。",
-      "one_line_takeaway": "COPC通过耦合策略与优势校正，解决了异步LLM强化学习中的优势陈旧问题，在数学推理和搜索任务上实现最优性能与训练稳定性。",
-      "core_method": "COPC是一种actor-critic方法，在异步RL中同时校正策略和优势估计。它结合token级比率掩码与TD残差的双侧裁剪比率加权，用于回报和优势估计，以协调策略权重和优势估计误差。",
-      "innovation_points": [
-        "识别并形式化了异步RL中的优势陈旧问题，即优势估计继承行为策略延续的不匹配。",
-        "推导了双通道actor更新的精确偏差和方差分解，揭示了策略权重与优势估计误差的不可分离耦合。",
-        "提出COPC，通过耦合校正策略和优势估计，在多个任务上实现最优性能和稳定性。"
-      ],
-      "experiment_results": [
-        "在工具集成数学推理和搜索任务上，COPC取得了报告的最高性能，优于最强的异步基线。",
-        "在搜索任务中，COPC在整个训练过程中保持稳定，而大多数评估的异步基线在训练后期崩溃。",
-        "COPC在64步策略陈旧下仍保持性能增益，相比异步PPO仅增加极小步时开销，并保持对同步PPO的1.7倍步时加速。"
-      ],
-      "limitations": [
-        "未提供具体的数值结果和统计显著性检验。",
-        "实验仅限于工具集成数学推理和搜索任务，泛化性未知。",
-        "未与其他类型的异步RL方法进行广泛比较。"
-      ],
-      "practical_value": "COPC为异步LLM强化学习提供了一种有效的校正方法，能够提升训练稳定性和最终性能，同时保持较高的训练效率，适用于需要快速后训练的大规模语言模型场景。",
-      "why_it_matters": "该工作揭示了异步RL中优势估计的偏差来源，提出了耦合校正方法，对于提升LLM后训练的效率和稳定性具有重要意义，并为后续研究提供了理论分析框架。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "97bcfcca51bbdc60",
-      "is_daily_pick": false
-    },
     {
       "id": "arxiv:2609.39327",
       "title": "Generative End-to-end Ad Retrieval at Douyin",
@@ -366,7 +85,7 @@
         "GenRec",
         "Tokenization"
       ],
-      "score": 120,
+      "score": 119,
       "summary": "本文针对生成式检索在真实推荐系统中面临的两个关键瓶颈：表示坍缩（tokenizer在连续分布偏移下收敛到退化结果）和物品碰撞（大规模候选池导致不同物品共享相同token序列），且二者相互耦合（扩大码本容量缓解碰撞会加剧坍缩）。提出GEAR端到端框架，联合优化tokenizer、生成器和重排器。为缓解表示坍缩，引入BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间的刚性旋转，稳定梯度动态；进一步扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下增强码本表达能力。为解决物品碰撞，GEAR在生成过程中集成上下文条件重排头，以最小计算开销高效消歧碰撞物品。该框架统一了稳定token化与联合重排，形成完全可微且可扩展的范式，目前服务于抖音广告数亿日活用户，在线A/B测试取得显著提升。",
       "one_line_takeaway": "GEAR通过BasisVQ稳定码本训练并集成上下文重排头，解决了生成式检索中表示坍缩与物品碰撞的耦合难题，在抖音广告数亿日活场景下实现端到端部署并取得显著线上收益。",
       "core_method": "GEAR是一个端到端生成式检索框架，联合优化tokenizer、生成器和重排器。针对表示坍缩，提出BasisVQ，用正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转；进一步扩展为prefix-aware BasisRQ，在相同渐近时间复杂度下提升码本表达能力。针对物品碰撞，在生成过程中集成上下文条件重排头，以最小计算开销消歧碰撞物品。整个框架完全可微，支持稳定token化和联合重排。",
@@ -471,72 +190,6 @@
       "is_daily_pick": false
     },
     {
-      "id": "openalex:W7214995768",
-      "title": "TabFM-Auto: Self-Evolving Pipelines for Tabular Foundation Models",
-      "authors": [
-        "Deqing Fu",
-        "Huangyuan Su",
-        "Rajat Sen",
-        "Taman Narayan",
-        "Sujay Sanghavi",
-        "Das, Abhimanyu",
-        "Weihao Kong"
-      ],
-      "affiliations": [
-        "University of Southern California",
-        "Google (United States)",
-        "Harvard University",
-        "Google DeepMind (United Kingdom)",
-        "The University of Texas at Austin"
-      ],
-      "published": "2026-09-29",
-      "updated": "2026-10-12T09:40:04.860316",
-      "abstract": "Tabular foundation models achieve strong zero-shot accuracy on structured data by pretraining on synthetic tables, but they ignore the column names, task descriptions, and auxiliary files that carry dataset semantics. Meanwhile, self-evolving machine learning engineering (MLE) agents train models from scratch on each dataset, yet jointly searching over features, architectures, and hyperparameters is noisy and prone to overfitting. We introduce TabFM-Auto, which pairs a tabular foundation model, TabFM, with a language model agent that evolves the data pipeline around it. Guided by dataset metadata and validation feedback, TabFM-Auto iteratively refines data cleaning, feature engineering, context selection, and post-processing to reduce TabFM's error. Across all 51 datasets of the TabArena benchmark, five TabFM-Auto configurations with different agents and language models take the top five overall positions, and the best raises TabFM from 1785 to 2013 Elo. The discovered pipelines also transfer to other frozen tabular foundation models (+69 to +143 Elo) with no further search. On the 8 tabular competitions of MLE-Bench, TabFM-Auto ranks first overall among MLE agents.",
-      "url": "https://arxiv.org/abs/2609.37989",
-      "pdf_url": "https://arxiv.org/pdf/2609.37989",
-      "doi": "10.48550/arxiv.2609.37989",
-      "source": "OpenAlex",
-      "content_type": "paper",
-      "company": "Google DeepMind",
-      "venue": "arXiv (Cornell University)",
-      "categories": [
-        "Machine Learning and Data Classification",
-        "Machine Learning in Materials Science",
-        "Evolutionary Algorithms and Applications"
-      ],
-      "tags": [
-        "Google DeepMind",
-        "企业论文",
-        "LLM 基模",
-        "预训练"
-      ],
-      "score": 89,
-      "summary": "针对表格基础模型忽略列名、任务描述等语义信息，以及自进化MLE代理从零训练易过拟合的问题，提出TabFM-Auto。该方法将表格基础模型TabFM与语言模型代理结合，代理在数据集元数据和验证反馈指导下，迭代优化数据清洗、特征工程、上下文选择和后处理，以降低TabFM的预测误差。在TabArena的51个数据集上，五种不同代理和语言模型配置的TabFM-Auto占据总排名前五，最佳配置将TabFM的Elo从1785提升至2013。发现的流程无需额外搜索即可迁移到其他冻结表格基础模型，提升69至143 Elo。在MLE-Bench的8个表格竞赛中，TabFM-Auto在MLE代理中总排名第一。",
-      "one_line_takeaway": "TabFM-Auto通过LLM代理自动进化数据流程，显著提升表格基础模型性能，并在多个基准上取得领先。",
-      "core_method": "TabFM-Auto将表格基础模型TabFM与语言模型代理配对，代理利用数据集元数据和验证反馈，迭代优化数据清洗、特征工程、上下文选择和后处理步骤，以最小化TabFM的预测误差。",
-      "innovation_points": [
-        "提出自进化数据流程，利用LLM代理围绕冻结的表格基础模型进行迭代优化，而非从零训练模型。",
-        "结合数据集元数据和验证反馈指导流程进化，有效利用列名、任务描述等语义信息。",
-        "在多个基准上验证了方法的有效性和可迁移性，发现的流程能直接应用于其他表格基础模型。"
-      ],
-      "experiment_results": [
-        "在TabArena的51个数据集上，五种TabFM-Auto配置占据总排名前五，最佳配置将TabFM的Elo从1785提升至2013。",
-        "发现的流程迁移到其他冻结表格基础模型，无需额外搜索即可提升69至143 Elo。",
-        "在MLE-Bench的8个表格竞赛中，TabFM-Auto在MLE代理中总排名第一。"
-      ],
-      "limitations": [
-        "未明确说明代理进化过程的计算成本和搜索效率。",
-        "实验仅基于TabArena和MLE-Bench基准，在其他真实业务场景的泛化性有待验证。",
-        "依赖语言模型代理，可能引入额外的复杂性和不确定性。"
-      ],
-      "practical_value": "TabFM-Auto能够自动优化表格数据流程，减少人工特征工程和调参成本，提升表格基础模型在真实业务场景中的预测性能，且发现的流程可迁移到其他模型，具有较高的工程应用价值。",
-      "why_it_matters": "该工作展示了LLM代理与表格基础模型结合的巨大潜力，通过自动化数据流程进化，显著提升模型性能，为表格数据挖掘和AutoML领域提供了新思路，并推动了自进化机器学习工程的发展。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "247d1d5d9041a67a",
-      "is_daily_pick": false
-    },
-    {
       "id": "openalex:W7171254520",
       "title": "Coarse-to-Fine Long-term Interest Modeling for Generative Recommendation",
       "authors": [
@@ -580,7 +233,7 @@
         "Semantic ID",
         "Tokenization"
       ],
-      "score": 196,
+      "score": 195,
       "summary": "针对生成式推荐（GR）中因注意力二次复杂度而难以建模长序列用户行为的问题，本文提出GLASS框架。核心洞察是语义ID（SID）的生成本质是粗到细的过程：前缀决定粗粒度语义类别，后缀定位具体物品，因此需要差异化的长期信号注入。GLASS包含两个模块：SID-Tier将长期交互映射为统一兴趣向量，利用语义码本的紧凑性融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索则用已生成的粗粒度SID作为动态键，检索相关历史行为，并通过自适应门控融合模块校准后续细粒度token的生成轨迹。在TAOBAO-MM和KuaiRec两个大规模真实数据集上，GLASS优于现有最优基线；在短视频平台为期两周的在线A/B测试中，推荐质量获得显著提升。",
       "one_line_takeaway": "GLASS通过为SID前缀和后缀分别设计长期兴趣注入机制，有效提升了生成式推荐对长序列用户行为的建模能力。",
       "core_method": "提出GLASS框架，包含SID-Tier和语义硬搜索两个模块。SID-Tier将长期交互映射为统一兴趣向量，利用语义码本融合长期历史与候选语义码的交叉特征，增强前缀SID预测；语义硬搜索以生成的粗粒度SID为动态键检索相关历史行为，并通过自适应门控融合模块校准后缀细粒度token的生成。",
@@ -639,7 +292,7 @@
         "后训练",
         "Reasoning"
       ],
-      "score": 90,
+      "score": 89,
       "summary": "该研究针对推荐系统中主观验证任务（如安全与质量准则）的LLM推理失效问题展开大规模实证。基于生产推荐平台的四项真实任务，覆盖专有与开源模型，发现数学导向的刚性推理链会损害验证性能，标准RLVR训练引发“推理崩溃”——策略放弃深思转为快速启发式猜测。提出条件长度惩罚后训练算法，将验证准确率与有界推理长度耦合，遏制崩溃并恢复性能。进一步在1500个合成人格上发现，推理轨迹有效性与社会语言学框架紧密相关，仅因推理人格不同，宏F1波动近0.38，表明主观验证错误多源于推理风格错配。据此提出中期训练架构，通过上下文对齐人格路由推理，为对齐推理模型与真实主观约束提供算法补丁与架构蓝图。",
       "one_line_takeaway": "主观验证任务中，数学式刚性推理会引发推理崩溃，需通过长度惩罚与人格路由对齐推理风格。",
       "core_method": "提出条件长度惩罚后训练算法，在RLVR中耦合验证准确率与有界推理长度以遏制推理崩溃；并设计中期训练架构，基于上下文对齐的人格路由推理轨迹。",
@@ -701,7 +354,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 138,
+      "score": 137,
       "summary": "针对序列生成推荐中直接沿用语言模型RoPE仅编码交互顺序、忽略真实时间间隔与周期性的问题，本文提出T-RoPE。该方法用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性、无法区分季节上下文，而T-RoPE在保留RoPE接口的同时打破该不变性。在五个公开基准上，T-RoPE在所有数据集的全部指标上取得最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%；在超60亿交互的工业电商数据上，较HSTU+Time RAB基线各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试中转化率提升0.33%、订单量提升0.63%。前向与反向算法额外开销与序列长度和头维度呈线性。",
       "one_line_takeaway": "T-RoPE将时间戳、多尺度周期与非平稳性注入旋转位置编码，在保留RoPE接口的同时显著提升序列生成推荐的离线与线上效果。",
       "core_method": "T-RoPE用基于时间戳的角度替换RoPE的索引旋转，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转；理论证明标准RoPE即使使用时间戳仍时间平移不变，无法区分季节上下文，而T-RoPE打破该不变性且保持RoPE接口。",
@@ -762,7 +415,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 126,
+      "score": 125,
       "summary": "针对跨境电商推荐中用户与商品ID空间跨市场不共享、传统跨域方法缺乏锚点的问题，生成式推荐（GR）通过共享token空间和统一模型缓解，但现有方法仍将行为序列严格限定在单一国家，知识迁移仅停留在参数层面，数据层面缺失。本文提出CMRec，受多语言NLP中语码转换语料启发，在数据层面注入跨国监督：首先从多模态内容与跨国行为共现中学习共享语义码本，再基于该码本通过token级替换合成混合国家序列，替换同时满足静态内容约束与动态（价格、受众、热度）约束，最后引入上下文感知损失，按混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和线上A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
       "one_line_takeaway": "CMRec通过双约束上下文感知的跨国码混合，在数据层面实现生成式推荐的跨国知识迁移，显著提升数据稀疏市场表现并带来线上收入与订单增长。",
       "core_method": "CMRec是一个跨国生成式推荐框架，核心是在数据层面注入跨国监督。它首先利用多模态内容与跨国行为共现学习共享语义码本，将商品映射到统一token空间；然后基于该码本进行token级替换，合成混合国家序列，替换过程受静态（内容）和动态（价格、受众、热度等）双约束；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权，使模型在训练中有效利用跨国混合数据。",
@@ -863,14 +516,14 @@
         "Yang Du",
         "Zhen Yang",
         "Yangyu Tao",
-        "Deng, Yaping",
+        "Yaping Deng",
         "Yi Shen",
         "Yigeng Hong",
         "Yiqi Chen"
       ],
       "affiliations": [],
       "published": "2026-09-23",
-      "updated": "2026-10-12T09:40:04.860316",
+      "updated": "2026-09-27T08:07:27.782135",
       "abstract": "We present Hunyuan-A13B, an open-source large language model based on a Mixture-of-Experts architecture. It contains 80 billion total parameters but activates only 13 billion during inference, balancing model capability, computational efficiency, and deployment cost. The model is pretrained on a rigorously filtered 20T-token corpus with enhanced STEM data curation, improving factual reliability and reasoning ability. High-quality supervised fine-tuning and large-scale reinforcement learning further enhance its overall performance. Hunyuan-A13B also introduces a dual-mode Chain-of-Thought framework that adapts reasoning depth to task complexity: fast thinking for routine queries and slow thinking for complex, multi-step problems. Evaluations show competitive performance across mathematics, science, programming, general language understanding, and agent tasks, often approaching that of much larger models. Its high inference throughput makes it suitable for latency-sensitive applications. We release Hunyuan-A13B to support open research and practical LLM deployment.",
       "url": "https://arxiv.org/abs/2609.27284",
       "pdf_url": "https://arxiv.org/pdf/2609.27284",
@@ -881,8 +534,8 @@
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Topic Modeling",
-        "Natural Language Processing Techniques",
-        "Multimodal Machine Learning Applications"
+        "Multimodal Machine Learning Applications",
+        "Machine Learning in Materials Science"
       ],
       "tags": [
         "Tencent Hunyuan",
@@ -895,28 +548,29 @@
         "Multimodal"
       ],
       "score": 139,
-      "summary": "腾讯混元发布开源大模型Hunyuan-A13B，采用MoE架构，总参数量800亿，推理时仅激活130亿参数，以平衡能力、效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；通过高质量SFT和大规模RL进一步优化。其创新在于双模式思维链框架，可根据任务复杂度自适应调整推理深度：常规查询用快思考，复杂多步问题用慢思考。评估显示在数学、科学、编程、通用语言理解和智能体任务上表现有竞争力，常接近更大模型，且高推理吞吐适合延迟敏感场景。",
-      "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在800亿总参数下仅激活130亿，实现了高效推理与强竞争力的平衡。",
-      "core_method": "基于MoE架构，总参数800亿，推理激活130亿；在20T token过滤语料上预训练，增强STEM数据；采用高质量SFT和大规模RL；引入双模式思维链框架，自适应选择快思考或慢思考。",
+      "summary": "腾讯混元团队发布开源大语言模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数80B，推理时仅激活13B，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20T token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力；随后通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，可根据任务复杂度自适应调整推理深度：对常规查询采用快速思考，对复杂多步问题采用慢速思考。评估显示其在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
+      "one_line_takeaway": "Hunyuan-A13B通过MoE架构与双模式思维链，在80B总参数下仅激活13B，实现了高效推理与接近更大模型的性能。",
+      "core_method": "基于混合专家（MoE）架构，总参数80B，推理激活13B；在20T token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和大规模强化学习；引入双模式思维链框架，动态适配推理深度。",
       "innovation_points": [
-        "MoE架构实现高参数容量与低推理激活的平衡，总参800亿仅激活130亿。",
-        "双模式思维链框架，根据任务复杂度动态调整推理深度，兼顾效率与复杂问题求解。",
-        "增强STEM数据整理的20T token预训练语料，提升事实可靠性与推理能力。"
+        "MoE架构实现80B总参数仅激活13B，平衡能力与效率。",
+        "双模式思维链框架，根据任务复杂度自适应切换快速与慢速思考。",
+        "增强STEM数据整理的20T token预训练，提升事实可靠性与推理能力。",
+        "结合高质量SFT与大规模RL，优化整体性能。"
       ],
       "experiment_results": [
-        "在数学、科学、编程、通用语言理解和智能体任务上评估，表现有竞争力，常接近更大模型。",
-        "高推理吞吐，适合延迟敏感应用。"
+        "在数学、科学、编程、通用语言理解和智能体任务上评估，性能具有竞争力，常接近更大模型。",
+        "高推理吞吐量，适合延迟敏感应用。"
       ],
       "limitations": [
-        "未提供具体基准分数或与同类模型的详细对比数据。",
-        "未讨论模型在长尾或低资源任务上的表现。",
-        "未涉及安全对齐或伦理风险的详细评估。"
+        "摘要未提供具体基准测试分数或与同类模型的详细对比数据。",
+        "未说明模型在长尾或特定领域任务上的表现。",
+        "未讨论训练数据的具体构成或潜在偏差。"
       ],
-      "practical_value": "为开源社区和工业部署提供高效能LLM选择，低激活参数降低推理成本，双模式思维链适配不同延迟需求，适合实际业务场景。",
-      "why_it_matters": "展示了MoE架构与自适应推理在开源大模型中的潜力，为高效部署和复杂推理平衡提供新思路，推动可落地LLM发展。",
+      "practical_value": "为开源社区和工业部署提供了一个高效的大模型选择，其MoE架构和双模式推理在降低计算成本的同时保持较强能力，适合延迟敏感场景。",
+      "why_it_matters": "该工作展示了通过MoE和动态推理深度在有限激活参数下实现接近更大模型性能的可行性，对高效大模型研究和实际部署具有参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "e1e2b2c09c0b11ea",
+      "analysis_signature": "56677644dc5a29de",
       "is_daily_pick": false
     },
     {
@@ -957,7 +611,7 @@
         "后训练",
         "推理系统"
       ],
-      "score": 90,
+      "score": 89,
       "summary": "该论文原声称通过隐藏状态几何测量发现大语言模型存在情绪惯性，即“冷静下来”指令无法重置情绪状态。但作者于2026年9月发布更正，指出实验使用无状态单字符串前向传播，未将诱导状态带入重置或探测上下文，因此四种重置措辞不可能影响报告的重置后表示，其相同值是设计属性而非重置鲁棒性证据。报告的十二个数字实为三个不同值各打印四次，2.13好奇心持续比率的分母是表中最小位移，输出掩蔽和尺度不变性观察也基于同一缺陷设计。结论：核心假设既未被证实也未被证伪，因为实验根本未测试该假设。",
       "one_line_takeaway": "该论文因实验设计缺陷（无状态单字符串前向传播）无法测试情绪惯性假设，作者主动更正并承认核心主张不成立。",
       "core_method": "原实验试图通过几何测量隐藏状态来检验LLM情绪重置能力，使用四种重置措辞、四种架构（含无RLHF对照和1.1B参数规模测试）。但实际采用无状态单字符串前向传播，未累积对话历史或诱导状态，导致重置条件无法影响探测表示。",
@@ -1016,7 +670,7 @@
         "MoE",
         "推理系统"
       ],
-      "score": 134,
+      "score": 133,
       "summary": "针对MoE中参与度、执行量与参数物化量无法独立调节的问题，提出IntBMoE。该方法将稠密专家组合与稀疏块执行配对：块来自小型可学习码本，每层通过轻量超网络将专家池中所有专家基合并为一个组合专家，使每个token获得全参与；路由器仅将token发送至少数块，保持稀疏执行；码本固定块数量，限制物化量。双路径残差门控进一步耦合两条独立组合路径。在图像分类、语言建模和序列推荐上验证了泛化性。该系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试获得2.4%相对UVCTR提升。",
       "one_line_takeaway": "IntBMoE通过块级条件与超网络组合，将MoE的参与度、执行量和物化量解耦，并在高德生成式推荐中实现线上收益。",
       "core_method": "IntBMoE采用块条件MoE架构：每个内部层维护一个专家基池，通过轻量超网络将所有专家基合并为一个组合专家，实现全参与；路由器将每个token路由至少数从可学习码本中选取的块，保持稀疏执行；码本大小固定，从而限制参数物化量。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
@@ -1073,7 +727,7 @@
         "后训练",
         "GenRec"
       ],
-      "score": 118,
+      "score": 117,
       "summary": "VARG 是面向天猫 App 搜索的生成式检索系统，目标是在电商搜索中把召回与预排序统一，使生成的候选商品能直接进入最终排序器，同时兼顾相关性、个性化与业务价值。技术路线包括：用 RQ-VAE 构建语义前缀，通过双向 query-item 对比学习增强相关性，并将前缀与按价值排序的第三 token 组合成细粒度商品地址，提供业务价值先验；三阶段监督微调逐步学习商品到标识符映射、查询语义检索与个性化检索；个性化训练结合价值感知与层级对齐监督，并采用局部序数监督 LO-SFT 学习第三 token 编码的簇内排序；Prefix-GRPO 融合输出合法性、用户行为、排序器优势与搜索相关性的门控奖励，配合前缀感知 token 加权，使候选生成与业务价值和排序目标对齐。系统还支持每日商品与模型协同更新，在保留已有商品地址的同时纳入新品与行为反馈。离线实验在数千万商品上验证了标识符稳定性，并显示 SFT 策略与 Prefix-GRPO 在检索质量和头部价值召回上优于各自基线。14 天、覆盖 20% 搜索流量的在线 A/B 测试中，VARG 将生成候选直接送入最终排序器，GMV 提升 1.45%，人均 IPV 提升 0.22%，PCTR 提升 0.31%；购物指南类查询评估中，VARG 在更小候选配额下保持有竞争力的相关性。",
       "one_line_takeaway": "VARG 通过语义前缀、价值排序 token 与 Prefix-GRPO 对齐，让生成式检索候选直接进入天猫最终排序器，并在 14 天 20% 流量 A/B 中实现 GMV +1.45%。",
       "core_method": "VARG 以 RQ-VAE 构建语义前缀，并用双向 query-item 对比学习增强相关性；将前缀与按业务价值排序的第三 token 组合为细粒度商品地址。采用三阶段监督微调依次学习商品到标识符映射、查询语义检索和个性化检索；个性化阶段结合价值感知与层级对齐监督，并用 LO-SFT 学习第三 token 的簇内局部排序。Prefix-GRPO 使用输出合法性、用户行为、排序器优势和搜索相关性的门控奖励，并配合前缀感知 token 加权，使生成候选与业务价值和排序目标对齐。系统支持每日商品与模型协同更新，保留已有商品地址并纳入新品与行为反馈。",
@@ -1130,7 +784,7 @@
         "Tokenization",
         "Reasoning"
       ],
-      "score": 141,
+      "score": 140,
       "summary": "生成式推荐中，语义ID（SID）通常由独立训练的RQ-VAE生成，其编码与下游LLM及任务目标不对齐，导致需要额外对齐语料、推理/RL或逐token编码器来弥合差距。本文提出Guided SID，通过确定性监督索引分配强制粗粒度RQ-VAE层级编码预定义的、文本接地且任务相关的类别属性，同时保持码本可学习（仍接收重建梯度）。采用trie-merge构造将高基数或集合值属性映射到固定码预算，并保持合并桶语义连贯。引导不增加内在成本：碰撞和重建指标匹配或优于基线。在仅SID编码不同的端到端A/B测试中，引导检索器在所有列表长度上提升recall@k（k=1时1.36倍，k=10时1.39倍），MRR从0.0260升至0.0355，预定义属性预测频率提高4.2倍。",
       "one_line_takeaway": "通过强制粗粒度语义ID编码任务相关属性，无需额外对齐即可显著提升生成式推荐性能。",
       "core_method": "Guided SID：在RQ-VAE训练中，对粗粒度层级采用确定性监督索引分配，用预定义类别属性标签覆盖最近邻选择，强制其编码文本接地且任务相关的属性；同时保留码本的重建梯度。使用trie-merge构造将高基数或集合值属性映射到固定码预算，确保合并桶语义连贯。",
@@ -1202,7 +856,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 150,
+      "score": 149,
       "summary": "TGR是腾讯提出的工业级生成式推荐框架，旨在解决传统级联推荐系统（检索、预排序、排序、重排）中模型分离优化导致的扩展性受限、决策碎片化以及缺乏语义知识和推理能力的问题。TGR沿三个耦合方向推进：TGR-GenRank通过CCFormer升级排序，采用统一特征令牌化、可扩展Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，同时保留逐项多任务输出；TGR-GenRec探索两种端到端生成范式，BARGE通过项上下文感知注意力、分层路径重排序和正交双路径解码解决层次语义ID生成中的项边界损失和语义漂移，HiGR则使用前缀结构语义ID、粗到细解码和列表级多目标对齐实现整槽生成；TGR-Reason将离线生成的语义ID推理令牌注入在线解码，无需请求时展开即可提供推理能力。TGR已在腾讯多个生产场景部署，服务数亿用户。CCFormer在五个A/B测试场景中显著提升，其中两个已全面上线，CTR提升3.57%，广告收入提升1.71%；BARGE的Hit@5提升10.2%-16.9%，全面上线后CTR提升0.60%，阅读时长提升1.70%；HiGR离线槽质量提升15.9%-21.3%，推理加速5倍，在线观看时长提升1.22%，视频观看量提升1.73%；TGR-Reason使冷启动新用户Hit@1提升477.8%，有效消费提升1.75%，新用户曝光到转化提升13.09%。",
       "one_line_takeaway": "TGR通过生成式排序、端到端生成和推理注入的统一框架，在工业推荐中实现了显著的在线收益，验证了生成式范式的可行性和价值。",
       "core_method": "TGR框架包含三个核心组件：1) TGR-GenRank：基于CCFormer的生成式排序模型，采用统一特征令牌化、Transformer主干、特征域分离交叉注意力、子空间令牌混合和分层序列压缩，输出逐项多任务预测；2) TGR-GenRec：包括BARGE和HiGR两种生成范式，BARGE使用层次语义ID生成并解决语义漂移，HiGR使用前缀结构语义ID进行整槽生成；3) TGR-Reason：通过离线生成语义ID推理令牌，在线解码时注入，实现无需请求时展开的推理增强。",
@@ -1262,7 +916,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 126,
+      "score": 125,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
       "one_line_takeaway": "CHAP通过层次化语义对齐和残差级联生成机制，实现了高效且个性化的生成式检索，兼顾精度与推理速度。",
       "core_method": "CHAP框架包含三个核心组件：1）层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；2）个性化GR框架，结合离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；3）残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。",
@@ -1377,7 +1031,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 117,
+      "score": 116,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
       "one_line_takeaway": "在生成式推荐中，利用SID树进行粗化可显著提升离线策略评估的可靠性，且粗化偏差可由量化器重建误差和目标日志散度界定。",
       "core_method": "利用SID树作为动作抽象，将物品边缘化到码前缀簇，通过解码器直接计算簇质量，实现粗化OPE，并推导条件偏差界。",
@@ -1430,7 +1084,6 @@
         "Zhuang Liu"
       ],
       "affiliations": [
-        "University of Oxford",
         "National Institute of Advanced Industrial Science and Technology",
         "Stanford University",
         "University of Cambridge",
@@ -1440,11 +1093,11 @@
         "Carnegie Mellon University",
         "New York University",
         "Imperial College London",
-        "Harvard University",
+        "Harvard University Press",
         "Princeton University"
       ],
       "published": "2026-08-26",
-      "updated": "2026-10-06T10:28:23.643775",
+      "updated": "2026-09-30T09:27:27.532063",
       "abstract": "This paper reconsiders intelligence from a vision-centered perspective and examines whether intelligence emerging from visual experience and learning may provide a pathway toward AGI. In the language domain, beginning with the introduction of the Transformer architecture, the GPT series has demonstrated transfer to unseen tasks through autoregressive language modeling on web-scale text combined with aggressive scaling. This raises a natural question, namely, what capabilities and forms of intelligence can emerge from visual modalities such as images, videos, and geometry? In this paper, we discuss whether visual intelligence can serve as a pathway toward AGI, referred to in this paper as visual general intelligence (VGI), by bringing together contributors from diverse standpoints and affiliations. Our aim is not to offer a single definition of visual intelligence, but to clarify the principles that computer vision should pursue in the AGI era, the visual input modalities, the benchmarks, the learning paradigms, and the relationship between vision, when taken as the core, and other modalities such as language.",
       "url": "https://arxiv.org/abs/2608.25924",
       "pdf_url": "https://arxiv.org/pdf/2608.25924",
@@ -1454,39 +1107,37 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
-        "Multimodal Machine Learning Applications",
-        "Domain Adaptation and Few-Shot Learning",
-        "Advanced Neural Network Applications"
+        "Psychiatry, Mental Health, Neuroscience",
+        "Cognitive Science and Education Research",
+        "Data Visualization and Analytics"
       ],
       "tags": [
         "Google DeepMind",
         "企业论文",
-        "后训练",
-        "Multimodal"
+        "后训练"
       ],
-      "score": 76,
-      "summary": "该白皮书从视觉中心视角重新审视智能，探讨视觉经验与学习能否成为通向AGI的路径，提出视觉通用智能（VGI）概念。作者类比语言领域GPT系列通过自回归建模与规模化实现跨任务迁移的成功，追问图像、视频、几何等视觉模态能涌现何种能力与智能形式。论文汇集多机构研究者观点，不追求单一视觉智能定义，而是旨在澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准测试、学习范式，以及视觉作为核心时与语言等其他模态的关系。",
+      "score": 73,
+      "summary": "本文以视觉为中心重新审视智能，探讨视觉经验与学习能否通向AGI，提出视觉通用智能（VGI）概念。作者汇集多机构观点，类比语言领域GPT系列通过自回归建模与规模化实现未见任务迁移，追问图像、视频、几何等视觉模态能涌现何种能力。目标不是给出单一视觉智能定义，而是澄清AGI时代计算机视觉应追求的原则、视觉输入模态、基准、学习范式，以及视觉作为核心与语言等其他模态的关系。",
       "one_line_takeaway": "视觉通用智能（VGI）可能成为通向AGI的独立路径，需系统厘清其原则、模态、基准与学习范式。",
-      "core_method": "以立场论文形式，汇集多机构研究者观点，通过类比语言领域GPT系列的自回归建模与规模化路径，从视觉中心视角讨论AGI的可能性，并梳理视觉输入模态、基准、学习范式及视觉与语言的关系。",
+      "core_method": "白皮书形式，汇集多机构研究者观点，以语言领域GPT系列的自回归建模与规模化迁移为类比，从视觉中心视角讨论AGI路径，不提出单一技术方案。",
       "innovation_points": [
-        "提出视觉通用智能（VGI）概念，将视觉经验与学习作为通向AGI的候选路径。",
-        "系统对比语言领域GPT成功范式，追问视觉模态能否复制类似涌现与迁移能力。",
-        "不追求单一视觉智能定义，而是聚焦AGI时代计算机视觉应追求的原则、模态、基准与学习范式。",
-        "探讨视觉作为核心时与语言等其他模态的关系，为多模态研究提供框架性思考。"
+        "提出视觉通用智能（VGI）概念，将视觉视为通向AGI的核心路径而非附属模态",
+        "系统梳理AGI时代计算机视觉应追求的原则、视觉输入模态、基准与学习范式",
+        "探讨视觉作为核心与语言等其他模态的关系，而非仅将视觉作为语言模型的输入"
       ],
       "experiment_results": [
-        "该论文为白皮书/立场论文，未报告具体实验数据或量化结果。"
+        "本文为白皮书，未报告具体实验数据或量化结果。"
       ],
       "limitations": [
-        "作为立场论文，未提供实证实验或量化验证，结论以观点和框架为主。",
-        "未给出视觉通用智能的单一明确定义，可能影响后续研究的可操作性。",
-        "对视觉与语言等其他模态关系的讨论仍停留在原则层面，缺乏具体技术方案。"
+        "作为白皮书，未提供具体技术实现或实验验证",
+        "未给出视觉通用智能的单一明确定义，结论偏原则性讨论",
+        "未量化视觉路径与语言路径在通向AGI上的优劣"
       ],
-      "practical_value": "为计算机视觉与AGI交叉领域的研究者提供战略方向与原则性框架，帮助理解视觉中心路径的潜力与挑战，并指导基准设计、学习范式选择及多模态关系处理。",
-      "why_it_matters": "在语言模型主导AGI讨论的背景下，该白皮书系统提出视觉中心路径，可能启发新的研究议程与资源投入方向，对关注基座模型扩展规律与多模态智能的研究者具有参考价值。",
+      "practical_value": "为计算机视觉与多模态研究提供AGI时代的战略方向参考，帮助研究者理解视觉核心路径的潜在原则、基准需求与学习范式，对生成式推荐等需要视觉理解的任务有方向性启发。",
+      "why_it_matters": "在语言模型主导AGI讨论的背景下，本文系统论证视觉作为独立路径的可能性，为视觉与多模态研究提供议程设置，值得关注AGI路径的研究者阅读。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "f9f1af7c8104e4e3",
+      "analysis_signature": "d5a277cac2854f47",
       "is_daily_pick": false
     },
     {
@@ -1531,7 +1182,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 60,
+      "score": 59,
       "summary": "硬件内核优化需要反复编译、正确性测试、性能分析和修改。现有LLM代理虽能自动化部分流程，但无法从已完成的任务中学习，且保留所有历史轨迹会与当前任务竞争上下文。本文提出KOPE，一个经验驱动的框架，通过经验图记忆记录优化轨迹及反馈，并采用主动上下文管理和注入，在固定token预算下检索相关经验。在GLM-5.2设置下，KOPE的每算子加速比几何均值是强基线CANNBot的1.54倍。在53算子消融中，主动上下文管理将通过率从60.0%提升至84.6%，正字段几何均值从0.0382提升至0.0661，优化token消耗从15.9B降至1.113B。启用经验图记忆将全套通过率从55.2%提升至84.6%，有效时序比较上加速比几何均值为1.43倍。结果表明，在基础模型固定时，通过外部经验可实现持续优化。",
       "one_line_takeaway": "KOPE通过经验图记忆和主动上下文管理，使LLM代理能从历史优化中学习，显著提升硬件内核优化效率，且不依赖更强的基础模型。",
       "core_method": "KOPE框架：1) 经验图记忆（EGM）存储优化轨迹，包含决策、执行反馈和后续决策，保留决策顺序和替代分支；2) 主动上下文管理和注入（ACMI）在固定token预算下检索相关经验，动态构建上下文。",
@@ -1585,7 +1236,7 @@
         "LLM 基模",
         "Multimodal"
       ],
-      "score": 128,
+      "score": 127,
       "summary": "本报告介绍阿里巴巴Qwen团队发布的Qwen Drive 1.0，这是迈向自动驾驶视觉语言基础模型的第一步。该模型基于Qwen2-VL架构，通过多模态指令微调，将视觉编码器与语言模型结合，旨在处理驾驶场景中的感知、预测和规划任务。报告强调其作为基础模型的定位，而非应用层案例。技术路线包括利用大规模驾驶视频和文本对进行预训练，并采用统一的token表示来对齐视觉和语言信息。实验结果显示，在多个自动驾驶基准上，Qwen Drive 1.0在零样本和少样本设置下均展现出有竞争力的性能，尤其在场景理解和决策推理方面。然而，报告未提供详细的消融实验或与现有方法的全面对比数据。局限性包括对复杂动态场景的鲁棒性不足，以及缺乏真实路测验证。实践价值在于为自动驾驶提供可解释的决策基础，但距离实际部署仍有距离。",
       "one_line_takeaway": "Qwen Drive 1.0展示了将视觉语言基础模型应用于自动驾驶的初步可行性，但尚需更多工程化验证。",
       "core_method": "基于Qwen2-VL架构，采用视觉编码器与语言模型结合，通过多模态指令微调，使用驾驶视频和文本对进行预训练，统一视觉和语言token表示，实现感知、预测和规划的多任务处理。",
@@ -1641,7 +1292,7 @@
         "A/B 实验",
         "Tokenization"
       ],
-      "score": 84,
+      "score": 83,
       "summary": "本文提出基于流的物品分词器Tlow，用于将语义嵌入转化为离散令牌ID，以替代传统推荐模型中的随机物品ID，解决参数过多和冷启动问题。现有分词器如RQ-VAE因码本依赖导致解码效率低，而OPQ等独立分词器难以处理嵌入的维度相关性和分布复杂性。Tlow通过标准化流将原始语义嵌入映射到标准正态分布，实现维度独立和分布简化，从而进行独立分词。同时引入码本引导，对齐码本空间与令牌嵌入空间，增强语义区分。在四个公开数据集上的离线实验表明，Tlow显著提升推荐性能，并在跨域和多模态推荐中有效。在微信多模态检索任务的在线实验中，基于令牌ID的检索模型使全局用户点击率提升10.32%，新物品点击率提升11.64%。代码已开源。",
       "one_line_takeaway": "Tlow通过标准化流简化嵌入分布，实现高效独立分词，显著提升推荐性能并缓解冷启动。",
       "core_method": "使用标准化流（如RealNVP）将语义嵌入变换为独立标准正态分布，然后对变换后的嵌入进行独立量化（如均匀量化或乘积量化），生成令牌ID；同时引入码本引导损失，使码本空间与令牌嵌入空间对齐。",
@@ -2009,7 +1660,10 @@
       "affiliations": [
         "Harvard University",
         "Apple (United States)",
-        "Google DeepMind (United Kingdom)"
+        "Google DeepMind (United Kingdom)",
+        "Harvard University Press",
+        "Apple (United Kingdom)",
+        "Google (United States)"
       ],
       "published": "2026-08-06",
       "updated": "2026-09-30T09:27:27.532063",
@@ -2022,9 +1676,9 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
-        "Natural Language Processing Techniques",
         "Topic Modeling",
-        "Advanced Neural Network Applications"
+        "Generative Adversarial Networks and Image Synthesis",
+        "Speech Recognition and Synthesis"
       ],
       "tags": [
         "Google DeepMind",
@@ -3416,29 +3070,36 @@
         "Fanyi Di",
         "Xin Li"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Alibaba Group (China)"
+      ],
       "published": "2026-07-13T15:44:06Z",
       "updated": "2026-07-13T15:44:06Z",
       "abstract": "Generative retrieval enables recommender systems to retrieve items by generating compact item identifiers, but scaling it to industrial scenarios remains challenging due to redundant or colliding token assignments and insufficient integration of heterogeneous item signals. These challenges are particularly critical for next Point-of-Interest (POI) recommendation, where models must represent structured spatial entities, capture sequential mobility patterns, and produce predictions consistent with real user behavior. We propose Gwhere, an end-to-end industrial framework that integrates semantic identifier (SID) generation with LLM-based generative next POI recommendation. Gwhere first learns discriminative POI SIDs through a contrastive residual-quantization tokenizer that aligns textual, visual, spatial, and collaborative signals. Based on these SIDs, Gwhere adapts LLMs to mobility scenarios via continued pretraining on enriched spatio-temporal corpora, supervised fine-tuning, and Exposure-Aware Kahneman-Tversky Optimization (EAKTO), a reinforcement learning objective for behavioral preference alignment. Experiments on public datasets and Amap's large-scale industrial dataset demonstrate the effectiveness of Gwhere. The system has been deployed in Amap's homepage service under high-concurrency and low-latency constraints. Long-term online A/B tests show improvements of 5.83% in P-CTR and 6.20% in U-CTR over the production baseline. The implementation is publicly available at https://github.com/alibaba/SimCIT.",
       "url": "http://arxiv.org/abs/2607.26073v1",
       "pdf_url": "https://arxiv.org/pdf/2607.26073v1",
-      "doi": "",
+      "doi": "10.1145/3773078.3831863",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Alibaba Qwen",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Multimodal Machine Learning Applications",
+        "Advanced Graph Neural Networks"
       ],
       "tags": [
+        "Alibaba Qwen",
         "A/B 实验",
+        "企业论文",
         "预训练",
         "后训练",
         "GenRec",
         "Semantic ID",
         "Reasoning"
       ],
-      "score": 158,
+      "score": 220,
       "summary": "Gwhere是阿里巴巴高德地图提出的端到端工业级生成式下一兴趣点（POI）推荐框架，旨在解决生成式检索在工业场景中面临的token分配冗余/冲突以及异构信号融合不足等问题。该框架首先通过对比残差量化分词器学习判别性POI语义ID（SID），该分词器对齐文本、视觉、空间和协同信号；然后基于SID，通过丰富时空语料上的持续预训练、监督微调和暴露感知的Kahneman-Tversky优化（EAKTO）将LLM适配到移动场景。在公共数据集和高德大规模工业数据集上的实验验证了有效性，系统已部署在高德首页服务中，长期在线A/B测试显示P-CTR提升5.83%，U-CTR提升6.20%。",
       "one_line_takeaway": "Gwhere通过语义ID生成和LLM微调，实现了工业级生成式POI推荐，显著提升线上点击率。",
       "core_method": "Gwhere包含两个核心组件：1）对比残差量化分词器，学习融合多模态信号的POI语义ID；2）基于LLM的生成式推荐，通过持续预训练、监督微调和EAKTO对齐用户行为偏好。",
@@ -3988,7 +3649,8 @@
         "Theravance Biopharma (United States)",
         "Intel (United States)",
         "Google (United States)",
-        "Google DeepMind (United Kingdom)"
+        "Google DeepMind (United Kingdom)",
+        "Intel (United Kingdom)"
       ],
       "published": "2026-05-27",
       "updated": "2026-09-30T09:27:27.532063",
@@ -4001,9 +3663,9 @@
       "company": "Google DeepMind",
       "venue": "arXiv (Cornell University)",
       "categories": [
+        "Big Data and Digital Economy",
         "Parallel Computing and Optimization Techniques",
-        "Cloud Computing and Resource Management",
-        "Distributed and Parallel Computing Systems"
+        "Advanced Neural Network Applications"
       ],
       "tags": [
         "Google DeepMind",
@@ -4348,7 +4010,8 @@
         "Mihir Parmar",
         "Ben Zhou",
         "Swaroop Mishra",
-        "Chitta R. Baral"
+        "Chitta R. Baral",
+        "Aswin RRV"
       ],
       "affiliations": [
         "Arizona State University",
@@ -4367,16 +4030,17 @@
       "venue": "arXiv (Cornell University)",
       "categories": [
         "Topic Modeling",
-        "Reinforcement Learning in Robotics",
-        "Natural Language Processing Techniques"
+        "Multimodal Machine Learning Applications",
+        "Artificial Intelligence in Healthcare and Education"
       ],
       "tags": [
         "Google DeepMind",
         "企业论文",
         "LLM 基模",
-        "Reasoning"
+        "Reasoning",
+        "Multimodal"
       ],
-      "score": 66,
+      "score": 68,
       "summary": "该研究探讨了在强化学习（RL）前进行中期训练（mid-training）时，使用自生成数据对语言模型的影响。作者提出一个基于波利亚问题解决方法的引导式数据生成框架，为每个训练问题生成多种正确解法变体，并进行微调。理论分析表明，这种中期训练能激励策略梯度更新结合多种推理路径。实验显示，在数学推理、代码生成和叙事推理等任务上，使用该中期数据初始化的RL模型取得一致提升。",
       "one_line_takeaway": "在RL前用自生成的多解法数据做中期训练，能显著提升语言模型的推理能力。",
       "core_method": "采用基于波利亚问题解决方法的引导式自生成数据框架，为每个问题生成多种正确解法变体，进行中期微调，再执行RL训练。",
@@ -4484,8 +4148,7 @@
         "Jun Wang",
         "Fuji Ren",
         "Wenwu Ou",
-        "Yu Yin",
-        "Wen-Wu Ou"
+        "Yu Yin"
       ],
       "affiliations": [],
       "published": "2026-04-26T03:59:35Z",
@@ -5263,10 +4926,10 @@
         "Songhao Ni",
         "Dongxu Liang",
         "Jun Wang",
-        "Shi-Min Cai",
+        "Shimin Cai",
         "Tao Zhou",
         "Fuji Ren",
-        "Wen-Wu Ou"
+        "Wenwu Ou"
       ],
       "affiliations": [],
       "published": "2026-02-28",
@@ -6947,7 +6610,7 @@
         "K. Feng",
         "Xiaojian Ma",
         "Yalong Wang",
-        "Yong-Qi Liu",
+        "Yongqi Liu",
         "Han Li",
         "Zhen-Qiang Zhou",
         "Yang Wang"
@@ -6991,66 +6654,6 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "b78c48ca92028ea5",
-      "is_daily_pick": false
-    },
-    {
-      "id": "s2:04e744714031c8dcbe2421a2b28b81b3968de1ef",
-      "title": "CAT-ID2: Category-Tree Integrated Document Identifier Learning for Generative Retrieval In E-commerce",
-      "authors": [
-        "Xiaoyu Liu",
-        "Fu-Wei Zhang",
-        "Yi-Qing Wu",
-        "Xinyu Jia",
-        "Zenghua Xia",
-        "Fu-Zhen Zhuang",
-        "Zhao Zhang",
-        "Fei Jiang",
-        "Wei Lin"
-      ],
-      "affiliations": [],
-      "published": "2025-11-03",
-      "updated": "2025-11-03",
-      "abstract": "Generative retrieval (GR) has gained significant attention as an effective paradigm that integrates the capabilities of large language models (LLMs). It generally consists of two stages: constructing discrete semantic identifiers (IDs) for documents and retrieving documents by autoregressively generating ID tokens. The core challenge in GR is how to construct document IDs (DocIDS) with strong representational power. Good IDs should exhibit two key properties: similar documents should have more similar IDs, and each document should maintain a distinct and unique ID. However, most existing methods ignore native category information, which is common and critical in E-commerce. Therefore, we propose a novel ID learning method, CAtegory-Tree Integrated Document IDentifier (CAT-ID2), incorporating prior category information into the semantic IDs. CAT-ID2 includes three key modules: a Hierarchical Class Constraint Loss to integrate category information layer by layer during quantization, a Cluster Scale Constraint Loss for uniform ID token distribution, and a Dispersion Loss to improve the distinction of reconstructed documents. These components enable CAT-ID2 to generate IDs that make similar documents more alike while preserving the uniqueness of different documents' representations. Extensive offline and online experiments confirm the effectiveness of our method, with online A/B tests showing a (0.33%) increase in average orders per thousand users for ambiguous intent queries and (0.24%) for long-tail queries. The source code is available at https://github.com/lxbdtt/CAT-ID2.",
-      "url": "https://www.semanticscholar.org/paper/04e744714031c8dcbe2421a2b28b81b3968de1ef",
-      "pdf_url": "",
-      "doi": "10.48550/arXiv.2511.01461",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "Web Search and Data Mining",
-      "categories": [],
-      "tags": [
-        "A/B 实验",
-        "LLM 基模",
-        "GenRec",
-        "Semantic ID",
-        "推理系统"
-      ],
-      "score": 136,
-      "summary": "该论文针对生成式检索（GR）中文档标识符（DocID）构建这一核心挑战，提出CAT-ID2方法。现有方法多忽略电商场景中普遍且关键的原始类目信息，导致ID表示能力不足。CAT-ID2将先验类目信息融入语义ID，包含三个关键模块：分层类目约束损失，在量化过程中逐层整合类目信息；簇尺度约束损失，促使ID token分布均匀；分散损失，提升重构文档的区分度。这些组件使相似文档获得更相似的ID，同时保持不同文档表示的唯一性。离线与在线实验验证了方法有效性，在线A/B测试显示，在模糊意图查询上每千用户平均订单量提升0.33%，长尾查询提升0.24%。",
-      "one_line_takeaway": "CAT-ID2通过将电商类目树先验融入语义ID学习，在保持ID唯一性的同时增强相似文档的ID相似性，并在线上A/B测试中显著提升模糊意图与长尾查询的订单转化。",
-      "core_method": "CAT-ID2是一种面向电商生成式检索的文档标识符学习方法，核心是将先验类目信息融入语义ID。它包含三个模块：分层类目约束损失，在量化过程中逐层整合类目信息；簇尺度约束损失，促使ID token分布均匀；分散损失，提升重构文档的区分度。三者协同使相似文档的ID更相似，同时保持不同文档表示的唯一性。",
-      "innovation_points": [
-        "首次将电商场景中普遍且关键的原始类目信息显式融入生成式检索的语义ID学习过程。",
-        "提出分层类目约束损失，在量化过程中逐层整合类目树信息，使ID继承类目层次结构。",
-        "设计簇尺度约束损失与分散损失，分别保证ID token分布均匀和重构文档的区分度。",
-        "在离线与在线A/B测试中验证方法有效性，并开源代码。"
-      ],
-      "experiment_results": [
-        "在线A/B测试显示，在模糊意图查询上每千用户平均订单量提升0.33%。",
-        "在线A/B测试显示，在长尾查询上每千用户平均订单量提升0.24%。",
-        "离线实验确认了方法有效性，但摘要未提供具体离线指标数值。"
-      ],
-      "limitations": [
-        "摘要未提供离线实验的具体指标与对比基线细节，无法全面评估离线性能。",
-        "方法依赖电商场景的类目树先验，迁移到无类目信息的领域可能受限。",
-        "在线提升幅度较小（0.33%和0.24%），统计显著性与长期收益未在摘要中说明。"
-      ],
-      "practical_value": "CAT-ID2直接面向电商生成式检索的真实业务场景，利用平台已有的类目树先验，工程上易于集成到现有GR流程中。在线A/B测试证实其在模糊意图和长尾查询上带来订单量提升，对提升搜索转化和长尾覆盖具有实际业务价值，且代码开源便于复现与落地。",
-      "why_it_matters": "生成式检索是LLM时代信息检索的重要范式，而文档ID的表示能力是其核心瓶颈。CAT-ID2首次系统性地将电商类目树先验融入ID学习，为语义ID构建提供了新思路，并通过在线A/B测试验证了业务价值，对研究者和电商搜索工程师均有参考意义。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "8e816cf78af86f1b",
       "is_daily_pick": false
     },
     {

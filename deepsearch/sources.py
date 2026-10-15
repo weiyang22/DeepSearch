@@ -74,7 +74,7 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
 
 def collect_arxiv(config: Config) -> list[Paper]:
     categories = " OR ".join(f"cat:{item}" for item in config.arxiv_categories)
-    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=config.retention_days)
+    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=config.discovery_window_days)
     date_range = f"submittedDate:[{cutoff:%Y%m%d%H%M} TO {dt.datetime.now(dt.timezone.utc):%Y%m%d%H%M}]"
     queries = _arxiv_queries(config, categories, date_range)
     papers: list[Paper] = []
@@ -158,15 +158,18 @@ def _collect_arxiv_via_openalex(config: Config) -> list[Paper]:
     location (~11% broader than the primary-location filter).
     """
     papers: list[Paper] = []
-    cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
-    work_filter = f"locations.source.id:{OPENALEX_ARXIV_SOURCE_ID},from_publication_date:{cutoff}"
+    today = dt.date.today().isoformat()
+    cutoff = (dt.date.today() - dt.timedelta(days=config.discovery_window_days)).isoformat()
+    # to_publication_date drops in-press works dated in the future, which
+    # otherwise crowd the newest-first result page.
+    work_filter = f"locations.source.id:{OPENALEX_ARXIV_SOURCE_ID},from_publication_date:{cutoff},to_publication_date:{today}"
     for query in _arxiv_mirror_searches(config):
         url = "https://api.openalex.org/works?" + urllib.parse.urlencode(
             {
                 "search": query,
                 "filter": work_filter,
                 "per-page": str(config.openalex_per_query),
-                "sort": "publication_date:desc",
+                "sort": "relevance_score:desc",
             }
         )
         try:
@@ -192,7 +195,7 @@ def _arxiv_mirror_searches(config: Config) -> list[str]:
     family_searches = [
         " OR ".join(f'"{term}"' for term in chunk) for chunk in _chunks(discovery_terms, 11)
     ]
-    return [*config.topic_queries[:8], *family_searches]
+    return [*config.topic_queries[:10], *family_searches]
 
 
 def _openalex_arxiv_paper(work: dict[str, Any], config: Config) -> Paper | None:
@@ -242,7 +245,7 @@ def _arxiv_id_from(value: str) -> str:
 def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str]:
     """Build a few balanced queries to avoid both oversized requests and rate limits."""
     queries: list[str] = []
-    topic_terms = " OR ".join(f'all:\"{term}\"' for term in config.topic_queries[:8])
+    topic_terms = " OR ".join(f'all:\"{term}\"' for term in config.topic_queries[:10])
     if topic_terms:
         queries.append(f"({categories}) AND ({topic_terms}) AND {date_range}")
 
@@ -325,24 +328,25 @@ def collect_dblp(config: Config) -> list[Paper]:
 
 def collect_openalex(config: Config) -> list[Paper]:
     papers: list[Paper] = []
-    cutoff = (dt.date.today() - dt.timedelta(days=config.retention_days)).isoformat()
+    today = dt.date.today().isoformat()
+    cutoff = (dt.date.today() - dt.timedelta(days=config.discovery_window_days)).isoformat()
     queries = _unique([
-        *config.topic_queries[:8],
+        *config.topic_queries[:10],
         *[terms[0] for terms in config.company_queries.values()],
         *[terms[0] for terms in config.model_families.values()],
     ])
     requests: list[tuple[str, str, str, str]] = [
-        (query, f"from_publication_date:{cutoff}", "", "") for query in queries
+        (query, f"from_publication_date:{cutoff},to_publication_date:{today}", "", "") for query in queries
     ]
     for company, institution_id in config.openalex_institutions.items():
         requests.extend(
             (
                 query,
-                f"institutions.id:{institution_id},from_publication_date:{cutoff},type:article|preprint",
+                f"institutions.id:{institution_id},from_publication_date:{cutoff},to_publication_date:{today},type:article|preprint",
                 company,
                 institution_id,
             )
-            for query in config.topic_queries[:8]
+            for query in config.topic_queries[:10]
         )
 
     for query, work_filter, focus_company, focus_institution_id in requests:
@@ -351,7 +355,7 @@ def collect_openalex(config: Config) -> list[Paper]:
                 "search": query,
                 "filter": work_filter,
                 "per-page": str(config.openalex_per_query),
-                "sort": "publication_date:desc",
+                "sort": "relevance_score:desc",
             }
         )
         for work in _request_json(url).get("results", []) or []:
@@ -417,7 +421,7 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
     # Anonymous Semantic Scholar traffic is heavily throttled on shared CI IPs.
     # Core topic searches provide the useful abstracts; company-wide discovery is
     # already handled by OpenAlex and official GitHub.
-    queries = config.topic_queries[:8]
+    queries = config.topic_queries[:10]
     for query in queries:
         url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode(
             {"query": query, "limit": str(config.semantic_scholar_limit), "fields": fields}
@@ -456,7 +460,7 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
 
 def collect_official_github(config: Config) -> list[Paper]:
     papers: list[Paper] = []
-    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=config.retention_days)
+    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=config.discovery_window_days)
     github_headers = {"Accept": "application/vnd.github+json"}
     github_token = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
     if github_token:

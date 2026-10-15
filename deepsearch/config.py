@@ -15,6 +15,7 @@ class Config:
     daily_window_days: int
     daily_min_score: int
     retention_days: int
+    discovery_window_days: int
     arxiv_categories: list[str]
     topic_queries: list[str]
     include_keywords: list[str]
@@ -51,6 +52,10 @@ def load_config(path: str | Path = "config.toml") -> Config:
         daily_window_days=int(site.get("daily_window_days", 3)),
         daily_min_score=int(site.get("daily_min_score", 45)),
         retention_days=int(site.get("retention_days", 365)),
+        # Discovery only needs to surface RECENT papers (the archive keeps the
+        # rest); a narrow window stops high-frequency queries from pushing new
+        # work out of the per-query result page.
+        discovery_window_days=int(discovery.get("discovery_window_days", 30)),
         arxiv_categories=list(discovery.get("arxiv_categories", ["cs.AI", "cs.CL", "cs.LG", "cs.IR"])),
         topic_queries=list(discovery.get("topic_queries", [])),
         include_keywords=list(discovery.get("include_keywords", [])),

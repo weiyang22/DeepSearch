@@ -59,6 +59,18 @@ AB_EXPERIMENT_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# Recommendation-system "scaling up" research: the GenRec scope is broader
+# than generative recommenders alone — industrial work on recommender scaling
+# laws, capacity scaling and compute-optimal training (e.g. TikTok's HELIX
+# ranking-model scaling paper) belongs to the same technology radar.
+REC_TITLE_ANCHOR = re.compile(r"\brecommend(?:ation|ations|ers?|ing)?\b|\brecsys\b", re.IGNORECASE)
+REC_SCALING_EVIDENCE = re.compile(
+    r"\bscaling[- ]laws?\b|\bscaling up\b|\bscale up\b|\bscaling-up\b"
+    r"|\bscaling ceiling\b|\bscaling slope\b|\bscaling behavior\b|\bscaling curve\b"
+    r"|\bscaling capacity\b|\bcompute[- ]optimal\b",
+    re.IGNORECASE,
+)
+
 OFFICIAL_MODEL_PATTERN = re.compile(
     r"\b(?:gpt[- ]?\d(?:\.\d)?|openai[- ]?o[134]|claude(?:[- ]\w+)?|"
     r"gemini[- ]?\d(?:\.\d)?|gemma[- ]?\d|llama[- ]?\d(?:\.\d)?|grok[- ]?\d|"
@@ -110,6 +122,7 @@ EXPLICIT_LLM_TITLE_PATTERN = re.compile(
     r"\b(?:foundation|base)\s+models?\b"
     r"|\blanguage\s+models?\b"
     r"|\bllms?\b"
+    r"|\bscaling\s+laws?\b"
     r"|technical\s+report"
     r"|tech\s+report"
     r"|white\s*paper"
@@ -253,6 +266,10 @@ def score_paper(paper: Paper, config: Config) -> int:
 def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     text = _search_text(paper)
     tags = [tag for tag, terms in TAG_RULES.items() if any(term in text for term in terms)]
+    if "GenRec" not in tags and _is_rec_scaling(paper):
+        # Scaling-up recommender papers enter through the broader GenRec
+        # branch; tag them so the frontend GenRec tab shows them too.
+        tags.append("GenRec")
     if paper.content_type == "company_report":
         tags.insert(0, "LLM 基模")
         tags.insert(0, "官方技术报告")
@@ -266,12 +283,28 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     for tag in tags:
         if tag not in unique:
             unique.append(tag)
-    return unique[:8] or ["GenRec"]
+    if not unique:
+        # An admitted paper without a TAG_RULES match still needs a truthful
+        # category for the frontend tabs instead of the old "GenRec" default.
+        return ["LLM 基模"] if is_core_llm(paper) else ["GenRec"]
+    return unique[:8]
 
 
 def is_genrec(paper: Paper) -> bool:
     text = _search_text(paper)
-    return any(term in text for term in GENREC_TERMS)
+    if any(term in text for term in GENREC_TERMS):
+        return True
+    return _is_rec_scaling(paper)
+
+
+def _is_rec_scaling(paper: Paper) -> bool:
+    """Broader GenRec scope: recommender "scaling up" research.
+
+    Requires a recommendation anchor in the title plus genuine scaling
+    evidence in the body, so a passing mention of "recommendation" far from
+    any scaling discussion does not qualify.
+    """
+    return bool(REC_TITLE_ANCHOR.search(paper.title) and REC_SCALING_EVIDENCE.search(_search_text(paper)))
 
 
 def is_core_llm(paper: Paper) -> bool:

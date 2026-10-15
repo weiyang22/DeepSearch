@@ -13,7 +13,15 @@ import deepsearch.sources as sources
 from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
-from deepsearch.ranking import choose_daily_picks, effective_daily_window, has_ab_experiment, infer_tags, prepare_candidates
+from deepsearch.ranking import (
+    _is_rec_scaling,
+    choose_daily_picks,
+    effective_daily_window,
+    has_ab_experiment,
+    infer_tags,
+    is_genrec,
+    prepare_candidates,
+)
 from deepsearch.summarizer import _call_deepseek
 from deepsearch.sources import (
     PartialCollectionError,
@@ -297,7 +305,7 @@ class PipelineTests(unittest.TestCase):
         searches = _arxiv_mirror_searches(self.config)
         topics = [item for item in searches if " OR " not in item]
         families = [item for item in searches if " OR " in item]
-        self.assertEqual(topics, self.config.topic_queries[:8])
+        self.assertEqual(topics, self.config.topic_queries[:10])
         self.assertTrue(families, "model-family chunks should extend the mirror")
         self.assertIn('"GPT"', families[0])
         self.assertIn('"Claude"', families[0])
@@ -341,6 +349,40 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(paper.pdf_url, "")
         self.assertEqual(paper.venue, "")
         self.assertEqual(paper.score, 5)
+
+    def test_rec_scaling_work_enters_the_broader_genrec_scope(self):
+        # TikTok HELIX-style paper: recommender scaling research without any
+        # generative-recommendation vocabulary, reporting an online A/B test.
+        helix = Paper(
+            id="arxiv:2609.37183",
+            title="HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+            published=dt.date.today().isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Industrial recommendation ranking models typically scale along two modeling axes. "
+            "We find that scaling either capability in isolation is insufficient, as each exhibits a limited "
+            "scaling ceiling and a suboptimal scaling-law slope. We present HELIX, a purified and unified "
+            "architecture for large-scale recommendation. Deployed in TikTok's e-commerce recommendation "
+            "system. In online A/B tests, it achieves an approximately 6% increase in e-commerce video GMV per user.",
+        )
+        classify_company(helix, self.config)
+        self.assertTrue(is_genrec(helix))
+        self.assertIn("GenRec", infer_tags(helix, self.config))
+        ranked = prepare_candidates([helix], self.config)
+        self.assertEqual([item.id for item in ranked], ["arxiv:2609.37183"])
+        self.assertEqual(helix.company, "ByteDance Seed")
+
+    def test_rec_scaling_branch_rejects_incidental_mentions(self):
+        # A recommendation title whose body only mentions ML "feature scaling"
+        # is not recommender scaling-up research.
+        incidental = Paper(
+            id="incidental",
+            title="A Recommendation Method for Large-Scale Database Administration",
+            published=dt.date.today().isoformat(),
+            abstract="We tune index selection with feature scaling before fitting the "
+            "gradient boosting model on database workloads.",
+        )
+        self.assertFalse(is_genrec(incidental))
+        self.assertFalse(_is_rec_scaling(incidental))
 
     def test_text_helper_renders_missing_api_values_as_empty(self):
         self.assertEqual(_text(None), "")
