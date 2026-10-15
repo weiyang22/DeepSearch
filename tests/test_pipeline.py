@@ -417,6 +417,36 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(is_rec_theme(academic))
         self.assertEqual(prepare_candidates([academic], self.config), [])
 
+    def test_llm_tab_membership_is_track_decided(self):
+        # The LLM tab must reflect the LLM-track decision, not descriptive
+        # topic tags: an enterprise recommendation paper whose abstract
+        # mentions generic ML words (inference, post-training, reinforcement
+        # learning) shares topic vocabulary with LLM work but is not
+        # foundation-model content.
+        rec_paper = Paper(
+            id="rec-with-generic-topics",
+            title="NextGen: A Multi-Objective Generative Re-ranking Framework",
+            published=dt.date.today().isoformat(),
+            affiliations=["Kuaishou"],
+            abstract="We rebuild the re-ranking stage with post-training and inference "
+            "optimizations; reinforcement learning tunes the ranker. Online A/B tests "
+            "show significant gains.",
+        )
+        rec_tags = infer_tags(rec_paper, self.config)
+        self.assertIn("GenRec", rec_tags)
+        self.assertIn("A/B 实验", rec_tags)
+        self.assertNotIn("LLM 基模", rec_tags)
+        # ... while genuine foundation-model content keeps the LLM tag.
+        llm_paper = Paper(
+            id="llm-core",
+            title="Scaling Laws for Language Model Post-Training",
+            published=dt.date.today().isoformat(),
+            affiliations=["OpenAI"],
+            abstract="We study large language model post-training data curation and "
+            "reinforcement learning from human feedback.",
+        )
+        self.assertIn("LLM 基模", infer_tags(llm_paper, self.config))
+
     def test_existing_archive_stays_admitted_under_current_gates(self):
         # Calibration fixture: every paper the production pipeline already
         # published must still clear the admission gates, so gate changes are

@@ -55,7 +55,6 @@ type Payload = {
 type ViewMode = "today" | "llm" | "genrec" | "company" | "all" | "saved";
 const MARKS_KEY = "deepsearch-saved-papers-v1";
 const GENREC_TAGS = ["GenRec", "Semantic ID", "Tokenization"];
-const LLM_TAGS = ["LLM 基模", "预训练", "后训练", "MoE", "训练系统", "推理系统"];
 
 const VIEW_MODES: ViewMode[] = ["today", "llm", "genrec", "company", "all", "saved"];
 
@@ -381,7 +380,10 @@ function matchesMode(paper: Paper, mode: ViewMode, saved: string[]) {
   return (
     mode === "all" ||
     (mode === "today" && paper.is_daily_pick) ||
-    (mode === "llm" && paper.tags.includes("企业论文") && paper.tags.some((item) => LLM_TAGS.includes(item))) ||
+    // "LLM 基模" is the backend's LLM-track decision; topic tags such as
+    // 预训练/推理系统 also describe recommendation papers, so matching on
+    // them leaked rec work into this tab.
+    (mode === "llm" && paper.tags.includes("LLM 基模")) ||
     (mode === "genrec" && paper.tags.some((item) => GENREC_TAGS.includes(item))) ||
     (mode === "company" && (paper.content_type === "company_report" || paper.tags.includes("企业论文"))) ||
     (mode === "saved" && saved.includes(paper.id))

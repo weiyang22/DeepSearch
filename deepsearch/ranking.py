@@ -68,10 +68,11 @@ AB_EXPERIMENT_PATTERN = re.compile(
 # always applied); a term list that tries to name every relevant subfield in
 # advance is how relevant papers get silently dropped.
 REC_TITLE_ANCHOR = re.compile(
-    r"\brecommend(?:ation|ations|ers?|ing)?\b|\brecsys\b|\bctr\b", re.IGNORECASE
+    r"\brecommend(?:ation|ations|ers?|ing)?\b|\brecsys\b|\bctr\b|\bre-?rank(?:ing|er)s?\b",
+    re.IGNORECASE,
 )
 REC_BODY_SIGNAL = re.compile(
-    r"\brecommend(?:ation|ations|ers?|ing)\b|\brecsys\b|\bctr\b"
+    r"\brecommend(?:ation|ations|ers?|ing)\b|\brecsys\b|\bctr\b|\bre-?rank(?:ing|er)s?\b"
     r"|\bclick[- ]through\b|\bconversion rate\b|\buser behaviors?\b"
     r"|\branking models?\b|\bgmv\b|\bitems? set\b|\bcorpus[- ]level\b",
     re.IGNORECASE,
@@ -148,7 +149,6 @@ APPLICATION_ONLY_TERMS = (
 )
 
 TAG_RULES = {
-    "LLM 基模": ["large language model", "foundation model", "base model"],
     "预训练": ["pretraining", "pre-training", "pretrain", "scaling law"],
     "后训练": ["post-training", "post training", "instruction tuning", "supervised fine-tuning", "rlhf", "rlaif", "dpo", "grpo"],
     "GenRec": ["generative recommendation", "generative recommender", "generative retrieval"],
@@ -281,6 +281,12 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
         # The GenRec tag is the frontend's handle for the recommendation
         # track: vocabulary matches or online-evidenced rec-domain work.
         tags.append("GenRec")
+    if "LLM 基模" not in tags and (paper.content_type == "company_report" or is_core_llm(paper)):
+        # Tab membership is the LLM-track decision made at admission, not a
+        # vocabulary match: descriptive topic tags (预训练, 推理系统, 后训练
+        # ...) describe subjects that recommendation papers share too, so
+        # matching on them pulled rec work into the LLM tab.
+        tags.append("LLM 基模")
     if paper.content_type == "company_report":
         tags.insert(0, "LLM 基模")
         tags.insert(0, "官方技术报告")
