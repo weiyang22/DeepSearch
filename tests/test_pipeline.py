@@ -14,12 +14,13 @@ from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import (
-    _is_rec_scaling,
     choose_daily_picks,
     effective_daily_window,
     has_ab_experiment,
     infer_tags,
+    is_core_llm,
     is_genrec,
+    is_rec_theme,
     prepare_candidates,
 )
 from deepsearch.summarizer import _call_deepseek
@@ -369,39 +370,63 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(paper.venue, "")
         self.assertEqual(paper.score, 5)
 
-    def test_rec_scaling_work_enters_the_broader_genrec_scope(self):
-        # TikTok HELIX-style paper: recommender scaling research without any
-        # generative-recommendation vocabulary, reporting an online A/B test.
-        helix = Paper(
-            id="arxiv:2609.37183",
-            title="HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
-            published=dt.date.today().isoformat(),
-            affiliations=["ByteDance"],
-            abstract="Industrial recommendation ranking models typically scale along two modeling axes. "
-            "We find that scaling either capability in isolation is insufficient, as each exhibits a limited "
-            "scaling ceiling and a suboptimal scaling-law slope. We present HELIX, a purified and unified "
-            "architecture for large-scale recommendation. Deployed in TikTok's e-commerce recommendation "
-            "system. In online A/B tests, it achieves an approximately 6% increase in e-commerce video GMV per user.",
+    def test_rec_track_admits_online_evidenced_industrial_rec_work(self):
+        # The recommendation track is domain + online evidence, not a
+        # vocabulary whitelist: papers outside the generative-recommendation
+        # and scaling lexicons still qualify when they report online A/B
+        # evidence on a recommender system.
+        cases = {
+            # TikTok HELIX: scaling-focused, no generative-rec vocabulary.
+            "arxiv:2609.37183": (
+                "HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+                "Industrial recommendation ranking models typically scale along two modeling axes. "
+                "We present HELIX, a purified and unified architecture for large-scale recommendation. "
+                "Deployed in TikTok's e-commerce recommendation system. In online A/B tests, it achieves "
+                "an approximately 6% increase in e-commerce video GMV per user.",
+            ),
+            # A feed-ranking architecture paper with none of the lexicons that
+            # earlier gates enumerated - the track must still admit it.
+            "feed-ranking": (
+                "ORCA: A Unified Ranking Architecture for Feed Streaming",
+                "We redesign the cascade of recall and ranking models for the feed. "
+                "Online A/B tests show a 1.8% increase in click-through rate.",
+            ),
+        }
+        for paper_id, (title, abstract) in cases.items():
+            paper = Paper(id=paper_id, title=title, published=dt.date.today().isoformat(), abstract=abstract)
+            self.assertTrue(is_rec_theme(paper), paper_id)
+            self.assertTrue(has_ab_experiment(paper), paper_id)
+            self.assertIn("GenRec", infer_tags(paper, self.config), paper_id)
+        ranked = prepare_candidates(
+            [Paper(id=paper_id, title=title, published=dt.date.today().isoformat(), abstract=abstract)
+             for paper_id, (title, abstract) in cases.items()],
+            self.config,
         )
-        classify_company(helix, self.config)
-        self.assertTrue(is_genrec(helix))
-        self.assertIn("GenRec", infer_tags(helix, self.config))
-        ranked = prepare_candidates([helix], self.config)
-        self.assertEqual([item.id for item in ranked], ["arxiv:2609.37183"])
-        self.assertEqual(helix.company, "ByteDance Seed")
+        self.assertEqual({item.id for item in ranked}, set(cases))
 
-    def test_rec_scaling_branch_rejects_incidental_mentions(self):
-        # A recommendation title whose body only mentions ML "feature scaling"
-        # is not recommender scaling-up research.
-        incidental = Paper(
-            id="incidental",
+    def test_rec_track_requires_online_evidence(self):
+        # A recommendation-domain title without deployment evidence stays out:
+        # the A/B bar, not a subfield lexicon, is the admission mechanism.
+        academic = Paper(
+            id="academic",
             title="A Recommendation Method for Large-Scale Database Administration",
             published=dt.date.today().isoformat(),
             abstract="We tune index selection with feature scaling before fitting the "
             "gradient boosting model on database workloads.",
         )
-        self.assertFalse(is_genrec(incidental))
-        self.assertFalse(_is_rec_scaling(incidental))
+        self.assertTrue(is_rec_theme(academic))
+        self.assertEqual(prepare_candidates([academic], self.config), [])
+
+    def test_existing_archive_stays_admitted_under_current_gates(self):
+        # Calibration fixture: every paper the production pipeline already
+        # published must still clear the admission gates, so gate changes are
+        # deliberate policy shifts rather than silent regressions.
+        payload = json.loads(Path("public/papers.json").read_text())
+        archive = [Paper.from_dict(item) for item in payload["papers"]]
+        self.assertTrue(archive)
+        admitted = prepare_candidates(archive, self.config)
+        missing = sorted({item.id for item in archive} - {item.id for item in admitted})
+        self.assertEqual(missing, [])
 
     def test_text_helper_renders_missing_api_values_as_empty(self):
         self.assertEqual(_text(None), "")

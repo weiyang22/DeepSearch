@@ -189,12 +189,6 @@ export function DigestDashboard() {
       <section className="intro">
         <p className="eyebrow">LLM FOUNDATION MODELS × GENERATIVE RECOMMENDATION</p>
         <h1>大模型基座技术与生成式推荐论文追踪</h1>
-        <p className="intro-copy">
-          LLM 仅关注企业参与或企业官方发布的预训练、基模架构、训练数据、对齐与后训练等技术内容；不收录普通应用层或纯学术论文。
-          重点跟踪中美主流模型机构及 GPT、Claude、Gemini、Llama、Grok、DeepSeek、Kimi、MiniMax、GLM、Qwen、MiMo 等模型家族。
-          GenRec 覆盖生成式推荐、生成式检索、Semantic ID，以及推荐系统规模化（Scaling Up）方向，
-          并且只收录明确报告 A/B 测试或线上受控实验的工作。
-        </p>
         <div className="intro-meta">
           <span>近 {effectiveWindow} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
           <span>滚动保留 {payload.site.retention_days} 天</span>

@@ -59,15 +59,21 @@ AB_EXPERIMENT_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-# Recommendation-system "scaling up" research: the GenRec scope is broader
-# than generative recommenders alone — industrial work on recommender scaling
-# laws, capacity scaling and compute-optimal training (e.g. TikTok's HELIX
-# ranking-model scaling paper) belongs to the same technology radar.
-REC_TITLE_ANCHOR = re.compile(r"\brecommend(?:ation|ations|ers?|ing)?\b|\brecsys\b", re.IGNORECASE)
-REC_SCALING_EVIDENCE = re.compile(
-    r"\bscaling[- ]laws?\b|\bscaling up\b|\bscale up\b|\bscaling-up\b"
-    r"|\bscaling ceiling\b|\bscaling slope\b|\bscaling behavior\b|\bscaling curve\b"
-    r"|\bscaling capacity\b|\bcompute[- ]optimal\b",
+# Recommendation track: defined by domain + online evidence, not by a
+# vocabulary whitelist. Any paper anchored in recommender-systems research
+# that reports an online controlled experiment belongs to the radar —
+# generative recommenders, ranking architecture, sequence modeling, scaling,
+# retrieval, and whatever comes next. Deployment evidence is the precision
+# mechanism (it is hard to fake and is exactly the bar the GenRec scope has
+# always applied); a term list that tries to name every relevant subfield in
+# advance is how relevant papers get silently dropped.
+REC_TITLE_ANCHOR = re.compile(
+    r"\brecommend(?:ation|ations|ers?|ing)?\b|\brecsys\b|\bctr\b", re.IGNORECASE
+)
+REC_BODY_SIGNAL = re.compile(
+    r"\brecommend(?:ation|ations|ers?|ing)\b|\brecsys\b|\bctr\b"
+    r"|\bclick[- ]through\b|\bconversion rate\b|\buser behaviors?\b"
+    r"|\branking models?\b|\bgmv\b|\bitems? set\b|\bcorpus[- ]level\b",
     re.IGNORECASE,
 )
 
@@ -166,14 +172,19 @@ def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
         text = _search_text(paper)
         if any(term.lower() in text for term in config.exclude_keywords):
             continue
-        genrec = is_genrec(paper)
+        rec = is_rec_theme(paper)
         core_llm = is_core_llm(paper)
         enterprise = is_enterprise_paper(paper, config)
-        if not genrec and not core_llm:
+        if not rec and not core_llm:
             continue
-        if genrec and config.require_ab_genrec and not has_ab_experiment(paper):
+        # Track policies: the recommendation track requires online experiment
+        # evidence; the LLM track requires enterprise participation. A paper
+        # qualifying for both tracks admits through the LLM track when it has
+        # enterprise backing, otherwise it must clear the A/B bar too.
+        has_ab = has_ab_experiment(paper)
+        if not core_llm and rec and config.require_ab_genrec and not has_ab:
             continue
-        if core_llm and not genrec and config.require_enterprise_llm and not enterprise:
+        if core_llm and not rec and config.require_enterprise_llm and not enterprise:
             continue
         paper.tags = infer_tags(paper, config)
         paper.score = score_paper(paper, config)
@@ -224,14 +235,14 @@ def _window_candidates(papers: list[Paper], config: Config, window: int) -> list
 
 def score_paper(paper: Paper, config: Config) -> int:
     text = _search_text(paper)
-    genrec = is_genrec(paper)
+    rec = is_rec_theme(paper)
     enterprise = is_enterprise_paper(paper, config)
     score = 0
     if paper.content_type == "company_report" and is_core_llm(paper):
         score += 50
-    if genrec:
+    if rec:
         score += 32
-    if genrec and enterprise:
+    if rec and enterprise:
         score += 42
     elif enterprise:
         score += 12
@@ -266,9 +277,9 @@ def score_paper(paper: Paper, config: Config) -> int:
 def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     text = _search_text(paper)
     tags = [tag for tag, terms in TAG_RULES.items() if any(term in text for term in terms)]
-    if "GenRec" not in tags and _is_rec_scaling(paper):
-        # Scaling-up recommender papers enter through the broader GenRec
-        # branch; tag them so the frontend GenRec tab shows them too.
+    if "GenRec" not in tags and (is_genrec(paper) or (is_rec_theme(paper) and has_ab_experiment(paper))):
+        # The GenRec tag is the frontend's handle for the recommendation
+        # track: vocabulary matches or online-evidenced rec-domain work.
         tags.append("GenRec")
     if paper.content_type == "company_report":
         tags.insert(0, "LLM 基模")
@@ -290,21 +301,26 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
     return unique[:8]
 
 
-def is_genrec(paper: Paper) -> bool:
+def is_rec_theme(paper: Paper) -> bool:
+    """True when the paper is anchored in recommender-systems research.
+
+    A title anchor or a generative-recommendation vocabulary term is
+    sufficient on its own; otherwise the body needs at least two distinct
+    recommendation-domain signals so a single passing mention in an
+    unrelated paper does not qualify. Admission still requires online
+    experiment evidence (see ``prepare_candidates``).
+    """
     text = _search_text(paper)
+    if REC_TITLE_ANCHOR.search(paper.title):
+        return True
     if any(term in text for term in GENREC_TERMS):
         return True
-    return _is_rec_scaling(paper)
+    return len(set(REC_BODY_SIGNAL.findall(text))) >= 2
 
 
-def _is_rec_scaling(paper: Paper) -> bool:
-    """Broader GenRec scope: recommender "scaling up" research.
-
-    Requires a recommendation anchor in the title plus genuine scaling
-    evidence in the body, so a passing mention of "recommendation" far from
-    any scaling discussion does not qualify.
-    """
-    return bool(REC_TITLE_ANCHOR.search(paper.title) and REC_SCALING_EVIDENCE.search(_search_text(paper)))
+def is_genrec(paper: Paper) -> bool:
+    """Generative-recommendation vocabulary match, used for tagging only."""
+    return any(term in _search_text(paper) for term in GENREC_TERMS)
 
 
 def is_core_llm(paper: Paper) -> bool:
