@@ -47,6 +47,12 @@ def collect_all(config: Config) -> tuple[list[Paper], list[str]]:
     # already cover better.
     collectors: list[tuple[str, Any]] = [
         ("arXiv", collect_arxiv),
+        # The OpenAlex arXiv mirror runs unconditionally, not only as a
+        # fallback: arXiv's quoted-phrase queries miss papers whose title and
+        # abstract never contain the exact phrase (e.g. TikTok's HELIX
+        # scaling paper), so the relevance-ranked mirror adds coverage even
+        # on days when arXiv responds normally.
+        ("OpenAlex arXiv mirror", _collect_arxiv_via_openalex),
     ]
     if config.enable_dblp:
         collectors.append(("DBLP", collect_dblp))
@@ -132,20 +138,10 @@ def collect_arxiv(config: Config) -> list[Paper]:
         time.sleep(4)
     papers = deduplicate(papers)
     if failures:
-        if not papers:
-            # export.arxiv.org increasingly refuses shared CI egress ranges with
-            # HTTP 406 before any query is evaluated. Fall back to the OpenAlex
-            # arXiv mirror so fresh preprints still reach the digest.
-            mirrored = _collect_arxiv_via_openalex(config)
-            if mirrored:
-                message = (
-                    f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}），"
-                    f"已通过 OpenAlex arXiv 镜像发现 {len(mirrored)} 篇预印本"
-                )
-                raise PartialCollectionError(message, mirrored)
-            raise RuntimeError(f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}）")
-        message = f"{len(failures)}/{len(queries)} 个分片失败，已保留成功分片（{_short_error(failures[0])}）"
-        raise PartialCollectionError(message, papers)
+        if papers:
+            message = f"{len(failures)}/{len(queries)} 个分片失败，已保留成功分片（{_short_error(failures[0])}）"
+            raise PartialCollectionError(message, papers)
+        raise RuntimeError(f"全部 {len(queries)} 个分片失败（{_short_error(failures[0])}）")
     return papers
 
 

@@ -123,6 +123,7 @@ class PipelineTests(unittest.TestCase):
         with patch.multiple(
             sources,
             collect_arxiv=MagicMock(side_effect=PartialCollectionError("1/10 个分片失败", [partial])),
+            _collect_arxiv_via_openalex=empty,
             collect_dblp=empty,
             collect_openalex=empty,
             collect_semantic_scholar=empty,
@@ -311,6 +312,24 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('"Claude"', families[0])
         # Model-family terms are chunked into OR groups of at most 11 terms.
         self.assertTrue(all(item.count('"') <= 22 for item in families))
+
+    def test_collect_all_always_runs_the_openalex_mirror(self):
+        # The mirror is a standing discovery source, not only an outage
+        # fallback: a healthy arXiv response must not suppress it.
+        mirror_paper = Paper(
+            id="arxiv:2609.37183",
+            title="HELIX: Purified and Unified - Rethinking Feature Interaction and Sequence Modeling for Large-Scale Recommendation",
+            published=dt.date.today().isoformat(),
+        )
+        with patch.object(sources, "collect_arxiv", return_value=[]), \
+                patch.object(sources, "_collect_arxiv_via_openalex", return_value=[mirror_paper]) as mirror_mock, \
+                patch.object(sources, "collect_openalex", return_value=[]), \
+                patch.object(sources, "collect_semantic_scholar", return_value=[]), \
+                patch.object(sources, "collect_official_github", return_value=[]):
+            papers, errors = collect_all(self.config)
+        self.assertTrue(mirror_mock.called)
+        self.assertIn("arxiv:2609.37183", [item.id for item in papers])
+        self.assertEqual(errors, [])
 
     def test_arxiv_mirror_fallback_rejects_works_without_arxiv_identity(self):
         work = {
