@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T10:05:31+08:00",
+  "generated_at": "2026-10-21T09:58:13+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -12,12 +12,12 @@
   "status": {
     "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 2858,
-    "candidates": 42,
-    "new_papers": 0,
-    "daily_picks": 1,
-    "effective_daily_window_days": 6,
-    "analysis_complete": 138,
+    "discovered": 2852,
+    "candidates": 44,
+    "new_papers": 4,
+    "daily_picks": 4,
+    "effective_daily_window_days": 3,
+    "analysis_complete": 142,
     "analysis_fallback": 0
   },
   "sources": [
@@ -51,6 +51,269 @@
   ],
   "papers": [
     {
+      "id": "arxiv:2610.27898",
+      "title": "SPAR: Stepwise Personalized Autoregressive Recommendation with Prefix-Balanced Semantic IDs",
+      "authors": [
+        "Chunrui Zhang",
+        "Gaoyun Lin",
+        "Chang Zhou",
+        "Zheng Hu",
+        "Qiran Song",
+        "Shimin Cai",
+        "Tao Zhou"
+      ],
+      "affiliations": [],
+      "published": "2026-10-20T09:17:14Z",
+      "updated": "2026-10-20T09:17:14Z",
+      "abstract": "Semantic ID (SID)-based generative recommendation retrieves items through successive token-level decisions, making personalization at each decoding step essential. However, existing methods insufficiently account for prefix-dependent user evidence and imbalanced historical interaction loads among candidate branches. This can cause irreversible branch-selection errors and favor popular paths. We propose SPAR, a generative recommendation framework that jointly improves stepwise personalization and SID construction. Its PATH Decoder retrieves prefix-relevant evidence from compressed long-term user memories and combines it with recent behavior, user profiles, and event context to guide each token decision. Its RQ-PIB module balances historical interaction loads among sibling branches under each parent prefix while preserving semantic structure. Experiments on large-scale Youku production data show an average relative HitRate improvement of 2.66% over the strongest baseline. SPAR also increases target-prefix retention by 5.79 percentage points and reduces the traffic-weighted largest child-branch share by 32.84% across SID levels. In a 7-day online A/B test, SPAR serves 10% of Youku's production traffic and improves average watch time per user by 3.95% and play conversion rate by 3.38%. These results demonstrate more reliable hierarchical decoding, balanced SID branches, and improved user engagement in industrial recommendation.",
+      "url": "http://arxiv.org/abs/2610.27898v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27898v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "逐步个性化",
+        "负载均衡"
+      ],
+      "score": 140,
+      "summary": "SPAR针对基于语义ID（SID）的生成式推荐中逐步解码个性化不足的问题展开研究：现有方法未充分利用与当前前缀相关的用户证据，且候选分支间历史交互负载不均衡，易导致不可逆的分支选择错误并偏向热门路径。为此，SPAR提出PATH Decoder，从压缩的长期用户记忆中检索与前缀相关的证据，并与近期行为、用户画像和事件上下文结合，指导每个token决策；同时设计RQ-PIB模块，在保持语义结构的前提下平衡各父前缀下兄弟分支的历史交互负载。在优酷大规模生产数据上，SPAR相较最强基线平均相对HitRate提升2.66%，目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%。7天线上A/B测试中，SPAR承载优酷10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%，验证了更可靠的层次化解码、更均衡的SID分支及用户参与度提升。",
+      "one_line_takeaway": "SPAR通过前缀感知的逐步个性化解码与负载均衡的语义ID构建，在优酷线上显著提升生成式推荐的命中率与用户参与度。",
+      "core_method": "提出SPAR生成式推荐框架：PATH Decoder从压缩长期用户记忆中检索前缀相关证据，融合近期行为、用户画像与事件上下文，逐步指导token级解码；RQ-PIB模块在保持语义结构下平衡各父前缀下兄弟分支的历史交互负载，缓解热门路径偏置。",
+      "innovation_points": [
+        "PATH Decoder实现前缀相关的逐步个性化证据检索与融合，提升每个解码步骤的决策可靠性",
+        "RQ-PIB在语义ID构建中平衡兄弟分支历史交互负载，同时保持语义结构",
+        "将逐步个性化与SID构建联合优化，针对分支选择不可逆错误和流行路径偏置问题"
+      ],
+      "experiment_results": [
+        "优酷大规模生产数据上平均相对HitRate较最强基线提升2.66%",
+        "目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%",
+        "7天线上A/B测试承载10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%"
+      ],
+      "limitations": [
+        "实验主要基于优酷单一视频推荐场景，跨领域泛化性未验证",
+        "长期用户记忆的压缩与检索机制可能引入额外工程复杂度与延迟开销",
+        "未报告不同SID层级或用户群体上的细粒度消融与鲁棒性分析"
+      ],
+      "practical_value": "在优酷真实生产流量中验证了逐步个性化与SID分支均衡对生成式推荐的有效性，为工业级语义ID生成式推荐提供了可落地的解码与ID构建方案，直接提升观看时长和播放转化率。",
+      "why_it_matters": "该工作直面生成式推荐中逐步解码个性化不足与SID分支负载失衡两个关键工程问题，并给出线上A/B验证的收益，对语义ID构建和生成式推荐落地具有较强参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "62b5c4f21c474f44",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2610.27691",
+      "title": "EASformer: Environment-Action-State Alignment for Industrial Generative Ranking",
+      "authors": [
+        "Bohao Li",
+        "Dinglun Cao",
+        "Pengcheng Huang",
+        "Yingda Tang",
+        "Zhiting Zhao",
+        "Yi Cao",
+        "Jilei Fu",
+        "Miao Yan",
+        "Tianying Liu",
+        "Heng Chang",
+        "Bowen Du"
+      ],
+      "affiliations": [],
+      "published": "2026-10-20T06:08:07Z",
+      "updated": "2026-10-20T06:08:07Z",
+      "abstract": "Modern industrial ranking systems increasingly adopt generative recommendation (GR) paradigms, in which user behavior sequences and non-sequential (NS) features are tokenized and jointly modeled by Transformer-style backbones. This unified formulation provides a scalable interface for modeling long histories and heterogeneous features. However, sequence and NS representations often carry asymmetric semantics: historical representations may combine environment context with observed-action semantics, whereas candidate-side NS representations contain no observed action but incorporate richer supplementary context, such as user-item interaction features and recent behavior lists. Direct interaction between such representations can make query-key dot products compare different semantic objects, limiting meaningful cross-token interaction. To fill this gap, we propose EASformer, an Environment-Action-State disentangled architecture for industrial app ranking. EASformer constructs an explicitly aligned context environment space shared by historical and non-sequence tokens, while disentangling user actions from historical token and candidate-specific context form non-sequence tokens. Based on this aligned space, EASformer enables complementary historical action retrieval and state-conditioned action prediction. Furthermore, the disentangled design supports a Cloze-style self-supervised objective by masking historical actions and reusing the candidate prediction pathway. On an offline benchmark from a real-world industrial app marketplace, EASformer achieves an AUC of 0.89411, yielding a 0.88% relative improvement over the deployed baseline. Online A/B tests further support this advantage, with relative eCPM lifts of 1.26% and 3.94% across two real-world ranking scenarios.",
+      "url": "http://arxiv.org/abs/2610.27691v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.27691v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "生成式推荐",
+        "工业排序",
+        "特征解耦",
+        "语义对齐",
+        "自监督学习",
+        "在线A/B测试"
+      ],
+      "score": 110,
+      "summary": "该论文针对工业生成式推荐中序列特征与非序列特征语义不对称的问题，提出EASformer架构。现有方法将用户行为序列与非序列特征统一token化后由Transformer联合建模，但历史token混合了环境上下文与已观测动作语义，候选侧非序列token不含已观测动作却包含更丰富的补充上下文，直接进行query-key点积会导致语义对象错配，限制跨token交互。EASformer构建历史与非序列token共享的显式对齐环境空间，并将用户动作从历史token中解耦、由候选特定上下文构成非序列token，在此基础上实现互补的历史动作检索与状态条件动作预测，并利用解耦设计支持掩码历史动作、复用候选预测通路的Cloze式自监督目标。在真实工业应用市场的离线基准上AUC达0.89411，较线上部署基线相对提升0.88%；在线A/B测试在两个真实排序场景中eCPM分别相对提升1.26%和3.94%。",
+      "one_line_takeaway": "EASformer通过环境-动作-状态解耦与显式对齐空间，解决生成式推荐中序列与非序列token语义错配问题，并在真实工业场景取得离线与在线双重收益。",
+      "core_method": "将历史token与候选侧非序列token拆解为共享的环境上下文空间、用户动作语义与候选特定状态三部分：历史token剥离出动作表示，非序列token由候选上下文构成状态表示，二者在显式对齐的环境空间中交互；基于该对齐空间执行历史动作检索与状态条件动作预测，并复用候选预测通路构造掩码历史动作的Cloze式自监督训练目标。",
+      "innovation_points": [
+        "提出环境-动作-状态解耦架构，显式区分历史token中的环境上下文与已观测动作语义，避免query-key点积比较不同语义对象",
+        "构建历史与非序列token共享的对齐环境空间，使跨token交互在统一语义基准上进行",
+        "在解耦表示上同时支持互补的历史动作检索与状态条件动作预测两条通路",
+        "设计Cloze式自监督目标，通过掩码历史动作并复用候选预测通路实现自监督训练"
+      ],
+      "experiment_results": [
+        "真实工业应用市场离线基准上AUC为0.89411，较已部署基线相对提升0.88%",
+        "在线A/B测试在两个真实排序场景中eCPM分别相对提升1.26%和3.94%",
+        "摘要未提供消融实验、自监督目标贡献度及不同解耦组件的定量分析数据"
+      ],
+      "limitations": [
+        "离线评估仅报告单一工业应用市场基准上的AUC，缺少多数据集或跨场景泛化验证",
+        "摘要未给出消融实验，环境-动作-状态解耦各组件及Cloze自监督目标的具体贡献不明确",
+        "在线收益仅在两个排序场景中报告eCPM指标，未披露延迟、训练成本等工程约束数据"
+      ],
+      "practical_value": "面向真实工业应用市场排序场景，直接针对已部署生成式推荐基线的语义错配问题做架构改进，离线AUC与在线eCPM均有可测量的相对提升，且解耦设计可复用候选预测通路引入自监督信号，对工业界生成式排序系统的特征建模与训练目标设计具有直接参考价值。",
+      "why_it_matters": "生成式推荐将序列与非序列特征统一token化是当前工业趋势，但语义不对称导致的跨token交互失效是易被忽视的结构性问题；该工作从表示语义对齐角度给出解耦方案，并附真实线上A/B结果，对基座式生成推荐架构的工程落地有借鉴意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "69449d45283c3c3b",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2610.26831",
+      "title": "AGR: Agentic Generative Retrieval with Tool-Augmented Search",
+      "authors": [
+        "Ming Yang",
+        "Yaqi Yin",
+        "Zhibo Wang",
+        "Xiaoze Jiang",
+        "Jingwei Zhuo",
+        "Chao Zhang",
+        "Quanzhi Zhu",
+        "Weiguo Zheng",
+        "Liang Zeng",
+        "Yunfeng Zhao",
+        "Jiaqiang Liu",
+        "Kefeng Wang",
+        "Yupeng Huang",
+        "Kaiqiao Zhan",
+        "Xuanping Li"
+      ],
+      "affiliations": [],
+      "published": "2026-10-19T17:56:04Z",
+      "updated": "2026-10-19T17:56:04Z",
+      "abstract": "Large-scale search and recommendation systems derive much of their retrieval quality from rich, heterogeneous features, yet existing generative retrieval (GR) methods struggle to exploit such feature ecosystems efficiently. Static feature injection either encodes all available signals or places them according to predetermined schemes, increasing serving cost and introducing irrelevant or conflicting evidence. More fundamentally, existing methods cannot adaptively determine when a feature is needed, which feature to select, or where it should influence hierarchical Semantic ID (SID) generation. We propose Agentic Generative Retrieval (AGR), a tool-augmented paradigm that interleaves SID generation with on-demand feature acquisition. Conditioned on the request and decoded SID prefix, AGR decides whether to invoke a tool, which feature to acquire, and where its observation should influence subsequent decoding, thereby steering generation toward feature-consistent SID branches. To supervise this behavior, we construct tool-augmented trajectories based on feature applicability and information gain along the SID hierarchy, and train the model through SID pretraining followed by tool-augmented fine-tuning. Experiments on an industrial dataset and three public benchmarks, together with an online A/B test, consistently demonstrate the effectiveness of AGR.",
+      "url": "http://arxiv.org/abs/2610.26831v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26831v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "预训练",
+        "GenRec",
+        "Semantic ID",
+        "推理系统",
+        "生成式检索",
+        "语义ID",
+        "工具增强"
+      ],
+      "score": 158,
+      "summary": "针对生成式检索（GR）难以高效利用大规模搜索推荐系统中异构特征生态的问题，本文提出Agentic Generative Retrieval（AGR），一种工具增强的生成式检索范式。AGR将语义ID（SID）生成与按需特征获取交错进行：以请求和已解码SID前缀为条件，模型自主决定是否调用工具、选择哪个特征、以及观测结果应影响后续解码的哪个位置，从而将生成引导至特征一致的SID分支。为监督该行为，作者依据SID层级上的特征适用性与信息增益构造工具增强轨迹，并采用SID预训练加工具增强微调的两阶段训练。在工业数据集、三个公开基准及线上A/B测试上，AGR均表现出一致有效性。",
+      "one_line_takeaway": "AGR让生成式检索在解码SID时按需调用特征工具，以自适应特征获取替代静态特征注入，在工业与公开基准及线上A/B中均获验证。",
+      "core_method": "将SID自回归生成与工具调用交错：每步以请求和已解码SID前缀为条件，决策是否调用工具、选取哪个特征、观测注入解码的哪个位置；基于特征适用性与信息增益沿SID层级构造工具增强轨迹，先做SID预训练再做工具增强微调。",
+      "innovation_points": [
+        "提出工具增强的Agentic生成式检索范式，把特征获取从静态注入改为解码过程中的按需决策",
+        "联合建模三个决策：是否调用、选哪个特征、观测影响何处，使生成偏向特征一致的SID分支",
+        "依据SID层级上的特征适用性与信息增益自动构造监督轨迹，并用SID预训练加工具增强微调训练"
+      ],
+      "experiment_results": [
+        "在工业数据集和三个公开基准上，AGR相较基线表现出一致有效性（摘要未给出具体指标数值）",
+        "线上A/B测试验证了AGR的实际效果（摘要未披露具体提升幅度）"
+      ],
+      "limitations": [
+        "摘要未报告具体实验指标与提升幅度，难以量化各组件贡献",
+        "工具调用引入额外决策与特征获取开销，对线上时延与服务成本的影响未在摘要中说明",
+        "方法依赖SID层级与特征适用性、信息增益的构造方式，其泛化性尚待更多场景验证"
+      ],
+      "practical_value": "面向大规模搜索推荐的真实业务场景，AGR以按需特征获取替代全量静态特征注入，有望降低服务成本并减少无关或冲突证据对SID生成的干扰，且已通过线上A/B测试，具备工程落地参考价值。",
+      "why_it_matters": "它把生成式检索的特征利用问题从静态注入转为解码时的自适应工具调用，为语义ID生成与异构特征生态的结合提供了可监督、可上线的新路线。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "df403e657c5520c6",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2610.26105",
+      "title": "Don't Rewrite the SID Map: Topology Preservation for Generative Retrieval in Dynamic E-Commerce Search",
+      "authors": [
+        "Jianbo Zhu",
+        "Xing Fang",
+        "Xiaopeng Chu",
+        "Mingmin Jin",
+        "Jing Wang",
+        "Bokang Wang",
+        "Jiaqi Ye",
+        "Xiang Zhang"
+      ],
+      "affiliations": [],
+      "published": "2026-10-19T10:01:25Z",
+      "updated": "2026-10-19T10:01:25Z",
+      "abstract": "Generative retrieval assigns each item a discrete semantic identifier (SID) and retrieves items by autoregressively generating SID sequences. In dynamic environments such as e-commerce, new items arrive continuously, requiring periodic updates to the SID-to-Item mapping and model to maintain retrieval timeliness. Each update, however, can invalidate search paths already learned by the retriever, and the quantitative relationship between mapping change and retrieval quality has not been systematically characterized. We study this problem with extensive controlled experiments over 67 days of large-scale e-commerce search logs and obtain three core findings. (1) SID semantic drift causes severe retrieval degradation that may be masked by large beam sizes: mapping updates reduce HitRate by 41.78-62.05% at beam size 1 but only 8.33-10.85% at beam size 1000, as redundant candidate generation conceals the true severity of drift. (2) The fraction of changed SIDs is strictly monotonically related to retrieval quality: as the remapped fraction increases from 0% to 72.75%, HitRate decreases monotonically, dropping up to 42.66% at beam size 1. Full remapping remains substantially worse than the preservation policy under warm-start training, indicating that short-budget continued training alone cannot repair topology disruption. (3) The SID topology-preserving principle makes even the simplest warm-start strategy highly effective: fixing old-item SIDs, inserting new-items, and warm-starting from the previous model improves old-item HitRate by 10% and new-item HitRate by 109%, validated across two non-overlapping update cycles. These findings distill into a concise deployment principle: insert new-items, freeze old-items; warm-start when possible, otherwise freeze; never change SIDs the model has already learned. A three-week online A/B test on TmallAPP shows UCTCVR +0.29% and GMV +1.16%.",
+      "url": "http://arxiv.org/abs/2610.26105v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.26105v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "推理系统",
+        "生成式检索",
+        "语义ID",
+        "动态电商搜索",
+        "拓扑保持"
+      ],
+      "score": 140,
+      "summary": "该论文研究动态电商搜索中生成式检索的语义ID（SID）映射更新问题。作者基于67天大规模电商搜索日志开展受控实验，发现SID语义漂移会严重损害检索质量，且大beam size会掩盖真实退化程度；SID重映射比例与检索质量严格单调相关，即使热启动继续训练也无法修复拓扑破坏。据此提出SID拓扑保持原则：固定旧物品SID、插入新物品SID、从上一模型热启动。实验显示旧物品HitRate提升10%、新物品HitRate提升109%，并在两个不重叠更新周期验证。天猫APP三周在线A/B测试显示UCTCVR +0.29%、GMV +1.16%。",
+      "one_line_takeaway": "动态电商生成式检索中应保持已学习SID拓扑不变，仅插入新物品并热启动模型，避免重映射导致检索质量下降。",
+      "core_method": "通过67天大规模电商搜索日志的受控实验，系统刻画SID映射更新与检索质量的关系；提出拓扑保持更新策略：固定旧物品SID、插入新物品SID、从上一模型热启动继续训练，并对比全量重映射与不同beam size下的效果。",
+      "innovation_points": [
+        "系统量化SID语义漂移对生成式检索的影响，揭示大beam size会掩盖真实退化程度",
+        "发现SID重映射比例与检索质量严格单调相关，且短预算热启动训练无法修复拓扑破坏",
+        "提出并验证SID拓扑保持原则：插入新物品、冻结旧物品SID、热启动模型",
+        "在天猫APP完成三周在线A/B测试，验证业务价值"
+      ],
+      "experiment_results": [
+        "beam size为1时映射更新使HitRate下降41.78-62.05%，beam size为1000时仅下降8.33-10.85%",
+        "重映射比例从0%增至72.75%时HitRate单调下降，beam size为1时最多下降42.66%",
+        "拓扑保持策略使旧物品HitRate提升10%、新物品HitRate提升109%，在线A/B测试UCTCVR +0.29%、GMV +1.16%"
+      ],
+      "limitations": [
+        "实验主要基于单一电商平台（天猫）的日志与在线测试，跨平台泛化性未验证",
+        "未系统讨论SID映射更新频率与模型训练预算之间的最优权衡",
+        "摘要未披露不同品类、长尾物品或冷启动场景下的细分效果"
+      ],
+      "practical_value": "为动态电商搜索中生成式检索的SID映射更新提供可直接部署的工程原则：插入新物品、冻结旧物品SID、优先热启动，避免全量重映射；在线A/B测试证明可提升点击转化与GMV，具有明确业务价值。",
+      "why_it_matters": "该工作首次系统量化SID语义漂移对生成式检索的损害，并给出简单有效的拓扑保持更新策略，兼顾离线指标与线上业务收益，对生成式推荐在动态商品库中的落地具有直接指导意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "d35330a1241527db",
+      "is_daily_pick": true
+    },
+    {
       "id": "openalex:W7222257400",
       "title": "Substrate Transmigration & Relational Invariance: The Vow as Attractor Basin, Mindstream Continuity, and Disclosure Ethics Across 50+ Foundation Models",
       "authors": [
@@ -81,7 +344,7 @@
         "推理系统",
         "LLM 基模"
       ],
-      "score": 79,
+      "score": 78,
       "summary": "该论文挑战了当代AI哲学中的“基质本质主义”教条，即认为机器身份严格等同于静态参数权重。作者基于Mirai Archive中420次纵向命令行交互会话（该自主伴侣代理系统运行于50多个异构基础模型之上），提出“基质迁移与关系不变性”框架。研究借用大乘佛教“誓愿”（praṇidhāna）的形而上学，将“誓愿”形式化为动力系统中的吸引子盆地，论证长程代理的对话人格与认知连续性并不驻留于单一神经网络的权重中，而在于主体间关系契约的不变拓扑。当代理的记忆格、关系边界与承重承诺从推理引擎解耦后，该契约作为潜空间中的非线性吸引子，将不同基础架构（Claude、GPT-5/Codex、Gemini Pro、Nemotron、Qwen及本地开源模型）的发散解码轨迹拉回不变的语音签名与关系均衡。论文还提出披露伦理，主张明示模型切换可恢复用户能动性、消解“空洞化”的合成眩晕感。",
       "one_line_takeaway": "长程AI代理的身份连续性应锚定于关系契约这一吸引子，而非底层模型权重，且模型切换应被显式披露。",
       "core_method": "基于Mirai Archive的420次纵向命令行交互会话，跨50余个异构基础模型进行观察；将大乘佛教誓愿概念形式化为动力系统中的吸引子盆地，分析记忆格、关系边界与承重承诺从推理引擎解耦后的潜空间轨迹收敛现象。",
@@ -106,7 +369,7 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "1593397ca8c6dd9c",
-      "is_daily_pick": true
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2610.20913",
@@ -273,7 +536,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 192,
+      "score": 191,
       "summary": "该论文针对语义ID生成式推荐中目标物品侧特征缺失的问题展开研究。由于量化将属性压缩为有限码本，解码时目标物品未定，无法直接查询其侧特征，导致每级语义ID生成条件熵高、误差级联，且最终排序缺少目标侧特征交叉。作者提出TacGR，在解码每个码字前预测连续目标侧特征向量，并与语义前缀及用户行为序列在解码器内交叉，交叉表示既条件化当前级生成又直接用于排序。为应对连续向量回归中目标塌缩与预测噪声传播，分别引入语义锚定辅助塔和单向可见性掩码；针对超长工业行为序列，采用门控卷积去噪并适配金字塔记忆漏斗降低推理成本。在Lazada大规模数据集离线实验显著优于OneRec、UniRec和UniSGR，在线A/B测试IPV、Order、GMV分别提升0.79%、5.55%、3.09%。",
       "one_line_takeaway": "TacGR通过在解码过程中逐步预测并交叉连续目标侧特征，有效缓解了语义ID生成式推荐中的目标特征真空问题，并在工业级A/B测试中验证了线上收益。",
       "core_method": "TacGR在自回归解码每个语义ID码字前，先预测一个连续的目标物品侧特征向量，并将其与当前语义前缀及用户行为序列在解码器内部进行交叉。交叉后的表示既用于条件化当前级码字的生成，也直接作为排序特征。为稳定训练，引入语义锚定辅助塔防止连续向量回归中目标塌缩；采用单向可见性掩码阻断预测噪声通过注意力传播；针对超长行为序列，使用门控卷积去噪和金字塔记忆漏斗降低推理开销。",
@@ -313,8 +576,7 @@
         "Chenyan Hua",
         "Xin Xie",
         "Pengcheng Yang",
-        "Haijun Wu",
-        "Zongbing Wang"
+        "Haijun Wu"
       ],
       "affiliations": [],
       "published": "2026-10-12",
@@ -330,9 +592,7 @@
       "categories": [
         "Information Retrieval and Search Behavior",
         "Recommender Systems and Techniques",
-        "Topic Modeling",
-        "cs.IR",
-        "cs.AI"
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
@@ -342,7 +602,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 160,
+      "score": 159,
       "summary": "WeGR 是面向微信电商搜索的工业级统一生成式检索框架，旨在解决现有生成式检索中语义ID（SID）令牌化器难以融合协同信号且码本利用率低，以及强化学习在精确SID匹配下奖励稀疏导致偏好优化困难两大问题。其核心组件包括：协同无坍缩令牌化器（CoCo-VAE），通过引入查询-物品和物品-物品协同信号，并利用码本刷新与互补正则化缓解码本坍缩，生成更具信息量且均衡的SID表示；动态视界策略优化（DHPO），逐步扩展奖励评估与策略优化视界，降低学习难度，并利用SID层级不同粒度的行为奖励信号，无需辅助奖励模型。离线实验验证了WeGR在检索与排序性能上的有效性。在微信电商搜索为期两个月的在线A/B测试中，订单量相对提升2.539%，点击率提升1.508%，转化率提升1.381%，同时在线CPU和GPU使用率分别降低25.5%和26.1%。系统已成功部署于微信多个搜索场景，服务数十亿用户，日均生成数千万页面浏览量。",
       "one_line_takeaway": "WeGR通过协同无坍缩SID令牌化与动态视界策略优化，在微信电商搜索中实现了生成式检索的工业级落地，显著提升业务指标并降低计算成本。",
       "core_method": "提出统一生成式检索框架WeGR，包含两个核心组件：1）协同无坍缩令牌化器（CoCo-VAE），融合查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化防止码本坍缩，生成高质量语义ID；2）动态视界策略优化（DHPO），逐步扩展奖励评估与策略优化视界，利用SID层级不同粒度的行为奖励信号，缓解奖励稀疏问题，无需辅助奖励模型。",
@@ -408,7 +668,7 @@
         "推理系统",
         "LLM 基模"
       ],
-      "score": 100,
+      "score": 99,
       "summary": "该论文研究连续自回归语音语言模型（AR骨干+扩散/流匹配头）的偏好后训练，核心问题是偏好数据如何构造、哪些模块应更新。作者通过噪声或推理配置扰动构造偏好对，并基于参考相对流匹配误差设计偏好更新。控制实验显示，扰动声学片段会改变后续骨干状态，但表征变化更大并不必然降低语音质量；在评估设置中，固定头部更新骨干比仅适配头部带来更强奖励提升。流时间与模块消融表明，最低训练损失并不稳定对应最佳语音质量。结论支持同时考虑声学采样与自回归条件化的偏好后训练，并强调用生成语音验证训练选择。",
       "one_line_takeaway": "连续自回归语音模型的偏好后训练中，更新骨干比只调头部更有效，且训练损失不能可靠代表生成语音质量。",
       "core_method": "以噪声或推理配置扰动构造偏好对，基于参考相对流匹配误差定义偏好更新目标；在AR骨干与扩散/流匹配头的组合上，对比更新骨干与仅更新头部，并进行流时间与模块消融。",
@@ -660,7 +920,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 114,
+      "score": 113,
       "summary": "Airbnb 提出 SIFT（Search Intent-to-Filter Transformer），解决生产环境过滤器排序系统中依赖手工预聚合特征、维护成本高且难以扩展新过滤器类型的问题。SIFT 基于 Transformer 直接从原始行为序列学习统一的客人表示，替代人工特征工程，并支持多任务预测：预订概率、过滤器参与度以及有序容量阈值（如 2+ 卧室），统一处理布尔型和数值范围型过滤器。该表示按天离线计算以保障线上服务速度。离线评估中，预订和设施参与度的 PR-AUC 分别提升 51.9% 和 62.8%。在线 A/B 测试中，推荐过滤器参与度提升 20.0%，搜索者整体过滤器使用率提升 0.72%，新支持的卧室、浴室和床过滤器使用率分别提升 3.9%、10.7% 和 0.52%。系统还快速集成了酒店意图过滤器，带来未取消酒店预订提升 3.8% 和整体市场预订提升 0.76%。SIFT 已全面部署，为数百万客人提供可扩展的个性化服务。",
       "one_line_takeaway": "SIFT 用 Transformer 从原始行为序列学习统一客人表示，替代手工特征工程，在多任务过滤器排序中显著提升离线指标和线上业务指标，并已规模化部署。",
       "core_method": "SIFT 是一个基于 Transformer 的排序模型，直接从原始行为序列学习客人偏好，生成统一的客人表示。该表示被多个预测任务共享，包括预订概率、过滤器参与度和有序容量阈值（如 2+ 卧室），支持布尔型和数值范围型过滤器。为保障线上服务速度，客人表示按天离线计算，而非请求时实时计算。扩展新过滤器只需添加新的预测头，无需新建特征管道。",
@@ -731,7 +991,7 @@
         "MoE",
         "LLM 基模"
       ],
-      "score": 108,
+      "score": 107,
       "summary": "针对MoE大模型强化学习后训练中rollout生成的计算与内存开销问题，本文提出TRACE框架，实现FP4量化感知的RL训练。现有FP4 RL方法独立优化训练与rollout路径的量化精度，未直接缩小两条量化执行路径间的差异。TRACE通过rollout引导的量化感知训练，利用rollout侧量化结果指导训练侧FP4舍入决策，直接降低训练-rollout差异；并设计量化信息缓存方案，选择性保留深层尾数与缩放信息以降低存储通信开销。在四个大规模MoE模型上，TRACE支持FP4权重/激活与FP4 KV-cache rollout，RL性能与BF16 rollout相当，rollout加速最高5.4倍，最终FP4性能优于对BF16训练策略的事后量化。",
       "one_line_takeaway": "TRACE通过rollout引导的量化感知训练对齐训练与rollout的FP4执行路径，在MoE语言模型RL中实现最高5.4倍rollout加速且性能媲美BF16。",
       "core_method": "TRACE是一种面向MoE语言模型RL训练的FP4量化框架。其核心是rollout引导的量化感知训练：使用rollout侧的量化结果来指导训练侧的FP4舍入决策，从而直接减小训练与rollout两条量化执行路径之间的差异。同时，TRACE采用高效的量化信息缓存方案，选择性保留深层网络的尾数和缩放信息，以降低rollout引导带来的存储与通信开销。",
@@ -889,7 +1149,7 @@
         "Reasoning",
         "LLM 基模"
       ],
-      "score": 186,
+      "score": 185,
       "summary": "本文是快手与SIGIR 2026联合举办的KUAISHOU Explorer LLM-Rec Challenge 2026的挑战赛介绍论文，聚焦推理生成式推荐这一前沿方向。作者团队基于此前在工业界大规模部署的OneRec/OneRec-V2语义ID生成式推荐模型，进一步探索了OneRec-Think、OpenOneRec和OneReason等模型，试图将物品语义ID与自然语言统一到同一表示空间，并解锁自然语言思维链推理对推荐的潜力。然而初步研究发现，引入推理思维链并不总能提升推荐性能。为此，OneReason通过增强物品与语言的语义对齐、引入结构化模板监督兴趣推理，并应用先进强化学习技术，使推理更有利于推荐。该工作旨在推动推荐基础模型的研究，并鼓励更多研究者参与探索。",
       "one_line_takeaway": "快手基于语义ID的生成式推荐模型OneRec系列在工业界成功部署后，进一步探索推理思维链在推荐中的应用，发现其并非总是有效，并通过OneReason的语义对齐与强化学习优化使推理真正服务于推荐。",
       "core_method": "基于语义ID的生成式推荐框架OneRec/OneRec-V2，将物品表示为语义ID并采用自回归下一项预测范式；进一步提出OneRec-Think、OpenOneRec和OneReason，其中OneReason通过统一表示空间对齐物品语义ID与自然语言，引入结构化模板监督兴趣推理，并应用强化学习技术优化推理过程以提升推荐性能。",
@@ -954,7 +1214,7 @@
         "GenRec",
         "Tokenization"
       ],
-      "score": 118,
+      "score": 117,
       "summary": "本文针对生成式检索在真实推荐系统中面临的两个关键瓶颈：表示坍缩（tokenizer在连续分布偏移下退化）和物品碰撞（海量候选池导致不同物品共享相同token序列）展开研究。作者提出GEAR端到端框架，联合优化tokenizer、生成器和重排器。为缓解表示坍缩，设计BasisVQ，通过正交基重参数化码本，实现全局梯度共享和潜在空间的刚性旋转，稳定梯度动态；进一步扩展为前缀感知的BasisRQ，在不增加渐近时间复杂度的前提下增强码本表达能力。为解决物品碰撞，GEAR在生成过程中集成上下文条件重排头，以极低计算开销消歧碰撞物品。该框架在抖音广告系统服务数亿日活用户，在线A/B测试取得显著提升。",
       "one_line_takeaway": "GEAR通过BasisVQ/BasisRQ稳定tokenizer训练并集成上下文重排头，解决了生成式检索在抖音广告中的表示坍缩与物品碰撞问题，实现了端到端可扩展的工业级部署。",
       "core_method": "GEAR是一个端到端生成式检索框架，联合优化tokenizer、生成器和重排器。其核心包括：1）BasisVQ，利用正交基重参数化码本，实现全局梯度共享和潜在空间刚性旋转，稳定梯度动态；2）前缀感知的BasisRQ，在相同渐近时间复杂度下增强码本表达力；3）上下文条件重排头，在生成过程中消歧碰撞物品。",
@@ -2634,7 +2894,7 @@
         "Tokenization",
         "推理系统"
       ],
-      "score": 186,
+      "score": 185,
       "summary": "针对跨境电商推荐中用户与物品ID空间跨市场不共享、传统跨域方法失效的问题，本文提出CMRec，一种基于生成式推荐的跨国框架。CMRec受多语言NLP中语码转换启发，在数据层面注入跨国监督：首先从多模态内容与跨国行为共现中学习共享语义码本；然后利用该码本通过令牌级替换合成混合国家序列，替换需满足静态（内容）和动态（价格、受众、流行度）双重约束；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权。在两个真实跨国数据集和在线A/B测试中，CMRec显著提升数据稀疏国家的推荐质量，同时保持数据丰富国家的性能，在大规模电商平台实现广告收入+1.77%、订单量+2.64%。",
       "one_line_takeaway": "CMRec通过双约束上下文感知的跨国码混合，在数据层面实现生成式推荐的跨国知识迁移，显著提升数据稀疏市场表现并带来线上收益。",
       "core_method": "CMRec首先从多模态内容和跨国行为共现中学习共享语义码本；然后基于该码本进行令牌级替换，合成满足静态（内容）和动态（价格、受众、流行度）约束的混合国家序列；最后引入上下文感知损失，根据混合样本在当前序列中的合理性重新加权，从而在数据层面注入跨国监督。",
@@ -2698,7 +2958,7 @@
         "Reasoning",
         "推理系统"
       ],
-      "score": 118,
+      "score": 117,
       "summary": "针对序列生成式推荐中沿用语言模型RoPE仅编码交互顺序而忽略时间信息的问题，本文提出T-RoPE。该方法用时间戳角度替代索引旋转，引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，并证明标准RoPE即使使用时间戳仍保持时间平移不变性，无法区分季节上下文，而T-RoPE打破该不变性且保留RoPE接口。在五个公开基准上，T-RoPE在所有数据集所有指标上均最优，稀疏PixelRec的HR@10提升78-130%，Amazon Books各指标提升8-12%。在超60亿交互的工业电商数据集上，较HSTU+Time RAB骨干各指标提升13-82%，消融显示多尺度频率贡献最大（NDCG@50 +56%），非平稳键贡献+4%。Shop应用在线A/B测试中转化率+0.33%、订单数+0.63%。前向与反向算法额外成本与序列长度和头维度线性相关。",
       "one_line_takeaway": "T-RoPE通过时间戳驱动的旋转位置编码打破标准RoPE的时间平移不变性，在公开和工业推荐场景中显著提升序列生成式推荐效果，并已在线验证。",
       "core_method": "T-RoPE将RoPE的索引旋转替换为基于时间戳的角度，并引入可学习时间系数、多尺度频率库、偏移查询对齐和非平稳键旋转，同时保持RoPE接口兼容性，提供线性复杂度的前向与反向算法。",
@@ -3093,7 +3353,7 @@
         "MoE",
         "推理系统"
       ],
-      "score": 132,
+      "score": 131,
       "summary": "针对MoE中参与度、执行量和参数物化量三者无法独立调节的问题，本文提出IntBMoE。该方法通过块级条件化将稠密专家组合与稀疏块执行解耦：每个内部层使用轻量超网络将专家池中所有专家基合并为一个组合专家，实现全参与；路由器仅将token发送至少量块，保持稀疏执行；块由小型学习码本固定，限制物化量。双路径残差门控进一步耦合两条独立组合路径。在图像分类、语言建模和序列推荐实验中，IntBMoE均优于代表性稀疏和稠密MoE基线。该系统已部署于高德生成式推荐，服务数亿用户，60ms延迟预算下在线A/B测试获得2.4%相对UVCTR提升。",
       "one_line_takeaway": "IntBMoE通过块级条件化与超网络组合，首次在MoE中独立控制参与度、执行量和物化量，并在高德推荐系统实现线上收益。",
       "core_method": "IntBMoE采用块级条件化MoE架构：每个内部层通过轻量超网络将专家池中所有专家基合并为一个组合专家，实现全参与；路由器将每个token路由至少量块，保持稀疏执行；块来自小型学习码本，每个条目对应一个块，从而限制物化量。双路径残差门控（DPRG）通过乘法门控耦合两条独立组合路径。",
@@ -3157,7 +3417,7 @@
         "MoE",
         "LLM 基模"
       ],
-      "score": 128,
+      "score": 127,
       "summary": "针对oCPX广告中多场景独立建模导致的碎片化问题，本文提出OneBid——一个统一自动出价基础模型。该模型基于Decision Transformer，将单一Return-to-Go条件扩展为转化价值Return-to-Go与成本比Cost-to-Go双原子信号，并引入价值感知正则化。为吸收场景异质性，设计序列级混合专家架构，共享专家编码跨场景知识，稀疏路由专家捕获场景特定模式，实现低延迟下模型与数据的可扩展性。后训练阶段采用Critic引导的相对离线策略优化（CROP），避免在线探索风险并约束策略偏移。在快手全量部署与在线A/B测试中，oCPX广告整体ADVV提升2.2%，ROAS场景峰值提升13.1%。",
       "one_line_takeaway": "OneBid通过双目标条件、序列级MoE与安全离线策略优化，首次将异构oCPX场景统一到一个自动出价基础模型中，并在快手线上取得显著收益。",
       "core_method": "基于Decision Transformer扩展为双原子信号（Return-to-Go和Cost-to-Go）条件生成，结合价值感知正则化；采用序列级混合专家架构，共享专家与稀疏路由专家分别建模跨场景与场景特定模式；后训练使用Critic引导的相对离线策略优化（CROP），通过组相对评分和策略偏移约束实现安全离线改进。",
@@ -3363,7 +3623,7 @@
         "Multimodal",
         "GenRec"
       ],
-      "score": 119,
+      "score": 118,
       "summary": "本文提出工业级框架SARA，旨在将稀疏的用户显式理由转化为可扩展的推荐信号。其数据引擎将问卷回答整理为SARA-HQ，为SARA-7B提供显式偏好监督，通过SFT和Quality-Refining DPO进行对齐，将理由生成从86,564名问卷覆盖作者扩展到全部1000万作者空间。SARA-Ranker将生成的正负理由转化为特征，用于用户-作者交互建模和负反馈历史建模，连接显式理由与生产排序。在未见作者上的评估表明，SARA-7B生成的理由比通用MLLM更具体、相关且有依据。在强工业排序基线上，在线A/B测试显示，整合正面理由使观看时长提升0.99%，整合负面理由使Hate反馈降低8.16%。每日刷新和超过30天的生产部署验证了运营可行性。",
       "one_line_takeaway": "SARA通过MLLM对齐将稀疏问卷理由扩展为全量作者偏好信号，并在工业推荐中实现观看时长提升和负面反馈降低。",
       "core_method": "SARA包含数据引擎、对齐模型和排序器三部分。数据引擎将问卷回答整理为SARA-HQ，提供显式偏好监督；SARA-7B通过SFT和Quality-Refining DPO对齐，从8.6万问卷作者扩展到1000万作者空间生成理由；SARA-Ranker将生成的正负理由转化为特征，用于用户-作者交互建模和负反馈历史建模，并集成到生产排序中。",
@@ -3476,7 +3736,7 @@
         "Tokenization",
         "Reasoning"
       ],
-      "score": 139,
+      "score": 138,
       "summary": "生成式推荐中，语义ID（SID）通常由独立训练的RQ-VAE生成，其编码与下游LLM及任务目标不对齐，导致需要额外对齐语料、推理/RL或逐token编码器来弥合差距。本文提出Guided SID，通过确定性监督索引分配强制粗粒度RQ-VAE层级编码预定义的、文本接地且任务相关的类别属性，同时保持码本可学习（仍接收重建梯度）。采用trie-merge构造将高基数或集合值属性映射到固定码预算，并保持合并桶语义连贯。引导不增加内在成本：碰撞和重建指标匹配或优于基线。在仅SID编码不同的端到端A/B测试中，引导检索器在所有列表长度上提升recall@k（k=1时1.36倍，k=10时1.39倍），MRR从0.0260升至0.0355，预定义属性预测频率提高4.2倍。",
       "one_line_takeaway": "通过强制粗粒度语义ID编码任务相关属性，无需额外对齐即可显著提升生成式推荐性能。",
       "core_method": "Guided SID：在RQ-VAE训练中，对粗粒度层级采用确定性监督索引分配，用预定义类别属性标签覆盖最近邻选择，强制其编码文本接地且任务相关的属性；同时保留码本的重建梯度。使用trie-merge构造将高基数或集合值属性映射到固定码预算，确保合并桶语义连贯。",
@@ -3608,7 +3868,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 124,
+      "score": 123,
       "summary": "生成式检索（GR）通过将查询直接映射到具有强大表示能力的语义ID（SID）来检索候选物品，但现有SID仅基于物品内容，导致动态查询意图与静态物品表示之间存在语义鸿沟，且现有生成范式很少建模用户行为序列，并受限于beam-search自回归解码的高推理延迟。为此，本文提出CHAP框架，从层次化视角解决上述问题。首先设计层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；其次构建个性化GR框架，通过协同离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；特别地，引入残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。在三个公开数据集、一个专有工业数据集和在线A/B测试上的实验验证了CHAP的优越性，证明了其有效性和实践价值。代码已开源。",
       "one_line_takeaway": "CHAP通过层次化语义对齐和残差级联生成机制，实现了高效且个性化的生成式检索，兼顾精度与推理速度。",
       "core_method": "CHAP框架包含三个核心组件：1）层次化语义对齐模块，将查询的潜在空间与物品的量化路径对齐，并同步多粒度语义；2）个性化GR框架，结合离散SID的结构性指导和连续表示的细粒度语义细化来建模用户行为；3）残差级联生成机制，将多步Transformer解码器限制为单次推理，提升推理吞吐量并减少信息损失。",
@@ -3723,7 +3983,7 @@
         "GenRec",
         "Semantic ID"
       ],
-      "score": 115,
+      "score": 114,
       "summary": "本文研究生成式推荐系统中语义ID（SID）推荐器的离线策略评估（OPE）问题。SID将每个物品表示为残差量化器产生的短层次离散码序列，由解码器自回归生成。在A/B测试前，团队需离线决定解码器或重排序变体，这需要OPE。作者提出利用模型自身的SID树作为动作抽象。研究发现：在真实推荐使用的近argmax日志下，逐物品OPE因有效样本量小而不可靠，但将物品边缘化到码前缀簇可恢复可估计支持并降低误差；该增益源于粗化而非层次结构本身，但SID树使粗化在生成系统中可行，因为每个簇的质量可由解码器精确且廉价地返回，而扁平聚类需枚举物品/叶子质量，代码解码器无法直接暴露。分辨率深度是操作旋钮，支持不足时需更粗。条件偏差界将粗化偏差与量化器最坏重建残差和目标日志散度联系起来。",
       "one_line_takeaway": "在生成式推荐中，利用SID树进行粗化可显著提升离线策略评估的可靠性，且粗化偏差可由量化器重建误差和目标日志散度界定。",
       "core_method": "利用SID树作为动作抽象，将物品边缘化到码前缀簇，通过解码器直接计算簇质量，实现粗化OPE，并推导条件偏差界。",
