@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T09:46:48+08:00",
+  "generated_at": "2026-10-23T09:57:06+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -11,12 +11,14 @@
   },
   "status": {
     "analysis_enabled": true,
-    "source_errors": [],
-    "discovered": 2944,
-    "candidates": 49,
-    "new_papers": 0,
+    "source_errors": [
+      "arXiv: 3/4 个分片失败，已保留成功分片（The read operation timed out）"
+    ],
+    "discovered": 2549,
+    "candidates": 41,
+    "new_papers": 1,
     "daily_picks": 2,
-    "effective_daily_window_days": 3,
+    "effective_daily_window_days": 4,
     "analysis_complete": 142,
     "analysis_fallback": 0
   },
@@ -63,49 +65,57 @@
         "Tao Zhou"
       ],
       "affiliations": [],
-      "published": "2026-10-20T09:17:14Z",
-      "updated": "2026-10-20T09:17:14Z",
+      "published": "2026-10-20",
+      "updated": "2026-10-20",
       "abstract": "Semantic ID (SID)-based generative recommendation retrieves items through successive token-level decisions, making personalization at each decoding step essential. However, existing methods insufficiently account for prefix-dependent user evidence and imbalanced historical interaction loads among candidate branches. This can cause irreversible branch-selection errors and favor popular paths. We propose SPAR, a generative recommendation framework that jointly improves stepwise personalization and SID construction. Its PATH Decoder retrieves prefix-relevant evidence from compressed long-term user memories and combines it with recent behavior, user profiles, and event context to guide each token decision. Its RQ-PIB module balances historical interaction loads among sibling branches under each parent prefix while preserving semantic structure. Experiments on large-scale Youku production data show an average relative HitRate improvement of 2.66% over the strongest baseline. SPAR also increases target-prefix retention by 5.79 percentage points and reduces the traffic-weighted largest child-branch share by 32.84% across SID levels. In a 7-day online A/B test, SPAR serves 10% of Youku's production traffic and improves average watch time per user by 3.95% and play conversion rate by 3.38%. These results demonstrate more reliable hierarchical decoding, balanced SID branches, and improved user engagement in industrial recommendation.",
-      "url": "http://arxiv.org/abs/2610.27898v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.27898v1",
-      "doi": "",
+      "url": "https://arxiv.org/abs/2610.27898",
+      "pdf_url": "https://arxiv.org/pdf/2610.27898",
+      "doi": "10.48550/arxiv.2610.27898",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
         "cs.IR"
       ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "Semantic ID",
-        "推理系统"
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "逐步个性化",
+        "前缀平衡"
       ],
-      "score": 140,
-      "summary": "SPAR针对基于语义ID（SID）的生成式推荐中逐步解码个性化不足的问题展开研究：现有方法未充分利用与当前前缀相关的用户证据，且候选分支间历史交互负载不均衡，易导致不可逆的分支选择错误并偏向热门路径。为此，SPAR提出PATH Decoder，从压缩的长期用户记忆中检索与前缀相关的证据，并与近期行为、用户画像和事件上下文结合，指导每个token决策；同时设计RQ-PIB模块，在保持语义结构的前提下平衡各父前缀下兄弟分支的历史交互负载。在优酷大规模生产数据上，SPAR相较最强基线平均相对HitRate提升2.66%，目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%。7天线上A/B测试中，SPAR承载优酷10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%，验证了更可靠的层次化解码、更均衡的SID分支及用户参与度提升。",
-      "one_line_takeaway": "SPAR通过前缀感知的逐步个性化解码与负载均衡的语义ID构建，在优酷线上显著提升生成式推荐的命中率与用户参与度。",
-      "core_method": "提出SPAR生成式推荐框架：PATH Decoder从压缩长期用户记忆中检索前缀相关证据，融合近期行为、用户画像与事件上下文，逐步指导token级解码；RQ-PIB模块在保持语义结构下平衡各父前缀下兄弟分支的历史交互负载，缓解热门路径偏置。",
+      "score": 139,
+      "summary": "SPAR针对基于语义ID（SID）的生成式推荐中逐步解码个性化不足与候选分支历史交互负载不均衡的问题，提出联合优化逐步个性化与SID构造的生成式推荐框架。其PATH Decoder从压缩的长期用户记忆中检索与当前前缀相关的证据，并结合近期行为、用户画像与事件上下文，引导每个token级决策；RQ-PIB模块在保持语义结构的前提下，平衡同一父前缀下兄弟分支的历史交互负载，缓解流行路径偏好与不可逆分支选择错误。在优酷大规模生产数据上，SPAR相对最强基线平均HitRate相对提升2.66%，目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%。7天线上A/B测试中，SPAR承载优酷10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%，验证了层次解码可靠性、SID分支均衡性与用户参与度的工业价值。",
+      "one_line_takeaway": "SPAR通过前缀感知的逐步个性化解码与兄弟分支负载均衡的语义ID构造，在优酷线上显著提升生成式推荐效果与用户参与度。",
+      "core_method": "SPAR包含两个核心组件：PATH Decoder在每一步token解码时，从压缩的长期用户记忆中检索与当前前缀相关的证据，并与近期行为、用户画像和事件上下文融合，实现逐步个性化；RQ-PIB模块在语义ID的每个父前缀下，对兄弟分支的历史交互负载进行平衡，同时保持语义结构，以缓解流行路径偏好和不可逆分支选择错误。",
       "innovation_points": [
-        "PATH Decoder实现前缀相关的逐步个性化证据检索与融合，提升每个解码步骤的决策可靠性",
-        "RQ-PIB在语义ID构建中平衡兄弟分支历史交互负载，同时保持语义结构",
-        "将逐步个性化与SID构建联合优化，针对分支选择不可逆错误和流行路径偏置问题"
+        "提出PATH Decoder，在生成式推荐的每个解码步骤中动态检索前缀相关长期记忆，并与近期行为、画像和上下文联合引导token决策，增强逐步个性化。",
+        "设计RQ-PIB模块，在保持语义结构的前提下平衡同一父前缀下兄弟分支的历史交互负载，缓解流行路径偏好与分支选择偏差。",
+        "将逐步个性化解码与语义ID构造联合优化，形成端到端的生成式推荐框架，并在工业级生产数据与线上A/B测试中验证。",
+        "在优酷大规模生产环境中部署，覆盖10%线上流量，验证了方法在真实业务场景下的工程可行性与线上价值。"
       ],
       "experiment_results": [
-        "优酷大规模生产数据上平均相对HitRate较最强基线提升2.66%",
-        "目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%",
-        "7天线上A/B测试承载10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%"
+        "在优酷大规模生产数据上，SPAR相对最强基线平均HitRate相对提升2.66%。",
+        "目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%。",
+        "7天线上A/B测试中，SPAR承载优酷10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%。"
       ],
       "limitations": [
-        "实验主要基于优酷单一视频推荐场景，跨领域泛化性未验证",
-        "长期用户记忆的压缩与检索机制可能引入额外工程复杂度与延迟开销",
-        "未报告不同SID层级或用户群体上的细粒度消融与鲁棒性分析"
+        "摘要未披露PATH Decoder中长期用户记忆的压缩方式、检索开销及在线推理延迟等工程约束细节。",
+        "RQ-PIB的负载平衡策略可能对语义ID的语义纯度或长尾物品覆盖产生何种影响，摘要未给出消融或敏感性分析。",
+        "线上A/B测试仅覆盖优酷单一业务场景与7天周期，跨场景、跨平台的泛化性尚未验证。"
       ],
-      "practical_value": "在优酷真实生产流量中验证了逐步个性化与SID分支均衡对生成式推荐的有效性，为工业级语义ID生成式推荐提供了可落地的解码与ID构建方案，直接提升观看时长和播放转化率。",
-      "why_it_matters": "该工作直面生成式推荐中逐步解码个性化不足与SID分支负载失衡两个关键工程问题，并给出线上A/B验证的收益，对语义ID构建和生成式推荐落地具有较强参考价值。",
+      "practical_value": "SPAR面向工业级生成式推荐的真实业务场景，在优酷生产环境承载10%线上流量并取得人均观看时长与播放转化率的双提升，说明其逐步个性化解码与SID分支均衡策略在工程约束下具备可部署性。RQ-PIB缓解流行路径偏好，有助于改善候选分支负载不均与长尾曝光结构，为基于语义ID的生成式推荐系统提供可落地的优化路径。",
+      "why_it_matters": "该工作直面生成式推荐中逐步解码个性化不足与SID分支负载失衡两个关键问题，提出可联合优化的框架，并在大规模生产数据与线上A/B测试中给出明确收益，对关注生成式推荐工业落地与语义ID构造的研究者和工程师具有直接参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "62b5c4f21c474f44",
+      "analysis_signature": "d3b184635c6baf7f",
       "is_daily_pick": true
     },
     {
@@ -113,7 +123,7 @@
       "title": "EASformer: Environment-Action-State Alignment for Industrial Generative Ranking",
       "authors": [
         "Bohao Li",
-        "Dinglun Cao",
+        "DingLun Cao",
         "Pengcheng Huang",
         "Yingda Tang",
         "Zhiting Zhao",
@@ -122,51 +132,61 @@
         "Miao Yan",
         "Tianying Liu",
         "Heng Chang",
-        "Bowen Du"
+        "Bowen Du",
+        "Dinglun Cao"
       ],
       "affiliations": [],
-      "published": "2026-10-20T06:08:07Z",
-      "updated": "2026-10-20T06:08:07Z",
+      "published": "2026-10-20",
+      "updated": "2026-10-20",
       "abstract": "Modern industrial ranking systems increasingly adopt generative recommendation (GR) paradigms, in which user behavior sequences and non-sequential (NS) features are tokenized and jointly modeled by Transformer-style backbones. This unified formulation provides a scalable interface for modeling long histories and heterogeneous features. However, sequence and NS representations often carry asymmetric semantics: historical representations may combine environment context with observed-action semantics, whereas candidate-side NS representations contain no observed action but incorporate richer supplementary context, such as user-item interaction features and recent behavior lists. Direct interaction between such representations can make query-key dot products compare different semantic objects, limiting meaningful cross-token interaction. To fill this gap, we propose EASformer, an Environment-Action-State disentangled architecture for industrial app ranking. EASformer constructs an explicitly aligned context environment space shared by historical and non-sequence tokens, while disentangling user actions from historical token and candidate-specific context form non-sequence tokens. Based on this aligned space, EASformer enables complementary historical action retrieval and state-conditioned action prediction. Furthermore, the disentangled design supports a Cloze-style self-supervised objective by masking historical actions and reusing the candidate prediction pathway. On an offline benchmark from a real-world industrial app marketplace, EASformer achieves an AUC of 0.89411, yielding a 0.88% relative improvement over the deployed baseline. Online A/B tests further support this advantage, with relative eCPM lifts of 1.26% and 3.94% across two real-world ranking scenarios.",
-      "url": "http://arxiv.org/abs/2610.27691v1",
-      "pdf_url": "https://arxiv.org/pdf/2610.27691v1",
-      "doi": "",
+      "url": "https://arxiv.org/abs/2610.27691",
+      "pdf_url": "https://arxiv.org/pdf/2610.27691",
+      "doi": "10.48550/arxiv.2610.27691",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
         "cs.AI"
       ],
       "tags": [
         "A/B 实验",
-        "GenRec"
+        "GenRec",
+        "生成式推荐",
+        "工业排序",
+        "序列建模",
+        "语义对齐",
+        "自监督学习",
+        "在线A/B"
       ],
-      "score": 110,
-      "summary": "该论文针对工业生成式推荐中序列特征与非序列特征语义不对称的问题，提出EASformer架构。现有方法将用户行为序列与非序列特征统一token化后由Transformer联合建模，但历史token混合了环境上下文与已观测动作语义，候选侧非序列token不含已观测动作却包含更丰富的补充上下文，直接进行query-key点积会导致语义对象错配，限制跨token交互。EASformer构建历史与非序列token共享的显式对齐环境空间，并将用户动作从历史token中解耦、由候选特定上下文构成非序列token，在此基础上实现互补的历史动作检索与状态条件动作预测，并利用解耦设计支持掩码历史动作、复用候选预测通路的Cloze式自监督目标。在真实工业应用市场的离线基准上AUC达0.89411，较线上部署基线相对提升0.88%；在线A/B测试在两个真实排序场景中eCPM分别相对提升1.26%和3.94%。",
-      "one_line_takeaway": "EASformer通过环境-动作-状态解耦与显式对齐空间，解决生成式推荐中序列与非序列token语义错配问题，并在真实工业场景取得离线与在线双重收益。",
-      "core_method": "将历史token与候选侧非序列token拆解为共享的环境上下文空间、用户动作语义与候选特定状态三部分：历史token剥离出动作表示，非序列token由候选上下文构成状态表示，二者在显式对齐的环境空间中交互；基于该对齐空间执行历史动作检索与状态条件动作预测，并复用候选预测通路构造掩码历史动作的Cloze式自监督训练目标。",
+      "score": 109,
+      "summary": "EASformer针对工业生成式推荐中用户行为序列与非序列特征联合建模时的语义不对称问题：历史表示混合环境上下文与已观测动作语义，候选侧非序列表示不含观测动作但含更丰富补充上下文，直接做query-key点积会比对不同语义对象，限制跨token交互。作者提出环境-动作-状态解耦架构，构建历史与非序列token共享的显式对齐上下文环境空间，将用户动作从历史token中解耦，并由候选特定上下文构成非序列token；在该对齐空间上实现互补的历史动作检索与状态条件动作预测，并支持掩码历史动作、复用候选预测通路的Cloze式自监督目标。真实工业应用市场离线基准AUC为0.89411，较线上基线相对提升0.88%；两个真实排序场景在线A/B的eCPM相对提升1.26%和3.94%。",
+      "one_line_takeaway": "EASformer通过环境-动作-状态显式解耦与共享环境空间对齐，修复了生成式推荐中序列与非序列token的语义错配，并在真实工业场景取得离线与在线双重收益。",
+      "core_method": "将历史行为序列与非序列特征token化后，构建历史token与候选侧非序列token共享的显式对齐上下文环境空间；把用户动作语义从历史token中剥离，候选特定上下文形成非序列token；在统一对齐空间上分别执行历史动作检索与状态条件动作预测，并以掩码历史动作、复用候选预测通路的Cloze式自监督目标训练Transformer骨干。",
       "innovation_points": [
-        "提出环境-动作-状态解耦架构，显式区分历史token中的环境上下文与已观测动作语义，避免query-key点积比较不同语义对象",
-        "构建历史与非序列token共享的对齐环境空间，使跨token交互在统一语义基准上进行",
-        "在解耦表示上同时支持互补的历史动作检索与状态条件动作预测两条通路",
-        "设计Cloze式自监督目标，通过掩码历史动作并复用候选预测通路实现自监督训练"
+        "提出环境-动作-状态解耦表示，明确区分历史token中的环境上下文与已观测动作语义，缓解query-key点积比对不同语义对象的问题",
+        "构建历史与非序列token共享的显式对齐环境空间，使跨token交互在同一语义坐标系下进行",
+        "在对齐空间上组合历史动作检索与状态条件动作预测，形成互补的生成式排序路径",
+        "设计掩码历史动作并复用候选预测通路的Cloze式自监督目标，提升训练信号利用率"
       ],
       "experiment_results": [
-        "真实工业应用市场离线基准上AUC为0.89411，较已部署基线相对提升0.88%",
-        "在线A/B测试在两个真实排序场景中eCPM分别相对提升1.26%和3.94%",
-        "摘要未提供消融实验、自监督目标贡献度及不同解耦组件的定量分析数据"
+        "真实工业应用市场离线基准AUC为0.89411，较已部署基线相对提升0.88%",
+        "两个真实排序场景在线A/B测试eCPM相对提升分别为1.26%和3.94%",
+        "摘要未提供消融实验、各模块独立贡献及训练成本数据"
       ],
       "limitations": [
-        "离线评估仅报告单一工业应用市场基准上的AUC，缺少多数据集或跨场景泛化验证",
-        "摘要未给出消融实验，环境-动作-状态解耦各组件及Cloze自监督目标的具体贡献不明确",
-        "在线收益仅在两个排序场景中报告eCPM指标，未披露延迟、训练成本等工程约束数据"
+        "离线评估仅基于单一真实工业应用市场基准，跨业务泛化性证据有限",
+        "在线收益来自两个排序场景的A/B结果，未披露长期生态指标与用户侧影响",
+        "摘要未给出解耦各模块的消融数据，难以量化环境对齐与动作解耦的独立贡献"
       ],
-      "practical_value": "面向真实工业应用市场排序场景，直接针对已部署生成式推荐基线的语义错配问题做架构改进，离线AUC与在线eCPM均有可测量的相对提升，且解耦设计可复用候选预测通路引入自监督信号，对工业界生成式排序系统的特征建模与训练目标设计具有直接参考价值。",
-      "why_it_matters": "生成式推荐将序列与非序列特征统一token化是当前工业趋势，但语义不对称导致的跨token交互失效是易被忽视的结构性问题；该工作从表示语义对齐角度给出解耦方案，并附真实线上A/B结果，对基座式生成推荐架构的工程落地有借鉴意义。",
+      "practical_value": "面向工业应用市场排序场景，提供可落地的序列-非序列统一建模接口，在保持Transformer骨干可扩展性的同时修正语义错配；在线eCPM提升表明该解耦对齐设计可直接服务于真实流量排序与生成式推荐系统升级。",
+      "why_it_matters": "生成式推荐正从学术走向工业部署，序列与非序列特征语义不对称是统一建模中的共性工程难题；该工作给出显式对齐与解耦的系统性方案，并附真实线上A/B证据，对基座式推荐架构设计与线上价值验证均有参考意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "69449d45283c3c3b",
+      "analysis_signature": "3137f0212f32ad1c",
       "is_daily_pick": true
     },
     {
@@ -203,18 +223,14 @@
       "categories": [
         "Information Retrieval and Search Behavior",
         "Recommender Systems and Techniques",
-        "Topic Modeling",
-        "cs.IR"
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
         "预训练",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式检索",
-        "语义ID",
-        "工具增强"
+        "推理系统"
       ],
       "score": 157,
       "summary": "针对生成式检索（GR）难以高效利用大规模搜索推荐系统中异构特征生态的问题，本文提出Agentic Generative Retrieval（AGR），一种工具增强的生成式检索范式。AGR将语义ID（SID）生成与按需特征获取交错进行：在给定请求与已解码SID前缀的条件下，模型自适应决定是否调用工具、选择哪个特征、以及观测结果应影响后续解码的哪个位置，从而将生成引导至特征一致的SID分支。为监督该行为，作者依据特征适用性与沿SID层级的信息增益构造工具增强轨迹，并采用SID预训练加工具增强微调的两阶段训练。工业数据集、三个公开基准与线上A/B测试一致验证了AGR的有效性。",
@@ -269,19 +285,13 @@
       "categories": [
         "Information Retrieval and Search Behavior",
         "Topic Modeling",
-        "Recommender Systems and Techniques",
-        "cs.IR",
-        "cs.AI"
+        "Recommender Systems and Techniques"
       ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "Semantic ID",
-        "推理系统",
-        "生成式检索",
-        "语义ID",
-        "动态电商搜索",
-        "拓扑保持"
+        "推理系统"
       ],
       "score": 139,
       "summary": "该论文研究动态电商搜索中生成式检索的语义ID（SID）映射更新问题：新商品持续到达迫使周期性重映射SID与模型，但更新会破坏检索器已学习的搜索路径。作者基于67天大规模电商搜索日志开展受控实验，发现三点：SID语义漂移导致检索显著退化，且大beam size会掩盖真实严重性（beam=1时HitRate下降41.78-62.05%，beam=1000时仅8.33-10.85%）；变更SID比例与检索质量严格单调负相关，0%到72.75%重映射时HitRate最多下降42.66%，全量重映射在热启动下仍明显差于保持策略；遵循SID拓扑保持原则——固定旧商品SID、插入新商品、从上一模型热启动——即使最简单策略也有效，旧商品HitRate提升10%、新商品HitRate提升109%，并在两个不重叠更新周期验证。最终形成部署原则：插入新商品、冻结旧商品；能热启动则热启动，否则冻结；绝不更改模型已学SID。天猫APP三周在线A/B测试显示UCTCVR +0.29%、GMV +1.16%。",
@@ -395,15 +405,14 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.IR"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "A/B 实验",
         "GenRec",
         "推理系统"
       ],
-      "score": 130,
+      "score": 129,
       "summary": "TransX 提出面向工业推荐的序列转导框架及配套基础设施，核心是将序列编码、行为记忆与候选条件融合拆分为可独立扩展的组件，从而显式控制模型算力分配与执行摊销。训练侧利用因果轨迹在行为前缀上的摊销计算，并将记忆状态扇出至候选；服务侧通过紧凑行为记忆 KV 将批量预填充、近线刷新与在线预测解耦。作者报告各向异性扩展规律：固定记忆分辨率与融合容量下编码器加深可能饱和；增加监督会将分配前沿推向候选条件融合；保持质量所需记忆分辨率随容量增长大致稳定。线上 A/B 中核心模型 CTR 提升 6.02%、转化提升 4.45%，后训练检索与偏好排序变体分别提升 2.96% 和 1.33%；训练基础设施监督目标吞吐提升 84%，服务解耦降低总服务成本近 80%，同等成本下每请求 FLOPs 约为 HSTU 风格基线的 5 倍。",
       "one_line_takeaway": "TransX 通过组件化解耦与训练/服务摊销，使推荐模型容量扩展不再线性推高线上服务成本。",
       "core_method": "将推荐建模为序列转导：分离序列编码器、行为记忆与候选条件融合三个可独立扩展组件；训练时在行为前缀上摊销因果轨迹计算并将记忆状态扇出到候选，服务时以紧凑行为记忆 KV 解耦批量预填充、近线刷新与在线预测。",
@@ -467,7 +476,7 @@
         "推理系统",
         "LLM 基模"
       ],
-      "score": 100,
+      "score": 99,
       "summary": "PA1-OPD针对语言模型预训练中知识蒸馏仅在语料前缀上匹配教师分布、缺乏对学生预测所诱导上下文的直接监督这一问题，提出一步前缀增强的在线策略蒸馏。方法在每个选定前缀处让学生采样一次转移，再用教师在该学生诱导状态上的反馈进行监督，从而扩展受监督状态，同时保留下一词预测与语料路径KD；数据锚定根支持并行采样，可微树注意力共享前缀计算且不改变推理。在两种继续预训练设置下，全覆盖在C4、PG-19和Pile的每个评估检查点上均提升留出交叉熵；Stage2选取学生困惑度最高的10%根，使KD相对下一词训练的Macro交叉熵增益增加48.85%。排除语料路径上已有后继状态的监督后增益仍存在，说明观测上下文之外的反馈有价值；增加深度或广度在每项监督权重不变时改善总体结果，收益因语料而异。",
       "one_line_takeaway": "PA1-OPD用学生采样一步后的教师反馈补充语料前缀蒸馏，在不改变推理的前提下扩展预训练监督状态并稳定提升留出交叉熵。",
       "core_method": "在语料前缀处先由学生模型采样一次转移，得到学生诱导上下文，再以教师分布对该状态提供监督；与原有下一词预测和语料路径KD联合训练。数据锚定根使不同前缀可并行采样，可微树注意力在共享前缀计算的同时保持推理路径不变。Stage2按学生困惑度选择根节点，仅对最高10%的根施加分支监督。",
@@ -522,8 +531,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.IR"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "Alibaba Qwen",
@@ -560,7 +568,7 @@
     },
     {
       "id": "arxiv:2610.16979",
-      "title": "WeGR: Unified Generative Retrieval for Industrial Search Systems in WeChat",
+      "title": "WeGR: Towards Unified Generative Retrieval via Behavior-aware Tokenization and Preference Alignment",
       "authors": [
         "Jiajun Han",
         "Guoxin Ma",
@@ -578,7 +586,7 @@
       "affiliations": [],
       "published": "2026-10-12",
       "updated": "2026-10-12",
-      "abstract": "Generative retrieval (GR) offers a promising paradigm for industrial search by unifying candidate generation within an autoregressive framework. However, its effectiveness is limited by two key challenges. First, existing Semantic ID (SID) tokenizers struggle to incorporate collaborative signals while maintaining effective codebook utilization, limiting their ability to distinguish items and achieve high-quality retrieval. Second, existing reinforcement learning (RL) methods suffer from severe reward sparsity under exact SID matching, leaving many sampled trajectories without effective learning signals and hindering preference optimization. To address these challenges, we propose WeGR, a unified generative retrieval framework consisting of two complementary components. Specifically, the Collaborative and Collapse-free Tokenizer (CoCo-VAE) incorporates query-to-item and item-to-item collaborative signals while mitigating codebook collapse through codebook refresh and complementary regularization, enabling more informative and balanced SID representations. Building upon these SIDs, Dynamic Horizon Policy Optimization (DHPO) progressively expands both reward evaluation and policy optimization horizons, reducing learning difficulty while leveraging behavioral reward signals at different levels of the SID hierarchy, without relying on auxiliary reward models. Extensive offline experiments demonstrate the effectiveness of WeGR in improving retrieval and ranking performance. Moreover, a two-month online A/B test in WeChat E-commerce Search demonstrates relative improvements of 2.539% in orders, 1.508% in click-through rate, and 1.381% in conversion rate, while reducing online CPU and GPU usage by 25.5% and 26.1%, respectively. The system has been successfully deployed across multiple search scenarios in WeChat, serving billions of users, generating tens of millions of PVs daily.",
+      "abstract": "Generative retrieval (GR) offers a promising paradigm for industrial search by unifying candidate generation within an autoregressive framework. However, effectively leveraging user behaviors in industrial GR remains challenging: existing SID tokenization methods struggle to preserve collaborative signals while maintaining balanced codebook utilization, whereas reinforcement learning (RL) for prioritizing high-value candidates suffers from sparse rewards when generated SIDs fail to match positive items. To address these challenges, we propose WeGR, a unified GR framework with two complementary components. Specifically, the Collaborative and Collapse-free Tokenizer (CoCo-VAE) injects query-to-item and item-to-item collaborative signals into continuous representations before quantization, preserving behavioral information without disrupting codebook optimization. It further couples first-layer codebook refresh to reactivate underutilized codewords with fidelity anti-collapse regularization, which broadens gradient coverage over relevant codewords and penalizes collisions in deeper layers to yield behavior-aware SIDs with balanced utilization. For preference alignment, Dynamic Horizon Policy Optimization (DHPO) progressively expands reward evaluation and policy optimization horizons to alleviate reward sparsity, enabling coarse-to-fine preference learning from SID prefixes to complete items without auxiliary reward models. Extensive offline experiments validate that WeGR improves retrieval and ranking performance. Moreover, a six-week online A/B test on a large-scale e-commerce search platform achieves relative gains of 2.539% in orders, 1.508% in CTR, and 1.381% in CVR, while reducing CPU and GPU usage by 25.5% and 26.1%. These results highlight the effectiveness and efficiency of WeGR in industrial deployment, supporting multiple search scenarios and tens of millions of daily page views.",
       "url": "https://arxiv.org/abs/2610.16979",
       "pdf_url": "https://arxiv.org/pdf/2610.16979",
       "doi": "10.48550/arxiv.2610.16979",
@@ -594,35 +602,37 @@
       "tags": [
         "A/B 实验",
         "GenRec",
-        "Semantic ID",
         "Tokenization",
         "Reasoning",
-        "推理系统"
+        "推理系统",
+        "生成式检索",
+        "语义ID",
+        "协同信号"
       ],
-      "score": 159,
-      "summary": "WeGR 是面向微信电商搜索的工业级统一生成式检索框架，旨在解决现有生成式检索中语义ID（SID）令牌化器难以融合协同信号且码本利用率低，以及强化学习在精确SID匹配下奖励稀疏导致偏好优化困难两大问题。其核心组件包括：协同无坍缩令牌化器（CoCo-VAE），通过引入查询-物品和物品-物品协同信号，并利用码本刷新与互补正则化缓解码本坍缩，生成更具信息量且均衡的SID表示；动态视界策略优化（DHPO），逐步扩展奖励评估与策略优化视界，降低学习难度，并利用SID层级不同粒度的行为奖励信号，无需辅助奖励模型。离线实验验证了WeGR在检索与排序性能上的有效性。在微信电商搜索为期两个月的在线A/B测试中，订单量相对提升2.539%，点击率提升1.508%，转化率提升1.381%，同时在线CPU和GPU使用率分别降低25.5%和26.1%。系统已成功部署于微信多个搜索场景，服务数十亿用户，日均生成数千万页面浏览量。",
-      "one_line_takeaway": "WeGR通过协同无坍缩SID令牌化与动态视界策略优化，在微信电商搜索中实现了生成式检索的工业级落地，显著提升业务指标并降低计算成本。",
-      "core_method": "提出统一生成式检索框架WeGR，包含两个核心组件：1）协同无坍缩令牌化器（CoCo-VAE），融合查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化防止码本坍缩，生成高质量语义ID；2）动态视界策略优化（DHPO），逐步扩展奖励评估与策略优化视界，利用SID层级不同粒度的行为奖励信号，缓解奖励稀疏问题，无需辅助奖励模型。",
+      "score": 137,
+      "summary": "WeGR 针对工业级生成式检索中用户行为信号难以有效利用的问题提出统一框架。现有语义ID分词方法难以在保留协同信号的同时维持码本均衡利用，而用强化学习优先高价值候选时，生成SID与正样本不匹配会导致奖励稀疏。为此，WeGR 设计协同且抗坍缩的分词器 CoCo-VAE：在量化前将查询到物品、物品到物品的协同信号注入连续表示，并将首层码本刷新与保真抗坍缩正则耦合，扩大相关码字梯度覆盖并惩罚深层碰撞，产出行为感知且利用均衡的SID。偏好对齐方面提出动态视野策略优化 DHPO，逐步扩展奖励评估与策略优化视野，从SID前缀到完整物品实现由粗到细的偏好学习，无需辅助奖励模型。离线实验验证检索与排序提升；某大型电商搜索平台六周线上A/B测试订单相对提升2.539%、CTR提升1.508%、CVR提升1.381%，CPU与GPU用量分别降低25.5%和26.1%，支撑多搜索场景与数千万日PV。",
+      "one_line_takeaway": "WeGR 通过行为感知的协同抗坍缩SID分词与动态视野偏好对齐，在工业电商搜索中同时提升生成式检索效果并显著降低算力开销。",
+      "core_method": "提出统一生成式检索框架 WeGR，包含两个互补组件：CoCo-VAE 在量化前注入查询到物品和物品到物品的协同信号，并以首层码本刷新、保真抗坍缩正则和深层碰撞惩罚实现行为感知且均衡利用的语义ID；DHPO 通过逐步扩展奖励评估与策略优化视野，从SID前缀到完整物品进行由粗到细的偏好学习，缓解奖励稀疏且不依赖辅助奖励模型。",
       "innovation_points": [
-        "CoCo-VAE令牌化器：首次在语义ID生成中同时引入查询-物品和物品-物品协同信号，并通过码本刷新与互补正则化有效缓解码本坍缩，提升SID的区分性和码本利用率。",
-        "DHPO强化学习优化：提出动态视界策略优化，逐步扩展奖励评估和策略优化视界，利用SID层级的多粒度行为奖励，解决精确SID匹配下的奖励稀疏问题，且不依赖辅助奖励模型。",
-        "工业级统一生成式检索框架：将候选生成统一到自回归框架中，并在微信电商搜索中成功部署，验证了其在大规模真实业务场景下的有效性和效率。"
+        "CoCo-VAE 在量化前注入协同信号，避免破坏码本优化，同时保留用户行为信息",
+        "将首层码本刷新与保真抗坍缩正则、深层碰撞惩罚结合，兼顾码字利用均衡与行为感知SID质量",
+        "DHPO 以动态扩展的奖励与优化视野实现由粗到细的偏好对齐，无需辅助奖励模型即可缓解SID不匹配导致的奖励稀疏"
       ],
       "experiment_results": [
-        "离线实验表明WeGR在检索和排序性能上均有提升。",
-        "微信电商搜索为期两个月的在线A/B测试显示：订单量相对提升2.539%，点击率提升1.508%，转化率提升1.381%。",
-        "在线CPU和GPU使用率分别降低25.5%和26.1%。"
+        "离线实验验证 WeGR 在检索与排序性能上均有提升（摘要未给出具体离线指标数值）",
+        "某大型电商搜索平台六周线上A/B测试：订单相对提升2.539%，CTR提升1.508%，CVR提升1.381%",
+        "同一线上测试中 CPU 与 GPU 用量分别降低25.5%和26.1%，支撑多搜索场景与数千万日PV"
       ],
       "limitations": [
-        "摘要未提及模型在跨领域或跨语言场景下的泛化能力。",
-        "未讨论SID层级结构对超参数（如视界扩展策略）的敏感性。",
-        "缺乏与更多基线方法在离线实验中的详细对比数据。"
+        "线上验证局限于单一大型电商搜索平台，跨业务域泛化性尚未在材料中体现",
+        "摘要未披露离线实验的具体数据集、基线对比数值与消融结果，难以独立评估各组件贡献",
+        "DHPO 的动态视野扩展策略涉及额外超参数与训练调度，材料未说明其调参成本与稳定性边界"
       ],
-      "practical_value": "WeGR已在微信多个搜索场景中部署，服务数十亿用户，日均处理数千万PV，显著提升订单、点击率和转化率，同时大幅降低计算资源消耗，为工业级生成式检索提供了可复用的技术方案。",
-      "why_it_matters": "该工作针对生成式检索在工业搜索中的两大核心挑战提出了创新性解决方案，并通过大规模在线A/B测试验证了其业务价值与效率优势，对推动生成式检索在实际系统中的应用具有重要参考意义。",
+      "practical_value": "在真实电商搜索场景中同时改善订单、CTR与CVR，并降低CPU和GPU资源消耗，说明该方法可在不增加算力负担的前提下支撑多搜索场景与数千万级日PV，具备直接工业部署价值。",
+      "why_it_matters": "它直面工业生成式检索的两个核心工程痛点——协同信号保留与码本均衡、强化学习奖励稀疏，并给出可上线验证的统一方案；线上收益与算力节省并存的证据，对搜索推荐系统的生成式改造具有较强参考意义。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "ea374c62ab6d9192",
+      "analysis_signature": "f3a6aa6b8a7b17f6",
       "is_daily_pick": false
     },
     {
@@ -735,7 +745,7 @@
         "GenRec",
         "LLM 基模"
       ],
-      "score": 153,
+      "score": 152,
       "summary": "本文针对基于LLM的推荐系统中语义ID（SID）生成范式，在工业级流媒体目录上进行了单头自回归束搜索与多令牌预测（MTP）的严格对比。研究引入了一种新的辅助排序损失，用于训练MTP目标，并在多任务LLM中联合优化个性化检索、内容问答和指令遵循。实验表明，单头束搜索在排序和内容QA等产品关键指标上持续优于MTP，且训练成本降低约2.6倍（Qwen3-8B规模），MTP仅在原始推理吞吐量上占优。端到端相比非SID基线，冷启动排序提升77%，内容QA准确率提升22%，训练速度加快2.8倍，但语言指标因SID词表扩展而下降，通过强化学习后训练得到缓解。",
       "one_line_takeaway": "在工业级LLM推荐中，单头自回归束搜索在排序和QA质量上优于多令牌预测，且训练成本更低，但需通过RL后训练缓解语言能力退化。",
       "core_method": "提出一种基于语义ID（SID）的LLM推荐框架，将物品表示为离散层次内容码序列，并统一检索、内容理解与语言生成。对比两种SID生成范式：单头自回归解码（使用约束束搜索）与多令牌预测（MTP，并行预测所有令牌）。为训练MTP，引入基于联合SID分数的辅助排序损失。模型在多任务设置下联合优化个性化检索、内容QA和指令遵循。",
@@ -1117,9 +1127,7 @@
         "Kaiqiao Zhan",
         "Yanan Niu",
         "Lantao Hu",
-        "Kun Gai",
-        "Zhihuai Cai",
-        "Xiangwu Yang"
+        "Kun Gai"
       ],
       "affiliations": [],
       "published": "2026-09-30",
@@ -1135,8 +1143,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.IR"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "Xiaomi MiMo",
@@ -1186,8 +1193,7 @@
         "Boya Wu",
         "Tuoyu Zhang",
         "Yekui Chen",
-        "Xiang Sun",
-        "Shaowen Zeng"
+        "Xiang Sun"
       ],
       "affiliations": [],
       "published": "2026-09-30",
@@ -1203,8 +1209,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Topic Modeling",
-        "cs.IR"
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
@@ -1262,8 +1267,7 @@
         "Mingtao Zhang",
         "Jinchao Ye",
         "Lili Zhang",
-        "Chunhui Zhu",
-        "Dongheng Li"
+        "Chunhui Zhu"
       ],
       "affiliations": [],
       "published": "2026-09-29",
@@ -1279,8 +1283,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.IR"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "A/B 实验",
@@ -1291,7 +1294,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 181,
+      "score": 180,
       "summary": "GRP v0.1 提出一个生成式推荐框架，将检索、排序和奖励建模统一到单个编码器-解码器模型中，并探索端到端推荐的渐进路径。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持对日志目标的似然。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励区分度。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果。仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
       "one_line_takeaway": "GRP 将检索、排序与奖励建模统一为单一生成式模型，并通过 mGRPO 和渐进式部署在真实工业推荐系统中取得在线收益。",
       "core_method": "GRP 是一个编码器-解码器生成式推荐框架，联合建模检索、排序和奖励。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结排序模块为强化学习后训练提供奖励。提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持对日志目标的似然。",
@@ -1357,7 +1360,7 @@
         "企业论文",
         "GenRec"
       ],
-      "score": 165,
+      "score": 164,
       "summary": "该论文研究如何利用推荐系统产生的延迟、噪声且混杂的反馈信号（如曝光、点击、转化）来演化内容生成智能体的外部记忆。现有方法依赖即时反馈或语义检索，难以准确归因推荐结果并转化为记忆适应度。为此，作者提出TIDE框架，将记忆视为容量受限的经验群体，通过时序与语义信用分配估计上下文适应度，并利用责任信用根据生成时引用的记忆分配结果信号，进而执行强化、交叉、变异或淘汰操作。同时提出记忆演化增益（MEG）指标，衡量演化后记忆在严格未来任务上相对于无记忆基线的效用提升。在电商会员营销内容生成智能体上，TIDE离线时序回放MEG提升7.75个百分点，在线A/B测试显著提升UCTR和激活率；在延迟标签基准上取得最低MAE和RMSE及最高MEG。",
       "one_line_takeaway": "TIDE通过延迟推荐反馈驱动外部记忆演化，在电商内容生成智能体中显著提升未来任务效用和在线点击转化指标。",
       "core_method": "TIDE将记忆建模为容量受限的经验群体，通过时序和语义信用分配估计上下文适应度，并利用责任信用将延迟推荐结果信号分配给生成时引用的记忆，进而执行强化、交叉、变异或淘汰操作。同时提出MEG指标衡量演化记忆在严格未来任务上相对无记忆基线的效用提升。",
@@ -1430,7 +1433,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 103,
+      "score": 102,
       "summary": "工业推荐排序模型通常沿特征交互和序列建模两个轴扩展，但单独扩展任一轴均存在性能天花板且缩放律斜率次优。本文提出HELIX，一种净化统一架构，通过交错序列检索与特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，在保持跨深度通信的同时使用户侧序列计算可摊销，实现两轴的灵活非对称扩展。在TikTok电商推荐系统部署后，离线CTR AUC、CVR AUC等排序指标持续提升，在线A/B测试中每用户电商视频GMV提升约6%。",
       "one_line_takeaway": "HELIX通过统一缩放特征交互与序列建模两轴，在TikTok电商推荐中实现离线指标提升和在线GMV约6%的增长。",
       "core_method": "HELIX采用净化统一架构，交错序列检索和特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，从而在保持跨深度通信的同时，使用户侧序列计算可摊销，支持序列建模与特征交互的灵活非对称缩放。",
@@ -1494,7 +1497,7 @@
         "预训练",
         "LLM 基模"
       ],
-      "score": 87,
+      "score": 86,
       "summary": "TabFM-Auto 针对表格基础模型（TabFM）在零样本预测时忽略列名、任务描述和辅助文件等数据集语义的问题，提出用语言模型智能体围绕冻结的 TabFM 演化数据流水线。智能体依据数据集元数据和验证反馈，迭代优化数据清洗、特征工程、上下文选择与后处理，以降低 TabFM 的预测误差。在 TabArena 全部 51 个数据集上，五种不同智能体与语言模型组合的配置包揽总榜前五，最佳配置将 TabFM 的 Elo 从 1785 提升至 2013；发现的流水线无需再搜索即可迁移到其他冻结表格基础模型，带来 +69 至 +143 Elo 增益；在 MLE-Bench 的 8 个表格竞赛中，TabFM-Auto 在 MLE 智能体中总排名第一。",
       "one_line_takeaway": "用语言模型智能体自动演化数据流水线，可显著放大冻结表格基础模型的零样本性能，并跨模型迁移。",
       "core_method": "将冻结的表格基础模型 TabFM 与语言模型智能体配对，智能体以数据集元数据和验证集反馈为引导，迭代搜索并优化数据清洗、特征工程、上下文选择和后处理等流水线步骤，以最小化 TabFM 的预测误差。",
@@ -1556,7 +1559,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 67,
+      "score": 66,
       "summary": "表格机器学习通常依赖逐数据集工作流，需为每个任务从头拟合树集成或运行AutoML搜索。本文提出TabFM，一个400M参数的表格基础模型，将监督表格预测形式化为上下文学习，无需任务特定调优即可在单次前向传播中产生校准的零样本预测。TabFM完全在由结构因果模型生成的合成表格上训练，学习可零样本迁移到真实任务的通用表格表示。在TabArena全部51个基准数据集（38个分类和13个回归）上，零样本TabFM在默认表格基础模型中排名第一，并优于调优的AutoML流水线。基于同一冻结权重的两个扩展进一步提升性能：多视图特征扩展与集成及事后校准（TabFM+），以及LLM引导的、数据集特定的数据处理与特征工程（TabFM-Auto）。",
       "one_line_takeaway": "TabFM通过合成因果数据预训练和上下文学习，实现了表格预测的零样本基础模型，在51个基准上超越调优AutoML。",
       "core_method": "TabFM是一个400M参数的表格基础模型，将监督表格预测建模为上下文学习。它完全在由结构因果模型生成的合成表格上预训练，学习通用表格表示。推理时，模型在单次前向传播中基于上下文示例产生校准的零样本预测，无需任务特定微调。",
@@ -2137,7 +2140,7 @@
         "Kuaishou (China)"
       ],
       "published": "2026-09-25",
-      "updated": "2026-10-16T09:59:22.235173",
+      "updated": "2026-10-22T18:32:59.640997",
       "abstract": "Language-based user profiles convert long behavioral histories into explicit semantic representations for recommendation. However, most profile generators are optimized in an open loop: they may summarize past behavior fluently, but are not directly trained to improve future recommendation. We study this problem in real-world short-video recommendation, where user behaviors continuously arrive as streams and profiles must be incrementally updated under limited capacity. This requires maintaining a consistent bounded profile state and constructing profile-targeted semantic feedback from industrial implicit behavior logs. We propose RECAP, an offline closed-loop framework for optimizing streaming structured semantic profiles with historical recommendation feedback. RECAP maintains each profile as a bounded structured memory by combining LLM-based semantic updates with deterministic lifecycle and capacity control. RECAP constructs profile-targeted semantic feedback by filtering label-consistent behavior pairs with an LLM judge and training a dual-tower evaluator whose matching score serves as a GRPO reward. Experiments on Kuaishou short-video data show that RECAP improves uAUC by 0.0084 and Recall@2000 by about 4.9% over the base generator. Further analyses confirm the benefits of feedback construction and policy optimization, and show more grounded refinement and user-level abstraction in profile updates. A seven-day online A/B test further shows a statistically significant 0.139% improvement in average application usage time per user.",
       "url": "https://doi.org/10.1145/3773078.3831930",
       "pdf_url": "",
@@ -2155,33 +2158,37 @@
         "A/B 实验",
         "企业论文",
         "后训练",
-        "GenRec"
+        "GenRec",
+        "用户画像",
+        "流式推荐",
+        "GRPO",
+        "闭环优化"
       ],
       "score": 175,
-      "summary": "RECAP针对短视频推荐中语言化用户画像生成器“开环优化”的问题：画像虽能流畅总结历史行为，却未直接以提升未来推荐为目标训练。论文在真实流式行为场景下，要求画像在有限容量内增量更新并保持有界一致状态，同时从工业隐式行为日志构造画像针对性语义反馈。方法上，RECAP以LLM语义更新结合确定性生命周期与容量控制维护有界结构化记忆，用LLM裁判过滤标签一致行为对，训练双塔评估器，将其匹配分作为GRPO奖励，实现离线闭环优化。快手数据实验显示uAUC提升0.0084、Recall@2000约提升4.9%，七天线上A/B测试人均应用使用时长显著提升0.139%。",
-      "one_line_takeaway": "RECAP用工业隐式反馈构造画像针对性奖励并闭环优化流式语义画像，在快手取得离线指标与线上时长的双重提升。",
-      "core_method": "将每个用户画像维护为有界结构化记忆：LLM负责语义更新，确定性生命周期与容量控制保证流式场景下状态一致且有界；从隐式行为日志中用LLM裁判筛选标签一致的行为对，训练双塔评估器，以匹配分作为GRPO奖励对画像生成策略做离线闭环优化。",
+      "summary": "RECAP针对短视频推荐中语言化用户画像生成器“开环优化”的问题：画像虽能流畅总结历史行为，却未直接以提升未来推荐为目标训练。论文提出离线闭环框架，将画像维护为有界结构化记忆，结合LLM语义更新与确定性生命周期/容量控制，保证流式行为下画像状态一致且有界；同时从工业隐式行为日志中，用LLM裁判筛选标签一致的行为对，训练双塔评估器，将其匹配分作为GRPO奖励，构造画像定向语义反馈。在快手短视频数据上，uAUC提升0.0084，Recall@2000约提升4.9%；七天线上A/B测试显示人均应用使用时长显著提升0.139%。",
+      "one_line_takeaway": "RECAP用工业隐式反馈构造画像定向奖励并闭环优化流式语义画像，在快手取得离线指标与线上时长的双重提升。",
+      "core_method": "将用户画像维护为有界结构化记忆：LLM负责语义更新，确定性规则控制生命周期与容量，保证流式场景下状态一致且有界；从隐式行为日志中用LLM裁判筛选标签一致的行为对，训练双塔评估器，以匹配分作为GRPO奖励，闭环优化画像生成策略。",
       "innovation_points": [
-        "把画像生成从开环摘要改为以推荐反馈为奖励的闭环策略优化，直接面向未来推荐效果训练",
-        "在有界容量与流式到达约束下，用LLM语义更新加确定性生命周期控制维护一致的结构化画像状态",
-        "用LLM裁判过滤标签一致行为对并训练双塔评估器，从工业隐式日志构造画像针对性语义反馈",
-        "将评估器匹配分接入GRPO，形成可落地的离线训练流程"
+        "把画像生成从开环摘要改为以推荐反馈为奖励的闭环优化，直接面向未来推荐效果训练",
+        "设计有界结构化记忆与确定性生命周期/容量控制，适配持续到达的流式行为与有限容量约束",
+        "用LLM裁判筛选标签一致行为对并训练双塔评估器，将工业隐式日志转化为画像定向语义反馈",
+        "将评估器匹配分接入GRPO，形成可扩展的离线策略优化流程"
       ],
       "experiment_results": [
-        "快手短视频数据上uAUC提升0.0084，Recall@2000约提升4.9%",
-        "七天线上A/B测试人均应用使用时长显著提升0.139%",
-        "消融分析确认反馈构造与策略优化的收益，画像更新呈现更 grounded 的细化和用户级抽象"
+        "快手短视频数据离线实验：uAUC提升0.0084，Recall@2000约提升4.9%",
+        "七天线上A/B测试：人均应用使用时长显著提升0.139%",
+        "消融与分析确认反馈构造与策略优化的收益，画像更新呈现更 grounded 的细化和用户级抽象"
       ],
       "limitations": [
-        "线上收益幅度较小（0.139%），需关注长期与多场景稳定性",
-        "依赖LLM裁判构造反馈，存在评判偏差与成本约束",
-        "画像容量有界，超长历史信息可能被压缩损失"
+        "依赖LLM裁判与双塔评估器构造反馈，存在评估器偏差与额外离线计算成本",
+        "线上收益幅度较小（0.139%），需在更多场景验证泛化性",
+        "有界容量与生命周期控制可能丢弃长尾历史信息，摘要未量化其影响"
       ],
-      "practical_value": "面向短视频等流式行为场景，给出在有限容量下增量维护语义画像并以真实隐式反馈闭环优化的工程路径，离线训练与线上服务解耦，具备直接落地价值。",
-      "why_it_matters": "它把用户画像从“可读的摘要”推进为“可优化的推荐组件”，并给出从工业日志构造奖励、在有界状态下流式更新的完整方案，对生成式推荐中的语义用户建模有参考意义。",
+      "practical_value": "面向短视频等流式行为场景，提供可落地的画像闭环优化方案：有界记忆控制工程成本，隐式日志构造反馈避免人工标注，离线训练后可直接服务线上推荐，并已通过线上A/B验证。",
+      "why_it_matters": "它把语言化用户画像从“可读摘要”推进为“可优化推荐组件”，给出工业约束下构造画像定向反馈与闭环训练的完整路径，对生成式推荐中的用户建模有直接参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "5f7953cdb3bb2960",
+      "analysis_signature": "194cfed5ed525cc8",
       "is_daily_pick": false
     },
     {
@@ -2879,9 +2886,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.IR",
-        "cs.AI"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "Alibaba Qwen",
@@ -2944,10 +2949,7 @@
       "categories": [
         "Recommender Systems and Techniques",
         "Information Retrieval and Search Behavior",
-        "Advanced Bandit Algorithms Research",
-        "cs.AI",
-        "cs.IR",
-        "cs.LG"
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "A/B 实验",
@@ -3088,7 +3090,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 127,
+      "score": 126,
       "summary": "腾讯混元团队发布开源大模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数量800亿，推理时仅激活130亿参数，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20万亿token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力。通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，根据任务复杂度自适应调整推理深度：常规查询使用快速思考，复杂多步问题使用慢速思考。评估显示，在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
       "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在800亿总参数下仅激活130亿，实现了高效推理与强大能力的平衡。",
       "core_method": "基于混合专家（MoE）架构，总参数800亿，推理激活130亿；在20万亿token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和强化学习；引入双模式思维链（快速/慢速思考）自适应调整推理深度。",
@@ -3154,7 +3156,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 168,
+      "score": 167,
       "summary": "本文针对音乐流媒体平台中用户渴望发现新艺术家却因信任障碍而犹豫的探索-利用困境，提出一种解耦式推荐架构。该架构将LLM推理异步离线化，预计算个性化未发现艺术家候选池及自然语言解释理由，从而在避免实时推理成本的同时实现可解释推荐。大规模在线A/B实验表明，结合LLM推荐与解释理由能显著降低新内容的信任门槛，在发现场景中同时提升用户探索行为和整体参与度，为工业级可解释推荐提供了可扩展的工程范式。",
       "one_line_takeaway": "通过异步离线LLM推理预计算个性化解释理由，可在不增加在线延迟的前提下显著提升音乐发现场景的用户探索与参与度。",
       "core_method": "提出解耦式推荐架构：将LLM推理完全异步离线化，预计算每个用户的未发现艺术家候选池及对应的自然语言解释理由；在线服务仅需轻量级检索与排序，避免实时LLM推理开销。",
@@ -3223,7 +3225,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 110,
+      "score": 109,
       "summary": "针对工业推荐系统因延迟和内存限制截断用户历史至数百条、导致长期兴趣利用不足，且多模态异构意图难以用稀疏ID表示的问题，MuSeR在已部署的MGS系统上提出检索框架，集成三项技术：分层时间压缩保留近期全分辨率动作并渐进池化旧片段，使10^4-10^5条交互历史适配固定服务预算；解耦多查询兴趣提取与正交正则化；多模态语义对齐，用大语言模型蒸馏的文本摘要增强稀疏物品ID。工程上采用异步用户表示刷新与自适应缓存，以及跨异构硬件的分层束搜索检索。在三个公开基准和大规模工业数据集上，MuSeR的Recall@K持续优于强长序列和多兴趣基线。百度APP首页、发现页和短视频场景的在线A/B测试显示，日活用户提升0.26%、总会话时长提升0.89%（p<0.05），同时降低服务延迟和成本。",
       "one_line_takeaway": "MuSeR通过系统级集成分层压缩、多兴趣解耦与多模态语义对齐，使超长序列多兴趣建模在工业实时推荐中可部署，并带来显著在线收益。",
       "core_method": "MuSeR是一个基于已部署MGS系统的检索框架，包含三个核心组件：分层时间压缩（近期动作全分辨率保留，旧片段渐进池化，支持10^4-10^5长度历史）、解耦多查询兴趣提取（带正交正则化）、多模态语义对齐（用LLM蒸馏文本摘要增强稀疏ID）。工程上采用异步用户表示刷新与自适应缓存，以及跨异构硬件的分层束搜索检索。",
@@ -3479,7 +3481,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 143,
+      "score": 142,
       "summary": "针对搜索广告中多目标（相关性、点击倾向、商业价值）联合优化时，单奖励对齐或朴素奖励融合易导致梯度竞争与全局次优的问题，提出 UniPolicy 目标感知多策略对齐框架。该方法在共享生成式基座内，通过目标特定前缀 token、稀疏 MoE-LoRA 路由和目标特定残差 FFN 分层解耦参数，为不同业务目标提供差异化参数与策略表达空间；同时利用多阶段行为反馈构建成对偏好，补充曝光未点击样本的相对偏好信息，强化点击候选在生成分布中的相对优势。推理时支持并行、业务可定制的多策略束搜索，在固定检索预算下灵活分配各目标候选配额。大规模离线实验显示多指标均衡提升且检索质量保持，优于单目标强化学习和朴素奖励融合基线；在真实搜索广告系统 7 天在线 A/B 测试中，CTR 提升 0.71%，RPS 提升 1.58%，广告收入提升 1.32%，服务延迟稳定。",
       "one_line_takeaway": "UniPolicy 通过目标特定参数解耦与多策略束搜索，在生成式搜索广告中实现多目标均衡对齐，并在真实线上系统取得 CTR、RPS 和收入同步提升。",
       "core_method": "在共享生成式基座中，采用目标特定前缀 token、稀疏 MoE-LoRA 路由和目标特定残差 FFN 分层解耦参数，为不同业务目标提供差异化参数与策略表达空间；基于多阶段行为反馈构建成对偏好，补充曝光未点击样本的相对偏好信息；推理时支持并行、业务可定制的多策略束搜索，在固定检索预算下分配各目标候选配额。",
@@ -3929,7 +3931,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 141,
+      "score": 140,
       "summary": "针对电商搜索中生成式检索（GR）训练流程难以保持查询意图一致性的问题，ICEGR提出端到端框架，从语义ID构建、监督微调与偏好优化三阶段注入查询意图。首先，意图感知SID构建将查询意图信号融入语义ID，使其超越静态商品信息；其次，合成查询增强的统一SFT将多个SFT任务统一到查询到SID目标下，并用合成查询补充低曝光商品的稀疏监督；最后，相关性校准的偏好优化将查询-商品相关性与业务信号融入边际自适应偏好目标，在保留查询意图的同时学习业务偏好。离线实验显示Recall@20提升21.7%，NDCG@20提升26.6%；在百度电商搜索部署为端到端生成式检索通路，A/B测试中CTR相对提升3.52%，订单量提升15.96%，GMV提升7.53%。",
       "one_line_takeaway": "ICEGR通过意图感知SID、合成查询增强SFT和相关性校准偏好优化，在电商搜索中实现查询意图一致的端到端生成式检索，离线与线上指标显著提升。",
       "core_method": "ICEGR包含三个组件：(1) 意图感知SID构建，将查询意图信号融入语义ID生成，使SID编码商品-意图关联；(2) 合成查询增强的统一SFT，统一多个SFT任务为查询到SID目标，并用合成查询为低曝光商品提供补充监督；(3) 相关性校准的偏好优化，将查询-商品相关性与业务信号集成到边际自适应偏好目标中，平衡意图保持与业务偏好。",
