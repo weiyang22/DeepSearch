@@ -1,6 +1,6 @@
 [site]
-title = "LLM&GR&EAI"
-subtitle = "大模型 · 生成式推荐 · 具身智能 技术雷达"
+title = "deepsearch"
+subtitle = "SOTA 论文追踪"
 timezone = "Asia/Shanghai"
 # 0 表示不设数量上限；每日入选数量由时间窗口和质量分决定。
 daily_limit = 0

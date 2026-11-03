@@ -172,7 +172,7 @@ export function DigestDashboard() {
   }
 
   if (!payload) {
-    return <main className="center-state" role="status"><p>正在加载 LLM&GR…</p></main>;
+    return <main className="center-state" role="status"><p>正在加载 deepsearch…</p></main>;
   }
 
   const todayCount = tabCounts.today;
@@ -182,13 +182,12 @@ export function DigestDashboard() {
   return (
     <main className="site-shell" id="top">
       <header className="site-header">
-        <a className="brand" href="#top">{payload.site.title}<small>DeepSearch</small></a>
+        <a className="brand" href="#top">deepsearch</a>
         <p>每天 08:00 更新 · {formatGeneratedAt(payload.generated_at)}</p>
       </header>
 
       <section className="intro">
-        <p className="eyebrow">LLM × GENERATIVE RECOMMENDATION × EMBODIED AI</p>
-        <h1>大模型基座、生成式推荐与具身智能论文追踪</h1>
+        <h1>SOTA 论文追踪</h1>
         <div className="intro-meta">
           <span>近 {effectiveWindow} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
           <span>共 {papers.length} 篇</span>

@@ -12,13 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = requestHeaders.get("x-forwarded-proto") || (host.startsWith("localhost") ? "http" : "https");
   const image = `${protocol}://${host}/og.png`;
   return {
-    title: "LLM&GR · DeepSearch",
-    description: "追踪大模型预训练、基模、后训练，以及企业优先的生成式推荐研究。",
+    title: "deepsearch",
+    description: "SOTA 论文追踪：大模型基座、生成式推荐与具身智能。",
     icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] },
     openGraph: {
-      title: "LLM&GR · DeepSearch",
-      description: "追踪大模型基座技术与企业优先的生成式推荐论文。",
-      images: [{ url: image, width: 1200, height: 630, alt: "LLM&GR DeepSearch Research Radar" }],
+      title: "deepsearch",
+      description: "SOTA 论文追踪：大模型基座、生成式推荐与具身智能。",
+      images: [{ url: image, width: 1200, height: 630, alt: "deepsearch research radar" }],
     },
     twitter: { card: "summary_large_image", images: [image] },
   };

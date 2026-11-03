@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { DigestDashboard } from "@/components/DigestDashboard";
 
 export const metadata: Metadata = {
-  title: "LLM&GR · DeepSearch",
-  description: "追踪大模型基座技术与企业优先的生成式推荐论文。",
+  title: "deepsearch",
+  description: "SOTA 论文追踪：大模型基座、生成式推荐与具身智能。",
 };
 
 export default function Home() {
