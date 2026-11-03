@@ -14,12 +14,12 @@ from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import (
-    _paper_date,
     choose_daily_picks,
     effective_daily_window,
     has_ab_experiment,
     infer_tags,
     is_core_llm,
+    is_embodied_theme,
     is_genrec,
     is_rec_theme,
     prepare_candidates,
@@ -308,7 +308,7 @@ class PipelineTests(unittest.TestCase):
         searches = _arxiv_mirror_searches(self.config)
         topics = [item for item in searches if " OR " not in item]
         families = [item for item in searches if " OR " in item]
-        self.assertEqual(topics, self.config.topic_queries[:10])
+        self.assertEqual(topics, self.config.topic_queries[:12])
         self.assertTrue(families, "model-family chunks should extend the mirror")
         self.assertIn('"GPT"', families[0])
         self.assertIn('"Claude"', families[0])
@@ -451,51 +451,68 @@ class PipelineTests(unittest.TestCase):
     def test_existing_archive_stays_admitted_under_current_gates(self):
         # Calibration fixture: every paper the production pipeline already
         # published must still clear the admission gates, so gate changes are
-        # deliberate policy shifts rather than silent regressions.
-        #
-        # Papers OUTSIDE the active retention window are exempt: the 365-day
-        # rolling archive legitimately evicts them, and the daily run is what
-        # performs the eviction. Requiring them to pass here would deadlock
-        # the pipeline (test fails -> archive never regenerated -> stale
-        # paper never evicted -> test keeps failing), which froze the site
-        # for days in Nov 2026.
+        # deliberate policy shifts rather than silent regressions. Safe to
+        # require the whole archive because the policy is "never evict by
+        # age" - papers cannot silently fall out of the window.
         payload = json.loads(Path("public/papers.json").read_text())
         archive = [Paper.from_dict(item) for item in payload["papers"]]
         self.assertTrue(archive)
-        today = dt.date.today()
-        cutoff = today - dt.timedelta(days=self.config.retention_days)
-        in_window = [item for item in archive if cutoff <= _paper_date(item) <= today + dt.timedelta(days=7)]
-        self.assertTrue(in_window)
-        admitted = prepare_candidates(in_window, self.config)
-        missing = sorted({item.id for item in in_window} - {item.id for item in admitted})
+        admitted = prepare_candidates(archive, self.config)
+        missing = sorted({item.id for item in archive} - {item.id for item in admitted})
         self.assertEqual(missing, [])
 
     def test_text_helper_renders_missing_api_values_as_empty(self):
         self.assertEqual(_text(None), "")
         self.assertEqual(_text("https://example.com"), "https://example.com")
 
-    def test_retention_window_covers_the_past_year(self):
-        within_window = (dt.date.today() - dt.timedelta(days=364)).isoformat()
-        outside_window = (dt.date.today() - dt.timedelta(days=366)).isoformat()
+    def test_archive_never_evicts_by_age(self):
+        # Policy: the archive accumulates - an aged paper stays admitted
+        # instead of rolling out of the archive.
+        aged = Paper(
+            id="aged",
+            title="Industrial Generative Recommendation",
+            published=(dt.date.today() - dt.timedelta(days=1200)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation evaluated with an online A/B test.",
+        )
+        ranked = prepare_candidates([aged], self.config)
+        self.assertIn("aged", [item.id for item in ranked])
+
+    def test_embodied_track_admits_robot_algorithm_papers(self):
+        # Domain-anchored admission with no extra evidence bar: humanoid
+        # locomotion, VLA policies, dexterous manipulation all qualify.
+        cases = {
+            "humanoid-locomotion": (
+                "Rapid Motor Adaptation for Legged Robots",
+                "We learn robust locomotion controllers for quadruped robots that "
+                "adapt online to terrain changes; sim-to-real transfer is evaluated.",
+            ),
+            "vla-policy": (
+                "OpenVLA: An Open-Source Vision-Language-Action Model",
+                "A robot policy pretrained on a large manipulation dataset; "
+                "bimanual grasping success improves over prior models.",
+            ),
+        }
         papers = [
-            Paper(
-                id="within",
-                title="Industrial Generative Recommendation",
-                published=within_window,
-                affiliations=["ByteDance"],
-                abstract="Generative recommendation evaluated with an online A/B test.",
-            ),
-            Paper(
-                id="outside",
-                title="Older Industrial Generative Recommendation",
-                published=outside_window,
-                affiliations=["ByteDance"],
-                abstract="Generative recommendation evaluated with an online A/B test.",
-            ),
+            Paper(id=paper_id, title=title, published=dt.date.today().isoformat(), abstract=abstract)
+            for paper_id, (title, abstract) in cases.items()
         ]
+        for paper in papers:
+            self.assertTrue(is_embodied_theme(paper), paper.id)
+            self.assertIn("具身智能", infer_tags(paper, self.config), paper.id)
         ranked = prepare_candidates(papers, self.config)
-        self.assertIn("within", [item.id for item in ranked])
-        self.assertNotIn("outside", [item.id for item in ranked])
+        self.assertEqual({item.id for item in ranked}, set(cases))
+
+    def test_embodied_track_rejects_incidental_mentions(self):
+        # A single passing robot mention is not embodied research.
+        chatbot = Paper(
+            id="chatbot",
+            title="A Conversational Assistant for Customer Support",
+            published=dt.date.today().isoformat(),
+            abstract="Our assistant, built as a chatbot, answers questions. "
+            "A robot icon improves user trust.",
+        )
+        self.assertFalse(is_embodied_theme(chatbot))
 
     def test_main_payload_invariants_end_to_end(self):
         today = dt.date.today()

@@ -1,17 +1,16 @@
 [site]
-title = "LLM&GR"
-subtitle = "大模型 · 生成式推荐 · Semantic ID 技术雷达"
+title = "LLM&GR&EAI"
+subtitle = "大模型 · 生成式推荐 · 具身智能 技术雷达"
 timezone = "Asia/Shanghai"
 # 0 表示不设数量上限；每日入选数量由时间窗口和质量分决定。
 daily_limit = 0
 daily_window_days = 3
 daily_min_score = 45
-retention_days = 365
-# 发现侧只用窄窗口找近期论文（归档保留由既有 papers.json 负责），避免高频查询把新论文挤出单页结果。
+# 发现侧只用窄窗口找近期论文（归档只增不删），避免高频查询把新论文挤出单页结果。
 discovery_window_days = 30
 
 [discovery]
-# LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验。
+# LLM 只保留企业参与/官方发布；GenRec 必须有明确 A/B 或线上受控实验；具身智能收录相关算法。
 require_enterprise_llm = true
 require_ab_genrec = true
 # DBLP 现对非浏览器请求返回反爬挑战页（无摘要的元数据源，其他来源已覆盖），默认关闭。
@@ -29,7 +28,9 @@ topic_queries = [
   "semantic ID recommendation",
   "semantic identifier recommendation",
   "recommendation model scaling",
-  "large-scale recommendation model"
+  "large-scale recommendation model",
+  "embodied ai robot policy",
+  "vision-language-action robot model"
 ]
 include_keywords = [
   "large language model",

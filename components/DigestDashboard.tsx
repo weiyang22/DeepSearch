@@ -36,7 +36,6 @@ type Payload = {
     subtitle: string;
     daily_limit: number;
     daily_window_days?: number;
-    retention_days: number;
   };
   status: {
     analysis_enabled: boolean;
@@ -52,11 +51,12 @@ type Payload = {
   papers: Paper[];
 };
 
-type ViewMode = "today" | "llm" | "genrec" | "company" | "all" | "saved";
+type ViewMode = "today" | "llm" | "genrec" | "embodied" | "company" | "all" | "saved";
 const MARKS_KEY = "deepsearch-saved-papers-v1";
 const GENREC_TAGS = ["GenRec", "Semantic ID", "Tokenization"];
+const EMBODIED_TAGS = ["具身智能"];
 
-const VIEW_MODES: ViewMode[] = ["today", "llm", "genrec", "company", "all", "saved"];
+const VIEW_MODES: ViewMode[] = ["today", "llm", "genrec", "embodied", "company", "all", "saved"];
 
 function parseViewFromHash(): { mode: ViewMode; tag: string; query: string } | null {
   if (typeof window === "undefined" || !window.location.hash) return null;
@@ -137,11 +137,12 @@ export function DigestDashboard() {
       .map(([item]) => item);
   }, [papers]);
   const tabCounts = useMemo(() => {
-    const counts: Record<ViewMode, number> = { today: 0, llm: 0, genrec: 0, company: 0, all: 0, saved: 0 };
+    const counts: Record<ViewMode, number> = { today: 0, llm: 0, genrec: 0, embodied: 0, company: 0, all: 0, saved: 0 };
     for (const paper of papers) {
       if (matchesMode(paper, "today", saved)) counts.today += 1;
       if (matchesMode(paper, "llm", saved)) counts.llm += 1;
       if (matchesMode(paper, "genrec", saved)) counts.genrec += 1;
+      if (matchesMode(paper, "embodied", saved)) counts.embodied += 1;
       if (matchesMode(paper, "company", saved)) counts.company += 1;
       if (matchesMode(paper, "saved", saved)) counts.saved += 1;
       counts.all += 1;
@@ -186,11 +187,10 @@ export function DigestDashboard() {
       </header>
 
       <section className="intro">
-        <p className="eyebrow">LLM FOUNDATION MODELS × GENERATIVE RECOMMENDATION</p>
-        <h1>大模型基座技术与生成式推荐论文追踪</h1>
+        <p className="eyebrow">LLM × GENERATIVE RECOMMENDATION × EMBODIED AI</p>
+        <h1>大模型基座、生成式推荐与具身智能论文追踪</h1>
         <div className="intro-meta">
           <span>近 {effectiveWindow} 日入选 <strong>{todayCount}</strong> 篇，不设固定数量</span>
-          <span>滚动保留 {payload.site.retention_days} 天</span>
           <span>共 {papers.length} 篇</span>
         </div>
       </section>
@@ -224,6 +224,7 @@ export function DigestDashboard() {
             <ViewTab active={mode === "today"} onClick={() => setMode("today")} label="近期" count={todayCount} />
             <ViewTab active={mode === "llm"} onClick={() => setMode("llm")} label="LLM 基模" count={tabCounts.llm} />
             <ViewTab active={mode === "genrec"} onClick={() => setMode("genrec")} label="GenRec" count={tabCounts.genrec} />
+            <ViewTab active={mode === "embodied"} onClick={() => setMode("embodied")} label="具身智能" count={tabCounts.embodied} />
             <ViewTab active={mode === "company"} onClick={() => setMode("company")} label="企业 / 官方" count={tabCounts.company} />
             <ViewTab active={mode === "all"} onClick={() => setMode("all")} label="全部" count={tabCounts.all} />
             <ViewTab active={mode === "saved"} onClick={() => setMode("saved")} label="收藏" count={tabCounts.saved} />
@@ -373,7 +374,7 @@ function formatPaperDate(value: string) {
 }
 
 function viewLabel(mode: ViewMode) {
-  return { today: "近期入选", llm: "LLM 基模技术", genrec: "GenRec / Semantic ID", company: "企业与官方发布", all: "全部归档", saved: "我的收藏" }[mode];
+  return { today: "近期入选", llm: "LLM 基模技术", genrec: "GenRec / Semantic ID", embodied: "具身智能", company: "企业与官方发布", all: "全部归档", saved: "我的收藏" }[mode];
 }
 
 function matchesMode(paper: Paper, mode: ViewMode, saved: string[]) {
@@ -385,6 +386,7 @@ function matchesMode(paper: Paper, mode: ViewMode, saved: string[]) {
     // them leaked rec work into this tab.
     (mode === "llm" && paper.tags.includes("LLM 基模")) ||
     (mode === "genrec" && paper.tags.some((item) => GENREC_TAGS.includes(item))) ||
+    (mode === "embodied" && paper.tags.some((item) => EMBODIED_TAGS.includes(item))) ||
     (mode === "company" && (paper.content_type === "company_report" || paper.tags.includes("企业论文"))) ||
     (mode === "saved" && saved.includes(paper.id))
   );

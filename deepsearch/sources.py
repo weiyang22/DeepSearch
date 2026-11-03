@@ -191,7 +191,7 @@ def _arxiv_mirror_searches(config: Config) -> list[str]:
     family_searches = [
         " OR ".join(f'"{term}"' for term in chunk) for chunk in _chunks(discovery_terms, 11)
     ]
-    return [*config.topic_queries[:10], *family_searches]
+    return [*config.topic_queries[:12], *family_searches]
 
 
 def _openalex_arxiv_paper(work: dict[str, Any], config: Config) -> Paper | None:
@@ -241,7 +241,7 @@ def _arxiv_id_from(value: str) -> str:
 def _arxiv_queries(config: Config, categories: str, date_range: str) -> list[str]:
     """Build a few balanced queries to avoid both oversized requests and rate limits."""
     queries: list[str] = []
-    topic_terms = " OR ".join(f'all:\"{term}\"' for term in config.topic_queries[:10])
+    topic_terms = " OR ".join(f'all:\"{term}\"' for term in config.topic_queries[:12])
     if topic_terms:
         queries.append(f"({categories}) AND ({topic_terms}) AND {date_range}")
 
@@ -327,7 +327,7 @@ def collect_openalex(config: Config) -> list[Paper]:
     today = dt.date.today().isoformat()
     cutoff = (dt.date.today() - dt.timedelta(days=config.discovery_window_days)).isoformat()
     queries = _unique([
-        *config.topic_queries[:10],
+        *config.topic_queries[:12],
         *[terms[0] for terms in config.company_queries.values()],
         *[terms[0] for terms in config.model_families.values()],
     ])
@@ -342,7 +342,7 @@ def collect_openalex(config: Config) -> list[Paper]:
                 company,
                 institution_id,
             )
-            for query in config.topic_queries[:10]
+            for query in config.topic_queries[:12]
         )
 
     for query, work_filter, focus_company, focus_institution_id in requests:
@@ -417,7 +417,7 @@ def collect_semantic_scholar(config: Config) -> list[Paper]:
     # Anonymous Semantic Scholar traffic is heavily throttled on shared CI IPs.
     # Core topic searches provide the useful abstracts; company-wide discovery is
     # already handled by OpenAlex and official GitHub.
-    queries = config.topic_queries[:10]
+    queries = config.topic_queries[:12]
     for query in queries:
         url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode(
             {"query": query, "limit": str(config.semantic_scholar_limit), "fields": fields}

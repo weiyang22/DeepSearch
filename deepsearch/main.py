@@ -47,8 +47,8 @@ def main() -> int:
     daily_picks = choose_daily_picks(daily_pool, config)
 
     merged = deduplicate(_merge(daily_picks, candidates, archived))
-    cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
-    merged = [paper for paper in merged if _paper_date(paper) >= cutoff]
+    # No age-based eviction: the archive accumulates and each run overwrites
+    # it with the merged pool.
     merged.sort(key=lambda paper: (_paper_date(paper), paper.score), reverse=True)
     previous_titles = {_normalized_title(paper.title) for paper in previous}
     new_papers = sum(_normalized_title(paper.title) not in previous_titles for paper in merged)
@@ -71,7 +71,6 @@ def main() -> int:
             "daily_limit": config.daily_limit,
             "daily_window_days": config.daily_window_days,
             "daily_min_score": config.daily_min_score,
-            "retention_days": config.retention_days,
         },
         "status": {
             "analysis_enabled": bool(os.getenv("DEEPSEEK_API_KEY")),

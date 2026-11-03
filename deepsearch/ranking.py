@@ -78,6 +78,27 @@ REC_BODY_SIGNAL = re.compile(
     re.IGNORECASE,
 )
 
+# Embodied-intelligence track: robot learning algorithms - humanoid control,
+# locomotion, dexterous manipulation, vision-language-action policies. The
+# scope is "related algorithms", so admission is domain-anchored without an
+# extra evidence bar (unlike the recommendation track's A/B requirement).
+EMBODIED_TITLE_ANCHOR = re.compile(
+    r"\bhumanoid\w*\b|\bembodied\s+(?:ai|intelligence|agents?|llms?|navigation)\b"
+    r"|\bvision[- ]language[- ]action\b|\blocomotion\b|\bquadruped\w*\b"
+    r"|\bdexterous\b|\bbimanual\b|\bgrasping\b|\bmanipulation\b"
+    r"|\bmobile manipulation\b|\bwhole[- ]body control\b|\bsim[- ]?to[- ]?real\b"
+    r"|\bsim2real\b|\brobot policies\b|\brobot policy\b|\brobot learning\b"
+    r"|\brobotic manipulation\b|\bmanipulator\b|\bend[- ]effector\b",
+    re.IGNORECASE,
+)
+EMBODIED_BODY_SIGNAL = re.compile(
+    r"\bhumanoid\w*\b|\bembodied\w*\b|\blocomotion\b|\bquadruped\w*\b"
+    r"|\bdexterous\b|\bbimanual\b|\bgrasp\w*\b|\bmanipulat\w+\b"
+    r"|\bvision[- ]language[- ]action\b|\bsim[- ]?to[- ]?real\b|\bsim2real\b"
+    r"|\brobot\w*\b|\bmanipulator\b|\btactile\b",
+    re.IGNORECASE,
+)
+
 OFFICIAL_MODEL_PATTERN = re.compile(
     r"\b(?:gpt[- ]?\d(?:\.\d)?|openai[- ]?o[134]|claude(?:[- ]\w+)?|"
     r"gemini[- ]?\d(?:\.\d)?|gemma[- ]?\d|llama[- ]?\d(?:\.\d)?|grok[- ]?\d|"
@@ -163,28 +184,31 @@ TAG_RULES = {
 
 
 def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
-    cutoff = dt.date.today() - dt.timedelta(days=config.retention_days)
     selected: list[Paper] = []
     for paper in papers:
         paper_date = _paper_date(paper)
-        if paper_date < cutoff or paper_date > dt.date.today() + dt.timedelta(days=7):
+        # The archive never evicts by age (policy: keep accumulating), so no
+        # lower bound — only far-future dates beyond the in-press grace period
+        # are rejected as data errors.
+        if paper_date > dt.date.today() + dt.timedelta(days=7):
             continue
         text = _search_text(paper)
         if any(term.lower() in text for term in config.exclude_keywords):
             continue
         rec = is_rec_theme(paper)
         core_llm = is_core_llm(paper)
-        enterprise = is_enterprise_paper(paper, config)
-        if not rec and not core_llm:
+        embodied = is_embodied_theme(paper)
+        if not (rec or core_llm or embodied):
             continue
         # Track policies: the recommendation track requires online experiment
         # evidence; the LLM track requires enterprise participation. A paper
-        # qualifying for both tracks admits through the LLM track when it has
-        # enterprise backing, otherwise it must clear the A/B bar too.
+        # qualifying for another track admits through it instead (for example
+        # an embodied paper that merely mentions recommendation).
         has_ab = has_ab_experiment(paper)
+        enterprise = is_enterprise_paper(paper, config)
         if not core_llm and rec and config.require_ab_genrec and not has_ab:
             continue
-        if core_llm and not rec and config.require_enterprise_llm and not enterprise:
+        if core_llm and not rec and not embodied and config.require_enterprise_llm and not enterprise:
             continue
         paper.tags = infer_tags(paper, config)
         paper.score = score_paper(paper, config)
@@ -259,6 +283,7 @@ def score_paper(paper: Paper, config: Config) -> int:
             "Reasoning": 8,
             "MoE": 10,
             "训练系统": 10,
+            "具身智能": 20,
             "推理系统": 8,
         }.get(tag, 2)
     if paper.venue.lower() in {"recsys", "sigir", "www", "kdd", "wsdm", "neurips", "icml", "iclr", "acl", "emnlp"}:
@@ -287,6 +312,10 @@ def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:
         # ...) describe subjects that recommendation papers share too, so
         # matching on them pulled rec work into the LLM tab.
         tags.append("LLM 基模")
+    if "具身智能" not in tags and is_embodied_theme(paper):
+        # Same principle for the embodied-intelligence track: the tab tag is
+        # the admission-track decision, not a topic description.
+        tags.append("具身智能")
     if paper.content_type == "company_report":
         tags.insert(0, "LLM 基模")
         tags.insert(0, "官方技术报告")
@@ -327,6 +356,18 @@ def is_rec_theme(paper: Paper) -> bool:
 def is_genrec(paper: Paper) -> bool:
     """Generative-recommendation vocabulary match, used for tagging only."""
     return any(term in _search_text(paper) for term in GENREC_TERMS)
+
+
+def is_embodied_theme(paper: Paper) -> bool:
+    """True when the paper is anchored in embodied-intelligence research.
+
+    A title anchor is sufficient on its own; otherwise the body needs at
+    least two distinct robot-domain signals so a passing mention in an
+    unrelated paper does not qualify.
+    """
+    if EMBODIED_TITLE_ANCHOR.search(paper.title):
+        return True
+    return len(set(EMBODIED_BODY_SIGNAL.findall(_search_text(paper)))) >= 2
 
 
 def is_core_llm(paper: Paper) -> bool:
