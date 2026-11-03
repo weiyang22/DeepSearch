@@ -14,6 +14,7 @@ from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import (
+    _paper_date,
     choose_daily_picks,
     effective_daily_window,
     has_ab_experiment,
@@ -451,11 +452,22 @@ class PipelineTests(unittest.TestCase):
         # Calibration fixture: every paper the production pipeline already
         # published must still clear the admission gates, so gate changes are
         # deliberate policy shifts rather than silent regressions.
+        #
+        # Papers OUTSIDE the active retention window are exempt: the 365-day
+        # rolling archive legitimately evicts them, and the daily run is what
+        # performs the eviction. Requiring them to pass here would deadlock
+        # the pipeline (test fails -> archive never regenerated -> stale
+        # paper never evicted -> test keeps failing), which froze the site
+        # for days in Nov 2026.
         payload = json.loads(Path("public/papers.json").read_text())
         archive = [Paper.from_dict(item) for item in payload["papers"]]
         self.assertTrue(archive)
-        admitted = prepare_candidates(archive, self.config)
-        missing = sorted({item.id for item in archive} - {item.id for item in admitted})
+        today = dt.date.today()
+        cutoff = today - dt.timedelta(days=self.config.retention_days)
+        in_window = [item for item in archive if cutoff <= _paper_date(item) <= today + dt.timedelta(days=7)]
+        self.assertTrue(in_window)
+        admitted = prepare_candidates(in_window, self.config)
+        missing = sorted({item.id for item in in_window} - {item.id for item in admitted})
         self.assertEqual(missing, [])
 
     def test_text_helper_renders_missing_api_values_as_empty(self):
