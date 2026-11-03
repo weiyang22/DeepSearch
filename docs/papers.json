@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T01:35:57+08:00",
+  "generated_at": "2026-11-04T01:44:33+08:00",
   "site": {
     "title": "LLM&GR",
     "subtitle": "大模型 · 生成式推荐 · Semantic ID 技术雷达",
@@ -10,14 +10,14 @@
     "retention_days": 365
   },
   "status": {
-    "analysis_enabled": false,
+    "analysis_enabled": true,
     "source_errors": [],
-    "discovered": 144,
-    "candidates": 142,
-    "new_papers": 0,
-    "daily_picks": 1,
-    "effective_daily_window_days": 14,
-    "analysis_complete": 142,
+    "discovered": 2816,
+    "candidates": 46,
+    "new_papers": 23,
+    "daily_picks": 8,
+    "effective_daily_window_days": 3,
+    "analysis_complete": 165,
     "analysis_fallback": 0
   },
   "sources": [
@@ -51,6 +51,1552 @@
   ],
   "papers": [
     {
+      "id": "openalex:W7202290351",
+      "title": "ConnectionMind: Leveraging Social Networks and Large Language Models for Personalized Recommendation at Meta",
+      "authors": [
+        "Haoyu Han",
+        "Yuming Liu",
+        "Lei Huang",
+        "Lizhu Zhang",
+        "Jiliang Tang",
+        "Xiangjun Fan"
+      ],
+      "affiliations": [
+        "Michigan State University",
+        "Meta (United States)"
+      ],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Modern recommendation systems on social media platforms such as Meta must model complex social relationships, including friendships, group memberships, and creator interactions, alongside massive and heterogeneous content such as text and video. Traditional recommendation models, however, often omit these signals or treat them independently, lacking the reasoning capability to integrate multi-relational context for fine-grained personalization. We present ConnectionMind, a production-ready recommendation framework that tightly integrates the social network structure with large language models (LLMs) to enable scalable, interpretable, and reasoning-aware personalization in Meta. ConnectionMind constructs a heterogeneous graph connecting users, items, friends, groups, and creator pages, and formulates recommendation as a graph reasoning problem: discovering personalized paths from users to candidate items. An LLM-based policy is employed to reason over these graph structures and guide recommendation decisions. To train the system at scale, ConnectionMind adopts a two-stage learning strategy. We first perform supervised fine-tuning (SFT) on large-scale user-item interaction trajectories to initialize the reasoning policy, followed by end-to-end reinforcement learning (RL) to refine the model's ability to reason over social graphs for personalized recommendation. Extensive experiments on multiple real-world datasets demonstrate the effectiveness of ConnectionMind compared to representative baselines. More importantly, ConnectionMind has been deployed in Meta's large-scale recommendation pipeline and has been evaluated through online A/B tests, achieving a 0.43% improvement in video watch time. These results demonstrate measurable real-world impact in a production recommendation system.",
+      "url": "https://doi.org/10.1145/3799682.3840157",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840157",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "A/B 实验",
+        "企业论文",
+        "后训练",
+        "Reasoning",
+        "GenRec",
+        "LLM 基模",
+        "社交推荐",
+        "异构图推理"
+      ],
+      "score": 210,
+      "summary": "ConnectionMind是Meta提出的生产级个性化推荐框架，将社交网络结构与LLM推理能力紧耦合。它构建连接用户、物品、好友、群组和创作者页面的异构图，把推荐形式化为图推理问题：从用户到候选物品发现个性化路径，并由基于LLM的策略在图上推理并指导推荐决策。为支撑规模化训练，采用两阶段策略：先在大规模用户-物品交互轨迹上做监督微调以初始化推理策略，再用端到端强化学习精炼模型对社交图的推理能力。多个真实数据集实验显示其优于代表性基线；系统已部署于Meta大规模推荐管线，在线A/B测试中视频观看时长提升0.43%，验证了可测量的线上价值。",
+      "one_line_takeaway": "ConnectionMind把社交异构图路径发现与LLM推理策略结合，经SFT加RL训练并在Meta线上A/B中取得视频观看时长0.43%的提升。",
+      "core_method": "构建用户、物品、好友、群组与创作者页面的异构图，将推荐建模为从用户到候选物品的个性化路径发现与图推理问题；用基于LLM的策略在图上推理并指导推荐决策；训练采用两阶段：先在大规模用户-物品交互轨迹上监督微调初始化推理策略，再以端到端强化学习精炼社交图推理能力。",
+      "innovation_points": [
+        "将社交网络多关系结构（好友、群组、创作者页面）统一为异构图，并把推荐转化为用户到候选物品的个性化路径发现与图推理任务",
+        "用LLM策略对图结构进行推理并直接指导推荐决策，而非将社交信号作为独立特征拼接",
+        "提出SFT初始化加端到端RL精炼的两阶段规模化训练策略，兼顾冷启动推理能力与线上目标优化",
+        "在Meta生产推荐管线部署并通过在线A/B验证真实业务收益"
+      ],
+      "experiment_results": [
+        "多个真实世界数据集上相比代表性基线取得更优效果（摘要未给出具体指标数值）",
+        "已在Meta大规模推荐管线部署，在线A/B测试中视频观看时长提升0.43%"
+      ],
+      "limitations": [
+        "摘要未披露离线实验的具体数据集、基线配置与量化指标，难以独立评估方法增益幅度",
+        "线上收益为0.43%的视频观看时长提升，绝对幅度较小，长期与多目标影响未说明",
+        "异构图路径发现与LLM推理的在线推理开销、延迟约束及工程折中未在摘要中展开"
+      ],
+      "practical_value": "面向社交平台推荐的真实业务场景，给出可落地的工程路径：以异构图统一建模好友、群组与创作者关系，用LLM推理替代独立特征拼接，并通过SFT加RL两阶段训练适配大规模管线；已在Meta生产环境上线并产生可测量的观看时长增益，对社交推荐系统的架构设计与上线评估具有直接参考价值。",
+      "why_it_matters": "它展示了LLM推理策略与社交异构图在超大规模生产推荐系统中的实际集成方式，并给出线上A/B的量化业务收益，为生成式与推理式推荐从离线研究走向线上部署提供了可复用的训练范式与工程证据。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "f2e41c47df6dcfd8",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7117985811",
+      "title": "HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent",
+      "authors": [
+        "Yunsheng Pang",
+        "Zijian Liu",
+        "Yudong Li",
+        "Shaojie Zhu",
+        "Zijian Luo",
+        "Chenyun YU",
+        "Sikai Wu",
+        "Shichen Shen",
+        "Cong Xu",
+        "Bin Wang",
+        "Kai Jiang",
+        "Chengxiang Zhuo",
+        "Zang Li",
+        "Chenyun Yu",
+        "Si-Kai Wu"
+      ],
+      "affiliations": [
+        "Tencent (China)",
+        "Sun Yat-sen University"
+      ],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Slate recommendation, which presents users with a ranked item list in a single display, is ubiquitous across mainstream online platforms. While recent generative recommendation methods have shown strong potential in modeling item sequences with semantic IDs, directly applying them to industrial-scale slate recommendation faces a fundamental disconnect: entangled SID spaces confound high-level list planning, fine-grained autoregressive decoding over long sequences limits semantic planning efficiency, and token-level objectives misalign with holistic slate quality. In this paper, we propose HiGR, an industrial-scale hierarchical generative framework for slate recommendation that bridges this disconnect through a co-designed pipeline. First, HiGR learns structured SIDs via a Prefix-Contrastive Residual Quantized VAE (PCRQ-VAE). By enforcing high-level prefixes to capture shared semantics, PCRQ-VAE creates a controllable discrete space that acts as a prerequisite for efficient planning. Leveraging this structured space, our Hierarchical Slate Decoder (HSD) shifts autoregressive modeling from entangled token-level decoding to coarse-grained preference embeddings. This design significantly reduces inference latency while allowing explicit global slate structure planning. Finally, this stable planning space enables an ORPO-based listwise alignment mechanism to optimize triple-objective implicit feedback-ranking fidelity, genuine user interest, and diversity. Extensive offline experiments show that HiGR outperforms state-of-the-art baselines by over 10% in offline recommendation quality while achieving a $5\\times$ inference speedup. Online A/B tests on Tencent platforms further improve watch time by 1.22% and video plays by 1.73%. HiGR has been deployed on multiple Tencent platform surfaces, serving hundreds of millions of users and proving its industrial-scale applicability.",
+      "url": "https://doi.org/10.1145/3799682.3840166",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840166",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Tencent Hunyuan",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "Tencent Hunyuan",
+        "A/B 实验",
+        "企业论文",
+        "GenRec",
+        "Semantic ID",
+        "推理系统",
+        "生成式推荐",
+        "列表推荐"
+      ],
+      "score": 198,
+      "summary": "HiGR针对工业级列表推荐中生成式方法的三处脱节：语义ID空间纠缠导致高层列表规划困难、长序列细粒度自回归解码效率低、token级目标与整体列表质量不一致。提出协同设计流水线：先用前缀对比残差量化VAE（PCRQ-VAE）学习结构化SID，使高层前缀捕获共享语义，形成可控离散规划空间；再用分层列表解码器（HSD）将自回归建模从纠缠token级解码转为粗粒度偏好嵌入，降低推理延迟并显式规划全局列表结构；最后在该稳定规划空间上引入ORPO式listwise对齐，优化隐式反馈排序保真、真实用户兴趣与多样性三目标。离线实验显示推荐质量超SOTA基线10%以上，推理加速5倍；腾讯线上A/B测试观看时长提升1.22%、视频播放提升1.73%，已部署于多平台面服务数亿用户。",
+      "one_line_takeaway": "HiGR通过结构化语义ID、分层粗粒度列表解码与listwise对齐的协同设计，在腾讯工业级列表推荐中实现质量与效率双赢并完成大规模线上部署。",
+      "core_method": "提出PCRQ-VAE学习前缀对比的结构化语义ID，构建可控离散规划空间；设计分层列表解码器HSD，将自回归从token级转为粗粒度偏好嵌入以规划全局列表结构；基于ORPO进行listwise对齐，联合优化排序保真、用户兴趣与多样性三目标。",
+      "innovation_points": [
+        "PCRQ-VAE通过前缀对比约束使高层SID前缀捕获共享语义，缓解SID空间纠缠，为高层列表规划提供可控离散空间",
+        "HSD将自回归建模从长序列token级解码转为粗粒度偏好嵌入解码，兼顾全局列表结构规划与推理效率",
+        "在稳定规划空间上引入ORPO式listwise对齐，统一优化隐式反馈排序、真实兴趣与多样性三重目标",
+        "面向工业级场景的端到端协同流水线，并在腾讯多平台面完成大规模部署验证"
+      ],
+      "experiment_results": [
+        "离线实验中推荐质量超过SOTA基线10%以上，同时实现5倍推理加速",
+        "腾讯线上A/B测试观看时长提升1.22%，视频播放提升1.73%",
+        "已部署于腾讯多个平台面，服务数亿用户，验证工业级可扩展性"
+      ],
+      "limitations": [
+        "摘要未披露离线实验的具体数据集、基线清单与消融细节，难以独立评估各模块贡献",
+        "线上收益幅度相对温和（1.22%/1.73%），且未报告多样性、延迟分布等三目标权衡的细粒度指标",
+        "方法依赖结构化SID与分层解码的协同设计，迁移到其他平台时的调参成本与泛化性未在材料中说明"
+      ],
+      "practical_value": "为工业级列表推荐提供可落地的生成式框架：结构化SID使高层规划可控，粗粒度解码显著降低线上推理成本，listwise对齐直接面向业务三目标；已在腾讯多平台面服务数亿用户，证明其工程可行性与线上价值。",
+      "why_it_matters": "它直面生成式推荐落地工业列表场景的核心矛盾——SID空间纠缠、长序列解码效率与token级目标错位，并给出协同设计解法与大规模线上验证，对研究语义ID结构与listwise对齐、以及工程侧推理加速均有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "4510c2c279e8062c",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7204485222",
+      "title": "TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation",
+      "authors": [
+        "Zhifei Zheng",
+        "Yunfei Liu",
+        "Bin Liu",
+        "Qiren Zhu",
+        "Hanbing Liu",
+        "Ziru Xu",
+        "Han Zhu",
+        "Jian Xu",
+        "Qi Qi",
+        "Bo Zheng"
+      ],
+      "affiliations": [
+        "Renmin University of China",
+        "Alibaba Group (China)"
+      ],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Applying scaling laws to recommendation retrieval is hindered by feature heterogeneity: naively stacking Transformer layers yields diminishing returns because heterogeneous fields produce severe token-norm divergence. We present TransRetrieval, a Transformer-based retrieval framework that scales with both computational budget and cross-domain data. The key enabler is (1) weighted average aggregation, which restores the homogeneous-token assumption Transformers rely on. Building on this, we introduce (2) target token compression that cuts per-candidate FLOPs by 85% while preserving cross-attention expressiveness, and (3) position-style domain embeddings that unify multiple domains at negligible additional cost, turning cross-domain data into a scaling asset. On a 40-billion-interaction industrial dataset and the public KuaiRand benchmark, scaling compute from 0.1 to 2 MFLOPs per target yields +19.3/+22.2 pt Recall@2000, confirming robust log-linear scaling. In online A/B tests, TransRetrieval lifts platform revenue by 2.53% under the same end-to-end latency constraint as the production baseline.",
+      "url": "https://doi.org/10.1145/3799682.3840118",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840118",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "Alibaba Qwen",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Topic Modeling"
+      ],
+      "tags": [
+        "Alibaba Qwen",
+        "A/B 实验",
+        "企业论文",
+        "预训练",
+        "推理系统",
+        "GenRec",
+        "生成式推荐",
+        "Transformer检索"
+      ],
+      "score": 194,
+      "summary": "TransRetrieval针对工业推荐检索中Transformer难以套用缩放规律的问题展开研究：异构特征字段导致严重的token范数差异，直接堆叠Transformer层收益递减。论文提出三项关键技术：加权平均聚合恢复Transformer依赖的同质token假设；目标token压缩在保留交叉注意力表达力的同时将每候选FLOPs降低85%；位置式域嵌入以极低额外成本统一多域，使跨域数据成为缩放资产。在400亿交互工业数据集和公开KuaiRand基准上，将每目标计算量从0.1扩至2 MFLOPs，Recall@2000分别提升19.3与22.2个百分点，验证了稳健的对数线性缩放。线上A/B在同等端到端延迟约束下带来2.53%平台收入提升。",
+      "one_line_takeaway": "通过修复异构token范数并压缩目标token，TransRetrieval让Transformer检索在工业推荐中重新获得对数线性缩放能力，并在同等延迟下提升线上收入。",
+      "core_method": "以Transformer为检索主干，用加权平均聚合将异构字段token归一为同质表示，恢复缩放规律；引入目标token压缩降低每候选计算量并保留交叉注意力；用位置式域嵌入统一多域数据，使跨域样本成为缩放资产。",
+      "innovation_points": [
+        "加权平均聚合修复异构字段造成的token范数发散，恢复Transformer的同质token假设",
+        "目标token压缩将每候选FLOPs降低85%且保留交叉注意力表达力",
+        "位置式域嵌入以近零额外成本统一多域，把跨域数据转为缩放收益",
+        "在工业级数据上验证检索侧计算缩放的对数线性规律"
+      ],
+      "experiment_results": [
+        "400亿交互工业数据集上，计算量0.1→2 MFLOPs/目标带来Recall@2000提升19.3个百分点",
+        "公开KuaiRand基准同等缩放带来Recall@2000提升22.2个百分点",
+        "线上A/B在同等端到端延迟约束下平台收入提升2.53%"
+      ],
+      "limitations": [
+        "证据仅来自标题、摘要与元数据，缺少消融细节与各组件独立贡献的量化",
+        "线上收益仅在单一平台A/B中报告，跨业务泛化性未说明",
+        "缩放结论主要覆盖Recall@2000与收入指标，其他检索质量维度未提及"
+      ],
+      "practical_value": "在保持生产基线同等端到端延迟的前提下，为工业推荐检索提供可随算力与跨域数据扩展的Transformer方案，并以85%的每候选FLOPs压缩控制工程成本，直接转化为2.53%的平台收入提升。",
+      "why_it_matters": "它指出推荐检索难以缩放的关键障碍是特征异构而非模型容量，并给出可落地的工程修复路径，同时用工业数据与线上A/B验证了检索侧缩放规律与业务价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "10bb0d775804d226",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7128618440",
+      "title": "SARM: LLM-Augmented Semantic Anchor for End-to-End Live-Streaming Ranking",
+      "authors": [
+        "Ruochen Yang",
+        "Yueyang Liu",
+        "Zijie Zhuang",
+        "Changxin Lao",
+        "Yuhui Zhang",
+        "Jiangxia Cao",
+        "Jia Cheng Xu",
+        "Xiang Chen",
+        "Haoke Xiao",
+        "Xiangyu Wu",
+        "Xiaoyou Zhou",
+        "Xiao Lv",
+        "Shuang Yang",
+        "Tingwen Liu",
+        "Zhaojie Liu",
+        "Han Li",
+        "Kun Gai"
+      ],
+      "affiliations": [
+        "Chinese Academy of Sciences",
+        "Institute of Information Engineering",
+        "Kuaishou (China)"
+      ],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Large-scale live-streaming recommendation requires precise modeling of non-stationary content semantics under strict real-time serving constraints. In industrial deployment, two common approaches exhibit fundamental limitations: discrete semantic abstractions sacrifice descriptive precision through clustering, while dense multimodal embeddings are extracted independently and remain weakly aligned with ranking optimization, limiting fine-grained content-aware ranking. To address these limitations, we propose \\textbf{SARM}, an end-to-end ranking architecture that integrates natural-language semantic anchors directly into ranking optimization, enabling fine-grained author representations conditioned on multimodal content. Each semantic anchor is represented as learnable text tokens jointly optimized with ranking features, allowing the model to adapt content descriptions to ranking objectives. A lightweight dual-token gated design captures domain-specific live-streaming semantics, while an asymmetric deployment strategy preserves low-latency online training and serving. Extensive offline evaluation and large-scale A/B tests show consistent improvements over production baselines. SARM is fully deployed and serves over 400 million users daily.",
+      "url": "https://doi.org/10.1145/3799682.3840099",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840099",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Topic Modeling"
+      ],
+      "tags": [
+        "A/B 实验",
+        "企业论文",
+        "Multimodal",
+        "推理系统",
+        "GenRec",
+        "直播推荐",
+        "端到端排序",
+        "语义锚"
+      ],
+      "score": 176,
+      "summary": "SARM针对大规模直播推荐中非平稳内容语义建模与严格实时服务约束的矛盾，指出现有离散语义抽象因聚类损失描述精度、稠密多模态嵌入独立提取且与排序优化弱对齐，难以支撑细粒度内容感知排序。为此提出端到端排序架构，将自然语言语义锚直接融入排序优化：每个语义锚表示为可学习文本token，与排序特征联合优化，使内容描述适配排序目标；轻量双token门控设计捕捉直播领域特有语义，非对称部署策略兼顾低延迟在线训练与服务。离线评估与大规模A/B测试显示相对生产基线一致提升，系统已全量部署，日服务超4亿用户。",
+      "one_line_takeaway": "SARM用与排序目标联合优化的可学习文本语义锚替代离散聚类与弱对齐稠密嵌入，在严格实时约束下实现细粒度内容感知的直播排序并完成超4亿用户规模部署。",
+      "core_method": "将自然语言语义锚表示为可学习文本token，与排序特征端到端联合优化，形成以多模态内容为条件的细粒度作者表示；采用轻量双token门控设计捕捉直播领域语义，并通过非对称部署策略分离在线训练与服务路径以控制延迟。",
+      "innovation_points": [
+        "以可学习文本token作为语义锚，直接嵌入排序优化，避免聚类式离散抽象的精度损失",
+        "语义锚与排序特征联合训练，使内容描述自适应排序目标，缓解稠密多模态嵌入与排序弱对齐问题",
+        "双token门控轻量设计针对直播领域语义，兼顾表达力与实时开销",
+        "非对称部署策略在保持低延迟在线训练与服务的同时支撑端到端架构落地"
+      ],
+      "experiment_results": [
+        "离线评估相对生产基线取得一致提升（摘要未给出具体指标数值）",
+        "大规模A/B测试相对生产基线取得一致提升（摘要未给出具体提升幅度）",
+        "系统已全量部署，日服务超4亿用户"
+      ],
+      "limitations": [
+        "摘要未披露离线评估与A/B测试的具体指标与提升幅度，难以量化各组件贡献",
+        "语义锚以文本token形式引入，其覆盖范围与对非文本多模态信号的刻画能力未在摘要中说明",
+        "非对称部署策略的工程复杂度与维护成本未展开，实时约束下的最坏时延表现缺少数据"
+      ],
+      "practical_value": "面向直播推荐的真实工业场景，在严格实时服务约束下将内容语义与排序目标对齐，提供可部署的端到端方案；已全量上线并日服务超4亿用户，说明其工程可行性与线上价值经过大规模验证。",
+      "why_it_matters": "它给出了一条在工业级实时约束下把自然语言语义锚纳入排序优化的可落地路径，并用超4亿用户的部署规模验证，对生成式推荐与语义ID方向的内容语义建模具有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "3ed3d02bdcbe8235",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W4416242476",
+      "title": "Towards Comprehensible Recommendation with Large Language Model Fine-tuning",
+      "authors": [
+        "Yunze Luo",
+        "Gaode Chen",
+        "Yinjie Jiang",
+        "Xinghua Zhang",
+        "Kaigui Bian"
+      ],
+      "affiliations": [
+        "Peking University",
+        "Kuaishou (China)"
+      ],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Recommender systems have become increasingly ubiquitous in daily life. While traditional recommendation approaches primarily rely on ID-based representations or item-side content features, they often fall short in capturing the underlying semantics aligned with user preferences (e.g., recommendation reasons for items), leading to a semantic-collaborative gap. Recently emerged LLM-based feature extraction approaches also face a key challenge: how to ensure that LLMs possess recommendation-aligned reasoning capabilities and can generate accurate, personalized reasons to mitigate the semantic-collaborative gap. To address these issues, we propose a novel Content Understanding from a Collaborative Perspective framework (CURec), which generates collaborative-aligned content features for more comprehensive recommendations. CURec first adapts the LLM with recommendation objectives through post-training, equipping it with instruction-following and chain-of-thought reasoning capabilities. Next, we use the LLM-generated features to train the recommender model. Then, we treat the user-item prediction scores produced by the trained recommender model as reward signals to guide RL-based refinement of the LLM, thereby improving the quality of generated reasons and pattern. The corrected reasons are directly integrated into the recommender model to enhance comprehensibility and recommendation performance. Extensive experiments on public benchmarks demonstrate the superiority of CURec over existing methods.",
+      "url": "https://doi.org/10.1145/3799682.3840740",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840740",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "企业论文",
+        "后训练",
+        "Reasoning",
+        "LLM 基模",
+        "可解释推荐",
+        "LLM微调",
+        "强化学习",
+        "语义-协同鸿沟"
+      ],
+      "score": 158,
+      "summary": "该论文针对传统推荐系统依赖ID表示或物品侧内容特征、难以捕捉与用户偏好对齐的语义（如推荐理由）所导致的语义-协同鸿沟问题，提出CURec框架。CURec首先通过面向推荐目标的后训练适配LLM，使其具备指令跟随与思维链推理能力；随后用LLM生成的内容特征训练推荐模型；再将训练后推荐模型给出的用户-物品预测分数作为奖励信号，通过强化学习精炼LLM，提升生成理由与模式的质量；修正后的理由直接融入推荐模型以增强可解释性与推荐性能。公开基准实验表明CURec优于现有方法。",
+      "one_line_takeaway": "CURec通过推荐目标后训练与推荐模型奖励驱动的强化学习，让LLM生成协同对齐的推荐理由，弥合语义-协同鸿沟。",
+      "core_method": "提出Content Understanding from a Collaborative Perspective（CURec）框架：先以推荐目标对LLM进行后训练，赋予指令跟随与思维链推理能力；再用LLM生成特征训练推荐模型；然后以推荐模型的用户-物品预测分数为奖励信号，通过强化学习精炼LLM生成的理由与模式；最终将修正后的理由直接整合进推荐模型。",
+      "innovation_points": [
+        "从协同视角出发，用推荐目标后训练LLM，使其具备推荐对齐的推理与理由生成能力",
+        "构建LLM生成特征训练推荐模型、再以推荐模型预测分数为奖励信号反向强化学习精炼LLM的闭环",
+        "将修正后的推荐理由直接融入推荐模型，同时提升可解释性与推荐性能"
+      ],
+      "experiment_results": [
+        "公开基准上的大量实验表明CURec优于现有方法；摘要未给出具体指标数值"
+      ],
+      "limitations": [
+        "摘要未报告具体数据集、指标数值与消融结果，性能提升幅度无法量化",
+        "方法涉及LLM后训练与强化学习精炼的多阶段流程，计算与工程成本未在摘要中讨论",
+        "仅在公开基准上验证，未涉及真实业务场景的线上评估"
+      ],
+      "practical_value": "为推荐系统提供了一条以LLM生成协同对齐理由来增强可解释性与推荐效果的路径，其“后训练+推荐模型奖励强化学习”的闭环设计对工业界构建可解释推荐与语义特征增强具有参考价值。",
+      "why_it_matters": "它直面LLM特征提取中“推荐对齐推理能力不足”的关键挑战，将推荐模型的协同信号作为强化学习奖励回传至LLM，为弥合语义-协同鸿沟提供了可复用的训练范式。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "755a47a013cc406e",
+      "is_daily_pick": true
+    },
+    {
+      "id": "openalex:W7204592580",
+      "title": "Scaling Graph Neural Networks for Friend Recommendation: Multi-Hash User Embeddings and Temporal Neighbor Sampling",
+      "authors": [
+        "Maksim Utushkin",
+        "Andrei Ovsiannikov",
+        "Alexander Dyakonov"
+      ],
+      "affiliations": [],
+      "published": "2026-11-03",
+      "updated": "2026-11-03T10:50:19.383937",
+      "abstract": "Friend recommendation is inherently graph-structured: the relevance of a potential connection depends on multi-hop social context rather than user attributes alone. However, deploying message-passing GNNs on a production-scale social graph with hundreds of millions of users and tens of billions of edges requires addressing numerous modeling and systems challenges. We present a scalable end-to-end GNN ranking system for production social graphs, focusing on two design choices that are critical in this setting: multi-hash ID embeddings and temporal neighbor sampling. Multi-hash embeddings are common for high-cardinality features, but industrial GNN systems typically either ignore trainable IDs or accept full embedding tables, exceeding 200 GB for our graph. We integrate multi-hash as the primary node representation, reducing the ID-embedding table size by more than 98 percent while preserving ranking quality. Temporal neighbor sampling is well understood in principle, but existing implementations scan full adjacency lists, which is a non-starter for users with tens of thousands of friends. We implement timestamp-sorted CSR storage with binary search, reducing the per-node temporal sampling cost from $O(deg(v) + k)$ to $O(\\log(deg(v)) + k)$. Beyond these components, we show that this combination scales and yields measurable production impact. On a graph with 194M users and 28B edges, offline ablations isolate each design choice's contribution. In an online A/B test, our system increases friend additions from recommendations by 16 percent and unique friend adders by 11.5 percent over a strong production baseline. We release our framework for distributed training and inference on large temporal graphs.",
+      "url": "https://doi.org/10.1145/3799682.3840149",
+      "pdf_url": "",
+      "doi": "10.1145/3799682.3840149",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "ACM International Conference on Information and Knowledge Management (CIKM)",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Advanced Graph Neural Networks",
+        "Graph Theory and Algorithms"
+      ],
+      "tags": [
+        "A/B 实验",
+        "训练系统",
+        "推理系统",
+        "GenRec",
+        "GNN推荐",
+        "好友推荐",
+        "多哈希嵌入",
+        "时间邻居采样"
+      ],
+      "score": 124,
+      "summary": "该论文面向生产级社交图（1.94亿用户、280亿边）的好友推荐排序任务，提出可扩展的端到端GNN系统，重点解决两个工程瓶颈：一是高基数用户ID嵌入表超过200GB的问题，将多哈希ID嵌入作为主节点表示，在保持排序质量的同时将ID嵌入表缩小98%以上；二是时间邻居采样中全邻接表扫描代价过高的问题，采用按时间戳排序的CSR存储与二分查找，将单节点采样复杂度从O(deg(v)+k)降至O(log(deg(v))+k)。离线消融实验分别验证两项设计的贡献，在线A/B测试中推荐带来的好友添加量提升16%、独立添加好友用户数提升11.5%，并开源分布式训练与推理框架。",
+      "one_line_takeaway": "用多哈希ID嵌入压缩98%以上的嵌入表、用时间戳排序CSR加二分查找降低时间邻居采样复杂度，使GNN好友推荐在生产级社交图上取得16%好友添加提升。",
+      "core_method": "构建面向大规模时序社交图的分布式GNN排序系统：以多哈希用户ID嵌入替代全量嵌入表作为主节点表示；邻居采样采用按时间戳排序的CSR存储，通过二分查找定位时间窗口，避免扫描完整邻接表；系统支持分布式训练与推理，并在1.94亿用户、280亿边的图上进行离线消融与在线A/B验证。",
+      "innovation_points": [
+        "将多哈希ID嵌入作为GNN主节点表示，把超过200GB的ID嵌入表压缩98%以上且不损失排序质量",
+        "实现时间戳排序CSR存储与二分查找采样，将每节点时间采样代价从O(deg(v)+k)降为O(log(deg(v))+k)",
+        "在超大规模生产社交图上完成端到端GNN排序系统的离线消融与在线A/B闭环验证",
+        "开源面向大规模时序图的分布式训练与推理框架"
+      ],
+      "experiment_results": [
+        "离线消融在1.94亿用户、280亿边的图上分别隔离两项设计选择的贡献（摘要未给出具体消融数值）",
+        "在线A/B测试中，推荐带来的好友添加量相对强生产基线提升16%",
+        "在线A/B测试中，独立添加好友用户数提升11.5%"
+      ],
+      "limitations": [
+        "摘要未披露离线消融的具体指标数值与统计显著性细节",
+        "多哈希嵌入与时间采样在排序质量上的权衡边界未在摘要中量化",
+        "在线收益来自单一生产社交图场景，跨场景泛化性尚不明确"
+      ],
+      "practical_value": "为工业界GNN推荐系统提供了可落地的高基数ID表示与时间邻居采样方案，显著降低嵌入存储与采样计算开销，并给出可复现的在线收益证据，适合大规模社交图、时序图推荐场景的工程参考。",
+      "why_it_matters": "论文把GNN推荐中常被忽视的ID嵌入存储与邻居采样复杂度两个系统级问题转化为可量化的工程方案，并在亿级用户生产图上验证了在线价值，对构建大规模图推荐系统具有直接借鉴意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "1eef1d5f5e90ca5f",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2611.03272",
+      "title": "Diverse-Teacher On-Policy Distillation for Generative Recommendation",
+      "authors": [
+        "Zhipeng Yi",
+        "Xinyu Lin",
+        "Minxuan Shan",
+        "Zipeng Chen",
+        "Yujiao Zhao",
+        "Chuanyu Xu",
+        "Wenjie Wang"
+      ],
+      "affiliations": [],
+      "published": "2026-11-02T15:14:16Z",
+      "updated": "2026-11-02T15:14:16Z",
+      "abstract": "Generative recommendation generates the semantic ID (SID) of the next item from a user's interaction history. Existing training objectives mainly supervise target SID tokens, while on-policy distillation (OPD) provides denser supervision through a teacher's probability distribution over all tokens for more effective and efficient training. However, OPD can aggravate popularity bias: teacher feedback favors popular-item tokens, transferring this preference to the student, while student rollout favors popular items, leaving unpopular-item SID paths rarely generated and supervised. These two sources of bias reinforce each other and reduce recommendation diversity. We propose HERO, a diversity-aware OPD framework. Heterogeneous teacher distillation trains two teachers specializing in popular and unpopular items and routes each training sample to the teacher matching the popularity group of its ground-truth item. The student learns from the routed teacher's probability distribution along its own generated SIDs. Diversity-aware item rollout incorporates ground-truth SIDs of unpopular items into training, covering SID paths that the student rarely generates. Only the student is used for inference. Offline experiments on an industrial dataset and three public datasets further demonstrate its effectiveness, diversity, and robustness. Moreover, we deploy HERO in the \"Guess What You Like\" module on the 1688 homepage, where a 15-day online A/B test shows a 3.412% increase in gross merchandise value (GMV).",
+      "url": "http://arxiv.org/abs/2611.03272v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.03272v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "在线策略蒸馏"
+      ],
+      "score": 154,
+      "summary": "该论文研究生成式推荐中在线策略蒸馏（OPD）加剧流行度偏差的问题：教师反馈偏好热门物品token，学生自回归采样也偏向热门物品，导致冷门物品的SID路径既少被生成也少被监督，推荐多样性下降。作者提出HERO多样性感知OPD框架：异构教师蒸馏训练热门与冷门两个专家教师，按真实物品的流行度分组将样本路由到对应教师，学生沿自身生成的SID学习路由教师的概率分布；多样性感知物品rollout将冷门物品的真实SID纳入训练，覆盖学生极少生成的SID路径。推理阶段仅使用学生模型。在工业数据集和三个公开数据集上的离线实验验证了有效性、多样性与鲁棒性；并在1688首页“猜你喜欢”模块部署，15天在线A/B测试GMV提升3.412%。",
+      "one_line_takeaway": "HERO通过异构教师路由与冷门SID路径注入，缓解在线策略蒸馏中的流行度偏差，在保持生成式推荐效果的同时提升多样性并带来线上GMV增长。",
+      "core_method": "多样性感知的在线策略蒸馏框架：训练热门与冷门两个异构教师，按真实物品流行度分组路由样本；学生沿自身生成的SID学习路由教师的完整token概率分布；并将冷门物品的真实SID纳入rollout训练以覆盖稀疏SID路径；推理仅保留学生模型。",
+      "innovation_points": [
+        "识别并形式化OPD中教师反馈偏差与学生rollout偏差相互强化的流行度偏差机制",
+        "提出异构教师蒸馏与按真实物品流行度分组的样本路由策略",
+        "提出多样性感知物品rollout，将冷门物品真实SID注入训练以监督学生极少生成的路径",
+        "推理阶段仅部署学生模型，不增加线上服务开销"
+      ],
+      "experiment_results": [
+        "工业数据集与三个公开数据集离线实验表明方法在有效性、多样性和鲁棒性上均有提升（摘要未给出具体数值）",
+        "在1688首页“猜你喜欢”模块部署，15天在线A/B测试GMV提升3.412%"
+      ],
+      "limitations": [
+        "摘要未报告离线实验中有效性、多样性、鲁棒性的具体量化指标与消融结果",
+        "教师分组路由依赖物品流行度划分，分组阈值与教师数量对效果的影响未在摘要中说明",
+        "线上验证仅报告GMV单一指标，未披露多样性及冷启动相关线上指标"
+      ],
+      "practical_value": "面向真实电商首页推荐场景，在不增加推理成本的前提下缓解生成式推荐的流行度偏差，兼顾效果与多样性，并已在1688“猜你喜欢”模块通过在线A/B测试验证GMV正向收益，具备直接落地参考价值。",
+      "why_it_matters": "生成式推荐普遍采用SID生成范式，而蒸馏训练中的流行度偏差是制约多样性的关键工程问题；该工作给出可部署的偏差缓解方案，并提供了工业级在线验证证据，对GenRec训练目标设计与线上价值评估均有参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "376a5cc1cae67d22",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2611.02981",
+      "title": "Utility-Aware Generative Recommendation: Utility-Enriched Semantic Codes and Utility-Guided Decoding",
+      "authors": [
+        "Yang Hu",
+        "Duo Wang",
+        "Ning Li",
+        "Kang Li",
+        "Junda She",
+        "Chengcheng Guo",
+        "Kuo Cai",
+        "Bin Liu",
+        "Youhua Liu",
+        "Xiaoshuang Chen"
+      ],
+      "affiliations": [],
+      "published": "2026-11-02T11:48:34Z",
+      "updated": "2026-11-02T11:48:34Z",
+      "abstract": "Generative recommendation has been widely adopted in large-scale industrial recommendation systems, where multimodal item embeddings are quantized into offline semantic identifiers (SIDs) and items are retrieved by autoregressively generating their SIDs. However, conventional SID construction often underrepresents item utility reflected in post-exposure behaviors such as shares, long views, and video completion, making semantically similar items with different utility insufficiently distinguishable while struggling to accommodate rapidly changing utility signals. Moreover, generation likelihood may be misaligned with downstream utility, causing high-utility candidates to be prematurely pruned during beam search before post-generation reranking or training-time reward alignment can effectively compensate. To address these limitations, we propose UAGR, which aligns both SID construction and decoding with downstream multi-objective utility. Our Utility-Enriched Semantic Codes preserve the original semantic information while incorporating item-level utility without increasing SID length or vocabulary size, supporting incremental utility updates with no additional tokenization or sequence-decoding cost. Meanwhile, our Utility-Guided Decoding estimates candidate utility by combining predictions of multiple post-exposure outcomes and incorporates these estimates into beam scoring, reducing the risk of prematurely pruning high-utility paths while enabling flexible utility control without interfering with generative backbone training. Extensive offline experiments and online A/B tests under real-world traffic demonstrate the effectiveness and deployability of UAGR, which has been fully deployed on Kuaishou and increases video watch time by 0.206\\% online.",
+      "url": "http://arxiv.org/abs/2611.02981v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.02981v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "Multimodal",
+        "生成式推荐",
+        "语义ID",
+        "效用对齐"
+      ],
+      "score": 148,
+      "summary": "针对生成式推荐中语义ID（SID）构建忽略分享、长观看、完播等曝光后效用信号，且生成似然与下游多目标效用错位、高效用候选在beam search早期被剪枝的问题，本文提出UAGR，从SID构建与解码两端对齐下游效用。方法上，效用增强语义码在不增加SID长度与词表规模的前提下，将物品级效用注入原有语义表示，并支持效用增量更新，不引入额外分词或序列解码开销；效用引导解码则融合多曝光后行为预测估计候选效用，并将其纳入beam打分，降低高效用路径被过早剪枝的风险，同时支持灵活效用调控且不干扰生成主干训练。离线实验与真实流量在线A/B测试验证了有效性与可部署性，系统已在快手全量上线，线上视频观看时长提升0.206%。",
+      "one_line_takeaway": "UAGR在SID构建与beam解码两端注入多目标效用信号，在不增加SID长度与解码成本的前提下提升生成式推荐线上观看时长。",
+      "core_method": "将物品级曝光后效用注入原有语义SID，保持SID长度与词表不变并支持增量更新；解码阶段用多曝光后行为预测组合估计候选效用，融入beam打分以缓解高效用路径过早剪枝，且不干扰生成主干训练。",
+      "innovation_points": [
+        "效用增强语义码：在保留原语义信息的同时编码物品效用，不增加SID长度与词表规模，支持效用增量更新且无额外分词与序列解码开销",
+        "效用引导解码：融合多曝光后结果预测估计候选效用并纳入beam评分，降低高效用路径被提前剪枝的风险",
+        "效用调控与主干解耦：可在不干扰生成式主干训练的情况下灵活调节效用权重",
+        "完成离线实验与真实流量在线A/B验证并全量部署于快手，具备工业可部署性"
+      ],
+      "experiment_results": [
+        "真实流量在线A/B测试中，系统全量部署于快手，视频观看时长提升0.206%",
+        "摘要称大量离线实验验证了方法有效性，但未给出具体离线指标数值",
+        "未提供消融实验、SID长度或解码开销的量化对比数据"
+      ],
+      "limitations": [
+        "摘要未披露离线实验的具体指标、对比基线及消融结果，效用增强语义码与效用引导解码各自的增益难以量化",
+        "效用信号依赖曝光后行为预测，对快速变化的效用分布与冷启动物品的估计稳定性缺乏说明",
+        "线上收益为0.206%观看时长，绝对幅度较小，长期与多目标（如分享、完播）的权衡效果未展开"
+      ],
+      "practical_value": "面向大规模工业生成式推荐，方法不改变SID长度与词表、不增加分词与解码成本，可增量更新效用，且解码端效用调控与生成主干训练解耦，便于在现有SID检索链路上低改造成本上线，已在快手真实流量验证并全量部署。",
+      "why_it_matters": "它指出生成式推荐中SID语义表示与生成似然同下游效用错位的两个关键工程痛点，并给出不增加系统开销的构建与解码双侧对齐方案，附真实流量上线结果，对工业界落地生成式推荐具有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "5b0a32a308193146",
+      "is_daily_pick": true
+    },
+    {
+      "id": "arxiv:2611.00323",
+      "title": "Beyond Semantic IDs: Atomic Creator Tokens for Large-Scale Generative Recommendation",
+      "authors": [
+        "Zhuosheng Liu",
+        "Yihan Wu",
+        "Ziyun Xu",
+        "Xiaoxuan Liu",
+        "Longfei Yun",
+        "Kevin Han",
+        "Mingze Gao",
+        "Pengfei Wang",
+        "Junfeng Pan",
+        "Wenjie Fu",
+        "Haoran Liu"
+      ],
+      "affiliations": [],
+      "published": "2026-10-30T19:43:04Z",
+      "updated": "2026-10-30T19:43:04Z",
+      "abstract": "Recommending creators that a user does not yet follow is a cold-start problem: from hundreds of thousands of popular creators and only a short trail of prior engagements, the system must predict the next creator worth surfacing. The prevailing generative recommendation recipe tokenizes each creator into a \\emph{Semantic ID} (SID) by quantizing a frozen embedding and trains a language model to generate SIDs. We show that this SID layer, not the language model, is the binding constraint. The creator-to-SID map is many-to-one, so colliding creators must be resolved by a popularity tie-break that caps creator-level recall and favors already-popular creators, and the frozen quantizer stops the training gradient from reaching the creator representation. We propose Atomic Creator Token (ACT), which gives every creator its own vocabulary token trained end-to-end. The map is bijective, so collisions are impossible and inference is a direct top-$k$ over creator logits. In a controlled comparison on production data in which the token layer is the only variable, ACT improves creator-level Recall@15 by 19.8 points ($1.84\\times$) over a matched SID baseline, still leads when the SID codebook is enlarged $64\\times$, and serves at ${\\sim}2.7\\times$ lower per-user latency. The advantage carries over to the public KuaiRand dataset, where ACT is the only method that beats a global-popularity baseline, provided each creator token sees enough training examples. In a live A/B test, ACT is directionally positive on every reported metric against both the SID-enhanced and the classic production rankers.",
+      "url": "http://arxiv.org/abs/2611.00323v1",
+      "pdf_url": "https://arxiv.org/pdf/2611.00323v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "Semantic ID",
+        "Tokenization",
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "原子Token"
+      ],
+      "score": 153,
+      "summary": "该论文针对大规模生成式推荐中推荐用户未关注创作者的冷启动问题，指出现有基于语义ID（SID）的生成式推荐方案的核心瓶颈在于SID层而非语言模型：创作者到SID的映射是多对一的，导致碰撞创作者只能靠热度打破平局，从而限制了创作者级召回并偏向热门创作者；同时冻结的量化器阻断了训练梯度回传到创作者表示。为此作者提出原子创作者Token（ACT），为每个创作者分配独立的词表Token并进行端到端训练，使映射变为双射，彻底消除碰撞，推理时直接在创作者logits上做top-k。在生产数据的受控对比中，仅改变Token层，ACT将创作者级Recall@15提升19.8个百分点（1.84倍），在SID码本扩大64倍时仍保持领先，且每用户延迟降低约2.7倍；在公开KuaiRand数据集上，ACT是唯一能击败全局热度基线的方法（前提是每个创作者Token有足够训练样本）；线上A/B测试中，ACT相对SID增强版和经典生产排序器在所有报告指标上均呈正向趋势。",
+      "one_line_takeaway": "生成式推荐的瓶颈在语义ID层而非语言模型，为每个创作者分配独立且端到端训练的原子Token可显著提升召回并降低延迟。",
+      "core_method": "提出原子创作者Token（ACT）：为每个创作者分配一个独立的词表Token，替代传统语义ID（SID）的量化映射；Token嵌入与语言模型端到端联合训练，使梯度可回传至创作者表示；推理时直接在创作者Token的logits上做top-k检索，避免多对一碰撞和热度平局。",
+      "innovation_points": [
+        "揭示并验证SID层（多对一映射与冻结量化器）是生成式推荐召回的主要瓶颈，而非语言模型本身",
+        "用双射的原子创作者Token替代SID，从根本上消除创作者碰撞和热度偏置",
+        "Token表示端到端训练，使梯度直达创作者表示，提升表示质量",
+        "推理简化为创作者logits上的直接top-k，显著降低服务延迟"
+      ],
+      "experiment_results": [
+        "生产数据受控对比中，仅改变Token层，ACT将创作者级Recall@15提升19.8个百分点（1.84倍）",
+        "SID码本扩大64倍后ACT仍保持领先，且每用户延迟降低约2.7倍",
+        "公开KuaiRand数据集上ACT是唯一击败全局热度基线的方法（需每个创作者Token有足够训练样本）；线上A/B测试所有报告指标方向为正"
+      ],
+      "limitations": [
+        "ACT依赖每个创作者Token获得足够训练样本，长尾创作者可能面临样本不足问题",
+        "线上A/B测试仅报告方向性正向，未给出具体显著性与幅度数据",
+        "实验主要基于单一生产数据和KuaiRand，跨平台泛化性有待验证"
+      ],
+      "practical_value": "为工业级生成式推荐提供了一种更简单有效的Token化方案：消除SID碰撞与热度偏置，提升冷启动创作者召回，同时将每用户推理延迟降低约2.7倍，便于线上部署和A/B验证。",
+      "why_it_matters": "该工作挑战了生成式推荐中广泛采用的语义ID范式，明确指出瓶颈所在，并给出端到端可训练、低延迟的替代方案，对大规模推荐系统的Token化设计具有直接指导意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "de10574c8e65bd03",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.41236",
+      "title": "Experts Exhibit Structured Redundancy: Structure-Preserving Expert Pruning for Mixture-of-Experts Large Language Models",
+      "authors": [
+        "Tian Wang",
+        "Yongding Tao",
+        "Yihong Dong",
+        "Xiaoming Wu",
+        "Ying Guo",
+        "Ge Li"
+      ],
+      "affiliations": [],
+      "published": "2026-10-30T04:21:25Z",
+      "updated": "2026-10-30T04:21:25Z",
+      "abstract": "Sparse MoE mechanism significantly improves the trade-off between model capacity and inference efficiency. However, practical deployment still requires storing all experts, resulting in substantial memory overhead. We show that expert outputs in MoE layers exhibit structured redundancy. Across different models and task categories, the stable rank and entropy effective rank of expert outputs are consistently far below the nominal number of experts, while expert output distributions also exhibit fewer effective modes. Motivated by these observations, we reformulate expert pruning as a structure-preserving expert subset selection problem and efficiently optimize it via a greedy strategy, rather than only independently scoring and ranking individual experts or exhaustively searching over expert combinations. We propose two expert pruning methods under the unified structure-preserving framework: Projection Energy Expert Pruning (PEEP), which preserves the functional subspace by maximizing weighted projection energy, and Distributional Coverage Expert Pruning (DCEP), which preserves the distributional geometry by minimizing weighted coverage error. Both methods incorporate router-derived weights as priors, enabling them to jointly preserve the global structural relationships among experts while accounting for the local importance of individual experts. Experiments on DeepSeek-V2-Lite and Qwen3-30B-A3B demonstrate that, at the expert retention ratios of 75% and 50%, our methods outperform the state-of-the-art baselines on the majority of benchmarks and consistently achieve the best average performance across both general tasks and mathematical reasoning tasks.",
+      "url": "http://arxiv.org/abs/2610.41236v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.41236v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Xiaomi MiMo",
+      "venue": "",
+      "categories": [
+        "cs.AI"
+      ],
+      "tags": [
+        "Xiaomi MiMo",
+        "企业论文",
+        "Reasoning",
+        "MoE",
+        "推理系统",
+        "LLM 基模",
+        "专家剪枝",
+        "模型压缩"
+      ],
+      "score": 101,
+      "summary": "该论文研究MoE大语言模型在部署时因需存储全部专家而导致的内存开销问题。作者首先通过实证分析发现，MoE层中各专家的输出存在结构化冗余：在不同模型和任务类别下，专家输出的稳定秩与熵有效秩均远低于名义专家数量，输出分布的有效模态数也更少。基于这一观察，作者将专家剪枝重新建模为结构保持的专家子集选择问题，并采用贪心策略高效求解，而非仅对单个专家独立打分排序或穷举组合搜索。在统一框架下提出两种方法：PEEP通过最大化加权投影能量保持功能子空间，DCEP通过最小化加权覆盖误差保持分布几何结构，二者均引入路由器权重作为先验，兼顾全局结构关系与局部重要性。在DeepSeek-V2-Lite和Qwen3-30B-A3B上，75%与50%保留率下多数基准优于SOTA，通用与数学推理平均性能最佳。",
+      "one_line_takeaway": "MoE专家输出存在结构化冗余，将剪枝建模为结构保持的子集选择问题可在高压缩率下优于独立打分基线。",
+      "core_method": "先实证刻画专家输出的低秩与低有效模态结构化冗余，再将专家剪枝形式化为结构保持的专家子集选择问题，用贪心策略优化；提出PEEP（最大化加权投影能量以保持功能子空间）和DCEP（最小化加权覆盖误差以保持分布几何），并以路由器权重作为先验融合全局结构与局部重要性。",
+      "innovation_points": [
+        "揭示并量化MoE专家输出的结构化冗余（稳定秩、熵有效秩、有效模态数远低于专家数）",
+        "将专家剪枝从独立打分排序重构为结构保持的专家子集选择问题，并用贪心策略高效求解",
+        "提出PEEP与DCEP两种互补的结构保持剪枝准则，统一在路由器权重先验框架下"
+      ],
+      "experiment_results": [
+        "在DeepSeek-V2-Lite和Qwen3-30B-A3B上，75%和50%专家保留率下多数基准优于SOTA基线",
+        "在通用任务与数学推理任务上均取得最佳平均性能",
+        "摘要未给出具体数值指标，仅有相对比较结论"
+      ],
+      "limitations": [
+        "仅在两个MoE模型上验证，跨模型与跨规模的泛化性证据有限",
+        "贪心策略为近似求解，未与穷举最优解做理论或实验上的差距分析",
+        "摘要未报告内存节省、推理延迟等实际部署指标"
+      ],
+      "practical_value": "面向MoE大模型部署时全量专家存储带来的内存瓶颈，提供无需重训练的结构保持剪枝方案，可在50%-75%保留率下维持通用与数学推理性能，降低显存占用与部署成本，适合作为上线前的模型压缩环节。",
+      "why_it_matters": "它把专家剪枝从“逐个打分”推进到“保持专家间结构关系”的子集选择视角，并给出可解释的低秩冗余证据，为MoE压缩提供了新范式，对关注大模型推理系统与部署效率的研究者和工程师有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "833cf9d57ac3b4db",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.39426",
+      "title": "UGR: Unified Generative Ranking for Heterogeneous E-commerce Recommendation",
+      "authors": [
+        "Zonghe Shao",
+        "Huabin Chen",
+        "Sitong Lu",
+        "Fangmei Zhu",
+        "Yingcai Ma",
+        "Ge Fan",
+        "Jinguo Gao",
+        "Wei Shi",
+        "Yanfang Liu",
+        "Huiping Chu"
+      ],
+      "affiliations": [
+        "Alibaba Group (China)"
+      ],
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "abstract": "List-wise ranking in e-commerce recommendation must balance user utility and commercial value across organic content, ads, and candidates from other businesses, while modeling candidate interactions and sequential dependencies. Existing generative ranking methods typically learn from logged exposure sequences and operate on truncated candidate sets from a single business. Exposure-sequence learning may not fully exploit post-exposure feedback signals. Meanwhile, generative ranking over heterogeneous, multi-business candidates remains less explored, particularly when recommendation scores and advertising value must be jointly modeled under generalized second-price (GSP) auctions. We propose Unified Generative Ranking (UGR), which performs generative ranking over the full request-level multi-business heterogeneous candidate set, typically comprising around a thousand candidates in production, and directly generates multi-business ranking lists through candidate-aware autoregressive decoding. To go beyond exposure-sequence imitation, UGR introduces complementary feedback supervision through weighted supervised fine-tuning and permutation preference optimization, which respectively leverage observed post-exposure feedback and feedback-derived preferences among permutations. UGR uses a training-time advertising debiasing tower to model historical ad exposure effects and incorporates current ad value during serving while preserving the existing allocation and GSP pricing rules. Multi-value sequence retrieval produces candidate ranking lists, and the existing downstream evaluator selects the final list for exposure. Offline experiments demonstrate consistent gains in ranking quality, while online A/B tests on Taobao's Guess You Like recommendation service yield improvements of 1.76% in Core IPV, 3.29% in Transaction Volume, and 2.10% in GMV over the production baseline.",
+      "url": "https://arxiv.org/abs/2610.39426",
+      "pdf_url": "https://arxiv.org/pdf/2610.39426",
+      "doi": "10.48550/arxiv.2610.39426",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Alibaba Qwen",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "Alibaba Qwen",
+        "A/B 实验",
+        "企业论文",
+        "后训练",
+        "推理系统",
+        "GenRec",
+        "生成式排序",
+        "电商推荐"
+      ],
+      "score": 197,
+      "summary": "UGR针对电商推荐中列表式排序需同时平衡用户效用与商业价值、并处理自然内容、广告及多业务候选的问题，提出统一生成式排序框架。现有生成式排序多基于曝光序列学习且仅处理单一业务的截断候选集，难以充分利用曝光后反馈，也较少探索异构多业务候选与GSP拍卖下的推荐分数和广告价值联合建模。UGR在请求级全量多业务异构候选集（生产约千级）上进行候选感知自回归解码，直接生成多业务排序列表；通过加权监督微调和排列偏好优化引入曝光后反馈与排列偏好监督，并采用训练期广告去偏塔建模历史广告曝光效应，服务时融入当前广告价值且保持原有分配与GSP定价规则。离线实验显示排序质量稳定提升，淘宝猜你喜欢在线A/B测试中Core IPV提升1.76%、交易量提升3.29%、GMV提升2.10%。",
+      "one_line_takeaway": "UGR将千级多业务异构候选的列表生成、曝光后反馈监督与广告价值去偏统一到自回归生成式排序框架，并在淘宝猜你喜欢取得Core IPV、交易量和GMV的线上正向收益。",
+      "core_method": "在请求级全量多业务异构候选集（生产约千级）上执行候选感知自回归解码，直接生成多业务排序列表；以加权监督微调利用曝光后反馈，以排列偏好优化利用反馈导出的排列偏好；训练期广告去偏塔建模历史广告曝光效应，服务时融入当前广告价值，同时保持原有分配与GSP定价规则；多值序列检索产生候选排序列表，由现有下游评估器选择最终曝光列表。",
+      "innovation_points": [
+        "面向请求级全量多业务异构候选集（约千级）的生成式排序，而非单一业务截断候选集",
+        "以加权监督微调和排列偏好优化引入曝光后反馈监督，超越曝光序列模仿",
+        "训练期广告去偏塔与服务时广告价值注入相结合，在保持GSP定价与分配规则下联合建模推荐分数和广告价值",
+        "多值序列检索生成候选排序列表，并与现有下游评估器衔接形成完整链路"
+      ],
+      "experiment_results": [
+        "离线实验显示排序质量一致提升（摘要未给出具体离线指标数值）",
+        "淘宝猜你喜欢在线A/B测试相对生产基线：Core IPV提升1.76%",
+        "同一在线A/B测试：交易量提升3.29%，GMV提升2.10%"
+      ],
+      "limitations": [
+        "摘要未披露离线实验的具体指标数值与消融结果，难以量化各模块独立贡献",
+        "线上收益仅在淘宝猜你喜欢单一场景验证，跨业务、跨场景泛化性未说明",
+        "广告去偏与GSP规则保持的具体实现细节及对广告主侧长期影响未在摘要中展开"
+      ],
+      "practical_value": "面向真实电商推荐系统，在请求级千级多业务候选上统一生成排序列表，兼顾用户效用与广告商业价值，并保持既有分配与GSP定价规则，降低替换成本；线上A/B在Core IPV、交易量和GMV上均取得正向收益，具备直接落地参考价值。",
+      "why_it_matters": "它把生成式排序从单业务曝光序列模仿推进到多业务异构全量候选与拍卖约束下的统一建模，并给出淘宝生产环境的在线增益，对生成式推荐在真实业务中的工程落地具有参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "3f11abb3e625899b",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.39273",
+      "title": "PFA: Attention Can Be Progressively Focused in Long-Sequence Generative Recommendation",
+      "authors": [
+        "Pengjie Zhou",
+        "Weiqin Yang",
+        "Haibo Xing",
+        "Hao Deng",
+        "Jinxin Hu"
+      ],
+      "affiliations": [
+        "Alibaba Group (China)",
+        "Zhejiang University"
+      ],
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "abstract": "Long user behavioral sequences improve the performance of generative recommendation (GR), but computing full attention over long histories during autoregressive beam search decoding incurs substantial online inference latency. To accelerate long-sequence decoding, existing approaches typically rely on static history compression or dynamic top-k sparse attention; however, the former risks losing critical semantics, whereas the latter incurs significant overhead from repeated token selection and non-contiguous memory access. In this work, we thoroughly analyze attention patterns during GR decoding and reveal two key properties: (i) progressive attention focusing, where attention progressively focuses on a small subset of critical historical tokens; and (ii) cross-step ranking consistency, where their importance rankings remain relatively stable across subsequent decoding steps. Motivated by these observations, we propose Progressively Focused Attention (PFA), an efficient sparse decoding framework for long-sequence GR. PFA retains full attention at the initial decoding step to explore global historical preferences. It then establishes a shared importance ranking through cross-beam weighted aggregation and reorders the key-value cache of the selected tokens into a contiguous memory layout. Subsequent decoding steps reuse this ranking and geometrically reduce the token budget, preserving critical semantics while lowering computational and memory access overhead. Extensive experiments on two public benchmarks and a large-scale industrial dataset demonstrate that PFA outperforms state-of-the-art baselines. A 7-day online A/B test on a large-scale e-commerce advertising platform further confirms that PFA delivers substantial business gains while maintaining low inference latency. Our code is publicly available at https://anonymous.4open.science/r/PFA-review-088D.",
+      "url": "https://arxiv.org/abs/2610.39273",
+      "pdf_url": "https://arxiv.org/pdf/2610.39273",
+      "doi": "10.48550/arxiv.2610.39273",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Alibaba Qwen",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
+        "cs.IR"
+      ],
+      "tags": [
+        "Alibaba Qwen",
+        "A/B 实验",
+        "企业论文",
+        "GenRec",
+        "推理系统",
+        "生成式推荐",
+        "长序列建模",
+        "稀疏注意力"
+      ],
+      "score": 179,
+      "summary": "该论文研究长序列生成式推荐（GR）自回归beam search解码中全注意力计算导致线上推理延迟高的问题。作者分析GR解码的注意力模式，发现两个关键性质：注意力逐步聚焦于少量关键历史token，且这些token的重要性排序在后续解码步骤中保持稳定（跨步排序一致性）。据此提出渐进聚焦注意力PFA：首步保留全注意力以探索全局历史偏好，随后通过跨beam加权聚合建立共享重要性排序，并将选中token的KV cache重排为连续内存布局；后续解码步骤复用该排序并几何式缩减token预算。在2个公开基准和1个大规模工业数据集上优于SOTA基线，并在某大型电商广告平台完成7天线上A/B测试，验证业务收益与低推理延迟。",
+      "one_line_takeaway": "PFA利用GR解码中注意力渐进聚焦与跨步排序稳定的性质，以共享排序加几何缩减token预算实现高效稀疏解码，兼顾长序列语义与线上低延迟。",
+      "core_method": "首步全注意力探索全局偏好；通过跨beam加权聚合建立共享token重要性排序；将选中token的KV cache重排为连续内存布局；后续解码步骤复用排序并几何式缩减token预算，降低计算与内存访问开销。",
+      "innovation_points": [
+        "揭示GR解码中注意力渐进聚焦与跨步排序一致性两个经验性质",
+        "提出跨beam加权聚合的共享重要性排序，避免每步重复token选择",
+        "将选中token的KV cache重排为连续内存布局，降低非连续内存访问开销",
+        "几何式缩减token预算，在保留关键语义的同时持续降低解码成本"
+      ],
+      "experiment_results": [
+        "在2个公开基准和1个大规模工业数据集上优于SOTA基线（具体数值未在给定材料中提供）",
+        "在某大型电商广告平台完成7天线上A/B测试，确认业务收益并保持低推理延迟（具体指标未提供）"
+      ],
+      "limitations": [
+        "依赖注意力渐进聚焦与排序稳定性的经验观察，未给出理论保证",
+        "共享排序基于跨beam聚合，可能对beam多样性或排序漂移敏感（材料未提供相关分析）",
+        "线上验证限于单一电商广告平台，跨场景泛化性待验证"
+      ],
+      "practical_value": "面向长用户行为序列的生成式推荐线上服务，PFA直接降低自回归beam search解码的推理延迟与内存访问开销，并已在大型电商广告平台通过7天A/B测试验证业务收益，具备工程落地价值。",
+      "why_it_matters": "长序列GR的线上瓶颈在解码延迟；PFA从注意力模式出发设计稀疏解码，避免静态压缩的语义损失与top-k稀疏的重复选择开销，并给出工业级线上验证，对生成式推荐的推理系统优化有直接参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "ddd6c413d3208ace",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.40476",
+      "title": "Training language models in simulation for psychiatric intake",
+      "authors": [
+        "Samuel Schmidgall",
+        "Tim Strother",
+        "A. Bijamov",
+        "Min Sun",
+        "Anil K. Palepu",
+        "Akshay Goel",
+        "Ulysse Marteau-Ferey",
+        "Théo Moutakanni",
+        "Yubin Kim",
+        "Joseph Breda",
+        "Christina Chen",
+        "Justin Chen",
+        "Paul Jhun",
+        "Andrew Marshall",
+        "Sarah Montgomery‐Taylor",
+        "Eun Kyoung Hong",
+        "Shashank Ravi",
+        "Kameron Collin Black",
+        "David Wu",
+        "Austin Schoeffler",
+        "John Lyon Havlik",
+        "Elizabeth Cameron Stade",
+        "Jared Moore",
+        "johannes Christopher Eichstaedt",
+        "Logan Pierce",
+        "Jeff Jopling",
+        "Johannes Thrul",
+        "Thomas H. McCoy",
+        "Neguine Rezaii",
+        "Mark S. Chen",
+        "Ellen E. Fitzsimmons‐Craft",
+        "Shirley Wang",
+        "Desmond C. Ong",
+        "Katharina Schultebraucks",
+        "Torrey Creed",
+        "Bhavna Daryani",
+        "Aleksandra Faust",
+        "S. Sara Mahdavi",
+        "Caroline Astrid Figueroa",
+        "Eric C. Lin",
+        "Kate H. Bentley",
+        "Ernest Lim",
+        "Zhihan Jiang",
+        "Xuhai \"Orson\" Xu",
+        "Daniel McDuff",
+        "John Blake Torous",
+        "Yun Liu",
+        "Po-Hsuan Cameron Chen",
+        "Mike Schaekermann",
+        "Joelle K. Barral",
+        "Alvin Rajkomar",
+        "Tao Tu",
+        "Lin Yang",
+        "Isaac R. Galatzer‐Levy",
+        "David Racz",
+        "Valentin Liévin"
+      ],
+      "affiliations": [
+        "Harvard University",
+        "Google (United States)",
+        "Stanford University",
+        "University of California, Los Angeles",
+        "University of California, San Francisco",
+        "Johns Hopkins University",
+        "Massachusetts General Hospital",
+        "The University of Texas at Austin",
+        "Yale University",
+        "New York University",
+        "University of Pennsylvania",
+        "Columbia University",
+        "Beth Israel Deaconess Medical Center",
+        "Washington University in St. Louis"
+      ],
+      "published": "2026-10-29",
+      "updated": "2026-10-29",
+      "abstract": "In psychiatric practice, the clinical intake interview remains a primary diagnostic instrument, requiring the clinician to establish rapport while disentangling complex, overlapping presentations. Here, we show that multi-turn reinforcement learning (RL) in simulation environments improves language model performance on structured text-based psychiatric intake, spanning history-taking, differential diagnosis, and initial management planning. In a randomized, double-blind crossover study ($N = 60$ matched scenario pairs, 120 encounters) comparing the RL-trained agent against its identically prompted base model, 32 board-certified psychiatrists role-played standardized patients while a separate panel of 15 independent, board-certified psychiatrists scored the de-identified transcripts. The trained agent outperformed the base model in 76.7% of matched scenario pairs ($p < 0.0001$), with gains on an adapted clinical-examination rubric ($d_z = 0.77$, $p < 0.0001$), patient-centered communication (82.0% vs. 65.2%, $p < 0.001$), and differential diagnosis appropriateness (68.3% vs. 33.3%, $p < 0.001$). Across 127 psychiatrist-validated simulated intake scenarios, the trained agent nearly doubled its base model's clinical rubric score (0.706 vs. 0.379; composite reward 0.564 vs. 0.294, $p < 0.0001$). To systematically probe conversational safety, we established two Delphi-consensus taxonomies, of clinical safety risks and relational competencies, from which 256 challenging adversarial presentations were derived; we find that training in simulation environments more than halved under-triage of acute safety risks (12.9% vs. 30.5%, $p < 0.0001$). Simulation environments thus provide a controlled testbed for training and stress-testing psychiatric conversational agents, with gains that transferred to psychiatrist-enacted encounters, though residual gaps require safeguards and clinician oversight.",
+      "url": "https://arxiv.org/abs/2610.40476",
+      "pdf_url": "https://arxiv.org/pdf/2610.40476",
+      "doi": "10.48550/arxiv.2610.40476",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Artificial Intelligence in Healthcare and Education",
+        "Machine Learning in Healthcare",
+        "Speech and dialogue systems"
+      ],
+      "tags": [
+        "企业论文",
+        "Reasoning",
+        "LLM 基模",
+        "精神科接诊",
+        "多轮强化学习",
+        "仿真环境",
+        "临床安全",
+        "对话智能体"
+      ],
+      "score": 81,
+      "summary": "该研究针对精神科接诊访谈这一核心诊断工具，探索在仿真环境中用多轮强化学习训练语言模型，以提升其结构化文本接诊能力，覆盖病史采集、鉴别诊断和初始管理规划。研究采用随机双盲交叉设计，60对匹配场景、120次接诊，由32名委员会认证精神科医生扮演标准化患者，另由15名独立认证精神科医生对去标识化转录评分。结果显示，训练后智能体在76.7%的匹配场景对中优于同提示基座模型，临床检查量表效应量d_z=0.77，以患者为中心的沟通82.0%对65.2%，鉴别诊断适当性68.3%对33.3%；在127个经精神科医生验证的仿真接诊场景中，临床评分近乎翻倍（0.706对0.379）。研究还基于两套德尔菲共识分类法构建256个对抗性呈现，发现仿真训练将急性安全风险的低分诊率从30.5%降至12.9%。",
+      "one_line_takeaway": "在仿真环境中进行多轮强化学习，可显著提升语言模型的精神科接诊表现与对话安全性，且效果可迁移至精神科医生扮演的真实式接诊场景。",
+      "core_method": "构建精神科接诊仿真环境，采用多轮强化学习训练语言模型；以随机双盲交叉研究比较RL训练智能体与同提示基座模型，由精神科医生扮演标准化患者并由独立精神科医生小组评分；另建立德尔菲共识的临床安全风险与关系能力分类法，生成对抗性呈现用于压力测试。",
+      "innovation_points": [
+        "将多轮强化学习置于精神科接诊仿真环境中，覆盖病史采集、鉴别诊断与初始管理规划全流程",
+        "采用随机双盲交叉设计，由精神科医生扮演标准化患者、独立精神科医生盲评，提升评估生态效度",
+        "建立两套德尔菲共识分类法（临床安全风险与关系能力），并据此构建256个对抗性呈现系统探测对话安全",
+        "发现仿真训练收益可迁移至精神科医生实际扮演的接诊场景，并显著降低急性安全风险低分诊率"
+      ],
+      "experiment_results": [
+        "在60对匹配场景、120次接诊中，训练后智能体在76.7%的匹配场景对中优于基座模型（p<0.0001）",
+        "临床检查量表效应量d_z=0.77（p<0.0001）；患者中心沟通82.0%对65.2%（p<0.001）；鉴别诊断适当性68.3%对33.3%（p<0.001）",
+        "在127个验证场景中临床评分0.706对0.379、复合奖励0.564对0.294（p<0.0001）；急性安全风险低分诊率12.9%对30.5%（p<0.0001）"
+      ],
+      "limitations": [
+        "研究基于文本仿真环境，未覆盖真实临床中的多模态信息与非结构化互动",
+        "仍存在残余差距，需配套安全保障措施与临床医生监督，不能独立部署",
+        "评估依赖标准化患者角色扮演与模拟场景，外部真实临床有效性尚待验证"
+      ],
+      "practical_value": "为精神科对话智能体的训练与压力测试提供了可控仿真测试平台，并展示了在病史采集、鉴别诊断、初始管理规划及安全分诊上的可量化提升，对临床决策支持与医生培训工具的开发具有直接参考价值。",
+      "why_it_matters": "该工作将多轮强化学习与精神科接诊仿真环境结合，并用随机双盲交叉设计和独立精神科医生盲评验证效果，同时系统评估对话安全风险，为高风险临床场景下语言模型的训练与评估提供了较严谨的范式。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "5b397a8dff53cea7",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.38378",
+      "title": "Towards Reliable, Scalable, and Value-Aligned Generative Recommendation for Large-Scale Advertising",
+      "authors": [
+        "Yatong Xiao",
+        "Yibo Sheng",
+        "Lixiang Wang",
+        "Mingjie Sun",
+        "Yunhao Sha",
+        "Pengfei Zhang",
+        "Shengyu Wang",
+        "Peng Wang",
+        "Wenjin Wu",
+        "Peng Jiang"
+      ],
+      "affiliations": [
+        "Kuaishou (China)"
+      ],
+      "published": "2026-10-28",
+      "updated": "2026-10-28",
+      "abstract": "Generative recommendation (GR) reformulates item retrieval as autoregressive generation of discrete semantic identifiers (SIDs), offering a unified paradigm for personalized recommendation. GR4AD, as an industrial generative recommendation framework, has greatly improved advertising revenue while enabling efficient real-time serving in Kuaishou. However, continued deployment has exposed three limitations: deterministic SID assignment remains sensitive to semantic boundaries; conventional backbone scaling provides diminishing revenue gains under strict serving constraints; and sequence-level value optimization provides limited credit assignment to intermediate SID decisions, causing likelihood-based beam search to prematurely prune potentially high-value candidates. We present GR4AD-X, which addresses these limitations through reliable SID construction, serving-efficient capacity scaling, and unified value alignment. Specifically, GR4AD-X improves SID reliability through Multi-Path assignment. It expands model capacity along multiple complementary dimensions rather than relying solely on wider or deeper backbones, achieving a better effectiveness-efficiency trade-off under strict serving constraints. Finally, Unified Value-Guided Generation and Discrimination (UniVGD) aligns generation with commercial value through prefix-level reward optimization, value-guided beam pruning, and discriminative reranking within a unified model. Large-scale online A/B tests on the Kuaishou advertising platform demonstrate that GR4AD-X achieves a cumulative revenue improvement of 3.07% over the deployed GR4AD baseline while satisfying strict latency and throughput constraints.",
+      "url": "https://arxiv.org/abs/2610.38378",
+      "pdf_url": "https://arxiv.org/pdf/2610.38378",
+      "doi": "10.48550/arxiv.2610.38378",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "tags": [
+        "A/B 实验",
+        "企业论文",
+        "GenRec",
+        "Semantic ID",
+        "推理系统",
+        "生成式推荐",
+        "语义ID",
+        "大规模广告"
+      ],
+      "score": 198,
+      "summary": "该论文面向快手大规模广告场景，针对已部署的生成式推荐框架GR4AD在实际运行中暴露的三个问题提出GR4AD-X：确定性语义ID（SID）分配对语义边界敏感、常规骨干网络扩展在严格服务约束下收益递减、序列级价值优化对中间SID决策的信用分配不足导致基于似然的beam search过早剪枝高价值候选。方法上分别采用多路径SID分配提升可靠性、沿多个互补维度扩展容量以改善效果-效率权衡、以及统一价值引导的生成与判别（UniVGD），通过前缀级奖励优化、价值引导beam剪枝和判别式重排将生成对齐到商业价值。快手广告平台大规模在线A/B测试显示，相对已部署GR4AD基线累计收入提升3.07%，并满足严格时延与吞吐约束。",
+      "one_line_takeaway": "GR4AD-X通过多路径SID分配、多维度容量扩展与统一价值对齐，在严格线上约束下将快手广告生成式推荐的累计收入较GR4AD提升3.07%。",
+      "core_method": "在工业生成式推荐框架GR4AD基础上提出三项改进：一是Multi-Path SID分配，缓解确定性语义ID对语义边界的敏感性以提升SID可靠性；二是沿多个互补维度扩展模型容量，而非仅加宽或加深骨干，在严格服务约束下取得更优效果-效率权衡；三是UniVGD统一价值引导的生成与判别，将前缀级奖励优化、价值引导beam剪枝与判别式重排整合进单一模型，使生成过程对齐商业价值。",
+      "innovation_points": [
+        "提出Multi-Path语义ID分配，从SID构建层面提升生成式推荐在语义边界附近的可靠性",
+        "放弃单一加宽/加深的骨干扩展路线，沿多个互补维度扩展容量，面向严格时延与吞吐约束优化效果-效率权衡",
+        "UniVGD将前缀级奖励优化、价值引导beam剪枝与判别式重排统一在一个模型中，缓解序列级价值优化对中间SID决策信用分配不足的问题",
+        "在快手广告生产环境完成从GR4AD到GR4AD-X的迭代并做大规模在线A/B验证"
+      ],
+      "experiment_results": [
+        "快手广告平台大规模在线A/B测试中，GR4AD-X相对已部署的GR4AD基线取得3.07%的累计收入提升",
+        "线上结果同时满足严格的时延与吞吐约束",
+        "摘要未给出离线指标、消融实验及各模块单独贡献的量化数据"
+      ],
+      "limitations": [
+        "摘要仅报告在线A/B的累计收入提升，未提供离线评估、消融实验与各模块独立贡献的量化证据",
+        "方法验证局限于快手广告单一工业场景，跨平台、跨业务的可迁移性未在材料中说明",
+        "多路径SID分配、多维度容量扩展与UniVGD均增加系统复杂度，其额外工程与运维成本未在材料中量化"
+      ],
+      "practical_value": "面向真实广告业务，论文直接处理已部署系统的线上痛点：SID语义边界敏感、服务约束下扩容收益递减、beam search过早剪枝高价值候选。三项改进均以时延与吞吐为硬约束设计，并在生产环境完成A/B验证，对大规模生成式推荐系统的持续迭代具有直接工程参考价值。",
+      "why_it_matters": "生成式推荐从离线原型走向大规模在线服务后，可靠性、服务成本与商业价值对齐往往比模型结构更关键。该工作给出了一套在严格线上约束下同时处理SID构建、容量扩展与价值对齐的工业方案，并以在线收入指标验证，对关注生成式推荐落地与语义ID设计的研究者和工程师具有参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "39ccd2aa1c21441c",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7224106355",
+      "title": "LLM‐Enhanced Semantic Information Alignment for ID Recommendation",
+      "authors": [
+        "Peng Yang",
+        "Yucheng Zheng",
+        "Zijian Bai",
+        "Keqing Li",
+        "Bo Wu",
+        "Daoan Du"
+      ],
+      "affiliations": [
+        "Southeast University"
+      ],
+      "published": "2026-10-28",
+      "updated": "2026-10-31T12:09:11.096373",
+      "abstract": "ABSTRACT Identity‐based Recommendation (IDR) plays a crucial role in modern personalized recommendation systems by leveraging users' identity information and historical interactions to model long‐term user preferences. However, existing IDR methods face three critical challenges: difficulty in fully capturing latent user preference, limited representational capacity, and poor adaptability to cold‐start scenarios. To address these issues, we propose the LLM‐Enhanced Semantic Information Alignment for ID Recommendation (ESIA‐IDR) framework, which systematically integrates semantic features generated by large language models (LLMs) into ID‐based recommendation. ESIA‐IDR first employs LLMs to deeply perceive unstructured textual data, such as user reviews and product descriptions, thereby effectively mining users' latent interest patterns. An independent pretraining mechanism is then applied to optimize the training dynamics of semantic and ID embeddings, mitigating inconsistencies in convergence behavior. Additionally, a feature discretization strategy is adopted to enhance semantic feature compatibility with traditional recommendation pipelines. During the recommendation phase, semantic‐enhanced features and collaborative signals are jointly modeled to achieve robust performance in cold‐start environments. ESIA‐IDR consists of four key components: Semantic and Interest Perception, Semantic Alignment, Discrete Feature Construction, and Recommendation Integration. By combining pretraining, dimensionality reduction, and similarity‐based bucketing, the framework achieves effective alignment between semantic features and ID feature spaces, bridging the semantic‐structural gap and improving user preference modeling accuracy. Extensive experiments on multiple real‐world datasets demonstrate that ESIA‐IDR achieves a 2.21% improvement in NDCG and a 1.48% improvement in Hit Rate compared to the best‐performing baselines, validating its effectiveness in enhancing recommendation performance.",
+      "url": "https://doi.org/10.1111/coin.70307",
+      "pdf_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1111/coin.70307",
+      "doi": "10.1111/coin.70307",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Computational Intelligence",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "预训练",
+        "LLM 基模",
+        "LLM语义特征",
+        "ID推荐",
+        "语义对齐",
+        "特征离散化",
+        "冷启动"
+      ],
+      "score": 92,
+      "summary": "该论文针对基于身份的推荐（IDR）在捕捉潜在用户偏好、表征能力与冷启动适应性上的不足，提出ESIA-IDR框架，将大语言模型生成的语义特征系统性地融入ID推荐。框架包含语义与兴趣感知、语义对齐、离散特征构建和推荐集成四个模块：先用LLM深度理解用户评论与商品描述等非结构化文本，挖掘潜在兴趣模式；再以独立预训练机制优化语义与ID嵌入的训练动态，缓解收敛行为不一致；随后通过特征离散化（降维与相似度分桶）提升语义特征与传统推荐流水线的兼容性；推荐阶段联合建模语义增强特征与协同信号。在多个真实数据集上，NDCG提升2.21%、命中率提升1.48%。",
+      "one_line_takeaway": "ESIA-IDR通过LLM语义特征与ID特征空间的预训练对齐和离散化，在真实数据上小幅但稳定地提升ID推荐效果并改善冷启动适应性。",
+      "core_method": "用LLM从用户评论、商品描述等非结构化文本中提取语义与兴趣特征；对语义嵌入和ID嵌入分别独立预训练以对齐训练动态；通过降维和相似度分桶进行特征离散化，使语义特征兼容传统推荐流水线；最终将语义增强特征与协同信号联合建模用于推荐。",
+      "innovation_points": [
+        "将LLM语义特征系统化引入ID推荐，并设计语义与兴趣感知模块挖掘潜在用户偏好",
+        "采用独立预训练机制分别优化语义嵌入与ID嵌入，缓解二者收敛行为不一致的问题",
+        "提出基于降维与相似度分桶的离散特征构建策略，桥接语义特征与ID特征空间的结构性差距",
+        "在推荐阶段联合建模语义增强特征与协同信号，以提升冷启动场景下的鲁棒性"
+      ],
+      "experiment_results": [
+        "在多个真实数据集上，相较最佳基线NDCG提升2.21%",
+        "Hit Rate提升1.48%",
+        "摘要未提供冷启动场景的单独量化结果，也未报告消融实验的具体数据"
+      ],
+      "limitations": [
+        "性能提升幅度相对有限（NDCG 2.21%、Hit Rate 1.48%），实际业务收益需进一步验证",
+        "摘要未给出冷启动场景的独立量化评估，冷启动优势的证据不够充分",
+        "依赖LLM处理文本数据，引入额外推理成本与工程复杂度，摘要未讨论线上延迟与成本约束"
+      ],
+      "practical_value": "为工业ID推荐系统提供了一条可落地的语义增强路径：利用LLM挖掘评论文本等非结构化信号，并通过预训练对齐与特征离散化兼容现有推荐流水线，对冷启动场景具有潜在工程价值；但需评估LLM推理成本与线上延迟。",
+      "why_it_matters": "该工作展示了如何在不重构现有ID推荐架构的前提下，将LLM语义能力以对齐和离散化方式注入传统推荐流水线，为生成式语义信号与ID协同信号的融合提供了可参考的工程范式。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "f76fa666d846f62d",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.38683",
+      "title": "Quantum-Inspired Pairwise Ranking Aggregation via Active LLM Feedback",
+      "authors": [
+        "Quan Mai",
+        "Susan Gauch",
+        "Gibson Nkhata"
+      ],
+      "affiliations": [],
+      "published": "2026-10-28T18:55:57Z",
+      "updated": "2026-10-28T18:55:57Z",
+      "abstract": "Ranking aggregation from multiple retrievers is a powerful yet under-explored technique in modern retrieval and RAG systems. We introduce LLM-IRA, the first extension of the quantum-inspired interactive ranking aggregation framework to document reranking. By leveraging large language models (LLMs) solely for pairwise judgments on high-disagreement document pairs, our method learns fusion weights in a principled, interactive way. The final ranking is a simple, ultra-fast pointwise linear fusion of scores, no full pairwise matrix or expensive listwise prompting is required. Experiments on the BEIR benchmark and TREC Deep Learning tracks with an open-weight instruction-tuned judge (Llama-3.1-8B-Instruct) show that LLM-IRA matches or numerically exceeds strong static fusion baselines on 5 of 6 evaluated benchmarks. We report two weight-update variants: momentum blending and a full accumulated-history refit, which together reach statistical significance (Wilcoxon signed-rank, p<0.05) over the best unsupervised aggregator on 4 of 6 benchmarks (DL19 under momentum; DL20, DBpedia, and NFCorpus under accumulated refit, which is the stronger of the two configurations overall). On the benchmarks we profiled (DL19, DL20), it already clears the best unsupervised baseline within as few as 5 LLM calls per query, well before exhausting its typical ~25--30 call budget. LLM-IRA also achieves cost-effectiveness comparable to state-of-the-art zero-shot LLM rerankers at an order of magnitude fewer LLM calls, and requires no training data or model fine-tuning.",
+      "url": "http://arxiv.org/abs/2610.38683v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.38683v1",
+      "doi": "",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "cs.CL"
+      ],
+      "tags": [
+        "LLM 基模",
+        "排序聚合",
+        "LLM重排",
+        "RAG",
+        "量子启发",
+        "成对比较",
+        "免训练"
+      ],
+      "score": 74,
+      "summary": "该论文研究多检索器排序聚合问题，提出LLM-IRA，将量子启发的交互式排序聚合框架首次扩展到文档重排序。方法仅用大语言模型对高分歧文档对做成对判断，以交互方式学习融合权重，最终排序采用极快的逐点线性分数融合，无需完整成对矩阵或昂贵的列表式提示。在BEIR和TREC DL上，使用Llama-3.1-8B-Instruct作为评判模型，LLM-IRA在6个基准中的5个匹配或数值上超过强静态融合基线；两种权重更新变体（动量混合与全历史重拟合）在4个基准上相对最佳无监督聚合器达到统计显著（Wilcoxon符号秩检验，p<0.05）。在DL19、DL20上每查询仅5次LLM调用即超过最佳无监督基线，远低于约25-30次调用预算，且无需训练数据或微调。",
+      "one_line_takeaway": "LLM-IRA用少量高分歧成对LLM判断学习检索器融合权重，以线性融合实现低成本、免训练的排序聚合，并在多数基准上达到或超过强基线。",
+      "core_method": "将量子启发的交互式排序聚合框架扩展到文档重排序：仅对高分歧文档对调用LLM做成对偏好判断，交互式更新各检索器融合权重；最终排序为逐点线性分数融合，避免完整成对矩阵和列表式提示。报告动量混合与全历史重拟合两种权重更新变体。",
+      "innovation_points": [
+        "首次将量子启发的交互式排序聚合框架用于文档重排序，以成对LLM反馈学习融合权重",
+        "仅查询高分歧文档对，显著降低LLM调用成本，最终采用超快逐点线性融合",
+        "提出动量混合与全历史重拟合两种权重更新策略，后者整体更强",
+        "无需训练数据或模型微调，使用开放权重指令微调模型即可工作"
+      ],
+      "experiment_results": [
+        "在BEIR与TREC DL共6个基准上，LLM-IRA在5个基准匹配或数值上超过强静态融合基线",
+        "两种权重更新变体合计在4个基准上相对最佳无监督聚合器达到统计显著（Wilcoxon符号秩，p<0.05）：DL19为动量混合，DL20、DBpedia、NFCorpus为全历史重拟合",
+        "在DL19、DL20上每查询仅5次LLM调用即超过最佳无监督基线，典型预算约25-30次调用；成本效益与先进零样本LLM重排器相当，但LLM调用少一个数量级"
+      ],
+      "limitations": [
+        "实验仅使用Llama-3.1-8B-Instruct一个评判模型，未验证其他LLM规模或家族的影响",
+        "统计显著性仅在6个基准中的4个上成立，并非全部基准一致显著",
+        "高分歧对选择与权重更新依赖LLM成对判断质量，未报告判断噪声或偏差的鲁棒性分析"
+      ],
+      "practical_value": "为RAG与多检索器系统提供免训练、低调用成本的融合权重学习方案：线上只需少量LLM成对判断即可校准融合权重，最终排序为线性融合，延迟低、易部署，适合需要快速集成多个检索器且不愿微调模型的工程场景。",
+      "why_it_matters": "它把昂贵的LLM重排能力压缩为少量成对判断，并用线性融合保留线上效率，为多检索器排序聚合提供了可落地、成本可控的新路径，值得关注LLM重排与RAG系统融合策略的研究者和工程师阅读。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "f5364c7424d6b163",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.36958",
+      "title": "PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search",
+      "authors": [
+        "Xiaohan Ye",
+        "Zihan Gong",
+        "Jingqian Zhao",
+        "Lianyu Du",
+        "Yunmeng Shu",
+        "Xu Chen",
+        "Zesheng Zhou",
+        "Renchun You",
+        "Bocheng Chen",
+        "Jinsong Lan",
+        "Haihong Tang",
+        "Bo Zheng"
+      ],
+      "affiliations": [
+        "Alibaba Group (China)"
+      ],
+      "published": "2026-10-27",
+      "updated": "2026-10-27",
+      "abstract": "Generative retrieval models have been increasingly adopted in search and recommendation systems. However, industrial generative retrieval models are commonly specialized to a fixed online scenario: they learn from scenario-specific interactions, support a narrow set of query forms and retrieval objectives. We study how to remove these couplings and build a unified end-to-end multimodal search system for open-ended image--text queries, heterogeneous shopping intents, and online scenarios with different resource constraints. We present \\textbf{PailitaoMMSearch}, which directly generates product Semantic IDs from a raw query image and free-form instruction and scales along three dimensions. \\textbf{Data scaling} uses a reusable toolset that can be composed into intent- and lifecycle-specific workflows for cold-start synthesis, quality control, real-traffic refinement, and continuous data production. \\textbf{Intent scaling} progressively equips one model with e-commerce product knowledge, multiple retrieval relations, and adjustable reasoning budgets through continual pre-training (CPT), mixed-budget supervised fine-tuning (SFT), and unified reinforcement learning (RL). The RL stage combines intent-balanced optimization and Sample--Beam rollouts aligned with multi-candidate serving. \\textbf{Scenario scaling} exposes quality--cost operating points across model capacity and reasoning budget. The system is deployed in multimodal search applications on Taobao Pailitao. A controlled online A/B test reports statistically significant improvements, including item page views $\\textbf{+17.90\\%}$, transactions $\\textbf{+27.04\\%}$, and gross merchandise value $\\textbf{+8.94\\%}$.",
+      "url": "https://arxiv.org/abs/2610.36958",
+      "pdf_url": "https://arxiv.org/pdf/2610.36958",
+      "doi": "10.48550/arxiv.2610.36958",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Alibaba Qwen",
+      "venue": "",
+      "categories": [
+        "Information Retrieval and Search Behavior",
+        "Multimodal Machine Learning Applications",
+        "Advanced Image and Video Retrieval Techniques",
+        "cs.IR",
+        "cs.AI"
+      ],
+      "tags": [
+        "Alibaba Qwen",
+        "A/B 实验",
+        "企业论文",
+        "预训练",
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "Reasoning"
+      ],
+      "score": 250,
+      "summary": "PailitaoMMSearch2.0 针对工业生成式检索模型通常绑定单一在线场景、仅支持有限查询形式与检索目标的问题，提出统一端到端多模态搜索系统：直接从原始查询图像与自由指令生成商品 Semantic ID。系统沿数据、意图、场景三个维度扩展：数据侧用可复用工具集组合出冷启动合成、质量控制、真实流量精炼与持续生产流程；意图侧通过持续预训练注入电商商品知识，混合预算 SFT 赋予多检索关系，统一 RL 结合意图均衡优化与 Sample-Beam rollout 对齐多候选服务；场景侧提供模型容量与推理预算下的质量—成本操作点。系统已部署于淘宝拍立淘多模态搜索，受控线上 A/B 测试报告显著提升：商品页浏览 +17.90%、交易 +27.04%、GMV +8.94%。",
+      "one_line_takeaway": "PailitaoMMSearch2.0 用统一端到端多模态生成式检索替代场景专用模型，并在淘宝拍立淘线上 A/B 中取得显著交易与 GMV 提升。",
+      "core_method": "以原始查询图像和自由形式指令为输入，直接生成商品 Semantic ID；通过可组合数据工具集完成冷启动合成、质控、真实流量精炼与持续数据生产；以持续预训练注入电商知识，混合预算 SFT 学习多检索关系，统一 RL（意图均衡优化 + 与多候选服务对齐的 Sample-Beam rollout）调节推理预算；在模型容量与推理预算维度暴露质量—成本操作点。",
+      "innovation_points": [
+        "统一端到端多模态生成式检索：从原始图像与自由指令直接生成 Semantic ID，去除场景、查询形式与检索目标的耦合",
+        "数据扩展：可复用工具集组合为意图与生命周期特定工作流，覆盖冷启动合成、质控、真实流量精炼与持续生产",
+        "意图扩展：CPT + 混合预算 SFT + 统一 RL 渐进赋予单模型电商知识、多检索关系与可调推理预算",
+        "场景扩展：在模型容量与推理预算上提供质量—成本操作点，适配不同资源约束的在线场景"
+      ],
+      "experiment_results": [
+        "淘宝拍立淘多模态搜索线上受控 A/B 测试：商品页浏览 +17.90%",
+        "交易 +27.04%",
+        "GMV +8.94%；摘要称统计显著，未给出离线基准或消融数据"
+      ],
+      "limitations": [
+        "证据仅来自标题、摘要与学术元数据，缺少离线基准、消融实验与统计细节",
+        "线上 A/B 仅报告三项业务指标，未披露延迟、成本或质量—成本操作点的具体数值",
+        "统一 RL 与 Sample-Beam rollout 的细节及训练稳定性未在给定材料中展开"
+      ],
+      "practical_value": "面向电商多模态搜索的真实业务场景，提供可部署的统一生成式检索方案：以 Semantic ID 生成替代场景专用模型，用数据工具集支撑持续生产，用质量—成本操作点适配不同资源约束，并已在淘宝拍立淘线上验证业务收益。",
+      "why_it_matters": "它展示了生成式检索从场景专用走向统一端到端多模态系统的工业路径，并给出线上 A/B 的业务价值证据，对关注生成式推荐、语义 ID 与多模态搜索落地的研究者和工程师具有直接参考意义。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "3a75bf1a12061c19",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.36973",
+      "title": "KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation",
+      "authors": [
+        "Weiqin Yang",
+        "Yandong Wang",
+        "Yuan Gao",
+        "Hao Deng",
+        "Jinxin Hu",
+        "Jing Cao",
+        "Jiawei Chen"
+      ],
+      "affiliations": [
+        "Zhejiang University",
+        "Alibaba Group (China)"
+      ],
+      "published": "2026-10-27",
+      "updated": "2026-10-27",
+      "abstract": "Coordinating multiple recommendation objectives (e.g., click and conversion) is critical for real-world generative recommendation (GR). However, since a positive item in GR can be retrieved only when its tokens are successively selected at every decoding step, traditional item-wise methods lack fine-grained token-wise supervision to guide intermediate steps. Motivated by its success in foundation models, we consider introducing multi-objective on-policy distillation (MOPD) into GR to distill two single-objective teachers into a student at each token. Yet, we find that in vanilla MOPD, (i) teachers exhibit unequal distillation difficulty at each token (i.e., token-level imbalance), and (ii) the harder-to-distill teacher varies across tokens (i.e., cross-token inconsistency), leaving each objective poorly learned at certain steps and hindering positive item retrieval for both objectives, leading to suboptimal performance. To address this challenge, we propose KL-MOPD (KL-Weighted Multi-Objective On-Policy Distillation), a simple yet effective distillation method that allocates token-wise teacher weights proportional to the initial student-teacher token-wise KL divergences, thereby strengthening supervision for the harder-to-distill teacher at every decoding step. Despite its simplicity, we theoretically prove that KL-MOPD strictly outperforms vanilla MOPD in the additive joint recommendation objective under mild conditions. Moreover, KL-MOPD is plug-and-play and computationally efficient, requiring only a one-time pre-training weight calibration with negligible training overhead. Extensive experiments on three public benchmarks, a billion-scale industrial dataset, and online A/B tests on our e-commerce advertising platform demonstrate that KL-MOPD significantly improves both individual and joint recommendation performance. The anonymous code is provided for peer review.",
+      "url": "https://arxiv.org/abs/2610.36973",
+      "pdf_url": "https://arxiv.org/pdf/2610.36973",
+      "doi": "10.48550/arxiv.2610.36973",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Alibaba Qwen",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research",
+        "cs.IR"
+      ],
+      "tags": [
+        "Alibaba Qwen",
+        "A/B 实验",
+        "企业论文",
+        "预训练",
+        "GenRec",
+        "生成式推荐",
+        "多目标优化",
+        "在线策略蒸馏"
+      ],
+      "score": 188,
+      "summary": "该论文研究生成式推荐（GR）中多目标（点击与转化）协调问题。GR按token逐级解码，传统item级方法缺乏token级细粒度监督。作者将基础模型中的多目标在线策略蒸馏（MOPD）引入GR，用两个单目标教师逐token蒸馏学生，但发现原始MOPD存在token级不平衡（各token上教师蒸馏难度不同）和跨token不一致（难蒸馏的教师随token变化），导致各目标在部分解码步学习不足、正例检索受损。为此提出KL-MOPD，按初始学生-教师token级KL散度分配教师权重，在每个解码步加强对更难蒸馏教师的监督。理论证明在温和条件下KL-MOPD在加性联合推荐目标上严格优于原始MOPD；方法即插即用，仅需一次性预训练权重校准，训练开销可忽略。在三个公开基准、十亿级工业数据集及电商广告平台在线A/B测试上，KL-MOPD显著提升单目标与联合推荐性能。",
+      "one_line_takeaway": "KL-MOPD按token级KL散度动态加权多目标教师，以即插即用的在线策略蒸馏解决生成式推荐中多目标token级监督不平衡问题，并在工业在线验证有效。",
+      "core_method": "将多目标在线策略蒸馏引入生成式推荐：两个单目标教师逐token指导学生解码；以初始学生-教师token级KL散度为权重分配各教师监督强度，强化每步更难蒸馏的教师；仅需一次性预训练权重校准，训练开销可忽略。",
+      "innovation_points": [
+        "识别原始MOPD在GR中的token级不平衡与跨token不一致两类问题，并给出token级教师加权方案",
+        "提出KL-MOPD，按初始token级KL散度比例分配教师权重，即插即用且计算高效",
+        "理论证明在温和条件下KL-MOPD在加性联合推荐目标上严格优于原始MOPD",
+        "在公开基准、十亿级工业数据和电商广告在线A/B测试中验证单目标与联合目标均提升"
+      ],
+      "experiment_results": [
+        "三个公开基准上单目标与联合推荐性能显著提升",
+        "十亿级工业数据集上验证有效性",
+        "电商广告平台在线A/B测试显示显著提升；具体数值未在给定材料中提供"
+      ],
+      "limitations": [
+        "方法依赖两个单目标教师，教师数量扩展与多目标场景未在材料中讨论",
+        "理论保证限于加性联合推荐目标及温和条件，更一般目标形式未覆盖",
+        "在线验证限于电商广告场景，其他推荐场景泛化性待验证"
+      ],
+      "practical_value": "面向真实电商广告推荐，在token级协调点击与转化等多目标，即插即用、训练开销可忽略，并已在十亿级工业数据和在线A/B测试中验证，具备直接落地价值。",
+      "why_it_matters": "它把基础模型中的在线策略蒸馏引入生成式推荐，揭示并解决多目标token级监督不平衡问题，兼具理论保证与工业在线验证，对多目标GR落地有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "8a34b31400300c74",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.36890",
+      "title": "Latent Residual Reasoning for Ranking in Generative Recommendation",
+      "authors": [
+        "Haihan Shi",
+        "Ruidong Han",
+        "Wenjie Wang",
+        "Shangyu Chen",
+        "Sunhao Dai",
+        "Yongqi Li",
+        "Yangyang Li",
+        "Fei Jiang",
+        "Wei Lin",
+        "Fuli Feng",
+        "Xiangnan He"
+      ],
+      "affiliations": [
+        "University of Science and Technology of China",
+        "Meituan (China)",
+        "Renmin University of China",
+        "Hong Kong Polytechnic University"
+      ],
+      "published": "2026-10-27T09:25:53Z",
+      "updated": "2026-10-27T09:25:53Z",
+      "abstract": "Generative recommendation (GR) models for ranking typically adopt a fast-thinking direct prediction paradigm with strong practical efficiency. However, ranking requires fine-grained scoring across multiple candidate items, while existing GR models still mainly rely on one-shot prediction. This raises the question whether additional inference-time computation can further improve ranking quality. Recently, inspired by Chain-of-Thought (CoT) reasoning in large language models (LLMs), some work has begun to introduce reasoning into recommendation systems. Some of these methods rely on LLM reasoning frameworks to perform explicit reasoning in textual space, but such designs are not suitable for more widely deployed non-textual recommendation models. A more relevant direction is to introduce latent reasoning into ID-based recommendation models. Although recent work has extended latent reasoning to industrial ranking, how successive reasoning steps should improve fine-grained candidate scores remains less explored. To address this problem, we propose Refiner, a latent residual reasoning framework with parameter-efficient fine-tuning for generative ranking. Our approach introduces three key components: (1) a residual reasoning mechanism that progressively refines ranking scores through cumulative additive corrections, (2) history queries that provide condensed user behavior representations to enhance candidate-specific reasoning, and (3) a parameter-efficient fine-tuning strategy that leverages LoRA modules to adapt pre-trained models for latent reasoning. Extensive experiments on two public benchmarks, an offline industrial dataset, and an online A/B test demonstrate that Refiner consistently improves over direct prediction, validating its effectiveness and practical utility.",
+      "url": "http://arxiv.org/abs/2610.36890v1",
+      "pdf_url": "https://arxiv.org/pdf/2610.36890v1",
+      "doi": "10.1145/3799682.3841103",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
+      ],
+      "tags": [
+        "A/B 实验",
+        "企业论文",
+        "GenRec",
+        "Reasoning",
+        "推理系统",
+        "生成式推荐",
+        "排序",
+        "潜在推理"
+      ],
+      "score": 184,
+      "summary": "该论文关注生成式推荐（GR）排序模型普遍采用的一次性直接预测范式：排序需对多候选细粒度打分，但现有GR模型缺少推理时额外计算。作者提出Refiner——面向生成式排序的潜在残差推理框架，结合参数高效微调。方法包含三部分：残差推理机制通过累积加性修正逐步精化排序分数；历史查询提供压缩的用户行为表示以增强候选特定推理；基于LoRA的参数高效微调使预训练模型适配潜在推理。实验覆盖两个公开基准、一个离线工业数据集和一次在线A/B测试，结果显示Refiner相对直接预测取得一致提升，验证了有效性与实用价值。",
+      "one_line_takeaway": "Refiner用潜在残差推理与LoRA微调，让生成式排序模型通过多步累积修正精化候选分数，并在公开基准、离线工业数据和在线A/B中稳定优于直接预测。",
+      "core_method": "在基于ID的生成式推荐排序模型上引入潜在空间残差推理：以预训练模型为基座，用LoRA参数高效微调适配推理；每一步推理产生加性修正并累积到候选排序分数上，实现渐进精化；同时引入历史查询，将用户行为压缩为表示，为候选特定推理提供上下文。",
+      "innovation_points": [
+        "提出残差推理机制，以累积加性修正逐步精化排序分数，而非一次性预测",
+        "设计历史查询，用压缩的用户行为表示增强候选特定推理",
+        "采用LoRA参数高效微调，使预训练生成式推荐模型适配潜在推理，避免依赖文本空间显式推理"
+      ],
+      "experiment_results": [
+        "在两个公开基准、一个离线工业数据集和在线A/B测试上，Refiner相对直接预测取得一致提升",
+        "摘要未给出具体指标数值与提升幅度，无法报告定量结果"
+      ],
+      "limitations": [
+        "摘要未披露推理步数、延迟与计算开销等工程约束的定量分析",
+        "方法依赖预训练生成式推荐基座与LoRA适配，跨模型与跨场景泛化性未在摘要中说明",
+        "在线验证仅提及A/B测试，具体业务场景与线上收益细节未展开"
+      ],
+      "practical_value": "面向已部署的基于ID的生成式推荐排序系统，提供不依赖文本LLM推理框架的潜在推理方案；LoRA微调降低适配成本，残差修正可直接作用于候选打分，具备在线排序场景的落地潜力。",
+      "why_it_matters": "它回应了生成式推荐排序中“推理时额外计算能否提升细粒度打分”的关键问题，给出可工程化的潜在残差推理路径，并通过离线工业数据与在线A/B验证，对推荐系统与LLM推理交叉方向有参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "d8d941635637ccec",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.37973",
+      "title": "Merge and Branch: Efficient Tree-Structured Supervised Fine-Tuning of LLMs for Recommendation",
+      "authors": [
+        "Yunqin Zhu",
+        "Yao Xie"
+      ],
+      "affiliations": [
+        "Georgia Institute of Technology"
+      ],
+      "published": "2026-10-27",
+      "updated": "2026-10-27",
+      "abstract": "LLM-based generative recommendation reads long, text-rich interaction histories but generates only short semantic identifiers (SIDs). This asymmetry makes supervised fine-tuning inefficient: encoding the history is expensive, yet each history usually provides supervision for only one target. We present Merge and Branch (M&B) to reduce input cost and learn more from each encoded history. Merge compresses each historical item's SID and text into a small number of learned tokens. Branch uses the compressed history to predict multiple target SIDs. To share history computation while keeping these targets independent, M&B organizes each example as a shallow, wide tree. We develop tree FlashAttention to execute this layout efficiently, processing the shared history once and propagating gradients from every branch for end-to-end training. A tree-structured key/value cache extends history sharing to constrained decoding. Experiments on public benchmarks show that M&B outperforms strong recommendation baselines while substantially improving training and decoding efficiency.",
+      "url": "https://arxiv.org/abs/2610.37973",
+      "pdf_url": "https://arxiv.org/pdf/2610.37973",
+      "doi": "10.48550/arxiv.2610.37973",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Topic Modeling",
+        "cs.IR",
+        "cs.AI"
+      ],
+      "tags": [
+        "后训练",
+        "GenRec",
+        "Semantic ID",
+        "LLM 基模",
+        "生成式推荐",
+        "监督微调",
+        "语义ID",
+        "树结构注意力"
+      ],
+      "score": 138,
+      "summary": "该论文针对LLM生成式推荐中监督微调的低效问题：模型需读取长文本交互历史，却只生成短语义ID（SID），编码成本高而每条历史仅提供一个监督目标。作者提出Merge and Branch（M&B）：Merge将每个历史条目的SID与文本压缩为少量可学习token；Branch利用压缩历史同时预测多个目标SID。为共享历史计算并保持各目标独立，将每个样本组织为浅而宽的树结构，并设计tree FlashAttention高效执行该布局，使共享历史只处理一次、各分支梯度端到端回传；树结构KV cache将历史共享扩展到约束解码。公开基准实验显示M&B优于强推荐基线，并显著提升训练与解码效率。",
+      "one_line_takeaway": "M&B用可学习token压缩历史并以树结构分支多目标监督，在共享历史计算的同时提升生成式推荐的训练与解码效率。",
+      "core_method": "将历史条目的SID与文本经Merge压缩为少量可学习token；以压缩历史为共享前缀，Branch出多个目标SID预测分支，组成浅宽树；配套tree FlashAttention与树结构KV cache，实现共享历史单次编码、多分支梯度回传及约束解码下的历史复用。",
+      "innovation_points": [
+        "Merge将每条历史条目的SID与文本压缩为少量可学习token，降低长历史输入成本",
+        "Branch以树结构组织多目标SID预测，使一条历史提供多个监督信号且分支间保持独立",
+        "设计tree FlashAttention与树结构KV cache，将历史共享从训练扩展到约束解码"
+      ],
+      "experiment_results": [
+        "公开基准上M&B优于强推荐基线",
+        "训练与解码效率显著提升",
+        "摘要未给出具体数值指标，需查阅全文实验表格"
+      ],
+      "limitations": [
+        "证据仅来自标题、摘要与元数据，缺少具体数据集、基线配置与数值结果",
+        "压缩token数量与分支宽度等超参对效果与效率的影响未在摘要中说明",
+        "树结构注意力与KV cache的实现复杂度及对现有推理框架的适配成本未量化"
+      ],
+      "practical_value": "面向企业生成式推荐场景，直接缓解长交互历史编码昂贵、单目标监督信号稀疏的工程痛点；树结构KV cache支持约束解码下的历史复用，有利于线上低延迟SID生成，对训练吞吐与推理成本均有实际收益。",
+      "why_it_matters": "该工作把生成式推荐中历史编码与短SID生成的不对称性转化为结构化的计算共享问题，提出可落地的树形注意力与缓存机制，为LLM推荐微调的效率优化提供了可复用的工程思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "f490f660ceafea61",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.36389",
+      "title": "MAREval: A Multi-Agent Framework for Evaluating Natural Language Recommendation Explanations",
+      "authors": [
+        "Reza Yousefi Maragheh",
+        "Jayesh Uddhav Kudase",
+        "Aysenur Inan",
+        "Ramin Giahi",
+        "Kai Zhao",
+        "Parth Parikh",
+        "Jianpeng Xu",
+        "Jason Cho",
+        "Evren Körpeoğlu",
+        "Sushant Kumar"
+      ],
+      "affiliations": [],
+      "published": "2026-10-26",
+      "updated": "2026-10-26",
+      "abstract": "Evaluating natural language explanations in recommender systems is essential for fostering user trust, transparency, and engagement. However, existing evaluation approaches like human evaluations, while accurate, are resource-intensive and impractical at the scale required by modern recommendation platforms. Also, automated methods using single-agent LLMs suffer from prompt sensitivity and inconsistent outputs. To address these challenges, we propose MAREval, a structured multi-agent framework for evaluating recommendation explanations using large language models. MAREval orchestrates (i) a planner agent that uses a novel Chain of Debate (CoD) prompting strategy to coordinate agent roles and enforce logically consistent evaluation plans; (ii) a moderator agent that regulates discussions by mitigating prompt drift; and (iii) an arbitrator agent that aggregates outputs from multiple evaluation rounds and (iv) a Monte Carlo sampling method, improving robustness and alignment with human judgment. We conduct comprehensive evaluations on both public (TopicalChat) and proprietary recommendation datasets, demonstrating that MAREval outperforms state-of-the-art baselines. Comprehensive experiments on a public benchmark and a proprietary e-commerce dataset show that MAREval improves alignment with human judgments over strong singleand multi-agent baselines. Stability analyses indicate substantially lower variability across repeated trials. In a large human-annotation gate, MAREval meets production quality thresholds where prior evaluators fall short, and online A/B testing demonstrates statistically significant improvements in engagement and revenue metrics. These results establish MAREval as a scalable and reliable solution for human-aligned evaluation of recommendation explanations in real-world systems",
+      "url": "https://arxiv.org/abs/2610.36389",
+      "pdf_url": "https://arxiv.org/pdf/2610.36389",
+      "doi": "10.48550/arxiv.2610.36389",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "",
+      "venue": "",
+      "categories": [
+        "Recommender Systems and Techniques",
+        "Explainable Artificial Intelligence (XAI)",
+        "Information Retrieval and Search Behavior"
+      ],
+      "tags": [
+        "A/B 实验",
+        "GenRec",
+        "推荐解释评估",
+        "多智能体LLM",
+        "Chain of Debate",
+        "人类对齐",
+        "线上A/B测试",
+        "生成式推荐"
+      ],
+      "score": 108,
+      "summary": "MAREval 针对推荐系统自然语言解释评估中人工评估成本高、单智能体 LLM 评估对提示敏感且输出不稳定的问题，提出结构化多智能体评估框架。该框架由规划智能体（采用 Chain of Debate 提示协调角色并保证评估计划逻辑一致）、主持人智能体（抑制提示漂移）、仲裁智能体（聚合多轮评估输出）组成，并结合蒙特卡洛采样提升鲁棒性与人类判断对齐度。在公开 TopicalChat 与专有电商推荐数据集上，MAREval 在人类判断对齐上优于强单/多智能体基线，重复试验变异性显著更低；大规模人工标注门控达到生产质量阈值，线上 A/B 测试在参与度与收入指标上取得统计显著提升。",
+      "one_line_takeaway": "MAREval 用规划-主持-仲裁多智能体加蒙特卡洛采样，把推荐解释的 LLM 自动评估做到可上线、与人类判断对齐且线上指标显著提升。",
+      "core_method": "多智能体框架：规划智能体以 Chain of Debate 提示协调评估角色并生成逻辑一致的评估计划；主持人智能体调控讨论、缓解提示漂移；仲裁智能体聚合多轮评估输出；辅以蒙特卡洛采样提升稳健性并与人类判断对齐。",
+      "innovation_points": [
+        "提出 Chain of Debate 提示策略，由规划智能体协调多角色评估并保证计划逻辑一致",
+        "引入主持人智能体抑制多轮讨论中的提示漂移，仲裁智能体聚合多轮输出",
+        "结合蒙特卡洛采样降低重复试验方差，提升与人类判断的对齐稳定性",
+        "在公开与专有电商数据上完成从离线对齐、人工标注门控到线上 A/B 的完整验证"
+      ],
+      "experiment_results": [
+        "在公开 TopicalChat 与专有电商数据集上，人类判断对齐优于强单智能体与多智能体基线",
+        "稳定性分析显示重复试验间变异性显著低于基线",
+        "大规模人工标注门控达到生产质量阈值，线上 A/B 测试在参与度与收入指标上统计显著提升"
+      ],
+      "limitations": [
+        "依赖 LLM 作为评估器，评估质量仍受底层模型能力与提示设计影响",
+        "线上收益来自特定电商场景的 A/B 测试，跨平台与跨品类泛化性未在材料中验证",
+        "多智能体多轮讨论与蒙特卡洛采样带来额外推理成本，材料未给出成本量化"
+      ],
+      "practical_value": "为推荐平台提供可规模化、低方差且与人类判断对齐的解释评估方案，可替代高成本人工评估并嵌入生产门控流程；线上 A/B 显示对参与度与收入有正向价值，适合作为推荐解释上线前的自动化质量关卡。",
+      "why_it_matters": "它把 LLM 评估从单智能体的不稳定打分推进到可上线的多智能体评估系统，并用人工门控与线上 A/B 双重证据证明其生产可用性，对生成式推荐解释的质量保障具有直接参考价值。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "0b59941a917a7a2b",
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.32141",
+      "title": "Beyond Data Schedule: Fast LLM Pretraining on Data Mixtures by Loss-Reweighting",
+      "authors": [
+        "Jiazheng Li",
+        "Huaqing Zhang",
+        "Jing Xu",
+        "Tianle Cai",
+        "Jingzhao Zhang"
+      ],
+      "affiliations": [
+        "ByteDance (China)",
+        "Tsinghua University"
+      ],
+      "published": "2026-10-23",
+      "updated": "2026-10-23",
+      "abstract": "Large language models often acquire specialized capabilities through successive pretraining stages, but these gains can come at the cost of forgetting earlier knowledge. In this work, we investigate whether such trade-offs can be improved by changing how strongly each domain contributes to learning while keeping its data exposure fixed. We find that, in controlled knowledge--mathematics experiments, loss reweighting produces a single checkpoint that surpasses the best knowledge and reasoning scores attained along either stage trajectory. This reveals an independent control that data-mixture ratios alone do not capture. Building on this finding, we propose LARE (Loss-Adaptive Reweighting under fixed Exposure), which automatically adjusts domain weights from running loss statistics. Motivated by a theoretical analysis of gradient noise, its normalized inverse-square-root rule balances relative loss scales without changing the sampled mixture or requiring additional runs to search for weights. Across knowledge, mathematics, and code, \\Method{} improves all five evaluated benchmarks for a 1.5B model trained on 240B tokens, averaging +7.84 pp over a matched direct mixture, including gains of +17.06 pp on GSM8K and +9.00 pp on MATH. These findings demonstrate that adjusting domain loss scales can improve joint capabilities without additional domain exposure.",
+      "url": "https://arxiv.org/abs/2610.32141",
+      "pdf_url": "https://arxiv.org/pdf/2610.32141",
+      "doi": "10.48550/arxiv.2610.32141",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "ByteDance Seed",
+      "venue": "",
+      "categories": [
+        "Topic Modeling",
+        "Domain Adaptation and Few-Shot Learning",
+        "Natural Language Processing Techniques"
+      ],
+      "tags": [
+        "ByteDance Seed",
+        "企业论文",
+        "预训练",
+        "Reasoning",
+        "LLM 基模",
+        "LLM预训练",
+        "数据配比",
+        "损失重加权"
+      ],
+      "score": 99,
+      "summary": "该论文研究LLM预训练中多阶段数据配比带来的知识遗忘与能力权衡问题。作者在知识-数学受控实验中发现，在固定各领域数据曝光量的前提下，仅调整各领域损失权重即可获得单一检查点，其知识与推理得分同时超过任一阶段轨迹上的最佳值，说明损失重加权是数据配比之外的一种独立控制手段。基于梯度噪声的理论分析，提出LARE方法，依据运行中的损失统计自动调整领域权重，采用归一化反平方根规则平衡各领域相对损失尺度，无需改变采样配比或额外搜索权重。在1.5B模型、240B token训练下，LARE在知识、数学、代码五个基准上平均较匹配的直接混合提升7.84个百分点，其中GSM8K提升17.06个百分点、MATH提升9.00个百分点。",
+      "one_line_takeaway": "固定数据曝光下，按损失尺度自动重加权领域损失即可同时提升知识与推理能力，无需增加数据或搜索配比。",
+      "core_method": "提出LARE（Loss-Adaptive Reweighting under fixed Exposure）：在保持各领域采样配比与总曝光量不变的前提下，利用训练过程中各领域的运行损失统计，按归一化反平方根规则自动调整领域损失权重，以平衡相对损失尺度；该规则由梯度噪声理论分析启发，无需额外训练运行来搜索权重。",
+      "innovation_points": [
+        "揭示损失重加权是独立于数据配比比例的控制维度，可在固定曝光下改善多领域联合能力",
+        "提出基于运行损失统计的归一化反平方根自动重加权规则，免去权重搜索成本",
+        "从梯度噪声角度给出理论分析，解释为何平衡相对损失尺度有效",
+        "在知识、数学、代码多领域统一验证，覆盖五个基准"
+      ],
+      "experiment_results": [
+        "1.5B模型、240B token训练下，五个评测基准平均较匹配直接混合提升+7.84个百分点",
+        "GSM8K提升+17.06个百分点，MATH提升+9.00个百分点",
+        "受控知识-数学实验中，单一检查点同时超过两阶段轨迹各自的最佳知识与推理得分"
+      ],
+      "limitations": [
+        "实验规模限于1.5B模型与240B token，未验证更大模型与更长训练下的表现",
+        "理论分析基于梯度噪声视角，可能未覆盖所有数据分布与任务类型",
+        "仅在知识、数学、代码三类领域验证，领域覆盖有限"
+      ],
+      "practical_value": "为企业LLM预训练提供一种低成本的多领域能力平衡手段：无需改变数据采样配比、无需额外数据曝光或权重搜索，仅通过训练中自动调整领域损失权重即可提升知识与推理基准，适合在固定数据预算下优化基座模型联合能力。",
+      "why_it_matters": "该工作指出数据配比之外存在独立的损失尺度控制维度，并给出无需额外搜索的自动重加权方法，为多阶段/多领域预训练中的知识遗忘与能力权衡提供了新的工程可操作路径。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "314a6e107a7ddd00",
+      "is_daily_pick": false
+    },
+    {
       "id": "arxiv:2610.30675",
       "title": "OneLatent: Latent Reasoning for Efficient Foundation Recommendation Models",
       "authors": [
@@ -68,7 +1614,9 @@
         "Peng Jiang",
         "Wenwu Ou"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Kuaishou (China)"
+      ],
       "published": "2026-10-22",
       "updated": "2026-10-22",
       "abstract": "Large language models (LLMs) have demonstrated strong reasoning capabilities, motivating their use as the backbone of foundation recommendation models (FRMs). Existing methods enhance recommendations through explicit Chain-of-Thought (CoT) reasoning under a Think-then-Answer paradigm. However, explicit CoT incurs substantial inference overhead by generating lengthy reasoning traces and relies on manually designed templates that struggle to capture diverse, dynamic user interests. We propose OneLatent, an efficient latent reasoning framework that compresses explicit reasoning traces into several learnable latent tokens, enabling Latent-Reason-then-Answer inference without generating verbose traces. OneLatent first introduces Multi-View Adaptive CoT (MV-ACoT), which creates diverse, high-quality teacher-generated supervision by exploring user interests from multiple perspectives and automatically adapting reasoning complexity to each instance. Building on pretrained FRMs, it then uses a three-stage latent-token alignment paradigm to progressively internalize CoT traces into learnable latent tokens. Finally, a multistage curriculum-based post-training strategy activates latent-token reasoning for downstream recommendation tasks. Experiments on an industrial-scale Kuaishou dataset and the public Kuaishou LLM-Rec benchmark show that OneLatent consistently outperforms explicit CoT-based methods and traditional baselines. Compared with the Think and No-Think variants of FRMs, OneLatent improves SID@64 by 17.44% and 9.33%, respectively, while achieving over 17x higher online inference throughput. We further develop a production serving system for scalable, real-time FRM inference. An online A/B test in Kuaishou's local-services advertising scenario shows that deploying OneLatent with this system yields an estimated 9.6% revenue lift over strong online baselines, including OneRec and OneReason.",
@@ -86,13 +1634,14 @@
       ],
       "tags": [
         "A/B 实验",
+        "企业论文",
         "预训练",
         "后训练",
         "Reasoning",
         "推理系统",
         "GenRec"
       ],
-      "score": 158,
+      "score": 218,
       "summary": "OneLatent针对基础推荐模型（FRM）中显式思维链（CoT）推理带来的推理开销大、依赖人工模板且难以刻画动态用户兴趣的问题，提出一种高效隐式推理框架。该方法首先构建多视角自适应CoT（MV-ACoT），从多角度生成多样化且推理复杂度自适应的教师监督信号；随后在预训练FRM上采用三阶段隐式token对齐范式，将显式CoT轨迹逐步内化为可学习的隐式token；最后通过多阶段课程式后训练激活隐式token推理能力，实现“隐式推理后作答”的推理模式。在快手工业级数据集和公开LLM-Rec基准上，OneLatent一致优于显式CoT方法与传统基线，相比Think与No-Think变体SID@64分别提升17.44%和9.33%，线上推理吞吐提升超过17倍；快手本地服务广告场景的在线A/B测试显示相对OneRec、OneReason等强基线带来约9.6%的收入提升。",
       "one_line_takeaway": "OneLatent用可学习隐式token替代冗长显式CoT，在提升推荐效果的同时将线上推理吞吐提高17倍以上，并已在快手广告场景验证收入增益。",
       "core_method": "提出多视角自适应CoT（MV-ACoT）生成多样化、复杂度自适应的教师推理监督；在预训练FRM上设计三阶段隐式token对齐范式，将显式CoT轨迹逐步压缩并内化为可学习隐式token；再以多阶段课程式后训练激活隐式token推理能力，实现Latent-Reason-then-Answer推理，并配套面向实时FRM推理的生产级服务系统。",
@@ -117,7 +1666,79 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "2b159ea1ce9f9977",
-      "is_daily_pick": true
+      "is_daily_pick": false
+    },
+    {
+      "id": "arxiv:2610.30917",
+      "title": "Harnessing Language Models as Optimization Modeling Agents",
+      "authors": [
+        "Yunxiang Luo",
+        "Xin Xu",
+        "Tianhao Chen",
+        "Zhixi Xiong",
+        "Peiqi Jiang",
+        "Fan Zhang",
+        "Wei Shao",
+        "Xuejian Gao",
+        "Yuwei Fan",
+        "Can Yang"
+      ],
+      "affiliations": [
+        "Hong Kong University of Science and Technology",
+        "Huawei Technologies (China)"
+      ],
+      "published": "2026-10-22",
+      "updated": "2026-10-22",
+      "abstract": "Large language models (LLMs) can translate natural-language optimization problems into solver programs, but reliably producing correct formulations and implementations remains challenging. Existing approaches improve optimization modeling through agentic workflows or task-specific post-training. This raises a practical question: can a lightweight harness using a single model role achieve competitive performance without additional training? We introduce OPTICYCLE and OPTISTATE, two lightweight inference harnesses for optimization modeling, and evaluate them on nine benchmarks comprising 2,634 problems using 11 Qwen variants spanning 0.6B-27B parameters. Our results show that execution-guided revision consistently improves macro accuracy over direct generation for all evaluated models, with gains of up to 49.46 percentage points. Despite their simplicity, both harnesses outperform six adapted agentic workflows in same-model comparisons and four evaluated post-trained optimization models at comparable model sizes, without additional training. Explicit formulation state provides further but model-dependent improvements, suggesting that additional structure is not universally beneficial.",
+      "url": "https://arxiv.org/abs/2610.30917",
+      "pdf_url": "https://arxiv.org/pdf/2610.30917",
+      "doi": "10.48550/arxiv.2610.30917",
+      "source": "arXiv",
+      "content_type": "paper",
+      "company": "Huawei Pangu",
+      "venue": "",
+      "categories": [
+        "Topic Modeling",
+        "Natural Language Processing Techniques",
+        "Artificial Intelligence Applications"
+      ],
+      "tags": [
+        "Huawei Pangu",
+        "企业论文",
+        "后训练",
+        "推理系统",
+        "LLM 基模",
+        "优化建模",
+        "LLM推理harness",
+        "执行引导修正"
+      ],
+      "score": 98,
+      "summary": "该论文研究大语言模型将自然语言优化问题转化为求解器程序时，如何在不额外训练的情况下可靠生成正确建模与实现。作者提出OPTICYCLE与OPTISTATE两种轻量推理harness，均只使用单一模型角色：前者以执行反馈驱动迭代修正，后者显式维护建模状态。在九个基准、2634个问题、11个Qwen变体（0.6B-27B）上评估，执行引导修正对所有模型均提升宏平均准确率，最高增益49.46个百分点；两种harness在同模型对比中优于六种适配的agentic工作流，并在可比规模下优于四个已后训练的优化建模模型。显式建模状态带来额外但依赖模型的提升，说明额外结构并非普遍有益。",
+      "one_line_takeaway": "轻量单角色推理harness配合执行引导修正，无需额外训练即可在优化建模任务上超越复杂agentic工作流与后训练模型。",
+      "core_method": "提出OPTICYCLE和OPTISTATE两种轻量推理harness，均使用单一模型角色完成优化建模。OPTICYCLE通过执行求解器程序获得反馈并迭代修正；OPTISTATE额外维护显式建模状态以辅助生成。两者均不进行额外训练，仅依赖推理阶段编排。",
+      "innovation_points": [
+        "以单模型角色替代多角色agentic工作流，降低推理harness复杂度",
+        "执行引导的迭代修正机制，将求解器执行结果作为反馈信号",
+        "显式建模状态作为可选结构，并系统评估其收益的模型依赖性",
+        "在统一模型规模下与多种agentic工作流及后训练模型进行受控对比"
+      ],
+      "experiment_results": [
+        "在九个基准、2634个问题上，执行引导修正对所有11个Qwen变体均提升宏平均准确率，最高增益49.46个百分点",
+        "两种harness在同模型对比中优于六种适配的agentic工作流",
+        "在可比模型规模下优于四个已后训练的优化建模模型",
+        "显式建模状态带来额外但依赖模型的提升，并非普遍有益"
+      ],
+      "limitations": [
+        "实验仅覆盖Qwen系列模型，未验证其他模型家族",
+        "显式建模状态的收益依赖模型，缺乏通用性结论",
+        "未报告推理开销、延迟或token成本等工程指标"
+      ],
+      "practical_value": "为优化建模场景提供无需额外训练、部署轻量的推理方案，降低对多角色agentic编排和后训练数据的依赖，便于在求解器集成环境中快速落地。",
+      "why_it_matters": "该工作表明，在优化建模任务中，推理阶段的执行反馈与轻量harness设计可能比复杂agentic工作流或任务后训练更具性价比，为LLM作为优化建模代理的工程化提供了简洁基线。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "9497ec8f2216cf33",
+      "is_daily_pick": false
     },
     {
       "id": "arxiv:2610.27898",
@@ -134,7 +1755,6 @@
       "affiliations": [
         "University of Electronic Science and Technology of China",
         "University of Science and Technology of China",
-        "Zeus Entertainment (China)",
         "Southwest Jiaotong University"
       ],
       "published": "2026-10-20",
@@ -159,7 +1779,7 @@
         "Semantic ID",
         "推理系统"
       ],
-      "score": 135,
+      "score": 136,
       "summary": "SPAR针对基于语义ID（SID）的生成式推荐中逐步解码个性化不足与候选分支历史交互负载不均衡的问题，提出联合优化逐步个性化与SID构造的生成式推荐框架。其PATH Decoder从压缩的长期用户记忆中检索与当前前缀相关的证据，并结合近期行为、用户画像与事件上下文，引导每个token级决策；RQ-PIB模块在保持语义结构的前提下，平衡同一父前缀下兄弟分支的历史交互负载，缓解流行路径偏好与不可逆分支选择错误。在优酷大规模生产数据上，SPAR相对最强基线平均HitRate相对提升2.66%，目标前缀保留率提升5.79个百分点，流量加权最大子分支占比在SID各层级降低32.84%。7天线上A/B测试中，SPAR承载优酷10%生产流量，人均观看时长提升3.95%，播放转化率提升3.38%，验证了层次解码可靠性、SID分支均衡性与用户参与度的工业价值。",
       "one_line_takeaway": "SPAR通过前缀感知的逐步个性化解码与兄弟分支负载均衡的语义ID构造，在优酷线上显著提升生成式推荐效果与用户参与度。",
       "core_method": "SPAR包含两个核心组件：PATH Decoder在每一步token解码时，从压缩的长期用户记忆中检索与当前前缀相关的证据，并与近期行为、用户画像和事件上下文融合，实现逐步个性化；RQ-PIB模块在语义ID的每个父前缀下，对兄弟分支的历史交互负载进行平衡，同时保持语义结构，以缓解流行路径偏好和不可逆分支选择错误。",
@@ -197,11 +1817,13 @@
         "Zhiting Zhao",
         "Yi Cao",
         "Jilei Fu",
-        "Miao Yan",
-        "Tianying Liu",
         "Heng Chang",
-        "Bowen Du",
-        "Dinglun Cao"
+        "Tianying Liu",
+        "Miao Yan",
+        "Zhende Zhuang",
+        "Jiarui Wang",
+        "Deliang Liu",
+        "Bowen Du"
       ],
       "affiliations": [
         "Beihang University",
@@ -227,7 +1849,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 105,
+      "score": 106,
       "summary": "EASformer针对工业生成式推荐中用户行为序列与非序列特征联合建模时的语义不对称问题：历史表示混合环境上下文与已观测动作语义，候选侧非序列表示不含观测动作但含更丰富补充上下文，直接做query-key点积会比对不同语义对象，限制跨token交互。作者提出环境-动作-状态解耦架构，构建历史与非序列token共享的显式对齐上下文环境空间，将用户动作从历史token中解耦，并由候选特定上下文构成非序列token；在该对齐空间上实现互补的历史动作检索与状态条件动作预测，并支持掩码历史动作、复用候选预测通路的Cloze式自监督目标。真实工业应用市场离线基准AUC为0.89411，较线上基线相对提升0.88%；两个真实排序场景在线A/B的eCPM相对提升1.26%和3.94%。",
       "one_line_takeaway": "EASformer通过环境-动作-状态显式解耦与共享环境空间对齐，修复了生成式推荐中序列与非序列token的语义错配，并在真实工业场景取得离线与在线双重收益。",
       "core_method": "将历史行为序列与非序列特征token化后，构建历史token与候选侧非序列token共享的显式对齐上下文环境空间；把用户动作语义从历史token中剥离，候选特定上下文形成非序列token；在统一对齐空间上分别执行历史动作检索与状态条件动作预测，并以掩码历史动作、复用候选预测通路的Cloze式自监督目标训练Transformer骨干。",
@@ -491,7 +2113,7 @@
         "GenRec",
         "推理系统"
       ],
-      "score": 125,
+      "score": 126,
       "summary": "TransX 提出面向工业推荐的序列转导框架及配套基础设施，核心是将序列编码、行为记忆与候选条件融合拆分为可独立扩展的组件，从而显式控制模型算力分配与执行摊销。训练侧利用因果轨迹在行为前缀上的摊销计算，并将记忆状态扇出至候选；服务侧通过紧凑行为记忆 KV 将批量预填充、近线刷新与在线预测解耦。作者报告各向异性扩展规律：固定记忆分辨率与融合容量下编码器加深可能饱和；增加监督会将分配前沿推向候选条件融合；保持质量所需记忆分辨率随容量增长大致稳定。线上 A/B 中核心模型 CTR 提升 6.02%、转化提升 4.45%，后训练检索与偏好排序变体分别提升 2.96% 和 1.33%；训练基础设施监督目标吞吐提升 84%，服务解耦降低总服务成本近 80%，同等成本下每请求 FLOPs 约为 HSTU 风格基线的 5 倍。",
       "one_line_takeaway": "TransX 通过组件化解耦与训练/服务摊销，使推荐模型容量扩展不再线性推高线上服务成本。",
       "core_method": "将推荐建模为序列转导：分离序列编码器、行为记忆与候选条件融合三个可独立扩展组件；训练时在行为前缀上摊销因果轨迹计算并将记忆状态扇出到候选，服务时以紧凑行为记忆 KV 解耦批量预填充、近线刷新与在线预测。",
@@ -555,7 +2177,7 @@
         "推理系统",
         "LLM 基模"
       ],
-      "score": 95,
+      "score": 96,
       "summary": "PA1-OPD针对语言模型预训练中知识蒸馏仅在语料前缀上匹配教师分布、缺乏对学生预测所诱导上下文的直接监督这一问题，提出一步前缀增强的在线策略蒸馏。方法在每个选定前缀处让学生采样一次转移，再用教师在该学生诱导状态上的反馈进行监督，从而扩展受监督状态，同时保留下一词预测与语料路径KD；数据锚定根支持并行采样，可微树注意力共享前缀计算且不改变推理。在两种继续预训练设置下，全覆盖在C4、PG-19和Pile的每个评估检查点上均提升留出交叉熵；Stage2选取学生困惑度最高的10%根，使KD相对下一词训练的Macro交叉熵增益增加48.85%。排除语料路径上已有后继状态的监督后增益仍存在，说明观测上下文之外的反馈有价值；增加深度或广度在每项监督权重不变时改善总体结果，收益因语料而异。",
       "one_line_takeaway": "PA1-OPD用学生采样一步后的教师反馈补充语料前缀蒸馏，在不改变推理的前提下扩展预训练监督状态并稳定提升留出交叉熵。",
       "core_method": "在语料前缀处先由学生模型采样一次转移，得到学生诱导上下文，再以教师分布对该状态提供监督；与原有下一词预测和语料路径KD联合训练。数据锚定根使不同前缀可并行采样，可微树注意力在共享前缀计算的同时保持推理路径不变。Stage2按学生困惑度选择根节点，仅对最高10%的根施加分支监督。",
@@ -591,8 +2213,7 @@
         "Jiawei Sun",
         "Ziyue Guo",
         "Jianan Yan",
-        "Tao Luo",
-        "Xiaoyi Zeng"
+        "Tao Luo"
       ],
       "affiliations": [
         "Alibaba Group (China)"
@@ -825,7 +2446,7 @@
         "GenRec",
         "LLM 基模"
       ],
-      "score": 148,
+      "score": 149,
       "summary": "本文针对基于LLM的推荐系统中语义ID（SID）生成范式，在工业级流媒体目录上进行了单头自回归束搜索与多令牌预测（MTP）的严格对比。研究引入了一种新的辅助排序损失，用于训练MTP目标，并在多任务LLM中联合优化个性化检索、内容问答和指令遵循。实验表明，单头束搜索在排序和内容QA等产品关键指标上持续优于MTP，且训练成本降低约2.6倍（Qwen3-8B规模），MTP仅在原始推理吞吐量上占优。端到端相比非SID基线，冷启动排序提升77%，内容QA准确率提升22%，训练速度加快2.8倍，但语言指标因SID词表扩展而下降，通过强化学习后训练得到缓解。",
       "one_line_takeaway": "在工业级LLM推荐中，单头自回归束搜索在排序和QA质量上优于多令牌预测，且训练成本更低，但需通过RL后训练缓解语言能力退化。",
       "core_method": "提出一种基于语义ID（SID）的LLM推荐框架，将物品表示为离散层次内容码序列，并统一检索、内容理解与语言生成。对比两种SID生成范式：单头自回归解码（使用约束束搜索）与多令牌预测（MTP，并行预测所有令牌）。为训练MTP，引入基于联合SID分数的辅助排序损失。模型在多任务设置下联合优化个性化检索、内容QA和指令遵循。",
@@ -872,7 +2493,7 @@
         "East China Normal University"
       ],
       "published": "2026-10-07",
-      "updated": "2026-10-13T10:08:12.033832",
+      "updated": "2026-10-28T10:33:24.094632",
       "abstract": "Asynchronous RL accelerates large language model post-training by decoupling rollout generation from optimization, but trains on stale trajectories. Existing methods primarily correct token-level policy mismatch through importance-ratio control in the actor objective. We show that this \\emph{policy-side correction} alone is insufficient: advantage estimates also inherit mismatch from behavior-policy continuations, which we term \\emph{advantage staleness}. We derive exact bias and variance decompositions for a general two-channel actor update, revealing nonseparable coupling between policy-weight and advantage-estimation errors: their interaction induces multiplicative bias terms, while squared policy weights amplify advantage uncertainty in gradient variance. This motivates the hypothesis that policy- and advantage-side correction should be coordinated. We introduce Coupled Off-Policy Correction (COPC), an actor--critic method combining token-level ratio masking with two-sided clipped-ratio weighting of TD residuals for return and advantage estimation. Joint parameter sweeps across staleness levels support this hypothesis: the effect of one correction parameter depends on, and can reverse with, the other. COPC achieves the highest reported performance on tool-integrated mathematical reasoning and search, outperforming the strongest reported asynchronous baseline in each setting. It also offers a broad high-performing parameter region and improved training stability. In search, COPC remains stable throughout training, while most evaluated asynchronous baselines collapse late in training. These gains persist at 64-step policy staleness. COPC adds minimal step-time overhead over asynchronous PPO and retains a $1.7\\times$ step-time speedup over synchronous PPO.",
       "url": "https://arxiv.org/abs/2610.09597",
       "pdf_url": "https://arxiv.org/pdf/2610.09597",
@@ -890,33 +2511,37 @@
         "企业论文",
         "后训练",
         "Reasoning",
-        "LLM 基模"
+        "LLM 基模",
+        "异步强化学习",
+        "离策略纠正",
+        "LLM后训练",
+        "actor-critic"
       ],
       "score": 91,
-      "summary": "异步强化学习通过解耦轨迹生成与优化加速大语言模型后训练，但训练数据来自陈旧策略。现有方法主要依赖actor目标中的重要性比率控制进行token级策略校正，本文指出这种策略侧校正不足：优势估计也继承了行为策略延续带来的不匹配，称为优势陈旧。作者推导了双通道actor更新的精确偏差与方差分解，揭示策略权重与优势估计误差之间的不可分离耦合：交互产生乘性偏差项，而策略权重的平方放大梯度方差中的优势不确定性。这促使提出耦合离策略校正（COPC），一种actor-critic方法，结合token级比率掩码与TD残差的双侧裁剪比率加权，用于回报和优势估计。在工具集成数学推理和搜索任务上，COPC取得最高报告性能，优于最强异步基线，并在64步策略陈旧下保持增益，训练稳定性更好，搜索任务中基线后期崩溃而COPC稳定。COPC相比异步PPO仅增加极小步时开销，相比同步PPO保持1.7倍步时加速。",
-      "one_line_takeaway": "COPC通过耦合策略与优势侧校正，解决了异步LLM强化学习中优势陈旧导致的偏差与方差问题，在数学推理和搜索任务上实现最优性能与训练稳定性。",
-      "core_method": "COPC是一种actor-critic方法，在异步LLM强化学习中，同时进行token级重要性比率掩码和TD残差的双侧裁剪比率加权，以协调策略侧和优势侧的离策略校正。",
+      "summary": "异步强化学习通过解耦轨迹生成与优化来加速大语言模型后训练，但训练数据来自过时策略。现有方法主要在actor目标中用重要性比率控制来纠正token级策略失配。本文指出仅靠策略侧纠正不足：优势估计也会继承行为策略延续带来的失配，称为优势陈旧。作者推导了通用双通道actor更新的精确偏差与方差分解，揭示策略权重误差与优势估计误差不可分离地耦合：二者交互产生乘性偏差项，而策略权重平方会放大梯度方差中的优势不确定性。据此提出耦合离策略纠正COPC，一种actor-critic方法，将token级比率掩码与TD残差的双侧裁剪比率加权结合，用于回报和优势估计。联合参数扫描表明两个纠正参数相互依赖且效果可反转。COPC在工具集成数学推理和搜索上取得最高报告性能，优于最强异步基线，并在64步策略陈旧下保持增益，步时开销极小，相对同步PPO仍有1.7倍加速。",
+      "one_line_takeaway": "异步LLM强化学习必须同时纠正策略权重与优势估计的耦合失配，COPC通过双侧裁剪比率加权TD残差实现稳定加速。",
+      "core_method": "COPC是一种actor-critic离策略纠正方法：在actor侧保留token级重要性比率掩码以控制策略失配；在critic侧对TD残差采用双侧裁剪比率加权，用于回报和优势估计，从而协调策略侧与优势侧纠正。方法基于双通道actor更新的偏差-方差分解，揭示两类误差的乘性耦合。",
       "innovation_points": [
-        "识别并形式化了优势陈旧问题：行为策略延续导致优势估计不匹配，仅策略侧校正不足。",
-        "推导了双通道actor更新的精确偏差与方差分解，揭示了策略权重与优势估计误差之间的不可分离耦合。",
-        "提出COPC，联合token级比率掩码与TD残差的双侧裁剪比率加权，实现策略与优势校正的协调。",
-        "实验表明校正参数间存在交互效应，一个参数的效果可随另一个参数反转，支持耦合校正假设。"
+        "揭示异步RL中优势陈旧问题，指出仅纠正token级策略失配不足",
+        "推导双通道actor更新的精确偏差与方差分解，证明策略权重与优势估计误差不可分离耦合",
+        "提出COPC，将token级比率掩码与TD残差的双侧裁剪比率加权结合，协调两侧纠正",
+        "实验表明两个纠正参数相互依赖且效果可反转，并给出宽的高性能参数区域"
       ],
       "experiment_results": [
-        "在工具集成数学推理和搜索任务上，COPC取得最高报告性能，优于最强异步基线。",
-        "在搜索任务中，COPC在整个训练过程中保持稳定，而大多数评估的异步基线在训练后期崩溃。",
-        "在64步策略陈旧下，COPC的性能增益仍然保持，且相比异步PPO仅增加极小步时开销，相比同步PPO保持1.7倍步时加速。"
+        "在工具集成数学推理和搜索上取得最高报告性能，每个设置均优于最强异步基线",
+        "在搜索任务中COPC全程稳定，多数异步基线训练后期崩溃",
+        "增益在64步策略陈旧下仍保持；相对异步PPO步时开销极小，相对同步PPO保持1.7倍步时加速"
       ],
       "limitations": [
-        "摘要未提及在更广泛任务或模型规模上的泛化性验证。",
-        "未提供与同步PPO在最终性能上的详细比较数据。",
-        "理论分析基于特定假设，实际应用中的有效性需进一步验证。"
+        "摘要未提供具体数值结果、消融规模或统计显著性检验",
+        "方法依赖TD残差与裁剪比率加权，超参数虽区域较宽但仍需联合调参",
+        "评估集中在工具集成数学推理与搜索，其他LLM后训练任务的泛化性未在摘要中说明"
       ],
-      "practical_value": "COPC为异步LLM强化学习后训练提供了一种稳定且高效的校正方法，在保持异步加速优势的同时，显著提升训练稳定性和最终性能，适用于需要大规模并行训练的场景。",
-      "why_it_matters": "该工作揭示了异步RL中优势估计的陈旧问题，提出了耦合校正的理论框架和实用算法，对提升LLM后训练效率和稳定性具有重要意义，尤其在大规模分布式训练中。",
+      "practical_value": "为异步LLM强化学习后训练提供可落地的actor-critic纠正方案，在保持1.7倍于同步PPO的步时加速同时提升训练稳定性，适合需要高吞吐rollout的工程场景。",
+      "why_it_matters": "该工作从偏差-方差分解角度解释了异步RL中策略与优势误差的耦合机制，并给出协调纠正的实用算法，对理解与改进LLM异步后训练系统有直接参考价值。",
       "evidence_basis": "abstract",
       "analysis_status": "complete",
-      "analysis_signature": "97bcfcca51bbdc60",
+      "analysis_signature": "2558ec3f549a97eb",
       "is_daily_pick": false
     },
     {
@@ -1102,6 +2727,65 @@
       "evidence_basis": "abstract",
       "analysis_status": "complete",
       "analysis_signature": "91da5593f6e7823f",
+      "is_daily_pick": false
+    },
+    {
+      "id": "openalex:W7220459895",
+      "title": "From Prediction to Recommendation: A Hybrid Machine Learning and Fine-Tuned Language Model Approach for Soil-Based Crop Recommendation",
+      "authors": [
+        "Yugandhar Akkaldevi"
+      ],
+      "affiliations": [
+        "The University of Texas at Austin"
+      ],
+      "published": "2026-10-05",
+      "updated": "2026-10-31T12:09:11.096373",
+      "abstract": "Abstract Crop recommendation is an important decision-support task in agriculture, where multiple crops may be suitable under similar soil and environmental conditions. In this paper, we propose a hybrid framework that combines classical machine learning with a fine-tuned lightweight language model for soil-based crop recommendation. We first evaluate several classical machine learning models and a neural network baseline on tabular agricultural data. Our results show that XGBoost achieves the best predictive performance (0.487 Top-1 and 0.770 Top-3 accuracy across 48 crop classes), while a Multi-Layer Perceptron does not provide meaningful improvement over tree-based methods. Because strict single-label prediction is often inadequate in agricultural settings, we reformulate the task as a Top-K recommendation problem and show that Top-3 accuracy provides a more realistic measure of practical utility. To improve interpretability and usability, we further fine-tune a lightweight language model using LoRA to generate structured, farmer-friendly recommendations conditioned on machine learning predictions. Qualitative evaluation on held-out examples demonstrates that the fine-tuned model produces more coherent, grounded, and useful outputs than the base model. Overall, our results highlight the effectiveness of combining tabular machine learning for prediction with language models for explanation in agricultural decision-support systems.",
+      "url": "https://doi.org/10.21203/rs.3.rs-11212418/v1",
+      "pdf_url": "https://www.researchsquare.com/article/rs-11212418/latest.pdf",
+      "doi": "10.21203/rs.3.rs-11212418/v1",
+      "source": "OpenAlex",
+      "content_type": "paper",
+      "company": "",
+      "venue": "Research Square",
+      "categories": [
+        "Smart Agriculture and AI",
+        "Recommender Systems and Techniques",
+        "Data Mining and Machine Learning Applications"
+      ],
+      "tags": [
+        "LLM 基模",
+        "作物推荐",
+        "混合机器学习",
+        "LoRA微调",
+        "Top-K推荐",
+        "农业决策支持",
+        "可解释性"
+      ],
+      "score": 67,
+      "summary": "该论文研究土壤驱动的作物推荐问题，指出在相似土壤与环境条件下多种作物均可能适宜，严格单标签预测不足以支撑农业决策。作者先在表格农业数据上系统比较多种经典机器学习模型与神经网络基线，发现XGBoost预测性能最佳（48类作物下Top-1为0.487、Top-3为0.770），而多层感知机相对树模型无实质提升。基于此，作者将任务重构为Top-K推荐问题，并以Top-3准确率作为更贴近实际效用的度量。为提升可解释性与可用性，作者进一步用LoRA微调轻量语言模型，以机器学习预测为条件生成结构化、面向农户的推荐文本；在留出样本上的定性评估显示，微调模型输出比基座模型更连贯、更有依据且更有用。整体上，该工作展示了表格机器学习负责预测、语言模型负责解释的混合决策支持路径。",
+      "one_line_takeaway": "用XGBoost做Top-K作物预测、再用LoRA微调轻量语言模型生成农户可读解释，是农业决策支持中预测与解释分工的可行组合。",
+      "core_method": "在表格农业数据上对比经典机器学习模型与神经网络基线，确定XGBoost为预测主干；将单标签分类重构为Top-K推荐并以Top-3准确率评估；再以机器学习预测为条件输入，用LoRA微调轻量语言模型生成结构化、农户友好的推荐说明。",
+      "innovation_points": [
+        "将作物推荐从严格单标签预测重构为Top-K推荐问题，更贴合多作物均可能适宜的农业实际",
+        "采用预测与解释分离的混合架构：表格机器学习负责判别，微调语言模型负责生成可读推荐",
+        "使用LoRA对轻量语言模型进行条件化微调，以较低成本获得结构化农户友好输出"
+      ],
+      "experiment_results": [
+        "XGBoost在48类作物上取得Top-1 0.487、Top-3 0.770，为所比较模型中最佳",
+        "多层感知机相对树模型方法未带来有意义的提升",
+        "留出样本上的定性评估显示，LoRA微调模型输出比基座模型更连贯、更有依据且更有用；未报告定量生成质量指标"
+      ],
+      "limitations": [
+        "Top-1准确率仅0.487，绝对预测性能仍有限，Top-K仅部分缓解该问题",
+        "语言模型部分仅做定性评估，缺少结构化生成质量的定量指标",
+        "研究基于单一表格农业数据集，跨区域、跨作物体系的泛化性未验证"
+      ],
+      "practical_value": "为农业决策支持提供可落地范式：以树模型给出候选作物排序，再由轻量微调语言模型转写为农户可理解的结构化建议，兼顾预测性能与可用性，且LoRA微调成本较低，适合资源受限场景部署。",
+      "why_it_matters": "该工作说明在农业等高风险决策场景中，单标签预测并非终点，Top-K推荐加语言模型解释的混合路线能同时改善实用性与可解释性，为表格机器学习与轻量语言模型结合的决策支持系统提供了可复用的设计思路。",
+      "evidence_basis": "abstract",
+      "analysis_status": "complete",
+      "analysis_signature": "c72ff61396ddb08a",
       "is_daily_pick": false
     },
     {
@@ -1381,7 +3065,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 176,
+      "score": 177,
       "summary": "GRP v0.1 提出一个生成式推荐框架，将检索、排序和奖励建模统一到单个编码器-解码器模型中，并探索端到端推荐的渐进路径。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结的排序模块随后为强化学习后训练提供奖励。作者提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持对日志目标的似然。离线实验考察了历史编码、模型容量分配、事件选择、分词和奖励区分度。服务优化将端到端检索延迟降低 69%。在线实验评估了模型作为检索源、早期排序旁路以及替换较弱源的效果。仅检索对比中，观看时长提升 0.46%，分享提升 0.77%；结合旁路和源替换的对比中，观看时长提升 0.82%，分享提升 2.56%，平台级护栏指标中性。",
       "one_line_takeaway": "GRP 将检索、排序与奖励建模统一为单一生成式模型，并通过 mGRPO 和渐进式部署在真实工业推荐系统中取得在线收益。",
       "core_method": "GRP 是一个编码器-解码器生成式推荐框架，联合建模检索、排序和奖励。模型生成多模态语义ID，并用联合训练的排序模块对候选打分；冻结排序模块为强化学习后训练提供奖励。提出 mGRPO，在奖励优化中加入参考锚定的 margin，以保持对日志目标的似然。",
@@ -1447,7 +3131,7 @@
         "企业论文",
         "GenRec"
       ],
-      "score": 160,
+      "score": 161,
       "summary": "该论文研究如何利用推荐系统产生的延迟、噪声且混杂的反馈信号（如曝光、点击、转化）来演化内容生成智能体的外部记忆。现有方法依赖即时反馈或语义检索，难以准确归因推荐结果并转化为记忆适应度。为此，作者提出TIDE框架，将记忆视为容量受限的经验群体，通过时序与语义信用分配估计上下文适应度，并利用责任信用根据生成时引用的记忆分配结果信号，进而执行强化、交叉、变异或淘汰操作。同时提出记忆演化增益（MEG）指标，衡量演化后记忆在严格未来任务上相对于无记忆基线的效用提升。在电商会员营销内容生成智能体上，TIDE离线时序回放MEG提升7.75个百分点，在线A/B测试显著提升UCTR和激活率；在延迟标签基准上取得最低MAE和RMSE及最高MEG。",
       "one_line_takeaway": "TIDE通过延迟推荐反馈驱动外部记忆演化，在电商内容生成智能体中显著提升未来任务效用和在线点击转化指标。",
       "core_method": "TIDE将记忆建模为容量受限的经验群体，通过时序和语义信用分配估计上下文适应度，并利用责任信用将延迟推荐结果信号分配给生成时引用的记忆，进而执行强化、交叉、变异或淘汰操作。同时提出MEG指标衡量演化记忆在严格未来任务上相对无记忆基线的效用提升。",
@@ -1520,7 +3204,7 @@
         "A/B 实验",
         "GenRec"
       ],
-      "score": 98,
+      "score": 99,
       "summary": "工业推荐排序模型通常沿特征交互和序列建模两个轴扩展，但单独扩展任一轴均存在性能天花板且缩放律斜率次优。本文提出HELIX，一种净化统一架构，通过交错序列检索与特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，在保持跨深度通信的同时使用户侧序列计算可摊销，实现两轴的灵活非对称扩展。在TikTok电商推荐系统部署后，离线CTR AUC、CVR AUC等排序指标持续提升，在线A/B测试中每用户电商视频GMV提升约6%。",
       "one_line_takeaway": "HELIX通过统一缩放特征交互与序列建模两轴，在TikTok电商推荐中实现离线指标提升和在线GMV约6%的增长。",
       "core_method": "HELIX采用净化统一架构，交错序列检索和特征交互，并强制从可复用序列状态到候选条件混合令牌的单向信息流，从而在保持跨深度通信的同时，使用户侧序列计算可摊销，支持序列建模与特征交互的灵活非对称缩放。",
@@ -1584,7 +3268,7 @@
         "预训练",
         "LLM 基模"
       ],
-      "score": 82,
+      "score": 83,
       "summary": "TabFM-Auto 针对表格基础模型（TabFM）在零样本预测时忽略列名、任务描述和辅助文件等数据集语义的问题，提出用语言模型智能体围绕冻结的 TabFM 演化数据流水线。智能体依据数据集元数据和验证反馈，迭代优化数据清洗、特征工程、上下文选择与后处理，以降低 TabFM 的预测误差。在 TabArena 全部 51 个数据集上，五种不同智能体与语言模型组合的配置包揽总榜前五，最佳配置将 TabFM 的 Elo 从 1785 提升至 2013；发现的流水线无需再搜索即可迁移到其他冻结表格基础模型，带来 +69 至 +143 Elo 增益；在 MLE-Bench 的 8 个表格竞赛中，TabFM-Auto 在 MLE 智能体中总排名第一。",
       "one_line_takeaway": "用语言模型智能体自动演化数据流水线，可显著放大冻结表格基础模型的零样本性能，并跨模型迁移。",
       "core_method": "将冻结的表格基础模型 TabFM 与语言模型智能体配对，智能体以数据集元数据和验证集反馈为引导，迭代搜索并优化数据清洗、特征工程、上下文选择和后处理等流水线步骤，以最小化 TabFM 的预测误差。",
@@ -1646,7 +3330,7 @@
         "企业论文",
         "LLM 基模"
       ],
-      "score": 62,
+      "score": 63,
       "summary": "表格机器学习通常依赖逐数据集工作流，需为每个任务从头拟合树集成或运行AutoML搜索。本文提出TabFM，一个400M参数的表格基础模型，将监督表格预测形式化为上下文学习，无需任务特定调优即可在单次前向传播中产生校准的零样本预测。TabFM完全在由结构因果模型生成的合成表格上训练，学习可零样本迁移到真实任务的通用表格表示。在TabArena全部51个基准数据集（38个分类和13个回归）上，零样本TabFM在默认表格基础模型中排名第一，并优于调优的AutoML流水线。基于同一冻结权重的两个扩展进一步提升性能：多视图特征扩展与集成及事后校准（TabFM+），以及LLM引导的、数据集特定的数据处理与特征工程（TabFM-Auto）。",
       "one_line_takeaway": "TabFM通过合成因果数据预训练和上下文学习，实现了表格预测的零样本基础模型，在51个基准上超越调优AutoML。",
       "core_method": "TabFM是一个400M参数的表格基础模型，将监督表格预测建模为上下文学习。它完全在由结构因果模型生成的合成表格上预训练，学习通用表格表示。推理时，模型在单次前向传播中基于上下文示例产生校准的零样本预测，无需任务特定微调。",
@@ -3178,7 +4862,7 @@
         "Multimodal",
         "推理系统"
       ],
-      "score": 122,
+      "score": 123,
       "summary": "腾讯混元团队发布开源大模型Hunyuan-A13B，采用混合专家（MoE）架构，总参数量800亿，推理时仅激活130亿参数，旨在平衡模型能力、计算效率与部署成本。模型在严格过滤的20万亿token语料上预训练，并增强STEM数据整理，提升事实可靠性与推理能力。通过高质量监督微调和大规模强化学习进一步优化性能。该模型引入双模式思维链框架，根据任务复杂度自适应调整推理深度：常规查询使用快速思考，复杂多步问题使用慢速思考。评估显示，在数学、科学、编程、通用语言理解和智能体任务上具有竞争力，常接近更大模型的表现，且高推理吞吐量适合延迟敏感应用。",
       "one_line_takeaway": "Hunyuan-A13B通过MoE架构和双模式思维链，在800亿总参数下仅激活130亿，实现了高效推理与强大能力的平衡。",
       "core_method": "基于混合专家（MoE）架构，总参数800亿，推理激活130亿；在20万亿token严格过滤语料上预训练，增强STEM数据；采用高质量监督微调和强化学习；引入双模式思维链（快速/慢速思考）自适应调整推理深度。",
@@ -3244,7 +4928,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 163,
+      "score": 164,
       "summary": "本文针对音乐流媒体平台中用户渴望发现新艺术家却因信任障碍而犹豫的探索-利用困境，提出一种解耦式推荐架构。该架构将LLM推理异步离线化，预计算个性化未发现艺术家候选池及自然语言解释理由，从而在避免实时推理成本的同时实现可解释推荐。大规模在线A/B实验表明，结合LLM推荐与解释理由能显著降低新内容的信任门槛，在发现场景中同时提升用户探索行为和整体参与度，为工业级可解释推荐提供了可扩展的工程范式。",
       "one_line_takeaway": "通过异步离线LLM推理预计算个性化解释理由，可在不增加在线延迟的前提下显著提升音乐发现场景的用户探索与参与度。",
       "core_method": "提出解耦式推荐架构：将LLM推理完全异步离线化，预计算每个用户的未发现艺术家候选池及对应的自然语言解释理由；在线服务仅需轻量级检索与排序，避免实时LLM推理开销。",
@@ -3313,7 +4997,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 105,
+      "score": 106,
       "summary": "针对工业推荐系统因延迟和内存限制截断用户历史至数百条、导致长期兴趣利用不足，且多模态异构意图难以用稀疏ID表示的问题，MuSeR在已部署的MGS系统上提出检索框架，集成三项技术：分层时间压缩保留近期全分辨率动作并渐进池化旧片段，使10^4-10^5条交互历史适配固定服务预算；解耦多查询兴趣提取与正交正则化；多模态语义对齐，用大语言模型蒸馏的文本摘要增强稀疏物品ID。工程上采用异步用户表示刷新与自适应缓存，以及跨异构硬件的分层束搜索检索。在三个公开基准和大规模工业数据集上，MuSeR的Recall@K持续优于强长序列和多兴趣基线。百度APP首页、发现页和短视频场景的在线A/B测试显示，日活用户提升0.26%、总会话时长提升0.89%（p<0.05），同时降低服务延迟和成本。",
       "one_line_takeaway": "MuSeR通过系统级集成分层压缩、多兴趣解耦与多模态语义对齐，使超长序列多兴趣建模在工业实时推荐中可部署，并带来显著在线收益。",
       "core_method": "MuSeR是一个基于已部署MGS系统的检索框架，包含三个核心组件：分层时间压缩（近期动作全分辨率保留，旧片段渐进池化，支持10^4-10^5长度历史）、解耦多查询兴趣提取（带正交正则化）、多模态语义对齐（用LLM蒸馏文本摘要增强稀疏ID）。工程上采用异步用户表示刷新与自适应缓存，以及跨异构硬件的分层束搜索检索。",
@@ -3569,7 +5253,7 @@
         "推理系统",
         "GenRec"
       ],
-      "score": 138,
+      "score": 139,
       "summary": "针对搜索广告中多目标（相关性、点击倾向、商业价值）联合优化时，单奖励对齐或朴素奖励融合易导致梯度竞争与全局次优的问题，提出 UniPolicy 目标感知多策略对齐框架。该方法在共享生成式基座内，通过目标特定前缀 token、稀疏 MoE-LoRA 路由和目标特定残差 FFN 分层解耦参数，为不同业务目标提供差异化参数与策略表达空间；同时利用多阶段行为反馈构建成对偏好，补充曝光未点击样本的相对偏好信息，强化点击候选在生成分布中的相对优势。推理时支持并行、业务可定制的多策略束搜索，在固定检索预算下灵活分配各目标候选配额。大规模离线实验显示多指标均衡提升且检索质量保持，优于单目标强化学习和朴素奖励融合基线；在真实搜索广告系统 7 天在线 A/B 测试中，CTR 提升 0.71%，RPS 提升 1.58%，广告收入提升 1.32%，服务延迟稳定。",
       "one_line_takeaway": "UniPolicy 通过目标特定参数解耦与多策略束搜索，在生成式搜索广告中实现多目标均衡对齐，并在真实线上系统取得 CTR、RPS 和收入同步提升。",
       "core_method": "在共享生成式基座中，采用目标特定前缀 token、稀疏 MoE-LoRA 路由和目标特定残差 FFN 分层解耦参数，为不同业务目标提供差异化参数与策略表达空间；基于多阶段行为反馈构建成对偏好，补充曝光未点击样本的相对偏好信息；推理时支持并行、业务可定制的多策略束搜索，在固定检索预算下分配各目标候选配额。",
@@ -4313,20 +5997,27 @@
         "Yong Li",
         "Qingmin Liao"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Tsinghua University",
+        "Tencent (China)",
+        "Tsinghua Shenzhen International Graduate School"
+      ],
       "published": "2026-08-25T07:43:09Z",
       "updated": "2026-08-25T07:43:09Z",
       "abstract": "Item tokenizer encodes semantic embeddings into token IDs to replace the randomly assigned item IDs used in traditional recommendation models, fundamentally addressing the problems of excessive parameters and cold starts. However, the most common tokenizer, RQ-VAE, suffers from low decoding efficiency due to the inherent dependencies among its codebooks. Meanwhile, efficient independent tokenizers such as optimized product quantization (OPQ) still struggle with dimensional correlations and distribution complexity of semantic embeddings. In this work, we propose a f\\underline{low}-based item \\underline{T}okenizer (Tlow) to transform raw semantic embeddings into a latent space where embeddings conform to a unified standard normal distribution, achieving dual advantages of dimensional independence and distributional simplicity. Independent tokenization performed on these latent embeddings yields semantically clear token IDs. Additionally, we introduce a novel codebook guidance to align the codebook space with the token embedding space, further aiding the learning of more semantically distinct token embeddings. Offline experiments on four public datasets demonstrate that Tlow's tokenization and codebook guidance significantly improve recommendation performance. The improvement on cross-domain and multi-modal recommendations also proves the effectiveness of item tokenization in a simplified embedding space. Online experiments for a multi-modal retrieval task on China's largest social media platform WeChat validate Tlow's powerful distribution transformation capability. The retrieval model based on token IDs improves user CTR by 10.32\\% globally and by 11.64\\% for new items. Our codes are available at https://github.com/wjjln/Tlow.",
       "url": "http://arxiv.org/abs/2608.24176v1",
       "pdf_url": "https://arxiv.org/pdf/2608.24176v1",
-      "doi": "",
+      "doi": "10.1145/3799682.3840087",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Tencent Hunyuan",
       "venue": "",
       "categories": [
         "cs.IR",
-        "cs.AI"
+        "cs.AI",
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
@@ -6444,19 +8135,24 @@
         "Mariia Ulianova",
         "Ilya Murzin"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Yandex (Russia)"
+      ],
       "published": "2026-06-07T12:31:26Z",
       "updated": "2026-06-09T13:50:48Z",
       "abstract": "Generative retrieval (GR) has become a scalable approach to candidate generation: each item is assigned a short hierarchical token sequence called a Semantic ID (SID), and the next item's SID is decoded autoregressively. A practical limitation is that the decoder's beam search optimizes the likelihood of token sequences, not the relevance of the underlying items. These objectives diverge when sequence likelihood is poorly calibrated due to beam search error accumulation, and when several items collapse onto a single SID and receive identical scores. We introduce Gryphon, an encoder-decoder generative recommendation architecture that adds a jointly trained item-level scoring component alongside SID generation, reusing the encoder's user representation computed in a single forward pass. Instead of ranking SIDs by accumulated token likelihood, Gryphon resolves each generated SID to its concrete items and re-scores those items directly, which sidesteps miscalibrated sequence scores and separates items that collide on the same identifier. On an industrial music service, with item-level scoring trained under a next-item-prediction objective, Gryphon attains the highest item-level Recall@1000, above the strongest baselines (+3.7% over vanilla GR and +2.5% over collision-resolved GR) at comparable parameter count and latency. Gryphon's item-level ranking also surpasses its beam-likelihood ranking of the same candidates (+4.2% gain), demonstrating the benefit of item-level scoring in GR. Deployed as the sole candidate source in a 7-day A/B test, Gryphon produced no statistically significant change in total listening time (+0.25%) while replacing a pipeline of more than 15 candidate generators and a separate preranking stage, substantially simplifying the candidate-generation system.",
       "url": "http://arxiv.org/abs/2606.08604v2",
       "pdf_url": "https://arxiv.org/pdf/2606.08604v2",
-      "doi": "",
+      "doi": "10.1145/3799682.3840005",
       "source": "arXiv",
       "content_type": "paper",
       "company": "",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
@@ -6949,19 +8645,25 @@
         "He Guo",
         "Jing Wang"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Alibaba Group (China)",
+        "Peking University"
+      ],
       "published": "2026-05-22T07:29:51Z",
       "updated": "2026-05-22T07:29:51Z",
       "abstract": "Long-tail recommendation in real-world e-commerce platforms remains challenging due to severe data imbalance. Existing methods often struggle to combine content-based multimodal features with collaborative signals. Many of these methods also ignore an important asymmetry in knowledge transfer between head and tail IDs: noisy signals from tail IDs can hurt representation learning for head IDs. This paper presents AKT-Rec, a framework for Asymmetric Knowledge Transfer in long-tail Recommendation that uses LLM-generated semantic IDs. AKT-Rec uses Multimodal LLMs (MLLMs) with supervised fine-tuning to align content representations with collaborative information for both items and users, producing semantic representations. It then discretizes these representations into semantic IDs with a Residual-Quantized VAE (RQ-VAE), which yields semantic clusters of similar entities. AKT-Rec has two main components: (1) Cluster-Guided Adaptive Embedding, which decomposes each ID representation into a cluster-level embedding that captures shared semantics and an individual embedding. Through an asymmetric contrastive objective and an activity-aware gating mechanism, this module directs knowledge transfer from head to tail IDs. (2) Hierarchical Feature Aggregation, which builds parallel feature views and adaptively fuses them to optimize predictions for samples with varying activity levels. Extensive experiments on a large-scale industrial dataset and online A/B testing on the Alibaba Tmall platform demonstrate the effectiveness of AKT-Rec. AKT-Rec improves offline performance by 0.35% in AUC and 1.53% in GAUC, outperforming several competitive baselines. In online A/B testing, AKT-Rec achieves a 2.76% increase in CTR and a 3.47% increase in GMV, validating its utility in real-world production environments.",
       "url": "http://arxiv.org/abs/2605.23310v1",
       "pdf_url": "https://arxiv.org/pdf/2605.23310v1",
-      "doi": "",
+      "doi": "10.1145/3799682.3839993",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Alibaba Qwen",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "A/B 实验",
@@ -7066,20 +8768,25 @@
         "Zhenyu Xie",
         "Junjie Bai"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Alibaba Group (China)"
+      ],
       "published": "2026-05-14T06:27:46Z",
       "updated": "2026-05-14T06:27:46Z",
       "abstract": "Generative retrieval offers a promising alternative by unifying the fragmented multi-stage retrieval process into a single end-to-end model. However, its practical adoption in industrial e-commerce search remains challenging, given the massive and dynamic product catalogs, strict latency requirements, and the need to align retrieval with downstream ranking goals. In this work, we propose a retrieval framework tailored for real-world recall scenarios, positioning generative retrieval as a recall-stage supplement rather than an end-to-end replacement. Our method, CQ-SID (Category-and-Query constrained Semantic ID), employs category-aware and query-item contrastive learning along with Residual Quantized VAEs to encode items into hierarchical semantic cluster identifiers, significantly reducing beam search complexity. Additionally, we develop EG-GRPO (Expert-Guided Group Relative Policy Optimization), a reinforcement learning approach that aligns generative recall with downstream ranking under sparse rewards by injecting ground-truth samples to stabilize training. Offline experiments on TmallAPP search logs show that CQ-SID achieves up to 26.76% and 11.11% relative gains in semantic and personalized click hitrate over RQ-VAE baselines, while halving beam search size. EG-GRPO further improves multi-objective performance. Online A/B tests confirm gains in GMV (+1.15%) and UCTCVR (+0.40%). The generative recall channel now contributes substantially in production, accounting for over 50.25% of exposures, 58.96% of clicks, and 72.63% of purchases, demonstrating a viable path for deploying generative retrieval in real-world e-commerce systems.",
       "url": "http://arxiv.org/abs/2605.14434v1",
       "pdf_url": "https://arxiv.org/pdf/2605.14434v1",
-      "doi": "",
+      "doi": "10.1145/3799682.3840110",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Alibaba Qwen",
       "venue": "",
       "categories": [
         "cs.IR",
-        "cs.AI"
+        "cs.AI",
+        "Information Retrieval and Search Behavior",
+        "Recommender Systems and Techniques",
+        "Topic Modeling"
       ],
       "tags": [
         "A/B 实验",
@@ -8219,21 +9926,28 @@
         "Jinxin Hu",
         "Yu Zhang",
         "Xiaoyi Zeng",
-        "Jing Zhang"
+        "Jing Zhang",
+        "Yu Huan Zhang"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "Alibaba Group (China)",
+        "Wuhan University"
+      ],
       "published": "2026-02-27T03:22:58Z",
       "updated": "2026-02-27T03:22:58Z",
       "abstract": "Generative Recommendation (GR) has become a promising paradigm for large-scale recommendation systems. However, existing GR models typically perform single-pass decoding without explicit refinement, causing early deviations to accumulate and ultimately degrade recommendation quality. To tackle this problem, we propose GRC, which is, to our knowledge, the first structured reflection-correction framework for GR that extends standard decoding into a Generation-Reflection-Correction (GRC) process. Concretely, GRC introduces a supervised reflection-correction template that decomposes the decoding process into initial draft generation, multi-granular reflection, and reflection-guided correction, thereby enabling structured reflection and correction in the semantic token space. To further explore the enlarged refinement space introduced by the GRC process, we optimize the entire GRC trajectory with GRPO-based reinforcement learning, under a carefully designed reward function with token-level and trajectory-level signals. For efficient online serving, we propose an Entropy-Guided Reflection Scheduling (EGRS) strategy that dynamically allocates more correction budget to high-uncertainty decoding trajectories during beam search. Extensive experiments on real-world datasets show that GRC consistently outperforms six state-of-the-art baselines by up to 15.74%, and online A/B tests demonstrate its substantial practical value in large-scale industrial recommendation, delivering a 1.79% lift in advertising revenue with only modest latency overhead.",
       "url": "http://arxiv.org/abs/2602.23639v1",
       "pdf_url": "https://arxiv.org/pdf/2602.23639v1",
-      "doi": "",
+      "doi": "10.1145/3799682.3840787",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "Alibaba Qwen",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Information Retrieval and Search Behavior",
+        "Advanced Bandit Algorithms Research"
       ],
       "tags": [
         "A/B 实验",
@@ -9085,9 +10799,14 @@
         "Haoda Li",
         "Sihao Ding",
         "Shaohui Ruan",
-        "Yang Zhang"
+        "Yang Zhang",
+        "Jing Nathan Yan",
+        "ZongYu Liu"
       ],
-      "affiliations": [],
+      "affiliations": [
+        "ByteDance (China)",
+        "National University of Singapore"
+      ],
       "published": "2026-01-28T02:56:30Z",
       "updated": "2026-08-11T03:15:39Z",
       "abstract": "Item indexing, which maps a large corpus of items into compact discrete representations, is critical for both discriminative and generative recommender systems, yet existing Vector Quantization (VQ)-based approaches struggle with the highly skewed and non-stationary item distributions common in industrial streaming recommenders, leading to poor assignment accuracy, imbalanced cluster occupancy, and insufficient cluster separation. To address these challenges, we propose MERGE, a next-generation item indexing paradigm that adaptively constructs clusters from scratch, dynamically monitors cluster occupancy, and forms hierarchical index structures via fine-to-coarse merging. Extensive experiments demonstrate that MERGE significantly improves assignment accuracy, cluster uniformity, and cluster separation compared with existing indexing methods, while online A/B tests show substantial gains in key business metrics, highlighting its potential as a foundational indexing approach for large-scale recommendation. Codes are available at https://github.com/baiyimeng/MERGE.",
@@ -9096,10 +10815,13 @@
       "doi": "10.1145/3799682.3840083",
       "source": "arXiv",
       "content_type": "paper",
-      "company": "",
+      "company": "ByteDance Seed",
       "venue": "",
       "categories": [
-        "cs.IR"
+        "cs.IR",
+        "Recommender Systems and Techniques",
+        "Advanced Clustering Algorithms Research",
+        "Information Retrieval and Search Behavior"
       ],
       "tags": [
         "A/B 实验",
@@ -9312,68 +11034,6 @@
       "evidence_basis": "official_release",
       "analysis_status": "complete",
       "analysis_signature": "cd82e3f88d9a5bcb",
-      "is_daily_pick": false
-    },
-    {
-      "id": "s2:1ca747e4420a59bb08ce61ab97e7a91353287334",
-      "title": "HiGR: Industrial-Scale Hierarchical Generative Slate Recommendation Framework in Tencent",
-      "authors": [
-        "Yunsheng Pang",
-        "Zijian Liu",
-        "Yudong Li",
-        "Shaojie Zhu",
-        "Zijian Luo",
-        "Chenyun Yu",
-        "Si-Kai Wu",
-        "Shichen Shen",
-        "Cong Xu",
-        "Bin Wang",
-        "Kai Jiang",
-        "Chengxiang Zhuo",
-        "Zang Li"
-      ],
-      "affiliations": [],
-      "published": "2025-12-31",
-      "updated": "2025-12-31",
-      "abstract": "Slate recommendation, which presents users with a ranked item list in a single display, is ubiquitous across mainstream online platforms. While recent generative recommendation methods have shown strong potential in modeling item sequences with semantic IDs, directly applying them to industrial-scale slate recommendation faces a fundamental disconnect: entangled SID spaces confound high-level list planning, fine-grained autoregressive decoding over long sequences limits semantic planning efficiency, and token-level objectives misalign with holistic slate quality. In this paper, we propose HiGR, an industrial-scale hierarchical generative framework for slate recommendation that bridges this disconnect through a co-designed pipeline. First, HiGR learns structured SIDs via a Prefix-Contrastive Residual Quantized VAE (PCRQ-VAE). By enforcing high-level prefixes to capture shared semantics, PCRQ-VAE creates a controllable discrete space that acts as a prerequisite for efficient planning. Leveraging this structured space, our Hierarchical Slate Decoder (HSD) shifts autoregressive modeling from entangled token-level decoding to coarse-grained preference embeddings. This design significantly reduces inference latency while allowing explicit global slate structure planning. Finally, this stable planning space enables an ORPO-based listwise alignment mechanism to optimize triple-objective implicit feedback-ranking fidelity, genuine user interest, and diversity. Extensive offline experiments show that HiGR outperforms state-of-the-art baselines by over 10% in offline recommendation quality while achieving a $5\\times$ inference speedup. Online A/B tests on Tencent platforms further improve watch time by 1.22% and video plays by 1.73%. HiGR has been deployed on multiple Tencent platform surfaces, serving hundreds of millions of users and proving its industrial-scale applicability.",
-      "url": "https://www.semanticscholar.org/paper/1ca747e4420a59bb08ce61ab97e7a91353287334",
-      "pdf_url": "",
-      "doi": "",
-      "source": "Semantic Scholar",
-      "content_type": "paper",
-      "company": "",
-      "venue": "",
-      "categories": [],
-      "tags": [
-        "A/B 实验",
-        "GenRec",
-        "Semantic ID",
-        "推理系统"
-      ],
-      "score": 118,
-      "summary": "HiGR是腾讯提出的工业级层次化生成式Slate推荐框架，旨在解决生成式推荐方法在工业规模Slate推荐中的根本性脱节问题：语义ID空间纠缠导致高层列表规划困难、长序列细粒度自回归解码限制语义规划效率、token级目标与整体Slate质量不一致。HiGR通过协同设计的流程弥合这一鸿沟：首先，提出前缀对比残差量化VAE（PCRQ-VAE）学习结构化语义ID，通过强制高层前缀捕获共享语义，创建可控的离散空间，为高效规划奠定基础；其次，利用该结构化空间，层次化Slate解码器（HSD）将自回归建模从纠缠的token级解码转向粗粒度偏好嵌入，显著降低推理延迟，同时允许显式的全局Slate结构规划；最后，该稳定规划空间支持基于ORPO的列表级对齐机制，优化三重目标：隐式反馈排序保真度、真实用户兴趣和多样性。离线实验表明，HiGR在离线推荐质量上优于最先进基线超过10%，同时实现5倍推理加速。腾讯平台在线A/B测试进一步将观看时长提升1.22%，视频播放量提升1.73%。HiGR已在腾讯多个平台上线，服务数亿用户，证明了其工业规模适用性。",
-      "one_line_takeaway": "HiGR通过结构化语义ID和层次化解码器，将生成式推荐成功扩展到工业级Slate推荐，实现质量与效率的双重提升。",
-      "core_method": "HiGR采用三阶段协同设计：1) PCRQ-VAE学习结构化语义ID，通过前缀对比学习使高层前缀捕获共享语义，形成可控离散空间；2) 层次化Slate解码器（HSD）将自回归建模从token级转为粗粒度偏好嵌入，实现全局结构规划和低延迟推理；3) 基于ORPO的列表级对齐机制优化排序保真度、用户兴趣和多样性三重目标。",
-      "innovation_points": [
-        "提出PCRQ-VAE，通过前缀对比学习生成结构化语义ID，解决语义ID空间纠缠问题，为高层规划提供可控离散空间。",
-        "设计层次化Slate解码器（HSD），将自回归解码从token级提升到粗粒度偏好嵌入，显著降低推理延迟并支持全局结构规划。",
-        "引入ORPO-based列表级对齐机制，联合优化隐式反馈排序保真度、真实用户兴趣和多样性，替代传统token级目标。"
-      ],
-      "experiment_results": [
-        "离线实验：HiGR在推荐质量上优于最先进基线超过10%，同时实现5倍推理加速。",
-        "在线A/B测试：在腾讯平台观看时长提升1.22%，视频播放量提升1.73%。",
-        "已部署于腾讯多个平台，服务数亿用户，验证工业规模适用性。"
-      ],
-      "limitations": [
-        "论文未提供具体离线实验数据集和基线细节，难以独立复现。",
-        "在线提升幅度较小（1-2%），可能受业务场景限制，泛化性需进一步验证。",
-        "层次化解码器依赖结构化语义ID，对非内容型推荐场景（如商品推荐）的适用性未明确说明。"
-      ],
-      "practical_value": "HiGR为工业级Slate推荐提供了一套完整的生成式解决方案，在腾讯多个平台成功部署，服务数亿用户，显著提升观看时长和视频播放量，同时实现5倍推理加速，证明了其工程可行性和业务价值。",
-      "why_it_matters": "本文解决了生成式推荐从学术研究到工业应用的关键瓶颈，提出了结构化语义ID和层次化解码器的新范式，为后续研究提供了可借鉴的框架，并展示了大规模部署的成功案例，对推荐系统领域具有重要参考价值。",
-      "evidence_basis": "abstract",
-      "analysis_status": "complete",
-      "analysis_signature": "49c4b7fd3500c85a",
       "is_daily_pick": false
     },
     {
