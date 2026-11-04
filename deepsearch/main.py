@@ -51,6 +51,17 @@ def main() -> int:
     # it with the merged pool.
     merged.sort(key=lambda paper: (_paper_date(paper), paper.score), reverse=True)
     previous_titles = {_normalized_title(paper.title) for paper in previous}
+    merged_titles = {_normalized_title(paper.title) for paper in merged}
+    # "Never evict" only holds if the committed archive actually came in: a
+    # stale or conflict-clobbered papers.json silently rebuilt the archive from
+    # fewer papers and 56 entries disappeared in Nov 2026. Fail loudly instead
+    # of shrinking quietly - restoring lost papers is cheap, noticing them is not.
+    lost = [paper for paper in previous if _normalized_title(paper.title) not in merged_titles]
+    if lost:
+        raise RuntimeError(
+            f"归档回退：{len(lost)} 篇历史论文未进入新归档（首例 {lost[0].id} / {lost[0].title[:60]!r}）。"
+            "若为有意的门槛收紧，请先移除这些条目；否则说明输入归档不完整。"
+        )
     new_papers = sum(_normalized_title(paper.title) not in previous_titles for paper in merged)
 
     # Analyze the complete rolling archive. Existing complete analyses are reused by

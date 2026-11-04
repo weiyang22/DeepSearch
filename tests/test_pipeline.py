@@ -583,6 +583,41 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(status["analysis_enabled"])
         self.assertTrue(all(item["analysis_status"] == "fallback" for item in payload["papers"]))
 
+    def test_main_refuses_to_shrink_the_archive(self):
+        # "Never evict" is only real if the run refuses to publish a smaller
+        # archive. A stale committed papers.json once cut the archive from 376
+        # to 354 entries without any error.
+        today = dt.date.today()
+        keep = Paper(
+            id="arxiv:2609.77777",
+            title="Enterprise Generative Recommendation with Semantic IDs",
+            published=(today - dt.timedelta(days=2)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        # A previous entry that the date guard rejects: simulating drift between
+        # the committed archive and what the current gates accept.
+        dropping = Paper(
+            id="arxiv:2610.11111",
+            title="Future Dated Preprint",
+            published=(today + dt.timedelta(days=30)).isoformat(),
+            affiliations=["ByteDance"],
+            abstract="Generative recommendation with semantic IDs and an online A/B test.",
+        )
+        seed = Path(tempfile.mkdtemp()) / "papers.json"
+        seed.write_text(
+            json.dumps({"papers": [keep.to_dict(), dropping.to_dict()]}, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        env = {key: value for key, value in os.environ.items() if key != "DEEPSEEK_API_KEY"}
+        with patch.object(ds_main, "collect_all", return_value=([], [])):
+            with patch.dict(os.environ, env, clear=True):
+                with patch.object(sys, "argv", ["deepsearch", "--out", str(seed), "--reselect-existing"]):
+                    with self.assertRaises(RuntimeError) as ctx:
+                        ds_main.main()
+        self.assertIn("归档回退", str(ctx.exception))
+        self.assertIn("Future Dated Preprint", str(ctx.exception))
+
     def test_deepseek_call_retries_transient_errors(self):
         config = load_config("config.toml")
         paper = Paper(
