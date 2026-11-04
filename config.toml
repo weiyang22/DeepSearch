@@ -5,7 +5,7 @@ timezone = "Asia/Shanghai"
 # 0 表示不设数量上限；每日入选数量由时间窗口和质量分决定。
 daily_limit = 0
 daily_window_days = 3
-daily_min_score = 45
+daily_min_score = 40
 # 发现侧只用窄窗口找近期论文（归档只增不删），避免高频查询把新论文挤出单页结果。
 discovery_window_days = 30
 

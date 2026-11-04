@@ -178,12 +178,16 @@ export function DigestDashboard() {
   const todayCount = tabCounts.today;
   const sourceErrors = payload.status.source_errors || [];
   const effectiveWindow = payload.status.effective_daily_window_days || payload.site.daily_window_days || 3;
+  // Silent pipeline failures are the dangerous kind (a 9-day freeze once
+  // went unnoticed), so the page itself reports data staleness instead of
+  // trusting that somebody reads the Actions tab.
+  const staleHours = dataStalenessHours(payload.generated_at);
 
   return (
     <main className="site-shell" id="top">
       <header className="site-header">
         <a className="brand" href="#top">deepsearch</a>
-        <p>每天 08:00 更新 · {formatGeneratedAt(payload.generated_at)}</p>
+        <p>每天自动更新 · 最近更新 {formatGeneratedAt(payload.generated_at)}</p>
       </header>
 
       <section className="intro">
@@ -196,6 +200,12 @@ export function DigestDashboard() {
 
       {!payload.status.analysis_enabled && (
         <p className="notice">尚未配置 AI Key，当前显示原始摘要与保守分析；配置后会自动补全中文深度解读。</p>
+      )}
+
+      {staleHours !== null && (
+        <p className="notice notice--stale">
+          数据已 {staleHours} 小时未更新，最近一次自动采集可能失败（归档内容仍可浏览，下一轮成功运行会自动补齐）。
+        </p>
       )}
 
       <section className={`data-status ${sourceErrors.length ? "data-status--warning" : ""}`} aria-label="数据同步状态">
@@ -337,6 +347,17 @@ function tagTone(tag: string, paper: Paper) {
   if (["企业论文", "官方技术报告", "A/B 实验"].includes(tag)) return "paper-tag--evidence";
   if (["LLM 基模", "GenRec", "Semantic ID"].includes(tag)) return "paper-tag--primary";
   return "paper-tag--topic";
+}
+
+const STALE_AFTER_HOURS = 36;
+
+// The daily cron runs once per day; more than 36h without a refresh means at
+// least one scheduled run did not complete.
+function dataStalenessHours(value: string): number | null {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const hours = Math.floor((Date.now() - date.getTime()) / 3_600_000);
+  return hours >= STALE_AFTER_HOURS ? hours : null;
 }
 
 function formatGeneratedAt(value: string) {

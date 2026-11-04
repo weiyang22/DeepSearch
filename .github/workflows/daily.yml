@@ -4,15 +4,17 @@ on:
   push:
     branches: [main]
   schedule:
-    # Start at Beijing 07:37 (UTC 23:37) so collection/build normally
-    # finishes near 08:00, while avoiding GitHub's congested top-of-hour queue.
-    - cron: "37 23 * * *"
+    # Beijing 04:37 (UTC 20:37). GitHub's scheduled queue is heavily delayed
+    # (measured 2.5-3.5h late on this repo), so an early request lands the
+    # actual run in the Beijing morning instead of near noon.
+    - cron: "37 20 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  issues: write
 
 concurrency:
   group: deepsearch-daily
@@ -77,3 +79,20 @@ jobs:
         if: vars.ENABLE_GITHUB_PAGES == 'true'
         id: deployment
         uses: actions/deploy-pages@v5
+
+      # A silent failure is worse than a loud one: the pipeline once failed on
+      # nine consecutive days and nobody noticed. File an issue (deduplicated
+      # against an existing open report) so failures surface in the repo.
+      - name: Report failure as an issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          existing=$(gh issue list --label pipeline-failure --state open --limit 1 --json number --jq '.[0].number')
+          body="每日更新流水线失败。\n\n- 运行记录：${RUN_URL}\n- 触发方式：${{ github.event_name }}\n- 失败原因见运行日志；若连续失败，站点会在页头显示数据陈旧提示。"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$(printf "$body")"
+          else
+            gh issue create --title "每日更新流水线失败" --label pipeline-failure --body "$(printf "$body")"
+          fi

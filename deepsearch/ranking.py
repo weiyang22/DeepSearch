@@ -182,6 +182,21 @@ TAG_RULES = {
     "推理系统": ["inference", "serving", "kv cache", "speculative decoding"],
 }
 
+# Topic tags describe subject matter shared across tracks; they earn a small
+# capped depth bonus and never act as track membership signals.
+TOPIC_TAGS = frozenset(
+    {"预训练", "后训练", "Semantic ID", "Tokenization", "Reasoning", "MoE", "Multimodal", "训练系统", "推理系统"}
+)
+TRACK_BASE_SCORE = 32
+MULTI_TRACK_BONUS = 8
+MAX_TOPIC_TAG_DEPTH = 4
+TOPIC_TAG_DEPTH_BONUS = 6
+# Evidence credit is available to every track; it is the radar's shared bar,
+# not a per-track privilege.
+ONLINE_EVIDENCE_BONUS = 28
+ENTERPRISE_BONUS = 18
+OFFICIAL_REPORT_BONUS = 50
+
 
 def prepare_candidates(papers: Iterable[Paper], config: Config) -> list[Paper]:
     selected: list[Paper] = []
@@ -258,34 +273,31 @@ def _window_candidates(papers: list[Paper], config: Config, window: int) -> list
 
 
 def score_paper(paper: Paper, config: Config) -> int:
+    """Track-neutral quality score.
+
+    Every radar track earns the same membership credit, and every track can
+    earn the same evidence credit. Previously recommendation papers collected
+    track-only bonuses (rec base + rec/enterprise double dip + the GenRec
+    topic tag) that no other track could ever reach, so the tracks were
+    measured with different rulers: the embodied median was 52 against the
+    recommendation median 136, and 13% of the archive sat below the global
+    daily floor it could never clear. Evidence bonuses now apply whatever
+    the track, and topic tags contribute only a small capped depth bonus.
+    """
     text = _search_text(paper)
-    rec = is_rec_theme(paper)
-    enterprise = is_enterprise_paper(paper, config)
     score = 0
-    if paper.content_type == "company_report" and is_core_llm(paper):
-        score += 50
-    if rec:
-        score += 32
-    if rec and enterprise:
-        score += 42
-    elif enterprise:
-        score += 12
-    for tag in infer_tags(paper, config):
-        score += {
-            "LLM 基模": 18,
-            "预训练": 18,
-            "后训练": 18,
-            "GenRec": 24,
-            "Semantic ID": 22,
-            "Tokenization": 14,
-            "企业论文": 18,
-            "A/B 实验": 28,
-            "Reasoning": 8,
-            "MoE": 10,
-            "训练系统": 10,
-            "具身智能": 20,
-            "推理系统": 8,
-        }.get(tag, 2)
+    tracks = _paper_tracks(paper)
+    if tracks:
+        score += TRACK_BASE_SCORE
+        score += MULTI_TRACK_BONUS * (len(tracks) - 1)
+    if paper.content_type == "company_report":
+        score += OFFICIAL_REPORT_BONUS
+    if is_enterprise_paper(paper, config):
+        score += ENTERPRISE_BONUS
+    if has_ab_experiment(paper):
+        score += ONLINE_EVIDENCE_BONUS
+    topic_tags = [tag for tag in infer_tags(paper, config) if tag in TOPIC_TAGS]
+    score += min(MAX_TOPIC_TAG_DEPTH, len(topic_tags)) * TOPIC_TAG_DEPTH_BONUS
     if paper.venue.lower() in {"recsys", "sigir", "www", "kdd", "wsdm", "neurips", "icml", "iclr", "acl", "emnlp"}:
         score += 18
     if paper.pdf_url:
@@ -297,6 +309,18 @@ def score_paper(paper: Paper, config: Config) -> int:
     age = max(0, (dt.date.today() - _paper_date(paper)).days)
     score += max(0, 18 - age // 3)
     return score
+
+
+def _paper_tracks(paper: Paper) -> list[str]:
+    """Radar tracks this paper belongs to, in bid-tag order."""
+    tracks: list[str] = []
+    if is_rec_theme(paper):
+        tracks.append("GenRec")
+    if is_core_llm(paper):
+        tracks.append("LLM 基模")
+    if is_embodied_theme(paper):
+        tracks.append("具身智能")
+    return tracks
 
 
 def infer_tags(paper: Paper, config: Config | None = None) -> list[str]:

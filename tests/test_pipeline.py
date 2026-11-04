@@ -14,6 +14,7 @@ from deepsearch.config import load_config
 from deepsearch.main import _merge
 from deepsearch.models import Paper
 from deepsearch.ranking import (
+    _paper_tracks,
     choose_daily_picks,
     effective_daily_window,
     has_ab_experiment,
@@ -460,6 +461,35 @@ class PipelineTests(unittest.TestCase):
         admitted = prepare_candidates(archive, self.config)
         missing = sorted({item.id for item in archive} - {item.id for item in admitted})
         self.assertEqual(missing, [])
+
+    def test_admission_and_daily_floors_use_one_ruler(self):
+        # An admitted paper that can never clear the daily floor is an
+        # inconsistency: the same run admits it and then hides it from 近期.
+        payload = json.loads(Path("public/papers.json").read_text())
+        archive = [Paper.from_dict(item) for item in payload["papers"]]
+        admitted = [item for item in prepare_candidates(archive, self.config) if item.score is not None]
+        self.assertTrue(admitted)
+        below = [item for item in admitted if item.score < self.config.daily_min_score]
+        # A small tail is tolerable (papers with no abstract/pdf and no tags),
+        # but a systematic gap means the two bars drifted apart.
+        self.assertLess(len(below) / len(admitted), 0.05, f"{len(below)} admitted papers under the daily floor")
+
+    def test_scores_stay_comparable_across_tracks(self):
+        # Track-neutral scoring is the invariant: track-only bonuses used to
+        # give recommendation papers a scale no other track could reach
+        # (embodied median 52 vs GenRec 136). Evidence may still separate
+        # tracks - that is the radar's shared bar - but the ruler must not.
+        payload = json.loads(Path("public/papers.json").read_text())
+        archive = [Paper.from_dict(item) for item in payload["papers"]]
+        admitted = prepare_candidates(archive, self.config)
+        tracks: dict[str, list[int]] = {}
+        for item in admitted:
+            found = _paper_tracks(item)
+            if len(found) == 1:
+                tracks.setdefault(found[0], []).append(item.score)
+        medians = {track: sorted(scores)[len(scores) // 2] for track, scores in tracks.items() if len(scores) >= 10}
+        self.assertGreaterEqual(len(medians), 2, "need at least two populated tracks")
+        self.assertLess(max(medians.values()) / min(medians.values()), 1.6, f"track medians diverged: {medians}")
 
     def test_text_helper_renders_missing_api_values_as_empty(self):
         self.assertEqual(_text(None), "")
