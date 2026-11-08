@@ -9,6 +9,11 @@ on:
     # actual run in the Beijing morning instead of near noon.
     - cron: "37 20 * * *"
   workflow_dispatch:
+    inputs:
+      probe_alert:
+        description: "自检：只触发失败告警链路，用于验证告警本身是否可用"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -88,8 +93,11 @@ jobs:
       # continue-on-error plus `|| true` on every call: the alerter must never
       # become a second failure. The first version did - the label did not
       # exist yet, `gh issue create --label` aborted, and no report was filed.
+      # An alarm that is never tested is not an alarm - the first version of
+      # this step failed silently on a missing label. Dispatch the workflow
+      # with probe_alert=true to exercise the reporting path deliberately.
       - name: Report failure as an issue
-        if: failure()
+        if: failure() || inputs.probe_alert == true
         continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
