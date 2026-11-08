@@ -618,6 +618,41 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("归档回退", str(ctx.exception))
         self.assertIn("Future Dated Preprint", str(ctx.exception))
 
+    def test_retitled_preprint_is_not_treated_as_a_lost_paper(self):
+        # Preprints get retitled upstream. _merge keys on id, so the record
+        # survives with the new title; judging archive health by title alone
+        # failed the daily run for a paper that never left (Open-HumanScale ->
+        # Open-HumanWAM, Nov 2026).
+        today = dt.date.today()
+        old_title = Paper(
+            id="arxiv:2611.06817",
+            title="Open-HumanScale: An Open Recipe for Scaling Human and Robot Experience",
+            published=(today - dt.timedelta(days=3)).isoformat(),
+            abstract="Embodied foundation model training recipe with real robot evaluation.",
+        )
+        retitled = Paper(
+            id="arxiv:2611.06817",
+            title="Open-HumanWAM: An Open Recipe for Scaling Human and Robot Experience",
+            published=(today - dt.timedelta(days=3)).isoformat(),
+            abstract="Embodied foundation model training recipe with real robot evaluation.",
+        )
+        seed = Path(tempfile.mkdtemp()) / "papers.json"
+        seed.write_text(
+            json.dumps({"papers": [old_title.to_dict()]}, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        out = Path(tempfile.mkdtemp()) / "papers.json"
+        env = {key: value for key, value in os.environ.items() if key != "DEEPSEEK_API_KEY"}
+        with patch.object(ds_main, "collect_all", return_value=([retitled], [])):
+            with patch.dict(os.environ, env, clear=True):
+                with patch.object(sys, "argv", ["deepsearch", "--out", str(seed)]):
+                    self.assertEqual(ds_main.main(), 0)
+        payload = json.loads(seed.read_text(encoding="utf-8"))
+        self.assertEqual([item["id"] for item in payload["papers"]], ["arxiv:2611.06817"])
+        self.assertIn("Open-HumanWAM", payload["papers"][0]["title"])
+        # A retitled paper is not a new paper.
+        self.assertEqual(payload["status"]["new_papers"], 0)
+
     def test_deepseek_call_retries_transient_errors(self):
         config = load_config("config.toml")
         paper = Paper(

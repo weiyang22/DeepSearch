@@ -81,18 +81,28 @@ jobs:
         uses: actions/deploy-pages@v5
 
       # A silent failure is worse than a loud one: the pipeline once failed on
+      # A silent failure is worse than a loud one: the pipeline once failed on
       # nine consecutive days and nobody noticed. File an issue (deduplicated
       # against an existing open report) so failures surface in the repo.
+      #
+      # continue-on-error plus `|| true` on every call: the alerter must never
+      # become a second failure. The first version did - the label did not
+      # exist yet, `gh issue create --label` aborted, and no report was filed.
       - name: Report failure as an issue
         if: failure()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          existing=$(gh issue list --label pipeline-failure --state open --limit 1 --json number --jq '.[0].number')
-          body="每日更新流水线失败。\n\n- 运行记录：${RUN_URL}\n- 触发方式：${{ github.event_name }}\n- 失败原因见运行日志；若连续失败，站点会在页头显示数据陈旧提示。"
+          gh label create pipeline-failure --color B60205 \
+            --description "每日更新流水线失败" 2>/dev/null || true
+          body="$(printf '每日更新流水线失败。\n\n- 运行记录：%s\n- 触发方式：%s\n- 失败步骤与原因见运行日志；若连续失败，站点页头会显示数据陈旧提示。' "$RUN_URL" "${{ github.event_name }}")"
+          existing=$(gh issue list --label pipeline-failure --state open --limit 1 \
+            --json number --jq '.[0].number' 2>/dev/null || true)
           if [ -n "$existing" ]; then
-            gh issue comment "$existing" --body "$(printf "$body")"
+            gh issue comment "$existing" --body "$body" || true
           else
-            gh issue create --title "每日更新流水线失败" --label pipeline-failure --body "$(printf "$body")"
+            gh issue create --title "每日更新流水线失败" --label pipeline-failure --body "$body" || \
+            gh issue create --title "每日更新流水线失败" --body "$body" || true
           fi
